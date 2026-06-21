@@ -389,7 +389,9 @@ h1 {
 .client-preview figcaption {
   margin-bottom: 12px;
   color: rgba(167, 160, 187, 0.72);
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 0.88rem;
+  font-style: italic;
   font-weight: 400;
   letter-spacing: 0;
   text-align: center;
