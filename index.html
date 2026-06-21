@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="SeraphIRC is a modern IRC client in alpha, built for classic IRC compatibility, privacy-conscious defaults, and polished desktop chat."
+    >
+    <title>SeraphIRC - Modern IRC</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header" aria-label="Site header">
+      <a class="brand" href="#" aria-label="SeraphIRC home">
+        <span class="brand-mark" aria-hidden="true">
+          <img src="assets/seraphirc-logo.png" alt="">
+        </span>
+        <span>SeraphIRC</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#features">Features</a>
+        <a href="#ircv3">IRCv3</a>
+        <a href="#why">Why</a>
+        <a href="#status">Status</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-atmosphere" aria-hidden="true"></div>
+        <div class="hero-content">
+          <div class="hero-emblem" aria-hidden="true">
+            <img src="assets/seraphirc-logo.png" alt="">
+          </div>
+          <h1 id="hero-title">SeraphIRC</h1>
+          <br></br>
+          <p class="hero-subheadline">A love letter to classic IRC</p>
+          <p class="hero-copy">
+            A polished IRC client with classic protocol compatibility, modern UI patterns,
+            privacy-conscious design, and a long-term vision for desktop and mobile.
+          </p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button button-primary" href="#status">Alpha in progress</a>
+            <a class="button button-secondary" href="#features">View on GitHub</a>
+          </div>
+        </div>
+
+        <figure class="client-preview">
+          <figcaption>Intuitive Network Manager</figcaption>
+          <button
+            class="client-preview-trigger"
+            type="button"
+            aria-label="Open larger SeraphIRC network manager screenshot"
+            aria-haspopup="dialog"
+            data-lightbox-target="network-manager-lightbox"
+          >
+            <img
+              src="assets/seraphirc-network-manager.png"
+              alt="SeraphIRC network manager showing active and inactive IRC networks"
+            >
+          </button>
+        </figure>
+
+        <figure class="client-preview">
+          <figcaption>Modern design, classic feel</figcaption>
+          <button
+            class="client-preview-trigger"
+            type="button"
+            aria-label="Open larger SeraphIRC interface screenshot"
+            aria-haspopup="dialog"
+            data-lightbox-target="interface-lightbox"
+          >
+            <img
+              src="assets/seraphirc-interface.png"
+              alt="SeraphIRC desktop client interface showing IRC channels, chat, and user list"
+            >
+          </button>
+        </figure>
+
+        <dialog
+          class="image-lightbox network-manager-lightbox"
+          id="network-manager-lightbox"
+          aria-label="Larger SeraphIRC network manager screenshot"
+        >
+          <form method="dialog">
+            <button class="lightbox-close" type="submit" aria-label="Close larger screenshot"></button>
+          </form>
+          <div class="lightbox-frame">
+            <img
+              src="assets/seraphirc-network-manager.png"
+              alt="SeraphIRC network manager showing active and inactive IRC networks"
+              width="1032"
+              height="876"
+            >
+          </div>
+        </dialog>
+
+        <dialog
+          class="image-lightbox interface-lightbox"
+          id="interface-lightbox"
+          aria-label="Larger SeraphIRC interface screenshot"
+        >
+          <form method="dialog">
+            <button class="lightbox-close" type="submit" aria-label="Close larger screenshot"></button>
+          </form>
+          <div class="lightbox-frame">
+            <img
+              src="assets/seraphirc-interface.png"
+              alt="SeraphIRC desktop client interface showing IRC channels, chat, and user list"
+              width="1725"
+              height="1042"
+            >
+          </div>
+        </dialog>
+      </section>
+
+      <section class="section" id="features" aria-labelledby="features-title">
+        <div class="section-heading">
+          <p class="eyebrow">Familiar, modern</p>
+          <h2 id="features-title">Built for real IRC use</h2>
+          <p>
+            SeraphIRC brings familiar IRC workflows into a calmer, more capable desktop experience.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3>Multi-network IRC</h3>
+            <p>Keep separate networks organized without losing the fast, lightweight feel of IRC.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Channels and private messages</h3>
+            <p>Move between busy rooms and direct conversations with clear context and focus.</p>
+          </article>
+          <article class="feature-card">
+            <h3>SASL and NickServ support</h3>
+            <p>Authentication workflows are planned around common IRC network expectations.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Local history and search</h3>
+            <p>Find recent conversations while keeping chat history under local user control.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Presence-aware UI</h3>
+            <p>See activity, joins, parts, and availability without turning the interface noisy.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Themeable dark interface</h3>
+            <p>A refined dark foundation with room for personal themes as the client matures.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Privacy-conscious design</h3>
+            <p>No analytics, no social growth loops, and defaults shaped around user control.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Built for future mobile sync</h3>
+            <p>The desktop alpha is the first step toward a broader cross-device IRC vision.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section ircv3-section" id="ircv3" aria-labelledby="ircv3-title">
+        <div class="section-heading">
+          <p class="eyebrow">Protocol compatibility</p>
+          <h2 id="ircv3-title">IRCv3 Compatibility</h2>
+          <p>
+            SeraphIRC negotiates modern IRC capabilities where networks advertise them, while
+            preserving classic IRC behavior as the baseline.
+          </p>
+        </div>
+
+        <div class="compat-panel">
+          <div class="compat-legend" aria-label="Compatibility status legend">
+            <span><span class="status-dot status-supported"></span>Supported</span>
+            <span><span class="status-dot status-partial"></span>Partial</span>
+            <span><span class="status-dot status-missing"></span>Not implemented</span>
+          </div>
+
+          <div class="compat-table-wrap">
+            <table class="compat-table">
+              <thead>
+                <tr>
+                  <th scope="col">Capability</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Alpha behavior</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>sasl</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Requests SASL when enabled and advertised; PLAIN flow is implemented.</td>
+                </tr>
+                <tr>
+                  <td><code>server-time</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Parses <code>@time</code> and uses valid server timestamps for messages.</td>
+                </tr>
+                <tr>
+                  <td><code>account-notify</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Tracks account login/logout events and surfaces subtle channel updates.</td>
+                </tr>
+                <tr>
+                  <td><code>account-tag</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Parses <code>@account</code> metadata when present on messages or users.</td>
+                </tr>
+                <tr>
+                  <td><code>away-notify</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Tracks away and back changes while the capability is active.</td>
+                </tr>
+                <tr>
+                  <td><code>chghost</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Handles host changes and updates known ident/host state.</td>
+                </tr>
+                <tr>
+                  <td><code>extended-join</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Parses JOIN account and real-name metadata.</td>
+                </tr>
+                <tr>
+                  <td><code>cap-notify</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Handles <code>CAP NEW</code> and <code>CAP DEL</code> safely.</td>
+                </tr>
+                <tr>
+                  <td><code>message-tags</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Parses and unescapes generic IRCv3 tags in memory.</td>
+                </tr>
+                <tr>
+                  <td><code>echo-message</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Suppresses duplicate local echo and relies on server echo.</td>
+                </tr>
+                <tr>
+                  <td><code>batch</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Tracks batch start/end and preserves batch references in message metadata.</td>
+                </tr>
+                <tr>
+                  <td><code>multi-prefix</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Parses multiple prefixes such as <code>@+nick</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>invite-notify</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Displays invite notifications without auto-joining channels.</td>
+                </tr>
+                <tr>
+                  <td><code>msgid</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Parses <code>@msgid</code> and preserves it in in-memory metadata.</td>
+                </tr>
+                <tr>
+                  <td><code>labeled-response</code></td>
+                  <td><span class="compat-status partial"><span></span>Partial</span></td>
+                  <td>Used for labeled WHOIS/NAMES; other response flows use fallback correlation.</td>
+                </tr>
+                <tr>
+                  <td>Persistent IRCv3 metadata</td>
+                  <td><span class="compat-status partial"><span></span>Partial</span></td>
+                  <td>Tag and msgid metadata is preserved in memory; persistence is not required yet.</td>
+                </tr>
+                <tr>
+                  <td><code>chathistory</code></td>
+                  <td><span class="compat-status missing"><span></span>Not implemented</span></td>
+                  <td>Future sync/history work is planned after the desktop alpha stabilizes.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section split-section" id="why" aria-labelledby="why-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Why SeraphIRC?</p>
+          <h2 id="why-title">IRC still has a place</h2>
+        </div>
+        <div class="why-panel">
+          <p>
+            IRC is a classic chat protocol that has been around for decades.
+          </p>
+          <p>
+            Still widely used today, IRC thrives in open source communities with a strong culture of privacy and
+            user control. Many of us grew up on IRC, and we continue to love it for its simplicity,
+            speed, and focus on conversation. No ads, no corporate gardens, no data collection, just low-friction conversation.
+          </p>
+          <p>
+            SeraphIRC is a love letter to that.
+          </p>
+          <p>
+            Many IRC clients feel locked in an older era of desktop software. SeraphIRC
+            aims to preserve what makes IRC great while making the client experience feel modern,
+            approachable, and polished for people who chat across multiple networks today.
+          </p>
+        </div>
+      </section>
+
+      <section class="section status-section" id="status" aria-labelledby="status-title">
+        <div class="status-panel">
+          <div>
+            <p class="eyebrow">Development status</p>
+            <h2 id="status-title">Alpha Status</h2>
+            <p>
+              SeraphIRC is currently in active alpha development. Core IRC functionality is being
+              implemented and polished.
+            </p>
+          </div>
+          <ul class="status-list" aria-label="Alpha status list">
+            <li>Desktop client in active development</li>
+            <li>Core IRC features</li>
+            <li>Alpha testing commenced</li>
+            <li>Mobile concept planned as Alpha stabilizes</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <img src="assets/seraphirc-logo.png" alt="" aria-hidden="true">
+      <strong>SeraphIRC</strong>
+      <span>Modern IRC. True to its roots.</span>
+      <a href="https://www.routingpackets.net/seraphirc">www.routingpackets.net/seraphirc</a>
+    </footer>
+    <script>
+      const previewTriggers = document.querySelectorAll(".client-preview-trigger");
+      const imageLightboxes = document.querySelectorAll(".image-lightbox");
+
+      previewTriggers.forEach((previewTrigger) => {
+        previewTrigger.addEventListener("click", () => {
+          const imageLightbox = document.getElementById(previewTrigger.dataset.lightboxTarget);
+
+          imageLightbox.showModal();
+        });
+      });
+
+      imageLightboxes.forEach((imageLightbox) => {
+        imageLightbox.addEventListener("click", (event) => {
+          if (event.target === imageLightbox) {
+            imageLightbox.close();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
