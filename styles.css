@@ -483,6 +483,7 @@ h1 {
 .lightbox-frame img {
   width: var(--lightbox-image-width, 1120px);
   max-width: none;
+  cursor: zoom-out;
 }
 
 .section {
