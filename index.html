@@ -55,6 +55,8 @@
         <a href="#ircv3">IRCv3</a>
         <a href="#why">Why</a>
         <a href="#status">Status</a>
+        <a href="#quick-start">Quick Start</a>
+        <a href="#available-commands">Commands</a>
       </nav>
     </header>
 
@@ -74,25 +76,10 @@
           </p>
           <div class="hero-actions" aria-label="Primary actions">
             <a class="button button-primary" href="https://github.com/seraphirc/seraphirc-download/tree/main">Download Alpha</a>
-            <a class="button button-secondary" href="https://www.buymeacoffee.com/seraphirc">Support The Project</a>
+            <a class="button button-secondary" href="#quick-start">Quick Start Guide</a>
+            <a class="button button-tertiary" href="#available-commands">Available Commands</a>
           </div>
         </div>
-
-        <figure class="client-preview">
-          <figcaption>Intuitive Network Manager</figcaption>
-          <button
-            class="client-preview-trigger"
-            type="button"
-            aria-label="Open larger SeraphIRC network manager screenshot"
-            aria-haspopup="dialog"
-            data-lightbox-target="network-manager-lightbox"
-          >
-            <img
-              src="assets/seraphirc-network-manager.png"
-              alt="SeraphIRC network manager showing active and inactive IRC networks"
-            >
-          </button>
-        </figure>
 
         <figure class="client-preview">
           <figcaption>Modern design, classic feel</figcaption>
@@ -109,24 +96,6 @@
             >
           </button>
         </figure>
-
-        <dialog
-          class="image-lightbox network-manager-lightbox"
-          id="network-manager-lightbox"
-          aria-label="Larger SeraphIRC network manager screenshot"
-        >
-          <form method="dialog">
-            <button class="lightbox-close" type="submit" aria-label="Close larger screenshot"></button>
-          </form>
-          <div class="lightbox-frame">
-            <img
-              src="assets/seraphirc-network-manager.png"
-              alt="SeraphIRC network manager showing active and inactive IRC networks"
-              width="1032"
-              height="876"
-            >
-          </div>
-        </dialog>
 
         <dialog
           class="image-lightbox interface-lightbox"
@@ -351,6 +320,182 @@
             <li>Alpha testing commenced</li>
             <li>Mobile concept planned as Alpha stabilizes</li>
           </ul>
+        </div>
+      </section>
+
+      <section class="section quick-start-section" id="quick-start" aria-labelledby="quick-start-title">
+        <div class="section-heading">
+          <p class="eyebrow">First launch</p>
+          <h2 id="quick-start-title">Quick Start Guide</h2>
+          <p>
+            This guide walks through the first-time SeraphIRC setup flow, from choosing a
+            network to configuring credentials and using built-in IRC commands.
+          </p>
+        </div>
+
+        <div class="guide-steps">
+          <article class="guide-step">
+            <div class="guide-copy">
+              <h3>1. Choose or Create a Network</h3>
+              <p>
+                When you first launch SeraphIRC, you will be presented with the Network Manager
+                Dialog. You may either select an existing server or Create Network, if your
+                network of choice isn't listed as one of the default options.
+              </p>
+              <p>
+                Once you click Activate, you will be presented with the Network Manager Config
+                screen.
+              </p>
+            </div>
+            <figure class="guide-shot">
+              <img
+                src="assets/01-network-manager-dialog.png"
+                alt="SeraphIRC Network Manager Dialog for choosing or creating a network"
+              >
+            </figure>
+          </article>
+
+          <article class="guide-step">
+            <div class="guide-copy">
+              <h3>2. Configure the Network</h3>
+              <p>
+                Inside of the Network Manager Config screen, you will be prompted to configure
+                your IRC username, alternate nick, SASL/NickServ credentials, and other pertinent
+                information. You may also scroll to the bottom to configure any autojoin settings
+                for the configured network. Once complete, click the "Activate Network" button,
+                which will proceed to connect.
+              </p>
+            </div>
+            <figure class="guide-shot">
+              <img
+                src="assets/02-network-manager-config.png"
+                alt="SeraphIRC Network Manager Config screen for network credentials and settings"
+              >
+            </figure>
+          </article>
+
+          <article class="guide-step">
+            <div class="guide-copy">
+              <h3>3. Manage an Active Network</h3>
+              <p>
+                Once a server is activated, it will appear on the left pane as an active network
+                by the name given in the Network Manager Config screen.
+              </p>
+              <p>
+                If you would like to Connect, Disconnect, Reconnect, Edit, or Deactivate the
+                network, you may do so by clicking the three "..." to the right side of the server
+                name. This will present you with the menu as shown in the screenshot.
+              </p>
+            </div>
+            <figure class="guide-shot">
+              <img
+                src="assets/03-network-management-options.png"
+                alt="SeraphIRC active network menu showing management options"
+              >
+            </figure>
+          </article>
+        </div>
+
+        <div class="command-reference" id="available-commands" aria-labelledby="commands-title">
+          <div class="section-heading compact">
+            <p class="eyebrow">Slash commands</p>
+            <h2 id="commands-title">Available Commands</h2>
+            <p>
+              Once logged in to a server, you may type <code>/help</code> in order to get a list
+              of available commands. For convenience, that list is also provided here.
+            </p>
+          </div>
+
+          <div class="command-grid">
+            <article class="command-category">
+              <h3>Connection</h3>
+              <table>
+                <tbody>
+                  <tr><th scope="row"><code>/connect</code></th><td>Connect the active network</td></tr>
+                  <tr><th scope="row"><code>/join &lt;#channel&gt;</code></th><td>Join a channel</td></tr>
+                  <tr><th scope="row"><code>/part [#channel] [reason]</code></th><td>Leave a channel</td></tr>
+                  <tr><th scope="row"><code>/partall</code></th><td>Leave all joined channels on the active network</td></tr>
+                  <tr><th scope="row"><code>/quit [reason]</code></th><td>Disconnect from the network</td></tr>
+                </tbody>
+              </table>
+            </article>
+
+            <article class="command-category">
+              <h3>Messaging</h3>
+              <table>
+                <tbody>
+                  <tr><th scope="row"><code>/ctcp &lt;target&gt; &lt;command&gt; [args]</code></th><td>Send a CTCP request</td></tr>
+                  <tr><th scope="row"><code>/me &lt;action&gt;</code></th><td>Send an action message</td></tr>
+                  <tr><th scope="row"><code>/msg &lt;nick|#channel&gt; &lt;message&gt;</code></th><td>Send a private or target message</td></tr>
+                  <tr><th scope="row"><code>/notice &lt;target&gt; &lt;message&gt;</code></th><td>Send an IRC NOTICE</td></tr>
+                  <tr><th scope="row"><code>/query &lt;nick&gt;</code></th><td>Open a private query buffer</td></tr>
+                </tbody>
+              </table>
+            </article>
+
+            <article class="command-category command-category-wide">
+              <h3>IRC</h3>
+              <table>
+                <tbody>
+                  <tr><th scope="row"><code>/away [message]</code></th><td>Mark yourself away</td></tr>
+                  <tr><th scope="row"><code>/back</code></th><td>Clear away status</td></tr>
+                  <tr><th scope="row"><code>/invite &lt;nick&gt; &lt;#channel&gt;</code></th><td>Invite a nick to a channel</td></tr>
+                  <tr><th scope="row"><code>/kick &lt;#channel&gt; &lt;nick&gt; [reason]</code></th><td>Kick a user from a channel</td></tr>
+                  <tr><th scope="row"><code>/list [pattern]</code></th><td>Open channel list</td></tr>
+                  <tr><th scope="row"><code>/mode &lt;target&gt; [modes] [args]</code></th><td>Send MODE command</td></tr>
+                  <tr><th scope="row"><code>/names [#channel]</code></th><td>Request channel user names</td></tr>
+                  <tr><th scope="row"><code>/nick &lt;newnick&gt;</code></th><td>Change nickname</td></tr>
+                  <tr><th scope="row"><code>/topic [text]</code></th><td>Show or set channel topic</td></tr>
+                  <tr><th scope="row"><code>/who &lt;mask&gt;</code></th><td>Send WHO command</td></tr>
+                  <tr><th scope="row"><code>/whois &lt;nick&gt;</code></th><td>Request WHOIS information</td></tr>
+                  <tr><th scope="row"><code>/whowas &lt;nickname&gt;</code></th><td>Shows information about a user who has quit</td></tr>
+                </tbody>
+              </table>
+            </article>
+
+            <article class="command-category">
+              <h3>Services</h3>
+              <table>
+                <tbody>
+                  <tr><th scope="row"><code>/botserv, /bs &lt;command&gt;</code></th><td>Message BotServ</td></tr>
+                  <tr><th scope="row"><code>/chanserv, /cs &lt;command&gt;</code></th><td>Message ChanServ</td></tr>
+                  <tr><th scope="row"><code>/helpserv &lt;command&gt;</code></th><td>Message HelpServ</td></tr>
+                  <tr><th scope="row"><code>/hostserv, /hs &lt;command&gt;</code></th><td>Message HostServ</td></tr>
+                  <tr><th scope="row"><code>/memoserv, /ms &lt;command&gt;</code></th><td>Message MemoServ</td></tr>
+                  <tr><th scope="row"><code>/nickserv, /ns &lt;command&gt;</code></th><td>Message NickServ</td></tr>
+                  <tr><th scope="row"><code>/operserv, /os &lt;command&gt;</code></th><td>Message OperServ</td></tr>
+                </tbody>
+              </table>
+            </article>
+
+            <article class="command-category">
+              <h3>Buffers</h3>
+              <table>
+                <tbody>
+                  <tr><th scope="row"><code>/buffers</code></th><td>List buffers</td></tr>
+                  <tr><th scope="row"><code>/clear</code></th><td>Clear the current buffer</td></tr>
+                  <tr><th scope="row"><code>/close</code></th><td>Close the current buffer</td></tr>
+                  <tr><th scope="row"><code>/current</code></th><td>Show the current buffer</td></tr>
+                  <tr><th scope="row"><code>/server</code></th><td>Open the server buffer</td></tr>
+                  <tr><th scope="row"><code>/show [count]</code></th><td>Show recent current-buffer messages</td></tr>
+                  <tr><th scope="row"><code>/state</code></th><td>Show buffer state summary</td></tr>
+                  <tr><th scope="row"><code>/switch &lt;buffer&gt;</code></th><td>Switch to a buffer</td></tr>
+                </tbody>
+              </table>
+            </article>
+
+            <article class="command-category">
+              <h3>Client</h3>
+              <table>
+                <tbody>
+                  <tr><th scope="row"><code>/about</code></th><td>Open About SeraphIRC</td></tr>
+                  <tr><th scope="row"><code>/exit</code></th><td>Exit SeraphIRC</td></tr>
+                  <tr><th scope="row"><code>/help [command]</code></th><td>Show command help</td></tr>
+                  <tr><th scope="row"><code>/notify [nick] [comment]</code></th><td>Manage notify list entries</td></tr>
+                </tbody>
+              </table>
+            </article>
+          </div>
         </div>
       </section>
     </main>
