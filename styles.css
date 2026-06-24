@@ -545,6 +545,7 @@ h2 {
 .command-category code {
   color: #e8dcff;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  overflow-wrap: anywhere;
 }
 
 .quick-start-section {
