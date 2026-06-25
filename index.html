@@ -40,7 +40,7 @@
     <meta name="twitter:image" content="https://www.seraphirc.chat/assets/seraphirc-link-preview.png">
     <meta name="twitter:image:alt" content="SeraphIRC logo on a dark purple glow">
     <title>SeraphIRC - Modern IRC made simple</title>
-    <link rel="stylesheet" href="styles.css?v=20260624-commands">
+    <link rel="stylesheet" href="styles.css?v=20260624-commands-hotkeys">
   </head>
   <body>
     <header class="site-header" aria-label="Site header">
@@ -510,7 +510,8 @@
               <table>
                 <tbody>
                   <tr><th scope="row"><code>/buffers</code></th><td>List buffers</td></tr>
-                  <tr><th scope="row"><code>/clear</code></th><td>Clear the current buffer</td></tr>
+                  <tr><th scope="row"><code>/clear</code></th><td>Clear the current visible buffer without deleting logs</td></tr>
+                  <tr><th scope="row"><code>/clearall -a | -s</code></th><td>Clear visible buffers without deleting logs</td></tr>
                   <tr><th scope="row"><code>/close</code></th><td>Close the current buffer</td></tr>
                   <tr><th scope="row"><code>/current</code></th><td>Show the current buffer</td></tr>
                   <tr><th scope="row"><code>/server</code></th><td>Open the server buffer</td></tr>
@@ -537,14 +538,27 @@
               </table>
             </article>
 
-            <article class="command-category">
-              <h3>Advanced</h3>
-              <table>
-                <tbody>
-                  <tr><th scope="row"><code>/raw, /quote &lt;IRC line&gt;</code></th><td>Send a raw IRC line</td></tr>
-                </tbody>
-              </table>
-            </article>
+            <div class="command-stack">
+              <article class="command-category">
+                <h3>Advanced</h3>
+                <table>
+                  <tbody>
+                    <tr><th scope="row"><code>/raw, /quote &lt;IRC line&gt;</code></th><td>Send a raw IRC line</td></tr>
+                  </tbody>
+                </table>
+              </article>
+
+              <article class="command-category">
+                <h3>Hotkeys</h3>
+                <table>
+                  <tbody>
+                    <tr><th scope="row"><code>Ctrl+F</code></th><td>Search buffer contents</td></tr>
+                    <tr><th scope="row"><code>Ctrl+K</code></th><td>Quick window switcher</td></tr>
+                    <tr><th scope="row"><code>Ctrl+T</code></th><td>Collapse or expand the left treebar</td></tr>
+                  </tbody>
+                </table>
+              </article>
+            </div>
           </div>
         </div>
       </section>

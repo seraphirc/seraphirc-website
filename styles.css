@@ -670,6 +670,12 @@ h2 {
   grid-row: span 2;
 }
 
+.command-stack {
+  display: grid;
+  gap: 16px;
+  align-self: start;
+}
+
 .command-category h3 {
   margin: 0;
   padding: 17px 18px;
