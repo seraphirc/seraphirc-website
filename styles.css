@@ -1040,18 +1040,21 @@ h2 {
 
 @media (max-width: 720px) {
   html {
-    scroll-padding-top: 24px;
+    scroll-padding-top: 132px;
   }
 
   .site-header {
-    position: relative;
+    position: sticky;
     flex-direction: column;
-    padding-top: 16px;
+    width: 100%;
+    padding: 14px 16px 12px;
+    background: rgba(5, 5, 13, 0.88);
+    border-bottom: 1px solid rgba(187, 164, 255, 0.12);
   }
 
   .section,
   .command-reference {
-    scroll-margin-top: 24px;
+    scroll-margin-top: 132px;
   }
 
   .site-nav {
