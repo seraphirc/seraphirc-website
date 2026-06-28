@@ -40,7 +40,7 @@
     <meta name="twitter:image" content="https://www.seraphirc.chat/assets/seraphirc-link-preview.png">
     <meta name="twitter:image:alt" content="SeraphIRC logo on a dark purple glow">
     <title>SeraphIRC - Modern IRC made simple</title>
-    <link rel="stylesheet" href="styles.css?v=20260624-commands-hotkeys">
+    <link rel="stylesheet" href="styles.css?v=20260627-command-list">
   </head>
   <body>
     <header class="site-header" aria-label="Site header">
@@ -440,7 +440,7 @@
                   <tr><th scope="row"><code>/partall</code></th><td>Leave all joined channels on the active network</td></tr>
                   <tr><th scope="row"><code>/quit [reason]</code></th><td>Gracefully quit the active network</td></tr>
                   <tr><th scope="row"><code>/reconnect</code></th><td>Reconnect the active network</td></tr>
-                  <tr><th scope="row"><code>/znc</code></th><td>Send a command to ZNC</td></tr>
+                  <tr><th scope="row"><code>/znc &lt;command&gt;</code></th><td>Send a command to ZNC</td></tr>
                 </tbody>
               </table>
             </article>
@@ -462,22 +462,29 @@
               <h3>IRC</h3>
               <table>
                 <tbody>
+                  <tr><th scope="row"><code>/admin [server]</code></th><td>Request server administrator information</td></tr>
                   <tr><th scope="row"><code>/away [message]</code></th><td>Mark yourself away</td></tr>
                   <tr><th scope="row"><code>/back</code></th><td>Clear away status</td></tr>
                   <tr><th scope="row"><code>/ban &lt;nick|mask&gt; or /ban &lt;#channel&gt; &lt;nick|mask&gt;</code></th><td>Ban a nick or mask from a channel</td></tr>
                   <tr><th scope="row"><code>/deop &lt;nick&gt;</code></th><td>Remove channel operator status</td></tr>
                   <tr><th scope="row"><code>/devoice &lt;nick&gt;</code></th><td>Remove voice from a nick</td></tr>
+                  <tr><th scope="row"><code>/info [server]</code></th><td>Request server information</td></tr>
                   <tr><th scope="row"><code>/invite &lt;nick&gt; &lt;#channel&gt;</code></th><td>Invite a nick to a channel</td></tr>
+                  <tr><th scope="row"><code>/ison &lt;nick&gt; [nick...]</code></th><td>Check whether nicknames are online</td></tr>
                   <tr><th scope="row"><code>/kick &lt;nick&gt; [reason] or /kick &lt;#channel&gt; &lt;nick&gt; [reason]</code></th><td>Kick a user from a channel</td></tr>
                   <tr><th scope="row"><code>/kickban &lt;nick&gt; [reason] or /kickban &lt;#channel&gt; &lt;nick&gt; [reason]</code></th><td>Ban and kick a user from a channel</td></tr>
                   <tr><th scope="row"><code>/list [pattern]</code></th><td>Open channel list</td></tr>
+                  <tr><th scope="row"><code>/lusers [args]</code></th><td>Request IRC network user/server statistics</td></tr>
                   <tr><th scope="row"><code>/mode &lt;target&gt; [modes] [args]</code></th><td>Send MODE command</td></tr>
                   <tr><th scope="row"><code>/motd [server]</code></th><td>Fetch the server Message of the Day</td></tr>
                   <tr><th scope="row"><code>/names [#channel]</code></th><td>Request channel user names</td></tr>
                   <tr><th scope="row"><code>/nick &lt;newnick&gt;</code></th><td>Change nickname</td></tr>
                   <tr><th scope="row"><code>/op &lt;nick&gt;</code></th><td>Give channel operator status</td></tr>
+                  <tr><th scope="row"><code>/time [server]</code></th><td>Request the server time</td></tr>
                   <tr><th scope="row"><code>/topic [text]</code></th><td>Show or set channel topic</td></tr>
                   <tr><th scope="row"><code>/unban &lt;nick|mask&gt; or /unban &lt;#channel&gt; &lt;nick|mask&gt;</code></th><td>Remove a ban from a channel</td></tr>
+                  <tr><th scope="row"><code>/userhost &lt;nick&gt; [nick...]</code></th><td>Request user/host information</td></tr>
+                  <tr><th scope="row"><code>/users [args]</code></th><td>Request the server USERS listing</td></tr>
                   <tr><th scope="row"><code>/voice &lt;nick&gt;</code></th><td>Give voice to a nick</td></tr>
                   <tr><th scope="row"><code>/who &lt;mask&gt;</code></th><td>Send WHO command</td></tr>
                   <tr><th scope="row"><code>/whois &lt;nick&gt;</code></th><td>Request WHOIS information</td></tr>
