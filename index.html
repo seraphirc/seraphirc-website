@@ -331,87 +331,136 @@
         <div class="guide-steps">
           <article class="guide-step">
             <div class="guide-copy">
-              <h3>1. Choose or Create a Network</h3>
+              <h3>1. Start the Quick Setup</h3>
               <p>
-                When you first launch SeraphIRC, you will be presented with the Network Manager
-                Dialog. You may either select an existing server or Create Network, if your
-                network of choice isn't listed as one of the default options.
-              </p>
-              <p>
-                Once you click Activate, you will be presented with the Network Manager Config
-                screen.
+                Upon first launch, you'll be greeted by the Quick Start Wizard. Click "Start
+                Quick Setup" to continue, or Exit Initial Setup if you prefer to set things up on
+                your own.
               </p>
             </div>
             <figure class="guide-shot">
               <img
-                src="assets/01-network-manager-dialog.png"
-                alt="SeraphIRC Network Manager Dialog for choosing or creating a network"
+                src="assets/01-quick-start-dialog.png"
+                alt="SeraphIRC Quick Start Wizard with Start Quick Setup and Exit Initial Setup options"
               >
             </figure>
           </article>
 
           <article class="guide-step">
             <div class="guide-copy">
-              <h3>2. Configure the Network</h3>
+              <h3>2. Choose a Network Source</h3>
               <p>
-                Inside of the Network Manager Config screen, you will be prompted to configure
-                your IRC username, alternate nick, SASL/NickServ credentials, and other pertinent
-                information. You may also scroll to the bottom to configure any autojoin settings
-                for the configured network. Once complete, click the "Activate Network" button,
-                which will proceed to connect.
-                </p>
-                <p>
-                For Advanced Users, ZNC and Soju per-network support is available by configuring
-                a bouncer profile in Settings > Bouncer Profiles.
+                After clicking next, you'll be prompted for a default provided network or a custom
+                network not on the list. Advanced users leveraging Soju can choose "Import from
+                Soju" to connect to their Soju bouncer and import their existing networks into
+                SeraphIRC.
               </p>
             </div>
             <figure class="guide-shot">
               <img
-                src="assets/02-network-manager-config.png"
-                alt="SeraphIRC Network Manager Config screen for network credentials and settings"
+                src="assets/02-network-select-dialog.png"
+                alt="SeraphIRC network selection dialog with default network, custom network, and Soju import choices"
               >
             </figure>
           </article>
 
           <article class="guide-step">
             <div class="guide-copy">
-              <h3>3. Initialize Secure Storage If Necessary</h3>
+              <h3>3. Pick a Connection Type</h3>
               <p>
-                During first-time setup, your local credential storage may not be initialized yet.
-                If SeraphIRC shows a "Secure storage check failed" warning, click the "Retry
-                secure storage" button and answer the following prompts with a new password to
-                initialize your credential storage.
-              </p>
-              <p>
-                SeraphIRC uses native credential stores instead of saving user passwords in
-                plaintext, so this step may be required before credentials can be stored safely.
+                On the next screen, you'll be asked if you'd like to connect directly or use a
+                ZNC/other type of bouncer. Note if you are using Soju, the previous screen will
+                take you through the workflow for importing your networks.
               </p>
             </div>
             <figure class="guide-shot">
               <img
-                src="assets/02a-network-manager-secure-storage.png"
-                alt="SeraphIRC Network Manager showing a secure storage check failed warning and retry button"
+                src="assets/03-direct-or-bouncer.png"
+                alt="SeraphIRC connection type dialog for choosing a direct connection or bouncer"
               >
             </figure>
           </article>
 
           <article class="guide-step">
             <div class="guide-copy">
-              <h3>4. Manage an Active Network</h3>
+              <h3>4. Configure Network Details</h3>
               <p>
-                Once a server is activated, it will appear on the left pane as an active network
-                by the name given in the Network Manager Config screen.
-              </p>
-              <p>
-                If you would like to Connect, Disconnect, Reconnect, Edit, or Deactivate the
-                network, you may do so by clicking the three "..." to the right side of the server
-                name. This will present you with the menu as shown in the screenshot.
+                On the next screen you can configure standard IRC network details such as
+                nickname, alternate nick, SASL/NickServ, or autojoin channels.
               </p>
             </div>
             <figure class="guide-shot">
               <img
-                src="assets/03-network-management-options.png"
-                alt="SeraphIRC active network menu showing management options"
+                src="assets/04-network-details-dialog.png"
+                alt="SeraphIRC network details dialog with nickname, credentials, and autojoin channel settings"
+              >
+            </figure>
+          </article>
+
+          <article class="guide-step">
+            <div class="guide-copy">
+              <h3>5. Initialize Secure Storage</h3>
+              <p>
+                SeraphIRC uses your operating system credential store to securely store passwords.
+                If you have not initialized your secrets store, you'll see a "Secure Storage
+                Required" warning. Click "Retry Secure Storage" and you will be prompted for a
+                credential store password. Once this is completed, click "Next" on the network
+                details dialog.
+              </p>
+            </div>
+            <figure class="guide-shot">
+              <img
+                src="assets/05-secure-storage-dialog.png"
+                alt="SeraphIRC Secure Storage Required warning with Retry Secure Storage action"
+              >
+            </figure>
+          </article>
+
+          <article class="guide-step">
+            <div class="guide-copy">
+              <h3>6. Set Connection Behavior</h3>
+              <p>
+                On the next screen, you can choose whether your network connects at startup, auto
+                reconnects, and what the reconnect delay is.
+              </p>
+            </div>
+            <figure class="guide-shot">
+              <img
+                src="assets/06-behavior-dialog.png"
+                alt="SeraphIRC connection behavior dialog with startup, reconnect, and reconnect delay settings"
+              >
+            </figure>
+          </article>
+
+          <article class="guide-step">
+            <div class="guide-copy">
+              <h3>7. Activate the Network</h3>
+              <p>
+                Once you've clicked next, you'll be presented with a network configuration
+                summary. When you're ready, click "Activate Network."
+              </p>
+            </div>
+            <figure class="guide-shot">
+              <img
+                src="assets/07-activate-network.png"
+                alt="SeraphIRC network configuration summary with Activate Network action"
+              >
+            </figure>
+          </article>
+
+          <article class="guide-step">
+            <div class="guide-copy">
+              <h3>8. Finish Setup</h3>
+              <p>
+                Once your network is activated, you'll be able to Add Another Network or Finish
+                Setup. Once setup is finished, your newly configured network will show up in your
+                left treebar, and you're ready to go..
+              </p>
+            </div>
+            <figure class="guide-shot">
+              <img
+                src="assets/08-finish-setup.png"
+                alt="SeraphIRC setup completion screen with Add Another Network and Finish Setup options"
               >
             </figure>
           </article>
