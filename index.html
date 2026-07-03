@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="SeraphIRC is a modern IRC client in alpha, built for classic IRC compatibility, privacy-conscious defaults, and polished desktop chat."
+      content="SeraphIRC is a privacy-conscious desktop IRC client in alpha, built for classic networks, Soju-first bouncer workflows, IRCv3 capabilities, and local control."
     >
     <meta name="theme-color" content="#05050d">
     <link rel="canonical" href="https://www.seraphirc.chat/">
@@ -18,10 +18,10 @@
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="SeraphIRC">
-    <meta property="og:title" content="SeraphIRC - Modern IRC">
+    <meta property="og:title" content="SeraphIRC - Desktop IRC for real networks">
     <meta
       property="og:description"
-      content="A polished IRC client with classic protocol compatibility, modern UI patterns, privacy-conscious design, and a long-term vision for desktop and mobile."
+      content="A privacy-conscious desktop IRC client for classic IRC, Soju/ZNC bouncers, IRCv3 capability negotiation, and local-first history."
     >
     <meta property="og:url" content="https://www.seraphirc.chat/">
     <meta property="og:image" content="https://www.seraphirc.chat/assets/seraphirc-link-preview.png">
@@ -32,15 +32,15 @@
     <meta property="og:image:alt" content="SeraphIRC logo on a dark purple glow">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SeraphIRC - Modern IRC">
+    <meta name="twitter:title" content="SeraphIRC - Desktop IRC for real networks">
     <meta
       name="twitter:description"
-      content="A polished IRC client with classic protocol compatibility, modern UI patterns, privacy-conscious design, and a long-term vision for desktop and mobile."
+      content="A privacy-conscious desktop IRC client for classic IRC, Soju/ZNC bouncers, IRCv3 capability negotiation, and local-first history."
     >
     <meta name="twitter:image" content="https://www.seraphirc.chat/assets/seraphirc-link-preview.png">
     <meta name="twitter:image:alt" content="SeraphIRC logo on a dark purple glow">
-    <title>SeraphIRC - Modern IRC made simple</title>
-    <link rel="stylesheet" href="styles.css?v=20260627-command-list">
+    <title>SeraphIRC - Privacy-conscious desktop IRC</title>
+    <link rel="stylesheet" href="styles.css?v=20260703-seraph-redesign">
   </head>
   <body>
     <header class="site-header" aria-label="Site header">
@@ -51,11 +51,13 @@
         <span>SeraphIRC</span>
       </a>
       <nav class="site-nav" aria-label="Primary navigation">
-        <a href="#features">Features</a>
-        <a href="#ircv3">IRCv3</a>
         <a href="#why">Why</a>
+        <a href="#features">Features</a>
+        <a href="#bouncers">Bouncers</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#ircv3">IRCv3</a>
         <a href="#status">Status</a>
-        <a href="#quick-start">Quick Start</a>
+        <a href="#quick-start">Start</a>
         <a href="#available-commands">Commands</a>
       </nav>
     </header>
@@ -64,25 +66,41 @@
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-atmosphere" aria-hidden="true"></div>
         <div class="hero-content">
-          <div class="hero-emblem" aria-hidden="true">
-            <img src="assets/seraphirc-logo.png" alt="">
+          <div class="hero-kicker">
+            <span>Desktop alpha</span>
+            <span>Soju-first</span>
+            <span>Local control</span>
           </div>
           <h1 id="hero-title">SeraphIRC</h1>
-          <br></br>
-          <p class="hero-subheadline">A love letter to classic IRC</p>
+          <p class="hero-subheadline">
+            A privacy-conscious client for people who still care about IRC.
+          </p>
           <p class="hero-copy">
-            A polished IRC client with feature-rich protocol compatibility, modern UI patterns,
-            privacy-conscious design, and a focus on simplicity for the user.
+            SeraphIRC keeps classic IRC workflows intact while adding modern desktop ergonomics:
+            local-first history, SASL and NickServ flows, IRCv3 capability negotiation, and
+            serious support for Soju, ZNC, direct networks, and self-hosted bouncers.
           </p>
           <div class="hero-actions" aria-label="Primary actions">
             <a class="button button-primary" href="https://github.com/seraphirc/seraphirc-download/tree/main">Download Alpha</a>
             <a class="button button-secondary" href="#quick-start">Quick Start Guide</a>
-            <a class="button button-secondary button-tertiary" href="#available-commands">Commands</a>
+            <a class="button button-secondary button-tertiary" href="#ircv3">IRCv3 Compatibility</a>
+          </div>
+        </div>
+
+        <div class="orbital-panel" aria-hidden="true">
+          <img src="assets/seraphirc-logo.png" alt="">
+          <div class="halo-ring"></div>
+          <div class="wing wing-left"></div>
+          <div class="wing wing-right"></div>
+          <div class="terminal-strip">
+            <span>Hello world!</span>
           </div>
         </div>
 
         <figure class="client-preview">
-          <figcaption>Chat interface (Aura theme, Input Mono font)</figcaption>
+          <figcaption>
+            SeraphIRC desktop workspace with network tree, focused channel buffer, and user list.
+          </figcaption>
           <button
             class="client-preview-trigger"
             type="button"
@@ -116,58 +134,111 @@
         </dialog>
       </section>
 
+      <section class="section split-section" id="why" aria-labelledby="why-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Why SeraphIRC exists</p>
+          <h2 id="why-title">IRC is not dead. It is under-served.</h2>
+        </div>
+        <div class="why-panel">
+          <p>
+            IRC still does something rare: it gives communities fast conversation without a
+            mandatory corporate identity layer. Open-source rooms, long-running networks, small
+            friend servers, and self-hosted bouncers keep proving the protocol still matters.
+          </p>
+          <p>
+            SeraphIRC is for people who want that world to feel good on a modern desktop without
+            sanding away the things that make IRC useful: real networks, slash commands, channel
+            culture, services, bouncers, and protocol details you can inspect.
+          </p>
+          <p>
+            It is calm by design, technical when it needs to be, and honest about being alpha
+            software.
+          </p>
+        </div>
+      </section>
+
       <section class="section" id="features" aria-labelledby="features-title">
         <div class="section-heading">
-          <p class="eyebrow">Familiar, modern</p>
-          <h2 id="features-title">Built for real IRC use</h2>
+          <p class="eyebrow">Built for real IRC use</p>
+          <h2 id="features-title">A desktop workstation for channels, bouncers, and services</h2>
           <p>
-            SeraphIRC brings familiar IRC workflows into a calmer, more capable desktop experience.
+            SeraphIRC is not trying to replace IRC with a social app. It is a focused client for
+            Libera, DALnet, OFTC, Rizon, private networks, and the bouncer setups power users
+            already run.
           </p>
         </div>
 
         <div class="feature-grid">
-          <article class="feature-card">
-            <h3>Multi-network IRC</h3>
-            <p>Keep separate networks organized without losing the fast, lightweight feel of IRC.</p>
+          <article class="feature-card"><span>01</span><h3>Multi-network desktop IRC</h3><p>Keep direct networks, bouncer imports, channels, server buffers, and private messages organized in one desktop workspace.</p></article>
+          <article class="feature-card"><span>02</span><h3>Soju-first bouncer support</h3><p>SeraphIRC is being shaped around modern Soju workflows, including bouncer-network discovery and practical network management.</p></article>
+          <article class="feature-card"><span>03</span><h3>ZNC and direct IRC support</h3><p>Connect through familiar ZNC setups or talk directly to traditional IRC networks when a bouncer is not part of the stack.</p></article>
+          <article class="feature-card"><span>04</span><h3>IRCv3 capability negotiation</h3><p>Negotiate advertised capabilities such as SASL, server-time, account tags, away notify, echo-message, and batch support.</p></article>
+          <article class="feature-card"><span>05</span><h3>SASL and NickServ workflows</h3><p>Use authentication paths that match how established IRC networks actually expect registered users to connect.</p></article>
+          <article class="feature-card"><span>06</span><h3>Local history and search</h3><p>Search recent conversations while keeping history and configuration under local user control.</p></article>
+          <article class="feature-card"><span>07</span><h3>Themeable interface</h3><p>Use a polished dark desktop UI today, with theme direction built into the client as it matures.</p></article>
+          <article class="feature-card"><span>08</span><h3>Diagnostics built in</h3><p>Inspect connection behavior, server responses, and client state without guessing what happened.</p></article>
+          <article class="feature-card"><span>09</span><h3>Privacy-conscious defaults</h3><p>No analytics, no forced cloud account, no social growth loops, and no pressure to make IRC less yours.</p></article>
+          <article class="feature-card"><span>10</span><h3>Mobile companion planned</h3><p>The desktop alpha comes first; future companion work will follow the same local-control and bouncer-native direction.</p></article>
+        </div>
+      </section>
+
+      <section class="section bouncer-section" id="bouncers" aria-labelledby="bouncers-title">
+        <div class="section-heading">
+          <p class="eyebrow">Bouncer-native without losing IRC</p>
+          <h2 id="bouncers-title">Made for Soju, compatible with the old paths</h2>
+          <p>
+            Bouncers are how many people keep IRC useful across machines and downtime. SeraphIRC
+            treats them as a first-class part of the experience while preserving direct IRC
+            compatibility.
+          </p>
+        </div>
+        <div class="bouncer-grid">
+          <article>
+            <h3>Soju direction</h3>
+            <p>Import networks, manage bouncer-aware connections, and move toward capabilities that match modern IRC persistence.</p>
           </article>
-          <article class="feature-card">
-            <h3>Channels and private messages</h3>
-            <p>Move between busy rooms and direct conversations with clear context and focus.</p>
+          <article>
+            <h3>ZNC compatibility</h3>
+            <p>Keep familiar ZNC setups working, including command forwarding and conventional bouncer connection patterns.</p>
           </article>
-          <article class="feature-card">
-            <h3>SASL and NickServ support</h3>
-            <p>Authentication workflows are planned around common IRC network expectations.</p>
+          <article>
+            <h3>Direct networks</h3>
+            <p>Connect directly to classic networks when that is the right tool, with the same channel and services expectations.</p>
           </article>
-          <article class="feature-card">
-            <h3>Local history and search</h3>
-            <p>Find recent conversations while keeping chat history under local user control.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Presence-aware UI</h3>
-            <p>See activity, joins, parts, and availability without turning the interface noisy.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Themeable dark interface</h3>
-            <p>A refined dark foundation with room for personal themes as the client matures.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Privacy-conscious design</h3>
-            <p>No analytics, no social growth loops, and defaults shaped around user control.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Built for future mobile sync</h3>
-            <p>The desktop alpha is the first step toward a broader cross-device IRC vision.</p>
-          </article>
+        </div>
+      </section>
+
+      <section class="section privacy-section" id="privacy" aria-labelledby="privacy-title">
+        <div class="privacy-panel">
+          <div>
+            <p class="eyebrow">Privacy and local control</p>
+            <h2 id="privacy-title">No account funnel. No analytics script. No forced cloud.</h2>
+          </div>
+          <div>
+            <p>
+              SeraphIRC is built around the assumption that your IRC setup belongs to you. History
+              and configuration are local-first, passwords use the operating system credential
+              store, and the project is designed without product telemetry or engagement loops.
+            </p>
+            <ul class="privacy-list">
+              <li>Local-first history and configuration</li>
+              <li>Operating-system secure storage for credentials</li>
+              <li>Readable diagnostics for connection troubleshooting</li>
+              <li>Open-source friendly development posture</li>
+            </ul>
+          </div>
         </div>
       </section>
 
       <section class="section ircv3-section" id="ircv3" aria-labelledby="ircv3-title">
         <div class="section-heading">
-          <p class="eyebrow">Protocol compatibility</p>
+          <p class="eyebrow">IRCv3 compatibility</p>
           <h2 id="ircv3-title">IRCv3 Compatibility</h2>
           <p>
             SeraphIRC negotiates modern IRC capabilities where networks advertise them, while
-            preserving classic IRC behavior as the baseline.
+            preserving classic IRC behavior as the baseline. This table reflects alpha behavior:
+            implemented pieces are usable, partial pieces are still being broadened, and planned
+            items may change as the client stabilizes.
           </p>
         </div>
 
@@ -270,32 +341,12 @@
                 </tr>
                 <tr>
                   <td><code>chathistory</code></td>
-                  <td><span class="compat-status missing"><span></span>Not implemented</span></td>
-                  <td>Future sync/history work is planned after the desktop alpha stabilizes.</td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Requests and replays missed or past messages from a server or bouncer</td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </div>
-      </section>
-
-      <section class="section split-section" id="why" aria-labelledby="why-title">
-        <div class="section-heading compact">
-          <p class="eyebrow">Why SeraphIRC?</p>
-          <h2 id="why-title">IRC still has a place</h2>
-        </div>
-        <div class="why-panel">
-          <p>
-            IRC is a classic chat protocol that has been around for decades.
-          </p>
-          <p>
-            Still widely used today, IRC thrives in open source communities with a strong culture of privacy and
-            user control. Many of us grew up on IRC, and we continue to love it for its simplicity,
-            speed, and focus on conversation. No ads, no corporate gardens, no data collection, just low-friction conversation.
-          </p>
-          <p>
-            SeraphIRC is a love letter to that.
-          </p>
         </div>
       </section>
 
@@ -305,26 +356,28 @@
             <p class="eyebrow">Development status</p>
             <h2 id="status-title">Alpha Status</h2>
             <p>
-              SeraphIRC is currently in active alpha development. Core IRC functionality is being
-              implemented and polished.
+              SeraphIRC is active alpha software. It is useful enough to test, specific enough to
+              have a direction, and early enough that behavior can still change as bouncer support,
+              IRCv3 coverage, and desktop polish improve.
             </p>
           </div>
           <ul class="status-list" aria-label="Alpha status list">
             <li>Desktop client in active development</li>
-            <li>Core IRC features</li>
-            <li>Alpha testing commenced</li>
-            <li>Mobile concept planned as Alpha stabilizes</li>
+            <li>Core IRC features under active polish</li>
+            <li>Soju-first bouncer work is a priority</li>
+            <li>Mobile companion planned after desktop stabilizes</li>
           </ul>
         </div>
       </section>
 
       <section class="section quick-start-section" id="quick-start" aria-labelledby="quick-start-title">
         <div class="section-heading">
-          <p class="eyebrow">First launch</p>
+          <p class="eyebrow">Quick start</p>
           <h2 id="quick-start-title">Quick Start Guide</h2>
           <p>
-            This guide walks through the first-time SeraphIRC setup flow, from choosing a
-            network to configuring credentials and using built-in IRC commands.
+            The first-run setup keeps direct IRC, ZNC-style bouncers, and Soju imports visible
+            from the start. Use it to configure credentials, choose connection behavior, and get
+            onto a real network quickly.
           </p>
         </div>
 
@@ -652,7 +705,7 @@
     <footer class="site-footer">
       <img src="assets/seraphirc-logo.png" alt="" aria-hidden="true">
       <strong>SeraphIRC</strong>
-      <span>Modern IRC made simple</span>
+      <span>Privacy-conscious desktop IRC</span>
       <a href="https://www.seraphirc.chat">www.seraphirc.chat</a>
     </footer>
     <script>
