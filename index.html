@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="SeraphIRC is a privacy-conscious desktop IRC client in alpha, built for classic networks, Soju-first bouncer workflows, IRCv3 capabilities, and local control."
+      content="SeraphIRC is a privacy-conscious IRC client for desktop and mobile, built for classic networks, Soju-first bouncer workflows, IRCv3 capabilities, and local control."
     >
-    <meta name="theme-color" content="#05050d">
+    <meta name="theme-color" content="#07080e">
     <link rel="canonical" href="https://www.seraphirc.chat/">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon.png">
@@ -18,10 +18,10 @@
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="SeraphIRC">
-    <meta property="og:title" content="SeraphIRC - Desktop IRC for real networks">
+    <meta property="og:title" content="SeraphIRC - Desktop &amp; mobile IRC for real networks">
     <meta
       property="og:description"
-      content="A privacy-conscious desktop IRC client for classic IRC, Soju/ZNC bouncers, IRCv3 capability negotiation, and local-first history."
+      content="A privacy-conscious IRC client for desktop and mobile: classic IRC, Soju/ZNC bouncers, IRCv3 capability negotiation, and local-first history."
     >
     <meta property="og:url" content="https://www.seraphirc.chat/">
     <meta property="og:image" content="https://www.seraphirc.chat/assets/seraphirc-link-preview.png">
@@ -32,15 +32,15 @@
     <meta property="og:image:alt" content="SeraphIRC logo on a dark purple glow">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SeraphIRC - Desktop IRC for real networks">
+    <meta name="twitter:title" content="SeraphIRC - Desktop &amp; mobile IRC for real networks">
     <meta
       name="twitter:description"
-      content="A privacy-conscious desktop IRC client for classic IRC, Soju/ZNC bouncers, IRCv3 capability negotiation, and local-first history."
+      content="A privacy-conscious IRC client for desktop and mobile: classic IRC, Soju/ZNC bouncers, IRCv3 capability negotiation, and local-first history."
     >
     <meta name="twitter:image" content="https://www.seraphirc.chat/assets/seraphirc-link-preview.png">
     <meta name="twitter:image:alt" content="SeraphIRC logo on a dark purple glow">
-    <title>SeraphIRC - Privacy-conscious desktop IRC</title>
-    <link rel="stylesheet" href="styles.css?v=20260703-seraph-redesign">
+    <title>SeraphIRC - Privacy-conscious IRC for desktop &amp; mobile</title>
+    <link rel="stylesheet" href="styles.css?v=20260705-terminal">
   </head>
   <body>
     <header class="site-header" aria-label="Site header">
@@ -53,6 +53,7 @@
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="#why">Why</a>
         <a href="#features">Features</a>
+        <a href="#platforms">Apps</a>
         <a href="#bouncers">Bouncers</a>
         <a href="#privacy">Privacy</a>
         <a href="#ircv3">IRCv3</a>
@@ -60,79 +61,135 @@
         <a href="#quick-start">Start</a>
         <a href="#available-commands">Commands</a>
       </nav>
+      <a class="header-cta" href="https://github.com/seraphirc/seraphirc-download/tree/main">Download Alpha</a>
     </header>
 
     <main>
       <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-atmosphere" aria-hidden="true"></div>
-        <div class="hero-content">
+        <div class="hero-head">
           <div class="hero-kicker">
-            <span>Desktop alpha</span>
+            <span>Desktop &amp; mobile alpha</span>
             <span>Soju-first</span>
             <span>Local control</span>
           </div>
-          <h1 id="hero-title">SeraphIRC</h1>
+          <h1 id="hero-title">SeraphIRC<span class="caret" aria-hidden="true"></span></h1>
           <p class="hero-subheadline">
             A privacy-conscious client for people who still care about IRC.
           </p>
           <p class="hero-copy">
-            SeraphIRC keeps classic IRC workflows intact while adding modern desktop ergonomics:
-            local-first history, SASL and NickServ flows, IRCv3 capability negotiation, and
-            serious support for Soju, ZNC, direct networks, and self-hosted bouncers.
+            SeraphIRC keeps classic IRC workflows intact while adding modern ergonomics across
+            desktop and mobile: local-first history, SASL and NickServ flows, IRCv3 capability
+            negotiation, and serious support for Soju, ZNC, direct networks, and self-hosted bouncers.
           </p>
           <div class="hero-actions" aria-label="Primary actions">
-            <a class="button button-primary" href="https://github.com/seraphirc/seraphirc-download/tree/main">Download Alpha</a>
+            <a class="button button-primary button-prompt" href="https://github.com/seraphirc/seraphirc-download/tree/main">Download Alpha</a>
             <a class="button button-secondary" href="#quick-start">Quick Start Guide</a>
-            <a class="button button-secondary button-tertiary" href="#ircv3">IRCv3 Compatibility</a>
+            <a class="button button-secondary" href="#ircv3">IRCv3 Compatibility</a>
           </div>
+          <p class="hero-hint">
+            Live demo below — try typing <code>/download</code> or <code>/help</code> in the message box.
+          </p>
         </div>
-
-        <div class="orbital-panel" aria-hidden="true">
-          <img src="assets/seraphirc-logo.png" alt="">
-          <div class="halo-ring"></div>
-          <div class="wing wing-left"></div>
-          <div class="wing wing-right"></div>
-          <div class="terminal-strip">
-            <span>Hello world!</span>
-          </div>
-        </div>
-
-        <figure class="client-preview">
-          <figcaption>
-            SeraphIRC desktop workspace with network tree, focused channel buffer, and user list.
-          </figcaption>
-          <button
-            class="client-preview-trigger"
-            type="button"
-            aria-label="Open larger SeraphIRC interface screenshot"
-            aria-haspopup="dialog"
-            data-lightbox-target="interface-lightbox"
-          >
-            <img
-              src="assets/seraphirc-interface.png"
-              alt="SeraphIRC desktop client interface showing IRC channels, chat, and user list"
-            >
-          </button>
-        </figure>
-
-        <dialog
-          class="image-lightbox interface-lightbox"
-          id="interface-lightbox"
-          aria-label="Larger SeraphIRC interface screenshot"
-        >
-          <form method="dialog">
-            <button class="lightbox-close" type="submit" aria-label="Close larger screenshot"></button>
-          </form>
-          <div class="lightbox-frame">
-            <img
-              src="assets/seraphirc-interface.png"
-              alt="SeraphIRC desktop client interface showing IRC channels, chat, and user list"
-              width="1725"
-              height="1042"
-            >
-          </div>
-        </dialog>
       </section>
+
+      <div class="client-stage">
+        <div class="app" role="group" aria-label="Interactive SeraphIRC client demo">
+          <div class="app-titlebar">
+            <div class="app-title">knowmadic @ libera (Soju) / #seraphirc — SeraphIRC</div>
+            <div class="app-conn"><span class="dot"></span>Soju connected</div>
+          </div>
+          <div class="app-body">
+            <aside class="app-tree" aria-label="Networks and channels">
+              <div class="tree-tabs">
+                <button type="button" class="active">Networks</button>
+                <button type="button">Bouncers</button>
+              </div>
+              <div class="tree-scroll">
+                <div class="tree-net"><span class="dot"></span>LIBERA (SOJU)<span class="more">···</span></div>
+                <button type="button" class="tree-buf server">server</button>
+                <div class="tree-grp">Channels (8)</div>
+                <button type="button" class="tree-buf" data-chan="##chat">##chat</button>
+                <button type="button" class="tree-buf" data-chan="#ircv3">#ircv3</button>
+                <button type="button" class="tree-buf active" data-chan="#seraphirc">#seraphirc</button>
+                <button type="button" class="tree-buf" data-chan="#libera">#libera</button>
+                <button type="button" class="tree-buf" data-chan="#linux">#linux</button>
+                <button type="button" class="tree-buf" data-chan="#networking">#networking</button>
+                <button type="button" class="tree-buf" data-chan="#security">#security</button>
+                <button type="button" class="tree-buf" data-chan="#soju">#soju</button>
+                <div class="tree-net" style="margin-top:12px"><span class="dot"></span>RIZON (SOJU)<span class="more">···</span></div>
+                <button type="button" class="tree-buf server">server</button>
+                <div class="tree-grp">Channels (5)</div>
+                <button type="button" class="tree-buf" data-chan="#chat">#chat</button>
+                <button type="button" class="tree-buf" data-chan="#computertech">#computertech</button>
+                <button type="button" class="tree-buf" data-chan="#seraphirc">#seraphirc</button>
+                <button type="button" class="tree-buf" data-chan="#videogames">#videogames<span class="badge">4</span></button>
+              </div>
+              <div class="tree-brand">
+                <svg viewBox="0 0 32 24" fill="none" aria-hidden="true">
+                  <circle cx="16" cy="6" r="3.1" stroke="currentColor" stroke-width="1.6"/>
+                  <path d="M16 11 C11 10 5 12 2 16 C8 14 11 15 16 18 C21 15 24 14 30 16 C27 12 21 10 16 11 Z" stroke="currentColor" stroke-width="1.4"/>
+                </svg>
+                SERAPHIRC
+              </div>
+            </aside>
+
+            <main class="app-main">
+              <div class="app-topic">
+                <span class="hash">#</span>
+                <div>
+                  <span class="name">#seraphirc</span> <span class="modes">42 · +ntC</span>
+                  <div class="topic-text">
+                    Welcome to the SeraphIRC channel — a privacy-conscious IRC client for desktop &amp; mobile.
+                    Alpha downloads &amp; guides: <a href="https://www.seraphirc.chat">seraphirc.chat</a> · Type
+                    <code>/help</code> for the demo commands.
+                  </div>
+                </div>
+              </div>
+              <div class="app-log" id="demoLog" role="log" aria-live="polite">
+                <div class="log-line sys"><span class="lt">[10:37]</span> <span class="sysmsg">*** Connected to libera.chat via Soju — caps: sasl server-time message-tags batch draft/chathistory echo-message</span></div>
+                <div class="log-line"><span class="lt">[10:37]</span> <span class="lp">&lt;</span><span class="nick n-seraph">seraph</span><span class="lp">&gt;</span> welcome to <b style="color:var(--text)">SeraphIRC</b> — a privacy-conscious IRC client for desktop &amp; mobile.</div>
+                <div class="log-line"><span class="lt">[10:37]</span> <span class="lp">&lt;</span><span class="nick n-5">seraphuser</span><span class="lp">&gt;</span> local-first history, Soju-first bouncers, real IRCv3, no telemetry :)</div>
+                <div class="log-line"><span class="lt">[10:38]</span> <span class="lp">&lt;</span><span class="nick n-1">seraphuser1</span><span class="lp">&gt;</span> soju import honestly "just worked" for me</div>
+                <div class="log-line evt"><span class="lt">[10:38]</span> <span class="arrow-j">--&gt;</span> <i>dr_ecs (~dr_ecs@user/dr-ecs) has joined #seraphirc</i></div>
+                <div class="log-line sys"><span class="lt">[10:39]</span> <span class="sysmsg">*** This is a live demo. Type <b style="color:var(--purple-bright)">/help</b> to see what it can do, or <b style="color:var(--purple-bright)">/download</b> to grab the alpha.</span></div>
+              </div>
+              <form class="app-input" id="demoForm" autocomplete="off">
+                <span class="prompt">[#seraphirc]</span>
+                <label class="visually-hidden" for="demoInput" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Message</label>
+                <input id="demoInput" type="text" placeholder="Type a message…  (try /download or /help)" aria-label="Message input for the SeraphIRC demo">
+                <button type="submit">Send</button>
+              </form>
+            </main>
+
+            <aside class="app-users" aria-label="Channel users">
+              <div class="users-head">Users 42 · Ops 6</div>
+              <div class="users-search">Find users</div>
+              <div class="users-scroll">
+                <div class="users-grp">Ops · 6</div>
+                <span class="user op">ChanServ</span>
+                <span class="user op">knowmadic</span>
+                <span class="user op">seraphuser1</span>
+                <span class="user op">seraphuser</span>
+                <span class="user op">seraph</span>
+                <span class="user op">chatuser1</span>
+                <div class="users-grp">Users · 42</div>
+                <span class="user">chatdj</span>
+                <span class="user">chatbaker</span>
+                <span class="user">socialcatty</span>
+                <span class="user">dr_user</span>
+                <span class="user">el_user</span>
+                <span class="user">dachatter</span>
+                <span class="user">kline</span>
+                <span class="user">daouser</span>
+                <span class="user">seraphrocks</span>
+                <span class="user">chatosuser</span>
+                <span class="user">gunit</span>
+                <span class="user">demome123</span>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
 
       <section class="section split-section" id="why" aria-labelledby="why-title">
         <div class="section-heading compact">
@@ -146,9 +203,9 @@
             friend servers, and self-hosted bouncers keep proving the protocol still matters.
           </p>
           <p>
-            SeraphIRC is for people who want that world to feel good on a modern desktop without
-            sanding away the things that make IRC useful: real networks, slash commands, channel
-            culture, services, bouncers, and protocol details you can inspect.
+            SeraphIRC is for people who want that world to feel good on a modern desktop or phone
+            without sanding away the things that make IRC useful: real networks, slash commands,
+            channel culture, services, bouncers, and protocol details you can inspect.
           </p>
           <p>
             It is calm by design, technical when it needs to be, and honest about being alpha
@@ -160,33 +217,142 @@
       <section class="section" id="features" aria-labelledby="features-title">
         <div class="section-heading">
           <p class="eyebrow">Built for real IRC use</p>
-          <h2 id="features-title">A desktop workstation for channels, bouncers, and services</h2>
-          <p>
+          <h2 id="features-title">A workstation for channels, bouncers, and services</h2>
+          <p class="lead">
             SeraphIRC is not trying to replace IRC with a social app. It is a focused client for
             Libera, DALnet, OFTC, Rizon, private networks, and the bouncer setups power users
-            already run.
+            already run — on desktop and on mobile.
           </p>
         </div>
 
         <div class="feature-grid">
-          <article class="feature-card"><span>01</span><h3>Multi-network desktop IRC</h3><p>Keep direct networks, bouncer imports, channels, server buffers, and private messages organized in one desktop workspace.</p></article>
-          <article class="feature-card"><span>02</span><h3>Soju-first bouncer support</h3><p>SeraphIRC is being shaped around modern Soju workflows, including bouncer-network discovery and practical network management.</p></article>
-          <article class="feature-card"><span>03</span><h3>ZNC and direct IRC support</h3><p>Connect through familiar ZNC setups or talk directly to traditional IRC networks when a bouncer is not part of the stack.</p></article>
-          <article class="feature-card"><span>04</span><h3>IRCv3 capability negotiation</h3><p>Negotiate advertised capabilities such as SASL, server-time, account tags, away notify, echo-message, and batch support.</p></article>
-          <article class="feature-card"><span>05</span><h3>SASL and NickServ workflows</h3><p>Use authentication paths that match how established IRC networks actually expect registered users to connect.</p></article>
-          <article class="feature-card"><span>06</span><h3>Local history and search</h3><p>Search recent conversations while keeping history and configuration under local user control.</p></article>
-          <article class="feature-card"><span>07</span><h3>Themeable interface</h3><p>Use a polished dark desktop UI today, with theme direction built into the client as it matures.</p></article>
-          <article class="feature-card"><span>08</span><h3>Diagnostics built in</h3><p>Inspect connection behavior, server responses, and client state without guessing what happened.</p></article>
-          <article class="feature-card"><span>09</span><h3>Privacy-conscious defaults</h3><p>No analytics, no forced cloud account, no social growth loops, and no pressure to make IRC less yours.</p></article>
-          <article class="feature-card"><span>10</span><h3>Mobile companion planned</h3><p>The desktop alpha comes first; future companion work will follow the same local-control and bouncer-native direction.</p></article>
+          <article class="feature-card"><span class="tag">multi-network</span><h3>Multi-network IRC</h3><p>Keep direct networks, bouncer imports, channels, server buffers, and private messages organized in one workspace.</p></article>
+          <article class="feature-card"><span class="tag">soju</span><h3>Soju-first bouncer support</h3><p>SeraphIRC is being shaped around modern Soju workflows, including bouncer-network discovery and practical network management.</p></article>
+          <article class="feature-card"><span class="tag">znc</span><h3>ZNC and direct IRC</h3><p>Connect through familiar ZNC setups or talk directly to traditional IRC networks when a bouncer is not part of the stack.</p></article>
+          <article class="feature-card"><span class="tag">ircv3</span><h3>IRCv3 capability negotiation</h3><p>Negotiate advertised capabilities such as SASL, server-time, account tags, away-notify, echo-message, batch, and chat history.</p></article>
+          <article class="feature-card"><span class="tag">auth</span><h3>SASL and NickServ workflows</h3><p>Use authentication paths that match how established IRC networks actually expect registered users to connect.</p></article>
+          <article class="feature-card"><span class="tag">history</span><h3>Local history and search</h3><p>Search recent conversations while keeping history and configuration under local user control.</p></article>
+          <article class="feature-card"><span class="tag">themes</span><h3>Themeable interface</h3><p>Use a polished dark workspace today, with theme direction built into the client as it matures.</p></article>
+          <article class="feature-card"><span class="tag">diagnostics</span><h3>Diagnostics built in</h3><p>Inspect connection behavior, server responses, and client state without guessing what happened.</p></article>
+          <article class="feature-card"><span class="tag">privacy</span><h3>Privacy-conscious defaults</h3><p>No analytics, no forced cloud account, no social growth loops, and no pressure to make IRC less yours.</p></article>
+          <article class="feature-card"><span class="tag">cross-device</span><h3>Desktop and mobile</h3><p>The same privacy-conscious client and local-control philosophy, now on both desktop and mobile.</p></article>
         </div>
       </section>
+
+      <section class="section" id="platforms" aria-labelledby="platforms-title">
+        <div class="section-heading">
+          <p class="eyebrow">One client, everywhere you use IRC</p>
+          <h2 id="platforms-title">SeraphIRC on desktop and mobile</h2>
+          <p class="lead">
+            The desktop app is a full IRC workstation with the network tree, channel buffers, and
+            user lists. The mobile app brings the same networks, bouncers, and local-control
+            philosophy to your phone. Both are in active alpha.
+          </p>
+        </div>
+
+        <div class="platform-grid">
+          <div class="platform-desktop">
+            <div class="platform-card-head">
+              <h3>Desktop</h3>
+              <span class="platform-badge">Alpha</span>
+            </div>
+            <p>
+              A focused desktop workspace: network tree, focused channel buffers, user lists,
+              services, and readable diagnostics — built for the bouncer setups power users run.
+            </p>
+            <figure class="client-preview platform-shot">
+              <button
+                class="client-preview-trigger"
+                type="button"
+                aria-label="Open larger SeraphIRC desktop interface screenshot"
+                aria-haspopup="dialog"
+                data-lightbox-target="interface-lightbox"
+              >
+                <img
+                  src="assets/seraphirc-interface.png"
+                  alt="SeraphIRC desktop client showing the network tree, channel buffer, and user list"
+                >
+              </button>
+            </figure>
+            <div class="hero-actions">
+              <a class="button button-primary button-prompt" href="https://github.com/seraphirc/seraphirc-download/tree/main">Download for Desktop</a>
+            </div>
+          </div>
+
+          <div class="platform-mobile">
+            <div class="platform-card-head">
+              <h3>Mobile</h3>
+              <span class="platform-badge">Alpha</span>
+            </div>
+            <p>
+              The same networks and channels in your pocket, with a layout tuned for touch — a
+              companion for the desktop workspace, not a stripped-down afterthought.
+            </p>
+            <div class="phone" role="img" aria-label="SeraphIRC mobile app showing the networks and channels list">
+              <div class="phone-screen">
+                <div class="m-status"><span>10:50</span><span class="m-ind"><span class="bars">▂▄▆</span> 97%</span></div>
+                <div class="m-header">
+                  <span class="m-brand">SeraphIRC</span>
+                  <span class="m-more" aria-hidden="true">···</span>
+                </div>
+                <div class="m-tabs"><span class="active">Networks</span><span>Soju</span></div>
+                <div class="m-scroll">
+                  <div class="m-net">
+                    <div class="m-net-head"><span class="chev" aria-hidden="true">⌄</span><span class="ndot"></span><span class="nname">libera</span><span class="nowner">(knowmadic)</span></div>
+                    <div class="m-grp">Channels · 8</div>
+                    <div class="m-chan"><span class="h">#</span>chat</div>
+                    <div class="m-chan"><span class="h">#</span>ircv3</div>
+                    <div class="m-chan"><span class="h">#</span>libera</div>
+                    <div class="m-chan unread"><span class="h">#</span>linux<span class="m-badge">6</span></div>
+                    <div class="m-chan"><span class="h">#</span>networking</div>
+                    <div class="m-chan unread"><span class="h">#</span>security<span class="m-badge">1</span></div>
+                    <div class="m-chan unread"><span class="h">#</span>seraphirc<span class="m-badge">3</span></div>
+                    <div class="m-chan"><span class="h">#</span>soju</div>
+                    <div class="m-join"><span class="plus" aria-hidden="true">+</span>Join a channel…</div>
+                    <div class="m-grp">Queries · 0</div>
+                    <div class="m-empty">No direct messages</div>
+                  </div>
+                  <div class="m-net">
+                    <div class="m-net-head"><span class="chev" aria-hidden="true">⌄</span><span class="ndot"></span><span class="nname">OFTC</span><span class="nowner">(knowmadic)</span></div>
+                    <div class="m-grp">Channels · 3</div>
+                    <div class="m-chan"><span class="h">#</span>moocows</div>
+                    <div class="m-chan"><span class="h">#</span>oftc</div>
+                    <div class="m-chan"><span class="h">#</span>seraphirc</div>
+                    <div class="m-join"><span class="plus" aria-hidden="true">+</span>Join a channel…</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hero-actions">
+              <a class="button button-secondary" href="https://github.com/seraphirc/seraphirc-download/tree/main">Get the Mobile App</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <dialog
+        class="image-lightbox interface-lightbox"
+        id="interface-lightbox"
+        aria-label="Larger SeraphIRC interface screenshot"
+      >
+        <form method="dialog">
+          <button class="lightbox-close" type="submit" aria-label="Close larger screenshot"></button>
+        </form>
+        <div class="lightbox-frame">
+          <img
+            src="assets/seraphirc-interface.png"
+            alt="SeraphIRC desktop client interface showing IRC channels, chat, and user list"
+            width="1725"
+            height="1042"
+          >
+        </div>
+      </dialog>
 
       <section class="section bouncer-section" id="bouncers" aria-labelledby="bouncers-title">
         <div class="section-heading">
           <p class="eyebrow">Bouncer-native without losing IRC</p>
           <h2 id="bouncers-title">Made for Soju, compatible with the old paths</h2>
-          <p>
+          <p class="lead">
             Bouncers are how many people keep IRC useful across machines and downtime. SeraphIRC
             treats them as a first-class part of the experience while preserving direct IRC
             compatibility.
@@ -233,12 +399,12 @@
       <section class="section ircv3-section" id="ircv3" aria-labelledby="ircv3-title">
         <div class="section-heading">
           <p class="eyebrow">IRCv3 compatibility</p>
-          <h2 id="ircv3-title">IRCv3 Compatibility</h2>
-          <p>
-            SeraphIRC negotiates modern IRC capabilities where networks advertise them, while
-            preserving classic IRC behavior as the baseline. This table reflects alpha behavior:
-            implemented pieces are usable, partial pieces are still being broadened, and planned
-            items may change as the client stabilizes.
+          <h2 id="ircv3-title">IRCv3 capability support</h2>
+          <p class="lead">
+            SeraphIRC negotiates modern IRC capabilities where networks and bouncers advertise
+            them, while preserving classic IRC behavior as the baseline. This table reflects alpha
+            behavior: supported pieces are usable, partial pieces are still being broadened, and
+            coverage may change as the client stabilizes.
           </p>
         </div>
 
@@ -246,7 +412,6 @@
           <div class="compat-legend" aria-label="Compatibility status legend">
             <span><span class="status-dot status-supported"></span>Supported</span>
             <span><span class="status-dot status-partial"></span>Partial</span>
-            <span><span class="status-dot status-missing"></span>Not implemented</span>
           </div>
 
           <div class="compat-table-wrap">
@@ -262,22 +427,37 @@
                 <tr>
                   <td><code>sasl</code></td>
                   <td><span class="compat-status supported"><span></span>Supported</span></td>
-                  <td>Requests SASL when enabled and advertised; PLAIN flow is implemented.</td>
+                  <td>Requests SASL when enabled and advertised; the PLAIN authentication flow is implemented.</td>
                 </tr>
                 <tr>
                   <td><code>server-time</code></td>
                   <td><span class="compat-status supported"><span></span>Supported</span></td>
-                  <td>Parses <code>@time</code> and uses valid server timestamps for messages.</td>
+                  <td>Parses the <code>@time</code> tag and uses valid server timestamps on messages.</td>
+                </tr>
+                <tr>
+                  <td><code>message-tags</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Parses and unescapes generic IRCv3 message tags.</td>
+                </tr>
+                <tr>
+                  <td><code>cap-notify</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Handles <code>CAP NEW</code> and <code>CAP DEL</code> after the initial handshake.</td>
                 </tr>
                 <tr>
                   <td><code>account-notify</code></td>
                   <td><span class="compat-status supported"><span></span>Supported</span></td>
-                  <td>Tracks account login/logout events and surfaces subtle channel updates.</td>
+                  <td>Tracks account login/logout events and updates channel state.</td>
                 </tr>
                 <tr>
                   <td><code>account-tag</code></td>
                   <td><span class="compat-status supported"><span></span>Supported</span></td>
-                  <td>Parses <code>@account</code> metadata when present on messages or users.</td>
+                  <td>Reads the <code>@account</code> tag on messages when present.</td>
+                </tr>
+                <tr>
+                  <td><code>extended-join</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Parses the account and real-name fields sent on <code>JOIN</code>.</td>
                 </tr>
                 <tr>
                   <td><code>away-notify</code></td>
@@ -287,27 +467,22 @@
                 <tr>
                   <td><code>chghost</code></td>
                   <td><span class="compat-status supported"><span></span>Supported</span></td>
-                  <td>Handles host changes and updates known ident/host state.</td>
+                  <td>Applies ident/host changes and updates known user state.</td>
                 </tr>
                 <tr>
-                  <td><code>extended-join</code></td>
+                  <td><code>multi-prefix</code></td>
                   <td><span class="compat-status supported"><span></span>Supported</span></td>
-                  <td>Parses JOIN account and real-name metadata.</td>
+                  <td>Parses stacked membership prefixes such as <code>@+nick</code>.</td>
                 </tr>
                 <tr>
-                  <td><code>cap-notify</code></td>
+                  <td><code>invite-notify</code></td>
                   <td><span class="compat-status supported"><span></span>Supported</span></td>
-                  <td>Handles <code>CAP NEW</code> and <code>CAP DEL</code> safely.</td>
-                </tr>
-                <tr>
-                  <td><code>message-tags</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                  <td>Parses and unescapes generic IRCv3 tags in memory.</td>
+                  <td>Surfaces invite notifications without auto-joining channels.</td>
                 </tr>
                 <tr>
                   <td><code>echo-message</code></td>
                   <td><span class="compat-status supported"><span></span>Supported</span></td>
-                  <td>Suppresses duplicate local echo and relies on server echo.</td>
+                  <td>Suppresses duplicate local echo and relies on the server echo.</td>
                 </tr>
                 <tr>
                   <td><code>batch</code></td>
@@ -315,38 +490,62 @@
                   <td>Tracks batch start/end and preserves batch references in message metadata.</td>
                 </tr>
                 <tr>
-                  <td><code>multi-prefix</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                  <td>Parses multiple prefixes such as <code>@+nick</code>.</td>
-                </tr>
-                <tr>
-                  <td><code>invite-notify</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                  <td>Displays invite notifications without auto-joining channels.</td>
-                </tr>
-                <tr>
                   <td><code>msgid</code></td>
                   <td><span class="compat-status supported"><span></span>Supported</span></td>
-                  <td>Parses <code>@msgid</code> and preserves it in in-memory metadata.</td>
+                  <td>Parses the <code>msgid</code> message tag and keeps it in message metadata.</td>
+                </tr>
+                <tr>
+                  <td><code>draft/chathistory</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Requests and replays missed or past messages from a server or bouncer (chathistory batch type).</td>
+                </tr>
+                <tr>
+                  <td><code>draft/read-marker</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Shares the server-authoritative read position via <code>MARKREAD</code>, so unread state stays in sync across desktop and mobile and survives relaunch.</td>
+                </tr>
+                <tr>
+                  <td><code>monitor</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Uses <code>MONITOR</code> to track online/offline presence for a watch list of nicknames.</td>
+                </tr>
+                <tr>
+                  <td><code>draft/no-implicit-names</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Negotiated so the server skips the implicit <code>NAMES</code> burst after join; SeraphIRC requests names when it needs them.</td>
+                </tr>
+                <tr>
+                  <td><code>soju.im/bouncer-networks</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Used for native Soju mode: discover, attach to, and manage bouncer networks from one connection.</td>
                 </tr>
                 <tr>
                   <td><code>labeled-response</code></td>
                   <td><span class="compat-status partial"><span></span>Partial</span></td>
-                  <td>Used for labeled WHOIS/NAMES; other response flows use fallback correlation.</td>
+                  <td>Used for labeled WHOIS/NAMES and bouncer attach; other response flows use fallback correlation.</td>
+                </tr>
+                <tr>
+                  <td><code>setname</code></td>
+                  <td><span class="compat-status partial"><span></span>Partial</span></td>
+                  <td>Negotiated where advertised; real-name (<code>SETNAME</code>) changes are tracked, with fuller in-client editing still in progress.</td>
+                </tr>
+                <tr>
+                  <td><code>standard-replies</code></td>
+                  <td><span class="compat-status partial"><span></span>Partial</span></td>
+                  <td>Negotiated where advertised; <code>FAIL</code>/<code>WARN</code>/<code>NOTE</code> replies are accepted, with richer surfacing still being broadened.</td>
                 </tr>
                 <tr>
                   <td>Persistent IRCv3 metadata</td>
                   <td><span class="compat-status partial"><span></span>Partial</span></td>
-                  <td>Tag and msgid metadata is preserved in memory; persistence is not required yet.</td>
-                </tr>
-                <tr>
-                  <td><code>chathistory</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                  <td>Requests and replays missed or past messages from a server or bouncer</td>
+                  <td>Tag and msgid metadata is preserved in memory; on-disk persistence is not required yet.</td>
                 </tr>
               </tbody>
             </table>
           </div>
+          <p class="compat-note">
+            Statuses reflect current alpha behavior. Capabilities are negotiated only where the
+            network or bouncer advertises them, and coverage may broaden as the client stabilizes.
+          </p>
         </div>
       </section>
 
@@ -354,18 +553,18 @@
         <div class="status-panel">
           <div>
             <p class="eyebrow">Development status</p>
-            <h2 id="status-title">Alpha Status</h2>
+            <h2 id="status-title">Alpha status</h2>
             <p>
               SeraphIRC is active alpha software. It is useful enough to test, specific enough to
               have a direction, and early enough that behavior can still change as bouncer support,
-              IRCv3 coverage, and desktop polish improve.
+              IRCv3 coverage, and desktop and mobile polish improve.
             </p>
           </div>
           <ul class="status-list" aria-label="Alpha status list">
-            <li>Desktop client in active development</li>
+            <li>Desktop and mobile clients in active development</li>
             <li>Core IRC features under active polish</li>
             <li>Soju-first bouncer work is a priority</li>
-            <li>Mobile companion planned after desktop stabilizes</li>
+            <li>Read markers sync unread state across desktop and mobile</li>
           </ul>
         </div>
       </section>
@@ -373,8 +572,8 @@
       <section class="section quick-start-section" id="quick-start" aria-labelledby="quick-start-title">
         <div class="section-heading">
           <p class="eyebrow">Quick start</p>
-          <h2 id="quick-start-title">Quick Start Guide</h2>
-          <p>
+          <h2 id="quick-start-title">Quick start guide</h2>
+          <p class="lead">
             The first-run setup keeps direct IRC, ZNC-style bouncers, and Soju imports visible
             from the start. Use it to configure credentials, choose connection behavior, and get
             onto a real network quickly.
@@ -384,7 +583,7 @@
         <div class="guide-steps">
           <article class="guide-step">
             <div class="guide-copy">
-              <h3>1. Start the Quick Setup</h3>
+              <h3><span class="step-no">1.</span> Start the Quick Setup</h3>
               <p>
                 Upon first launch, you'll be greeted by the Quick Start Wizard. Click "Start
                 Quick Setup" to continue, or Exit Initial Setup if you prefer to set things up on
@@ -401,7 +600,7 @@
 
           <article class="guide-step">
             <div class="guide-copy">
-              <h3>2. Choose a Network Source</h3>
+              <h3><span class="step-no">2.</span> Choose a Network Source</h3>
               <p>
                 After clicking next, you'll be prompted for a default provided network or a custom
                 network not on the list. Advanced users leveraging Soju can choose "Import from
@@ -419,7 +618,7 @@
 
           <article class="guide-step">
             <div class="guide-copy">
-              <h3>3. Pick a Connection Type</h3>
+              <h3><span class="step-no">3.</span> Pick a Connection Type</h3>
               <p>
                 On the next screen, you'll be asked if you'd like to connect directly or use a
                 ZNC/other type of bouncer. Note if you are using Soju, the previous screen will
@@ -436,7 +635,7 @@
 
           <article class="guide-step">
             <div class="guide-copy">
-              <h3>4. Configure Network Details</h3>
+              <h3><span class="step-no">4.</span> Configure Network Details</h3>
               <p>
                 On the next screen you can configure standard IRC network details such as
                 nickname, alternate nick, SASL/NickServ, or autojoin channels.
@@ -452,7 +651,7 @@
 
           <article class="guide-step">
             <div class="guide-copy">
-              <h3>5. Initialize Secure Storage</h3>
+              <h3><span class="step-no">5.</span> Initialize Secure Storage</h3>
               <p>
                 SeraphIRC uses your operating system credential store to securely store passwords.
                 If you have not initialized your secrets store, you'll see a "Secure Storage
@@ -471,7 +670,7 @@
 
           <article class="guide-step">
             <div class="guide-copy">
-              <h3>6. Set Connection Behavior</h3>
+              <h3><span class="step-no">6.</span> Set Connection Behavior</h3>
               <p>
                 On the next screen, you can choose whether your network connects at startup, auto
                 reconnects, and what the reconnect delay is.
@@ -487,7 +686,7 @@
 
           <article class="guide-step">
             <div class="guide-copy">
-              <h3>7. Activate the Network</h3>
+              <h3><span class="step-no">7.</span> Activate the Network</h3>
               <p>
                 Once you've clicked next, you'll be presented with a network configuration
                 summary. When you're ready, click "Activate Network."
@@ -503,11 +702,11 @@
 
           <article class="guide-step">
             <div class="guide-copy">
-              <h3>8. Finish Setup</h3>
+              <h3><span class="step-no">8.</span> Finish Setup</h3>
               <p>
                 Once your network is activated, you'll be able to Add Another Network or Finish
                 Setup. Once setup is finished, your newly configured network will show up in your
-                left treebar, and you're ready to go..
+                left treebar, and you're ready to go.
               </p>
             </div>
             <figure class="guide-shot">
@@ -522,7 +721,7 @@
         <div class="command-reference" id="available-commands" aria-labelledby="commands-title">
           <div class="section-heading compact">
             <p class="eyebrow">Slash commands</p>
-            <h2 id="commands-title">Available Commands</h2>
+            <h2 id="commands-title">Available commands</h2>
             <p>
               Once logged in to a server, you may type <code>/help</code> in order to get a list
               of available commands. For convenience, that list is also provided here.
@@ -705,28 +904,138 @@
     <footer class="site-footer">
       <img src="assets/seraphirc-logo.png" alt="" aria-hidden="true">
       <strong>SeraphIRC</strong>
-      <span>Privacy-conscious desktop IRC</span>
+      <span>Privacy-conscious IRC for desktop &amp; mobile</span>
       <a href="https://www.seraphirc.chat">www.seraphirc.chat</a>
     </footer>
+
     <script>
-      const previewTriggers = document.querySelectorAll(".client-preview-trigger");
-      const imageLightboxes = document.querySelectorAll(".image-lightbox");
+      // ---- Interactive client demo (the hero terminal) ----
+      (function () {
+        const DOWNLOAD_URL = "https://github.com/seraphirc/seraphirc-download/tree/main";
+        const form = document.getElementById("demoForm");
+        const input = document.getElementById("demoInput");
+        const log = document.getElementById("demoLog");
+        if (!form || !input || !log) return;
 
-      previewTriggers.forEach((previewTrigger) => {
-        previewTrigger.addEventListener("click", () => {
-          const imageLightbox = document.getElementById(previewTrigger.dataset.lightboxTarget);
+        const esc = (s) =>
+          s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-          imageLightbox.showModal();
-        });
-      });
+        function stamp() {
+          const d = new Date();
+          const p = (n) => String(n).padStart(2, "0");
+          return "[" + p(d.getHours()) + ":" + p(d.getMinutes()) + "]";
+        }
 
-      imageLightboxes.forEach((imageLightbox) => {
-        imageLightbox.addEventListener("click", (event) => {
-          if (event.target === imageLightbox || event.target.matches(".lightbox-frame img")) {
-            imageLightbox.close();
+        function push(html, cls) {
+          const el = document.createElement("div");
+          el.className = "log-line" + (cls ? " " + cls : "");
+          el.innerHTML = html;
+          log.appendChild(el);
+          log.scrollTop = log.scrollHeight;
+          return el;
+        }
+        const sys = (m) => push('<span class="lt">' + stamp() + '</span> <span class="sysmsg">*** ' + m + "</span>", "sys");
+        const seraph = (m) =>
+          push('<span class="lt">' + stamp() + '</span> <span class="lp">&lt;</span><span class="nick n-seraph">seraph</span><span class="lp">&gt;</span> ' + m);
+        const you = (m) =>
+          push('<span class="lt">' + stamp() + '</span> <span class="lp">&lt;</span><span class="nick n-you">knowmadic</span><span class="lp">&gt;</span> ' + esc(m));
+
+        function nav(id, label) {
+          const target = document.getElementById(id);
+          sys("Opening " + label + " →");
+          if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        const commands = {
+          help() {
+            sys("SeraphIRC demo commands:");
+            seraph(
+              '<code>/download</code> · <code>/features</code> · <code>/apps</code> · ' +
+                '<code>/bouncers</code> · <code>/privacy</code> · <code>/ircv3</code> · ' +
+                '<code>/quickstart</code> · <code>/commands</code> · <code>/status</code> · <code>/clear</code>'
+            );
+            sys("This is a demo. The real client supports the full command set listed further down the page.");
+          },
+          download() {
+            sys("Opening the alpha download…");
+            seraph('→ <a href="' + DOWNLOAD_URL + '" target="_blank" rel="noopener">' + DOWNLOAD_URL + "</a>");
+            window.open(DOWNLOAD_URL, "_blank", "noopener");
+          },
+          features() { nav("features", "Features"); },
+          apps() { nav("platforms", "desktop & mobile apps"); },
+          mobile() { nav("platforms", "desktop & mobile apps"); },
+          desktop() { nav("platforms", "desktop & mobile apps"); },
+          bouncers() { nav("bouncers", "Bouncers"); },
+          privacy() { nav("privacy", "Privacy"); },
+          ircv3() { nav("ircv3", "IRCv3 compatibility"); },
+          quickstart() { nav("quick-start", "the Quick Start guide"); },
+          start() { nav("quick-start", "the Quick Start guide"); },
+          commands() { nav("available-commands", "the command reference"); },
+          help_() {},
+          status() { nav("status", "Alpha status"); },
+          about() { sys("SeraphIRC — a privacy-conscious IRC client for desktop & mobile. Currently in alpha."); },
+          clear() {
+            log.innerHTML = "";
+            sys("Buffer cleared. Type /help for demo commands.");
+          },
+        };
+        commands["?"] = commands.help;
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const raw = input.value.trim();
+          if (!raw) return;
+          input.value = "";
+
+          if (raw.charAt(0) === "/") {
+            const parts = raw.slice(1).split(/\s+/);
+            const key = parts[0].toLowerCase();
+            if (Object.prototype.hasOwnProperty.call(commands, key) && key !== "help_") {
+              commands[key]();
+            } else {
+              you(raw);
+              sys("Unknown command: <code>/" + esc(key) + "</code> — type <code>/help</code>");
+            }
+          } else if (raw.toLowerCase() === "help") {
+            commands.help();
+          } else {
+            you(raw);
+            seraph("try a slash command — e.g. <code>/download</code> or <code>/help</code>");
           }
         });
-      });
+
+        // Clicking a channel in the tree switches the active buffer
+        const bufs = document.querySelectorAll(".tree-buf[data-chan]");
+        const topicName = document.querySelector(".app-topic .name");
+        const promptEl = document.querySelector(".app-input .prompt");
+        bufs.forEach((buf) => {
+          buf.addEventListener("click", function () {
+            bufs.forEach((b) => b.classList.remove("active"));
+            buf.classList.add("active");
+            const chan = buf.getAttribute("data-chan");
+            if (topicName) topicName.textContent = chan;
+            if (promptEl) promptEl.textContent = "[" + chan + "]";
+            sys("Now talking in " + esc(chan));
+          });
+        });
+      })();
+
+      // ---- Screenshot lightbox ----
+      (function () {
+        const triggers = document.querySelectorAll(".client-preview-trigger");
+        const lightboxes = document.querySelectorAll(".image-lightbox");
+        triggers.forEach((trigger) => {
+          trigger.addEventListener("click", () => {
+            const lb = document.getElementById(trigger.dataset.lightboxTarget);
+            if (lb && typeof lb.showModal === "function") lb.showModal();
+          });
+        });
+        lightboxes.forEach((lb) => {
+          lb.addEventListener("click", (event) => {
+            if (event.target === lb || event.target.matches(".lightbox-frame img")) lb.close();
+          });
+        });
+      })();
     </script>
   </body>
 </html>
