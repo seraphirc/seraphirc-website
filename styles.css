@@ -1459,3 +1459,6 @@ html { scroll-padding-top: 158px; }
   .marqrow .jukebox { align-self: center; padding: 4px 0 2px; }
   .marqrow .nav-marq { width: 100%; }
 }
+
+/* IRCv3 table is 2 columns now (Capability + Status) — fit on mobile */
+.compat-table { min-width: 0; }
