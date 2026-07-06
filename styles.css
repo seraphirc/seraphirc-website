@@ -1279,3 +1279,27 @@ body::before { display: none; }
 .header-cta-alt { background: linear-gradient(135deg, var(--cyan), #2f9fd0); color: #04121a; box-shadow: 4px 4px 0 #1b5f7a; }
 .header-cta-alt:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 #1b5f7a; }
 @media (max-width: 760px) { .header-ctas { display: none; } }
+
+/* fix: the mobile screenshot's intrinsic width was expanding the Mobile
+   column and collapsing the Desktop column — let cells honor the fr ratio */
+.platform-desktop, .platform-mobile { min-width: 0; }
+.platform-shot img, .phone-shot img { max-width: 100%; }
+
+/* keep the two header CTAs from squeezing; wrap to a new line if tight */
+.site-header { flex-wrap: wrap; row-gap: 10px; }
+.header-cta { white-space: nowrap; flex: none; }
+.header-ctas { flex-wrap: wrap; justify-content: flex-end; }
+
+/* mobile fix: gradient-clipped wordmarks rendered invisible/near-black on
+   iOS WebKit — a `filter` on a background-clip:text element breaks the fill.
+   Drop the filter, use -webkit-text-fill-color, and give a solid fallback. */
+#hero-title {
+  color: var(--purple-bright);
+  -webkit-text-fill-color: transparent;
+  filter: none;
+}
+#hero-title .caret { -webkit-text-fill-color: var(--purple-bright); }
+.brand > span:last-child {
+  color: var(--purple-bright);
+  -webkit-text-fill-color: transparent;
+}
