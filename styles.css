@@ -1257,3 +1257,19 @@ body::before { display: none; }
   .site-footer { align-items: center; }
 }
 .b31.e { background: #0b0c15; color: var(--amber); border: 1px solid var(--amber); }
+
+/* real mobile screenshot inside the phone frame (replaces the CSS mockup) */
+.phone-shot { position: relative; }
+.phone-shot .client-preview-trigger { border-radius: 31px; transition: transform 150ms ease; }
+.phone-shot .client-preview-trigger:hover { transform: translateY(-2px); }
+.phone-shot .phone-screen { position: relative; display: block; aspect-ratio: auto; }
+.phone-shot .phone-screen img { display: block; width: 100%; height: auto; }
+.phone-shot .enlarge-hint {
+  position: absolute; right: 10px; bottom: 10px;
+  font-family: var(--mono); font-size: 10.5px; color: var(--text);
+  background: rgba(9, 7, 20, 0.72); border: 1px solid var(--line-2); border-radius: 6px;
+  padding: 3px 8px; opacity: 0; transition: opacity 150ms ease; pointer-events: none;
+}
+.phone-shot .client-preview-trigger:hover .enlarge-hint,
+.phone-shot .client-preview-trigger:focus-visible .enlarge-hint { opacity: 1; }
+.mobile-lightbox { --lightbox-image-width: 460px; }

@@ -231,41 +231,23 @@
               The same networks and channels in your pocket, with a layout tuned for touch — a
               companion for the desktop workspace, not a stripped-down afterthought.
             </p>
-            <div class="phone" role="img" aria-label="SeraphIRC mobile app showing the networks and channels list">
-              <div class="phone-screen">
-                <div class="m-status"><span>10:50</span><span class="m-ind"><span class="bars">▂▄▆</span> 97%</span></div>
-                <div class="m-header">
-                  <span class="m-brand">SeraphIRC</span>
-                  <span class="m-more" aria-hidden="true">···</span>
-                </div>
-                <div class="m-tabs"><span class="active">Networks</span><span>Soju</span></div>
-                <div class="m-scroll">
-                  <div class="m-net">
-                    <div class="m-net-head"><span class="chev" aria-hidden="true">⌄</span><span class="ndot"></span><span class="nname">libera</span><span class="nowner">(knowmadic)</span></div>
-                    <div class="m-grp">Channels · 8</div>
-                    <div class="m-chan"><span class="h">#</span>chat</div>
-                    <div class="m-chan"><span class="h">#</span>ircv3</div>
-                    <div class="m-chan"><span class="h">#</span>libera</div>
-                    <div class="m-chan unread"><span class="h">#</span>linux<span class="m-badge">6</span></div>
-                    <div class="m-chan"><span class="h">#</span>networking</div>
-                    <div class="m-chan unread"><span class="h">#</span>security<span class="m-badge">1</span></div>
-                    <div class="m-chan unread"><span class="h">#</span>seraphirc<span class="m-badge">3</span></div>
-                    <div class="m-chan"><span class="h">#</span>soju</div>
-                    <div class="m-join"><span class="plus" aria-hidden="true">+</span>Join a channel…</div>
-                    <div class="m-grp">Queries · 0</div>
-                    <div class="m-empty">No direct messages</div>
-                  </div>
-                  <div class="m-net">
-                    <div class="m-net-head"><span class="chev" aria-hidden="true">⌄</span><span class="ndot"></span><span class="nname">OFTC</span><span class="nowner">(knowmadic)</span></div>
-                    <div class="m-grp">Channels · 3</div>
-                    <div class="m-chan"><span class="h">#</span>moocows</div>
-                    <div class="m-chan"><span class="h">#</span>oftc</div>
-                    <div class="m-chan"><span class="h">#</span>seraphirc</div>
-                    <div class="m-join"><span class="plus" aria-hidden="true">+</span>Join a channel…</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <figure class="phone phone-shot client-preview">
+              <button
+                class="client-preview-trigger"
+                type="button"
+                aria-label="Open larger SeraphIRC mobile app screenshot"
+                aria-haspopup="dialog"
+                data-lightbox-target="mobile-lightbox"
+              >
+                <span class="phone-screen">
+                  <img
+                    src="assets/mobile-treebar.jpeg"
+                    alt="SeraphIRC mobile app showing the networks and channels treebar for libera and OFTC"
+                  >
+                  <span class="enlarge-hint">⤢ click to enlarge</span>
+                </span>
+              </button>
+            </figure>
             <div class="hero-actions">
               <a class="button button-secondary" href="https://github.com/seraphirc/seraphirc-download/tree/main">Get the Mobile App</a>
             </div>
@@ -287,6 +269,24 @@
             alt="SeraphIRC desktop client interface showing IRC channels, chat, and user list"
             width="1725"
             height="1042"
+          >
+        </div>
+      </dialog>
+
+      <dialog
+        class="image-lightbox mobile-lightbox"
+        id="mobile-lightbox"
+        aria-label="Larger SeraphIRC mobile app screenshot"
+      >
+        <form method="dialog">
+          <button class="lightbox-close" type="submit" aria-label="Close larger screenshot"></button>
+        </form>
+        <div class="lightbox-frame">
+          <img
+            src="assets/mobile-treebar.jpeg"
+            alt="SeraphIRC mobile app networks and channels treebar for libera and OFTC"
+            width="1026"
+            height="2048"
           >
         </div>
       </dialog>
