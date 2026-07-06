@@ -40,7 +40,7 @@
     <meta name="twitter:image" content="https://www.seraphirc.chat/assets/seraphirc-link-preview.png">
     <meta name="twitter:image:alt" content="SeraphIRC logo on a dark purple glow">
     <title>SeraphIRC - Privacy-conscious IRC for desktop &amp; mobile</title>
-    <link rel="stylesheet" href="styles.css?v=20260705-terminal">
+    <link rel="stylesheet" href="styles.css?v=20260706-web15">
   </head>
   <body>
     <header class="site-header" aria-label="Site header">
@@ -48,20 +48,11 @@
         <span class="brand-mark" aria-hidden="true">
           <img src="assets/seraphirc-logo.png" alt="">
         </span>
+        <span class="brand-star" aria-hidden="true">✦</span>
         <span>SeraphIRC</span>
       </a>
-      <nav class="site-nav" aria-label="Primary navigation">
-        <a href="#why">Why</a>
-        <a href="#features">Features</a>
-        <a href="#platforms">Apps</a>
-        <a href="#bouncers">Bouncers</a>
-        <a href="#privacy">Privacy</a>
-        <a href="#ircv3">IRCv3</a>
-        <a href="#status">Status</a>
-        <a href="#quick-start">Start</a>
-        <a href="#available-commands">Commands</a>
-      </nav>
-      <a class="header-cta" href="https://github.com/seraphirc/seraphirc-download/tree/main">Download Alpha</a>
+      <span class="header-status"><span class="dot" aria-hidden="true"></span>desktop &amp; mobile</span>
+      <a class="header-cta" href="https://github.com/seraphirc/seraphirc-download/tree/main">▸ Download Alpha</a>
     </header>
 
     <main>
@@ -86,110 +77,62 @@
             <a class="button button-secondary" href="#quick-start">Quick Start Guide</a>
             <a class="button button-secondary" href="#ircv3">IRCv3 Compatibility</a>
           </div>
-          <p class="hero-hint">
-            Live demo below — try typing <code>/download</code> or <code>/help</code> in the message box.
-          </p>
         </div>
+
+        <div class="marqnav">
+          <div class="marqhead"><span>explore the site</span><span class="hint">— hover to grab a link, click to freeze —</span></div>
+          <div class="nav-marq" data-marq role="navigation" aria-label="Section links (scrolling)">
+            <div class="nav-run">
+              <a href="#why">Why SeraphIRC</a><span class="sep">✦</span>
+              <a href="#features">Features</a><span class="sep">✦</span>
+              <a href="#platforms">Apps</a><span class="sep">✦</span>
+              <a href="#bouncers">Bouncers</a><span class="sep">✦</span>
+              <a href="#privacy">Privacy</a><span class="sep">✦</span>
+              <a href="#ircv3">IRCv3</a><span class="sep">✦</span>
+              <a href="#status">Status</a><span class="sep">✦</span>
+              <a href="#quick-start">Quick Start</a><span class="sep">✦</span>
+              <a href="#available-commands">Commands</a><span class="sep">✦</span>
+              <a href="#why">Why SeraphIRC</a><span class="sep">✦</span>
+              <a href="#features">Features</a><span class="sep">✦</span>
+              <a href="#platforms">Apps</a><span class="sep">✦</span>
+              <a href="#bouncers">Bouncers</a><span class="sep">✦</span>
+              <a href="#privacy">Privacy</a><span class="sep">✦</span>
+              <a href="#ircv3">IRCv3</a><span class="sep">✦</span>
+              <a href="#status">Status</a><span class="sep">✦</span>
+              <a href="#quick-start">Quick Start</a><span class="sep">✦</span>
+              <a href="#available-commands">Commands</a><span class="sep">✦</span>
+            </div>
+          </div>
+          <nav class="faded" aria-label="Section links">
+            <a href="#why">Why</a><span class="d">·</span>
+            <a href="#features">Features</a><span class="d">·</span>
+            <a href="#platforms">Apps</a><span class="d">·</span>
+            <a href="#bouncers">Bouncers</a><span class="d">·</span>
+            <a href="#privacy">Privacy</a><span class="d">·</span>
+            <a href="#ircv3">IRCv3</a><span class="d">·</span>
+            <a href="#status">Status</a><span class="d">·</span>
+            <a href="#quick-start">Start</a><span class="d">·</span>
+            <a href="#available-commands">Commands</a>
+          </nav>
+        </div>
+
+        <figure class="hero-shot client-preview">
+          <button
+            class="client-preview-trigger"
+            type="button"
+            aria-label="Open larger SeraphIRC desktop interface screenshot"
+            aria-haspopup="dialog"
+            data-lightbox-target="interface-lightbox"
+          >
+            <img
+              src="assets/seraphirc-interface.png"
+              alt="The SeraphIRC desktop client showing the network tree, channel buffer, and user list"
+            >
+            <span class="enlarge-hint">⤢ click to enlarge</span>
+          </button>
+          <figcaption>▲ the actual client — <b>clean, dark, native</b></figcaption>
+        </figure>
       </section>
-
-      <div class="client-stage">
-        <div class="app" role="group" aria-label="Interactive SeraphIRC client demo">
-          <div class="app-titlebar">
-            <div class="app-title">knowmadic @ libera (Soju) / #seraphirc — SeraphIRC</div>
-            <div class="app-conn"><span class="dot"></span>Soju connected</div>
-          </div>
-          <div class="app-body">
-            <aside class="app-tree" aria-label="Networks and channels">
-              <div class="tree-tabs">
-                <button type="button" class="active">Networks</button>
-                <button type="button">Bouncers</button>
-              </div>
-              <div class="tree-scroll">
-                <div class="tree-net"><span class="dot"></span>LIBERA (SOJU)<span class="more">···</span></div>
-                <button type="button" class="tree-buf server">server</button>
-                <div class="tree-grp">Channels (8)</div>
-                <button type="button" class="tree-buf" data-chan="##chat">##chat</button>
-                <button type="button" class="tree-buf" data-chan="#ircv3">#ircv3</button>
-                <button type="button" class="tree-buf active" data-chan="#seraphirc">#seraphirc</button>
-                <button type="button" class="tree-buf" data-chan="#libera">#libera</button>
-                <button type="button" class="tree-buf" data-chan="#linux">#linux</button>
-                <button type="button" class="tree-buf" data-chan="#networking">#networking</button>
-                <button type="button" class="tree-buf" data-chan="#security">#security</button>
-                <button type="button" class="tree-buf" data-chan="#soju">#soju</button>
-                <div class="tree-net" style="margin-top:12px"><span class="dot"></span>RIZON (SOJU)<span class="more">···</span></div>
-                <button type="button" class="tree-buf server">server</button>
-                <div class="tree-grp">Channels (5)</div>
-                <button type="button" class="tree-buf" data-chan="#chat">#chat</button>
-                <button type="button" class="tree-buf" data-chan="#computertech">#computertech</button>
-                <button type="button" class="tree-buf" data-chan="#seraphirc">#seraphirc</button>
-                <button type="button" class="tree-buf" data-chan="#videogames">#videogames<span class="badge">4</span></button>
-              </div>
-              <div class="tree-brand">
-                <svg viewBox="0 0 32 24" fill="none" aria-hidden="true">
-                  <circle cx="16" cy="6" r="3.1" stroke="currentColor" stroke-width="1.6"/>
-                  <path d="M16 11 C11 10 5 12 2 16 C8 14 11 15 16 18 C21 15 24 14 30 16 C27 12 21 10 16 11 Z" stroke="currentColor" stroke-width="1.4"/>
-                </svg>
-                SERAPHIRC
-              </div>
-            </aside>
-
-            <main class="app-main">
-              <div class="app-topic">
-                <span class="hash">#</span>
-                <div>
-                  <span class="name">#seraphirc</span> <span class="modes">42 · +ntC</span>
-                  <div class="topic-text">
-                    Welcome to the SeraphIRC channel — a privacy-conscious IRC client for desktop &amp; mobile.
-                    Alpha downloads &amp; guides: <a href="https://www.seraphirc.chat">seraphirc.chat</a> · Type
-                    <code>/help</code> for the demo commands.
-                  </div>
-                </div>
-              </div>
-              <div class="app-log" id="demoLog" role="log" aria-live="polite">
-                <div class="log-line sys"><span class="lt">[10:37]</span> <span class="sysmsg">*** Connected to libera.chat via Soju — caps: sasl server-time message-tags batch draft/chathistory echo-message</span></div>
-                <div class="log-line"><span class="lt">[10:37]</span> <span class="lp">&lt;</span><span class="nick n-seraph">seraph</span><span class="lp">&gt;</span> welcome to <b style="color:var(--text)">SeraphIRC</b> — a privacy-conscious IRC client for desktop &amp; mobile.</div>
-                <div class="log-line"><span class="lt">[10:37]</span> <span class="lp">&lt;</span><span class="nick n-5">seraphuser</span><span class="lp">&gt;</span> local-first history, Soju-first bouncers, real IRCv3, no telemetry :)</div>
-                <div class="log-line"><span class="lt">[10:38]</span> <span class="lp">&lt;</span><span class="nick n-1">seraphuser1</span><span class="lp">&gt;</span> soju import honestly "just worked" for me</div>
-                <div class="log-line evt"><span class="lt">[10:38]</span> <span class="arrow-j">--&gt;</span> <i>dr_ecs (~dr_ecs@user/dr-ecs) has joined #seraphirc</i></div>
-                <div class="log-line sys"><span class="lt">[10:39]</span> <span class="sysmsg">*** This is a live demo. Type <b style="color:var(--purple-bright)">/help</b> to see what it can do, or <b style="color:var(--purple-bright)">/download</b> to grab the alpha.</span></div>
-              </div>
-              <form class="app-input" id="demoForm" autocomplete="off">
-                <span class="prompt">[#seraphirc]</span>
-                <label class="visually-hidden" for="demoInput" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Message</label>
-                <input id="demoInput" type="text" placeholder="Type a message…  (try /download or /help)" aria-label="Message input for the SeraphIRC demo">
-                <button type="submit">Send</button>
-              </form>
-            </main>
-
-            <aside class="app-users" aria-label="Channel users">
-              <div class="users-head">Users 42 · Ops 6</div>
-              <div class="users-search">Find users</div>
-              <div class="users-scroll">
-                <div class="users-grp">Ops · 6</div>
-                <span class="user op">ChanServ</span>
-                <span class="user op">knowmadic</span>
-                <span class="user op">seraphuser1</span>
-                <span class="user op">seraphuser</span>
-                <span class="user op">seraph</span>
-                <span class="user op">chatuser1</span>
-                <div class="users-grp">Users · 42</div>
-                <span class="user">chatdj</span>
-                <span class="user">chatbaker</span>
-                <span class="user">socialcatty</span>
-                <span class="user">dr_user</span>
-                <span class="user">el_user</span>
-                <span class="user">dachatter</span>
-                <span class="user">kline</span>
-                <span class="user">daouser</span>
-                <span class="user">seraphrocks</span>
-                <span class="user">chatosuser</span>
-                <span class="user">gunit</span>
-                <span class="user">demome123</span>
-              </div>
-            </aside>
-          </div>
-        </div>
-      </div>
 
       <section class="section split-section" id="why" aria-labelledby="why-title">
         <div class="section-heading compact">
@@ -902,124 +845,37 @@
     </main>
 
     <footer class="site-footer">
-      <img src="assets/seraphirc-logo.png" alt="" aria-hidden="true">
-      <strong>SeraphIRC</strong>
-      <span>Privacy-conscious IRC for desktop &amp; mobile</span>
-      <a href="https://www.seraphirc.chat">www.seraphirc.chat</a>
+      <div class="jukebox" id="jukebox">
+        <div class="jb-box">
+          <span class="jb-label">♫ Back to the 90s</span>
+          <button class="jb-btn" id="musicBtn" type="button" aria-pressed="false">▸ play</button>
+          <span class="jb-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        </div>
+        <span class="jb-note">original tune · click to enable · off by default</span>
+      </div>
+
+      <div class="foot-badges">
+        <a class="b31 a" href="https://github.com/seraphirc/seraphirc-download/tree/main" target="_blank" rel="noopener">Desktop<br>Download</a>
+        <a class="b31 b" href="https://testflight.apple.com/join/yWxRQutF" target="_blank" rel="noopener">Mobile App<br>(iOS)</a>
+        <a class="b31 c" href="https://ircv3.net" target="_blank" rel="noopener">POWERED BY<br>IRCv3</a>
+        <a class="b31 d" href="https://soju.im" target="_blank" rel="noopener">About<br>Soju</a>
+        <a class="b31 e" href="/privacy/" target="_blank" rel="noopener">Privacy<br>Policy</a>
+      </div>
+
+      <div class="foot-brand">
+        <img src="assets/seraphirc-logo.png" alt="" aria-hidden="true">
+        <strong>SeraphIRC</strong>
+        <span>Privacy-conscious IRC for desktop &amp; mobile</span>
+        <a href="https://www.seraphirc.chat">www.seraphirc.chat</a>
+      </div>
+
+      <div class="foot-meta">
+        visitor <span class="counter" id="yearCounter"><b>2</b><b>0</b><b>2</b><b>6</b></span> ·
+        © 1997–2026 SeraphIRC · best experienced everywhere — desktop &amp; mobile
+      </div>
     </footer>
 
     <script>
-      // ---- Interactive client demo (the hero terminal) ----
-      (function () {
-        const DOWNLOAD_URL = "https://github.com/seraphirc/seraphirc-download/tree/main";
-        const form = document.getElementById("demoForm");
-        const input = document.getElementById("demoInput");
-        const log = document.getElementById("demoLog");
-        if (!form || !input || !log) return;
-
-        const esc = (s) =>
-          s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-
-        function stamp() {
-          const d = new Date();
-          const p = (n) => String(n).padStart(2, "0");
-          return "[" + p(d.getHours()) + ":" + p(d.getMinutes()) + "]";
-        }
-
-        function push(html, cls) {
-          const el = document.createElement("div");
-          el.className = "log-line" + (cls ? " " + cls : "");
-          el.innerHTML = html;
-          log.appendChild(el);
-          log.scrollTop = log.scrollHeight;
-          return el;
-        }
-        const sys = (m) => push('<span class="lt">' + stamp() + '</span> <span class="sysmsg">*** ' + m + "</span>", "sys");
-        const seraph = (m) =>
-          push('<span class="lt">' + stamp() + '</span> <span class="lp">&lt;</span><span class="nick n-seraph">seraph</span><span class="lp">&gt;</span> ' + m);
-        const you = (m) =>
-          push('<span class="lt">' + stamp() + '</span> <span class="lp">&lt;</span><span class="nick n-you">knowmadic</span><span class="lp">&gt;</span> ' + esc(m));
-
-        function nav(id, label) {
-          const target = document.getElementById(id);
-          sys("Opening " + label + " →");
-          if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-
-        const commands = {
-          help() {
-            sys("SeraphIRC demo commands:");
-            seraph(
-              '<code>/download</code> · <code>/features</code> · <code>/apps</code> · ' +
-                '<code>/bouncers</code> · <code>/privacy</code> · <code>/ircv3</code> · ' +
-                '<code>/quickstart</code> · <code>/commands</code> · <code>/status</code> · <code>/clear</code>'
-            );
-            sys("This is a demo. The real client supports the full command set listed further down the page.");
-          },
-          download() {
-            sys("Opening the alpha download…");
-            seraph('→ <a href="' + DOWNLOAD_URL + '" target="_blank" rel="noopener">' + DOWNLOAD_URL + "</a>");
-            window.open(DOWNLOAD_URL, "_blank", "noopener");
-          },
-          features() { nav("features", "Features"); },
-          apps() { nav("platforms", "desktop & mobile apps"); },
-          mobile() { nav("platforms", "desktop & mobile apps"); },
-          desktop() { nav("platforms", "desktop & mobile apps"); },
-          bouncers() { nav("bouncers", "Bouncers"); },
-          privacy() { nav("privacy", "Privacy"); },
-          ircv3() { nav("ircv3", "IRCv3 compatibility"); },
-          quickstart() { nav("quick-start", "the Quick Start guide"); },
-          start() { nav("quick-start", "the Quick Start guide"); },
-          commands() { nav("available-commands", "the command reference"); },
-          help_() {},
-          status() { nav("status", "Alpha status"); },
-          about() { sys("SeraphIRC — a privacy-conscious IRC client for desktop & mobile. Currently in alpha."); },
-          clear() {
-            log.innerHTML = "";
-            sys("Buffer cleared. Type /help for demo commands.");
-          },
-        };
-        commands["?"] = commands.help;
-
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-          const raw = input.value.trim();
-          if (!raw) return;
-          input.value = "";
-
-          if (raw.charAt(0) === "/") {
-            const parts = raw.slice(1).split(/\s+/);
-            const key = parts[0].toLowerCase();
-            if (Object.prototype.hasOwnProperty.call(commands, key) && key !== "help_") {
-              commands[key]();
-            } else {
-              you(raw);
-              sys("Unknown command: <code>/" + esc(key) + "</code> — type <code>/help</code>");
-            }
-          } else if (raw.toLowerCase() === "help") {
-            commands.help();
-          } else {
-            you(raw);
-            seraph("try a slash command — e.g. <code>/download</code> or <code>/help</code>");
-          }
-        });
-
-        // Clicking a channel in the tree switches the active buffer
-        const bufs = document.querySelectorAll(".tree-buf[data-chan]");
-        const topicName = document.querySelector(".app-topic .name");
-        const promptEl = document.querySelector(".app-input .prompt");
-        bufs.forEach((buf) => {
-          buf.addEventListener("click", function () {
-            bufs.forEach((b) => b.classList.remove("active"));
-            buf.classList.add("active");
-            const chan = buf.getAttribute("data-chan");
-            if (topicName) topicName.textContent = chan;
-            if (promptEl) promptEl.textContent = "[" + chan + "]";
-            sys("Now talking in " + esc(chan));
-          });
-        });
-      })();
-
       // ---- Screenshot lightbox ----
       (function () {
         const triggers = document.querySelectorAll(".client-preview-trigger");
@@ -1035,6 +891,134 @@
             if (event.target === lb || event.target.matches(".lightbox-frame img")) lb.close();
           });
         });
+      })();
+
+      // ---- Marquee section-nav: pause on hover/focus, click to freeze ----
+      (function () {
+        document.querySelectorAll("[data-marq]").forEach(function (m) {
+          m.addEventListener("click", function (e) {
+            if (e.target.closest("a")) return; // let real links navigate
+            m.classList.toggle("paused");
+          });
+        });
+      })();
+
+      // ---- "visitor counter" reads the current year (rolls over automatically) ----
+      (function () {
+        const yc = document.getElementById("yearCounter");
+        if (yc) {
+          yc.innerHTML = String(new Date().getFullYear())
+            .split("").map(function (d) { return "<b>" + d + "</b>"; }).join("");
+        }
+      })();
+
+      // ---- Click-to-enable jukebox: an ORIGINAL, flowing nostalgic ballad (Web Audio) ----
+      (function () {
+        var btn = document.getElementById("musicBtn");
+        var jb = document.getElementById("jukebox");
+        if (!btn) return;
+        var ctx, master, timer, playing = false;
+        var bpm = 72, beat = 60 / bpm;
+        var evIndex = 0, loopOrigin = 0, loopDur;
+
+        function freq(name) {
+          if (!name) return 0;
+          var m = name.match(/^([A-G])(#|b)?(-?\d)$/);
+          var map = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
+          var s = map[m[1]]; if (m[2] === "#") s++; if (m[2] === "b") s--;
+          var midi = s + (parseInt(m[3], 10) + 1) * 12;
+          return 440 * Math.pow(2, (midi - 69) / 12);
+        }
+
+        // flowing, mostly-stepwise melody in D major — durations in beats (legato)
+        var mel = [
+          ["F#5",1],["E5",1],["D5",2],
+          ["E5",1],["F#5",1],["A5",2],
+          ["A5",1],["G5",1],["F#5",2],
+          ["G5",1],["F#5",1],["E5",2],
+          ["D5",1],["E5",1],["F#5",1],["A5",1],
+          ["G5",1],["F#5",1],["E5",2],
+          ["D5",1],["E5",1],["D5",1],["B4",1],
+          ["A4",2],["C#5",1],["E5",1]
+        ];
+        var bassRoot = ["D2","A2","B2","G2","D2","A2","G2","A2"];
+        var fifth    = ["A2","E3","F#3","D3","A2","E3","D3","E3"];
+        var pad = [["D3","F#3","A3"],["A3","C#4","E4"],["B3","D4","F#4"],["G3","B3","D4"],
+                   ["D3","F#3","A3"],["A3","C#4","E4"],["G3","B3","D4"],["A3","C#4","E4"]];
+
+        var loopBeats = 32, events = [], tb = 0;
+        mel.forEach(function (m) {
+          if (freq(m[0])) events.push({ t: tb, f: freq(m[0]), dur: m[1], gain: 0.17, kind: "mel" });
+          tb += m[1];
+        });
+        for (var b = 0; b < 8; b++) {
+          var t0 = b * 4;
+          events.push({ t: t0,     f: freq(bassRoot[b]), dur: 3.7, gain: 0.16, kind: "bass" });
+          events.push({ t: t0 + 2, f: freq(fifth[b]),    dur: 1.7, gain: 0.10, kind: "bass" });
+          pad[b].forEach(function (pn) { events.push({ t: t0, f: freq(pn), dur: 3.8, gain: 0.032, kind: "pad" }); });
+        }
+        events.sort(function (a, b) { return a.t - b.t; });
+
+        function voice(f, t, dur, gain, type) {
+          if (!f) return;
+          var o = ctx.createOscillator(), g = ctx.createGain();
+          o.type = type || "triangle"; o.frequency.value = f;
+          var hold = Math.max(0.06, dur * 0.7);
+          g.gain.setValueAtTime(0.0001, t);
+          g.gain.linearRampToValueAtTime(gain, t + 0.03);
+          g.gain.setValueAtTime(gain, t + hold);
+          g.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.18);
+          o.connect(g); g.connect(master);
+          o.start(t); o.stop(t + dur + 0.24);
+        }
+        function playEv(ev, when) {
+          var d = ev.dur * beat;
+          if (ev.kind === "mel") { voice(ev.f, when, d, ev.gain, "triangle"); voice(ev.f * 1.004, when, d, ev.gain * 0.4, "sine"); }
+          else if (ev.kind === "bass") { voice(ev.f, when, d, ev.gain, "sine"); }
+          else { voice(ev.f, when, d, ev.gain, "triangle"); }
+        }
+        function scheduler() {
+          var ahead = ctx.currentTime + 0.25;
+          while (true) {
+            var ev = events[evIndex];
+            var when = loopOrigin + ev.t * beat;
+            if (when >= ahead) break;
+            playEv(ev, when);
+            evIndex++;
+            if (evIndex >= events.length) { evIndex = 0; loopOrigin += loopDur; }
+          }
+        }
+        function start() {
+          if (!ctx) {
+            var AC = window.AudioContext || window.webkitAudioContext;
+            ctx = new AC();
+            master = ctx.createGain(); master.gain.value = 0.0001;
+            var lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 2900;
+            var comp = ctx.createDynamicsCompressor();
+            master.connect(lp); lp.connect(comp); comp.connect(ctx.destination);
+          }
+          loopDur = loopBeats * beat;
+          if (ctx.state === "suspended") ctx.resume();
+          master.gain.cancelScheduledValues(ctx.currentTime);
+          master.gain.setValueAtTime(Math.max(master.gain.value, 0.0001), ctx.currentTime);
+          master.gain.linearRampToValueAtTime(0.42, ctx.currentTime + 0.5);
+          evIndex = 0; loopOrigin = ctx.currentTime + 0.08;
+          timer = setInterval(scheduler, 25);
+          playing = true; jb.classList.add("playing");
+          btn.textContent = "❚❚ pause"; btn.setAttribute("aria-pressed", "true");
+        }
+        function stop() {
+          playing = false; jb.classList.remove("playing");
+          btn.textContent = "▸ play"; btn.setAttribute("aria-pressed", "false");
+          clearInterval(timer);
+          if (master) {
+            var now = ctx.currentTime;
+            master.gain.cancelScheduledValues(now);
+            master.gain.setValueAtTime(master.gain.value, now);
+            master.gain.linearRampToValueAtTime(0.0001, now + 0.35);
+          }
+        }
+        btn.addEventListener("click", function () { playing ? stop() : start(); });
       })();
     </script>
   </body>
