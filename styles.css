@@ -1273,3 +1273,9 @@ body::before { display: none; }
 .phone-shot .client-preview-trigger:hover .enlarge-hint,
 .phone-shot .client-preview-trigger:focus-visible .enlarge-hint { opacity: 1; }
 .mobile-lightbox { --lightbox-image-width: 460px; }
+
+/* two header download CTAs: Desktop (purple) + TestFlight (cyan) */
+.header-ctas { display: inline-flex; gap: 10px; }
+.header-cta-alt { background: linear-gradient(135deg, var(--cyan), #2f9fd0); color: #04121a; box-shadow: 4px 4px 0 #1b5f7a; }
+.header-cta-alt:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 #1b5f7a; }
+@media (max-width: 760px) { .header-ctas { display: none; } }
