@@ -1303,3 +1303,159 @@ body::before { display: none; }
   color: var(--purple-bright);
   -webkit-text-fill-color: transparent;
 }
+
+/* ============================================================
+   WORDMARKS: solid color (background-clip:text is unreliable on
+   iOS WebKit — it rendered as a bar / near-black). Bulletproof.
+   ============================================================ */
+#hero-title {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: currentColor;
+  color: #d6ccff;
+  text-shadow: 0 2px 22px rgba(139, 109, 255, 0.4);
+  filter: none;
+}
+#hero-title .caret { -webkit-text-fill-color: var(--purple-bright); background: var(--purple-bright); }
+.brand > span:last-child {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: currentColor;
+  color: var(--purple-bright);
+}
+
+/* ============================================================
+   RETRO PASS: drop the soft "SaaS card" look — flat dark panels,
+   hard-ish edges, offset solid shadows, box-drawing accents.
+   ============================================================ */
+.why-panel, .privacy-panel, .status-panel, .compat-panel,
+.bouncer-grid article, .feature-card, .command-category,
+.guide-step, .platform-desktop, .platform-mobile {
+  border-radius: 3px;
+  background: var(--panel);
+  border: 1px solid rgba(139, 109, 255, 0.3);
+}
+.feature-card, .bouncer-grid article, .command-category,
+.platform-desktop, .platform-mobile {
+  box-shadow: 5px 5px 0 rgba(139, 109, 255, 0.1);
+}
+.feature-card { transition: transform 100ms ease, box-shadow 100ms ease, border-color 100ms ease; }
+.feature-card:hover, .bouncer-grid article:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 rgba(139, 109, 255, 0.22);
+  border-color: var(--purple);
+}
+/* retro [tag] brackets on feature eyebrows */
+.feature-card .tag::before { content: "["; color: var(--dim); }
+.feature-card .tag::after { content: "]"; color: var(--dim); }
+/* dashed box-drawing rule under section headings */
+.section-heading h2::after {
+  content: "";
+  display: block;
+  width: 72px; height: 3px; margin-top: 16px;
+  background: repeating-linear-gradient(90deg, var(--purple) 0 8px, transparent 8px 13px);
+}
+/* hard-edge the panel titlebars/legends to match */
+.command-category h3, .compat-legend, .compat-note { border-radius: 0; }
+
+/* ============================================================
+   90s PASS: beveled panels + title bars (kills the "bootstrap card")
+   Raised bevel = light top/left, dark bottom/right. Hard corners.
+   ============================================================ */
+.why-panel, .privacy-panel, .status-panel, .compat-panel,
+.bouncer-grid article, .feature-card, .command-category,
+.guide-step, .platform-desktop, .platform-mobile {
+  border-radius: 0;
+  background: #0b0c15;
+  border-top: 2px solid rgba(184, 164, 255, 0.45);
+  border-left: 2px solid rgba(184, 164, 255, 0.45);
+  border-right: 2px solid #050409;
+  border-bottom: 2px solid #050409;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* feature blocks become little titled windows */
+.feature-grid { gap: 16px; }
+.feature-card { padding: 0; overflow: hidden; }
+.feature-card .tag {
+  display: block;
+  margin: 0;
+  padding: 5px 11px;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  color: #f2eeff;
+  background: linear-gradient(90deg, var(--purple-deep), var(--purple));
+  border-bottom: 2px solid #050409;
+}
+.feature-card .tag::before { content: "\00bb "; color: rgba(255, 255, 255, 0.65); }
+.feature-card .tag::after { content: ""; }
+.feature-card h3 { padding: 13px 13px 0; margin: 0 0 8px; }
+.feature-card p { padding: 0 13px 15px; }
+.feature-card:hover {
+  transform: none;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+  border-top-color: rgba(199, 183, 255, 0.7);
+  border-left-color: rgba(199, 183, 255, 0.7);
+}
+
+/* command panels get the same title-bar treatment */
+.command-category h3 {
+  color: #fff;
+  background: linear-gradient(90deg, var(--purple-deep), var(--purple));
+  border-bottom: 2px solid #050409;
+}
+.command-category h3::before { content: "\00bb "; color: rgba(255, 255, 255, 0.65); }
+
+/* chunkier retro divider under section headings */
+.section-heading h2::after {
+  width: 100%;
+  max-width: 340px;
+  height: 6px;
+  background:
+    repeating-linear-gradient(90deg, var(--purple) 0 10px, transparent 10px 10px),
+    linear-gradient(var(--purple-deep), var(--purple-deep));
+  background-size: 100% 2px, 100% 2px;
+  background-position: 0 0, 0 5px;
+  background-repeat: repeat-x;
+}
+
+/* ============================================================
+   FIXED TOP NAV: header + marquee + links stay put while scrolling,
+   so any section is reachable from anywhere on the page.
+   ============================================================ */
+.topbar {
+  position: sticky; top: 0; z-index: 60;
+  background: rgba(8, 6, 18, 0.93);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(139, 109, 255, 0.3);
+}
+.site-header { position: static; backdrop-filter: none; }
+.topnav { width: min(1280px, calc(100% - 36px)); margin: 0 auto; padding: 0 0 8px; }
+.topnav .nav-marq { margin: 0; padding: 9px 0; }
+.topnav .faded { padding: 8px 0 2px; }
+/* keep anchored sections clear of the fixed bar */
+html { scroll-padding-top: 158px; }
+.section { scroll-margin-top: 158px; }
+@media (max-width: 760px) {
+  html { scroll-padding-top: 208px; }
+  .section { scroll-margin-top: 208px; }
+}
+/* faded links stay visible on mobile too (per request) */
+.topnav .faded { display: flex; }
+
+/* jukebox lives in the sticky bar now, beside the marquee */
+.marqrow { display: flex; align-items: center; gap: 12px; }
+.marqrow .nav-marq { flex: 1; min-width: 0; }
+.topnav .jukebox { flex: none; padding: 9px 0; }
+.topnav .jb-box { padding: 6px 10px; white-space: nowrap; }
+.topnav .jb-label { font-size: 12px; }
+@media (max-width: 640px) {
+  .marqrow { flex-direction: column; align-items: stretch; gap: 8px; }
+  .marqrow .jukebox { align-self: center; padding: 4px 0 2px; }
+  .marqrow .nav-marq { width: 100%; }
+}

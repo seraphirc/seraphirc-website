@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="SeraphIRC is a privacy-conscious IRC client for desktop and mobile, built for classic networks, Soju-first bouncer workflows, IRCv3 capabilities, and local control."
+      content="SeraphIRC is a privacy-conscious IRC client for desktop and mobile, built for classic networks, Soju-native bouncer workflows, IRCv3 capabilities, and local control."
     >
     <meta name="theme-color" content="#07080e">
     <link rel="canonical" href="https://www.seraphirc.chat/">
@@ -40,9 +40,10 @@
     <meta name="twitter:image" content="https://www.seraphirc.chat/assets/seraphirc-link-preview.png">
     <meta name="twitter:image:alt" content="SeraphIRC logo on a dark purple glow">
     <title>SeraphIRC - Privacy-conscious IRC for desktop &amp; mobile</title>
-    <link rel="stylesheet" href="styles.css?v=20260706-web15">
+    <link rel="stylesheet" href="styles.css?v=20260707-web15b">
   </head>
   <body>
+    <div class="topbar">
     <header class="site-header" aria-label="Site header">
       <a class="brand" href="#" aria-label="SeraphIRC home">
         <span class="brand-mark" aria-hidden="true">
@@ -57,6 +58,23 @@
         <a class="header-cta header-cta-alt" href="https://testflight.apple.com/join/yWxRQutF" target="_blank" rel="noopener">▸ TestFlight Alpha</a>
       </span>
     </header>
+
+      <div class="topnav">
+        <div class="marqrow">
+          <div class="jukebox" id="jukebox">
+            <div class="jb-box">
+              <span class="jb-label">♫ <span class="jb-text">Back to the 90s</span></span>
+              <button class="jb-btn" id="musicBtn" type="button" aria-pressed="false">▸ play</button>
+              <span class="jb-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            </div>
+          </div>
+          <div class="nav-marq" data-marq role="navigation" aria-label="Section links (scrolling)">
+          <div class="nav-run"><a href="#platforms">Apps</a><span class="sep">✦</span><a href="#why">Why SeraphIRC</a><span class="sep">✦</span><a href="#features">Features</a><span class="sep">✦</span><a href="#bouncers">Bouncers</a><span class="sep">✦</span><a href="#privacy">Privacy</a><span class="sep">✦</span><a href="#ircv3">IRCv3</a><span class="sep">✦</span><a href="#status">Status</a><span class="sep">✦</span><a href="#quick-start">Quick Start</a><span class="sep">✦</span><a href="#available-commands">Commands</a><span class="sep">✦</span><a href="#platforms">Apps</a><span class="sep">✦</span><a href="#why">Why SeraphIRC</a><span class="sep">✦</span><a href="#features">Features</a><span class="sep">✦</span><a href="#bouncers">Bouncers</a><span class="sep">✦</span><a href="#privacy">Privacy</a><span class="sep">✦</span><a href="#ircv3">IRCv3</a><span class="sep">✦</span><a href="#status">Status</a><span class="sep">✦</span><a href="#quick-start">Quick Start</a><span class="sep">✦</span><a href="#available-commands">Commands</a><span class="sep">✦</span></div>
+        </div>
+        </div>
+        <nav class="faded" aria-label="Jump to section"><a href="#platforms">Apps</a><span class="d">·</span><a href="#why">Why</a><span class="d">·</span><a href="#features">Features</a><span class="d">·</span><a href="#bouncers">Bouncers</a><span class="d">·</span><a href="#privacy">Privacy</a><span class="d">·</span><a href="#ircv3">IRCv3</a><span class="d">·</span><a href="#status">Status</a><span class="d">·</span><a href="#quick-start">Start</a><span class="d">·</span><a href="#available-commands">Commands</a></nav>
+      </div>
+    </div>
 
     <main>
       <section class="hero" aria-labelledby="hero-title">
@@ -82,107 +100,6 @@
           </div>
         </div>
 
-        <div class="marqnav">
-          <div class="marqhead"><span>explore the site</span><span class="hint">— hover to grab a link, click to freeze —</span></div>
-          <div class="nav-marq" data-marq role="navigation" aria-label="Section links (scrolling)">
-            <div class="nav-run">
-              <a href="#why">Why SeraphIRC</a><span class="sep">✦</span>
-              <a href="#features">Features</a><span class="sep">✦</span>
-              <a href="#platforms">Apps</a><span class="sep">✦</span>
-              <a href="#bouncers">Bouncers</a><span class="sep">✦</span>
-              <a href="#privacy">Privacy</a><span class="sep">✦</span>
-              <a href="#ircv3">IRCv3</a><span class="sep">✦</span>
-              <a href="#status">Status</a><span class="sep">✦</span>
-              <a href="#quick-start">Quick Start</a><span class="sep">✦</span>
-              <a href="#available-commands">Commands</a><span class="sep">✦</span>
-              <a href="#why">Why SeraphIRC</a><span class="sep">✦</span>
-              <a href="#features">Features</a><span class="sep">✦</span>
-              <a href="#platforms">Apps</a><span class="sep">✦</span>
-              <a href="#bouncers">Bouncers</a><span class="sep">✦</span>
-              <a href="#privacy">Privacy</a><span class="sep">✦</span>
-              <a href="#ircv3">IRCv3</a><span class="sep">✦</span>
-              <a href="#status">Status</a><span class="sep">✦</span>
-              <a href="#quick-start">Quick Start</a><span class="sep">✦</span>
-              <a href="#available-commands">Commands</a><span class="sep">✦</span>
-            </div>
-          </div>
-          <nav class="faded" aria-label="Section links">
-            <a href="#why">Why</a><span class="d">·</span>
-            <a href="#features">Features</a><span class="d">·</span>
-            <a href="#platforms">Apps</a><span class="d">·</span>
-            <a href="#bouncers">Bouncers</a><span class="d">·</span>
-            <a href="#privacy">Privacy</a><span class="d">·</span>
-            <a href="#ircv3">IRCv3</a><span class="d">·</span>
-            <a href="#status">Status</a><span class="d">·</span>
-            <a href="#quick-start">Start</a><span class="d">·</span>
-            <a href="#available-commands">Commands</a>
-          </nav>
-        </div>
-
-        <figure class="hero-shot client-preview">
-          <button
-            class="client-preview-trigger"
-            type="button"
-            aria-label="Open larger SeraphIRC desktop interface screenshot"
-            aria-haspopup="dialog"
-            data-lightbox-target="interface-lightbox"
-          >
-            <img
-              src="assets/seraphirc-interface.png"
-              alt="The SeraphIRC desktop client showing the network tree, channel buffer, and user list"
-            >
-            <span class="enlarge-hint">⤢ click to enlarge</span>
-          </button>
-          <figcaption>▲ the actual client — <b>clean, dark, native</b></figcaption>
-        </figure>
-      </section>
-
-      <section class="section split-section" id="why" aria-labelledby="why-title">
-        <div class="section-heading compact">
-          <p class="eyebrow">Why SeraphIRC exists</p>
-          <h2 id="why-title">IRC is not dead. It is under-served.</h2>
-        </div>
-        <div class="why-panel">
-          <p>
-            IRC still does something rare: it gives communities fast conversation without a
-            mandatory corporate identity layer. Open-source rooms, long-running networks, small
-            friend servers, and self-hosted bouncers keep proving the protocol still matters.
-          </p>
-          <p>
-            SeraphIRC is for people who want that world to feel good on a modern desktop or phone
-            without sanding away the things that make IRC useful: real networks, slash commands,
-            channel culture, services, bouncers, and protocol details you can inspect.
-          </p>
-          <p>
-            It is calm by design, technical when it needs to be, and honest about being alpha
-            software.
-          </p>
-        </div>
-      </section>
-
-      <section class="section" id="features" aria-labelledby="features-title">
-        <div class="section-heading">
-          <p class="eyebrow">Built for real IRC use</p>
-          <h2 id="features-title">A workstation for channels, bouncers, and services</h2>
-          <p class="lead">
-            SeraphIRC is not trying to replace IRC with a social app. It is a focused client for
-            Libera, DALnet, OFTC, Rizon, private networks, and the bouncer setups power users
-            already run — on desktop and on mobile.
-          </p>
-        </div>
-
-        <div class="feature-grid">
-          <article class="feature-card"><span class="tag">multi-network</span><h3>Multi-network IRC</h3><p>Keep direct networks, bouncer imports, channels, server buffers, and private messages organized in one workspace.</p></article>
-          <article class="feature-card"><span class="tag">soju</span><h3>Soju-first bouncer support</h3><p>SeraphIRC is being shaped around modern Soju workflows, including bouncer-network discovery and practical network management.</p></article>
-          <article class="feature-card"><span class="tag">znc</span><h3>ZNC and direct IRC</h3><p>Connect through familiar ZNC setups or talk directly to traditional IRC networks when a bouncer is not part of the stack.</p></article>
-          <article class="feature-card"><span class="tag">ircv3</span><h3>IRCv3 capability negotiation</h3><p>Negotiate advertised capabilities such as SASL, server-time, account tags, away-notify, echo-message, batch, and chat history.</p></article>
-          <article class="feature-card"><span class="tag">auth</span><h3>SASL and NickServ workflows</h3><p>Use authentication paths that match how established IRC networks actually expect registered users to connect.</p></article>
-          <article class="feature-card"><span class="tag">history</span><h3>Local history and search</h3><p>Search recent conversations while keeping history and configuration under local user control.</p></article>
-          <article class="feature-card"><span class="tag">themes</span><h3>Themeable interface</h3><p>Use a polished dark workspace today, with theme direction built into the client as it matures.</p></article>
-          <article class="feature-card"><span class="tag">diagnostics</span><h3>Diagnostics built in</h3><p>Inspect connection behavior, server responses, and client state without guessing what happened.</p></article>
-          <article class="feature-card"><span class="tag">privacy</span><h3>Privacy-conscious defaults</h3><p>No analytics, no forced cloud account, no social growth loops, and no pressure to make IRC less yours.</p></article>
-          <article class="feature-card"><span class="tag">cross-device</span><h3>Desktop and mobile</h3><p>The same privacy-conscious client and local-control philosophy, now on both desktop and mobile.</p></article>
-        </div>
       </section>
 
       <section class="section" id="platforms" aria-labelledby="platforms-title">
@@ -293,6 +210,54 @@
           >
         </div>
       </dialog>
+
+      <section class="section split-section" id="why" aria-labelledby="why-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Why SeraphIRC exists</p>
+          <h2 id="why-title">IRC is not dead. It is under-served.</h2>
+        </div>
+        <div class="why-panel">
+          <p>
+            IRC still does something rare: it gives communities fast conversation without a
+            mandatory corporate identity layer. Open-source rooms, long-running networks, small
+            friend servers, and self-hosted bouncers keep proving the protocol still matters.
+          </p>
+          <p>
+            SeraphIRC is for people who want that world to feel good on a modern desktop or phone
+            without sanding away the things that make IRC useful: real networks, slash commands,
+            channel culture, services, bouncers, and protocol details you can inspect.
+          </p>
+          <p>
+            It is calm by design, technical when it needs to be, and honest about being alpha
+            software.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="features" aria-labelledby="features-title">
+        <div class="section-heading">
+          <p class="eyebrow">Built for real IRC use</p>
+          <h2 id="features-title">A workstation for channels, bouncers, and services</h2>
+          <p class="lead">
+            SeraphIRC is not trying to replace IRC with a social app. It is a focused client for
+            Libera, DALnet, OFTC, Rizon, private networks, and the bouncer setups power users
+            already run — on desktop and on mobile.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card"><span class="tag">multi-network</span><h3>Multi-network IRC</h3><p>Keep direct networks, bouncer imports, channels, server buffers, and private messages organized in one workspace.</p></article>
+          <article class="feature-card"><span class="tag">soju</span><h3>First class Soju bouncer support</h3><p>SeraphIRC is being shaped around modern Soju workflows, including bouncer-network discovery and practical network management.</p></article>
+          <article class="feature-card"><span class="tag">znc</span><h3>ZNC and direct IRC</h3><p>Connect through familiar ZNC setups or talk directly to traditional IRC networks when a bouncer is not part of the stack.</p></article>
+          <article class="feature-card"><span class="tag">ircv3</span><h3>IRCv3 capability negotiation</h3><p>Negotiate advertised capabilities such as SASL, server-time, account tags, away-notify, echo-message, batch, and chat history.</p></article>
+          <article class="feature-card"><span class="tag">auth</span><h3>SASL and NickServ workflows</h3><p>Use authentication paths that match how established IRC networks actually expect registered users to connect.</p></article>
+          <article class="feature-card"><span class="tag">history</span><h3>Local history and search</h3><p>Search recent conversations while keeping history and configuration under local user control.</p></article>
+          <article class="feature-card"><span class="tag">themes</span><h3>Themeable interface</h3><p>Use a polished dark workspace today, with theme direction built into the client as it matures.</p></article>
+          <article class="feature-card"><span class="tag">diagnostics</span><h3>Diagnostics built in</h3><p>Inspect connection behavior, server responses, and client state without guessing what happened.</p></article>
+          <article class="feature-card"><span class="tag">privacy</span><h3>Privacy-conscious defaults</h3><p>No analytics, no forced cloud account, no social growth loops, and no pressure to make IRC less yours.</p></article>
+          <article class="feature-card"><span class="tag">cross-device</span><h3>Desktop and mobile</h3><p>The same privacy-conscious client and local-control philosophy, now on both desktop and mobile.</p></article>
+        </div>
+      </section>
 
       <section class="section bouncer-section" id="bouncers" aria-labelledby="bouncers-title">
         <div class="section-heading">
@@ -466,6 +431,21 @@
                   <td>Used for native Soju mode: discover, attach to, and manage bouncer networks from one connection.</td>
                 </tr>
                 <tr>
+                  <td><code>soju.im/bouncer-networks-notify</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Receives live updates to the bouncer's network list while attached, so the network tree stays current without reconnecting.</td>
+                </tr>
+                <tr>
+                  <td><code>soju.im/webpush</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Registers Web Push subscriptions with soju (<code>WEBPUSH REGISTER</code>) so mentions and messages arrive as mobile push notifications; re-registers automatically after reconnect.</td>
+                </tr>
+                <tr>
+                  <td><code>draft/metadata-2</code></td>
+                  <td><span class="compat-status supported"><span></span>Supported</span></td>
+                  <td>Negotiated and used with soju to persist per-network state across devices via <code>METADATA SET</code> (for example, keeping a network muted with <code>soju.im/muted</code>).</td>
+                </tr>
+                <tr>
                   <td><code>labeled-response</code></td>
                   <td><span class="compat-status partial"><span></span>Partial</span></td>
                   <td>Used for labeled WHOIS/NAMES and bouncer attach; other response flows use fallback correlation.</td>
@@ -479,11 +459,6 @@
                   <td><code>standard-replies</code></td>
                   <td><span class="compat-status partial"><span></span>Partial</span></td>
                   <td>Negotiated where advertised; <code>FAIL</code>/<code>WARN</code>/<code>NOTE</code> replies are accepted, with richer surfacing still being broadened.</td>
-                </tr>
-                <tr>
-                  <td>Persistent IRCv3 metadata</td>
-                  <td><span class="compat-status partial"><span></span>Partial</span></td>
-                  <td>Tag and msgid metadata is preserved in memory; on-disk persistence is not required yet.</td>
                 </tr>
               </tbody>
             </table>
@@ -509,7 +484,7 @@
           <ul class="status-list" aria-label="Alpha status list">
             <li>Desktop and mobile clients in active development</li>
             <li>Core IRC features under active polish</li>
-            <li>Soju-first bouncer work is a priority</li>
+            <li>First-class Soju bouncer support is a priority</li>
             <li>Read markers sync unread state across desktop and mobile</li>
           </ul>
         </div>
@@ -848,15 +823,6 @@
     </main>
 
     <footer class="site-footer">
-      <div class="jukebox" id="jukebox">
-        <div class="jb-box">
-          <span class="jb-label">♫ Back to the 90s</span>
-          <button class="jb-btn" id="musicBtn" type="button" aria-pressed="false">▸ play</button>
-          <span class="jb-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-        </div>
-        <span class="jb-note">original tune · click to enable · off by default</span>
-      </div>
-
       <div class="foot-badges">
         <a class="b31 a" href="https://github.com/seraphirc/seraphirc-download/tree/main" target="_blank" rel="noopener">Desktop<br>Download</a>
         <a class="b31 b" href="https://testflight.apple.com/join/yWxRQutF" target="_blank" rel="noopener">Mobile App<br>(iOS)</a>
