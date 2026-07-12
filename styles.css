@@ -138,8 +138,9 @@ code, .mono { font-family: var(--mono); }
 
 .brand-mark { display: grid; place-items: center; width: 30px; height: 24px; }
 .brand-mark img {
-  width: 30px; height: 24px; object-fit: contain;
-  filter: drop-shadow(0 0 6px rgba(94, 140, 255, 0.4));
+  width: 24px; height: 24px; object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(94, 140, 255, 0.4);
 }
 
 .site-nav {
@@ -1012,7 +1013,7 @@ h2 {
   color: var(--muted);
   border-top: 1px solid var(--line);
 }
-.site-footer img { width: 24px; height: 24px; filter: drop-shadow(0 0 6px rgba(94, 140, 255, 0.4)); }
+.site-footer img { width: 24px; height: 24px; border-radius: 6px; box-shadow: 0 0 6px rgba(94, 140, 255, 0.4); }
 .site-footer strong { color: var(--text); font-family: var(--mono); letter-spacing: 0.08em; }
 .site-footer a { color: var(--accent-bright); font-family: var(--mono); font-size: 0.9rem; }
 
@@ -1515,7 +1516,8 @@ body {
 .hero-mark img {
   width: clamp(88px, 12vw, 140px);
   height: auto;
-  filter: drop-shadow(0 6px 20px rgba(94, 140, 255, 0.28));
+  border-radius: 22%;
+  box-shadow: 0 0 0 1px rgba(137, 168, 250, 0.22), 0 6px 28px rgba(94, 140, 255, 0.30);
 }
 #hero-title {
   color: #c6c0d8;
