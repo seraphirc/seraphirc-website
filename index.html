@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="SeraphIRC is a modernized IRC client for desktop and mobile."
+      content="SeraphIRC is an IRC client for desktop and mobile, with Soju and ZNC bouncer support, IRCv3, and locally stored history."
     >
-    <meta name="theme-color" content="#07080e">
+    <meta name="theme-color" content="#15141b">
     <link rel="canonical" href="https://www.seraphirc.chat/">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon.png">
@@ -21,7 +21,7 @@
     <meta property="og:title" content="SeraphIRC - Desktop &amp; mobile IRC for real networks">
     <meta
       property="og:description"
-      content="A modernized IRC client for desktop and mobile: classic IRC, Soju/ZNC bouncers, IRCv3 capability negotiation, and local-first history."
+      content="An IRC client for desktop and mobile, with Soju and ZNC bouncer support, IRCv3 capability negotiation, and locally stored history."
     >
     <meta property="og:url" content="https://www.seraphirc.chat/">
     <meta property="og:image" content="https://www.seraphirc.chat/assets/seraphirc-link-preview.png">
@@ -34,12 +34,12 @@
     <meta name="twitter:title" content="SeraphIRC - Desktop &amp; mobile IRC for real networks">
     <meta
       name="twitter:description"
-      content="A modernized IRC client for desktop and mobile: classic IRC, Soju/ZNC bouncers, IRCv3 capability negotiation, and local-first history."
+      content="An IRC client for desktop and mobile, with Soju and ZNC bouncer support, IRCv3 capability negotiation, and locally stored history."
     >
     <meta name="twitter:image" content="https://www.seraphirc.chat/assets/seraphirc-link-preview.png">
     <meta name="twitter:image:alt" content="SeraphIRC logo on a dark purple glow">
-    <title>SeraphIRC - Modernized IRC for desktop &amp; mobile</title>
-    <link rel="stylesheet" href="styles.css?v=20260707-web15c">
+    <title>SeraphIRC - IRC for desktop &amp; mobile</title>
+    <link rel="stylesheet" href="styles.css?v=20260711-dark7">
   </head>
   <body>
     <div class="topbar">
@@ -48,30 +48,18 @@
         <span class="brand-mark" aria-hidden="true">
           <img src="assets/seraphirc-logo.png" alt="">
         </span>
-        <span class="brand-star" aria-hidden="true">✦</span>
         <span>SeraphIRC</span>
       </a>
       <span class="header-status"><span class="dot" aria-hidden="true"></span>desktop &amp; mobile</span>
-      <span class="header-ctas">
-        <a class="header-cta" href="https://github.com/seraphirc/seraphirc-download/tree/main">▸ Desktop Alpha</a>
-        <a class="header-cta header-cta-alt" href="https://testflight.apple.com/join/yWxRQutF" target="_blank" rel="noopener">▸ TestFlight</a>
-      </span>
     </header>
 
       <div class="topnav">
         <div class="marqrow">
-          <div class="jukebox" id="jukebox">
-            <div class="jb-box">
-              <span class="jb-label">♫ <span class="jb-text">Back to the 90s</span></span>
-              <button class="jb-btn" id="musicBtn" type="button" aria-pressed="false">▸ play</button>
-              <span class="jb-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-            </div>
-          </div>
           <div class="nav-marq" data-marq role="navigation" aria-label="Section links (scrolling)">
-          <div class="nav-run"><a href="#platforms">Apps</a><span class="sep">✦</span><a href="#why">Why SeraphIRC</a><span class="sep">✦</span><a href="#features">Features</a><span class="sep">✦</span><a href="#bouncers">Bouncers</a><span class="sep">✦</span><a href="#ircv3">IRCv3</a><span class="sep">✦</span><a href="#quick-start">Quick Start</a><span class="sep">✦</span><a href="#platforms">Apps</a><span class="sep">✦</span><a href="#why">Why SeraphIRC</a><span class="sep">✦</span><a href="#features">Features</a><span class="sep">✦</span><a href="#bouncers">Bouncers</a><span class="sep">✦</span><a href="#ircv3">IRCv3</a><span class="sep">✦</span><a href="#quick-start">Quick Start</a><span class="sep">✦</span></div>
+          <div class="nav-run"><a href="#platforms">Apps</a><span class="sep">★</span><a href="#features">Features</a><span class="sep">★</span><a href="#bouncers">Bouncers</a><span class="sep">★</span><a href="#ircv3">IRCv3</a><span class="sep">★</span><a href="#platforms">Apps</a><span class="sep">★</span><a href="#features">Features</a><span class="sep">★</span><a href="#bouncers">Bouncers</a><span class="sep">★</span><a href="#ircv3">IRCv3</a><span class="sep">★</span></div>
         </div>
         </div>
-        <nav class="faded" aria-label="Jump to section"><a href="#platforms">Apps</a><span class="d">·</span><a href="#why">Why</a><span class="d">·</span><a href="#features">Features</a><span class="d">·</span><a href="#bouncers">Bouncers</a><span class="d">·</span><a href="#ircv3">IRCv3</a><span class="d">·</span><a href="#quick-start">Start</a></nav>
+        <nav class="faded" aria-label="Jump to section"><a href="#platforms">Apps</a><span class="d">·</span><a href="#features">Features</a><span class="d">·</span><a href="#bouncers">Bouncers</a><span class="d">·</span><a href="#ircv3">IRCv3</a></nav>
       </div>
     </div>
 
@@ -83,31 +71,29 @@
             <span>Soju-native</span>
             <span>Local control</span>
           </div>
+          <div class="hero-mark" aria-hidden="true">
+            <img src="assets/seraphirc-logo.png" alt="">
+          </div>
           <h1 id="hero-title">SeraphIRC<span class="caret" aria-hidden="true"></span></h1>
           <p class="hero-subheadline">
-            A modernized client for those who love IRC.
+            A new client for people who never left IRC.
           </p>
           <p class="hero-copy">
-            SeraphIRC keeps classic IRC workflows intact while adding modern ergonomics across
-            desktop and mobile. SeraphIRC features robust IRCv3 capability and support for Soju, 
-            ZNC, direct networks, and other self-hosted bouncers.
+            SeraphIRC runs on desktop, iPhone, and iPad. It supports IRCv3 and connects through
+            Soju, ZNC, or directly to an IRC network. Your chat history and configuration stay
+            on your own devices.
           </p>
-          <div class="hero-actions" aria-label="Primary actions">
-            <a class="button button-secondary button-go" href="#quick-start">Quick Start Guide</a>
-            <a class="button button-secondary button-proto" href="#ircv3">IRCv3 Compatibility</a>
-          </div>
         </div>
 
       </section>
 
       <section class="section" id="platforms" aria-labelledby="platforms-title">
         <div class="section-heading">
-          <p class="eyebrow">One client, everywhere you use IRC</p>
           <h2 id="platforms-title">SeraphIRC on desktop and mobile</h2>
           <p class="lead">
-            The desktop app is a full graphical client with network trees, channel buffers, and
-            user lists. The mobile app brings a familiar look and feel to your phone with mobile 
-            navigation gestures and push notifications.
+            The desktop app is a full graphical client with a network tree, channel buffers, and
+            user lists. The mobile app puts the same networks on your phone, with touch
+            navigation and push notifications.
           </p>
         </div>
 
@@ -118,8 +104,8 @@
               <span class="platform-badge">Alpha</span>
             </div>
             <p>
-              A focused desktop workspace: network tree, focused channel buffers, user lists,
-              services, and readable diagnostics — built for the bouncer setups power users run.
+              Network tree on the left, conversation in the middle, user list on the right.
+              Services and connection diagnostics are built in for when a network misbehaves.
             </p>
             <figure class="client-preview platform-shot">
               <button
@@ -146,8 +132,8 @@
               <span class="platform-badge">Alpha</span>
             </div>
             <p>
-              The same networks and channels on your iPhone or iPad with a layout tuned for touch. SeraphIRC
-              mobile is a familiar companion for the desktop workspace, not a stripped-down afterthought. (Requires Soju)
+              The same networks and channels on your iPhone or iPad. It connects through your
+              Soju bouncer, so unread state and history stay in sync with the desktop. (Requires Soju)
             </p>
             <figure class="phone phone-shot client-preview">
               <button
@@ -209,366 +195,93 @@
         </div>
       </dialog>
 
-      <section class="section split-section" id="why" aria-labelledby="why-title">
-        <div class="section-heading compact">
-          <p class="eyebrow">Why SeraphIRC exists</p>
-          <h2 id="why-title">IRC is not dead. It is under-served.</h2>
-        </div>
-        <div class="why-panel">
-          <p>
-            IRC still does something rare: it gives communities fast conversation without a
-            mandatory corporate identity layer. Open-source rooms, long-running networks, small
-            friend servers, and self-hosted bouncers keep proving the protocol still matters.
-          </p>
-          <p>
-            SeraphIRC is for people who want that world to feel good on a modern desktop or phone
-            without sanding away the things that make IRC useful: real networks, slash commands,
-            channel culture, services, bouncers, and protocol details you can inspect.
-          </p>
-          <p>
-            It is calm by design, technical when it needs to be.
-          </p>
-        </div>
-      </section>
 
       <section class="section" id="features" aria-labelledby="features-title">
         <div class="section-heading">
-          <p class="eyebrow">Built for real IRC use</p>
-          <h2 id="features-title">A workstation for channels, bouncers, and services</h2>
-          <p class="lead">
-            SeraphIRC is not trying to replace IRC with a social app. It is a focused client for
-            Libera, DALnet, OFTC, Rizon, private networks, and the bouncer setups power users
-            already run — on desktop and on mobile.
-          </p>
+          <h2 id="features-title">Features</h2>
         </div>
 
-        <div class="feature-grid">
-          <article class="feature-card"><span class="tag">multi-network</span><h3>Multi-network IRC</h3><p>Keep direct networks, bouncer imports, channels, server buffers, and private messages organized in one workspace.</p></article>
-          <article class="feature-card"><span class="tag">soju</span><h3>First class Soju bouncer support</h3><p>SeraphIRC is being shaped around modern Soju workflows, including bouncer-network discovery and practical network management.</p></article>
-          <article class="feature-card"><span class="tag">znc</span><h3>ZNC and direct IRC</h3><p>Connect through familiar ZNC setups or talk directly to traditional IRC networks when a bouncer is not part of the stack.</p></article>
-          <article class="feature-card"><span class="tag">ircv3</span><h3>IRCv3 capability negotiation</h3><p>Negotiate advertised capabilities such as SASL, server-time, account tags, away-notify, echo-message, batch, and chat history.</p></article>
-          <article class="feature-card"><span class="tag">auth</span><h3>SASL and NickServ workflows</h3><p>Use authentication paths that match how established IRC networks actually expect registered users to connect.</p></article>
-          <article class="feature-card"><span class="tag">history</span><h3>Local history and search</h3><p>Search recent conversations while keeping history and configuration under local user control.</p></article>
-          <article class="feature-card"><span class="tag">themes</span><h3>Themeable interface</h3><p>Use a polished dark workspace today, with theme direction built into the client as it matures.</p></article>
-          <article class="feature-card"><span class="tag">diagnostics</span><h3>Diagnostics built in</h3><p>Inspect connection behavior, server responses, and client state without guessing what happened.</p></article>
-          <article class="feature-card"><span class="tag">privacy</span><h3>Modernized defaults</h3><p>No analytics, no forced cloud account, no social growth loops, and no pressure to make IRC less yours.</p></article>
-          <article class="feature-card"><span class="tag">cross-device</span><h3>Desktop and mobile</h3><p>The same modernized client and local-control philosophy, now on both desktop and mobile.</p></article>
-        </div>
+        <ul class="punchlist">
+          <li><b>Multi-network IRC:</b> keep direct networks, bouncer imports, channels, server buffers, and private messages organized in one workspace.</li>
+          <li><b>First class Soju support:</b> import networks from a Soju bouncer, discover bouncer networks automatically, and manage them without leaving the client.</li>
+          <li><b>ZNC and direct IRC:</b> connect through an existing ZNC setup, or talk directly to traditional networks when you don't run a bouncer at all.</li>
+          <li><b>IRCv3 negotiation:</b> advertised capabilities such as SASL, server-time, account tags, away-notify, echo-message, batch, and chat history.</li>
+          <li><b>SASL and NickServ:</b> log in the way established networks expect registered users to — SASL during connection or a classic NickServ identify.</li>
+          <li><b>Local history and search:</b> search recent conversations while keeping history and configuration under local user control.</li>
+          <li><b>Themeable interface:</b> a prebuilt collection of common, beloved themes ready to use.</li>
+          <li><b>Diagnostics built in:</b> inspect connection behavior, server responses, and client state without guessing what happened.</li>
+          <li><b>Nothing phones home:</b> no analytics, no account requirement, no cloud dependency. The client talks to your networks and nothing else.</li>
+          <li><b>Desktop and mobile:</b> take the desktop's familiar interface layout and flows with you on the go with your mobile device.</li>
+          <li><b>Mobile push notifications:</b> receive push notifications on your mobile device when the setting is enabled on your app.</li>
+          <li><b>File uploads:</b> use your Soju bouncer to upload files and share with others.</li>
+          <li><b>Emoji support:</b> display emojis and use the emoji picker to spruce up your chat.</li>
+          <li><b>Voice dictation:</b> use your mobile device's microphone to translate your voice to IRC message. Handy for responding on the go.</li>
+        </ul>
       </section>
 
       <section class="section bouncer-section" id="bouncers" aria-labelledby="bouncers-title">
         <div class="section-heading">
-          <p class="eyebrow">Bouncer-native without losing IRC</p>
-          <h2 id="bouncers-title">Made for Soju, compatible with the old paths</h2>
+          <h2 id="bouncers-title">Made for Soju, works with ZNC and direct connections</h2>
           <p class="lead">
-            Bouncers are how many people keep IRC useful across machines and downtime. SeraphIRC
-            treats them as a first-class part of the experience while preserving direct IRC
-            compatibility.
+            If you keep IRC running through a bouncer, SeraphIRC understands that setup natively.
+            If you don't, direct connections behave like any classic client.
           </p>
         </div>
-        <div class="bouncer-grid">
-          <article>
-            <h3>Soju support</h3>
-            <p>Import networks, manage bouncer-aware connections, and move toward capabilities that match modern IRC persistence.</p>
-          </article>
-          <article>
-            <h3>ZNC compatibility</h3>
-            <p>Keep familiar ZNC setups working, including command forwarding and conventional bouncer connection patterns.</p>
-          </article>
-          <article>
-            <h3>Direct networks</h3>
-            <p>Connect directly to classic networks when that is the right tool, with the same channel and services expectations.</p>
-          </article>
-        </div>
+        <ul class="punchlist punchlist-1">
+          <li><b>Soju:</b> import networks straight from the bouncer and manage bouncer-aware connections inside the client, including push notifications over soju.im/webpush.</li>
+          <li><b>ZNC:</b> existing setups keep working, including command forwarding and the usual user/network style of login.</li>
+          <li><b>Direct networks:</b> no bouncer? Connect straight to a network and everything works as you'd expect: channels, services, SASL, the lot.</li>
+        </ul>
       </section>
 
       <section class="section ircv3-section" id="ircv3" aria-labelledby="ircv3-title">
         <div class="section-heading">
-          <p class="eyebrow">IRCv3 compatibility</p>
-          <h2 id="ircv3-title">IRCv3 capability support</h2>
-          <p class="lead">
-            SeraphIRC negotiates modern IRC capabilities where networks and bouncers advertise
-            them, while preserving classic IRC behavior as the baseline. This table reflects alpha
-            behavior: supported pieces are usable, partial pieces are still being broadened, and
-            coverage may change as the client stabilizes.
-          </p>
+          <h2 id="ircv3-title">Protocol support</h2>
         </div>
 
-        <div class="compat-panel">
-          <div class="compat-legend" aria-label="Compatibility status legend">
-            <span><span class="status-dot status-supported"></span>Supported</span>
-            <span><span class="status-dot status-partial"></span>Partial</span>
+        <div class="cap-groups">
+          <div class="cap-group">
+            <h3 class="cap-head"><span class="status-dot status-supported" aria-hidden="true"></span>Supported <span class="cap-count">&middot; 23</span></h3>
+            <ul class="punchlist cap-list">
+              <li><code>sasl</code></li>
+              <li><code>server-time</code></li>
+              <li><code>message-tags</code></li>
+              <li><code>cap-notify</code></li>
+              <li><code>account-notify</code></li>
+              <li><code>account-tag</code></li>
+              <li><code>extended-join</code></li>
+              <li><code>away-notify</code></li>
+              <li><code>chghost</code></li>
+              <li><code>multi-prefix</code></li>
+              <li><code>invite-notify</code></li>
+              <li><code>echo-message</code></li>
+              <li><code>batch</code></li>
+              <li><code>msgid</code></li>
+              <li><code>draft/chathistory</code></li>
+              <li><code>draft/read-marker</code></li>
+              <li><code>monitor</code></li>
+              <li><code>draft/no-implicit-names</code></li>
+              <li><code>soju.im/bouncer-networks</code></li>
+              <li><code>soju.im/bouncer-networks-notify</code></li>
+              <li><code>soju.im/webpush</code></li>
+              <li><code>soju.im/FILEHOST</code></li>
+              <li><code>draft/metadata-2</code></li>
+            </ul>
           </div>
-
-          <div class="compat-table-wrap">
-            <table class="compat-table">
-              <thead>
-                <tr>
-                  <th scope="col">Capability</th>
-                  <th scope="col">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code>sasl</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>server-time</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>message-tags</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>cap-notify</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>account-notify</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>account-tag</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>extended-join</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>away-notify</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>chghost</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>multi-prefix</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>invite-notify</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>echo-message</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>batch</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>msgid</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>draft/chathistory</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>draft/read-marker</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>monitor</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>draft/no-implicit-names</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>soju.im/bouncer-networks</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>soju.im/bouncer-networks-notify</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>soju.im/webpush</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>draft/metadata-2</code></td>
-                  <td><span class="compat-status supported"><span></span>Supported</span></td>
-                </tr>
-                <tr>
-                  <td><code>labeled-response</code></td>
-                  <td><span class="compat-status partial"><span></span>Partial</span></td>
-                </tr>
-                <tr>
-                  <td><code>setname</code></td>
-                  <td><span class="compat-status partial"><span></span>Partial</span></td>
-                </tr>
-                <tr>
-                  <td><code>standard-replies</code></td>
-                  <td><span class="compat-status partial"><span></span>Partial</span></td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="cap-group cap-group-partial">
+            <h3 class="cap-head"><span class="status-dot status-partial" aria-hidden="true"></span>Partial <span class="cap-count">&middot; 3</span></h3>
+            <ul class="punchlist cap-list">
+              <li><code>labeled-response</code></li>
+              <li><code>setname</code></li>
+              <li><code>standard-replies</code></li>
+            </ul>
           </div>
           <p class="compat-note">
-            Statuses reflect current alpha behavior. Capabilities are negotiated only where the
-            network or bouncer advertises them, and coverage may broaden as the client stabilizes.
+            "Partial" means the capability is negotiated but not every code path uses it yet.
           </p>
         </div>
       </section>
 
-      <section class="section quick-start-section" id="quick-start" aria-labelledby="quick-start-title">
-        <div class="section-heading">
-          <p class="eyebrow">Quick start</p>
-          <h2 id="quick-start-title">Quick start guide</h2>
-          <p class="lead">
-            The first-run setup keeps direct IRC, ZNC-style bouncers, and Soju imports visible
-            from the start. Use it to configure credentials, choose connection behavior, and get
-            onto a real network quickly.
-          </p>
-        </div>
-
-        <div class="guide-steps">
-          <article class="guide-step">
-            <div class="guide-copy">
-              <h3><span class="step-no">1.</span> Start the Quick Setup</h3>
-              <p>
-                Upon first launch, you'll be greeted by the Quick Start Wizard. Click "Start
-                Quick Setup" to continue, or Exit Initial Setup if you prefer to set things up on
-                your own.
-              </p>
-            </div>
-            <figure class="guide-shot">
-              <img
-                src="assets/01-quick-start-dialog.png"
-                alt="SeraphIRC Quick Start Wizard with Start Quick Setup and Exit Initial Setup options"
-              >
-            </figure>
-          </article>
-
-          <article class="guide-step">
-            <div class="guide-copy">
-              <h3><span class="step-no">2.</span> Choose a Network Source</h3>
-              <p>
-                After clicking next, you'll be prompted for a default provided network or a custom
-                network not on the list. Advanced users leveraging Soju can choose "Import from
-                Soju" to connect to their Soju bouncer and import their existing networks into
-                SeraphIRC.
-              </p>
-            </div>
-            <figure class="guide-shot">
-              <img
-                src="assets/02-network-select-dialog.png"
-                alt="SeraphIRC network selection dialog with default network, custom network, and Soju import choices"
-              >
-            </figure>
-          </article>
-
-          <article class="guide-step">
-            <div class="guide-copy">
-              <h3><span class="step-no">3.</span> Pick a Connection Type</h3>
-              <p>
-                On the next screen, you'll be asked if you'd like to connect directly or use a
-                ZNC/other type of bouncer. Note if you are using Soju, the previous screen will
-                take you through the workflow for importing your networks.
-              </p>
-            </div>
-            <figure class="guide-shot">
-              <img
-                src="assets/03-direct-or-bouncer.png"
-                alt="SeraphIRC connection type dialog for choosing a direct connection or bouncer"
-              >
-            </figure>
-          </article>
-
-          <article class="guide-step">
-            <div class="guide-copy">
-              <h3><span class="step-no">4.</span> Configure Network Details</h3>
-              <p>
-                On the next screen you can configure standard IRC network details such as
-                nickname, alternate nick, SASL/NickServ, or autojoin channels.
-              </p>
-            </div>
-            <figure class="guide-shot">
-              <img
-                src="assets/04-network-details-dialog.png"
-                alt="SeraphIRC network details dialog with nickname, credentials, and autojoin channel settings"
-              >
-            </figure>
-          </article>
-
-          <article class="guide-step">
-            <div class="guide-copy">
-              <h3><span class="step-no">5.</span> Initialize Secure Storage</h3>
-              <p>
-                SeraphIRC uses your operating system credential store to securely store passwords.
-                If you have not initialized your secrets store, you'll see a "Secure Storage
-                Required" warning. Click "Retry Secure Storage" and you will be prompted for a
-                credential store password. Once this is completed, click "Next" on the network
-                details dialog.
-              </p>
-            </div>
-            <figure class="guide-shot">
-              <img
-                src="assets/05-secure-storage-dialog.png"
-                alt="SeraphIRC Secure Storage Required warning with Retry Secure Storage action"
-              >
-            </figure>
-          </article>
-
-          <article class="guide-step">
-            <div class="guide-copy">
-              <h3><span class="step-no">6.</span> Set Connection Behavior</h3>
-              <p>
-                On the next screen, you can choose whether your network connects at startup, auto
-                reconnects, and what the reconnect delay is.
-              </p>
-            </div>
-            <figure class="guide-shot">
-              <img
-                src="assets/06-behavior-dialog.png"
-                alt="SeraphIRC connection behavior dialog with startup, reconnect, and reconnect delay settings"
-              >
-            </figure>
-          </article>
-
-          <article class="guide-step">
-            <div class="guide-copy">
-              <h3><span class="step-no">7.</span> Activate the Network</h3>
-              <p>
-                Once you've clicked next, you'll be presented with a network configuration
-                summary. When you're ready, click "Activate Network."
-              </p>
-            </div>
-            <figure class="guide-shot">
-              <img
-                src="assets/07-activate-network.png"
-                alt="SeraphIRC network configuration summary with Activate Network action"
-              >
-            </figure>
-          </article>
-
-          <article class="guide-step">
-            <div class="guide-copy">
-              <h3><span class="step-no">8.</span> Finish Setup</h3>
-              <p>
-                Once your network is activated, you'll be able to Add Another Network or Finish
-                Setup. Once setup is finished, your newly configured network will show up in your
-                left treebar, and you're ready to go.
-              </p>
-            </div>
-            <figure class="guide-shot">
-              <img
-                src="assets/08-finish-setup.png"
-                alt="SeraphIRC setup completion screen with Add Another Network and Finish Setup options"
-              >
-            </figure>
-          </article>
-        </div>
-
-      </section>
     </main>
 
     <footer class="site-footer">
@@ -583,13 +296,13 @@
       <div class="foot-brand">
         <img src="assets/seraphirc-logo.png" alt="" aria-hidden="true">
         <strong>SeraphIRC</strong>
-        <span>Modernized IRC for desktop &amp; mobile</span>
+        <span>IRC for desktop &amp; mobile</span>
         <a href="https://www.seraphirc.chat">www.seraphirc.chat</a>
       </div>
 
       <div class="foot-meta">
         visitor <span class="counter" id="yearCounter"><b>2</b><b>0</b><b>2</b><b>6</b></span> ·
-        © 1997–2026 SeraphIRC · best experienced everywhere — desktop &amp; mobile
+        © 1997–2026 SeraphIRC · best viewed with any browser
       </div>
     </footer>
 
@@ -630,114 +343,6 @@
         }
       })();
 
-      // ---- Click-to-enable jukebox: an ORIGINAL, flowing nostalgic ballad (Web Audio) ----
-      (function () {
-        var btn = document.getElementById("musicBtn");
-        var jb = document.getElementById("jukebox");
-        if (!btn) return;
-        var ctx, master, timer, playing = false;
-        var bpm = 72, beat = 60 / bpm;
-        var evIndex = 0, loopOrigin = 0, loopDur;
-
-        function freq(name) {
-          if (!name) return 0;
-          var m = name.match(/^([A-G])(#|b)?(-?\d)$/);
-          var map = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
-          var s = map[m[1]]; if (m[2] === "#") s++; if (m[2] === "b") s--;
-          var midi = s + (parseInt(m[3], 10) + 1) * 12;
-          return 440 * Math.pow(2, (midi - 69) / 12);
-        }
-
-        // flowing, mostly-stepwise melody in D major — durations in beats (legato)
-        var mel = [
-          ["F#5",1],["E5",1],["D5",2],
-          ["E5",1],["F#5",1],["A5",2],
-          ["A5",1],["G5",1],["F#5",2],
-          ["G5",1],["F#5",1],["E5",2],
-          ["D5",1],["E5",1],["F#5",1],["A5",1],
-          ["G5",1],["F#5",1],["E5",2],
-          ["D5",1],["E5",1],["D5",1],["B4",1],
-          ["A4",2],["C#5",1],["E5",1]
-        ];
-        var bassRoot = ["D2","A2","B2","G2","D2","A2","G2","A2"];
-        var fifth    = ["A2","E3","F#3","D3","A2","E3","D3","E3"];
-        var pad = [["D3","F#3","A3"],["A3","C#4","E4"],["B3","D4","F#4"],["G3","B3","D4"],
-                   ["D3","F#3","A3"],["A3","C#4","E4"],["G3","B3","D4"],["A3","C#4","E4"]];
-
-        var loopBeats = 32, events = [], tb = 0;
-        mel.forEach(function (m) {
-          if (freq(m[0])) events.push({ t: tb, f: freq(m[0]), dur: m[1], gain: 0.17, kind: "mel" });
-          tb += m[1];
-        });
-        for (var b = 0; b < 8; b++) {
-          var t0 = b * 4;
-          events.push({ t: t0,     f: freq(bassRoot[b]), dur: 3.7, gain: 0.16, kind: "bass" });
-          events.push({ t: t0 + 2, f: freq(fifth[b]),    dur: 1.7, gain: 0.10, kind: "bass" });
-          pad[b].forEach(function (pn) { events.push({ t: t0, f: freq(pn), dur: 3.8, gain: 0.032, kind: "pad" }); });
-        }
-        events.sort(function (a, b) { return a.t - b.t; });
-
-        function voice(f, t, dur, gain, type) {
-          if (!f) return;
-          var o = ctx.createOscillator(), g = ctx.createGain();
-          o.type = type || "triangle"; o.frequency.value = f;
-          var hold = Math.max(0.06, dur * 0.7);
-          g.gain.setValueAtTime(0.0001, t);
-          g.gain.linearRampToValueAtTime(gain, t + 0.03);
-          g.gain.setValueAtTime(gain, t + hold);
-          g.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.18);
-          o.connect(g); g.connect(master);
-          o.start(t); o.stop(t + dur + 0.24);
-        }
-        function playEv(ev, when) {
-          var d = ev.dur * beat;
-          if (ev.kind === "mel") { voice(ev.f, when, d, ev.gain, "triangle"); voice(ev.f * 1.004, when, d, ev.gain * 0.4, "sine"); }
-          else if (ev.kind === "bass") { voice(ev.f, when, d, ev.gain, "sine"); }
-          else { voice(ev.f, when, d, ev.gain, "triangle"); }
-        }
-        function scheduler() {
-          var ahead = ctx.currentTime + 0.25;
-          while (true) {
-            var ev = events[evIndex];
-            var when = loopOrigin + ev.t * beat;
-            if (when >= ahead) break;
-            playEv(ev, when);
-            evIndex++;
-            if (evIndex >= events.length) { evIndex = 0; loopOrigin += loopDur; }
-          }
-        }
-        function start() {
-          if (!ctx) {
-            var AC = window.AudioContext || window.webkitAudioContext;
-            ctx = new AC();
-            master = ctx.createGain(); master.gain.value = 0.0001;
-            var lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 2900;
-            var comp = ctx.createDynamicsCompressor();
-            master.connect(lp); lp.connect(comp); comp.connect(ctx.destination);
-          }
-          loopDur = loopBeats * beat;
-          if (ctx.state === "suspended") ctx.resume();
-          master.gain.cancelScheduledValues(ctx.currentTime);
-          master.gain.setValueAtTime(Math.max(master.gain.value, 0.0001), ctx.currentTime);
-          master.gain.linearRampToValueAtTime(0.42, ctx.currentTime + 0.5);
-          evIndex = 0; loopOrigin = ctx.currentTime + 0.08;
-          timer = setInterval(scheduler, 25);
-          playing = true; jb.classList.add("playing");
-          btn.textContent = "❚❚ pause"; btn.setAttribute("aria-pressed", "true");
-        }
-        function stop() {
-          playing = false; jb.classList.remove("playing");
-          btn.textContent = "▸ play"; btn.setAttribute("aria-pressed", "false");
-          clearInterval(timer);
-          if (master) {
-            var now = ctx.currentTime;
-            master.gain.cancelScheduledValues(now);
-            master.gain.setValueAtTime(master.gain.value, now);
-            master.gain.linearRampToValueAtTime(0.0001, now + 0.35);
-          }
-        }
-        btn.addEventListener("click", function () { playing ? stop() : start(); });
-      })();
     </script>
   </body>
 </html>
