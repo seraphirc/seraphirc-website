@@ -1808,13 +1808,24 @@ body::after {
    each drawing itself, holding, then dissolving back into the stars —
    on different cycle lengths so they never move in lockstep */
 .hero { position: relative; }
+/* two standalone SVGs anchored to the emblem: same desktop spots as
+   before, but they now scale into the free columns beside the logo
+   on phones instead of being hidden */
 .constellations {
   position: absolute;
-  inset: 0;
+  top: 50%;
+  translate: 0 -50%;
   z-index: -1;
-  width: 100%;
-  height: 100%;
+  height: auto;
   pointer-events: none;
+}
+.const-sword {
+  right: calc(50% + clamp(94px, 22.5vw, 336px));
+  width: clamp(64px, 12.5vw, 190px);
+}
+.const-shield {
+  left: calc(50% + clamp(94px, 22.8vw, 340px));
+  width: clamp(68px, 13vw, 195px);
 }
 .constellations .cl {
   fill: none;
@@ -1851,11 +1862,6 @@ body::after {
   50% { opacity: 0.9; }
   60% { opacity: 0.7; }
   65%, 100% { opacity: 0; }
-}
-
-/* clusters sit in the side whitespace; hide when there isn't any */
-@media (max-width: 1080px) {
-  .constellations { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
