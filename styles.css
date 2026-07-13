@@ -222,8 +222,6 @@ code, .mono { font-family: var(--mono); }
 }
 .button-proto:hover { border-color: var(--cyan); }
 
-.button-prompt::before { content: "$"; color: var(--gold-bright); margin-right: -2px; }
-
 /* ---------------------------------------------------------------- hero */
 
 .hero {
@@ -1626,7 +1624,6 @@ body::after {
 }
 .button-primary:hover { box-shadow: 6px 6px 0 var(--gold-deep); }
 .button-primary:active { box-shadow: 2px 2px 0 var(--gold-deep); }
-.button-primary.button-prompt::before { color: rgba(23, 16, 3, 0.75); }
 
 /* hero: warm starlight wordmark, gold caret, dual blue+gold halo on the mark */
 #hero-title {
