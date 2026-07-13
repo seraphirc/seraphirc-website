@@ -1801,9 +1801,9 @@ body::after {
   100% { opacity: 0; transform: translateX(58vw); }
 }
 
-/* constellations: a broadsword and a tower shield flank the emblem,
-   each drawing itself, holding, then dissolving back into the stars —
-   on different cycle lengths so they never move in lockstep */
+/* constellations: a royal scepter and the key of heaven flank the
+   emblem, each drawing itself, holding, then dissolving back into the
+   stars — on different cycle lengths so they never move in lockstep */
 .hero { position: relative; }
 /* two standalone SVGs anchored to the emblem: same desktop spots as
    before, but they now scale into the free columns beside the logo
@@ -1816,11 +1816,11 @@ body::after {
   height: auto;
   pointer-events: none;
 }
-.const-sword {
+.const-scepter {
   right: calc(50% + clamp(94px, 22.5vw, 336px));
   width: clamp(64px, 12.5vw, 190px);
 }
-.const-shield {
+.const-key {
   left: calc(50% + clamp(94px, 22.8vw, 340px));
   width: clamp(68px, 13vw, 195px);
 }
@@ -1836,12 +1836,12 @@ body::after {
 .constellations .node { fill: #9bc0ff; opacity: 0; }
 .constellations .node.gold { fill: var(--gold-bright); }
 
-.c-sword .cl { animation: constdraw 26s ease-in-out 1.5s infinite; }
-.c-sword .node, .c-sword .halo {
+.c-scepter .cl { animation: constdraw 26s ease-in-out 1.5s infinite; }
+.c-scepter .node, .c-scepter .halo {
   animation: constnode 26s ease-in-out calc(1.5s + var(--pd, 0s)) infinite;
 }
-.c-shield .cl { animation: constdraw 31s ease-in-out 8s infinite; }
-.c-shield .node, .c-shield .halo {
+.c-key .cl { animation: constdraw 31s ease-in-out 8s infinite; }
+.c-key .node, .c-key .halo {
   animation: constnode 31s ease-in-out calc(8s + var(--pd, 0s)) infinite;
 }
 
