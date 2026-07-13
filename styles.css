@@ -1802,18 +1802,20 @@ body::after {
   30% { opacity: 0.9; transform: translateY(-4px) scale(1.008); }
   40% { opacity: 0; transform: translateY(-14px) scale(1.015); }
 }
-/* each wing rotates at its shoulder: down-beat, back up, settle */
-.flap {
+/* each tendril rotates at the shoulder with its own amplitude (--amp)
+   and lag (--wd): long outer feathers swing wider and trail behind the
+   short inner ones, so the wing bends and the tips whip through last */
+.flap path {
   transform-box: view-box;
   transform-origin: 430px 420px;
-  animation: wingflap 22s ease-in-out 2s infinite;
+  animation: wingflap 22s ease-in-out calc(2s + var(--wd, 0s)) infinite;
 }
 @keyframes wingflap {
-  0%, 8% { transform: rotate(10deg); }
-  14% { transform: rotate(-12deg); }
-  20% { transform: rotate(10deg); }
-  26% { transform: rotate(-8deg); }
-  32%, 100% { transform: rotate(4deg); }
+  0%, 8% { transform: rotate(calc(var(--amp, 1) * 10deg)); }
+  14% { transform: rotate(calc(var(--amp, 1) * -13deg)); }
+  20% { transform: rotate(calc(var(--amp, 1) * 10deg)); }
+  26% { transform: rotate(calc(var(--amp, 1) * -9deg)); }
+  32%, 100% { transform: rotate(calc(var(--amp, 1) * 4deg)); }
 }
 /* gold dust motes drift up with the wings */
 .dust {
