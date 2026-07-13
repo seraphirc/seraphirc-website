@@ -1804,6 +1804,63 @@ body::after {
   100% { opacity: 0; transform: translateX(58vw); }
 }
 
+/* constellations: a broadsword and a tower shield flank the emblem,
+   each drawing itself, holding, then dissolving back into the stars —
+   on different cycle lengths so they never move in lockstep */
+.hero { position: relative; }
+.constellations {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.constellations .cl {
+  fill: none;
+  stroke: rgba(155, 192, 255, 0.22);
+  stroke-width: 1;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.constellations .halo { fill: rgba(155, 192, 255, 0.14); opacity: 0; }
+.constellations .halo.gold { fill: rgba(245, 196, 69, 0.16); }
+.constellations .node { fill: #9bc0ff; opacity: 0; }
+.constellations .node.gold { fill: var(--gold-bright); }
+
+.c-sword .cl { animation: constdraw 26s ease-in-out 1.5s infinite; }
+.c-sword .node, .c-sword .halo {
+  animation: constnode 26s ease-in-out calc(1.5s + var(--pd, 0s)) infinite;
+}
+.c-shield .cl { animation: constdraw 31s ease-in-out 8s infinite; }
+.c-shield .node, .c-shield .halo {
+  animation: constnode 31s ease-in-out calc(8s + var(--pd, 0s)) infinite;
+}
+
+@keyframes constdraw {
+  0% { stroke-dashoffset: 1; opacity: 1; }
+  14% { stroke-dashoffset: 0; opacity: 1; }
+  55% { stroke-dashoffset: 0; opacity: 1; }
+  65% { stroke-dashoffset: 0; opacity: 0; }
+  66%, 100% { stroke-dashoffset: 1; opacity: 0; }
+}
+@keyframes constnode {
+  0% { opacity: 0; }
+  10% { opacity: 0.9; }
+  30% { opacity: 0.5; }
+  50% { opacity: 0.9; }
+  60% { opacity: 0.7; }
+  65%, 100% { opacity: 0; }
+}
+
+/* clusters sit in the side whitespace; hide when there isn't any */
+@media (max-width: 1080px) {
+  .constellations { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .shooting-stars { display: none; }
+  /* constellations rest fully drawn instead of cycling */
+  .constellations .cl { animation: none; stroke-dashoffset: 0; }
+  .constellations .node, .constellations .halo { animation: none; opacity: 0.6; }
 }
