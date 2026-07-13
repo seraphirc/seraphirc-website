@@ -1743,16 +1743,16 @@ body::after {
   left: 50%;
   top: 50%;
   z-index: 0;
-  /* tracks the emblem's clamp(160px, 24vw, 300px), slightly inside it */
-  width: clamp(150px, 22.5vw, 280px);
+  /* tracks the emblem's clamp(160px, 24vw, 300px), well inside it */
+  width: clamp(125px, 18.5vw, 230px);
   aspect-ratio: 1;
   border-radius: 50%;
   translate: -50% -50%;
   background: radial-gradient(circle,
-    rgba(255, 236, 180, 0.26),
-    rgba(245, 196, 69, 0.15) 32%,
-    rgba(240, 180, 41, 0.06) 55%,
-    transparent 74%);
+    rgba(255, 236, 180, 0.17),
+    rgba(245, 196, 69, 0.1) 32%,
+    rgba(240, 180, 41, 0.04) 55%,
+    transparent 76%);
   pointer-events: none;
 }
 
@@ -1864,3 +1864,28 @@ body::after {
   .constellations .cl { animation: none; stroke-dashoffset: 0; }
   .constellations .node, .constellations .halo { animation: none; opacity: 0.6; }
 }
+
+/* ============================================================
+   TYPE PASS — Cormorant Garamond for display, Manrope for text.
+   The mono stays on terminal chrome (nav, buttons, labels).
+   ============================================================ */
+:root {
+  --serif: "Cormorant Garamond", Garamond, "Times New Roman", serif;
+  --sans: Manrope, Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+h1, h2, h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+}
+/* Garamond runs compact — give the display sizes a little back */
+#hero-title {
+  font-size: clamp(3rem, 7.5vw, 5.2rem);
+  letter-spacing: 0;
+}
+h2 { letter-spacing: 0; }
+.platform-card-head h3, .cap-head {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+.hero-subheadline { font-weight: 600; }
