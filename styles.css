@@ -1749,10 +1749,10 @@ body::after {
   border-radius: 50%;
   translate: -50% -50%;
   background: radial-gradient(circle,
-    rgba(255, 236, 180, 0.34),
-    rgba(245, 196, 69, 0.2) 32%,
-    rgba(240, 180, 41, 0.08) 55%,
-    transparent 72%);
+    rgba(255, 236, 180, 0.26),
+    rgba(245, 196, 69, 0.15) 32%,
+    rgba(240, 180, 41, 0.06) 55%,
+    transparent 74%);
   pointer-events: none;
 }
 
