@@ -1551,3 +1551,180 @@ main::before {
   -webkit-mask-image: linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
   mask-image: linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
 }
+
+/* ============================================================
+   CELESTIAL PASS (2026-07-12) — matches the desktop client's new
+   celestial flagship theme: night navy, gold-first accents, and
+   a starfield in place of the terminal grid.
+   ============================================================ */
+:root {
+  --gold-deep: #4a3906;
+}
+
+/* night sky ground: navy gradient + a faint gold aurora at the top */
+body {
+  background:
+    radial-gradient(ellipse at 50% -8%, rgba(61, 123, 255, 0.13), transparent 50%),
+    radial-gradient(ellipse at 82% 3%, rgba(240, 180, 41, 0.07), transparent 40%),
+    linear-gradient(180deg, #101626, #0c1220 55%, #080d18);
+  background-size: auto, auto, 100% 100%;
+  background-attachment: fixed;
+}
+
+/* the terminal grid retires; the stars come out */
+main::before { display: none; }
+
+/* starfield: dense far layer (white / blue / gold pinpricks) */
+body::before {
+  content: "";
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(1px 1px at 22% 18%, rgba(236, 238, 244, 0.5), transparent),
+    radial-gradient(1.4px 1.4px at 68% 44%, rgba(245, 196, 69, 0.5), transparent),
+    radial-gradient(1px 1px at 84% 12%, rgba(155, 192, 255, 0.55), transparent),
+    radial-gradient(1.2px 1.2px at 40% 72%, rgba(236, 238, 244, 0.35), transparent),
+    radial-gradient(1px 1px at 8% 56%, rgba(130, 226, 255, 0.38), transparent),
+    radial-gradient(1.6px 1.6px at 55% 92%, rgba(245, 196, 69, 0.34), transparent),
+    radial-gradient(1px 1px at 92% 78%, rgba(236, 238, 244, 0.4), transparent),
+    radial-gradient(1px 1px at 33% 38%, rgba(155, 192, 255, 0.3), transparent);
+  background-size: 260px 260px, 340px 340px, 300px 300px, 280px 280px,
+    220px 220px, 380px 380px, 320px 320px, 240px 240px;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* starfield: sparse near layer, gently twinkling */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(2px 2px at 16% 28%, rgba(245, 196, 69, 0.8), transparent),
+    radial-gradient(1.8px 1.8px at 78% 18%, rgba(236, 238, 244, 0.75), transparent),
+    radial-gradient(2px 2px at 62% 66%, rgba(155, 192, 255, 0.7), transparent),
+    radial-gradient(1.8px 1.8px at 34% 86%, rgba(245, 196, 69, 0.6), transparent),
+    radial-gradient(2.2px 2.2px at 90% 52%, rgba(236, 238, 244, 0.55), transparent);
+  background-size: 520px 520px, 460px 460px, 560px 560px, 480px 480px, 620px 620px;
+  animation: twinkle 5.5s ease-in-out infinite alternate;
+}
+@keyframes twinkle {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+
+/* gold-first accents (the client's nicks, badges, and halo read gold) */
+.button-primary {
+  color: #171003;
+  background: var(--gold);
+  box-shadow: 5px 5px 0 var(--gold-deep);
+}
+.button-primary:hover { box-shadow: 6px 6px 0 var(--gold-deep); }
+.button-primary:active { box-shadow: 2px 2px 0 var(--gold-deep); }
+.button-primary.button-prompt::before { color: rgba(23, 16, 3, 0.75); }
+
+/* hero: warm starlight wordmark, gold caret, dual blue+gold halo on the mark */
+#hero-title {
+  color: #f0e8d6;
+  text-shadow: 0 0 28px rgba(240, 180, 41, 0.22);
+}
+#hero-title .caret {
+  background: var(--gold);
+  -webkit-text-fill-color: var(--gold);
+}
+.hero-mark img {
+  filter: drop-shadow(0 6px 20px rgba(94, 140, 255, 0.28))
+    drop-shadow(0 0 30px rgba(240, 180, 41, 0.2));
+}
+
+/* punchlist bullets go gold */
+.punchlist li::marker { color: var(--gold); }
+.cap-list li::marker { color: var(--green); }
+.cap-group-partial .cap-list li::marker { color: var(--amber); }
+
+/* section-heading rule: gold dashes over a deep-gold baseline */
+.section-heading h2::after {
+  background:
+    repeating-linear-gradient(90deg, var(--gold) 0 10px, transparent 10px 10px),
+    linear-gradient(var(--gold-deep), var(--gold-deep));
+  background-size: 100% 2px, 100% 2px;
+  background-position: 0 0, 0 5px;
+  background-repeat: repeat-x;
+}
+
+/* marquee: the ★ separators shine gold; hover glows gold too */
+.nav-run .sep { color: var(--gold); text-shadow: 0 0 8px rgba(240, 180, 41, 0.45); }
+.nav-run a:hover, .nav-run a:focus-visible { color: var(--gold-bright); border-color: var(--gold-bright); }
+.faded a:hover, .faded a:focus-visible { background: rgba(240, 180, 41, 0.1); }
+
+/* gold hairline halo on the sticky bar and footer band */
+.topbar { border-bottom-color: rgba(240, 180, 41, 0.3); }
+.site-footer { border-top-color: rgba(240, 180, 41, 0.3); }
+.site-footer strong { color: var(--gold-bright); }
+
+/* footer badges: the mobile badge joins the gold accent */
+.b31.b { background: var(--gold); color: #171003; }
+
+/* bigger hero emblem */
+.hero-mark img { width: clamp(160px, 24vw, 300px); }
+
+/* ============================================================
+   DEVICE DUO — iPad + iPhone share the Mobile column, phone
+   tucked over the tablet's corner; one TestFlight button below.
+   ============================================================ */
+.device-duo {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: auto;
+  padding-bottom: 14px;
+}
+.tablet {
+  width: min(340px, 74%);
+  margin: 0;
+  padding: 10px;
+  background: linear-gradient(180deg, #1b1c29, #0f1017);
+  border: 1px solid var(--line-2);
+  border-radius: 26px;
+  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.55), inset 0 0 0 2px rgba(255, 255, 255, 0.02);
+}
+.tablet .client-preview-trigger { border-radius: 18px; transition: transform 150ms ease; }
+.tablet .client-preview-trigger:hover { transform: translateY(-2px); }
+.tablet-screen {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: #0a0b13;
+  border-radius: 18px;
+}
+.tablet-screen img { display: block; width: 100%; max-width: 100%; height: auto; }
+.tablet-shot .enlarge-hint {
+  position: absolute; right: 10px; bottom: 10px;
+  font-family: var(--mono); font-size: 10.5px; color: var(--text);
+  background: rgba(9, 7, 20, 0.72); border: 1px solid var(--line-2); border-radius: 6px;
+  padding: 3px 8px; opacity: 0; transition: opacity 150ms ease; pointer-events: none;
+}
+.tablet-shot .client-preview-trigger:hover .enlarge-hint,
+.tablet-shot .client-preview-trigger:focus-visible .enlarge-hint { opacity: 1; }
+.tablet-lightbox { --lightbox-image-width: 820px; }
+
+/* the phone rides in front, overlapping the tablet's lower corner */
+.device-duo .phone {
+  position: relative;
+  z-index: 2;
+  align-self: flex-end;
+  width: min(170px, 38%);
+  margin: 0 0 -14px -48px;
+  padding: 6px;
+  border-radius: 26px;
+  filter: drop-shadow(-16px 22px 30px rgba(0, 0, 0, 0.5));
+}
+.device-duo .phone-shot .phone-screen { border-radius: 20px; }
+@media (max-width: 560px) {
+  .device-duo .phone { margin-left: -34px; }
+}

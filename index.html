@@ -39,7 +39,7 @@
     <meta name="twitter:image" content="https://www.seraphirc.chat/assets/seraphirc-link-preview.png">
     <meta name="twitter:image:alt" content="SeraphIRC logo on a night-navy glow">
     <title>SeraphIRC - IRC for desktop &amp; mobile</title>
-    <link rel="stylesheet" href="styles.css?v=20260711-dark7">
+    <link rel="stylesheet" href="styles.css?v=20260712-celestial1">
   </head>
   <body>
     <div class="topbar">
@@ -133,25 +133,44 @@
             </div>
             <p>
               The same networks and channels on your iPhone or iPad. It connects through your
-              Soju bouncer, so unread state and history stay in sync with the desktop. (Requires Soju)
+              Soju bouncer, so unread state and history stay in sync with the desktop.
             </p>
-            <figure class="phone phone-shot client-preview">
-              <button
-                class="client-preview-trigger"
-                type="button"
-                aria-label="Open larger SeraphIRC mobile app screenshot"
-                aria-haspopup="dialog"
-                data-lightbox-target="mobile-lightbox"
-              >
-                <span class="phone-screen">
-                  <img
-                    src="assets/mobile-treebar.jpeg"
-                    alt="SeraphIRC mobile app showing the networks and channels treebar for libera and OFTC"
-                  >
-                  <span class="enlarge-hint">⤢ click to enlarge</span>
-                </span>
-              </button>
-            </figure>
+            <div class="device-duo">
+              <figure class="tablet tablet-shot client-preview">
+                <button
+                  class="client-preview-trigger"
+                  type="button"
+                  aria-label="Open larger SeraphIRC iPad screenshot"
+                  aria-haspopup="dialog"
+                  data-lightbox-target="tablet-lightbox"
+                >
+                  <span class="tablet-screen">
+                    <img
+                      src="assets/tablet-interface.png"
+                      alt="SeraphIRC on iPad showing the network list beside the #ircv3 conversation"
+                    >
+                    <span class="enlarge-hint">⤢ click to enlarge</span>
+                  </span>
+                </button>
+              </figure>
+              <figure class="phone phone-shot client-preview">
+                <button
+                  class="client-preview-trigger"
+                  type="button"
+                  aria-label="Open larger SeraphIRC iPhone screenshot"
+                  aria-haspopup="dialog"
+                  data-lightbox-target="mobile-lightbox"
+                >
+                  <span class="phone-screen">
+                    <img
+                      src="assets/mobile-chat.png"
+                      alt="SeraphIRC mobile app showing a channel conversation in the #ircv3 channel on Libera"
+                    >
+                    <span class="enlarge-hint">⤢ click to enlarge</span>
+                  </span>
+                </button>
+              </figure>
+            </div>
             <div class="hero-actions">
               <a class="button button-secondary" href="https://testflight.apple.com/join/yWxRQutF" target="_blank" rel="noopener">Get the Mobile App (iPhone/iPad)</a>
             </div>
@@ -171,8 +190,26 @@
           <img
             src="assets/seraphirc-interface.png"
             alt="SeraphIRC desktop client interface showing IRC channels, chat, and user list"
-            width="1725"
-            height="1042"
+            width="2560"
+            height="1568"
+          >
+        </div>
+      </dialog>
+
+      <dialog
+        class="image-lightbox tablet-lightbox"
+        id="tablet-lightbox"
+        aria-label="Larger SeraphIRC iPad screenshot"
+      >
+        <form method="dialog">
+          <button class="lightbox-close" type="submit" aria-label="Close larger screenshot"></button>
+        </form>
+        <div class="lightbox-frame">
+          <img
+            src="assets/tablet-interface.png"
+            alt="SeraphIRC on iPad showing the network list beside the #ircv3 conversation"
+            width="915"
+            height="1258"
           >
         </div>
       </dialog>
@@ -187,10 +224,10 @@
         </form>
         <div class="lightbox-frame">
           <img
-            src="assets/mobile-treebar.jpeg"
-            alt="SeraphIRC mobile app networks and channels treebar for libera and OFTC"
-            width="1026"
-            height="2048"
+            src="assets/mobile-chat.png"
+            alt="SeraphIRC mobile app showing a channel conversation in the #ircv3 channel on Libera"
+            width="643"
+            height="1246"
           >
         </div>
       </dialog>
