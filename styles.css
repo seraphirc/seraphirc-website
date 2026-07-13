@@ -1730,111 +1730,85 @@ body::after {
 }
 
 /* ============================================================
-   HERO WINGS EXPERIMENT — gold-dust angel wings unfurl upward
-   from behind the emblem, hold, fade, and return each cycle.
+   DIVINE PASS — heavenly / divine / paladin. The emblem burns
+   with a tight gold aura; gold meteors streak the night sky.
    ============================================================ */
+
+/* hero emblem: small-radius, hot-burn halo with a slow breathe */
 .hero-mark { position: relative; }
 .hero-mark img { position: relative; z-index: 1; }
-.hero-wings {
-  position: absolute;
-  left: 50%;
-  bottom: -10px;
-  z-index: -1;
-  width: min(1000px, 96vw);
-  height: auto;
-  translate: -50% 0;
-  pointer-events: none;
-  opacity: 0;
-  transform-origin: 50% 100%;
-  animation: wingcycle 22s ease-in-out 2s infinite;
-}
-/* chips get a solid backdrop so the wings pass cleanly behind them */
-.hero-kicker span { background: #101a2e; }
-@media (max-width: 760px) {
-  .hero-wings { width: 90vw; }
-}
-/* the emblem glows in step with the wings: rises, holds, fades together */
 .hero-mark::before {
   content: "";
   position: absolute;
   left: 50%;
   top: 50%;
   z-index: 0;
-  width: min(350px, 44vw);
+  width: min(300px, 40vw);
   aspect-ratio: 1;
   border-radius: 50%;
   translate: -50% -50%;
-  background: radial-gradient(circle, rgba(245, 196, 69, 0.6), rgba(240, 180, 41, 0.22) 42%, transparent 66%);
-  opacity: 0;
+  background: radial-gradient(circle,
+    rgba(255, 236, 180, 0.55),
+    rgba(245, 196, 69, 0.42) 30%,
+    rgba(240, 180, 41, 0.16) 55%,
+    transparent 68%);
   pointer-events: none;
-  animation: heroglow 22s ease-in-out 2s infinite;
+  animation: herobreath 4.5s ease-in-out infinite alternate;
 }
-@keyframes heroglow {
-  0%, 100% { opacity: 0; }
-  8% { opacity: 1; }
-  30% { opacity: 0.9; }
-  40% { opacity: 0; }
+@keyframes herobreath {
+  from { opacity: 0.72; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1.05); }
 }
-.wing-line-main {
-  fill: none;
-  stroke: url(#wgrad);
-  stroke-width: 3.4;
-  stroke-linecap: round;
+
+/* shooting stars: brief gold meteors; most of each cycle is dark */
+.shooting-stars {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
 }
-.wing-line-fine {
-  fill: none;
-  stroke: url(#wgrad);
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  opacity: 0.85;
-}
-.wing-glow {
-  fill: none;
-  stroke: url(#wgrad);
-  stroke-width: 9;
-  stroke-linecap: round;
-  filter: blur(8px);
-  opacity: 0.65;
-}
-@keyframes wingcycle {
-  0%, 100% { opacity: 0; transform: translateY(18px) scale(0.97); }
-  8% { opacity: 0.95; transform: translateY(0) scale(1); }
-  30% { opacity: 0.9; transform: translateY(-4px) scale(1.008); }
-  40% { opacity: 0; transform: translateY(-14px) scale(1.015); }
-}
-/* each tendril rotates at the shoulder with its own amplitude (--amp)
-   and lag (--wd): long outer feathers swing wider and trail behind the
-   short inner ones, so the wing bends and the tips whip through last */
-.flap path {
-  transform-box: view-box;
-  transform-origin: 430px 420px;
-  animation: wingflap 22s ease-in-out calc(2s + var(--wd, 0s)) infinite;
-}
-@keyframes wingflap {
-  0%, 8% { transform: rotate(calc(var(--amp, 1) * 10deg)); }
-  14% { transform: rotate(calc(var(--amp, 1) * -13deg)); }
-  20% { transform: rotate(calc(var(--amp, 1) * 10deg)); }
-  26% { transform: rotate(calc(var(--amp, 1) * -9deg)); }
-  32%, 100% { transform: rotate(calc(var(--amp, 1) * 4deg)); }
-}
-/* gold dust motes drift up with the wings */
-.dust {
-  fill: #f0b429;
+.shooting-stars span {
+  position: absolute;
+  top: var(--top);
+  left: var(--left);
+  width: 190px;
+  height: 2.5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(240, 180, 41, 0.55) 40%,
+    #ffe9b0 82%,
+    #fff);
+  box-shadow:
+    0 0 10px rgba(245, 196, 69, 0.55),
+    0 0 26px rgba(240, 180, 41, 0.3);
+  rotate: var(--angle);
   opacity: 0;
-  animation: dustcycle 22s ease-in-out infinite;
-  animation-delay: calc(2s + var(--dd, 0s));
+  animation: shoot var(--dur) linear infinite;
+  animation-delay: var(--delay);
 }
-.dust.w { fill: #fff; }
-.dust.b { fill: #9bc0ff; }
-@keyframes dustcycle {
-  0%, 6% { opacity: 0; transform: translateY(10px); }
-  12% { opacity: 0.9; }
-  28% { opacity: 0.65; }
-  36%, 100% { opacity: 0; transform: translateY(-26px); }
+/* white-hot head with a gold bloom */
+.shooting-stars span::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  top: -1.75px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow:
+    0 0 8px 2px rgba(255, 236, 180, 0.9),
+    0 0 22px 6px rgba(245, 196, 69, 0.55);
 }
-/* reduced motion: wings rest faintly instead of animating */
+@keyframes shoot {
+  0%, 91% { opacity: 0; transform: translateX(0); }
+  93% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(58vw); }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .hero-wings { animation: none; opacity: 0.45; }
-  .dust { animation: none; opacity: 0.3; }
-  .hero-mark::before { animation: none; opacity: 0.3; }
+  .shooting-stars { display: none; }
+  .hero-mark::before { animation: none; opacity: 0.85; }
 }
