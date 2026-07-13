@@ -1749,16 +1749,11 @@ body::after {
   border-radius: 50%;
   translate: -50% -50%;
   background: radial-gradient(circle,
-    rgba(255, 236, 180, 0.66),
-    rgba(245, 196, 69, 0.44) 32%,
-    rgba(240, 180, 41, 0.16) 55%,
+    rgba(255, 236, 180, 0.34),
+    rgba(245, 196, 69, 0.2) 32%,
+    rgba(240, 180, 41, 0.08) 55%,
     transparent 72%);
   pointer-events: none;
-  animation: herobreath 4.5s ease-in-out infinite alternate;
-}
-@keyframes herobreath {
-  from { opacity: 0.72; transform: scale(0.96); }
-  to { opacity: 1; transform: scale(1.05); }
 }
 
 /* shooting stars: brief gold meteors; most of each cycle is dark */
@@ -1811,5 +1806,4 @@ body::after {
 
 @media (prefers-reduced-motion: reduce) {
   .shooting-stars { display: none; }
-  .hero-mark::before { animation: none; opacity: 0.85; }
 }
