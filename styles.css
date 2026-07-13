@@ -1753,6 +1753,28 @@ body::after {
 @media (max-width: 760px) {
   .hero-wings { width: 90vw; }
 }
+/* the emblem glows in step with the wings: rises, holds, fades together */
+.hero-mark::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 0;
+  width: min(350px, 44vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  translate: -50% -50%;
+  background: radial-gradient(circle, rgba(245, 196, 69, 0.6), rgba(240, 180, 41, 0.22) 42%, transparent 66%);
+  opacity: 0;
+  pointer-events: none;
+  animation: heroglow 22s ease-in-out 2s infinite;
+}
+@keyframes heroglow {
+  0%, 100% { opacity: 0; }
+  8% { opacity: 1; }
+  30% { opacity: 0.9; }
+  40% { opacity: 0; }
+}
 .wing-line-main {
   fill: none;
   stroke: url(#wgrad);
@@ -1812,4 +1834,5 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   .hero-wings { animation: none; opacity: 0.45; }
   .dust { animation: none; opacity: 0.3; }
+  .hero-mark::before { animation: none; opacity: 0.3; }
 }
