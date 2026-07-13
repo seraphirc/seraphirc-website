@@ -1728,3 +1728,62 @@ body::after {
 @media (max-width: 560px) {
   .device-duo .phone { margin-left: -34px; }
 }
+
+/* ============================================================
+   HERO WINGS EXPERIMENT — gold-dust angel wings unfurl upward
+   from behind the emblem, hold, fade, and return each cycle.
+   ============================================================ */
+.hero-mark { position: relative; }
+.hero-mark img { position: relative; z-index: 1; }
+.hero-wings {
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  width: min(1000px, 96vw);
+  height: auto;
+  translate: -50% 0;
+  pointer-events: none;
+  opacity: 0;
+  transform-origin: 50% 100%;
+  animation: wingcycle 22s ease-in-out 2s infinite;
+}
+.wing-line {
+  fill: none;
+  stroke: url(#wgrad);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+}
+.wing-glow {
+  fill: none;
+  stroke: url(#wgrad);
+  stroke-width: 6;
+  stroke-linecap: round;
+  filter: blur(7px);
+  opacity: 0.6;
+}
+@keyframes wingcycle {
+  0%, 100% { opacity: 0; transform: translateY(26px) scale(0.96); }
+  8% { opacity: 0.95; transform: translateY(0) scale(1); }
+  27% { opacity: 0.85; transform: translateY(-8px) scale(1.012); }
+  38% { opacity: 0; transform: translateY(-20px) scale(1.02); }
+}
+/* gold dust motes drift up with the wings */
+.dust {
+  fill: #f0b429;
+  opacity: 0;
+  animation: dustcycle 22s ease-in-out infinite;
+  animation-delay: calc(2s + var(--dd, 0s));
+}
+.dust.w { fill: #fff; }
+.dust.b { fill: #9bc0ff; }
+@keyframes dustcycle {
+  0%, 6% { opacity: 0; transform: translateY(10px); }
+  12% { opacity: 0.9; }
+  28% { opacity: 0.65; }
+  36%, 100% { opacity: 0; transform: translateY(-26px); }
+}
+/* reduced motion: wings rest faintly instead of animating */
+@media (prefers-reduced-motion: reduce) {
+  .hero-wings { animation: none; opacity: 0.45; }
+  .dust { animation: none; opacity: 0.3; }
+}
