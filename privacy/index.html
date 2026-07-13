@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Privacy Policy for SeraphIRC — a privacy-conscious IRC client for desktop and mobile.">
-    <meta name="theme-color" content="#15141b">
+    <meta name="theme-color" content="#0d1322">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.seraphirc.chat/privacy/">
     <link rel="icon" href="/favicon.ico" sizes="any">
@@ -13,46 +13,49 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
     <title>Privacy Policy - SeraphIRC</title>
-    <link rel="stylesheet" href="/styles.css?v=20260711-dark7">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/styles.css?v=20260713-const2">
     <style>
       .legal { width: min(760px, calc(100% - 36px)); margin: 0 auto; padding: clamp(40px, 6vw, 72px) 0 90px; }
       .legal-head {
         padding: clamp(24px, 4vw, 38px);
-        background: linear-gradient(160deg, rgba(162, 119, 255, 0.09), transparent 48%), var(--panel);
-        border: 1px solid var(--line-2);
+        background: linear-gradient(160deg, rgba(240, 180, 41, 0.07), transparent 48%), var(--panel);
+        border: 1px solid rgba(240, 180, 41, 0.3);
         border-radius: var(--radius);
-        box-shadow: 6px 6px 0 rgba(162, 119, 255, 0.12);
+        box-shadow: 0 14px 44px rgba(0, 0, 0, 0.4);
         margin-bottom: 34px;
       }
       .legal-head h1 {
         margin: 0 0 10px;
-        font-family: var(--mono);
-        font-size: clamp(1.9rem, 4.4vw, 2.8rem);
+        font-size: clamp(2rem, 4.6vw, 3rem);
         line-height: 1.05;
-        letter-spacing: -0.02em;
-        color: var(--purple-bright);
-        text-shadow: 0 2px 18px rgba(162, 119, 255, 0.3);
+        color: #f0e8d6;
+        text-shadow: 0 0 24px rgba(240, 180, 41, 0.2);
       }
       .legal-head .eff { margin: 0; font-family: var(--mono); font-size: 0.82rem; color: var(--dim); }
-      .legal-head .eff b { color: var(--cyan); font-weight: 600; }
+      .legal-head .eff b { color: var(--gold-bright); font-weight: 600; }
       .legal-intro { margin: 20px 0 0; color: var(--text); font-size: 1.02rem; line-height: 1.7; }
       .legal h2 {
         margin: 40px 0 12px;
         padding-top: 22px;
         border-top: 1px solid var(--line);
-        font-family: var(--mono);
-        font-size: 1.12rem;
+        font-size: 1.5rem;
         letter-spacing: 0;
-        color: var(--purple-bright);
+        color: var(--text);
       }
-      .legal h2::before { content: "\2726 "; color: var(--amber); }
+      .legal h2::before { content: "\00a7\00a0 "; color: var(--gold-bright); }
       .legal p { margin: 0 0 14px; max-width: 70ch; color: var(--muted); line-height: 1.76; }
       .legal p:last-child { margin-bottom: 0; }
       .legal a { color: var(--cyan); text-decoration: underline; overflow-wrap: anywhere; }
       .legal-contact {
         margin-top: 12px;
         padding: 18px 20px;
-        background: rgba(11, 12, 21, 0.7);
+        background: rgba(13, 19, 34, 0.75);
         border: 1px solid var(--line-2);
         border-radius: var(--radius-sm);
         font-family: var(--mono);
@@ -65,17 +68,26 @@
         margin-top: 40px;
         padding: 10px 16px;
         font-family: var(--mono); font-size: 0.86rem; font-weight: 700;
-        color: var(--text);
-        background: rgba(16, 18, 30, 0.7);
-        border: 1px solid var(--line-2);
+        color: var(--gold-bright);
+        background: rgba(24, 20, 9, 0.6);
+        border: 1px solid rgba(245, 196, 69, 0.45);
         border-radius: 8px;
-        box-shadow: 5px 5px 0 rgba(162, 119, 255, 0.14);
         transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
       }
-      .legal-back:hover { transform: translate(-1px, -1px); box-shadow: 6px 6px 0 rgba(162, 119, 255, 0.24); border-color: var(--purple); }
+      .legal-back:hover { transform: translateY(-2px); border-color: var(--gold); box-shadow: 0 0 16px rgba(245, 196, 69, 0.28); }
+      /* gold header pill to match the site's primary CTA */
+      .header-cta { color: #171003; background: var(--gold); box-shadow: 4px 4px 0 var(--gold-deep); }
+      .header-cta:hover { box-shadow: 5px 5px 0 var(--gold-deep); }
     </style>
   </head>
   <body>
+    <div class="shooting-stars" aria-hidden="true">
+      <span style="--top: 12%; --left: 6%; --dur: 11s; --delay: 0s; --angle: 15deg;"></span>
+      <span style="--top: 30%; --left: 48%; --dur: 15s; --delay: 5.3s; --angle: 22deg;"></span>
+      <span style="--top: 56%; --left: 20%; --dur: 19s; --delay: 10.8s; --angle: 12deg;"></span>
+      <span style="--top: 20%; --left: 66%; --dur: 24s; --delay: 15.2s; --angle: 19deg;"></span>
+    </div>
+
     <header class="site-header" aria-label="Site header">
       <a class="brand" href="/" aria-label="SeraphIRC home">
         <span class="brand-mark" aria-hidden="true">
