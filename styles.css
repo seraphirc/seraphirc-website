@@ -1864,6 +1864,48 @@ body::after {
   65%, 100% { opacity: 0; }
 }
 
+/* the marquee becomes a star chart: the night band drifts slowly by,
+   links set in atlas small-caps, gold stars burning between them */
+.nav-marq {
+  background:
+    radial-gradient(1px 1px at 12% 30%, rgba(236, 238, 244, 0.5), transparent),
+    radial-gradient(1px 1px at 38% 72%, rgba(155, 192, 255, 0.45), transparent),
+    radial-gradient(1.3px 1.3px at 64% 26%, rgba(245, 196, 69, 0.5), transparent),
+    radial-gradient(1px 1px at 86% 62%, rgba(236, 238, 244, 0.4), transparent),
+    repeating-linear-gradient(90deg, rgba(155, 192, 255, 0.14) 0 1px, transparent 1px 48px),
+    rgba(10, 15, 28, 0.6);
+  background-size: 180px 100%, 220px 100%, 260px 100%, 200px 100%, 100% 5px, 100% 100%;
+  background-position: 0 0, 0 0, 0 0, 0 0, 0 100%, 0 0;
+  background-repeat: repeat, repeat, repeat, repeat, no-repeat, no-repeat;
+  border-top: 1px solid rgba(245, 196, 69, 0.22);
+  border-bottom: 1px solid rgba(245, 196, 69, 0.22);
+}
+.nav-run {
+  font-family: var(--serif);
+  font-variant: small-caps;
+  font-size: 17.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: #cfd8ec;
+  animation-duration: 55s;
+}
+.nav-run a {
+  margin: 0 26px;
+  color: #cfd8ec;
+  border-bottom: 0;
+}
+.nav-run a:hover, .nav-run a:focus-visible {
+  color: var(--gold-bright);
+  border-bottom: 0;
+  text-shadow: 0 0 12px rgba(245, 196, 69, 0.5);
+}
+.nav-run .sep {
+  color: var(--gold);
+  font-size: 12px;
+  vertical-align: 2px;
+  text-shadow: 0 0 8px rgba(245, 196, 69, 0.45);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .shooting-stars { display: none; }
   /* constellations rest fully drawn instead of cycling */
