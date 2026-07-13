@@ -1889,3 +1889,42 @@ h2 { letter-spacing: 0; }
   font-size: 1.6rem;
 }
 .hero-subheadline { font-weight: 600; }
+
+/* ============================================================
+   FOOTER PASS — celestial badges; the visitor counter retires.
+   Night-navy panels, hairline borders, soft glow on hover:
+   gold for our apps, blue/cyan for the ecosystem, dim for legal.
+   ============================================================ */
+.b31 {
+  width: 106px;
+  height: 36px;
+  border-radius: 7px;
+  background: rgba(13, 19, 34, 0.75);
+  border: 1px solid var(--line-2);
+  color: var(--accent-bright);
+  transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+.b31.a, .b31.b {
+  color: var(--gold-bright);
+  background: rgba(24, 20, 9, 0.6);
+  border-color: rgba(245, 196, 69, 0.45);
+}
+.b31.c {
+  color: var(--accent-bright);
+  background: rgba(13, 19, 34, 0.75);
+  border-color: rgba(94, 140, 255, 0.45);
+}
+.b31.d {
+  color: var(--cyan);
+  background: rgba(13, 19, 34, 0.75);
+  border-color: rgba(130, 226, 255, 0.35);
+}
+.b31.e {
+  color: var(--muted);
+  background: rgba(13, 19, 34, 0.75);
+  border-color: var(--line-2);
+}
+.b31.a:hover, .b31.b:hover { border-color: var(--gold); box-shadow: 0 0 16px rgba(245, 196, 69, 0.28); }
+.b31.c:hover { border-color: var(--accent); box-shadow: 0 0 16px rgba(94, 140, 255, 0.3); }
+.b31.d:hover { border-color: var(--cyan); box-shadow: 0 0 16px rgba(130, 226, 255, 0.28); }
+.b31.e:hover { border-color: var(--muted); box-shadow: 0 0 12px rgba(163, 169, 187, 0.2); }

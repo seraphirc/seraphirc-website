@@ -393,7 +393,6 @@
       </div>
 
       <div class="foot-meta">
-        visitor <span class="counter" id="yearCounter"><b>2</b><b>0</b><b>2</b><b>6</b></span> ·
         © 1997–2026 SeraphIRC · best viewed with any browser
       </div>
     </footer>
@@ -424,15 +423,6 @@
             m.classList.toggle("paused");
           });
         });
-      })();
-
-      // ---- "visitor counter" reads the current year (rolls over automatically) ----
-      (function () {
-        const yc = document.getElementById("yearCounter");
-        if (yc) {
-          yc.innerHTML = String(new Date().getFullYear())
-            .split("").map(function (d) { return "<b>" + d + "</b>"; }).join("");
-        }
       })();
 
     </script>
