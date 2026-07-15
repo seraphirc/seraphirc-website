@@ -1186,6 +1186,12 @@ body::before { display: none; }
 .faded a:hover, .faded a:focus-visible { color: var(--text); background: rgba(94, 140, 255, 0.12); outline: none; }
 .faded .d { color: var(--faint); }
 
+/* contact section email links */
+#contact a, #contact a b { color: var(--gold); border-bottom: 1px solid rgba(240, 180, 41, 0.4); }
+#contact a b { border-bottom: 0; }
+#contact a:hover, #contact a:hover b,
+#contact a:focus-visible, #contact a:focus-visible b { color: var(--gold-bright); border-bottom-color: var(--gold-bright); outline: none; }
+
 /* hero screenshot (real client, framed + click-to-enlarge) */
 .hero-shot { width: min(920px, 100%); margin: 42px auto 0; }
 .hero-shot .client-preview-trigger {
