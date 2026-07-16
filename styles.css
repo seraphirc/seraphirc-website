@@ -2100,6 +2100,32 @@ html[data-theme]:not([data-theme='seraph']) #hero-title {
   color: var(--text);
   text-shadow: 0 0 28px color-mix(in srgb, var(--sd-glow) 24%, transparent);
 }
+/* Emblem halo: Seraph keeps its fixed gold burn; every other theme
+   recolours the bloom to its signature --sd-glow so the logo never
+   sits in an off-theme gold glow. Hot whitened core, coloured falloff. */
+html[data-theme]:not([data-theme='seraph']) .hero-mark::before {
+  background: radial-gradient(circle,
+    color-mix(in srgb, color-mix(in srgb, var(--sd-glow) 55%, #fff) 22%, transparent),
+    color-mix(in srgb, var(--sd-glow) 13%, transparent) 32%,
+    color-mix(in srgb, var(--sd-glow) 5%, transparent) 55%,
+    transparent 76%);
+}
+/* Light grounds need a touch more colour to register against near-white. */
+html[data-theme='light'] .hero-mark::before,
+html[data-theme='solarized-light'] .hero-mark::before {
+  background: radial-gradient(circle,
+    color-mix(in srgb, var(--sd-glow) 34%, transparent),
+    color-mix(in srgb, var(--sd-glow) 20%, transparent) 34%,
+    color-mix(in srgb, var(--sd-glow) 8%, transparent) 58%,
+    transparent 78%);
+}
+/* The perceptible bloom is the drop-shadow hugging the logo silhouette
+   (Seraph = blue lift + gold glow). Recolour both to the theme: cool
+   lift from --sd-accent, coloured glow from --sd-glow. */
+html[data-theme]:not([data-theme='seraph']) .hero-mark img {
+  filter: drop-shadow(0 6px 20px color-mix(in srgb, var(--sd-accent) 30%, transparent))
+    drop-shadow(0 0 34px color-mix(in srgb, var(--sd-glow) 50%, transparent));
+}
 
 /* --- Top-bar theme picker ------------------------------------- */
 .header-right { display: flex; align-items: center; gap: 16px; }
