@@ -203,7 +203,7 @@ code, .mono { font-family: var(--mono); }
 }
 .button-secondary {
   color: var(--text);
-  background: rgba(16, 18, 30, 0.7);
+  background: color-mix(in srgb, var(--panel) 78%, transparent);
   border: 1px solid var(--line-2);
 }
 .button-secondary:hover { border-color: var(--accent); }
@@ -2000,6 +2000,7 @@ html[data-theme='funky-fresh']     { --sd-bg:#1e1726; --sd-deep:#17111f; --sd-te
 html[data-theme='gruvbox']         { --sd-bg:#282828; --sd-deep:#242424; --sd-text:#ebdbb2; --sd-accent:#83a598; --sd-glow:#d79921; --sd-sw:#fabd2f; --sd-sc:#83a598; --sd-swh:#fbf1c7; }
 html[data-theme='tokyo-night']     { --sd-bg:#1a1b26; --sd-deep:#161722; --sd-text:#c0caf5; --sd-accent:#7dcfff; --sd-glow:#7aa2f7; --sd-sw:#bb9af7; --sd-sc:#7dcfff; --sd-swh:#ffffff; }
 html[data-theme='nord']            { --sd-bg:#2e3440; --sd-deep:#29303b; --sd-text:#eceff4; --sd-accent:#81a1c1; --sd-glow:#88c0d0; --sd-sw:#ebcb8b; --sd-sc:#88c0d0; --sd-swh:#eceff4; }
+html[data-theme='ocean-breeze']    { color-scheme: light; --sd-bg:#e8f2fb; --sd-deep:#d3e5f4; --sd-text:#223c50; --sd-accent:#2f78b4; --sd-glow:#e0a51c; --sd-sw:#d69e10; --sd-sc:#2aa7bd; --sd-swh:#4a6076; }
 html[data-theme='catppuccin']      { --sd-bg:#1e1e2e; --sd-deep:#1a1a28; --sd-text:#cdd6f4; --sd-accent:#89dceb; --sd-glow:#b4befe; --sd-sw:#f9e2af; --sd-sc:#89dceb; --sd-swh:#ffffff; }
 html[data-theme='aura']            { --sd-bg:#15141d; --sd-deep:#100f17; --sd-text:#e8e5ee; --sd-accent:#82e2ff; --sd-glow:#a277ff; --sd-sw:#ffca85; --sd-sc:#82e2ff; --sd-swh:#ffffff; }
 html[data-theme='hackerman']       { --sd-bg:#020902; --sd-deep:#010401; --sd-text:#c9f7cd; --sd-accent:#00ffd0; --sd-glow:#39ff14; --sd-sw:#b9ffab; --sd-sc:#00ffd0; --sd-swh:#e6ffe6; }
@@ -2112,7 +2113,8 @@ html[data-theme]:not([data-theme='seraph']) .hero-mark::before {
 }
 /* Light grounds need a touch more colour to register against near-white. */
 html[data-theme='light'] .hero-mark::before,
-html[data-theme='solarized-light'] .hero-mark::before {
+html[data-theme='solarized-light'] .hero-mark::before,
+html[data-theme='ocean-breeze'] .hero-mark::before {
   background: radial-gradient(circle,
     color-mix(in srgb, var(--sd-glow) 34%, transparent),
     color-mix(in srgb, var(--sd-glow) 20%, transparent) 34%,
@@ -2159,7 +2161,8 @@ html[data-theme]:not([data-theme='seraph']) .hero-mark img {
    (fine on every dark theme) that washes out on a white ground —
    darken to a theme-tinted ink so they stay legible. */
 html[data-theme='light'] .cap-list code,
-html[data-theme='solarized-light'] .cap-list code {
+html[data-theme='solarized-light'] .cap-list code,
+html[data-theme='ocean-breeze'] .cap-list code {
   color: color-mix(in srgb, var(--accent) 45%, var(--text));
 }
 
@@ -2172,7 +2175,8 @@ html[data-theme='solarized-light'] .cap-list code {
 
 /* Marquee: defined tinted band + dark small-caps text (was #cfd8ec). */
 html[data-theme='light'] .nav-marq,
-html[data-theme='solarized-light'] .nav-marq {
+html[data-theme='solarized-light'] .nav-marq,
+html[data-theme='ocean-breeze'] .nav-marq {
   background: color-mix(in srgb, var(--sd-accent) 12%, var(--sd-bg));
   border-top-color: color-mix(in srgb, var(--sd-glow) 32%, transparent);
   border-bottom-color: color-mix(in srgb, var(--sd-glow) 32%, transparent);
@@ -2180,55 +2184,67 @@ html[data-theme='solarized-light'] .nav-marq {
 html[data-theme='light'] .nav-run,
 html[data-theme='light'] .nav-run a,
 html[data-theme='solarized-light'] .nav-run,
-html[data-theme='solarized-light'] .nav-run a {
+html[data-theme='solarized-light'] .nav-run a,
+html[data-theme='ocean-breeze'] .nav-run,
+html[data-theme='ocean-breeze'] .nav-run a {
   color: color-mix(in srgb, var(--text) 82%, var(--sd-accent));
 }
 
 /* Hero kicker "boxes": stronger fill, darker border + text. */
 html[data-theme='light'] .hero-kicker,
-html[data-theme='solarized-light'] .hero-kicker {
+html[data-theme='solarized-light'] .hero-kicker,
+html[data-theme='ocean-breeze'] .hero-kicker {
   color: color-mix(in srgb, var(--text) 80%, transparent);
 }
 html[data-theme='light'] .hero-kicker span,
-html[data-theme='solarized-light'] .hero-kicker span {
+html[data-theme='solarized-light'] .hero-kicker span,
+html[data-theme='ocean-breeze'] .hero-kicker span {
   background: color-mix(in srgb, var(--sd-accent) 13%, transparent);
   border-color: color-mix(in srgb, var(--sd-accent) 42%, transparent);
 }
 html[data-theme='light'] .hero-kicker span::before,
-html[data-theme='solarized-light'] .hero-kicker span::before {
+html[data-theme='solarized-light'] .hero-kicker span::before,
+html[data-theme='ocean-breeze'] .hero-kicker span::before {
   color: var(--gold);
 }
 
 /* Footer badges: light chips with readable, still colour-coded ink. */
 html[data-theme='light'] .b31,
-html[data-theme='solarized-light'] .b31 {
+html[data-theme='solarized-light'] .b31,
+html[data-theme='ocean-breeze'] .b31 {
   background: color-mix(in srgb, var(--panel) 68%, #fff);
   border-color: color-mix(in srgb, var(--accent) 22%, var(--line-2));
   color: var(--text);
 }
 html[data-theme='light'] .b31.a, html[data-theme='light'] .b31.b,
-html[data-theme='solarized-light'] .b31.a, html[data-theme='solarized-light'] .b31.b {
+html[data-theme='solarized-light'] .b31.a, html[data-theme='solarized-light'] .b31.b,
+html[data-theme='ocean-breeze'] .b31.a, html[data-theme='ocean-breeze'] .b31.b {
   color: color-mix(in srgb, var(--gold) 52%, #000);
   border-color: color-mix(in srgb, var(--gold) 45%, transparent);
 }
 html[data-theme='light'] .b31.c,
-html[data-theme='solarized-light'] .b31.c {
+html[data-theme='solarized-light'] .b31.c,
+html[data-theme='ocean-breeze'] .b31.c {
   color: color-mix(in srgb, var(--accent) 48%, #000);
   border-color: color-mix(in srgb, var(--accent) 45%, transparent);
 }
 html[data-theme='light'] .b31.d,
-html[data-theme='solarized-light'] .b31.d {
+html[data-theme='solarized-light'] .b31.d,
+html[data-theme='ocean-breeze'] .b31.d {
   color: color-mix(in srgb, var(--cyan) 32%, #000);
   border-color: color-mix(in srgb, var(--cyan) 45%, transparent);
 }
 html[data-theme='light'] .b31.e,
-html[data-theme='solarized-light'] .b31.e {
+html[data-theme='solarized-light'] .b31.e,
+html[data-theme='ocean-breeze'] .b31.e {
   color: var(--dim);
 }
 html[data-theme='light'] .b31.a:hover, html[data-theme='light'] .b31.b:hover,
 html[data-theme='solarized-light'] .b31.a:hover, html[data-theme='solarized-light'] .b31.b:hover,
 html[data-theme='light'] .b31.c:hover, html[data-theme='solarized-light'] .b31.c:hover,
-html[data-theme='light'] .b31.d:hover, html[data-theme='solarized-light'] .b31.d:hover {
+html[data-theme='light'] .b31.d:hover, html[data-theme='solarized-light'] .b31.d:hover,
+html[data-theme='ocean-breeze'] .b31.a:hover, html[data-theme='ocean-breeze'] .b31.b:hover,
+html[data-theme='ocean-breeze'] .b31.c:hover, html[data-theme='ocean-breeze'] .b31.d:hover {
   box-shadow: none;
 }
 
@@ -2237,24 +2253,29 @@ html[data-theme='light'] .b31.d:hover, html[data-theme='solarized-light'] .b31.d
    strokes, nodes and halos for the two light themes only — the draw/twinkle
    animations and opacity are left to the shared rules. */
 html[data-theme='light'] .constellations .cl,
-html[data-theme='solarized-light'] .constellations .cl {
+html[data-theme='solarized-light'] .constellations .cl,
+html[data-theme='ocean-breeze'] .constellations .cl {
   stroke: color-mix(in srgb, var(--sd-accent) 55%, #000);
   stroke-opacity: 0.5;
 }
 html[data-theme='light'] .constellations .node,
-html[data-theme='solarized-light'] .constellations .node {
+html[data-theme='solarized-light'] .constellations .node,
+html[data-theme='ocean-breeze'] .constellations .node {
   fill: color-mix(in srgb, var(--sd-accent) 70%, #000);
 }
 html[data-theme='light'] .constellations .node.gold,
-html[data-theme='solarized-light'] .constellations .node.gold {
+html[data-theme='solarized-light'] .constellations .node.gold,
+html[data-theme='ocean-breeze'] .constellations .node.gold {
   fill: color-mix(in srgb, var(--sd-glow) 62%, #000);
 }
 html[data-theme='light'] .constellations .halo,
-html[data-theme='solarized-light'] .constellations .halo {
+html[data-theme='solarized-light'] .constellations .halo,
+html[data-theme='ocean-breeze'] .constellations .halo {
   fill: color-mix(in srgb, var(--sd-accent) 30%, transparent);
 }
 html[data-theme='light'] .constellations .halo.gold,
-html[data-theme='solarized-light'] .constellations .halo.gold {
+html[data-theme='solarized-light'] .constellations .halo.gold,
+html[data-theme='ocean-breeze'] .constellations .halo.gold {
   fill: color-mix(in srgb, var(--sd-glow) 32%, transparent);
 }
 
@@ -2263,8 +2284,10 @@ html[data-theme='solarized-light'] .constellations .halo.gold {
    themes — purple on Light, the ink colour on Solarized Light. */
 html[data-theme='light'] { --meteor: var(--sd-glow); }             /* purple */
 html[data-theme='solarized-light'] { --meteor: var(--text); }      /* ink */
+html[data-theme='ocean-breeze'] { --meteor: var(--sd-accent); }    /* ocean blue */
 html[data-theme='light'] .shooting-stars span,
-html[data-theme='solarized-light'] .shooting-stars span {
+html[data-theme='solarized-light'] .shooting-stars span,
+html[data-theme='ocean-breeze'] .shooting-stars span {
   background: linear-gradient(90deg,
     transparent,
     color-mix(in srgb, var(--meteor) 45%, transparent) 40%,
@@ -2275,7 +2298,8 @@ html[data-theme='solarized-light'] .shooting-stars span {
     0 0 26px color-mix(in srgb, var(--meteor) 25%, transparent);
 }
 html[data-theme='light'] .shooting-stars span::after,
-html[data-theme='solarized-light'] .shooting-stars span::after {
+html[data-theme='solarized-light'] .shooting-stars span::after,
+html[data-theme='ocean-breeze'] .shooting-stars span::after {
   background: var(--meteor);
   box-shadow:
     0 0 8px 2px color-mix(in srgb, var(--meteor) 55%, transparent),
