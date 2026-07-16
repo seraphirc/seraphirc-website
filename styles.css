@@ -1979,3 +1979,282 @@ h2 { letter-spacing: 0; }
 .b31.c:hover { border-color: var(--accent); box-shadow: 0 0 16px rgba(94, 140, 255, 0.3); }
 .b31.d:hover { border-color: var(--cyan); box-shadow: 0 0 16px rgba(130, 226, 255, 0.28); }
 .b31.e:hover { border-color: var(--muted); box-shadow: 0 0 12px rgba(163, 169, 187, 0.2); }
+
+/* ============================================================
+   THEME SYSTEM (2026-07-15) — desktop-client parity.
+   Seraph is the default (the untouched :root palette + atmosphere
+   above). Every other theme sets ~8 SEED tokens lifted straight
+   from the client's [data-theme] blocks; the shared derivation
+   rule below turns those seeds into the site's full palette and
+   recolours the atmosphere (nebula glows + starfield). Switching
+   is driven by <html data-theme="…"> from the top-bar picker.
+   ============================================================ */
+
+/* --- Seed sets (per theme) ------------------------------------ */
+/* Seraph needs none — it IS the base :root. */
+html[data-theme='nebula']          { --sd-bg:#050914; --sd-deep:#04030a; --sd-text:#dce2ee; --sd-accent:#67e8f9; --sd-glow:#a855f7; --sd-sw:#d8b4fe; --sd-sc:#67e8f9; --sd-swh:#ffffff; }
+html[data-theme='dim']             { --sd-bg:#0f1726; --sd-deep:#0c1321; --sd-text:#d8deea; --sd-accent:#7fc7ff; --sd-glow:#9b6cff; --sd-sw:#b998ff; --sd-sc:#7fc7ff; --sd-swh:#ffffff; }
+html[data-theme='monokai']         { --sd-bg:#272822; --sd-deep:#22231d; --sd-text:#eeeee4; --sd-accent:#66d9ef; --sd-glow:#ae81ff; --sd-sw:#e6db74; --sd-sc:#66d9ef; --sd-swh:#ffffff; }
+html[data-theme='dracula']         { --sd-bg:#282a36; --sd-deep:#232530; --sd-text:#f0f0ea; --sd-accent:#8be9fd; --sd-glow:#bd93f9; --sd-sw:#ff79c6; --sd-sc:#8be9fd; --sd-swh:#ffffff; }
+html[data-theme='funky-fresh']     { --sd-bg:#1e1726; --sd-deep:#17111f; --sd-text:#f0eafd; --sd-accent:#36c5f0; --sd-glow:#a970ff; --sd-sw:#ecb22e; --sd-sc:#36c5f0; --sd-swh:#ffffff; }
+html[data-theme='gruvbox']         { --sd-bg:#282828; --sd-deep:#242424; --sd-text:#ebdbb2; --sd-accent:#83a598; --sd-glow:#d79921; --sd-sw:#fabd2f; --sd-sc:#83a598; --sd-swh:#fbf1c7; }
+html[data-theme='tokyo-night']     { --sd-bg:#1a1b26; --sd-deep:#161722; --sd-text:#c0caf5; --sd-accent:#7dcfff; --sd-glow:#7aa2f7; --sd-sw:#bb9af7; --sd-sc:#7dcfff; --sd-swh:#ffffff; }
+html[data-theme='nord']            { --sd-bg:#2e3440; --sd-deep:#29303b; --sd-text:#eceff4; --sd-accent:#81a1c1; --sd-glow:#88c0d0; --sd-sw:#ebcb8b; --sd-sc:#88c0d0; --sd-swh:#eceff4; }
+html[data-theme='catppuccin']      { --sd-bg:#1e1e2e; --sd-deep:#1a1a28; --sd-text:#cdd6f4; --sd-accent:#89dceb; --sd-glow:#b4befe; --sd-sw:#f9e2af; --sd-sc:#89dceb; --sd-swh:#ffffff; }
+html[data-theme='aura']            { --sd-bg:#15141d; --sd-deep:#100f17; --sd-text:#e8e5ee; --sd-accent:#82e2ff; --sd-glow:#a277ff; --sd-sw:#ffca85; --sd-sc:#82e2ff; --sd-swh:#ffffff; }
+html[data-theme='hackerman']       { --sd-bg:#020902; --sd-deep:#010401; --sd-text:#c9f7cd; --sd-accent:#00ffd0; --sd-glow:#39ff14; --sd-sw:#b9ffab; --sd-sc:#00ffd0; --sd-swh:#e6ffe6; }
+html[data-theme='phoenix']         { --sd-bg:#121a29; --sd-deep:#0e1420; --sd-text:#dbe2ee; --sd-accent:#ff9e4f; --sd-glow:#ff6b1a; --sd-sw:#ffc466; --sd-sc:#ff6040; --sd-swh:#fff4eb; }
+html[data-theme='solarized-dark']  { --sd-bg:#002b36; --sd-deep:#00242d; --sd-text:#eee8d5; --sd-accent:#2aa198; --sd-glow:#268bd2; --sd-sw:#b58900; --sd-sc:#2aa198; --sd-swh:#93a1a1; }
+html[data-theme='solarized-light'] { color-scheme: light; --sd-bg:#fdf6e3; --sd-deep:#eee8d5; --sd-text:#073642; --sd-accent:#268bd2; --sd-glow:#b58900; --sd-sw:#b58900; --sd-sc:#268bd2; --sd-swh:#586e75; }
+html[data-theme='light']           { color-scheme: light; --sd-bg:#fbfbfe; --sd-deep:#f0eef7; --sd-text:#15111f; --sd-accent:#4f46e5; --sd-glow:#7c3aed; --sd-sw:#7c3aed; --sd-sc:#0891b2; --sd-swh:#4a4358; }
+
+/* --- Shared derivation: seeds -> full site palette ------------ */
+/* Applies to every themed root EXCEPT Seraph, which keeps the
+   hand-tuned base palette untouched. "Lift toward --sd-text"
+   brightens surfaces on dark themes and darkens them on light
+   themes, so both directions work from one formula. */
+html[data-theme]:not([data-theme='seraph']) {
+  --bg:       var(--sd-deep);
+  --bg-2:     color-mix(in srgb, var(--sd-bg) 92%, #000);
+  --panel:    var(--sd-bg);
+  --panel-2:  color-mix(in srgb, var(--sd-bg) 90%, var(--sd-text));
+  --raised:   color-mix(in srgb, var(--sd-bg) 84%, var(--sd-text));
+  --tree:     color-mix(in srgb, var(--sd-deep) 90%, var(--sd-accent));
+  --chat:     color-mix(in srgb, var(--sd-bg) 97%, #000);
+
+  --line:      color-mix(in srgb, var(--sd-accent) 16%, transparent);
+  --line-2:    color-mix(in srgb, var(--sd-accent) 28%, transparent);
+  --line-soft: color-mix(in srgb, var(--sd-accent) 9%, transparent);
+  --sel:       color-mix(in srgb, var(--sd-accent) 18%, transparent);
+
+  --text:  var(--sd-text);
+  --muted: color-mix(in srgb, var(--sd-text) 66%, var(--sd-bg));
+  --dim:   color-mix(in srgb, var(--sd-text) 44%, var(--sd-bg));
+  --faint: color-mix(in srgb, var(--sd-text) 28%, var(--sd-bg));
+
+  --accent:        var(--sd-accent);
+  --accent-bright: color-mix(in srgb, var(--sd-accent) 62%, #fff);
+  --accent-deep:   color-mix(in srgb, var(--sd-accent) 42%, #000);
+  --gold:          var(--sd-glow);
+  --gold-bright:   color-mix(in srgb, var(--sd-glow) 70%, #fff);
+  --gold-deep:     color-mix(in srgb, var(--sd-glow) 32%, #000);
+
+  /* nick palette spread across the theme's signature hues */
+  --n1: var(--sd-glow);
+  --n2: var(--sd-accent);
+  --n3: color-mix(in srgb, var(--sd-sw) 72%, var(--sd-text));
+  --n4: var(--sd-sw);
+  --n5: color-mix(in srgb, var(--sd-glow) 55%, var(--sd-sc));
+  --n6: color-mix(in srgb, var(--sd-accent) 60%, #fff);
+  --n7: color-mix(in srgb, var(--sd-glow) 62%, #fff);
+  --n8: var(--sd-sc);
+}
+
+/* --- Atmosphere recolour (non-Seraph) ------------------------- */
+/* Base ground: theme gradient + two signature glows (nebula-warm
+   from --sd-glow, cool from --sd-accent). */
+html[data-theme]:not([data-theme='seraph']) body {
+  background:
+    radial-gradient(ellipse at 50% -8%, color-mix(in srgb, var(--sd-glow) 20%, transparent), transparent 52%),
+    radial-gradient(ellipse at 85% 4%, color-mix(in srgb, var(--sd-accent) 12%, transparent), transparent 44%),
+    linear-gradient(180deg, var(--sd-bg), var(--sd-deep) 62%, var(--sd-deep));
+  background-attachment: fixed;
+}
+/* Dense far starfield, recoloured to the theme's star tokens. */
+html[data-theme]:not([data-theme='seraph']) body::before {
+  background:
+    radial-gradient(1px 1px at 22% 18%, color-mix(in srgb, var(--sd-swh) 55%, transparent), transparent),
+    radial-gradient(1.4px 1.4px at 68% 44%, color-mix(in srgb, var(--sd-sw) 58%, transparent), transparent),
+    radial-gradient(1px 1px at 84% 12%, color-mix(in srgb, var(--sd-sc) 58%, transparent), transparent),
+    radial-gradient(1.2px 1.2px at 40% 72%, color-mix(in srgb, var(--sd-swh) 40%, transparent), transparent),
+    radial-gradient(1px 1px at 8% 56%, color-mix(in srgb, var(--sd-sc) 42%, transparent), transparent),
+    radial-gradient(1.6px 1.6px at 55% 92%, color-mix(in srgb, var(--sd-sw) 38%, transparent), transparent),
+    radial-gradient(1px 1px at 92% 78%, color-mix(in srgb, var(--sd-swh) 45%, transparent), transparent),
+    radial-gradient(1px 1px at 33% 38%, color-mix(in srgb, var(--sd-sc) 34%, transparent), transparent);
+  background-size: 260px 260px, 340px 340px, 300px 300px, 280px 280px,
+    220px 220px, 380px 380px, 320px 320px, 240px 240px;
+  -webkit-mask-image: none; mask-image: none;
+}
+/* Sparse near starfield (twinkles via the shared @keyframes). */
+html[data-theme]:not([data-theme='seraph']) body::after {
+  background:
+    radial-gradient(2px 2px at 16% 28%, color-mix(in srgb, var(--sd-sw) 85%, transparent), transparent),
+    radial-gradient(1.8px 1.8px at 78% 18%, color-mix(in srgb, var(--sd-swh) 78%, transparent), transparent),
+    radial-gradient(2px 2px at 62% 66%, color-mix(in srgb, var(--sd-sc) 72%, transparent), transparent),
+    radial-gradient(1.8px 1.8px at 34% 86%, color-mix(in srgb, var(--sd-sw) 62%, transparent), transparent),
+    radial-gradient(2.2px 2.2px at 90% 52%, color-mix(in srgb, var(--sd-swh) 58%, transparent), transparent);
+  background-size: 520px 520px, 460px 460px, 560px 560px, 480px 480px, 620px 620px;
+}
+/* Sticky bar + footer band follow the theme ground and glow. */
+html[data-theme]:not([data-theme='seraph']) .topbar {
+  background: color-mix(in srgb, var(--sd-deep) 92%, transparent);
+  border-bottom-color: color-mix(in srgb, var(--sd-glow) 30%, transparent);
+}
+html[data-theme]:not([data-theme='seraph']) .site-footer {
+  background: color-mix(in srgb, var(--sd-deep) 94%, transparent);
+  border-top-color: color-mix(in srgb, var(--sd-glow) 30%, transparent);
+}
+/* Hero wordmark uses a fixed warm-white on Seraph; let other
+   themes drive it from --text so it stays legible (incl. light). */
+html[data-theme]:not([data-theme='seraph']) #hero-title {
+  color: var(--text);
+  text-shadow: 0 0 28px color-mix(in srgb, var(--sd-glow) 24%, transparent);
+}
+
+/* --- Top-bar theme picker ------------------------------------- */
+.header-right { display: flex; align-items: center; gap: 16px; }
+.theme-picker { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.78rem; }
+.theme-picker-label { color: var(--dim); text-transform: uppercase; letter-spacing: 0.14em; }
+.theme-picker-label::before { content: "\25C8 "; color: var(--gold); }
+.theme-select {
+  appearance: none; -webkit-appearance: none;
+  margin: 0;
+  padding: 6px 30px 6px 12px;
+  color: var(--text);
+  font-family: var(--mono); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.03em;
+  background:
+    linear-gradient(45deg, transparent 50%, var(--gold) 50%) calc(100% - 15px) 55% / 6px 6px no-repeat,
+    linear-gradient(135deg, var(--gold) 50%, transparent 50%) calc(100% - 9px) 55% / 6px 6px no-repeat,
+    color-mix(in srgb, var(--panel) 82%, transparent);
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+.theme-select:hover { border-color: var(--gold); box-shadow: 0 0 14px color-mix(in srgb, var(--gold) 30%, transparent); }
+.theme-select:focus-visible { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 32%, transparent); }
+.theme-select option { background: var(--panel); color: var(--text); }
+@media (max-width: 560px) {
+  .theme-picker-label { display: none; }
+  .header-right { gap: 10px; }
+}
+
+/* Light themes: the capability `code` chips use a fixed pale lavender
+   (fine on every dark theme) that washes out on a white ground —
+   darken to a theme-tinted ink so they stay legible. */
+html[data-theme='light'] .cap-list code,
+html[data-theme='solarized-light'] .cap-list code {
+  color: color-mix(in srgb, var(--accent) 45%, var(--text));
+}
+
+/* ------------------------------------------------------------------
+   Light-theme contrast pass. The marquee, hero "boxes" and footer
+   badges were tuned for dark grounds — their fills and text stay too
+   pale on a white page. Darken them for the two light themes only;
+   every dark theme is untouched.
+   ------------------------------------------------------------------ */
+
+/* Marquee: defined tinted band + dark small-caps text (was #cfd8ec). */
+html[data-theme='light'] .nav-marq,
+html[data-theme='solarized-light'] .nav-marq {
+  background: color-mix(in srgb, var(--sd-accent) 12%, var(--sd-bg));
+  border-top-color: color-mix(in srgb, var(--sd-glow) 32%, transparent);
+  border-bottom-color: color-mix(in srgb, var(--sd-glow) 32%, transparent);
+}
+html[data-theme='light'] .nav-run,
+html[data-theme='light'] .nav-run a,
+html[data-theme='solarized-light'] .nav-run,
+html[data-theme='solarized-light'] .nav-run a {
+  color: color-mix(in srgb, var(--text) 82%, var(--sd-accent));
+}
+
+/* Hero kicker "boxes": stronger fill, darker border + text. */
+html[data-theme='light'] .hero-kicker,
+html[data-theme='solarized-light'] .hero-kicker {
+  color: color-mix(in srgb, var(--text) 80%, transparent);
+}
+html[data-theme='light'] .hero-kicker span,
+html[data-theme='solarized-light'] .hero-kicker span {
+  background: color-mix(in srgb, var(--sd-accent) 13%, transparent);
+  border-color: color-mix(in srgb, var(--sd-accent) 42%, transparent);
+}
+html[data-theme='light'] .hero-kicker span::before,
+html[data-theme='solarized-light'] .hero-kicker span::before {
+  color: var(--gold);
+}
+
+/* Footer badges: light chips with readable, still colour-coded ink. */
+html[data-theme='light'] .b31,
+html[data-theme='solarized-light'] .b31 {
+  background: color-mix(in srgb, var(--panel) 68%, #fff);
+  border-color: color-mix(in srgb, var(--accent) 22%, var(--line-2));
+  color: var(--text);
+}
+html[data-theme='light'] .b31.a, html[data-theme='light'] .b31.b,
+html[data-theme='solarized-light'] .b31.a, html[data-theme='solarized-light'] .b31.b {
+  color: color-mix(in srgb, var(--gold) 52%, #000);
+  border-color: color-mix(in srgb, var(--gold) 45%, transparent);
+}
+html[data-theme='light'] .b31.c,
+html[data-theme='solarized-light'] .b31.c {
+  color: color-mix(in srgb, var(--accent) 48%, #000);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+html[data-theme='light'] .b31.d,
+html[data-theme='solarized-light'] .b31.d {
+  color: color-mix(in srgb, var(--cyan) 32%, #000);
+  border-color: color-mix(in srgb, var(--cyan) 45%, transparent);
+}
+html[data-theme='light'] .b31.e,
+html[data-theme='solarized-light'] .b31.e {
+  color: var(--dim);
+}
+html[data-theme='light'] .b31.a:hover, html[data-theme='light'] .b31.b:hover,
+html[data-theme='solarized-light'] .b31.a:hover, html[data-theme='solarized-light'] .b31.b:hover,
+html[data-theme='light'] .b31.c:hover, html[data-theme='solarized-light'] .b31.c:hover,
+html[data-theme='light'] .b31.d:hover, html[data-theme='solarized-light'] .b31.d:hover {
+  box-shadow: none;
+}
+
+/* Constellations (hero scepter + key line-art): tuned in pale celestial
+   blue/gold for dark grounds, so they vanish on a white page. Darken the
+   strokes, nodes and halos for the two light themes only — the draw/twinkle
+   animations and opacity are left to the shared rules. */
+html[data-theme='light'] .constellations .cl,
+html[data-theme='solarized-light'] .constellations .cl {
+  stroke: color-mix(in srgb, var(--sd-accent) 55%, #000);
+  stroke-opacity: 0.5;
+}
+html[data-theme='light'] .constellations .node,
+html[data-theme='solarized-light'] .constellations .node {
+  fill: color-mix(in srgb, var(--sd-accent) 70%, #000);
+}
+html[data-theme='light'] .constellations .node.gold,
+html[data-theme='solarized-light'] .constellations .node.gold {
+  fill: color-mix(in srgb, var(--sd-glow) 62%, #000);
+}
+html[data-theme='light'] .constellations .halo,
+html[data-theme='solarized-light'] .constellations .halo {
+  fill: color-mix(in srgb, var(--sd-accent) 30%, transparent);
+}
+html[data-theme='light'] .constellations .halo.gold,
+html[data-theme='solarized-light'] .constellations .halo.gold {
+  fill: color-mix(in srgb, var(--sd-glow) 32%, transparent);
+}
+
+/* Meteor (shooting star): a gold→white streak with a white-hot head that
+   disappears on a light ground. Recolour via --meteor for the two light
+   themes — purple on Light, the ink colour on Solarized Light. */
+html[data-theme='light'] { --meteor: var(--sd-glow); }             /* purple */
+html[data-theme='solarized-light'] { --meteor: var(--text); }      /* ink */
+html[data-theme='light'] .shooting-stars span,
+html[data-theme='solarized-light'] .shooting-stars span {
+  background: linear-gradient(90deg,
+    transparent,
+    color-mix(in srgb, var(--meteor) 45%, transparent) 40%,
+    var(--meteor) 82%,
+    var(--meteor));
+  box-shadow:
+    0 0 10px color-mix(in srgb, var(--meteor) 45%, transparent),
+    0 0 26px color-mix(in srgb, var(--meteor) 25%, transparent);
+}
+html[data-theme='light'] .shooting-stars span::after,
+html[data-theme='solarized-light'] .shooting-stars span::after {
+  background: var(--meteor);
+  box-shadow:
+    0 0 8px 2px color-mix(in srgb, var(--meteor) 55%, transparent),
+    0 0 22px 6px color-mix(in srgb, var(--meteor) 30%, transparent);
+}
+
+/* Smooth the palette hand-off when a new theme is picked. */
+body, .topbar, .site-footer { transition: background-color 350ms ease, border-color 350ms ease, color 350ms ease; }

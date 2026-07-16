@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="seraph">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,7 +45,16 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="styles.css?v=20260713-marq1">
+    <script>
+      // No-flash theme: apply the saved theme before first paint.
+      (function () {
+        try {
+          var t = localStorage.getItem("seraphirc-theme");
+          if (t) document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="styles.css?v=20260715-themes1">
   </head>
   <body>
     <div class="topbar">
@@ -56,7 +65,29 @@
         </span>
         <span>SeraphIRC</span>
       </a>
-      <span class="header-status"><span class="dot" aria-hidden="true"></span>desktop &amp; mobile</span>
+      <div class="header-right">
+        <label class="theme-picker">
+          <span class="theme-picker-label">Theme</span>
+          <select id="theme-select" class="theme-select" aria-label="Site color theme">
+            <option value="aura">Aura</option>
+            <option value="catppuccin">Catppuccin</option>
+            <option value="dim">Dim</option>
+            <option value="dracula">Dracula</option>
+            <option value="funky-fresh">Funky Fresh</option>
+            <option value="gruvbox">Gruvbox</option>
+            <option value="hackerman">Hackerman</option>
+            <option value="light">Light</option>
+            <option value="monokai">Monokai</option>
+            <option value="nebula">Nebula</option>
+            <option value="nord">Nord</option>
+            <option value="phoenix">Phoenix</option>
+            <option value="seraph">Seraph</option>
+            <option value="solarized-dark">Solarized Dark</option>
+            <option value="solarized-light">Solarized Light</option>
+            <option value="tokyo-night">Tokyo Night</option>
+          </select>
+        </label>
+      </div>
     </header>
 
       <div class="topnav">
@@ -171,7 +202,8 @@
                 data-lightbox-target="interface-lightbox"
               >
                 <img
-                  src="assets/seraphirc-interface.png"
+                  data-desktop-shot
+                  src="assets/desktop-themes/seraph-desktop.png"
                   alt="SeraphIRC desktop client showing the network tree, channel buffer, and user list"
                 >
               </button>
@@ -201,7 +233,8 @@
                 >
                   <span class="tablet-screen">
                     <img
-                      src="assets/tablet-interface.png"
+                      data-tablet-shot
+                      src="assets/ipad-themes/seraph-ipad.jpeg"
                       alt="SeraphIRC on iPad showing the network list beside the #ircv3 conversation"
                     >
                     <span class="enlarge-hint">⤢ click to enlarge</span>
@@ -218,7 +251,8 @@
                 >
                   <span class="phone-screen">
                     <img
-                      src="assets/mobile-chat.png"
+                      data-phone-shot
+                      src="assets/iphone-themes/seraph-iphone.jpg"
                       alt="SeraphIRC mobile app showing a channel conversation in the #ircv3 channel on Libera"
                     >
                     <span class="enlarge-hint">⤢ click to enlarge</span>
@@ -243,7 +277,8 @@
         </form>
         <div class="lightbox-frame">
           <img
-            src="assets/seraphirc-interface.png"
+            data-desktop-shot
+            src="assets/desktop-themes/seraph-desktop.png"
             alt="SeraphIRC desktop client interface showing IRC channels, chat, and user list"
             width="2560"
             height="1568"
@@ -261,10 +296,11 @@
         </form>
         <div class="lightbox-frame">
           <img
-            src="assets/tablet-interface.png"
+            data-tablet-shot
+            src="assets/ipad-themes/seraph-ipad.jpeg"
             alt="SeraphIRC on iPad showing the network list beside the #ircv3 conversation"
-            width="915"
-            height="1258"
+            width="1640"
+            height="2296"
           >
         </div>
       </dialog>
@@ -279,10 +315,11 @@
         </form>
         <div class="lightbox-frame">
           <img
-            src="assets/mobile-chat.png"
+            data-phone-shot
+            src="assets/iphone-themes/seraph-iphone.jpg"
             alt="SeraphIRC mobile app showing a channel conversation in the #ircv3 channel on Libera"
-            width="643"
-            height="1246"
+            width="1290"
+            height="2670"
           >
         </div>
       </dialog>
@@ -431,6 +468,36 @@
             if (e.target.closest("a")) return; // let real links navigate
             m.classList.toggle("paused");
           });
+        });
+      })();
+
+      // ---- Theme picker: swap the site palette to a desktop-client theme ----
+      (function () {
+        var select = document.getElementById("theme-select");
+        if (!select) return;
+        var STORE = "seraphirc-theme";
+        var shots = document.querySelectorAll("[data-desktop-shot]");
+        var phoneShots = document.querySelectorAll("[data-phone-shot]");
+        var tabletShots = document.querySelectorAll("[data-tablet-shot]");
+        function applyShot(theme) {
+          shots.forEach(function (img) {
+            img.src = "assets/desktop-themes/" + theme + "-desktop.png";
+          });
+          phoneShots.forEach(function (img) {
+            img.src = "assets/iphone-themes/" + theme + "-iphone.jpg";
+          });
+          tabletShots.forEach(function (img) {
+            img.src = "assets/ipad-themes/" + theme + "-ipad.jpeg";
+          });
+        }
+        var current = document.documentElement.getAttribute("data-theme") || "seraph";
+        select.value = current;
+        applyShot(current);
+        select.addEventListener("change", function () {
+          var theme = select.value;
+          document.documentElement.setAttribute("data-theme", theme);
+          applyShot(theme);
+          try { localStorage.setItem(STORE, theme); } catch (e) {}
         });
       })();
 
