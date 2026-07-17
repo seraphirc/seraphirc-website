@@ -2002,12 +2002,22 @@ html[data-theme='tokyo-night']     { --sd-bg:#1a1b26; --sd-deep:#161722; --sd-te
 html[data-theme='nord']            { --sd-bg:#2e3440; --sd-deep:#29303b; --sd-text:#eceff4; --sd-accent:#81a1c1; --sd-glow:#88c0d0; --sd-sw:#ebcb8b; --sd-sc:#88c0d0; --sd-swh:#eceff4; }
 html[data-theme='ocean-breeze']    { color-scheme: light; --sd-bg:#e8f2fb; --sd-deep:#d3e5f4; --sd-text:#223c50; --sd-accent:#2f78b4; --sd-glow:#e0a51c; --sd-sw:#d69e10; --sd-sc:#2aa7bd; --sd-swh:#4a6076; }
 html[data-theme='catppuccin']      { --sd-bg:#1e1e2e; --sd-deep:#1a1a28; --sd-text:#cdd6f4; --sd-accent:#89dceb; --sd-glow:#b4befe; --sd-sw:#f9e2af; --sd-sc:#89dceb; --sd-swh:#ffffff; }
+html[data-theme='miami-nights']    { --sd-bg:#150a2e; --sd-deep:#0d0221; --sd-text:#e8d8ff; --sd-accent:#00e5ff; --sd-glow:#ff2fb9; --sd-sw:#f9c80e; --sd-sc:#00e5ff; --sd-swh:#e8d8ff; }
 html[data-theme='aura']            { --sd-bg:#15141d; --sd-deep:#100f17; --sd-text:#e8e5ee; --sd-accent:#82e2ff; --sd-glow:#a277ff; --sd-sw:#ffca85; --sd-sc:#82e2ff; --sd-swh:#ffffff; }
 html[data-theme='hackerman']       { --sd-bg:#020902; --sd-deep:#010401; --sd-text:#c9f7cd; --sd-accent:#00ffd0; --sd-glow:#39ff14; --sd-sw:#b9ffab; --sd-sc:#00ffd0; --sd-swh:#e6ffe6; }
 html[data-theme='phoenix']         { --sd-bg:#121a29; --sd-deep:#0e1420; --sd-text:#dbe2ee; --sd-accent:#ff9e4f; --sd-glow:#ff6b1a; --sd-sw:#ffc466; --sd-sc:#ff6040; --sd-swh:#fff4eb; }
 html[data-theme='solarized-dark']  { --sd-bg:#002b36; --sd-deep:#00242d; --sd-text:#eee8d5; --sd-accent:#2aa198; --sd-glow:#268bd2; --sd-sw:#b58900; --sd-sc:#2aa198; --sd-swh:#93a1a1; }
 html[data-theme='solarized-light'] { color-scheme: light; --sd-bg:#fdf6e3; --sd-deep:#eee8d5; --sd-text:#073642; --sd-accent:#268bd2; --sd-glow:#b58900; --sd-sw:#b58900; --sd-sc:#268bd2; --sd-swh:#586e75; }
 html[data-theme='light']           { color-scheme: light; --sd-bg:#fbfbfe; --sd-deep:#f0eef7; --sd-text:#15111f; --sd-accent:#4f46e5; --sd-glow:#7c3aed; --sd-sw:#7c3aed; --sd-sc:#0891b2; --sd-swh:#4a4358; }
+/* The three light newcomers. Their client blocks pitch --nebula-src close to
+   the paper on purpose (a saturated bloom stains a light ground), but the site
+   spends --sd-glow on borders, badges and the picker caret — a near-paper value
+   there reads as missing chrome. So --sd-glow takes each theme's saturated
+   signature (sage green / blossom / foxed grey) instead of its nebula tone.
+   Star seeds stay dark-on-light, as the client's own inversion requires. */
+html[data-theme='sage']            { color-scheme: light; --sd-bg:#f8faf5; --sd-deep:#eef1e9; --sd-text:#35402f; --sd-accent:#4a7340; --sd-glow:#6b8f5e; --sd-sw:#9e9244; --sd-sc:#3f7d6a; --sd-swh:#3c4b37; }
+html[data-theme='sakura']          { color-scheme: light; --sd-bg:#fffbfa; --sd-deep:#fbeff0; --sd-text:#4a3b3f; --sd-accent:#b0567d; --sd-glow:#c2185b; --sd-sw:#e282a8; --sd-sc:#7b5aa6; --sd-swh:#785060; }
+html[data-theme='newsprint']       { color-scheme: light; --sd-bg:#f4f2ee; --sd-deep:#e8e6e1; --sd-text:#21201d; --sd-accent:#21201d; --sd-glow:#8a8172; --sd-sw:#7a6c58; --sd-sc:#585e68; --sd-swh:#33322e; }
 
 /* --- Shared derivation: seeds -> full site palette ------------ */
 /* Applies to every themed root EXCEPT Seraph, which keeps the
@@ -2112,9 +2122,8 @@ html[data-theme]:not([data-theme='seraph']) .hero-mark::before {
     transparent 76%);
 }
 /* Light grounds need a touch more colour to register against near-white. */
-html[data-theme='light'] .hero-mark::before,
-html[data-theme='solarized-light'] .hero-mark::before,
-html[data-theme='ocean-breeze'] .hero-mark::before {
+html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean-breeze'],
+        [data-theme='sage'], [data-theme='sakura'], [data-theme='newsprint']) .hero-mark::before {
   background: radial-gradient(circle,
     color-mix(in srgb, var(--sd-hero-glow, var(--sd-glow)) 34%, transparent),
     color-mix(in srgb, var(--sd-hero-glow, var(--sd-glow)) 20%, transparent) 34%,
@@ -2160,155 +2169,127 @@ html[data-theme]:not([data-theme='seraph']) .hero-mark img {
 /* Light themes: the capability `code` chips use a fixed pale lavender
    (fine on every dark theme) that washes out on a white ground —
    darken to a theme-tinted ink so they stay legible. */
-html[data-theme='light'] .cap-list code,
-html[data-theme='solarized-light'] .cap-list code,
-html[data-theme='ocean-breeze'] .cap-list code {
+html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean-breeze'],
+        [data-theme='sage'], [data-theme='sakura'], [data-theme='newsprint']) .cap-list code {
   color: color-mix(in srgb, var(--accent) 45%, var(--text));
 }
 
 /* ------------------------------------------------------------------
-   Light-theme contrast pass. The marquee, hero "boxes" and footer
-   badges were tuned for dark grounds — their fills and text stay too
-   pale on a white page. Darken them for the two light themes only;
-   every dark theme is untouched.
+   Light-theme contrast pass. The marquee, hero "boxes", badges and
+   line-art were tuned for dark grounds — their fills and text stay too
+   pale on a white page. Darken them for the light themes only; every
+   dark theme is untouched. Each rule below used to enumerate every
+   light theme by hand, which meant six edits per new one — the roster
+   now lives in the single :is() list on this block. Add a light theme
+   here and it inherits the whole pass. Specificity is unchanged:
+   :is() takes its most specific argument, so these still weigh the
+   same as the hand-written html[data-theme='light'] … selectors did.
    ------------------------------------------------------------------ */
+html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean-breeze'],
+        [data-theme='sage'], [data-theme='sakura'], [data-theme='newsprint']) {
+  /* Marquee: defined tinted band + dark small-caps text (was #cfd8ec). */
+  & .nav-marq {
+    background: color-mix(in srgb, var(--sd-accent) 12%, var(--sd-bg));
+    border-top-color: color-mix(in srgb, var(--sd-glow) 32%, transparent);
+    border-bottom-color: color-mix(in srgb, var(--sd-glow) 32%, transparent);
+  }
+  & .nav-run,
+  & .nav-run a {
+    color: color-mix(in srgb, var(--text) 82%, var(--sd-accent));
+  }
 
-/* Marquee: defined tinted band + dark small-caps text (was #cfd8ec). */
-html[data-theme='light'] .nav-marq,
-html[data-theme='solarized-light'] .nav-marq,
-html[data-theme='ocean-breeze'] .nav-marq {
-  background: color-mix(in srgb, var(--sd-accent) 12%, var(--sd-bg));
-  border-top-color: color-mix(in srgb, var(--sd-glow) 32%, transparent);
-  border-bottom-color: color-mix(in srgb, var(--sd-glow) 32%, transparent);
-}
-html[data-theme='light'] .nav-run,
-html[data-theme='light'] .nav-run a,
-html[data-theme='solarized-light'] .nav-run,
-html[data-theme='solarized-light'] .nav-run a,
-html[data-theme='ocean-breeze'] .nav-run,
-html[data-theme='ocean-breeze'] .nav-run a {
-  color: color-mix(in srgb, var(--text) 82%, var(--sd-accent));
-}
+  /* Hero kicker "boxes": stronger fill, darker border + text. */
+  & .hero-kicker {
+    color: color-mix(in srgb, var(--text) 80%, transparent);
+  }
+  & .hero-kicker span {
+    background: color-mix(in srgb, var(--sd-accent) 13%, transparent);
+    border-color: color-mix(in srgb, var(--sd-accent) 42%, transparent);
+  }
+  & .hero-kicker span::before {
+    color: var(--gold);
+  }
 
-/* Hero kicker "boxes": stronger fill, darker border + text. */
-html[data-theme='light'] .hero-kicker,
-html[data-theme='solarized-light'] .hero-kicker,
-html[data-theme='ocean-breeze'] .hero-kicker {
-  color: color-mix(in srgb, var(--text) 80%, transparent);
-}
-html[data-theme='light'] .hero-kicker span,
-html[data-theme='solarized-light'] .hero-kicker span,
-html[data-theme='ocean-breeze'] .hero-kicker span {
-  background: color-mix(in srgb, var(--sd-accent) 13%, transparent);
-  border-color: color-mix(in srgb, var(--sd-accent) 42%, transparent);
-}
-html[data-theme='light'] .hero-kicker span::before,
-html[data-theme='solarized-light'] .hero-kicker span::before,
-html[data-theme='ocean-breeze'] .hero-kicker span::before {
-  color: var(--gold);
-}
+  /* Footer badges: light chips with readable, still colour-coded ink. */
+  & .b31 {
+    background: color-mix(in srgb, var(--panel) 68%, #fff);
+    border-color: color-mix(in srgb, var(--accent) 22%, var(--line-2));
+    color: var(--text);
+  }
+  & .b31.a, & .b31.b {
+    color: color-mix(in srgb, var(--gold) 52%, #000);
+    border-color: color-mix(in srgb, var(--gold) 45%, transparent);
+  }
+  & .b31.c {
+    color: color-mix(in srgb, var(--accent) 48%, #000);
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+  & .b31.d {
+    color: color-mix(in srgb, var(--cyan) 32%, #000);
+    border-color: color-mix(in srgb, var(--cyan) 45%, transparent);
+  }
+  & .b31.e {
+    color: var(--dim);
+  }
+  & .b31.a:hover, & .b31.b:hover,
+  & .b31.c:hover, & .b31.d:hover {
+    box-shadow: none;
+  }
 
-/* Footer badges: light chips with readable, still colour-coded ink. */
-html[data-theme='light'] .b31,
-html[data-theme='solarized-light'] .b31,
-html[data-theme='ocean-breeze'] .b31 {
-  background: color-mix(in srgb, var(--panel) 68%, #fff);
-  border-color: color-mix(in srgb, var(--accent) 22%, var(--line-2));
-  color: var(--text);
-}
-html[data-theme='light'] .b31.a, html[data-theme='light'] .b31.b,
-html[data-theme='solarized-light'] .b31.a, html[data-theme='solarized-light'] .b31.b,
-html[data-theme='ocean-breeze'] .b31.a, html[data-theme='ocean-breeze'] .b31.b {
-  color: color-mix(in srgb, var(--gold) 52%, #000);
-  border-color: color-mix(in srgb, var(--gold) 45%, transparent);
-}
-html[data-theme='light'] .b31.c,
-html[data-theme='solarized-light'] .b31.c,
-html[data-theme='ocean-breeze'] .b31.c {
-  color: color-mix(in srgb, var(--accent) 48%, #000);
-  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
-}
-html[data-theme='light'] .b31.d,
-html[data-theme='solarized-light'] .b31.d,
-html[data-theme='ocean-breeze'] .b31.d {
-  color: color-mix(in srgb, var(--cyan) 32%, #000);
-  border-color: color-mix(in srgb, var(--cyan) 45%, transparent);
-}
-html[data-theme='light'] .b31.e,
-html[data-theme='solarized-light'] .b31.e,
-html[data-theme='ocean-breeze'] .b31.e {
-  color: var(--dim);
-}
-html[data-theme='light'] .b31.a:hover, html[data-theme='light'] .b31.b:hover,
-html[data-theme='solarized-light'] .b31.a:hover, html[data-theme='solarized-light'] .b31.b:hover,
-html[data-theme='light'] .b31.c:hover, html[data-theme='solarized-light'] .b31.c:hover,
-html[data-theme='light'] .b31.d:hover, html[data-theme='solarized-light'] .b31.d:hover,
-html[data-theme='ocean-breeze'] .b31.a:hover, html[data-theme='ocean-breeze'] .b31.b:hover,
-html[data-theme='ocean-breeze'] .b31.c:hover, html[data-theme='ocean-breeze'] .b31.d:hover {
-  box-shadow: none;
-}
+  /* Constellations (hero scepter + key line-art): tuned in pale celestial
+     blue/gold for dark grounds, so they vanish on a white page. Darken the
+     strokes, nodes and halos — the draw/twinkle animations and opacity are
+     left to the shared rules. */
+  & .constellations .cl {
+    stroke: color-mix(in srgb, var(--sd-accent) 55%, #000);
+    stroke-opacity: 0.5;
+  }
+  & .constellations .node {
+    fill: color-mix(in srgb, var(--sd-accent) 70%, #000);
+  }
+  & .constellations .node.gold {
+    fill: color-mix(in srgb, var(--sd-glow) 62%, #000);
+  }
+  & .constellations .halo {
+    fill: color-mix(in srgb, var(--sd-accent) 30%, transparent);
+  }
+  & .constellations .halo.gold {
+    fill: color-mix(in srgb, var(--sd-glow) 32%, transparent);
+  }
 
-/* Constellations (hero scepter + key line-art): tuned in pale celestial
-   blue/gold for dark grounds, so they vanish on a white page. Darken the
-   strokes, nodes and halos for the two light themes only — the draw/twinkle
-   animations and opacity are left to the shared rules. */
-html[data-theme='light'] .constellations .cl,
-html[data-theme='solarized-light'] .constellations .cl,
-html[data-theme='ocean-breeze'] .constellations .cl {
-  stroke: color-mix(in srgb, var(--sd-accent) 55%, #000);
-  stroke-opacity: 0.5;
-}
-html[data-theme='light'] .constellations .node,
-html[data-theme='solarized-light'] .constellations .node,
-html[data-theme='ocean-breeze'] .constellations .node {
-  fill: color-mix(in srgb, var(--sd-accent) 70%, #000);
-}
-html[data-theme='light'] .constellations .node.gold,
-html[data-theme='solarized-light'] .constellations .node.gold,
-html[data-theme='ocean-breeze'] .constellations .node.gold {
-  fill: color-mix(in srgb, var(--sd-glow) 62%, #000);
-}
-html[data-theme='light'] .constellations .halo,
-html[data-theme='solarized-light'] .constellations .halo,
-html[data-theme='ocean-breeze'] .constellations .halo {
-  fill: color-mix(in srgb, var(--sd-accent) 30%, transparent);
-}
-html[data-theme='light'] .constellations .halo.gold,
-html[data-theme='solarized-light'] .constellations .halo.gold,
-html[data-theme='ocean-breeze'] .constellations .halo.gold {
-  fill: color-mix(in srgb, var(--sd-glow) 32%, transparent);
+  /* Meteor (shooting star): a gold→white streak with a white-hot head that
+     disappears on a light ground, so it re-colours to --meteor (picked per
+     theme below). */
+  & .shooting-stars span {
+    background: linear-gradient(90deg,
+      transparent,
+      color-mix(in srgb, var(--meteor) 45%, transparent) 40%,
+      var(--meteor) 82%,
+      var(--meteor));
+    box-shadow:
+      0 0 10px color-mix(in srgb, var(--meteor) 45%, transparent),
+      0 0 26px color-mix(in srgb, var(--meteor) 25%, transparent);
+  }
+  & .shooting-stars span::after {
+    background: var(--meteor);
+    box-shadow:
+      0 0 8px 2px color-mix(in srgb, var(--meteor) 55%, transparent),
+      0 0 22px 6px color-mix(in srgb, var(--meteor) 30%, transparent);
+  }
 }
 
-/* Meteor (shooting star): a gold→white streak with a white-hot head that
-   disappears on a light ground. Recolour via --meteor for the two light
-   themes — purple on Light, the ink colour on Solarized Light. */
+/* Each light theme's meteor: whichever of its seeds carries furthest
+   against its own paper. */
 html[data-theme='light'] { --meteor: var(--sd-glow); }             /* purple */
 html[data-theme='solarized-light'] { --meteor: var(--text); }      /* ink */
 html[data-theme='ocean-breeze'] { --meteor: var(--sd-accent); }    /* ocean blue */
+html[data-theme='sage'] { --meteor: var(--sd-accent); }            /* deep leaf */
+html[data-theme='sakura'] { --meteor: var(--sd-glow); }            /* blossom */
+html[data-theme='newsprint'] { --meteor: var(--text); }            /* ink */
 
 /* Ocean Breeze keeps gold as its star/badge accent, but a gold hero bloom
    fought the blue ground — bloom in the theme's cyan-blue instead. */
 html[data-theme='ocean-breeze'] { --sd-hero-glow: var(--sd-sc); }
-html[data-theme='light'] .shooting-stars span,
-html[data-theme='solarized-light'] .shooting-stars span,
-html[data-theme='ocean-breeze'] .shooting-stars span {
-  background: linear-gradient(90deg,
-    transparent,
-    color-mix(in srgb, var(--meteor) 45%, transparent) 40%,
-    var(--meteor) 82%,
-    var(--meteor));
-  box-shadow:
-    0 0 10px color-mix(in srgb, var(--meteor) 45%, transparent),
-    0 0 26px color-mix(in srgb, var(--meteor) 25%, transparent);
-}
-html[data-theme='light'] .shooting-stars span::after,
-html[data-theme='solarized-light'] .shooting-stars span::after,
-html[data-theme='ocean-breeze'] .shooting-stars span::after {
-  background: var(--meteor);
-  box-shadow:
-    0 0 8px 2px color-mix(in srgb, var(--meteor) 55%, transparent),
-    0 0 22px 6px color-mix(in srgb, var(--meteor) 30%, transparent);
-}
 
 /* Smooth the palette hand-off when a new theme is picked. */
 body, .topbar, .site-footer { transition: background-color 350ms ease, border-color 350ms ease, color 350ms ease; }
