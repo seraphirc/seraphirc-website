@@ -2056,7 +2056,7 @@ html[data-theme]:not([data-theme='seraph']) {
    from --sd-glow, cool from --sd-accent). */
 html[data-theme]:not([data-theme='seraph']) body {
   background:
-    radial-gradient(ellipse at 50% -8%, color-mix(in srgb, var(--sd-glow) 20%, transparent), transparent 52%),
+    radial-gradient(ellipse at 50% -8%, color-mix(in srgb, var(--sd-hero-glow, var(--sd-glow)) 20%, transparent), transparent 52%),
     radial-gradient(ellipse at 85% 4%, color-mix(in srgb, var(--sd-accent) 12%, transparent), transparent 44%),
     linear-gradient(180deg, var(--sd-bg), var(--sd-deep) 62%, var(--sd-deep));
   background-attachment: fixed;
@@ -2099,16 +2099,16 @@ html[data-theme]:not([data-theme='seraph']) .site-footer {
    themes drive it from --text so it stays legible (incl. light). */
 html[data-theme]:not([data-theme='seraph']) #hero-title {
   color: var(--text);
-  text-shadow: 0 0 28px color-mix(in srgb, var(--sd-glow) 24%, transparent);
+  text-shadow: 0 0 28px color-mix(in srgb, var(--sd-hero-glow, var(--sd-glow)) 24%, transparent);
 }
 /* Emblem halo: Seraph keeps its fixed gold burn; every other theme
    recolours the bloom to its signature --sd-glow so the logo never
    sits in an off-theme gold glow. Hot whitened core, coloured falloff. */
 html[data-theme]:not([data-theme='seraph']) .hero-mark::before {
   background: radial-gradient(circle,
-    color-mix(in srgb, color-mix(in srgb, var(--sd-glow) 55%, #fff) 22%, transparent),
-    color-mix(in srgb, var(--sd-glow) 13%, transparent) 32%,
-    color-mix(in srgb, var(--sd-glow) 5%, transparent) 55%,
+    color-mix(in srgb, color-mix(in srgb, var(--sd-hero-glow, var(--sd-glow)) 55%, #fff) 22%, transparent),
+    color-mix(in srgb, var(--sd-hero-glow, var(--sd-glow)) 13%, transparent) 32%,
+    color-mix(in srgb, var(--sd-hero-glow, var(--sd-glow)) 5%, transparent) 55%,
     transparent 76%);
 }
 /* Light grounds need a touch more colour to register against near-white. */
@@ -2116,9 +2116,9 @@ html[data-theme='light'] .hero-mark::before,
 html[data-theme='solarized-light'] .hero-mark::before,
 html[data-theme='ocean-breeze'] .hero-mark::before {
   background: radial-gradient(circle,
-    color-mix(in srgb, var(--sd-glow) 34%, transparent),
-    color-mix(in srgb, var(--sd-glow) 20%, transparent) 34%,
-    color-mix(in srgb, var(--sd-glow) 8%, transparent) 58%,
+    color-mix(in srgb, var(--sd-hero-glow, var(--sd-glow)) 34%, transparent),
+    color-mix(in srgb, var(--sd-hero-glow, var(--sd-glow)) 20%, transparent) 34%,
+    color-mix(in srgb, var(--sd-hero-glow, var(--sd-glow)) 8%, transparent) 58%,
     transparent 78%);
 }
 /* The perceptible bloom is the drop-shadow hugging the logo silhouette
@@ -2126,7 +2126,7 @@ html[data-theme='ocean-breeze'] .hero-mark::before {
    lift from --sd-accent, coloured glow from --sd-glow. */
 html[data-theme]:not([data-theme='seraph']) .hero-mark img {
   filter: drop-shadow(0 6px 20px color-mix(in srgb, var(--sd-accent) 30%, transparent))
-    drop-shadow(0 0 34px color-mix(in srgb, var(--sd-glow) 50%, transparent));
+    drop-shadow(0 0 34px color-mix(in srgb, var(--sd-hero-glow, var(--sd-glow)) 50%, transparent));
 }
 
 /* --- Top-bar theme picker ------------------------------------- */
@@ -2285,6 +2285,10 @@ html[data-theme='ocean-breeze'] .constellations .halo.gold {
 html[data-theme='light'] { --meteor: var(--sd-glow); }             /* purple */
 html[data-theme='solarized-light'] { --meteor: var(--text); }      /* ink */
 html[data-theme='ocean-breeze'] { --meteor: var(--sd-accent); }    /* ocean blue */
+
+/* Ocean Breeze keeps gold as its star/badge accent, but a gold hero bloom
+   fought the blue ground — bloom in the theme's cyan-blue instead. */
+html[data-theme='ocean-breeze'] { --sd-hero-glow: var(--sd-sc); }
 html[data-theme='light'] .shooting-stars span,
 html[data-theme='solarized-light'] .shooting-stars span,
 html[data-theme='ocean-breeze'] .shooting-stars span {
