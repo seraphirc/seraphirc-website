@@ -2293,3 +2293,22 @@ html[data-theme='ocean-breeze'] { --sd-hero-glow: var(--sd-sc); }
 
 /* Smooth the palette hand-off when a new theme is picked. */
 body, .topbar, .site-footer { transition: background-color 350ms ease, border-color 350ms ease, color 350ms ease; }
+
+/* ============================================================
+   BRAND MARK — wing sweep
+   The mark ships transparent (no icon tile) so the hero halo and the
+   drop-shadows hug the strokes instead of tracing a square. Its stock
+   colours are tuned for dark grounds: the pale-blue stroke all but
+   disappears on paper, so light themes swap to the deeper-blue cut.
+   Both cuts sit in the markup and one is hidden, rather than a CSS
+   content: url() swap — that isn't reliable on <img> across browsers.
+   ============================================================ */
+.mark-light { display: none; }
+html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean-breeze'],
+        [data-theme='sage'], [data-theme='sakura'], [data-theme='newsprint']) .mark-dark {
+  display: none;
+}
+html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean-breeze'],
+        [data-theme='sage'], [data-theme='sakura'], [data-theme='newsprint']) .mark-light {
+  display: inline;
+}
