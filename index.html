@@ -54,7 +54,7 @@
         } catch (e) {}
       })();
     </script>
-    <link rel="stylesheet" href="styles.css?v=20260716-themes2">
+    <link rel="stylesheet" href="styles.css?v=20260721-commands">
   </head>
   <body>
     <div class="topbar">
@@ -99,10 +99,10 @@
       <div class="topnav">
         <div class="marqrow">
           <div class="nav-marq" data-marq role="navigation" aria-label="Section links (scrolling)">
-          <div class="nav-run"><a href="#platforms">Apps</a><span class="sep">★</span><a href="#features">Features</a><span class="sep">★</span><a href="#bouncers">Bouncers</a><span class="sep">★</span><a href="#ircv3">IRCv3</a><span class="sep">★</span><a href="#contact">Contact</a><span class="sep">★</span><a href="#platforms">Apps</a><span class="sep">★</span><a href="#features">Features</a><span class="sep">★</span><a href="#bouncers">Bouncers</a><span class="sep">★</span><a href="#ircv3">IRCv3</a><span class="sep">★</span><a href="#contact">Contact</a><span class="sep">★</span><a href="#platforms">Apps</a><span class="sep">★</span><a href="#features">Features</a><span class="sep">★</span><a href="#bouncers">Bouncers</a><span class="sep">★</span><a href="#ircv3">IRCv3</a><span class="sep">★</span><a href="#contact">Contact</a><span class="sep">★</span><a href="#platforms">Apps</a><span class="sep">★</span><a href="#features">Features</a><span class="sep">★</span><a href="#bouncers">Bouncers</a><span class="sep">★</span><a href="#ircv3">IRCv3</a><span class="sep">★</span><a href="#contact">Contact</a><span class="sep">★</span><a href="#platforms">Apps</a><span class="sep">★</span><a href="#features">Features</a><span class="sep">★</span><a href="#bouncers">Bouncers</a><span class="sep">★</span><a href="#ircv3">IRCv3</a><span class="sep">★</span><a href="#contact">Contact</a><span class="sep">★</span><a href="#platforms">Apps</a><span class="sep">★</span><a href="#features">Features</a><span class="sep">★</span><a href="#bouncers">Bouncers</a><span class="sep">★</span><a href="#ircv3">IRCv3</a><span class="sep">★</span><a href="#contact">Contact</a><span class="sep">★</span></div>
+          <div class="nav-run"><a href="#platforms">Apps</a><span class="sep">★</span><a href="#features">Features</a><span class="sep">★</span><a href="#bouncers">Bouncers</a><span class="sep">★</span><a href="#ircv3">IRCv3</a><span class="sep">★</span><a href="#commands">Commands</a><span class="sep">★</span><a href="#contact">Contact</a><span class="sep">★</span><a href="#platforms">Apps</a><span class="sep">★</span><a href="#features">Features</a><span class="sep">★</span><a href="#bouncers">Bouncers</a><span class="sep">★</span><a href="#ircv3">IRCv3</a><span class="sep">★</span><a href="#commands">Commands</a><span class="sep">★</span><a href="#contact">Contact</a><span class="sep">★</span><a href="#platforms">Apps</a><span class="sep">★</span><a href="#features">Features</a><span class="sep">★</span><a href="#bouncers">Bouncers</a><span class="sep">★</span><a href="#ircv3">IRCv3</a><span class="sep">★</span><a href="#commands">Commands</a><span class="sep">★</span><a href="#contact">Contact</a><span class="sep">★</span><a href="#platforms">Apps</a><span class="sep">★</span><a href="#features">Features</a><span class="sep">★</span><a href="#bouncers">Bouncers</a><span class="sep">★</span><a href="#ircv3">IRCv3</a><span class="sep">★</span><a href="#commands">Commands</a><span class="sep">★</span><a href="#contact">Contact</a><span class="sep">★</span><a href="#platforms">Apps</a><span class="sep">★</span><a href="#features">Features</a><span class="sep">★</span><a href="#bouncers">Bouncers</a><span class="sep">★</span><a href="#ircv3">IRCv3</a><span class="sep">★</span><a href="#commands">Commands</a><span class="sep">★</span><a href="#contact">Contact</a><span class="sep">★</span><a href="#platforms">Apps</a><span class="sep">★</span><a href="#features">Features</a><span class="sep">★</span><a href="#bouncers">Bouncers</a><span class="sep">★</span><a href="#ircv3">IRCv3</a><span class="sep">★</span><a href="#commands">Commands</a><span class="sep">★</span><a href="#contact">Contact</a><span class="sep">★</span></div>
         </div>
         </div>
-        <nav class="faded" aria-label="Jump to section"><a href="#platforms">Apps</a><span class="d">·</span><a href="#features">Features</a><span class="d">·</span><a href="#bouncers">Bouncers</a><span class="d">·</span><a href="#ircv3">IRCv3</a><span class="d">·</span><a href="#contact">Contact</a></nav>
+        <nav class="faded" aria-label="Jump to section"><a href="#platforms">Apps</a><span class="d">·</span><a href="#features">Features</a><span class="d">·</span><a href="#bouncers">Bouncers</a><span class="d">·</span><a href="#ircv3">IRCv3</a><span class="d">·</span><a href="#commands">Commands</a><span class="d">·</span><a href="#contact">Contact</a></nav>
       </div>
     </div>
 
@@ -414,6 +414,173 @@
           <p class="compat-note">
             "Partial" means the capability is negotiated but not every code path uses it yet.
           </p>
+        </div>
+      </section>
+
+      <section class="section commands-section" id="commands" aria-labelledby="commands-title">
+        <div class="section-heading">
+          <h2 id="commands-title">Commands</h2>
+          <p class="lead">
+            Type <code>/help</code> in the client for the same list, or <code>/help &lt;command&gt;</code>
+            for detail on one. It's reproduced here for convenience.
+          </p>
+        </div>
+
+        <div class="command-grid">
+          <article class="command-category">
+            <h3>Connection</h3>
+            <table>
+              <tbody>
+                <tr><th scope="row"><code>/connect</code> or <code>/connect &lt;server&gt; [port] [remote]</code></th><td>Connect the active network or request a server link</td></tr>
+                <tr><th scope="row"><code>/cycle [#channel]</code></th><td>Part and rejoin a channel</td></tr>
+                <tr><th scope="row"><code>/disconnect</code></th><td>Immediately disconnect the active network</td></tr>
+                <tr><th scope="row"><code>/join &lt;#channel&gt;</code></th><td>Join a channel</td></tr>
+                <tr><th scope="row"><code>/part [#channel] [reason]</code></th><td>Leave a channel</td></tr>
+                <tr><th scope="row"><code>/partall</code></th><td>Leave all joined channels on the active network</td></tr>
+                <tr><th scope="row"><code>/quit [reason]</code></th><td>Gracefully quit the active network</td></tr>
+                <tr><th scope="row"><code>/reconnect</code></th><td>Reconnect the active network</td></tr>
+                <tr><th scope="row"><code>/znc &lt;command&gt;</code></th><td>Send a command to ZNC</td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article class="command-category">
+            <h3>Messaging</h3>
+            <table>
+              <tbody>
+                <tr><th scope="row"><code>/ctcp &lt;target&gt; &lt;command&gt; [args]</code></th><td>Send a CTCP request</td></tr>
+                <tr><th scope="row"><code>/me &lt;action&gt;</code></th><td>Send an action message</td></tr>
+                <tr><th scope="row"><code>/msg &lt;nick|#channel&gt; &lt;message&gt;</code></th><td>Send a private or target message</td></tr>
+                <tr><th scope="row"><code>/notice &lt;target&gt; &lt;message&gt;</code></th><td>Send an IRC NOTICE</td></tr>
+                <tr><th scope="row"><code>/query &lt;nick&gt;</code></th><td>Open a private query buffer</td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article class="command-category">
+            <h3>IRC</h3>
+            <table>
+              <tbody>
+                <tr><th scope="row"><code>/accept &lt;+nick|-nick|*&gt;</code></th><td>Manage your caller-ID (+g) accept list</td></tr>
+                <tr><th scope="row"><code>/admin [server]</code></th><td>Request server administrator information</td></tr>
+                <tr><th scope="row"><code>/away [message]</code></th><td>Mark yourself away</td></tr>
+                <tr><th scope="row"><code>/back</code></th><td>Clear away status</td></tr>
+                <tr><th scope="row"><code>/ban &lt;nick|mask&gt;</code> or <code>/ban &lt;#channel&gt; &lt;nick|mask&gt;</code></th><td>Ban a nick or mask from a channel</td></tr>
+                <tr><th scope="row"><code>/deop &lt;nick&gt;</code></th><td>Remove channel operator status</td></tr>
+                <tr><th scope="row"><code>/devoice &lt;nick&gt;</code></th><td>Remove voice from a nick</td></tr>
+                <tr><th scope="row"><code>/info [server]</code></th><td>Request server information</td></tr>
+                <tr><th scope="row"><code>/invite &lt;nick&gt; [#channel]</code></th><td>Invite a nick to a channel</td></tr>
+                <tr><th scope="row"><code>/ison &lt;nick&gt; [nick...]</code></th><td>Check whether nicknames are online</td></tr>
+                <tr><th scope="row"><code>/kick &lt;nick&gt; [reason]</code> or <code>/kick &lt;#channel&gt; &lt;nick&gt; [reason]</code></th><td>Kick a user from a channel</td></tr>
+                <tr><th scope="row"><code>/kickban &lt;nick&gt; [reason]</code> or <code>/kickban &lt;#channel&gt; &lt;nick&gt; [reason]</code></th><td>Ban and kick a user from a channel</td></tr>
+                <tr><th scope="row"><code>/knock &lt;#channel&gt; [reason]</code></th><td>Request an invite to an invite-only channel</td></tr>
+                <tr><th scope="row"><code>/list [pattern]</code></th><td>Open channel list</td></tr>
+                <tr><th scope="row"><code>/lusers [args]</code></th><td>Request IRC network user/server statistics</td></tr>
+                <tr><th scope="row"><code>/mode &lt;target&gt; [modes] [args]</code></th><td>Send MODE command</td></tr>
+                <tr><th scope="row"><code>/motd [server]</code></th><td>Fetch the server Message of the Day</td></tr>
+                <tr><th scope="row"><code>/names [#channel]</code></th><td>Request channel user names</td></tr>
+                <tr><th scope="row"><code>/nick &lt;newnick&gt;</code></th><td>Change nickname</td></tr>
+                <tr><th scope="row"><code>/op &lt;nick&gt;</code></th><td>Give channel operator status</td></tr>
+                <tr><th scope="row"><code>/time [server]</code></th><td>Request the server time</td></tr>
+                <tr><th scope="row"><code>/topic [text]</code></th><td>Show or set channel topic</td></tr>
+                <tr><th scope="row"><code>/unban &lt;nick|mask&gt;</code> or <code>/unban &lt;#channel&gt; &lt;nick|mask&gt;</code></th><td>Remove a ban from a channel</td></tr>
+                <tr><th scope="row"><code>/userhost &lt;nick&gt; [nick...]</code></th><td>Request user/host information</td></tr>
+                <tr><th scope="row"><code>/users [args]</code></th><td>Request the server USERS listing</td></tr>
+                <tr><th scope="row"><code>/voice &lt;nick&gt;</code></th><td>Give voice to a nick</td></tr>
+                <tr><th scope="row"><code>/who &lt;mask&gt;</code></th><td>Send WHO command</td></tr>
+                <tr><th scope="row"><code>/whois &lt;nick&gt;</code></th><td>Request WHOIS information</td></tr>
+                <tr><th scope="row"><code>/whowas &lt;nickname&gt;</code></th><td>Shows information about a user who has quit</td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article class="command-category">
+            <h3>IRC Operator</h3>
+            <table>
+              <tbody>
+                <tr><th scope="row"><code>/chghost &lt;nick&gt; &lt;newhost&gt;</code></th><td>Change a user's displayed host</td></tr>
+                <tr><th scope="row"><code>/cloak &lt;nick&gt;</code></th><td>Manage hostname cloaking, if supported</td></tr>
+                <tr><th scope="row"><code>/die &lt;reason&gt;</code></th><td>Shut down the IRC server</td></tr>
+                <tr><th scope="row"><code>/gline &lt;mask&gt; &lt;reason&gt;</code></th><td>Set a network-wide ban, if supported</td></tr>
+                <tr><th scope="row"><code>/globops &lt;message&gt;</code></th><td>Message all online IRC operators</td></tr>
+                <tr><th scope="row"><code>/kill &lt;nick&gt; &lt;reason&gt;</code></th><td>Forcibly disconnect a user</td></tr>
+                <tr><th scope="row"><code>/kline &lt;mask&gt; [duration] &lt;reason&gt;</code></th><td>Set a server-level host/IP ban</td></tr>
+                <tr><th scope="row"><code>/links</code></th><td>List linked servers</td></tr>
+                <tr><th scope="row"><code>/locops &lt;message&gt;</code></th><td>Message local IRC operators</td></tr>
+                <tr><th scope="row"><code>/map</code></th><td>Show network topology, if supported</td></tr>
+                <tr><th scope="row"><code>/oper &lt;user&gt; &lt;password&gt;</code></th><td>Gain IRC operator privileges</td></tr>
+                <tr><th scope="row"><code>/rehash [config]</code></th><td>Reload server configuration</td></tr>
+                <tr><th scope="row"><code>/restart &lt;reason&gt;</code></th><td>Restart the IRC server</td></tr>
+                <tr><th scope="row"><code>/sethost &lt;nick&gt; &lt;host&gt;</code></th><td>Set a user's displayed host</td></tr>
+                <tr><th scope="row"><code>/shun &lt;mask&gt; &lt;reason&gt;</code></th><td>Silently block commands from a user</td></tr>
+                <tr><th scope="row"><code>/silence [args...]</code></th><td>Manage server-side silence entries</td></tr>
+                <tr><th scope="row"><code>/squit &lt;server&gt; &lt;reason&gt;</code></th><td>Disconnect a server</td></tr>
+                <tr><th scope="row"><code>/stats &lt;flag&gt;</code></th><td>Query server statistics</td></tr>
+                <tr><th scope="row"><code>/trace &lt;nick|server&gt;</code></th><td>Trace a user or server route</td></tr>
+                <tr><th scope="row"><code>/uncloak &lt;nick&gt;</code></th><td>Remove hostname cloaking, if supported</td></tr>
+                <tr><th scope="row"><code>/unkline &lt;mask&gt;</code></th><td>Remove a K-line</td></tr>
+                <tr><th scope="row"><code>/wallops &lt;message&gt;</code></th><td>Broadcast to users with wallops enabled</td></tr>
+                <tr><th scope="row"><code>/zline &lt;ip&gt; &lt;reason&gt;</code></th><td>Set an IP-level ban, if supported</td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article class="command-category">
+            <h3>Services</h3>
+            <table>
+              <tbody>
+                <tr><th scope="row"><code>/botserv, /bs &lt;command&gt;</code></th><td>Message BotServ</td></tr>
+                <tr><th scope="row"><code>/chanserv, /cs &lt;command&gt;</code></th><td>Message ChanServ</td></tr>
+                <tr><th scope="row"><code>/helpserv &lt;command&gt;</code></th><td>Message HelpServ</td></tr>
+                <tr><th scope="row"><code>/hostserv, /hs &lt;command&gt;</code></th><td>Message HostServ</td></tr>
+                <tr><th scope="row"><code>/memoserv, /ms &lt;command&gt;</code></th><td>Message MemoServ</td></tr>
+                <tr><th scope="row"><code>/nickserv, /ns &lt;command&gt;</code></th><td>Message NickServ</td></tr>
+                <tr><th scope="row"><code>/operserv, /os &lt;command&gt;</code></th><td>Message OperServ</td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article class="command-category">
+            <h3>Buffers</h3>
+            <table>
+              <tbody>
+                <tr><th scope="row"><code>/buffers</code></th><td>List buffers</td></tr>
+                <tr><th scope="row"><code>/clear</code></th><td>Clear the current visible buffer without deleting logs</td></tr>
+                <tr><th scope="row"><code>/clearall -a | -s</code></th><td>Clear visible buffers without deleting logs</td></tr>
+                <tr><th scope="row"><code>/close</code></th><td>Close the current buffer</td></tr>
+                <tr><th scope="row"><code>/current</code></th><td>Show the current buffer</td></tr>
+                <tr><th scope="row"><code>/server</code></th><td>Open the server buffer</td></tr>
+                <tr><th scope="row"><code>/show [count]</code></th><td>Show recent current-buffer messages</td></tr>
+                <tr><th scope="row"><code>/state</code></th><td>Show buffer state summary</td></tr>
+                <tr><th scope="row"><code>/switch &lt;buffer&gt;</code></th><td>Switch to a buffer</td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article class="command-category">
+            <h3>Client</h3>
+            <table>
+              <tbody>
+                <tr><th scope="row"><code>/about</code></th><td>Open About SeraphIRC</td></tr>
+                <tr><th scope="row"><code>/alias &lt;name&gt; &lt;command&gt;</code></th><td>Create or update a command alias</td></tr>
+                <tr><th scope="row"><code>/exit</code></th><td>Exit SeraphIRC</td></tr>
+                <tr><th scope="row"><code>/help [command]</code></th><td>Show command help</td></tr>
+                <tr><th scope="row"><code>/ignore &lt;nick&gt;</code></th><td>Ignore a nick on the current network</td></tr>
+                <tr><th scope="row"><code>/notify [nick] [comment]</code></th><td>Manage notify list entries</td></tr>
+                <tr><th scope="row"><code>/unalias &lt;name&gt;</code></th><td>Remove a command alias</td></tr>
+                <tr><th scope="row"><code>/unignore &lt;nick&gt;</code></th><td>Stop ignoring a nick</td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article class="command-category">
+            <h3>Advanced</h3>
+            <table>
+              <tbody>
+                <tr><th scope="row"><code>/raw, /quote &lt;IRC line&gt;</code></th><td>Send a raw IRC line</td></tr>
+              </tbody>
+            </table>
+          </article>
         </div>
       </section>
 
