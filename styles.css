@@ -692,9 +692,13 @@ h2 {
   border-radius: 3px;
 }
 .platform-desktop p, .platform-mobile p { margin: 0; color: var(--muted); font-size: 0.98rem; line-height: 1.68; }
+/* thumbnail in the Desktop card; click opens it at native 2557px in the lightbox */
 .platform-shot { position: relative; margin-top: auto; }
-.platform-shot img {
-  display: block; width: 100%; height: auto;
+.platform-shot .client-preview-trigger { transition: transform 150ms ease; }
+.platform-shot .client-preview-trigger:hover { transform: translateY(-2px); }
+.desktop-screen { position: relative; display: block; }
+.desktop-screen img {
+  display: block; width: 100%; max-width: 100%; height: auto;
   background: #06070c;
   border: 1px solid var(--line-2);
   border-radius: var(--radius-sm);
@@ -990,7 +994,7 @@ h2 {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
-.interface-lightbox { --lightbox-image-width: 1725px; }
+.interface-lightbox { --lightbox-image-width: 2557px; } /* native width of the desktop shots */
 .image-lightbox::backdrop { background: rgba(2, 2, 8, 0.86); backdrop-filter: blur(10px); }
 .image-lightbox form { position: absolute; top: 14px; right: 14px; z-index: 2; margin: 0; }
 .lightbox-close {
@@ -1282,7 +1286,7 @@ body::before { display: none; }
 /* fix: the mobile screenshot's intrinsic width was expanding the Mobile
    column and collapsing the Desktop column — let cells honor the fr ratio */
 .platform-desktop, .platform-mobile { min-width: 0; }
-.platform-shot img, .phone-shot img { max-width: 100%; }
+.phone-shot img { max-width: 100%; }
 
 /* keep the two header CTAs from squeezing; wrap to a new line if tight */
 .site-header { flex-wrap: wrap; row-gap: 10px; }
