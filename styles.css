@@ -2016,7 +2016,7 @@ html[data-theme='hackerman']       { --sd-bg:#020902; --sd-deep:#010401; --sd-te
 html[data-theme='phoenix']         { --sd-bg:#121a29; --sd-deep:#0e1420; --sd-text:#dbe2ee; --sd-accent:#ff9e4f; --sd-glow:#ff6b1a; --sd-sw:#ffc466; --sd-sc:#ff6040; --sd-swh:#fff4eb; }
 html[data-theme='solarized-dark']  { --sd-bg:#002b36; --sd-deep:#00242d; --sd-text:#eee8d5; --sd-accent:#2aa198; --sd-glow:#268bd2; --sd-sw:#b58900; --sd-sc:#2aa198; --sd-swh:#93a1a1; }
 html[data-theme='solarized-light'] { color-scheme: light; --sd-bg:#fdf6e3; --sd-deep:#eee8d5; --sd-text:#073642; --sd-accent:#268bd2; --sd-glow:#b58900; --sd-sw:#b58900; --sd-sc:#268bd2; --sd-swh:#586e75; }
-html[data-theme='light']           { color-scheme: light; --sd-bg:#fbfbfe; --sd-deep:#f0eef7; --sd-text:#15111f; --sd-accent:#4f46e5; --sd-glow:#7c3aed; --sd-sw:#7c3aed; --sd-sc:#0891b2; --sd-swh:#4a4358; }
+html[data-theme='light']           { color-scheme: light; --sd-bg:#fafcff; --sd-deep:#e9eff8; --sd-text:#17202f; --sd-accent:#2563eb; --sd-glow:#1d4ed8; --sd-sw:#2563eb; --sd-sc:#0891b2; --sd-swh:#3b4a63; }
 /* The three light newcomers. Their client blocks pitch --nebula-src close to
    the paper on purpose (a saturated bloom stains a light ground), but the site
    spends --sd-glow on borders, badges and the picker caret — a near-paper value
@@ -2315,7 +2315,7 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
 
 /* Each light theme's meteor: whichever of its seeds carries furthest
    against its own paper. */
-html[data-theme='light'] { --meteor: var(--sd-glow); }             /* purple */
+html[data-theme='light'] { --meteor: var(--sd-glow); }             /* blue */
 html[data-theme='solarized-light'] { --meteor: var(--text); }      /* ink */
 html[data-theme='ocean-breeze'] { --meteor: var(--sd-accent); }    /* ocean blue */
 html[data-theme='sage'] { --meteor: var(--sd-accent); }            /* deep leaf */
