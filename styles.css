@@ -222,6 +222,26 @@ code, .mono { font-family: var(--mono); }
 }
 .button-proto:hover { border-color: var(--cyan); }
 
+/* Microsoft Store / Windows download button — deliberately Fluent, not retro */
+.button-windows {
+  gap: 11px;
+  color: #ffffff;
+  background: #0067b8;
+  border: 0;
+  border-radius: 2px;
+  font-family: "Segoe UI", "Segoe UI Variable", system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.button-windows:hover { background: #005da6; }
+.button-windows:active { background: #004e8c; }
+.button-windows:focus-visible { outline: 3px solid rgba(0, 103, 184, 0.55); outline-offset: 2px; }
+.button-windows-logo {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+}
+
 /* ---------------------------------------------------------------- hero */
 
 .hero {
@@ -1144,6 +1164,9 @@ body::before { display: none; }
 .button-go:hover { transform: translate(-1px, -1px); box-shadow: 6px 6px 0 rgba(97, 255, 202, 0.34); }
 .button-proto { box-shadow: 5px 5px 0 rgba(130, 226, 255, 0.22); }
 .button-proto:hover { transform: translate(-1px, -1px); box-shadow: 6px 6px 0 rgba(130, 226, 255, 0.34); }
+/* Windows button stays Fluent, not retro */
+.button-windows { border-radius: 2px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35); }
+.button-windows:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4); }
 
 /* eyebrow marker */
 .eyebrow::before { content: "\00bb "; color: var(--gold-bright); }
