@@ -947,7 +947,7 @@ h2 {
 
 /* commands — titled panels, one table per category. Multi-column
    rather than a grid so the tall IRC/Operator panels pack against the
-   short ones instead of leaving a column of dead space. Every colour
+   short ones instead of leaving a column of dead space. Every color
    derives from the palette tokens, so all 21 themes carry it. */
 .command-grid { columns: 2; column-gap: 15px; }
 .command-category {
@@ -992,6 +992,47 @@ h2 {
   color: color-mix(in srgb, var(--accent) 55%, var(--text));
   font-family: var(--mono);
 }
+
+/* formatting — reuses the command panels, but these tables carry real
+   column headers and 3-4 columns, so the 46% first-column rule is dropped
+   and each panel scrolls sideways rather than collapsing to blocks. */
+.format-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  align-items: start;
+}
+.format-grid .command-category { margin: 0; }
+.format-grid .table-scroll { overflow-x: auto; }
+.format-grid thead th {
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+}
+.format-grid th, .format-grid td { width: auto; }
+.format-grid tbody th { color: var(--text); font-size: 0.86rem; }
+.format-grid td { white-space: nowrap; }
+.format-grid td.na { color: var(--dim); }
+.format-grid .compat-note { border-top: 1px solid var(--line-2); }
+.format-grid .compat-note code { font-size: 0.8rem; }
+.swatch {
+  display: inline-block;
+  width: 11px; height: 11px;
+  margin-right: 8px;
+  vertical-align: -1px;
+  background: var(--sw);
+  border: 1px solid var(--line-2);
+  border-radius: 2px;
+}
+/* .punchlist's `margin: 0` is declared later in this file, so this needs the
+   extra specificity to keep the notes off the bottom of the taller panel. */
+.formatting-section .format-notes { margin-top: 44px; }
+@media (max-width: 900px) { .format-grid { grid-template-columns: minmax(0, 1fr); } }
 
 /* ---------------------------------------------------------------- lightbox */
 
@@ -1097,6 +1138,11 @@ h2 {
   .command-category tr:last-child { border-bottom: 0; }
   .command-category th, .command-category td { padding: 0; border-bottom: 0; }
   .command-category td { margin-top: 5px; }
+  /* the formatting tables keep their column headers and scroll instead */
+  .format-grid table, .format-grid thead, .format-grid tbody { display: revert; width: 100%; }
+  .format-grid tr { display: table-row; padding: 0; border-bottom: 0; }
+  .format-grid th, .format-grid td { display: table-cell; width: auto; margin-top: 0; padding: 9px 14px; border-bottom: 1px solid var(--line-soft); }
+  .format-grid tr:last-child th, .format-grid tr:last-child td { border-bottom: 0; }
   .site-footer { flex-direction: column; align-items: flex-start; }
 }
 
@@ -2017,7 +2063,7 @@ h2 { letter-spacing: 0; }
    above). Every other theme sets ~8 SEED tokens lifted straight
    from the client's [data-theme] blocks; the shared derivation
    rule below turns those seeds into the site's full palette and
-   recolours the atmosphere (nebula glows + starfield). Switching
+   recolors the atmosphere (nebula glows + starfield). Switching
    is driven by <html data-theme="…"> from the top-bar picker.
    ============================================================ */
 
@@ -2092,7 +2138,7 @@ html[data-theme]:not([data-theme='seraph']) {
   --n8: var(--sd-sc);
 }
 
-/* --- Atmosphere recolour (non-Seraph) ------------------------- */
+/* --- Atmosphere recolor (non-Seraph) ------------------------- */
 /* Base ground: theme gradient + two signature glows (nebula-warm
    from --sd-glow, cool from --sd-accent). */
 html[data-theme]:not([data-theme='seraph']) body {
@@ -2102,7 +2148,7 @@ html[data-theme]:not([data-theme='seraph']) body {
     linear-gradient(180deg, var(--sd-bg), var(--sd-deep) 62%, var(--sd-deep));
   background-attachment: fixed;
 }
-/* Dense far starfield, recoloured to the theme's star tokens. */
+/* Dense far starfield, recolored to the theme's star tokens. */
 html[data-theme]:not([data-theme='seraph']) body::before {
   background:
     radial-gradient(1px 1px at 22% 18%, color-mix(in srgb, var(--sd-swh) 55%, transparent), transparent),
@@ -2143,8 +2189,8 @@ html[data-theme]:not([data-theme='seraph']) #hero-title {
   text-shadow: 0 0 28px color-mix(in srgb, var(--sd-hero-glow, var(--sd-glow)) 24%, transparent);
 }
 /* Emblem halo: Seraph keeps its fixed gold burn; every other theme
-   recolours the bloom to its signature --sd-glow so the logo never
-   sits in an off-theme gold glow. Hot whitened core, coloured falloff. */
+   recolors the bloom to its signature --sd-glow so the logo never
+   sits in an off-theme gold glow. Hot whitened core, colored falloff. */
 html[data-theme]:not([data-theme='seraph']) .hero-mark::before {
   background: radial-gradient(circle,
     color-mix(in srgb, color-mix(in srgb, var(--sd-hero-glow, var(--sd-glow)) 55%, #fff) 22%, transparent),
@@ -2152,7 +2198,7 @@ html[data-theme]:not([data-theme='seraph']) .hero-mark::before {
     color-mix(in srgb, var(--sd-hero-glow, var(--sd-glow)) 5%, transparent) 55%,
     transparent 76%);
 }
-/* Light grounds need a touch more colour to register against near-white. */
+/* Light grounds need a touch more color to register against near-white. */
 html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean-breeze'],
         [data-theme='sage'], [data-theme='sakura'], [data-theme='newsprint']) .hero-mark::before {
   background: radial-gradient(circle,
@@ -2162,8 +2208,8 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
     transparent 78%);
 }
 /* The perceptible bloom is the drop-shadow hugging the logo silhouette
-   (Seraph = blue lift + gold glow). Recolour both to the theme: cool
-   lift from --sd-accent, coloured glow from --sd-glow. */
+   (Seraph = blue lift + gold glow). Recolor both to the theme: cool
+   lift from --sd-accent, colored glow from --sd-glow. */
 html[data-theme]:not([data-theme='seraph']) .hero-mark img {
   filter: drop-shadow(0 6px 20px color-mix(in srgb, var(--sd-accent) 30%, transparent))
     drop-shadow(0 0 34px color-mix(in srgb, var(--sd-hero-glow, var(--sd-glow)) 50%, transparent));
@@ -2241,7 +2287,7 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
     color: var(--gold);
   }
 
-  /* Footer badges: light chips with readable, still colour-coded ink. */
+  /* Footer badges: light chips with readable, still color-coded ink. */
   & .b31 {
     background: color-mix(in srgb, var(--panel) 68%, #fff);
     border-color: color-mix(in srgb, var(--accent) 22%, var(--line-2));
@@ -2289,7 +2335,7 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   }
 
   /* Meteor (shooting star): a gold→white streak with a white-hot head that
-     disappears on a light ground, so it re-colours to --meteor (picked per
+     disappears on a light ground, so it re-colors to --meteor (picked per
      theme below). */
   & .shooting-stars span {
     background: linear-gradient(90deg,
@@ -2356,7 +2402,7 @@ body, .topbar, .site-footer { transition: background-color 350ms ease, border-co
    BRAND MARK — wing sweep
    The mark ships transparent (no icon tile) so the hero halo and the
    drop-shadows hug the strokes instead of tracing a square. Its stock
-   colours are tuned for dark grounds: the pale-blue stroke all but
+   colors are tuned for dark grounds: the pale-blue stroke all but
    disappears on paper, so light themes swap to the deeper-blue cut.
    Both cuts sit in the markup and one is hidden, rather than a CSS
    content: url() swap — that isn't reliable on <img> across browsers.
