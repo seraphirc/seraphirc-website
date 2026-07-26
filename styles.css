@@ -2220,7 +2220,7 @@ html[data-theme]:not([data-theme='seraph']) .hero-mark img {
 .theme-picker { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.78rem; }
 .theme-picker-label { color: var(--dim); text-transform: uppercase; letter-spacing: 0.14em; }
 .theme-picker-label::before { content: "\25C8 "; color: var(--gold); }
-.theme-select {
+.theme-select, .changelog-select {
   appearance: none; -webkit-appearance: none;
   margin: 0;
   padding: 6px 30px 6px 12px;
@@ -2235,9 +2235,9 @@ html[data-theme]:not([data-theme='seraph']) .hero-mark img {
   cursor: pointer;
   transition: border-color 150ms ease, box-shadow 150ms ease;
 }
-.theme-select:hover { border-color: var(--gold); box-shadow: 0 0 14px color-mix(in srgb, var(--gold) 30%, transparent); }
-.theme-select:focus-visible { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 32%, transparent); }
-.theme-select option { background: var(--panel); color: var(--text); }
+.theme-select:hover, .changelog-select:hover { border-color: var(--gold); box-shadow: 0 0 14px color-mix(in srgb, var(--gold) 30%, transparent); }
+.theme-select:focus-visible, .changelog-select:focus-visible { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 32%, transparent); }
+.theme-select option, .changelog-select option { background: var(--panel); color: var(--text); }
 @media (max-width: 560px) {
   .theme-picker-label { display: none; }
   .header-right { gap: 10px; }
@@ -2380,6 +2380,20 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   & .commands-section .section-heading code {
     color: color-mix(in srgb, var(--accent) 28%, var(--text));
   }
+
+  /* Changelog panel: same rebuild as the command tables, structure and
+     ink struck from --text so the panel holds up on paper grounds. */
+  & .changelog-panel {
+    background: var(--panel);
+    border-color: color-mix(in srgb, var(--text) 24%, transparent);
+    box-shadow: 4px 4px 0 color-mix(in srgb, var(--text) 9%, transparent);
+  }
+  & .changelog-bar {
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    border-bottom-color: color-mix(in srgb, var(--text) 22%, transparent);
+  }
+  & .release-notes li { color: color-mix(in srgb, var(--text) 88%, var(--panel)); }
+  & .release-notes code { color: color-mix(in srgb, var(--accent) 28%, var(--text)); }
 }
 
 /* Each light theme's meteor: whichever of its seeds carries furthest
@@ -2415,4 +2429,64 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
 html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean-breeze'],
         [data-theme='sage'], [data-theme='sakura'], [data-theme='newsprint']) .mark-light {
   display: inline;
+}
+
+/* ---------------------------------------------------------------- changelog */
+/* Same recipe as .command-category: every color derives from the
+   palette tokens, so all 21 themes carry it. The version dropdown
+   reuses the top-bar .theme-select pill styling via .changelog-select. */
+.changelog-panel {
+  max-width: 860px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--panel) 78%, transparent);
+  border: 1px solid var(--line-2);
+  border-radius: 3px;
+  box-shadow: 4px 4px 0 color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.changelog-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 10px 16px;
+  font-family: var(--mono);
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
+  border-bottom: 1px solid var(--line-2);
+}
+.changelog-label {
+  color: var(--dim);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.changelog-label::before { content: "\00bb "; color: var(--gold); }
+.changelog-date {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+}
+.changelog-date::before { content: "\2605 "; color: var(--gold); }
+.release { padding: 16px 20px 18px; }
+.release[hidden] { display: none; }
+.release-notes {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 22px;
+}
+.release-notes li {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.release-notes li::marker { color: var(--accent); }
+.release-notes code {
+  color: color-mix(in srgb, var(--accent) 55%, var(--text));
+  font-family: var(--mono);
+  overflow-wrap: anywhere;
+}
+@media (max-width: 560px) {
+  .changelog-date { width: 100%; margin-left: 0; }
 }
