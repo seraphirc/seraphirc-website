@@ -709,6 +709,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.0.13-alpha">5.0.13-alpha</option>
               <option value="5.0.12-alpha">5.0.12-alpha</option>
               <option value="5.0.11-alpha">5.0.11-alpha</option>
               <option value="5.0.10-alpha">5.0.10-alpha</option>
@@ -724,7 +725,17 @@
             <span class="changelog-date" id="changelog-date">Jul 26, 2026</span>
           </div>
 
-          <article class="release" data-version="5.0.12-alpha" data-date="Jul 26, 2026">
+          <article class="release" data-version="5.0.13-alpha" data-date="Jul 26, 2026">
+            <ul class="release-notes">
+              <li>The channel list is now a floating pane: drag it, resize it, and keep browsing while you click around the app. Its position and size persist across sessions.</li>
+              <li>Focused window titlebars get a classic caption gradient, making the active window easier to spot at a glance.</li>
+              <li>Automatic text formatting now defaults to Markdown and tokens. If you turned it off before, your choice sticks.</li>
+              <li>The userlist control panel is now on by default.</li>
+              <li><code>/dcc</code> now appears in the <code>/help</code> overview under Messaging.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.0.12-alpha" data-date="Jul 26, 2026" hidden>
             <ul class="release-notes">
               <li>New userlist control panel with operator and other user context controls, including configurable button layouts.</li>
               <li>The channel list window stays open across joins, so you can keep browsing while you join.</li>
