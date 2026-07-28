@@ -2394,6 +2394,26 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   }
   & .release-notes li { color: color-mix(in srgb, var(--text) 88%, var(--panel)); }
   & .release-notes code { color: color-mix(in srgb, var(--accent) 28%, var(--text)); }
+
+  /* News cards: third panel on the same recipe, same reason. */
+  & .news-card {
+    background: var(--panel);
+    border-color: color-mix(in srgb, var(--text) 24%, transparent);
+    box-shadow: 4px 4px 0 color-mix(in srgb, var(--text) 9%, transparent);
+  }
+  & .news-card:hover { box-shadow: 5px 5px 0 color-mix(in srgb, var(--text) 14%, transparent); }
+  & .news-bar {
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    border-bottom-color: color-mix(in srgb, var(--text) 22%, transparent);
+  }
+  & .news-flag {
+    color: color-mix(in srgb, var(--gold) 45%, var(--text));
+    background: color-mix(in srgb, var(--gold) 18%, transparent);
+    border-color: color-mix(in srgb, var(--text) 24%, transparent);
+  }
+  & .news-body p { color: color-mix(in srgb, var(--text) 88%, var(--panel)); }
+  & .news-body .news-cmd { border-top-color: color-mix(in srgb, var(--text) 22%, transparent); }
+  & .news-cmd code { color: color-mix(in srgb, var(--accent) 28%, var(--text)); }
 }
 
 /* Each light theme's meteor: whichever of its seeds carries furthest
@@ -2489,4 +2509,92 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
 }
 @media (max-width: 560px) {
   .changelog-date { width: 100%; margin-left: 0; }
+}
+
+/* ---------------------------------------------------------------- news */
+/* Same panel recipe as .changelog-panel and .command-category: titlebar
+   over body, structure struck from the palette tokens so all 21 themes
+   carry it, and the light-theme rebuild lives with the other two below. */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+/* Column, so the two cards match height and both command rules sit on the
+   same line however much prose is above them. */
+.news-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--panel) 78%, transparent);
+  border: 1px solid var(--line-2);
+  border-radius: 3px;
+  box-shadow: 4px 4px 0 color-mix(in srgb, var(--accent) 10%, transparent);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+.news-card:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 color-mix(in srgb, var(--accent) 16%, transparent);
+}
+.news-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  font-family: var(--mono);
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
+  border-bottom: 1px solid var(--line-2);
+}
+.news-kicker {
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.news-kicker::before { content: "\00bb "; color: var(--gold); }
+.news-flag {
+  margin-left: auto;
+  padding: 2px 8px;
+  color: var(--gold-bright);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: color-mix(in srgb, var(--gold) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gold) 40%, transparent);
+  border-radius: 2px;
+}
+.news-flag::after { content: " \2605"; }
+.news-body { display: flex; flex-direction: column; flex: 1; padding: 18px 20px 20px; }
+.news-body h3 {
+  margin: 0 0 12px;
+  font-family: var(--mono);
+  font-size: clamp(1.05rem, 1.9vw, 1.32rem);
+  line-height: 1.24;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.news-body p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.66;
+}
+/* (0,2,0) so it beats the .news-body p margin above without !important. */
+/* auto top margin: the rule sits at the foot of the card, so the shorter
+   card's command line still lines up with the taller one's. */
+.news-body .news-cmd {
+  margin: auto 0 0;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line-2);
+}
+.news-cmd code {
+  color: color-mix(in srgb, var(--accent) 55%, var(--text));
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 860px) {
+  .news-grid { grid-template-columns: minmax(0, 1fr); }
 }
