@@ -771,6 +771,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.0.16-alpha">5.0.16-alpha</option>
               <option value="5.0.15-alpha">5.0.15-alpha</option>
               <option value="5.0.13-alpha">5.0.13-alpha</option>
               <option value="5.0.12-alpha">5.0.12-alpha</option>
@@ -785,10 +786,22 @@
               <option value="5.0.3-alpha">5.0.3-alpha</option>
               <option value="5.0.2-alpha">5.0.2-alpha</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Jul 28, 2026</span>
+            <span class="changelog-date" id="changelog-date">Jul 29, 2026</span>
           </div>
 
-          <article class="release" data-version="5.0.15-alpha" data-date="Jul 28, 2026">
+          <article class="release" data-version="5.0.16-alpha" data-date="Jul 29, 2026">
+            <ul class="release-notes">
+              <li><b>Seraph Transfer speed readout:</b> a send used to report speeds far above what the link could carry, because the estimate was sampled once per chunk instead of once per unit of time.</li>
+              <li><b>WHOIS answers in the window that asked:</b> run <code>/whois</code> from a channel and the reply lands there instead of in the server window. Applies to the nickname menu too, and the answer follows the window you asked from. Unknown nicks report once, not twice.</li>
+              <li><b>Nickname menu icons:</b> redrawn as filled two-tone glyphs with a color per action, the same family the toolbar uses. Query and Seraph Chat are far apart in hue because one crosses the network and the other does not, and DCC Send gets its own shape rather than a recolored one. Disabled rows now dim their icon along with the label.</li>
+              <li><b>Icon Size covers menus:</b> the preference that sizes toolbar icons now sizes the nickname menu's glyphs as well, and Large and Huge are properly distinct on large UI fonts. The Preferences section is renamed from Toolbar to Icon Size to match.</li>
+              <li><b>Context menus size to their content:</b> labels no longer get chopped off at larger UI font sizes, and every menu measures itself to stay on screen instead of guessing.</li>
+              <li>The two send actions name their transport instead of the verb: <b>Seraph Transfer</b> and <b>DCC Send</b>.</li>
+              <li><b>Seraph Chat windows match query windows:</b> the same timestamp and nickname columns, hanging indent, window frame, focus glow, and window opacity preference, plus the right background on light themes. The composer gains a Seraph Transfer button next to the emoji picker.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.0.15-alpha" data-date="Jul 28, 2026" hidden>
             <ul class="release-notes">
               <li><b>Seraph Transfer:</b> a new peer-to-peer file transport that works from behind NAT. A rendezvous server introduces the two clients, they punch a direct connection, and the file rides mutually authenticated TLS 1.3. Send a file with <code>/seraphtransfer &lt;nick&gt;</code>, or from a nickname's menu. DCC is still there and unchanged.</li>
               <li><b>Seraph Chat:</b> an encrypted side conversation over the same direct link, in a floating window that never becomes a buffer. Nothing is logged, stored, or restored, and an invitation writes nothing to the query window either. Start one with <code>/seraphchat</code> (<code>/schat</code>), or from a nickname's menu.</li>
