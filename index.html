@@ -771,6 +771,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.0.17-alpha">5.0.17-alpha</option>
               <option value="5.0.16-alpha">5.0.16-alpha</option>
               <option value="5.0.15-alpha">5.0.15-alpha</option>
               <option value="5.0.13-alpha">5.0.13-alpha</option>
@@ -789,7 +790,17 @@
             <span class="changelog-date" id="changelog-date">Jul 29, 2026</span>
           </div>
 
-          <article class="release" data-version="5.0.16-alpha" data-date="Jul 29, 2026">
+          <article class="release" data-version="5.0.17-alpha" data-date="Jul 29, 2026">
+            <ul class="release-notes">
+              <li><b>Seraph Transfer and Seraph Chat are always on:</b> the enable checkbox is gone, Send File and Seraph Chat never gray out, and the transfers tray is always there. Save folder, size cap, transfers at once, keepalive, and explicit declines still tune them, and nothing touches the network until you accept an invitation.</li>
+              <li><b>Join, part, quit, and nick lines can collapse into one row:</b> a new Chat preference folds a run of them into a clickable summary, <code>4 users joined, 2 parted, 6 quit, 1 changed nick</code>. It replaces Hide join/part/quit/nick rather than stacking with it, so turning one on turns the other off. Neither is the default, expansion is per window, and the new messages divider is never folded away.</li>
+              <li><b>Oversized offers now explain themselves:</b> a file over the size limit used to fail in silence. The sender is stopped at the picker, and the receiver gets a line naming the sender, the file, its size, the limit, and the setting that changes it. A file exactly at the limit is still allowed.</li>
+              <li><b>Windows Store builds get their own profile:</b> the packaged build no longer shares directory names with the portable exe, which fixes a Reset SeraphIRC that never finished and blocked config writes afterward. The portable build is untouched.</li>
+              <li>The File Transfers pane no longer claims that a size limit of 0 means no limit. It means the built-in default.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.0.16-alpha" data-date="Jul 29, 2026" hidden>
             <ul class="release-notes">
               <li><b>Seraph Transfer speed readout:</b> a send used to report speeds far above what the link could carry, because the estimate was sampled once per chunk instead of once per unit of time.</li>
               <li><b>WHOIS answers in the window that asked:</b> run <code>/whois</code> from a channel and the reply lands there instead of in the server window. Applies to the nickname menu too, and the answer follows the window you asked from. Unknown nicks report once, not twice.</li>
