@@ -204,7 +204,7 @@
               <h3>Innovating file transfers on IRC</h3>
               <p>
                 Peer-to-peer file transfer that works from behind a home router. A rendezvous
-                server introduces the two clients, they punch a direct connection, and the file
+                server introduces the two clients and the file
                 rides mutually authenticated TLS 1.3 from your machine to theirs. No upload host,
                 no copy left on somebody else's disk. NO CLEARTEXT.
               </p>
@@ -212,7 +212,7 @@
                 Peers are pinned the first time you transfer with them. If that identity ever
                 changes, the transfer stops and asks instead of quietly carrying on.
               </p>
-              <p class="news-cmd"><code>/seraphtransfer &lt;nick&gt;</code></p>
+              <p class="news-cmd"><code>/seraphtransfer &lt;nick&gt;</code> <span class="news-cmd-note">or from a nickname's context menu</span></p>
             </div>
           </article>
 
@@ -222,7 +222,7 @@
               <span class="news-flag">New</span>
             </div>
             <div class="news-body">
-              <h3>Direct, encrypted, no logs.</h3>
+              <h3>Direct, encrypted, no logs</h3>
               <p>
                 An encrypted conversation over that same direct link, in a floating window that
                 never becomes a buffer. Nothing is logged, stored, or restored, and the invitation
@@ -232,7 +232,7 @@
                 Close the window and the conversation is gone from both machines. There is no
                 history to hand over later, because there was never any history.
               </p>
-              <p class="news-cmd"><code>/seraphchat &lt;nick&gt;</code></p>
+              <p class="news-cmd"><code>/seraphchat &lt;nick&gt;</code> <span class="news-cmd-note">or from a nickname's context menu</span></p>
             </div>
           </article>
         </div>
@@ -420,6 +420,8 @@
           <li><b>Desktop and mobile:</b> take the desktop's familiar interface layout and flows with you on the go with your mobile device.</li>
           <li><b>Mobile push notifications:</b> receive push notifications on your mobile device when the setting is enabled on your app.</li>
           <li><b>File uploads and DCC send/receive:</b> use your Soju bouncer to upload files and share with others, or transfer files directly with DCC send and receive. Supports drag and drop with coordinates (including non-focused windows) and copy/paste.</li>
+          <li><b>Encrypted peer-to-peer transfers:</b> Seraph Transfer sends a file straight to another user over mutually authenticated TLS 1.3, with no upload host and no copy left behind, even when you are both behind NAT.</li>
+          <li><b>Encrypted peer-to-peer chats:</b> Seraph Chat opens a direct, mutually authenticated TLS 1.3 conversation with another user, even when you are both behind NAT.</li>
           <li><b>Markdown and color formatting:</b> write bold, italics, code spans, and colors with markdown or token syntax, all sent as standard IRC control codes that other clients understand. Spoilers are the exception, going out as literal <code>||text||</code> that SeraphIRC renders click-to-reveal.</li>
           <li><b>Emoji support:</b> display emojis and use the emoji picker to spruce up your chat.</li>
           <li><b>Voice dictation:</b> use your mobile device's microphone to translate your voice to IRC message. Handy for responding on the go.</li>

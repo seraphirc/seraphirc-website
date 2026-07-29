@@ -2595,6 +2595,10 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   font-size: 0.9rem;
   overflow-wrap: anywhere;
 }
+.news-cmd .news-cmd-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
 @media (max-width: 860px) {
   .news-grid { grid-template-columns: minmax(0, 1fr); }
 }
