@@ -2414,6 +2414,17 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   & .news-body p { color: color-mix(in srgb, var(--text) 88%, var(--panel)); }
   & .news-body .news-cmd { border-top-color: color-mix(in srgb, var(--text) 22%, transparent); }
   & .news-cmd code { color: color-mix(in srgb, var(--accent) 28%, var(--text)); }
+  & .news-nav {
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    border-color: color-mix(in srgb, var(--text) 24%, transparent);
+    box-shadow: 4px 4px 0 color-mix(in srgb, var(--text) 9%, transparent);
+  }
+  & .news-arrow {
+    background: var(--panel);
+    border-color: color-mix(in srgb, var(--text) 24%, transparent);
+  }
+  & .news-arrow:not(:disabled):hover { box-shadow: 2px 2px 0 color-mix(in srgb, var(--text) 16%, transparent); }
+  & .news-arrow-glyph { color: color-mix(in srgb, var(--gold) 45%, var(--text)); }
 }
 
 /* Each light theme's meteor: whichever of its seeds carries furthest
@@ -2515,13 +2526,31 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
 /* Same panel recipe as .changelog-panel and .command-category: titlebar
    over body, structure struck from the palette tokens so all 21 themes
    carry it, and the light-theme rebuild lives with the other two below. */
-.news-grid {
+/* One announcement at a time, newest first, arrows paging between them.
+   The deck is a single column because only one card is ever displayed. With
+   JS off nothing hides anything, the nav stays hidden, and every card
+   renders stacked in order. */
+/* Same 860px measure as .changelog-panel: one card is now the full width of
+   the deck, and card prose set the width of the section would run far past a
+   comfortable line length. */
+.news-panel { max-width: 860px; }
+.news-deck {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 22px;
 }
-/* Column, so the two cards match height and both command rules sit on the
-   same line however much prose is above them. */
+/* .news-card is a flex column, so [hidden] needs saying out loud. */
+.news-card[hidden] { display: none; }
+/* backwards, not both: a held `transform: none` at the end would outrank
+   the hover translate below. Re-runs on every swap, since going from
+   display:none back to displayed restarts the animation. */
+.news-deck > .news-card { animation: news-in 220ms ease backwards; }
+@keyframes news-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Column so the command rule can be pushed to the foot of the card by the
+   auto margin on .news-cmd, however much prose sits above it. */
 .news-card {
   display: flex;
   flex-direction: column;
@@ -2536,9 +2565,12 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   transform: translate(-1px, -1px);
   box-shadow: 5px 5px 0 color-mix(in srgb, var(--accent) 16%, transparent);
 }
+/* wrap, because three items in the bar do not fit a narrow phone and a
+   dropped flag reads better than an overflowing one. */
 .news-bar {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 12px;
   padding: 10px 16px;
   font-family: var(--mono);
@@ -2553,6 +2585,17 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   text-transform: uppercase;
 }
 .news-kicker::before { content: "\00bb "; color: var(--gold); }
+/* Release the announcement shipped in. Takes the auto margin off the flag
+   when both are present, so the two sit together at the right rather than
+   splitting the free space between them. */
+.news-date {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.news-date + .news-flag { margin-left: 0; }
 .news-flag {
   margin-left: auto;
   padding: 2px 8px;
@@ -2581,9 +2624,9 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   font-size: 0.94rem;
   line-height: 1.66;
 }
-/* (0,2,0) so it beats the .news-body p margin above without !important. */
-/* auto top margin: the rule sits at the foot of the card, so the shorter
-   card's command line still lines up with the taller one's. */
+/* (0,2,0) so it beats the .news-body p margin above without !important.
+   auto top margin so the rule sits at the foot of the card rather than
+   floating under whatever the last paragraph happened to be. */
 .news-body .news-cmd {
   margin: auto 0 0;
   padding-top: 12px;
@@ -2595,10 +2638,62 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   font-size: 0.9rem;
   overflow-wrap: anywhere;
 }
-.news-cmd .news-cmd-note {
-  color: var(--muted);
-  font-size: 0.85rem;
+/* Pager strip under the deck. Same titlebar fill as .news-bar, but its own
+   panel rather than a second bar on the card, which would have stacked two
+   chrome rows on one article. */
+.news-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 8px 12px;
+  font-family: var(--mono);
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
+  border: 1px solid var(--line-2);
+  border-radius: 3px;
+  box-shadow: 4px 4px 0 color-mix(in srgb, var(--accent) 10%, transparent);
 }
-@media (max-width: 860px) {
-  .news-grid { grid-template-columns: minmax(0, 1fr); }
+.news-nav[hidden] { display: none; }
+.news-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  max-width: 42%;
+  padding: 6px 12px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  background: color-mix(in srgb, var(--panel) 78%, transparent);
+  border: 1px solid var(--line-2);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+.news-arrow-next { margin-left: auto; }
+.news-arrow-glyph { flex: none; color: var(--gold); font-size: 1.05rem; line-height: 1; }
+/* The adjacent article's name, so the arrow says where it goes. */
+.news-arrow-label { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.news-arrow:not(:disabled):hover {
+  transform: translate(-1px, -1px);
+  border-color: var(--accent);
+  box-shadow: 2px 2px 0 color-mix(in srgb, var(--accent) 24%, transparent);
+}
+.news-arrow:focus-visible { outline: 3px solid rgba(155, 192, 255, 0.8); outline-offset: 2px; }
+.news-arrow:disabled { color: var(--dim); cursor: default; opacity: 0.5; }
+.news-arrow:disabled .news-arrow-glyph { color: var(--dim); }
+/* auto both sides, so the count sits centered between the two buttons
+   however wide their labels run. */
+.news-count {
+  margin: 0 auto;
+  flex: none;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+@media (max-width: 560px) {
+  .news-arrow-label { display: none; }
+  .news-arrow { max-width: none; }
 }

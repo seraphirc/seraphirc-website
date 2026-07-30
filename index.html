@@ -180,56 +180,91 @@
           <p class="eyebrow">Just shipped</p>
           <h2 id="news-title">News</h2>
           <p class="lead">
-            Solving DCC's limitations: Seraph Transfer and Seraph Chat are here! Two innovations on current IRC technology that let you share files and have a 
-            private conversation over a peer-to-peer connection, even with both users behind NAT.
-            </p>
-            <p>
-            Whether you're on a direct connection or a bouncer, SeraphIRC's rendezvous service can help establish a direct connection for you. 
-            Both Seraph Transfer and Seraph Chat are encrypted, authenticated, and private using TLS v1.3.
+            What just landed in SeraphIRC Desktop, newest first. Use the arrows to page
+            back through the earlier announcements.
           </p>
         </div>
 
-        <div class="news-grid">
-          <article class="news-card">
-            <div class="news-bar">
-              <span class="news-kicker">Seraph Transfer</span>
-              <span class="news-flag">New</span>
-            </div>
-            <div class="news-body">
-              <h3>Innovating file transfers on IRC</h3>
-              <p>
-                Peer-to-peer file transfer that works from behind a home router. A rendezvous
-                server introduces the two clients and the file
-                rides mutually authenticated TLS 1.3 from your machine to theirs. No upload host,
-                no copy left on somebody else's disk. NO CLEARTEXT.
-              </p>
-              <p>
-                Peers are pinned the first time you transfer with them. If that identity ever
-                changes, the transfer stops and asks instead of quietly carrying on.
-              </p>
-              <p class="news-cmd"><code>/seraphtransfer &lt;nick&gt;</code> <span class="news-cmd-note">or from a nickname's context menu</span></p>
-            </div>
-          </article>
+        <div class="news-panel" data-news-panel>
+          <div class="news-deck" data-news-deck>
+            <article class="news-card" data-news-title="Send Guard">
+              <div class="news-bar">
+                <span class="news-kicker">Send Guard</span>
+                <span class="news-date">5.0.18-alpha &middot; Jul 30, 2026</span>
+                <span class="news-flag">New</span>
+              </div>
+              <div class="news-body">
+                <h3>The message you didn't mean to send</h3>
+                <p>
+                  IRC has no undo. Send Guard reads a message on its way to the wire and holds
+                  the ones that look like an accident: a password typed into a channel instead of
+                  a services window, a private line addressed to someone who isn't in the room, a
+                  forty-line paste into a busy channel.
+                </p>
+                <p>
+                  A held message waits in a banner above the composer that names the destination
+                  and says which rule stopped it. Enter is deliberately not the confirm key, because
+                  the reflex that just sent the secret is a second tap on Enter. Send anyway is
+                  Ctrl+Enter, or Cmd+Enter on macOS, or a click. Escape drops the line, and editing
+                  it runs the check again.
+                </p>
+                <p class="news-cmd"><code>Settings &gt; Send Guard</code></p>
+              </div>
+            </article>
 
-          <article class="news-card">
-            <div class="news-bar">
-              <span class="news-kicker">Seraph Chat</span>
-              <span class="news-flag">New</span>
-            </div>
-            <div class="news-body">
-              <h3>Direct, encrypted, no logs</h3>
-              <p>
-                An encrypted conversation over that same direct link, in a floating window that
-                never becomes a buffer. Nothing is logged, stored, or restored, and the invitation
-                itself never lands in a query window.
-              </p>
-              <p>
-                Close the window and the conversation is gone from both machines. There is no
-                history to hand over later, because there was never any history.
-              </p>
-              <p class="news-cmd"><code>/seraphchat &lt;nick&gt;</code> <span class="news-cmd-note">or from a nickname's context menu</span></p>
-            </div>
-          </article>
+            <article class="news-card" data-news-title="Seraph Transfer">
+              <div class="news-bar">
+                <span class="news-kicker">Seraph Transfer</span>
+                <span class="news-date">5.0.15-alpha &middot; Jul 28, 2026</span>
+              </div>
+              <div class="news-body">
+                <h3>Innovating file transfers on IRC</h3>
+                <p>
+                  Peer-to-peer file transfer that works from behind a home router. A rendezvous
+                  server introduces the two clients and the file
+                  rides mutually authenticated TLS 1.3 from your machine to theirs. No upload host,
+                  no copy left on somebody else's disk. NO CLEARTEXT.
+                </p>
+                <p>
+                  Peers are pinned the first time you transfer with them. If that identity ever
+                  changes, the transfer stops and asks instead of quietly carrying on.
+                </p>
+                <p class="news-cmd"><code>/seraphtransfer &lt;nick&gt;</code></p>
+              </div>
+            </article>
+
+            <article class="news-card" data-news-title="Seraph Chat">
+              <div class="news-bar">
+                <span class="news-kicker">Seraph Chat</span>
+                <span class="news-date">5.0.15-alpha &middot; Jul 28, 2026</span>
+              </div>
+              <div class="news-body">
+                <h3>Direct, encrypted, no logs</h3>
+                <p>
+                  An encrypted conversation over that same direct link, in a floating window that
+                  never becomes a buffer. Nothing is logged, stored, or restored, and the invitation
+                  itself never lands in a query window.
+                </p>
+                <p>
+                  Close the window and the conversation is gone from both machines. There is no
+                  history to hand over later, because there was never any history.
+                </p>
+                <p class="news-cmd"><code>/seraphchat &lt;nick&gt;</code></p>
+              </div>
+            </article>
+          </div>
+
+          <div class="news-nav" data-news-nav hidden>
+            <button class="news-arrow" type="button" data-news-prev>
+              <span class="news-arrow-glyph" aria-hidden="true">&#8249;</span>
+              <span class="news-arrow-label"></span>
+            </button>
+            <span class="news-count" data-news-count aria-live="polite"></span>
+            <button class="news-arrow news-arrow-next" type="button" data-news-next>
+              <span class="news-arrow-label"></span>
+              <span class="news-arrow-glyph" aria-hidden="true">&#8250;</span>
+            </button>
+          </div>
         </div>
       </section>
 
@@ -766,6 +801,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.0.18-alpha">5.0.18-alpha</option>
               <option value="5.0.17-alpha">5.0.17-alpha</option>
               <option value="5.0.16-alpha">5.0.16-alpha</option>
               <option value="5.0.15-alpha">5.0.15-alpha</option>
@@ -782,10 +818,17 @@
               <option value="5.0.3-alpha">5.0.3-alpha</option>
               <option value="5.0.2-alpha">5.0.2-alpha</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Jul 29, 2026</span>
+            <span class="changelog-date" id="changelog-date">Jul 30, 2026</span>
           </div>
 
-          <article class="release" data-version="5.0.17-alpha" data-date="Jul 29, 2026">
+          <article class="release" data-version="5.0.18-alpha" data-date="Jul 30, 2026">
+            <ul class="release-notes">
+              <li><b>Send Guard:</b> holds a message on its way to the wire if it carries a credential, looks misaddressed, or is about to flood a channel. Eleven rules, each with its own switch. A hold appears as a banner over the composer, and Enter deliberately will not confirm it, because the reflex that just sent the secret is a second tap on Enter. Ctrl+Enter (Cmd+Enter on macOS) sends anyway, Escape drops the line.</li>
+              <li><b>Settings is now a preferences window:</b> categories on the left, one page on the right, so no more trips back to a menu grid. Groups collapse, pages are alphabetical, and Send Guard gets a page of its own. The window drags by its titlebar, resizes from a corner grip, remembers both, and stays on screen. Initial Setup moves to the Help menu as Setup Wizard.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.0.17-alpha" data-date="Jul 29, 2026" hidden>
             <ul class="release-notes">
               <li><b>Seraph Transfer and Seraph Chat are always on:</b> the enable checkbox is gone, Send File and Seraph Chat never gray out, and the transfers tray is always there. Save folder, size cap, transfers at once, keepalive, and explicit declines still tune them, and nothing touches the network until you accept an invitation.</li>
               <li><b>Join, part, quit, and nick lines can collapse into one row:</b> a new Chat preference folds a run of them into a clickable summary, <code>4 users joined, 2 parted, 6 quit, 1 changed nick</code>. It replaces Hide join/part/quit/nick rather than stacking with it, so turning one on turns the other off. Neither is the default, expansion is per window, and the new messages divider is never folded away.</li>
@@ -1017,6 +1060,53 @@
           applyShot(theme);
           try { localStorage.setItem(STORE, theme); } catch (e) {}
         });
+      })();
+
+      // ---- News: one announcement at a time, arrows page between them ----
+      // Cards are authored newest first, so prev walks toward the latest and
+      // stops on it, and next walks back through the archive and stops on the
+      // oldest. No wrap: the ends are where the news ends.
+      (function () {
+        var panel = document.querySelector("[data-news-panel]");
+        if (!panel) return;
+        var cards = Array.prototype.slice.call(panel.querySelectorAll(".news-card"));
+        var nav = panel.querySelector("[data-news-nav]");
+        var prev = panel.querySelector("[data-news-prev]");
+        var next = panel.querySelector("[data-news-next]");
+        var count = panel.querySelector("[data-news-count]");
+        // Nav is hidden in the markup, so with JS off every card just renders.
+        if (cards.length < 2 || !nav || !prev || !next || !count) return;
+        nav.hidden = false;
+
+        var index = 0;
+        function label(button, at) {
+          var card = cards[at];
+          var name = card ? card.dataset.newsTitle || "" : "";
+          button.querySelector(".news-arrow-label").textContent = name;
+          var verb = button.dataset.newsVerb;
+          button.setAttribute("aria-label", name ? verb + " announcement: " + name : "No " + verb.toLowerCase() + " announcement");
+        }
+        function show(at) {
+          index = Math.min(Math.max(at, 0), cards.length - 1);
+          cards.forEach(function (card, i) { card.hidden = i !== index; });
+          prev.disabled = index === 0;
+          next.disabled = index === cards.length - 1;
+          label(prev, index - 1);
+          label(next, index + 1);
+          count.textContent = index + 1 + " of " + cards.length;
+        }
+        // Clicking to an end disables the button under the pointer, which would
+        // drop focus to the body mid-keyboard-navigation. Hand it to the arrow
+        // that still works.
+        function step(to, from, other) {
+          show(to);
+          if (from.disabled && document.activeElement === from) other.focus();
+        }
+        prev.dataset.newsVerb = "Newer";
+        next.dataset.newsVerb = "Older";
+        prev.addEventListener("click", function () { step(index - 1, prev, next); });
+        next.addEventListener("click", function () { step(index + 1, next, prev); });
+        show(0);
       })();
 
       // ---- Changelog: version dropdown drives the visible release notes ----
