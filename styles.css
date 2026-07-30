@@ -2641,8 +2641,15 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
 /* Pager strip under the deck. Same titlebar fill as .news-bar, but its own
    panel rather than a second bar on the card, which would have stacked two
    chrome rows on one article. */
+/* Grid, not flex: the two arrows carry the adjacent article's name, so they
+   are different widths and change width on every page. Under flex the count
+   centered in whatever space was left over and shifted with them. Equal
+   minmax(0, 1fr) side tracks pin it to the middle of the strip instead, and
+   the 0 minimum is what lets the labels ellipsis rather than push the track
+   wider. */
 .news-nav {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   gap: 12px;
   margin-top: 20px;
@@ -2658,8 +2665,8 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  justify-self: start;
   min-width: 0;
-  max-width: 42%;
   padding: 6px 12px;
   color: var(--text);
   font-family: inherit;
@@ -2671,7 +2678,7 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   cursor: pointer;
   transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
 }
-.news-arrow-next { margin-left: auto; }
+.news-arrow-next { justify-self: end; }
 .news-arrow-glyph { flex: none; color: var(--gold); font-size: 1.05rem; line-height: 1; }
 /* The adjacent article's name, so the arrow says where it goes. */
 .news-arrow-label { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
@@ -2683,17 +2690,13 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
 .news-arrow:focus-visible { outline: 3px solid rgba(155, 192, 255, 0.8); outline-offset: 2px; }
 .news-arrow:disabled { color: var(--dim); cursor: default; opacity: 0.5; }
 .news-arrow:disabled .news-arrow-glyph { color: var(--dim); }
-/* auto both sides, so the count sits centered between the two buttons
-   however wide their labels run. */
 .news-count {
-  margin: 0 auto;
-  flex: none;
   color: var(--muted);
   font-size: 0.78rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
+/* Glyphs only, since two article names plus the count will not fit a phone. */
 @media (max-width: 560px) {
   .news-arrow-label { display: none; }
-  .news-arrow { max-width: none; }
 }
