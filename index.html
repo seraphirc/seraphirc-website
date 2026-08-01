@@ -823,6 +823,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.0.20-alpha">5.0.20-alpha</option>
               <option value="5.0.19-alpha">5.0.19-alpha</option>
               <option value="5.0.18-alpha">5.0.18-alpha</option>
               <option value="5.0.17-alpha">5.0.17-alpha</option>
@@ -841,10 +842,19 @@
               <option value="5.0.3-alpha">5.0.3-alpha</option>
               <option value="5.0.2-alpha">5.0.2-alpha</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Jul 31, 2026</span>
+            <span class="changelog-date" id="changelog-date">Aug 1, 2026</span>
           </div>
 
-          <article class="release" data-version="5.0.19-alpha" data-date="Jul 31, 2026">
+          <article class="release" data-version="5.0.20-alpha" data-date="Aug 1, 2026">
+            <ul class="release-notes">
+              <li><b>Seraph Chat gets pictures:</b> author blocks now carry the same identicon a channel draws. Identicons only, never a fetched avatar, so a direct conversation stays between the two of you.</li>
+              <li><b>The <code>/list</code> pane stays on screen:</b> it could be dragged under the toolbar and left with nothing to grab. It now stays inside the window when you open it, move it, resize it, or resize the app.</li>
+              <li><b>Unread badges clear on server windows:</b> a server window whose latest lines were replies or errors could hold its badge until something else came in.</li>
+              <li><b>Your status shows on a new channel:</b> creating a channel could leave you without your <code>@</code> until you ran <code>/names</code> by hand.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.0.19-alpha" data-date="Jul 31, 2026" hidden>
             <ul class="release-notes">
               <li><b>Modern Mode:</b> a new transcript layout with the nickname and time above the message and consecutive messages from one person grouped together. Optional avatars over IRCv3, an identicon otherwise. Now the default for new profiles, and Classic is still there under <code>Settings &gt; Preferences &gt; Appearance</code>.</li>
               <li><b>Interface polish:</b> Settings matches a channel window's corner, the mention, transfer, and chat trays moved to the left of the top bar, consolidated join and part bands no longer span the pane, and the Network Manager row menu flips up when it needs to.</li>
