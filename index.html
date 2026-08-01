@@ -187,11 +187,33 @@
 
         <div class="news-panel" data-news-panel>
           <div class="news-deck" data-news-deck>
+            <article class="news-card" data-news-title="Modern Mode">
+              <div class="news-bar">
+                <span class="news-kicker">Modern Mode</span>
+                <span class="news-date">5.0.19-alpha &middot; Jul 31, 2026</span>
+                <span class="news-flag">New</span>
+              </div>
+              <div class="news-body">
+                <h3>A fresh take on conversation</h3>
+                <p>
+                  If Discord-style layouts are your thing, Modern Mode is familiar ground. SeraphIRC
+                  brings that grouped, avatar-led conversational flow to IRC. A refreshing
+                  change of pace from the classic transcript.
+                </p>
+                <p>
+                  Avatars ride IRCv3 metadata and are opt-in, because fetching someone's picture
+                  tells their server your IP address. Anyone without one gets an identicon drawn
+                  on your own machine from their nick or account. Nothing is asked of a third
+                  party to build it.
+                </p>
+                <p class="news-cmd"><code>Settings &gt; Preferences &gt; Appearance</code></p>
+              </div>
+            </article>
+
             <article class="news-card" data-news-title="Send Guard">
               <div class="news-bar">
                 <span class="news-kicker">Send Guard</span>
                 <span class="news-date">5.0.18-alpha &middot; Jul 30, 2026</span>
-                <span class="news-flag">New</span>
               </div>
               <div class="news-body">
                 <h3>Check yourself, before you... yeah.</h3>
@@ -801,6 +823,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.0.19-alpha">5.0.19-alpha</option>
               <option value="5.0.18-alpha">5.0.18-alpha</option>
               <option value="5.0.17-alpha">5.0.17-alpha</option>
               <option value="5.0.16-alpha">5.0.16-alpha</option>
@@ -818,13 +841,22 @@
               <option value="5.0.3-alpha">5.0.3-alpha</option>
               <option value="5.0.2-alpha">5.0.2-alpha</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Jul 30, 2026</span>
+            <span class="changelog-date" id="changelog-date">Jul 31, 2026</span>
           </div>
 
-          <article class="release" data-version="5.0.18-alpha" data-date="Jul 30, 2026">
+          <article class="release" data-version="5.0.19-alpha" data-date="Jul 31, 2026">
             <ul class="release-notes">
-              <li><b>Send Guard:</b> holds a message on its way to the wire if it carries a credential, looks misaddressed, or is about to flood a channel. Eleven rules, each with its own switch. A hold appears as a banner over the composer, and Enter deliberately will not confirm it, because the reflex that just sent the secret is a second tap on Enter. Ctrl+Enter (Cmd+Enter on macOS) sends anyway, Escape drops the line.</li>
-              <li><b>Settings is now a preferences window:</b> categories on the left, one page on the right, so no more trips back to a menu grid. Groups collapse, pages are alphabetical, and Send Guard gets a page of its own. The window drags by its titlebar, resizes from a corner grip, remembers both, and stays on screen. Initial Setup moves to the Help menu as Setup Wizard.</li>
+              <li><b>Modern Mode:</b> a new transcript layout with the nickname and time above the message and consecutive messages from one person grouped together. Optional avatars over IRCv3, an identicon otherwise. Now the default for new profiles, and Classic is still there under <code>Settings &gt; Preferences &gt; Appearance</code>.</li>
+              <li><b>Interface polish:</b> Settings matches a channel window's corner, the mention, transfer, and chat trays moved to the left of the top bar, consolidated join and part bands no longer span the pane, and the Network Manager row menu flips up when it needs to.</li>
+              <li><b>The composer survives a <code>/part</code>:</b> leaving a channel could leave the disabled mirror as the only composer on screen until you clicked away and back.</li>
+              <li><b>Member lists fill in on join:</b> a freshly joined channel could sometimes stay empty until you ran <code>/names</code> by hand.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.0.18-alpha" data-date="Jul 30, 2026" hidden>
+            <ul class="release-notes">
+              <li><b>Send Guard:</b> holds a message on its way out if it carries a credential, looks misaddressed, or is about to flood a channel. Eleven rules, each with its own switch. Confirming takes Ctrl+Enter (Cmd+Enter on macOS), never a plain Enter.</li>
+              <li><b>Settings is now a preferences window:</b> categories on the left, one page on the right. Groups collapse, pages are alphabetical, Send Guard gets a page of its own, and the window drags, resizes, and remembers where you left it.</li>
             </ul>
           </article>
 
