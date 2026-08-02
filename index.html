@@ -823,6 +823,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.0.21-alpha">5.0.21-alpha</option>
               <option value="5.0.20-alpha">5.0.20-alpha</option>
               <option value="5.0.19-alpha">5.0.19-alpha</option>
               <option value="5.0.18-alpha">5.0.18-alpha</option>
@@ -845,7 +846,20 @@
             <span class="changelog-date" id="changelog-date">Aug 1, 2026</span>
           </div>
 
-          <article class="release" data-version="5.0.20-alpha" data-date="Aug 1, 2026">
+          <article class="release" data-version="5.0.21-alpha" data-date="Aug 1, 2026">
+            <ul class="release-notes">
+              <li><b>Channel names are links:</b> a <code>#channel</code> in any message is clickable, with a menu that knows whether you are in it. Join or run a <code>/who</code> if you are not, focus, part, or cycle if you are. Works in server windows and on names carrying a status prefix.</li>
+              <li><b>Joins wait for the server:</b> a channel window now opens when the join is confirmed rather than the moment you ask, so a refused join no longer leaves an empty buffer behind. <code>/cycle</code> waits for the part to land before rejoining.</li>
+              <li><b>A knock that gets answered joins you in:</b> if an invite arrives in response to your <code>/knock</code>, the channel opens without a second click. An unsolicited invite still joins nothing.</li>
+              <li><b>File Transfers settings split in three:</b> DCC Transfers, Seraph Transfer &amp; Chat, and Uploads, each its own page, with Remembered Peers on a card of its own.</li>
+              <li><b>Routed replies read as messages:</b> a <code>/whois</code> answered in the window you asked from now lines up with the conversation instead of sitting flush left, and server replies no longer wear a bogus <code>server</code> nickname.</li>
+              <li><b>Linux gets a Flatpak build,</b> alongside the existing packages.</li>
+              <li>Timestamps are legible again on Ocean Breeze, Sage, and Sakura, where they had washed out against the light backgrounds.</li>
+              <li>A pass over startup, message handling, and packaging trims work you were never meant to see. Nothing looks different, it just does less.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.0.20-alpha" data-date="Aug 1, 2026" hidden>
             <ul class="release-notes">
               <li><b>Seraph Chat gets pictures:</b> author blocks now carry the same identicon a channel draws. Identicons only, never a fetched avatar, so a direct conversation stays between the two of you.</li>
               <li><b>The <code>/list</code> pane stays on screen:</b> it could be dragged under the toolbar and left with nothing to grab. It now stays inside the window when you open it, move it, resize it, or resize the app.</li>
