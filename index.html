@@ -823,6 +823,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.0.22-alpha">5.0.22-alpha</option>
               <option value="5.0.21-alpha">5.0.21-alpha</option>
               <option value="5.0.20-alpha">5.0.20-alpha</option>
               <option value="5.0.19-alpha">5.0.19-alpha</option>
@@ -843,10 +844,18 @@
               <option value="5.0.3-alpha">5.0.3-alpha</option>
               <option value="5.0.2-alpha">5.0.2-alpha</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Aug 1, 2026</span>
+            <span class="changelog-date" id="changelog-date">Aug 2, 2026</span>
           </div>
 
-          <article class="release" data-version="5.0.21-alpha" data-date="Aug 1, 2026">
+          <article class="release" data-version="5.0.22-alpha" data-date="Aug 2, 2026">
+            <ul class="release-notes">
+              <li><b>The composer grows with your message:</b> a long draft wraps and the box grows to fit instead of running off the side. Channels, queries, and Seraph Chat alike, and the transcript holds its place as it grows. Hovering an unfocused window's composer no longer shows a not-allowed cursor.</li>
+              <li><b>New Messages divider in background windows:</b> a message arriving in a window you were not looking at only moved the treebar badge. The transcript sitting open beside it now marks where the new lines start.</li>
+              <li><b>Startup no longer pops a bouncer console:</b> launching could open the bouncer's service window over your saved layout. Automatic selection skips it now.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.0.21-alpha" data-date="Aug 1, 2026" hidden>
             <ul class="release-notes">
               <li><b>Channel names are links:</b> a <code>#channel</code> in any message is clickable, with a menu that knows whether you are in it. Join or run a <code>/who</code> if you are not, focus, part, or cycle if you are. Works in server windows and on names carrying a status prefix.</li>
               <li><b>Joins wait for the server:</b> a channel window now opens when the join is confirmed rather than the moment you ask, so a refused join no longer leaves an empty buffer behind. <code>/cycle</code> waits for the part to land before rejoining.</li>
