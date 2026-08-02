@@ -2413,7 +2413,8 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   }
   & .news-body p { color: color-mix(in srgb, var(--text) 88%, var(--panel)); }
   & .news-body .news-cmd { border-top-color: color-mix(in srgb, var(--text) 22%, transparent); }
-  & .news-cmd code { color: color-mix(in srgb, var(--accent) 28%, var(--text)); }
+  & .news-cmd code,
+  & .news-body p:not(.news-cmd) code { color: color-mix(in srgb, var(--accent) 28%, var(--text)); }
   & .news-nav {
     background: color-mix(in srgb, var(--accent) 16%, transparent);
     border-color: color-mix(in srgb, var(--text) 24%, transparent);
@@ -2623,6 +2624,13 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   color: var(--muted);
   font-size: 0.94rem;
   line-height: 1.66;
+}
+/* A command named mid-sentence, same ink as the footer rule below. Excludes
+   .news-cmd so it cannot override that rule's own font-size. */
+.news-body p:not(.news-cmd) code {
+  color: color-mix(in srgb, var(--accent) 55%, var(--text));
+  font-size: 0.9em;
+  overflow-wrap: anywhere;
 }
 /* (0,2,0) so it beats the .news-body p margin above without !important.
    auto top margin so the rule sits at the foot of the card rather than
