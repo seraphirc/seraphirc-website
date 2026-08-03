@@ -880,6 +880,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.0.25-alpha">5.0.25-alpha</option>
               <option value="5.0.24-alpha">5.0.24-alpha</option>
               <option value="5.0.23-alpha">5.0.23-alpha</option>
               <option value="5.0.22-alpha">5.0.22-alpha</option>
@@ -903,10 +904,16 @@
               <option value="5.0.3-alpha">5.0.3-alpha</option>
               <option value="5.0.2-alpha">5.0.2-alpha</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Aug 2, 2026</span>
+            <span class="changelog-date" id="changelog-date">Aug 3, 2026</span>
           </div>
 
-          <article class="release" data-version="5.0.24-alpha" data-date="Aug 2, 2026">
+          <article class="release" data-version="5.0.25-alpha" data-date="Aug 3, 2026">
+            <ul class="release-notes">
+              <li><b>Sitting in a channel counts as reading it:</b> a channel you kept open was only treated as read for as long as the app stayed running, so an evening spent in one place came back full of unread messages the next morning. The read position now moves along as messages arrive in the channel you are watching, and where your bouncer keeps track of it, it follows you to your other devices. History replayed on reconnect still does not count as read.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.0.24-alpha" data-date="Aug 2, 2026" hidden>
             <ul class="release-notes">
               <li><b>Reply:</b> right-click a message and answer it directly. Where the network carries the IRCv3 reply tag, your reply shows a preview of what it answers with a jump back to it. Where the tag cannot travel, it opens with <code>nick:</code> instead of graying out, and an info mark says which you are getting. Replies survive a restart.</li>
               <li><b>Multiline messages:</b> a long message, or one with line breaks in it, now goes out as a single message on networks that support IRCv3 multiline instead of arriving as several separate lines. Elsewhere nothing changes. Send Guard stops warning about flooding when the message genuinely leaves as one.</li>
