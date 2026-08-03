@@ -913,6 +913,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.0.26-alpha">5.0.26-alpha</option>
               <option value="5.0.25-alpha">5.0.25-alpha</option>
               <option value="5.0.24-alpha">5.0.24-alpha</option>
               <option value="5.0.23-alpha">5.0.23-alpha</option>
@@ -940,7 +941,15 @@
             <span class="changelog-date" id="changelog-date">Aug 3, 2026</span>
           </div>
 
-          <article class="release" data-version="5.0.25-alpha" data-date="Aug 3, 2026">
+          <article class="release" data-version="5.0.26-alpha" data-date="Aug 3, 2026">
+            <ul class="release-notes">
+              <li><b>Channel actions in the network tree:</b> Set Topic and Channel Modes are now a right-click on a channel in the tree, next to Find In Channel and View Ban List. They also appear for a channel you hold ops in but have not opened yet.</li>
+              <li><b>Channel Modes acts on the channel you opened it from:</b> opening it from a background channel showed and changed the modes of whichever channel was selected instead, and a mode set that way sat on <code>pending...</code> until it timed out.</li>
+              <li><b>Configuration is now Import/Export Config:</b> the page only ever imported and exported your settings, so the sidebar says so.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.0.25-alpha" data-date="Aug 3, 2026" hidden>
             <ul class="release-notes">
               <li><b>Sitting in a channel counts as reading it:</b> a channel you kept open was only treated as read for as long as the app stayed running, so an evening spent in one place came back full of unread messages the next morning. The read position now moves along as messages arrive in the channel you are watching, and where your bouncer keeps track of it, it follows you to your other devices. History replayed on reconnect still does not count as read.</li>
             </ul>
