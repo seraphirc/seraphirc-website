@@ -187,11 +187,37 @@
 
         <div class="news-panel" data-news-panel>
           <div class="news-deck" data-news-deck>
+            <article class="news-card" data-news-title="Multiline &amp; Replies">
+              <div class="news-bar">
+                <span class="news-kicker">Multiline &amp; Replies</span>
+                <span class="news-date">5.0.24-alpha &middot; Aug 2, 2026</span>
+                <span class="news-flag">New</span>
+              </div>
+              <div class="news-body">
+                <h3>Say the whole thing, and answer the right one</h3>
+                <p>
+                  Two IRCv3 extensions land together. Multiline lets a long message, or one
+                  with line breaks in it, travel as a single message instead of being chopped
+                  into a run of separate lines. Replies point a message at the one it answers,
+                  so the client draws that parent above it with a jump back to where it sits
+                  in the conversation.
+                </p>
+                <p>
+                  Both fail gracefully, because most of IRC has not caught up yet. Multiline is
+                  used only where the network offers it and your message actually needs it.
+                  A reply that cannot be tagged opens with <code>nick:</code> instead, the way
+                  IRC has addressed people for thirty years, so it reads correctly on every
+                  client ever written. Where the tag does travel, SeraphIRC hides the
+                  now-redundant prefix and draws the preview in its place.
+                </p>
+                <p class="news-cmd"><code>Right-click a message &gt; Reply</code></p>
+              </div>
+            </article>
+
             <article class="news-card" data-news-title="Giphy">
               <div class="news-bar">
                 <span class="news-kicker">Giphy</span>
                 <span class="news-date">5.0.23-alpha &middot; Aug 2, 2026</span>
-                <span class="news-flag">New</span>
               </div>
               <div class="news-body">
                 <h3>Some things are better said in motion</h3>
@@ -846,6 +872,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.0.24-alpha">5.0.24-alpha</option>
               <option value="5.0.23-alpha">5.0.23-alpha</option>
               <option value="5.0.22-alpha">5.0.22-alpha</option>
               <option value="5.0.21-alpha">5.0.21-alpha</option>
@@ -871,7 +898,19 @@
             <span class="changelog-date" id="changelog-date">Aug 2, 2026</span>
           </div>
 
-          <article class="release" data-version="5.0.23-alpha" data-date="Aug 2, 2026">
+          <article class="release" data-version="5.0.24-alpha" data-date="Aug 2, 2026">
+            <ul class="release-notes">
+              <li><b>Reply:</b> right-click a message and answer it directly. Where the network carries the IRCv3 reply tag, your reply shows a preview of what it answers with a jump back to it. Where the tag cannot travel, it opens with <code>nick:</code> instead of graying out, and an info mark says which you are getting. Replies survive a restart.</li>
+              <li><b>Multiline messages:</b> a long message, or one with line breaks in it, now goes out as a single message on networks that support IRCv3 multiline instead of arriving as several separate lines. Elsewhere nothing changes. Send Guard stops warning about flooding when the message genuinely leaves as one.</li>
+              <li><b>One message menu everywhere:</b> the transcript's right-click menu is now the same shape in channels, queries, and Seraph Chat. Copy and Quote Text act on the message under the cursor when nothing is selected, dragging across part of a line still takes just that part, and neither drags the quoted parent of a reply along with it. Both are grayed on your own message.</li>
+              <li><b>Channel actions moved to the titlebar:</b> Find In Channel, View Ban List, Set Topic, and Channel Modes are now a right-click on the window titlebar, which is the part of the window that stands for the channel as a whole. Double-clicking the topic still opens the editor.</li>
+              <li><b>Scrollback comes back on a direct connection:</b> a server you connect to without a bouncer showed only the current session after a restart, even though the history had been saved correctly the whole time.</li>
+              <li><b>Avatars on servers that defer:</b> some servers ask to be asked again for user information a moment later. SeraphIRC never asked again, so everyone else's avatar stayed blank for the life of the connection, and the server's request for a delay was printed in the server window as though it were an error.</li>
+              <li><b>Windows stay inside the app:</b> a buffer window could be pushed off the left, right, or bottom edge until there was almost nothing left to grab. All four walls hold now.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.0.23-alpha" data-date="Aug 2, 2026" hidden>
             <ul class="release-notes">
               <li><b>Giphy:</b> a GIF picker in the composer and a <code>/giphy</code> command, both off until you add your own Giphy API key under <code>Settings &gt; Integrations</code>. SeraphIRC ships no key and runs no proxy, so nothing reaches Giphy until you set it up, and your key is kept in the OS keyring rather than the config file.</li>
               <li><b>Quote Text:</b> select what somebody said, right-click, and the composer fills with <code>nick: &gt;&gt; "their words"</code> and the caret ready for your answer. Works in channels, queries, and Seraph Chat, and is offered only on things a person actually said, not on joins or server lines.</li>
