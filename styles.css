@@ -242,6 +242,21 @@ code, .mono { font-family: var(--mono); }
   flex: 0 0 auto;
 }
 
+/* Linux + macOS marks: monochrome so they take the button's own ink, unlike
+   the Microsoft Store button above, which keeps its full-color brand logo. */
+.button-os-logos {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 0 auto;
+}
+.button-os-logo {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  flex: 0 0 auto;
+}
+
 /* ---------------------------------------------------------------- hero */
 
 .hero {
