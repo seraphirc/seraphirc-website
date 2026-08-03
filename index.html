@@ -194,7 +194,7 @@
                 <span class="news-flag">New</span>
               </div>
               <div class="news-body">
-                <h3>Say the whole thing, and answer the right one</h3>
+                <h3>Additional IRCv3 Capabilities</h3>
                 <p>
                   Two IRCv3 extensions land together. Multiline lets a long message, or one
                   with line breaks in it, travel as a single message instead of being chopped
@@ -550,7 +550,7 @@
 
         <div class="cap-groups">
           <div class="cap-group">
-            <h3 class="cap-head"><span class="status-dot status-supported" aria-hidden="true"></span>Supported <span class="cap-count">&middot; 24</span></h3>
+            <h3 class="cap-head"><span class="status-dot status-supported" aria-hidden="true"></span>Supported <span class="cap-count">&middot; 26</span></h3>
             <ul class="punchlist cap-list">
               <li><code>sasl</code></li>
               <li><code>server-time</code></li>
@@ -566,7 +566,9 @@
               <li><code>invite-notify</code></li>
               <li><code>echo-message</code></li>
               <li><code>batch</code></li>
+              <li><code>draft/multiline</code></li>
               <li><code>msgid</code></li>
+              <li><code>+draft/reply</code></li>
               <li><code>draft/chathistory</code></li>
               <li><code>draft/read-marker</code></li>
               <li><code>monitor</code></li>
@@ -591,6 +593,12 @@
             Where a server advertises the ratified name instead of a draft one, the unprefixed
             variant (<code>chathistory</code>, <code>read-marker</code>, <code>no-implicit-names</code>)
             is negotiated too.
+          </p>
+          <p class="compat-note">
+            <code>+draft/reply</code> is a client-only tag rather than a capability. It rides on
+            <code>message-tags</code> and goes out under both spellings, and SeraphIRC offers Reply
+            as a threaded reply only where <code>CLIENTTAGDENY</code> says the server will pass it
+            along. Everywhere else the same action addresses the nick instead.
           </p>
         </div>
       </section>
