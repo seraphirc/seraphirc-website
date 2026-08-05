@@ -1,0 +1,24 @@
+{
+  "themes": [
+    {
+      "file": "blue-angel.seraphirc-theme.json",
+      "name": "Blue Angel",
+      "base": "light",
+      "baseLabel": "Light",
+      "overrides": 98,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-08-05"
+    },
+    {
+      "file": "red-and-black.seraphirc-theme.json",
+      "name": "Red and Black",
+      "base": "light",
+      "baseLabel": "Light",
+      "overrides": 98,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-08-05"
+    }
+  ]
+}

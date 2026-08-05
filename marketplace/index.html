@@ -1,0 +1,859 @@
+<!doctype html>
+<html lang="en" data-theme="seraph">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="The SeraphIRC theme marketplace. Download community themes for the desktop client, or submit your own."
+    >
+    <meta name="theme-color" content="#0d1322">
+    <link rel="canonical" href="https://www.seraphirc.chat/marketplace/">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-v3.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/android-chrome-192x192-v3.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32-v3.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16-v3.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon-v3.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SeraphIRC">
+    <meta property="og:title" content="SeraphIRC Theme Marketplace">
+    <meta
+      property="og:description"
+      content="Download community themes for SeraphIRC, or submit your own."
+    >
+    <meta property="og:url" content="https://www.seraphirc.chat/marketplace/">
+    <meta property="og:image" content="https://www.seraphirc.chat/assets/seraphirc-link-preview-v3.png">
+    <title>SeraphIRC - Theme Marketplace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    >
+    <script>
+      // No-flash theme: apply the saved theme before first paint.
+      (function () {
+        try {
+          var t = localStorage.getItem("seraphirc-theme");
+          if (t) document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="/styles.css?v=20260803-oslogos-1">
+    <style>
+      /* Marketplace-only styling, built on the site's theme variables. */
+      .market-list { overflow-x: auto; }
+      .market-table {
+        width: 100%; border-collapse: collapse;
+        background: var(--panel); border: 1px solid var(--line);
+        font-size: 0.92rem;
+      }
+      .market-table th, .market-table td {
+        padding: 7px 12px; text-align: left; border-bottom: 1px solid var(--line);
+        white-space: nowrap;
+      }
+      .market-table th {
+        color: var(--muted); font-weight: 600; font-size: 0.8rem;
+        text-transform: uppercase; letter-spacing: 0.04em;
+      }
+      .market-table tbody tr:last-child td { border-bottom: none; }
+      .market-table td.market-name { font-weight: 700; }
+      .market-table td.market-count { font-family: var(--mono); color: var(--muted); }
+      .market-sort {
+        display: inline-flex; align-items: center; gap: 5px;
+        font: inherit; color: inherit; letter-spacing: inherit; text-transform: inherit;
+        background: none; border: 0; padding: 0; cursor: pointer;
+      }
+      .market-sort:hover { color: var(--text); }
+      .market-sort .arrow { font-size: 0.6rem; color: var(--dim); }
+      .market-sort.active { color: var(--accent-bright, var(--accent)); }
+      .market-sort.active .arrow { color: var(--gold-bright, var(--gold)); }
+      .market-download {
+        display: inline-flex; align-items: center; gap: 6px;
+        text-decoration: none; font-weight: 700; font-size: 0.85rem;
+        color: var(--accent-bright, var(--accent));
+        border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px;
+      }
+      .market-download:hover { border-color: var(--accent); }
+      .market-download svg { width: 14px; height: 14px; fill: currentColor; }
+      .market-actions { display: flex; gap: 8px; }
+      .market-preview-button {
+        display: inline-flex; align-items: center; gap: 6px;
+        font: inherit; font-weight: 700; font-size: 0.85rem; cursor: pointer;
+        color: var(--text); background: none;
+        border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px;
+      }
+      .market-preview-button:hover { border-color: var(--accent); }
+      .market-empty { color: var(--muted); }
+      .market-toolbar { margin-bottom: 14px; }
+      .market-search {
+        width: 100%; max-width: 460px;
+        padding: 8px 12px;
+        font: inherit; font-family: var(--mono); font-size: 0.88rem;
+        color: var(--text);
+        background: var(--panel);
+        border: 1px solid var(--line); border-radius: 8px;
+      }
+      .market-search::placeholder { color: var(--dim); }
+      .market-search:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
+      }
+
+      /* ── Storefront heading ───────────────────────────────────────────────
+         The marketplace greeting, dressed up as a shopfront: striped awning
+         with a scalloped hem, centered signage, and a ticker of ★ separators
+         echoing the nav marquee. Everything is painted with theme variables
+         so it follows all site themes. */
+      .market-heading {
+        max-width: none;
+        margin-bottom: 38px;
+        padding: 0 clamp(16px, 4vw, 44px) 30px;
+        text-align: center;
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--accent) 8%, transparent), transparent 58%),
+          var(--panel);
+        border: 1px solid var(--line-2, var(--line));
+        border-radius: var(--radius);
+      }
+      .market-awning {
+        --stripe-a: var(--accent);
+        --stripe-b: color-mix(in srgb, var(--accent) 26%, var(--panel));
+        margin: 0 calc(clamp(16px, 4vw, 44px) * -1) 26px;
+      }
+      .market-awning .awning-top {
+        height: 20px;
+        background: repeating-linear-gradient(90deg, var(--stripe-a) 0 26px, var(--stripe-b) 26px 52px);
+        border-radius: var(--radius) var(--radius) 0 0;
+      }
+      .market-awning .awning-scallops {
+        height: 9px;
+        background:
+          radial-gradient(circle at 13px 0, var(--stripe-a) 8.5px, transparent 9px) 0 0 / 52px 9px repeat-x,
+          radial-gradient(circle at 13px 0, var(--stripe-b) 8.5px, transparent 9px) 26px 0 / 52px 9px repeat-x;
+      }
+      .market-heading h2 { margin-bottom: 10px; }
+      .market-heading h2::after { margin-left: auto; margin-right: auto; }
+      .market-heading h2 .orn {
+        color: var(--gold-bright, var(--gold));
+        font-size: 0.55em;
+        vertical-align: 0.28em;
+        padding: 0 0.35em;
+      }
+      .market-greet {
+        margin: 0 0 12px;
+        color: var(--gold-bright, var(--gold));
+        font-family: var(--mono);
+        font-style: italic;
+        font-size: 0.92rem;
+      }
+      .market-ticker {
+        margin: 0 0 18px;
+        color: var(--gold-bright, var(--gold));
+        font-family: var(--mono);
+        font-size: 0.74rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+      .market-ticker .sep { color: var(--dim); padding: 0 0.6em; }
+      .market-heading .lead { max-width: 640px; margin-left: auto; margin-right: auto; }
+
+      /* ── Theme preview dialog ─────────────────────────────────────────────
+         A rough sketch of the client, painted with the theme's own custom
+         properties. The tokens are the client's real ones, so the overrides
+         apply directly; anything a sparse theme leaves unset falls back to a
+         generic light or dark base. */
+      .market-preview-lightbox { --lightbox-image-width: 780px; }
+      .pv-frame { padding: 22px; max-height: calc(100vh - 32px); overflow: auto; }
+      .pv-frame h3 { margin: 0 0 2px; font-size: 1.2rem; }
+      .pv-sub { margin: 0 0 14px; color: var(--muted); font-size: 0.85rem; }
+      .pv-note { margin: 12px 0 0; color: var(--muted); font-size: 0.8rem; }
+
+      .pv-app {
+        --fb-bg: #10131c; --fb-panel: #171b28; --fb-text: #e8e8f0;
+        --fb-muted: #9aa0b5; --fb-accent: #5b7cfa; --fb-line: rgba(255,255,255,0.12);
+        display: grid; grid-template-rows: auto 1fr;
+        height: 400px; font-size: 11px; line-height: 1.45;
+        font-family: var(--mono);
+        border: 1px solid var(--line-2, var(--line)); border-radius: 8px; overflow: hidden;
+        background: var(--app-bg, var(--fb-bg));
+        color: var(--text, var(--fb-text));
+      }
+      .pv-app.pv-light {
+        --fb-bg: #f5f4f0; --fb-panel: #ffffff; --fb-text: #23262e;
+        --fb-muted: #6a6f80; --fb-accent: #2563eb; --fb-line: rgba(0,0,0,0.12);
+      }
+      .pv-header {
+        padding: 5px 10px; font-weight: 700;
+        background: var(--header-bg, var(--fb-panel));
+        color: var(--heading-text, var(--fb-text));
+        border-bottom: 1px solid var(--border, var(--fb-line));
+      }
+      .pv-body { display: grid; grid-template-columns: 118px 1fr; min-height: 0; }
+      .pv-side {
+        display: flex; flex-direction: column; gap: 2px; padding: 8px 0;
+        background: var(--sidebar-bg, var(--fb-panel));
+        color: var(--sidebar-text, var(--fb-muted));
+        border-right: 1px solid var(--border, var(--fb-line));
+      }
+      .pv-network { padding: 0 10px 4px; font-weight: 700; color: var(--network-name-text, var(--fb-text)); }
+      .pv-chan { padding: 2px 10px 2px 18px; }
+      .pv-chan.sel {
+        background: var(--selected-bg, var(--fb-accent));
+        color: var(--selected-text, #ffffff);
+        border-left: 2px solid var(--selected-border, transparent);
+        padding-left: 16px;
+      }
+      .pv-chan.unread { display: flex; align-items: center; gap: 6px; color: var(--unread-label-text, var(--fb-text)); font-weight: 700; }
+      .pv-badge {
+        font-size: 9px; font-weight: 700; padding: 0 5px; border-radius: 999px;
+        background: var(--badge-unread-bg, var(--fb-accent));
+        color: var(--badge-unread-text, #ffffff);
+      }
+
+      /* The floating channel window, over the app fill. */
+      .pv-desk { padding: 8px; min-width: 0; display: flex; background: var(--main-bg, var(--app-bg, var(--fb-bg))); }
+      .pv-window {
+        flex: 1; min-width: 0; display: grid;
+        grid-template-columns: minmax(0, 1fr) 118px;
+        grid-template-rows: auto auto 1fr auto;
+        border: 1px solid var(--border-strong, var(--fb-line));
+        border-radius: 8px; overflow: hidden;
+        box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
+        background: var(--panel-bg, var(--fb-panel));
+      }
+      .pv-titlebar {
+        grid-column: 1 / 3;
+        display: flex; align-items: center; gap: 5px; padding: 4px 8px;
+        background: var(--window-titlebar-active-bg, var(--fb-panel));
+        color: var(--window-titlebar-active-text, var(--fb-text));
+        font-weight: 700;
+      }
+      .pv-titlebar .dim { font-weight: 400; opacity: 0.75; }
+      .pv-winbtns { margin-left: auto; display: flex; gap: 4px; }
+      .pv-winbtns span { width: 9px; height: 9px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.35); background: rgba(255,255,255,0.5); }
+      .pv-winbtns .x { background: #c8372d; }
+      .pv-topic {
+        margin: 6px 8px 0; padding: 3px 10px; border-radius: 999px;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        background: var(--topic-bg, var(--fb-panel));
+        color: var(--channel-topic-text, var(--fb-muted));
+      }
+      .pv-chat {
+        padding: 8px 10px; overflow: hidden; min-width: 0;
+        background: var(--message-bg, var(--channel-pane-bg, var(--fb-bg)));
+        color: var(--message-text, var(--fb-text));
+      }
+      .pv-msg { display: flex; gap: 7px; margin-bottom: 6px; }
+      .pv-av { flex: none; width: 18px; height: 18px; border-radius: 50%; margin-top: 1px; border: 1px solid var(--border, var(--fb-line)); }
+      .pv-av.a1 { background: var(--nick-1, var(--fb-accent)); }
+      .pv-av.a2 { background: var(--nick-2, var(--fb-accent)); }
+      .pv-av.a3 { background: var(--nick-5, var(--fb-accent)); }
+      .pv-msg .bd { min-width: 0; }
+      .pv-msg .txt { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .pv-chat .t { color: var(--timestamp-text, var(--fb-muted)); margin-left: 6px; font-size: 9px; }
+      .pv-chat .n1 { color: var(--nick-1, var(--fb-accent)); font-weight: 700; }
+      .pv-chat .n2 { color: var(--nick-2, var(--fb-accent)); font-weight: 700; }
+      .pv-chat .n3 { color: var(--nick-5, var(--fb-accent)); font-weight: 700; }
+      .pv-chat .ev { color: var(--event-text, var(--fb-muted)); margin: 4px 0 6px 25px; }
+      .pv-chat .lk { color: var(--link-text, var(--fb-accent)); text-decoration: underline; }
+      .pv-composer {
+        display: flex; align-items: center; gap: 6px; padding: 6px 8px;
+        background: var(--composer-bg, var(--fb-panel));
+        border-top: 1px solid var(--border, var(--fb-line));
+      }
+      .pv-field {
+        flex: 1; display: flex; align-items: center; gap: 8px;
+        padding: 4px 10px; border-radius: 999px; min-width: 0;
+        background: var(--field-bg, var(--fb-bg));
+        color: var(--field-text, var(--fb-muted));
+        border: 1px solid var(--field-border, var(--fb-line));
+        white-space: nowrap; overflow: hidden;
+      }
+      .pv-field .gif { margin-left: auto; font-weight: 700; font-size: 9px; }
+      .pv-send {
+        flex: none; padding: 3px 10px; border-radius: 999px; font-weight: 700;
+        background: var(--send-button-bg, var(--fb-accent));
+        color: var(--pill-connected-text, #ffffff);
+      }
+      .pv-roster {
+        grid-column: 2; grid-row: 2 / 5;
+        display: flex; flex-direction: column; gap: 4px; padding: 7px 7px 8px;
+        background: var(--roster-bg, var(--surface-roster, var(--fb-panel)));
+        border-left: 1px solid var(--border, var(--fb-line));
+        min-height: 0; overflow: hidden;
+      }
+      .pv-roster-head { font-weight: 700; color: var(--heading-text, var(--fb-text)); }
+      .pv-find {
+        padding: 2px 8px; border-radius: 999px; font-size: 9px;
+        background: var(--field-bg, var(--fb-bg));
+        color: var(--field-text, var(--fb-muted));
+        border: 1px solid var(--field-border, var(--fb-line));
+      }
+      .pv-sec {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 1px 7px; border-radius: 3px;
+        font-weight: 700; font-size: 9px; letter-spacing: 0.06em;
+        background: var(--surface-roster, var(--fb-line));
+        color: var(--roster-section-text, var(--fb-muted));
+      }
+      .pv-user { display: flex; align-items: center; gap: 5px; padding-left: 7px; }
+      .pv-user .pv-dot { margin-left: auto; }
+      .pv-dot { flex: none; width: 5px; height: 5px; border-radius: 50%; background: var(--present-dot, #3fa06a); }
+      .pv-op { color: var(--user-prefix-text, var(--fb-accent)); font-weight: 700; }
+      .pv-btns { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+      .pv-btn {
+        text-align: center; padding: 2px 0; border-radius: 5px; font-size: 9px;
+        background: var(--settings-button-bg, var(--fb-bg));
+        color: var(--settings-button-text, var(--fb-muted));
+        border: 1px solid var(--settings-button-border, var(--fb-line));
+      }
+
+      .pv-palette { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+      .pv-swatch {
+        width: 26px; height: 26px; border-radius: 6px;
+        border: 1px solid var(--line-2, var(--line));
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+    <header class="site-header" aria-label="Site header">
+      <a class="brand" href="/" aria-label="SeraphIRC home">
+        <span class="brand-mark" aria-hidden="true">
+          <img class="mark-dark" src="/assets/seraph-mark.svg" alt="">
+          <img class="mark-light" src="/assets/seraph-mark-light.svg" alt="">
+        </span>
+        <span>SeraphIRC</span>
+      </a>
+      <div class="header-right">
+        <label class="theme-picker">
+          <span class="theme-picker-label">Theme</span>
+          <select id="theme-select" class="theme-select" aria-label="Site color theme">
+            <option value="aura">Aura</option>
+            <option value="catppuccin">Catppuccin</option>
+            <option value="dim">Dim</option>
+            <option value="dracula">Dracula</option>
+            <option value="funky-fresh">Funky Fresh</option>
+            <option value="gruvbox">Gruvbox</option>
+            <option value="hackerman">Hackerman</option>
+            <option value="light">Light</option>
+            <option value="miami-nights">Miami Nights</option>
+            <option value="monokai">Monokai</option>
+            <option value="nebula">Nebula</option>
+            <option value="newsprint">Newsprint</option>
+            <option value="nord">Nord</option>
+            <option value="ocean-breeze">Ocean Breeze</option>
+            <option value="phoenix">Phoenix</option>
+            <option value="sage">Sage</option>
+            <option value="sakura">Sakura</option>
+            <option value="seraph">Seraph</option>
+            <option value="solarized-dark">Solarized Dark</option>
+            <option value="solarized-light">Solarized Light</option>
+            <option value="tokyo-night">Tokyo Night</option>
+          </select>
+        </label>
+      </div>
+    </header>
+
+      <div class="topnav">
+        <div class="marqrow">
+          <div class="nav-marq" data-marq role="navigation" aria-label="Section links (scrolling)">
+          <div class="nav-run"><a href="/#news">News</a><span class="sep">★</span><a href="/#platforms">Apps</a><span class="sep">★</span><a href="/#features">Features</a><span class="sep">★</span><a href="/#bouncers">Bouncers</a><span class="sep">★</span><a href="/#ircv3">IRCv3</a><span class="sep">★</span><a href="/#commands">Commands</a><span class="sep">★</span><a href="/#formatting">Formatting</a><span class="sep">★</span><a href="/#changelog">Changelog</a><span class="sep">★</span><a href="/#contact">Contact</a><span class="sep">★</span><a href="/marketplace/">Theme Marketplace</a><span class="sep">★</span><a href="/#news">News</a><span class="sep">★</span><a href="/#platforms">Apps</a><span class="sep">★</span><a href="/#features">Features</a><span class="sep">★</span><a href="/#bouncers">Bouncers</a><span class="sep">★</span><a href="/#ircv3">IRCv3</a><span class="sep">★</span><a href="/#commands">Commands</a><span class="sep">★</span><a href="/#formatting">Formatting</a><span class="sep">★</span><a href="/#changelog">Changelog</a><span class="sep">★</span><a href="/#contact">Contact</a><span class="sep">★</span><a href="/marketplace/">Theme Marketplace</a><span class="sep">★</span><a href="/#news">News</a><span class="sep">★</span><a href="/#platforms">Apps</a><span class="sep">★</span><a href="/#features">Features</a><span class="sep">★</span><a href="/#bouncers">Bouncers</a><span class="sep">★</span><a href="/#ircv3">IRCv3</a><span class="sep">★</span><a href="/#commands">Commands</a><span class="sep">★</span><a href="/#formatting">Formatting</a><span class="sep">★</span><a href="/#changelog">Changelog</a><span class="sep">★</span><a href="/#contact">Contact</a><span class="sep">★</span><a href="/marketplace/">Theme Marketplace</a><span class="sep">★</span><a href="/#news">News</a><span class="sep">★</span><a href="/#platforms">Apps</a><span class="sep">★</span><a href="/#features">Features</a><span class="sep">★</span><a href="/#bouncers">Bouncers</a><span class="sep">★</span><a href="/#ircv3">IRCv3</a><span class="sep">★</span><a href="/#commands">Commands</a><span class="sep">★</span><a href="/#formatting">Formatting</a><span class="sep">★</span><a href="/#changelog">Changelog</a><span class="sep">★</span><a href="/#contact">Contact</a><span class="sep">★</span><a href="/marketplace/">Theme Marketplace</a><span class="sep">★</span></div>
+        </div>
+        </div>
+        <nav class="faded" aria-label="Jump to section"><a href="/#news">News</a><span class="d">·</span><a href="/#platforms">Apps</a><span class="d">·</span><a href="/#features">Features</a><span class="d">·</span><a href="/#bouncers">Bouncers</a><span class="d">·</span><a href="/#ircv3">IRCv3</a><span class="d">·</span><a href="/#commands">Commands</a><span class="d">·</span><a href="/#formatting">Formatting</a><span class="d">·</span><a href="/#changelog">Changelog</a><span class="d">·</span><a href="/#contact">Contact</a><span class="d">·</span><a href="/marketplace/">Theme Marketplace</a></nav>
+      </div>
+    </div>
+
+    <div class="shooting-stars" aria-hidden="true">
+      <span style="--top: 8%; --left: 4%; --dur: 9s; --delay: 0s; --angle: 14deg;"></span>
+      <span style="--top: 3%; --left: 50%; --dur: 13s; --delay: 4.2s; --angle: 24deg;"></span>
+      <span style="--top: 42%; --left: 24%; --dur: 16s; --delay: 8.6s; --angle: 10deg;"></span>
+      <span style="--top: 16%; --left: 68%; --dur: 19s; --delay: 12.9s; --angle: 20deg;"></span>
+    </div>
+
+    <main>
+      <section class="section" id="marketplace" aria-labelledby="marketplace-title">
+        <div class="section-heading market-heading">
+          <div class="market-awning" aria-hidden="true">
+            <div class="awning-top"></div>
+            <div class="awning-scallops"></div>
+          </div>
+          <p class="eyebrow">The SeraphIRC theme</p>
+          <h2 id="marketplace-title"><span class="orn" aria-hidden="true">&#10022;</span>Marketplace<span class="orn" aria-hidden="true">&#10022;</span></h2>
+          <p class="market-greet" id="market-greet">* SeraphBot rolls out the welcome mat</p>
+          <p class="market-ticker" id="market-ticker" aria-hidden="true">Open all hours<span class="sep">&#9733;</span>Free of charge<span class="sep">&#9733;</span>Hand reviewed<span class="sep">&#9733;</span>Made by users</p>
+          <p class="lead">
+            Every theme on these shelves was submitted by a fellow user, checked by hand, and
+            hung up with their nick on it. Take home whatever catches your eye, then import it
+            from <code>Settings &gt; Interface &gt; Appearance &gt; Import Theme</code>.
+          </p>
+        </div>
+
+        <div class="market-toolbar">
+          <input
+            type="search"
+            id="theme-search"
+            class="market-search"
+            placeholder="Search the shelves: name, nick, network, or year"
+            aria-label="Search themes by name, author nickname, network, or date added"
+          >
+        </div>
+
+        <div class="market-list" id="theme-list" aria-live="polite">
+          <p class="market-empty">Loading themes&hellip;</p>
+        </div>
+      </section>
+
+      <dialog class="image-lightbox market-preview-lightbox" id="preview-lightbox" aria-label="Theme preview">
+        <form method="dialog">
+          <button class="lightbox-close" type="submit" aria-label="Close theme preview"></button>
+        </form>
+        <div class="pv-frame">
+          <h3 id="pv-title">Theme preview</h3>
+          <p class="pv-sub" id="pv-sub"></p>
+          <div class="pv-app" id="pv-root" aria-hidden="true">
+            <div class="pv-header">SeraphIRC</div>
+            <div class="pv-body">
+              <div class="pv-side">
+                <div class="pv-network">Libera</div>
+                <div class="pv-chan sel">#seraphirc</div>
+                <div class="pv-chan">#ircv3</div>
+                <div class="pv-chan unread">#soju <span class="pv-badge">3</span></div>
+                <div class="pv-chan">#linux</div>
+              </div>
+              <div class="pv-desk">
+                <div class="pv-window">
+                  <div class="pv-titlebar">
+                    #seraphirc <span class="dim">[6] — Libera (Soju)</span>
+                    <span class="pv-winbtns"><span></span><span></span><span class="x"></span></span>
+                  </div>
+                  <div class="pv-topic">SeraphIRC Client Development and Discussion — <span class="lk">seraphirc.chat/#changelog</span></div>
+                  <div class="pv-chat">
+                    <div class="pv-msg">
+                      <span class="pv-av a1"></span>
+                      <div class="bd">
+                        <div><span class="n1">halo</span><span class="t">21:55</span></div>
+                        <div class="txt">anyone tried the new theme editor yet</div>
+                      </div>
+                    </div>
+                    <div class="pv-msg">
+                      <span class="pv-av a2"></span>
+                      <div class="bd">
+                        <div><span class="n2">wing</span><span class="t">21:55</span></div>
+                        <div class="txt">yeah, cloned Nord and went from there</div>
+                      </div>
+                    </div>
+                    <div class="ev">* seraph has joined #seraphirc</div>
+                    <div class="pv-msg">
+                      <span class="pv-av a3"></span>
+                      <div class="bd">
+                        <div><span class="n3">seraph</span><span class="t">21:56</span></div>
+                        <div class="txt">screenshots or it did not happen</div>
+                      </div>
+                    </div>
+                    <div class="pv-msg">
+                      <span class="pv-av a2"></span>
+                      <div class="bd">
+                        <div><span class="n2">wing</span><span class="t">21:57</span></div>
+                        <div class="txt"><span class="lk">seraphirc.chat/marketplace</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pv-composer">
+                    <span class="pv-field">Type a message… <span class="gif">GIF</span></span>
+                    <span class="pv-send">Send</span>
+                  </div>
+                  <div class="pv-roster">
+                    <div class="pv-roster-head">Users 5 · Ops 1</div>
+                    <div class="pv-find">Find users</div>
+                    <div class="pv-sec">OPS <span>1</span></div>
+                    <div class="pv-user"><span class="pv-op">@knowmadic</span><span class="pv-dot"></span></div>
+                    <div class="pv-sec">USERS <span>4</span></div>
+                    <div class="pv-user">halo<span class="pv-dot"></span></div>
+                    <div class="pv-user">wing<span class="pv-dot"></span></div>
+                    <div class="pv-user">seraph<span class="pv-dot"></span></div>
+                    <div class="pv-user">quark<span class="pv-dot"></span></div>
+                    <div class="pv-btns">
+                      <span class="pv-btn">Op</span><span class="pv-btn">DeOp</span>
+                      <span class="pv-btn">Ban</span><span class="pv-btn">Kick</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pv-palette" id="pv-palette"></div>
+          <p class="pv-note">
+            This is an automated color scheme render. It does not represent the actual client interface.
+          </p>
+        </div>
+      </dialog>
+
+      <section class="section" id="submit" aria-labelledby="submit-title">
+        <div class="section-heading">
+          <h2 id="submit-title">Submit your theme</h2>
+          <p class="lead">
+            Made something worth showing off? Export it from the desktop client and email the
+            file to <a href="mailto:themes@seraphirc.chat?subject=Theme%20submission"><b>themes@seraphirc.chat</b></a>.
+            Every submission is checked with the client's own theme validators and reviewed by
+            a person. Once approved, it lands in the list above with your nickname on it.
+          </p>
+        </div>
+        <ul class="punchlist punchlist-1">
+          <li><b>Export the file:</b> <code>Settings &gt; Interface &gt; Appearance</code>, select your theme in the dropdown, then <code>Edit theme &gt; Export</code>.</li>
+          <li><b>Include your nickname</b> so the theme can be attributed to you.</li>
+          <li><b>Optionally, your preferred server network</b>, so others can find you if they want to ask about the theme.</li>
+          <li><b>Your email address</b> is used for inquiries about the submission only. It is never used for marketing and never sold or shared with third parties.</li>
+        </ul>
+      </section>
+
+      <section class="section" id="marketplace-contact" aria-labelledby="marketplace-contact-title">
+        <div class="section-heading">
+          <h2 id="marketplace-contact-title">Questions</h2>
+        </div>
+        <ul class="punchlist punchlist-1">
+          <li>Send any questions or inquiries about themes to <a href="mailto:themes@seraphirc.chat"><b>themes@seraphirc.chat</b></a>.</li>
+          <li>Want a theme taken down or updated? Same address. Include the theme name.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="foot-badges">
+        <a class="b31 a" href="https://github.com/seraphirc/seraphirc-download/releases/latest" target="_blank" rel="noopener">Desktop<br>Download</a>
+        <a class="b31 b" href="https://testflight.apple.com/join/yWxRQutF" target="_blank" rel="noopener">Mobile App<br>(iOS)</a>
+        <a class="b31 c" href="https://ircv3.net" target="_blank" rel="noopener">POWERED BY<br>IRCv3</a>
+        <a class="b31 d" href="https://soju.im" target="_blank" rel="noopener">About<br>Soju</a>
+        <a class="b31 e" href="/privacy/" target="_blank" rel="noopener">Privacy<br>Policy</a>
+      </div>
+
+      <div class="foot-brand">
+        <img class="mark-dark" src="/assets/seraph-mark.svg" alt="" aria-hidden="true">
+        <img class="mark-light" src="/assets/seraph-mark-light.svg" alt="" aria-hidden="true">
+        <strong>SeraphIRC</strong>
+        <span>IRC for desktop &amp; mobile</span>
+        <a href="https://www.seraphirc.chat">www.seraphirc.chat</a>
+      </div>
+
+      <div class="foot-meta">
+        © 1997–2026 SeraphIRC · best viewed with any browser
+      </div>
+    </footer>
+
+    <script>
+      // ---- Marquee section-nav: pause on hover/focus, click to freeze ----
+      (function () {
+        document.querySelectorAll("[data-marq]").forEach(function (m) {
+          m.addEventListener("click", function (e) {
+            if (e.target.closest("a")) return; // let real links navigate
+            m.classList.toggle("paused");
+          });
+        });
+      })();
+
+      // ---- Theme picker: swap the site palette to a desktop-client theme ----
+      (function () {
+        var select = document.getElementById("theme-select");
+        if (!select) return;
+        var STORE = "seraphirc-theme";
+        var current = document.documentElement.getAttribute("data-theme") || "seraph";
+        select.value = current;
+        select.addEventListener("change", function () {
+          document.documentElement.setAttribute("data-theme", select.value);
+          try { localStorage.setItem(STORE, select.value); } catch (e) {}
+        });
+      })();
+
+      // ---- Marketplace ----
+      (function () {
+        var list = document.getElementById("theme-list");
+
+        /* Downloads go through the counting worker, which serves the file
+           with an attachment disposition and bumps its KV counter. The site
+           is not proxied through Cloudflare, so the worker lives on its own
+           origin. */
+        var WORKER_API = "https://seraphirc-theme-marketplace.seraphirc.workers.dev/api/";
+
+        /* filename -> count, from the worker. Null until it loads; the
+           Downloads column shows an em dash placeholder until then. */
+        var downloadCounts = null;
+
+        function countOf(theme) {
+          return downloadCounts ? (Number(downloadCounts[theme.file]) || 0) : 0;
+        }
+
+        function countLabel(theme) {
+          if (!downloadCounts) return "—";
+          return countOf(theme).toLocaleString();
+        }
+
+        /* Off by default (list stays newest first); the Downloads header
+           toggles most-downloaded first, ties broken by recency. */
+        var sortByDownloads = false;
+
+        function sortedThemes(themes) {
+          if (!sortByDownloads) return themes;
+          return themes.slice().sort(function (a, b) {
+            return (countOf(b) - countOf(a))
+              || String(b.addedAt || "").localeCompare(String(a.addedAt || ""));
+          });
+        }
+
+        // A different doorman line each visit.
+        var greet = document.getElementById("market-greet");
+        var GREETINGS = [
+          "* SeraphBot rolls out the welcome mat",
+          "* SeraphBot throws open the shutters",
+          "* SeraphBot polishes the display shelves",
+          "* SeraphBot waves you in from the doorway",
+          "* SeraphBot dusts off a spot just for you",
+          "* SeraphBot flips the sign to OPEN"
+        ];
+        greet.textContent = GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
+
+        /* Once the manifest arrives, the ticker trades its stock slogans for
+           the real community numbers. Author names and theme names come from
+           submissions, so textContent only. */
+        function updateTicker(themes) {
+          var ticker = document.getElementById("market-ticker");
+          if (!ticker || !themes.length) return;
+          var bits = [
+            themes.length + (themes.length === 1 ? " theme" : " themes") + " on the shelves",
+            "newest arrival: " + themes[0].name
+          ];
+          ticker.textContent = "";
+          bits.forEach(function (text, i) {
+            if (i) {
+              var sep = document.createElement("span");
+              sep.className = "sep";
+              sep.textContent = "★";
+              ticker.appendChild(sep);
+            }
+            ticker.append(text);
+          });
+        }
+
+        /* Every name, author, and network below came from a submission email.
+           They are rendered with textContent only, never markup. */
+        function cell(row, text, className) {
+          var td = document.createElement("td");
+          if (className) td.className = className;
+          td.textContent = text;
+          row.appendChild(td);
+          return td;
+        }
+
+        function render(themes, query) {
+          themes = sortedThemes(themes);
+          list.textContent = "";
+          if (!themes.length) {
+            var empty = document.createElement("p");
+            empty.className = "market-empty";
+            empty.textContent = query
+              ? 'Nothing on the shelves matches "' + query + '". Try a theme name, a nick, a network, or a year.'
+              : "No themes yet. Yours could be the first.";
+            list.appendChild(empty);
+            return;
+          }
+
+          var table = document.createElement("table");
+          table.className = "market-table";
+          var thead = document.createElement("thead");
+          var headRow = document.createElement("tr");
+          ["Theme", "By", "Network", "Added", "Downloads", ""].forEach(function (label) {
+            var th = document.createElement("th");
+            th.scope = "col";
+            if (label === "Downloads") {
+              th.setAttribute("aria-sort", sortByDownloads ? "descending" : "none");
+              var sort = document.createElement("button");
+              sort.type = "button";
+              sort.className = "market-sort" + (sortByDownloads ? " active" : "");
+              sort.title = sortByDownloads ? "Back to newest first" : "Sort by most downloads";
+              sort.append(label);
+              var arrow = document.createElement("span");
+              arrow.className = "arrow";
+              arrow.setAttribute("aria-hidden", "true");
+              arrow.textContent = "▼";
+              sort.appendChild(arrow);
+              sort.addEventListener("click", function () {
+                sortByDownloads = !sortByDownloads;
+                applyFilter();
+                /* The re-render replaced the button; keep keyboard focus on it. */
+                var replacement = list.querySelector(".market-sort");
+                if (replacement) replacement.focus();
+              });
+              th.appendChild(sort);
+            } else {
+              th.textContent = label;
+            }
+            headRow.appendChild(th);
+          });
+          thead.appendChild(headRow);
+          table.appendChild(thead);
+
+          var tbody = document.createElement("tbody");
+          themes.forEach(function (theme) {
+            var row = document.createElement("tr");
+            cell(row, theme.name, "market-name");
+            cell(row, theme.author);
+            cell(row, theme.network || "");
+            cell(row, theme.addedAt || "");
+            cell(row, countLabel(theme), "market-count");
+
+            var actions = document.createElement("td");
+            actions.className = "market-actions";
+
+            var preview = document.createElement("button");
+            preview.className = "market-preview-button";
+            preview.type = "button";
+            preview.textContent = "Preview";
+            preview.addEventListener("click", function () { openPreview(theme); });
+            actions.appendChild(preview);
+
+            var link = document.createElement("a");
+            link.className = "market-download";
+            link.href = WORKER_API + "download/" + encodeURIComponent(theme.file);
+            link.setAttribute("download", theme.file);
+            link.innerHTML =
+              '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.2l3.6-3.6 1.4 1.4-6 6-6-6 1.4-1.4L11 13.2V3h1zM5 19h14v2H5z"/></svg>';
+            link.append("Download");
+            actions.appendChild(link);
+            row.appendChild(actions);
+
+            tbody.appendChild(row);
+          });
+          table.appendChild(tbody);
+          list.appendChild(table);
+        }
+
+        // ---- Preview dialog ----
+        var previewDialog = document.getElementById("preview-lightbox");
+        var previewRoot = document.getElementById("pv-root");
+        var previewTitle = document.getElementById("pv-title");
+        var previewSub = document.getElementById("pv-sub");
+        var previewPalette = document.getElementById("pv-palette");
+        /* Bases whose stock palette is light; everything else previews on a
+           dark fallback. Only used for the tokens a theme leaves unset. */
+        var LIGHT_BASES = ["light", "ocean-breeze", "sage", "sakura", "newsprint", "solarized-light"];
+
+        function paletteOf(overrides) {
+          /* Sum the theme up: every color literal in its values, deduped. */
+          var seen = {};
+          var colors = [];
+          Object.keys(overrides).forEach(function (key) {
+            var matches = String(overrides[key]).match(
+              /#[0-9a-fA-F]{3,8}\b|(?:rgba?|hsla?|hwb|oklch|oklab|lab|lch)\([^)]*\)/g
+            );
+            (matches || []).forEach(function (color) {
+              var norm = color.toLowerCase().replace(/\s+/g, "");
+              if (seen[norm]) return;
+              seen[norm] = true;
+              colors.push(color);
+            });
+          });
+          return colors;
+        }
+
+        function openPreview(theme) {
+          fetch("/themes/" + encodeURIComponent(theme.file))
+            .then(function (r) { return r.json(); })
+            .then(function (doc) {
+              var overrides = doc.overrides || {};
+              previewTitle.textContent = doc.name || theme.name;
+              previewSub.textContent = "by " + theme.author;
+
+              /* Published themes already passed the client's validators, but
+                 re-screen the shape anyway before anything lands in a style
+                 attribute. */
+              previewRoot.setAttribute("style", "");
+              previewRoot.classList.toggle("pv-light", LIGHT_BASES.indexOf(theme.base) >= 0);
+              Object.keys(overrides).forEach(function (key) {
+                var value = overrides[key];
+                if (!/^--[a-z0-9-]{1,64}$/.test(key)) return;
+                if (typeof value !== "string" || value.length > 512) return;
+                if (/[;{}<>\\]/.test(value)) return;
+                previewRoot.style.setProperty(key, value);
+              });
+
+              previewPalette.textContent = "";
+              paletteOf(overrides).slice(0, 20).forEach(function (color) {
+                var swatch = document.createElement("span");
+                swatch.className = "pv-swatch";
+                swatch.style.background = color;
+                swatch.title = color;
+                previewPalette.appendChild(swatch);
+              });
+
+              if (typeof previewDialog.showModal === "function") previewDialog.showModal();
+            })
+            .catch(function () {
+              previewTitle.textContent = "Preview unavailable";
+              previewSub.textContent = "Try the download instead.";
+              previewPalette.textContent = "";
+              previewRoot.setAttribute("style", "");
+              if (typeof previewDialog.showModal === "function") previewDialog.showModal();
+            });
+        }
+        previewDialog.addEventListener("click", function (event) {
+          if (event.target === previewDialog) previewDialog.close();
+        });
+
+        // ---- Search ----
+        var allThemes = [];
+        var searchInput = document.getElementById("theme-search");
+
+        /* Lazy substring match against every column, so "blue" finds a theme,
+           "know" finds a nick, "libera" a network, and "2026" a year. */
+        function matches(theme, query) {
+          return [theme.name, theme.author, theme.network, theme.addedAt].some(function (field) {
+            return String(field || "").toLowerCase().indexOf(query) !== -1;
+          });
+        }
+
+        function applyFilter() {
+          var query = searchInput.value.trim().toLowerCase();
+          if (!query) {
+            render(allThemes);
+            return;
+          }
+          render(allThemes.filter(function (t) { return matches(t, query); }), searchInput.value.trim());
+        }
+
+        searchInput.addEventListener("input", applyFilter);
+
+        /* Fetched alongside the manifest; whichever lands second completes
+           the table. A worker hiccup just leaves the placeholder dashes. */
+        fetch(WORKER_API + "downloads")
+          .then(function (r) { return r.json(); })
+          .then(function (counts) {
+            downloadCounts = counts || {};
+            if (allThemes.length) applyFilter();
+          })
+          .catch(function () {});
+
+        fetch("/themes/manifest.json")
+          .then(function (r) { return r.json(); })
+          .then(function (manifest) {
+            allThemes = (manifest.themes || []).slice().sort(function (a, b) {
+              return String(b.addedAt || "").localeCompare(String(a.addedAt || ""));
+            });
+            applyFilter();
+            updateTicker(allThemes);
+          })
+          .catch(function () {
+            list.textContent = "";
+            var failed = document.createElement("p");
+            failed.className = "market-empty";
+            failed.textContent = "The theme list could not be loaded. Refresh to try again.";
+            list.appendChild(failed);
+          });
+      })();
+    </script>
+  </body>
+</html>
