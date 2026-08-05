@@ -205,11 +205,39 @@
 
         <div class="news-panel" data-news-panel>
           <div class="news-deck" data-news-deck>
+            <article class="news-card" data-news-title="Custom Themes">
+              <div class="news-bar">
+                <span class="news-kicker">Custom Themes</span>
+                <span class="news-date">5.0.28-alpha &middot; Aug 4, 2026</span>
+                <span class="news-flag">New</span>
+              </div>
+              <div class="news-body">
+                <h3>Seraph your way</h3>
+                <p>
+                  SeraphIRC ships with 21 themes, and until today that was the whole menu.
+                  Now any of them is a starting point. Clone one, give it a name, and recolor
+                  it from a floating editor that paints every change onto the running app as
+                  you make it. Every color is named for the thing it paints on screen, so you
+                  are choosing "Timestamps" or "Selected channel background", not deciphering
+                  a stylesheet. Pick from the palette the theme already uses, dial in
+                  something new on a full color wheel, or build a gradient. Your client,
+                  your colors.
+                </p>
+                <p>
+                  Made something worth showing off? Export it. A theme travels as a small
+                  file that carries its name and colors and nothing else, never your networks
+                  or credentials, so you can hand it to a friend or drop it in a channel.
+                  Imported themes are checked before a single color lands. And the originals
+                  are never touched, so there is always a way back.
+                </p>
+                <p class="news-cmd"><code>Settings &gt; Preferences &gt; Appearance</code></p>
+              </div>
+            </article>
+
             <article class="news-card" data-news-title="Multiline &amp; Replies">
               <div class="news-bar">
                 <span class="news-kicker">Multiline &amp; Replies</span>
                 <span class="news-date">5.0.24-alpha &middot; Aug 2, 2026</span>
-                <span class="news-flag">New</span>
               </div>
               <div class="news-body">
                 <h3>Additional IRCv3 Capabilities</h3>
@@ -812,6 +840,24 @@
               </tbody>
             </table>
           </article>
+
+          <article class="command-category">
+            <h3>Hotkeys</h3>
+            <table>
+              <tbody>
+                <tr><th scope="row"><code>Ctrl+S</code></th><td>Open or close the Quick Switcher (Cmd+S on macOS, and Ctrl+K works too)</td></tr>
+                <tr><th scope="row"><code>Ctrl+T</code></th><td>Collapse or expand the treebar</td></tr>
+                <tr><th scope="row"><code>Ctrl+U</code></th><td>Collapse or expand the member list in the current channel window</td></tr>
+                <tr><th scope="row"><code>Ctrl+&larr;</code> / <code>Ctrl+&rarr;</code></th><td>Switch the treebar between Networks and Bouncers view</td></tr>
+                <tr><th scope="row"><code>Ctrl+F</code></th><td>Find in the current window (Cmd+F on macOS)</td></tr>
+                <tr><th scope="row"><code>Ctrl+Shift+R</code></th><td>Restore the default appearance if a theme leaves the interface unreadable, with Undo offered (Cmd+Shift+R on macOS)</td></tr>
+                <tr><th scope="row"><code>Shift+Enter</code></th><td>Insert a line break, and never sends</td></tr>
+                <tr><th scope="row"><code>Ctrl+Enter</code></th><td>Confirm a Send Guard hold and send anyway (Cmd+Enter on macOS)</td></tr>
+                <tr><th scope="row"><code>Tab</code></th><td>Complete a nickname or command in the composer</td></tr>
+                <tr><th scope="row"><code>&uarr;</code> / <code>&darr;</code></th><td>Step through your input history, or move through an open suggestion list</td></tr>
+              </tbody>
+            </table>
+          </article>
         </div>
       </section>
 
@@ -913,6 +959,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.0.28-alpha">5.0.28-alpha</option>
               <option value="5.0.27-alpha">5.0.27-alpha</option>
               <option value="5.0.26-alpha">5.0.26-alpha</option>
               <option value="5.0.25-alpha">5.0.25-alpha</option>
@@ -939,10 +986,17 @@
               <option value="5.0.3-alpha">5.0.3-alpha</option>
               <option value="5.0.2-alpha">5.0.2-alpha</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Aug 3, 2026</span>
+            <span class="changelog-date" id="changelog-date">Aug 4, 2026</span>
           </div>
 
-          <article class="release" data-version="5.0.27-alpha" data-date="Aug 3, 2026">
+          <article class="release" data-version="5.0.28-alpha" data-date="Aug 4, 2026">
+            <ul class="release-notes">
+              <li><b>Custom themes:</b> clone any built-in theme and recolor it from a floating editor that previews every change on the running app. Colors are named for what they paint, with the theme's own palette, a full color wheel, and gradients for surfaces. Built-in themes are never edited in place, and Restore UI Defaults leaves your creations alone.</li>
+              <li><b>Share themes as files:</b> export a theme, import somebody else's. A theme file carries a name and colors and nothing else, never your networks or credentials, and imported values are strictly checked so a shared theme cannot reach the network or smuggle anything past the picker.</li>
+              <li><b>A way back from an unreadable theme:</b> if a theme leaves the interface illegible, Ctrl+Shift+R (Cmd+Shift+R on macOS) restores the default appearance, with Undo offered in case you reach for it by accident. Security notices now keep their own fixed, high-contrast colors under every theme.</li>            </ul>
+          </article>
+
+          <article class="release" data-version="5.0.27-alpha" data-date="Aug 3, 2026" hidden>
             <ul class="release-notes">
               <li><b>Flatpak file pickers see your real folders:</b> in the Flatpak build, opening or saving a file offered only Recent, Home, Downloads and Trash, leaving folders like Pictures unreachable. The picker now comes from the desktop itself. Other builds are unchanged.</li>
               <li><b>Seraph Transfer opens in your home directory,</b> not wherever the app happened to be launched from.</li>
