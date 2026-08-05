@@ -162,40 +162,45 @@
       .market-ticker .sep { color: var(--dim); padding: 0 0.6em; }
       .market-heading .lead { max-width: 640px; margin-left: auto; margin-right: auto; }
 
-      /* ── Awning barkers ──────────────────────────────────────────────────
-         Two lanky bowler-hatted barkers working the stall, standing on the
-         floor of the card under each end of the awning. Drawn inline so
-         every fill and stroke can point at the theme variables; they
+      /* ── Awning signs ────────────────────────────────────────────────────
+         Two little shop signs hung from the hem of the awning on short
+         strings, one at each end. Painted with the theme variables so they
          recolor with the rest of the site. Decorative only, so they vanish
          when the side aisles get tight. */
       .market-heading { position: relative; }
-      .market-vendor {
+      .market-sign {
         position: absolute;
-        bottom: 10px;
-        width: clamp(88px, 8.5vw, 116px);
-        height: auto;
+        top: 48px;
+        padding: 7px 14px;
+        background: var(--gold-bright, var(--gold));
+        color: #26221a;
+        border: 2px solid var(--text);
+        border-radius: 4px;
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
         pointer-events: none;
-        animation: vendor-bob 2.8s ease-in-out infinite alternate;
+        transform-origin: 50% -20px;
+        animation: sign-sway 3.4s ease-in-out infinite alternate;
       }
-      .market-vendor-left { left: clamp(12px, 2.5vw, 40px); }
-      .market-vendor-right { right: clamp(12px, 2.5vw, 40px); animation-delay: -1.4s; }
-      .vendor-hail { transform-box: view-box; }
-      .market-vendor-left .vendor-hail {
-        transform-origin: 72px 70px;
-        animation: vendor-hail-left 2.8s ease-in-out infinite alternate;
+      .market-sign::before,
+      .market-sign::after {
+        content: "";
+        position: absolute;
+        top: -20px;
+        width: 2px;
+        height: 21px;
+        background: var(--text);
       }
-      .market-vendor-right .vendor-hail {
-        transform-origin: 48px 70px;
-        animation: vendor-hail-right 2.8s ease-in-out infinite alternate;
-        animation-delay: -1.4s;
-      }
-      @keyframes vendor-bob { from { transform: translateY(0); } to { transform: translateY(-3px); } }
-      @keyframes vendor-hail-left { from { transform: rotate(-6deg); } to { transform: rotate(3deg); } }
-      @keyframes vendor-hail-right { from { transform: rotate(6deg); } to { transform: rotate(-3deg); } }
-      @media (max-width: 980px) { .market-vendor { display: none; } }
-      @media (prefers-reduced-motion: reduce) {
-        .market-vendor, .vendor-hail { animation: none; }
-      }
+      .market-sign::before { left: 26%; }
+      .market-sign::after { right: 26%; }
+      .market-sign-left { left: clamp(18px, 3vw, 52px); }
+      .market-sign-right { right: clamp(18px, 3vw, 52px); animation-delay: -1.7s; }
+      @keyframes sign-sway { from { transform: rotate(-2deg); } to { transform: rotate(2.4deg); } }
+      @media (max-width: 980px) { .market-sign { display: none; } }
+      @media (prefers-reduced-motion: reduce) { .market-sign { animation: none; } }
 
       /* ── Theme preview dialog ─────────────────────────────────────────────
          A rough sketch of the client, painted with the theme's own custom
@@ -419,98 +424,9 @@
             <div class="awning-top"></div>
             <div class="awning-scallops"></div>
           </div>
+          <div class="market-sign market-sign-left" aria-hidden="true">Free</div>
+          <div class="market-sign market-sign-right" aria-hidden="true">Themes</div>
 
-          <!-- Stall staff: two lanky bowler-hatted barkers. The auctioneer
-               on the left raises the gavel, the pitchman on the right waves
-               the FREE paddle. Painted with the theme variables. -->
-          <svg class="market-vendor market-vendor-left" viewBox="0 0 120 182" aria-hidden="true" focusable="false">
-            <path d="M52,120 L50,166" fill="none" stroke="var(--text)" stroke-width="9" stroke-linecap="round"/>
-            <path d="M64,120 L66,166" fill="none" stroke="var(--text)" stroke-width="9" stroke-linecap="round"/>
-            <path d="M52,120 L50,166" fill="none" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
-            <path d="M64,120 L66,166" fill="none" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
-            <ellipse cx="44" cy="171" rx="11" ry="5.5" fill="var(--text)"/>
-            <ellipse cx="71" cy="171" rx="11" ry="5.5" fill="var(--text)"/>
-            <path d="M46,64 L70,64 Q76,66 76,74 L74,116 Q74,122 68,122 L48,122 Q42,122 42,116 L40,74 Q40,66 46,64 Z" fill="var(--accent)" stroke="var(--text)" stroke-width="2.5" stroke-linejoin="round"/>
-            <path d="M52,64 L64,64 L61,94 L55,94 Z" fill="#fff" stroke="var(--text)" stroke-width="2" stroke-linejoin="round"/>
-            <path d="M52,64 L58,78 L45,73 Z" fill="color-mix(in srgb, var(--accent) 55%, #000)" stroke="var(--text)" stroke-width="1.6" stroke-linejoin="round"/>
-            <path d="M64,64 L58,78 L71,73 Z" fill="color-mix(in srgb, var(--accent) 55%, #000)" stroke="var(--text)" stroke-width="1.6" stroke-linejoin="round"/>
-            <path d="M52,63 L58,66.5 L52,70 Z" fill="var(--gold-bright, var(--gold))" stroke="var(--text)" stroke-width="1.6" stroke-linejoin="round"/>
-            <path d="M64,63 L58,66.5 L64,70 Z" fill="var(--gold-bright, var(--gold))" stroke="var(--text)" stroke-width="1.6" stroke-linejoin="round"/>
-            <circle cx="58" cy="66.5" r="2.2" fill="var(--gold-bright, var(--gold))" stroke="var(--text)" stroke-width="1.4"/>
-            <circle cx="58" cy="99" r="2" fill="var(--text)"/>
-            <circle cx="58" cy="109" r="2" fill="var(--text)"/>
-            <path d="M47,98 h8" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round"/>
-            <path d="M44,70 Q32,80 38,94" fill="none" stroke="var(--text)" stroke-width="9" stroke-linecap="round"/>
-            <path d="M44,70 Q32,80 38,94" fill="none" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
-            <circle cx="38" cy="96" r="4.2" fill="var(--panel)" stroke="var(--text)" stroke-width="2"/>
-            <g class="vendor-hail">
-              <path d="M72,70 Q86,62 90,46" fill="none" stroke="var(--text)" stroke-width="9" stroke-linecap="round"/>
-              <path d="M72,70 Q86,62 90,46" fill="none" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
-              <circle cx="92" cy="42" r="4.2" fill="var(--panel)" stroke="var(--text)" stroke-width="2"/>
-              <path d="M92,44 L94,14" fill="none" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round"/>
-              <g transform="rotate(-6 94 12)">
-                <rect x="71" y="1" width="46" height="18" rx="2.5" fill="var(--gold-bright, var(--gold))" stroke="var(--text)" stroke-width="2"/>
-                <text x="94" y="13.5" text-anchor="middle" font-family="var(--mono)" font-size="9" font-weight="800" letter-spacing="0.5" fill="#26221a">FREE</text>
-              </g>
-            </g>
-            <ellipse cx="58" cy="46" rx="16" ry="17" fill="var(--panel)" stroke="var(--text)" stroke-width="2.5"/>
-            <ellipse cx="52" cy="44" rx="4" ry="5.5" fill="#fff" stroke="var(--text)" stroke-width="1.5"/>
-            <ellipse cx="64" cy="44" rx="4" ry="5.5" fill="#fff" stroke="var(--text)" stroke-width="1.5"/>
-            <circle cx="53.5" cy="45" r="1.8" fill="#222"/>
-            <circle cx="65.5" cy="45" r="1.8" fill="#222"/>
-            <path d="M59,45 Q62.5,49 59,52" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round"/>
-            <path d="M58,55 Q50,58 45,55 Q41,52 44,49" fill="none" stroke="var(--text)" stroke-width="3" stroke-linecap="round"/>
-            <path d="M58,55 Q66,58 71,55 Q75,52 72,49" fill="none" stroke="var(--text)" stroke-width="3" stroke-linecap="round"/>
-            <g transform="rotate(-4 58 34)">
-              <path d="M44,34 Q44,15 58,15 Q72,15 72,34 Z" fill="var(--accent)" stroke="var(--text)" stroke-width="2.2" stroke-linejoin="round"/>
-              <path d="M44,30 h28" fill="none" stroke="var(--text)" stroke-width="1.8"/>
-              <ellipse cx="58" cy="34" rx="21" ry="4.2" fill="var(--accent)" stroke="var(--text)" stroke-width="2.2"/>
-            </g>
-          </svg>
-
-          <svg class="market-vendor market-vendor-right" viewBox="0 0 120 182" aria-hidden="true" focusable="false">
-            <path d="M56,120 L54,166" fill="none" stroke="var(--text)" stroke-width="9" stroke-linecap="round"/>
-            <path d="M68,120 L70,166" fill="none" stroke="var(--text)" stroke-width="9" stroke-linecap="round"/>
-            <path d="M56,120 L54,166" fill="none" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
-            <path d="M68,120 L70,166" fill="none" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
-            <ellipse cx="49" cy="171" rx="11" ry="5.5" fill="var(--text)"/>
-            <ellipse cx="76" cy="171" rx="11" ry="5.5" fill="var(--text)"/>
-            <path d="M50,64 L74,64 Q80,66 80,74 L78,116 Q78,122 72,122 L52,122 Q46,122 46,116 L44,74 Q44,66 50,64 Z" fill="var(--accent)" stroke="var(--text)" stroke-width="2.5" stroke-linejoin="round"/>
-            <path d="M56,64 L68,64 L65,94 L59,94 Z" fill="#fff" stroke="var(--text)" stroke-width="2" stroke-linejoin="round"/>
-            <path d="M56,64 L62,78 L49,73 Z" fill="color-mix(in srgb, var(--accent) 55%, #000)" stroke="var(--text)" stroke-width="1.6" stroke-linejoin="round"/>
-            <path d="M68,64 L62,78 L75,73 Z" fill="color-mix(in srgb, var(--accent) 55%, #000)" stroke="var(--text)" stroke-width="1.6" stroke-linejoin="round"/>
-            <path d="M56,63 L62,66.5 L56,70 Z" fill="var(--gold-bright, var(--gold))" stroke="var(--text)" stroke-width="1.6" stroke-linejoin="round"/>
-            <path d="M68,63 L62,66.5 L68,70 Z" fill="var(--gold-bright, var(--gold))" stroke="var(--text)" stroke-width="1.6" stroke-linejoin="round"/>
-            <circle cx="62" cy="66.5" r="2.2" fill="var(--gold-bright, var(--gold))" stroke="var(--text)" stroke-width="1.4"/>
-            <circle cx="62" cy="99" r="2" fill="var(--text)"/>
-            <circle cx="62" cy="109" r="2" fill="var(--text)"/>
-            <path d="M65,98 h8" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round"/>
-            <path d="M76,70 Q88,80 82,94" fill="none" stroke="var(--text)" stroke-width="9" stroke-linecap="round"/>
-            <path d="M76,70 Q88,80 82,94" fill="none" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
-            <circle cx="82" cy="96" r="4.2" fill="var(--panel)" stroke="var(--text)" stroke-width="2"/>
-            <g class="vendor-hail">
-              <path d="M48,70 Q34,62 30,46" fill="none" stroke="var(--text)" stroke-width="9" stroke-linecap="round"/>
-              <path d="M48,70 Q34,62 30,46" fill="none" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
-              <circle cx="28" cy="42" r="4.2" fill="var(--panel)" stroke="var(--text)" stroke-width="2"/>
-              <path d="M28,44 L26,14" fill="none" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round"/>
-              <g transform="rotate(6 26 12)">
-                <rect x="3" y="1" width="46" height="18" rx="2.5" fill="var(--gold-bright, var(--gold))" stroke="var(--text)" stroke-width="2"/>
-                <text x="26" y="13.5" text-anchor="middle" font-family="var(--mono)" font-size="9" font-weight="800" letter-spacing="0.5" fill="#26221a">THEMES</text>
-              </g>
-            </g>
-            <ellipse cx="62" cy="46" rx="16" ry="17" fill="var(--panel)" stroke="var(--text)" stroke-width="2.5"/>
-            <ellipse cx="56" cy="44" rx="4" ry="5.5" fill="#fff" stroke="var(--text)" stroke-width="1.5"/>
-            <ellipse cx="68" cy="44" rx="4" ry="5.5" fill="#fff" stroke="var(--text)" stroke-width="1.5"/>
-            <circle cx="54.5" cy="45" r="1.8" fill="#222"/>
-            <circle cx="66.5" cy="45" r="1.8" fill="#222"/>
-            <path d="M61,45 Q57.5,49 61,52" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round"/>
-            <path d="M53,55 Q61,62 68,53" fill="none" stroke="var(--text)" stroke-width="2.4" stroke-linecap="round"/>
-            <g transform="rotate(4 62 34)">
-              <path d="M48,34 Q48,15 62,15 Q76,15 76,34 Z" fill="var(--accent)" stroke="var(--text)" stroke-width="2.2" stroke-linejoin="round"/>
-              <path d="M48,30 h28" fill="none" stroke="var(--text)" stroke-width="1.8"/>
-              <ellipse cx="62" cy="34" rx="21" ry="4.2" fill="var(--accent)" stroke="var(--text)" stroke-width="2.2"/>
-            </g>
-          </svg>
           <p class="eyebrow">The SeraphIRC theme</p>
           <h2 id="marketplace-title"><span class="orn" aria-hidden="true">&#10022;</span>Marketplace<span class="orn" aria-hidden="true">&#10022;</span></h2>
           <p class="market-greet" id="market-greet">* SeraphBot rolls out the welcome mat</p>
