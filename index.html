@@ -182,9 +182,31 @@
             <img class="mark-light" src="assets/seraph-mark-light.svg" alt="">
           </div>
           <h1 id="hero-title">SeraphIRC<span class="caret" aria-hidden="true"></span></h1>
-          <p class="hero-subheadline">
-            Old soul. New tricks.
+          <p class="hero-subheadline" id="hero-subheadline">
+            Classic feel, modern capability
           </p>
+          <script>
+            // Randomize the subheadline before first paint.
+            (function () {
+              var taglines = [
+                "IRC Modernized",
+                "Classic feel, modern capability",
+                "Nostalgia optional",
+                "Old soul, new tricks",
+                "Skip the tutorial",
+                "Compatible with you",
+                "Comes in vintage",
+                "Welcome back to IRC",
+                "No feed. No algorithm. Just chat",
+                "Same wire, better window",
+                "Ping timeout is not goodbye",
+                "No product, just conversation",
+                "Your nick is probably still free"
+              ];
+              document.getElementById("hero-subheadline").textContent =
+                taglines[Math.floor(Math.random() * taglines.length)];
+            })();
+          </script>
           <p class="hero-copy">
             SeraphIRC is a polished IRC client that runs on desktop, iPhone, and iPad. It supports 
             IRCv3 and connects through Soju, ZNC, or directly to an IRC network.
