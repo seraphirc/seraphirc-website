@@ -2661,6 +2661,13 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   font-size: 0.9rem;
   overflow-wrap: anywhere;
 }
+.news-cmd a code {
+  border-bottom: 1px dashed color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.news-cmd a:hover code, .news-cmd a:focus-visible code {
+  color: var(--accent-bright);
+  border-bottom-color: var(--accent-bright);
+}
 /* Pager strip under the deck. Same titlebar fill as .news-bar, but its own
    panel rather than a second bar on the card, which would have stacked two
    chrome rows on one article. */
