@@ -1011,6 +1011,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.0.29-alpha">5.0.29-alpha</option>
               <option value="5.0.28-alpha">5.0.28-alpha</option>
               <option value="5.0.27-alpha">5.0.27-alpha</option>
               <option value="5.0.26-alpha">5.0.26-alpha</option>
@@ -1038,10 +1039,22 @@
               <option value="5.0.3-alpha">5.0.3-alpha</option>
               <option value="5.0.2-alpha">5.0.2-alpha</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Aug 4, 2026</span>
+            <span class="changelog-date" id="changelog-date">Aug 6, 2026</span>
           </div>
 
-          <article class="release" data-version="5.0.28-alpha" data-date="Aug 4, 2026">
+          <article class="release" data-version="5.0.29-alpha" data-date="Aug 6, 2026">
+            <ul class="release-notes">
+              <li><b>A stability release:</b> no new features, just bug fixes.</li>
+              <li>Fixed a crash a server could trigger, plus several rare timing bugs.</li>
+              <li>Fixed a memory leak on reconnect.</li>
+              <li>A misbehaving server can no longer grow the app's memory without limit.</li>
+              <li>Fixed three ways a malformed message could be misread.</li>
+              <li>Fixed a regression with /schat, /seraphchat, /seraphtransfer command handling</li>
+              <li>Quitting no longer stalls behind a busy database.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.0.28-alpha" data-date="Aug 4, 2026" hidden>
             <ul class="release-notes">
               <li><b>Custom themes:</b> clone any built-in theme and recolor it from a floating editor that previews every change on the running app. Colors are named for what they paint, with the theme's own palette, a full color wheel, and gradients for surfaces. Built-in themes are never edited in place, and Restore UI Defaults leaves your creations alone.</li>
               <li><b>Share themes as files:</b> export a theme, import somebody else's. A theme file carries a name and colors and nothing else, never your networks or credentials, and imported values are strictly checked so a shared theme cannot reach the network or smuggle anything past the picker.</li>
