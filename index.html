@@ -226,15 +226,15 @@
 
       <section class="section news-section" id="news" aria-labelledby="news-title">
         <div class="section-heading">
-          <p class="eyebrow">Just shipped</p>
           <h2 id="news-title">News</h2>
           <p class="lead">
-            What just landed in SeraphIRC Desktop, newest first. Use the arrows to page
-            back through the earlier announcements.
+            What just landed in SeraphIRC Desktop, newest first. Pick any release from
+            the list to read its announcement.
           </p>
         </div>
 
         <div class="news-panel" data-news-panel>
+          <div class="news-main">
           <div class="news-deck" data-news-deck>
             <article class="news-card" data-news-title="Theme Marketplace">
               <div class="news-bar">
@@ -435,6 +435,9 @@
               <span class="news-arrow-glyph" aria-hidden="true">&#8250;</span>
             </button>
           </div>
+          </div>
+
+          <nav class="news-index" data-news-index aria-label="All announcements"></nav>
         </div>
       </section>
 
@@ -523,7 +526,7 @@
                       src="assets/ipad-themes/seraph-ipad.jpeg"
                       alt="SeraphIRC on iPad showing the network list beside the #ircv3 conversation"
                     >
-                    <span class="enlarge-hint">⤢ click to enlarge</span>
+                    <span class="enlarge-hint"><svg class="icon-expand" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9.75 1.75h4.5v4.5M14.25 1.75 9.25 6.75M6.25 14.25h-4.5v-4.5M1.75 14.25l5-5"/></svg>click to enlarge</span>
                   </span>
                 </button>
               </figure>
@@ -541,7 +544,7 @@
                       src="assets/iphone-themes/seraph-iphone.jpg"
                       alt="SeraphIRC mobile app showing a channel conversation in the #ircv3 channel on Libera"
                     >
-                    <span class="enlarge-hint">⤢ click to enlarge</span>
+                    <span class="enlarge-hint"><svg class="icon-expand" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M9.75 1.75h4.5v4.5M14.25 1.75 9.25 6.75M6.25 14.25h-4.5v-4.5M1.75 14.25l5-5"/></svg>click to enlarge</span>
                   </span>
                 </button>
               </figure>
@@ -622,26 +625,80 @@
           <h2 id="features-title">Features</h2>
         </div>
 
-        <ul class="punchlist">
-          <li><b>Multi-network IRC:</b> keep direct networks, bouncer imports, channels, server buffers, and private messages organized in one workspace.</li>
-          <li><b>First class Soju support:</b> import networks from a Soju bouncer, discover bouncer networks automatically, and manage them without leaving the client.</li>
-          <li><b>ZNC and direct IRC:</b> connect through an existing ZNC setup, or talk directly to traditional networks when you don't run a bouncer at all.</li>
-          <li><b>IRCv3 negotiation:</b> advertised capabilities such as SASL, server-time, account tags, away-notify, echo-message, batch, and chat history.</li>
-          <li><b>Identity confidence probing:</b> the query window indicates whether a user is authenticated via SASL and on which account. A green check means verified. An orange question mark means unauthenticated or unknown.</li>
-          <li><b>Themeable interface:</b> a prebuilt collection of common, beloved themes ready to use.</li>
-          <li><b>Dial in your atmosphere:</b> use the Atmosphere slider to control how much cloud and starlight appears throughout the desktop client.</li>
-          <li><b>Diagnostics built in:</b> inspect connection behavior, server responses, and client state without guessing what happened.</li>
-          <li><b>Nothing phones home:</b> no analytics, no account requirement, no cloud dependency. The client talks to your networks and nothing else.</li>
-          <li><b>Desktop and mobile:</b> take the desktop's familiar interface layout and flows with you on the go with your mobile device.</li>
-          <li><b>Mobile push notifications:</b> receive push notifications on your mobile device when the setting is enabled on your app.</li>
-          <li><b>File uploads and DCC send/receive:</b> use your Soju bouncer to upload files and share with others, or transfer files directly with DCC send and receive. Supports drag and drop with coordinates (including non-focused windows) and copy/paste.</li>
-          <li><b>Encrypted peer-to-peer transfers:</b> Seraph Transfer sends a file straight to another user over mutually authenticated TLS 1.3, with no upload host and no copy left behind, even when you are both behind NAT.</li>
-          <li><b>Encrypted peer-to-peer chats:</b> Seraph Chat opens a direct, mutually authenticated TLS 1.3 conversation with another user, even when you are both behind NAT.</li>
-          <li><b>Markdown and color formatting:</b> write bold, italics, code spans, and colors with markdown or token syntax, all sent as standard IRC control codes that other clients understand. Spoilers are the exception, going out as literal <code>||text||</code> that SeraphIRC renders click-to-reveal.</li>
-          <li><b>Emoji support:</b> display emojis and use the emoji picker to spruce up your chat.</li>
-          <li><b>Optional GIPHY integration:</b> meme with your friends like anywhere else with our "bring your own key" GIPHY integration.</li>
-          <li><b>Voice dictation:</b> use your mobile device's microphone to translate your voice to IRC message. Handy for responding on the go.</li>
-        </ul>
+        <dl class="term-grid term-grid-3">
+            <div>
+              <dt>Multi-network IRC</dt>
+              <dd>Keep direct networks, bouncer imports, channels, server buffers, and private messages organized in one workspace.</dd>
+            </div>
+            <div>
+              <dt>First class Soju support</dt>
+              <dd>Import networks from a Soju bouncer, discover bouncer networks automatically, and manage them without leaving the client.</dd>
+            </div>
+            <div>
+              <dt>ZNC and direct IRC</dt>
+              <dd>Connect through an existing ZNC setup, or talk directly to traditional networks when you don't run a bouncer at all.</dd>
+            </div>
+            <div>
+              <dt>IRCv3 negotiation</dt>
+              <dd>Advertised capabilities such as SASL, server-time, account tags, away-notify, echo-message, batch, and chat history.</dd>
+            </div>
+            <div>
+              <dt>Identity confidence probing</dt>
+              <dd>The query window indicates whether a user is authenticated via SASL and on which account. A green check means verified. An orange question mark means unauthenticated or unknown.</dd>
+            </div>
+            <div>
+              <dt>Themeable interface</dt>
+              <dd>A prebuilt collection of common, beloved themes ready to use.</dd>
+            </div>
+            <div>
+              <dt>Dial in your atmosphere</dt>
+              <dd>Use the Atmosphere slider to control how much cloud and starlight appears throughout the desktop client.</dd>
+            </div>
+            <div>
+              <dt>Diagnostics built in</dt>
+              <dd>Inspect connection behavior, server responses, and client state without guessing what happened.</dd>
+            </div>
+            <div>
+              <dt>Nothing phones home</dt>
+              <dd>No analytics, no account requirement, no cloud dependency. The client talks to your networks and nothing else.</dd>
+            </div>
+            <div>
+              <dt>Desktop and mobile</dt>
+              <dd>Take the desktop's familiar interface layout and flows with you on the go with your mobile device.</dd>
+            </div>
+            <div>
+              <dt>Mobile push notifications</dt>
+              <dd>Receive push notifications on your mobile device when the setting is enabled on your app.</dd>
+            </div>
+            <div>
+              <dt>File uploads and DCC send/receive</dt>
+              <dd>Use your Soju bouncer to upload files and share with others, or transfer files directly with DCC send and receive. Supports drag and drop with coordinates (including non-focused windows) and copy/paste.</dd>
+            </div>
+            <div>
+              <dt>Encrypted peer-to-peer transfers</dt>
+              <dd>Seraph Transfer sends a file straight to another user over mutually authenticated TLS 1.3, with no upload host and no copy left behind, even when you are both behind NAT.</dd>
+            </div>
+            <div>
+              <dt>Encrypted peer-to-peer chats</dt>
+              <dd>Seraph Chat opens a direct, mutually authenticated TLS 1.3 conversation with another user, even when you are both behind NAT.</dd>
+            </div>
+            <div>
+              <dt>Markdown and color formatting</dt>
+              <dd>Write bold, italics, code spans, and colors with markdown or token syntax, all sent as standard IRC control codes that other clients understand. Spoilers are the exception, going out as literal <code>||text||</code> that SeraphIRC renders click-to-reveal.</dd>
+            </div>
+            <div>
+              <dt>Emoji support</dt>
+              <dd>Display emojis and use the emoji picker to spruce up your chat.</dd>
+            </div>
+            <div>
+              <dt>Optional GIPHY integration</dt>
+              <dd>Meme with your friends like anywhere else with our "bring your own key" GIPHY integration.</dd>
+            </div>
+            <div>
+              <dt>Voice dictation</dt>
+              <dd>Use your mobile device's microphone to translate your voice to IRC message. Handy for responding on the go.</dd>
+            </div>
+          </dl>
       </section>
 
       <section class="section bouncer-section" id="bouncers" aria-labelledby="bouncers-title">
@@ -652,11 +709,20 @@
             If you don't, direct connections behave like any classic client.
           </p>
         </div>
-        <ul class="punchlist punchlist-1">
-          <li><b>Soju:</b> import networks from Soju and manage bouncer-aware connections inside the client, including push notifications over soju.im/webpush.</li>
-          <li><b>ZNC:</b> existing setups keep working, including command forwarding and the usual user/network style of login.</li>
-          <li><b>Direct networks:</b> no bouncer? Connect straight to a network and everything works the way you expect.</li>
-        </ul>
+        <dl class="term-grid term-grid-3">
+            <div>
+              <dt>Soju</dt>
+              <dd>Import networks from Soju and manage bouncer-aware connections inside the client, including push notifications over soju.im/webpush.</dd>
+            </div>
+            <div>
+              <dt>ZNC</dt>
+              <dd>Existing setups keep working, including command forwarding and the usual user/network style of login.</dd>
+            </div>
+            <div>
+              <dt>Direct networks</dt>
+              <dd>No bouncer? Connect straight to a network and everything works the way you expect.</dd>
+            </div>
+          </dl>
       </section>
 
       <section class="section ircv3-section" id="ircv3" aria-labelledby="ircv3-title">
@@ -989,15 +1055,36 @@
           </article>
         </div>
 
-        <ul class="punchlist format-notes">
-          <li><b>Emphasis is underscores:</b> <code>_</code> follows CommonMark-style flanking, so <code>snake_case</code> and <code>http://example.com/a_b_c</code> stay literal. Asterisks are never markers.</li>
-          <li><b>Code spans win:</b> formatting inside <code>`…`</code> is suppressed, and unterminated markers stay literal text.</li>
-          <li><b>Escapes:</b> <code>\</code> before a formatting character makes it literal. A backslash before anything else is itself literal, so <code>C:\path</code> needs no doubling.</li>
-          <li><b>Spoilers:</b> the literal <code>||text||</code> goes on the wire and SeraphIRC renders it click-to-reveal. Other clients see readable pipes.</li>
-          <li><b>Per-message control:</b> <code>/format</code> (<code>/f</code>) formats one message, <code>/plain</code> sends one raw, with <code>-me</code>, <code>-msg</code>, and <code>-notice</code> variants.</li>
-          <li><b>Automatic:</b> Settings → Preferences → Chat sets <code>auto_format</code> to off, markdown, or markdown plus tokens as you type.</li>
-          <li><b>On the wire:</b> bold <code>0x02</code>, italic <code>0x1D</code>, underline <code>0x1F</code>, strikethrough <code>0x1E</code>, monospace <code>0x11</code>, color <code>0x03</code>. Every attribute closes with its own toggle instead of a trailing reset, so a truncated line can't leak formatting.</li>
-        </ul>
+        <dl class="term-grid term-grid-3 format-notes">
+            <div>
+              <dt>Emphasis is underscores</dt>
+              <dd><code>_</code> follows CommonMark-style flanking, so <code>snake_case</code> and <code>http://example.com/a_b_c</code> stay literal. Asterisks are never markers.</dd>
+            </div>
+            <div>
+              <dt>Code spans win</dt>
+              <dd>Formatting inside <code>`…`</code> is suppressed, and unterminated markers stay literal text.</dd>
+            </div>
+            <div>
+              <dt>Escapes</dt>
+              <dd><code>\</code> before a formatting character makes it literal. A backslash before anything else is itself literal, so <code>C:\path</code> needs no doubling.</dd>
+            </div>
+            <div>
+              <dt>Spoilers</dt>
+              <dd>The literal <code>||text||</code> goes on the wire and SeraphIRC renders it click-to-reveal. Other clients see readable pipes.</dd>
+            </div>
+            <div>
+              <dt>Per-message control</dt>
+              <dd><code>/format</code> (<code>/f</code>) formats one message, <code>/plain</code> sends one raw, with <code>-me</code>, <code>-msg</code>, and <code>-notice</code> variants.</dd>
+            </div>
+            <div>
+              <dt>Automatic</dt>
+              <dd>Settings → Preferences → Chat sets <code>auto_format</code> to off, markdown, or markdown plus tokens as you type.</dd>
+            </div>
+            <div>
+              <dt>On the wire</dt>
+              <dd>Bold <code>0x02</code>, italic <code>0x1D</code>, underline <code>0x1F</code>, strikethrough <code>0x1E</code>, monospace <code>0x11</code>, color <code>0x03</code>. Every attribute closes with its own toggle instead of a trailing reset, so a truncated line can't leak formatting.</dd>
+            </div>
+          </dl>
       </section>
 
       <section class="section" id="changelog" aria-labelledby="changelog-title">
@@ -1296,11 +1383,20 @@
         <div class="section-heading">
           <h2 id="contact-title">Contact</h2>
         </div>
-        <ul class="punchlist punchlist-1">
-          <li>For general support, questions, or assistance, contact <a href="mailto:support@seraphirc.chat"><b>support@seraphirc.chat</b></a>.</li>
-          <li>To report a security issue or vulnerability, contact <a href="mailto:security@seraphirc.chat"><b>security@seraphirc.chat</b></a>. Please include enough detail for us to investigate and respond appropriately.</li>
-          <li>Join us on Libera in <b>#seraphirc</b>.</li>
-        </ul>
+        <dl class="term-grid term-grid-3">
+            <div>
+              <dt>Support</dt>
+              <dd>For general support, questions, or assistance, write to <a href="mailto:support@seraphirc.chat">support@seraphirc.chat</a>.</dd>
+            </div>
+            <div>
+              <dt>Security</dt>
+              <dd>To report a security issue or vulnerability, write to <a href="mailto:security@seraphirc.chat">security@seraphirc.chat</a>. Please include enough detail for us to investigate and respond appropriately.</dd>
+            </div>
+            <div>
+              <dt>Community</dt>
+              <dd>Join us on Libera in <a href="ircs://irc.libera.chat/seraphirc">#seraphirc</a>.</dd>
+            </div>
+          </dl>
       </section>
 
     </main>
@@ -1401,6 +1497,31 @@
         if (cards.length < 2 || !nav || !prev || !next || !count) return;
         nav.hidden = false;
 
+        // Index rail: every announcement at once, so the archive is visible
+        // rather than something you have to page blindly through. Built from
+        // the cards, so it stays empty (and hidden) when this script is off.
+        var indexNav = panel.querySelector("[data-news-index]");
+        var indexItems = [];
+        if (indexNav) {
+          cards.forEach(function (card, i) {
+            var button = document.createElement("button");
+            button.type = "button";
+            button.className = "news-index-item";
+            var name = document.createElement("span");
+            name.className = "news-index-name";
+            name.textContent = card.dataset.newsTitle || "";
+            var when = document.createElement("span");
+            when.className = "news-index-date";
+            var stamp = card.querySelector(".news-date");
+            when.textContent = stamp ? stamp.textContent.trim() : "";
+            button.appendChild(name);
+            button.appendChild(when);
+            button.addEventListener("click", function () { show(i); });
+            indexNav.appendChild(button);
+            indexItems.push(button);
+          });
+        }
+
         var index = 0;
         function label(button, at) {
           var card = cards[at];
@@ -1417,6 +1538,10 @@
           label(prev, index - 1);
           label(next, index + 1);
           count.textContent = index + 1 + " of " + cards.length;
+          indexItems.forEach(function (button, i) {
+            button.classList.toggle("is-current", i === index);
+            button.setAttribute("aria-current", i === index ? "true" : "false");
+          });
         }
         // Clicking to an end disables the button under the pointer, which would
         // drop focus to the body mid-keyboard-navigation. Hand it to the arrow
