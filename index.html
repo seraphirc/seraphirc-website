@@ -1101,6 +1101,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.0.31-alpha">5.0.31-alpha</option>
               <option value="5.0.30-alpha">5.0.30-alpha</option>
               <option value="5.0.29-alpha">5.0.29-alpha</option>
               <option value="5.0.28-alpha">5.0.28-alpha</option>
@@ -1133,7 +1134,14 @@
             <span class="changelog-date" id="changelog-date">Aug 7, 2026</span>
           </div>
 
-          <article class="release" data-version="5.0.30-alpha" data-date="Aug 7, 2026">
+          <article class="release" data-version="5.0.31-alpha" data-date="Aug 7, 2026">
+            <ul class="release-notes">
+              <li><b>Windows open where you left them:</b> the app now starts at its last size and position reliably. This fixes an intermittent bug where windows could come back shrunken in the corner.</li>
+              <li><b>Typing indicators everywhere:</b> popped-out windows now show who's typing in their own conversation, not just the main window.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.0.30-alpha" data-date="Aug 7, 2026" hidden>
             <ul class="release-notes">
               <li><b>Mentions clear themselves once you've caught up:</b> reading a channel now marks its mentions as read automatically, so the @ panel only shows what you actually haven't seen.</li>
               <li><b>Snappier interface during busy traffic:</b> the sidebar, top bar, and window chrome now do far less work when messages are flowing, keeping the app responsive in high-volume channels.</li>
