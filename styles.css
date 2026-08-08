@@ -19,25 +19,32 @@
   --chat: #1c2338;
 
   /* lines (structural blue, the icon's mid-blue bar) */
-  --line: rgba(139, 175, 218, 0.16);
-  --line-2: rgba(139, 175, 218, 0.28);
-  --line-soft: rgba(139, 175, 218, 0.1);
+  --line: rgba(139, 175, 218, 0.2);
+  --line-2: rgba(139, 175, 218, 0.34);
+  --line-soft: rgba(139, 175, 218, 0.12);
 
   /* text */
   --text: #e5eaf3;
-  --muted: #b8c2d6;
-  --dim: #8fa1be;
-  --faint: #5d6f8e;
+  --muted: #c7d2e6;
+  --dim: #9fb0cb;
+  --faint: #7186a8;
 
   /* accents (Seraph v3: the palette is the app icon. Soft yellow is the
      mark, off-white is the highlight, blue is structural. Selection is
      yellow here for the same reason it is in the client.) */
-  --accent: #8bafda;
+  --accent: #79b0ea;
   --accent-bright: #c1daf5;
   --accent-deep: #22345c;
   --gold: #f3d372;
   --gold-bright: #f9e39a;
   --sel: rgba(243, 211, 114, 0.16);
+
+  /* Mono ink: the commands tables, release notes, news commands. Struck from
+     the accent it was a pale blue on a blue ground, which is one more shade
+     of the same thing. The yellow is the mark in this palette, and typed
+     commands are exactly what a mark is for. Resolves per theme, and the
+     light themes override it below. */
+  --code-ink: var(--gold);
   --green: #61ffca;
   --amber: #ffca85;
   --red: #ff6767;
@@ -433,7 +440,7 @@ h2 {
   font-family: var(--mono);
   font-size: 0.94rem;
   letter-spacing: 0.02em;
-  background: color-mix(in srgb, var(--accent) 11%, transparent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
   border-bottom: 1px solid var(--line-2);
 }
 .command-category h3::before { content: "\00bb "; color: var(--gold); }
@@ -446,17 +453,17 @@ h2 {
 }
 .command-category tr:last-child th, .command-category tr:last-child td { border-bottom: 0; }
 .command-category tr:nth-child(even) th, .command-category tr:nth-child(even) td {
-  background: color-mix(in srgb, var(--accent) 5%, transparent);
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
 }
 .command-category th { width: 46%; color: var(--text); font-size: 0.84rem; font-weight: 600; line-height: 1.45; }
 .command-category td { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
 .command-category code {
-  color: color-mix(in srgb, var(--accent) 55%, var(--text));
+  color: var(--code-ink);
   font-family: var(--mono);
   overflow-wrap: anywhere;
 }
 .commands-section .section-heading code {
-  color: color-mix(in srgb, var(--accent) 55%, var(--text));
+  color: var(--code-ink);
   font-family: var(--mono);
 }
 
@@ -924,7 +931,7 @@ body {
 .cap-list li { margin-bottom: 9px; }
 .cap-list li::marker { color: var(--green); }
 .cap-group-partial .cap-list li::marker { color: var(--amber); }
-.cap-list code { color: #ddd4ff; font-size: 0.92rem; overflow-wrap: anywhere; }
+.cap-list code { color: var(--accent-bright); font-size: 0.92rem; overflow-wrap: anywhere; }
 .cap-groups .compat-note {
   margin: 0;
   padding: 0;
@@ -1374,7 +1381,7 @@ h2 { letter-spacing: 0; }
 .b31.a:hover, .b31.b:hover { border-color: var(--gold); box-shadow: 0 0 16px rgba(249, 227, 154, 0.28); }
 .b31.c:hover { border-color: var(--accent); box-shadow: 0 0 16px rgba(139, 175, 218, 0.3); }
 .b31.d:hover { border-color: var(--cyan); box-shadow: 0 0 16px rgba(130, 226, 255, 0.28); }
-.b31.e:hover { border-color: var(--muted); box-shadow: 0 0 12px rgba(163, 169, 187, 0.2); }
+.b31.e:hover { border-color: var(--muted); box-shadow: 0 0 12px rgba(199, 210, 230, 0.2); }
 
 /* ============================================================
    THEME SYSTEM (2026-07-15) — desktop-client parity.
@@ -1562,6 +1569,10 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
    ------------------------------------------------------------------ */
 html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean-breeze'],
         [data-theme='sage'], [data-theme='sakura'], [data-theme='newsprint']) {
+  /* Mono ink: a yellow that carries a dark ground disappears on paper, so the
+     light themes take a dark theme-tinted ink instead. */
+  --code-ink: color-mix(in srgb, var(--accent) 28%, var(--text));
+
   /* Marquee: defined tinted band + dark small-caps text (was #cfd8ec). */
   & .nav-marq {
     background: color-mix(in srgb, var(--sd-accent) 12%, var(--sd-bg));
@@ -1768,7 +1779,7 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   gap: 12px;
   padding: 10px 16px;
   font-family: var(--mono);
-  background: color-mix(in srgb, var(--accent) 11%, transparent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
   border-bottom: 1px solid var(--line-2);
 }
 .changelog-label {
@@ -1801,7 +1812,7 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
 }
 .release-notes li::marker { color: var(--accent); }
 .release-notes code {
-  color: color-mix(in srgb, var(--accent) 55%, var(--text));
+  color: var(--code-ink);
   font-family: var(--mono);
   overflow-wrap: anywhere;
 }
@@ -1861,7 +1872,7 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   gap: 12px;
   padding: 10px 16px;
   font-family: var(--mono);
-  background: color-mix(in srgb, var(--accent) 11%, transparent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
   border-bottom: 1px solid var(--line-2);
 }
 .news-kicker {
@@ -1914,7 +1925,7 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
 /* A command named mid-sentence, same ink as the footer rule below. Excludes
    .news-cmd so it cannot override that rule's own font-size. */
 .news-body p:not(.news-cmd) code {
-  color: color-mix(in srgb, var(--accent) 55%, var(--text));
+  color: var(--code-ink);
   font-size: 0.9em;
   overflow-wrap: anywhere;
 }
@@ -1927,7 +1938,7 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   border-top: 1px dashed var(--line-2);
 }
 .news-cmd code {
-  color: color-mix(in srgb, var(--accent) 55%, var(--text));
+  color: var(--code-ink);
   font-family: var(--mono);
   font-size: 0.9rem;
   overflow-wrap: anywhere;
@@ -2111,7 +2122,7 @@ h3 {
   font-size: var(--t-small);
   line-height: 1.68;
 }
-.term-grid dd code { color: color-mix(in srgb, var(--accent) 55%, var(--text)); }
+.term-grid dd code { color: var(--code-ink); }
 .term-grid dd a { color: var(--accent-bright); }
 @media (max-width: 900px) { .term-grid { columns: 2; } }
 @media (max-width: 620px) { .term-grid { columns: 1; } }
