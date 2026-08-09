@@ -1101,6 +1101,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.0.34-alpha">5.0.34-alpha</option>
               <option value="5.0.33-alpha">5.0.33-alpha</option>
               <option value="5.0.32-alpha">5.0.32-alpha</option>
               <option value="5.0.31-alpha">5.0.31-alpha</option>
@@ -1136,7 +1137,15 @@
             <span class="changelog-date" id="changelog-date">Aug 8, 2026</span>
           </div>
 
-          <article class="release" data-version="5.0.33-alpha" data-date="Aug 8, 2026">
+          <article class="release" data-version="5.0.34-alpha" data-date="Aug 8, 2026">
+            <ul class="release-notes">
+              <li><b>A guided tour on first run:</b> new installs now get a short series of tips pointing out settings, connection health, the trays, and the network list. Tick the box on any tip to turn the rest off.</li>
+              <li><b>A fresh look out of the box:</b> the interface and your messages now both default to your system font at 15px, so the app reads as one piece instead of a terminal in a window. Monospace is still there under Settings, Appearance, Fonts.</li>
+              <li><b>Fixes:</b> the server window no longer shows an old transcript after reconnecting, and the setup wizard resets properly when you switch networks.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.0.33-alpha" data-date="Aug 8, 2026" hidden>
             <ul class="release-notes">
               <li><b>Seraph theme, dialed in:</b> the theme gets another round of tuning to bring its contrast back to a comfortable middle ground, so nothing reads as too flat or too harsh.</li>
               <li><b>Bigger channel and query headers:</b> conversation headers are larger and now scale along with your font size setting. The old headers were small and hard to read, so this is a deliberate accessibility improvement.</li>
