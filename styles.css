@@ -39,6 +39,17 @@
   --gold-bright: #f9e39a;
   --sel: rgba(243, 211, 114, 0.16);
 
+  /* Screenshot outline: a thin signature edge around every client shot
+     (desktop image, phone + tablet bezels, lightbox). Spent off --gold,
+     which each theme redefines below, so the edge follows the picker
+     without a per-theme rule. */
+  --shot-edge: color-mix(in srgb, var(--gold) 52%, transparent);
+  --shot-halo: color-mix(in srgb, var(--gold) 15%, transparent);
+  /* The phone/tablet bezels stay dark on every theme, so their edge is
+     split out — the light themes lift it toward white further down,
+     where the page tone would otherwise swallow it. */
+  --shot-edge-device: var(--shot-edge);
+
   /* Mono ink: the commands tables, release notes, news commands. Struck from
      the accent it was a pale blue on a blue ground, which is one more shade
      of the same thing. The yellow is the mark in this palette, and typed
@@ -382,9 +393,9 @@ h2 {
 .desktop-screen img {
   display: block; width: 100%; max-width: 100%; height: auto;
   background: #06070c;
-  border: 1px solid var(--line-2);
+  border: 1px solid var(--shot-edge);
   border-radius: var(--radius-sm);
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42), 0 0 30px rgba(139, 175, 218, 0.1);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42), 0 0 26px var(--shot-halo);
 }
 
 /* phone mock — mobile networks list (matches the SeraphIRC mobile app) */
@@ -394,9 +405,10 @@ h2 {
   margin: 0 auto;
   padding: 9px;
   background: linear-gradient(180deg, #1b1c29, #0f1017);
-  border: 1px solid var(--line-2);
+  border: 1px solid var(--shot-edge-device);
   border-radius: 40px;
-  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.55), inset 0 0 0 2px rgba(255, 255, 255, 0.02);
+  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.55), 0 0 22px var(--shot-halo),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.02);
 }
 .phone-screen {
   position: relative;
@@ -516,8 +528,19 @@ h2 {
   background: transparent; border: 0; cursor: zoom-in; color: inherit;
 }
 .client-preview-trigger:focus-visible { outline: 3px solid rgba(193, 218, 245, 0.8); outline-offset: 4px; }
+/* The dialog is sized so the shot fits BOTH axes: width is capped by the
+   viewport as before, and also by what the height budget allows at the
+   shot's own aspect ratio. The image then fills the dialog exactly — no
+   scrollbars to pan with, and no letterbox bars either, because the box
+   is never wider than the picture it holds. --lightbox-aspect is width
+   over height of the source image; the 999 default is a no-op for
+   lightboxes that hold markup rather than a photo (the theme preview). */
 .image-lightbox {
-  width: min(var(--lightbox-image-width, 1120px), calc(100vw - 32px));
+  width: min(
+    var(--lightbox-image-width, 1120px),
+    calc(100vw - 32px),
+    calc((100vh - 40px) * var(--lightbox-aspect, 999))
+  );
   max-width: none;
   max-height: calc(100vh - 32px);
   margin: auto;
@@ -525,11 +548,15 @@ h2 {
   overflow: hidden;
   color: var(--text);
   background: #06070c;
-  border: 1px solid var(--line-2);
+  /* the theme's signature edge, same one the thumbnails carry */
+  border: 1px solid var(--shot-edge);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
-.interface-lightbox { --lightbox-image-width: 2557px; } /* native width of the desktop shots */
+/* native width of the desktop shots (2559 x 1572). Where a theme's shot
+   differs by a pixel or two, the aspect below is the TALLEST of the set:
+   erring tall leaves a hair of slack rather than a scrollbar. */
+.interface-lightbox { --lightbox-image-width: 2559px; --lightbox-aspect: 1.627; }
 .image-lightbox::backdrop { background: rgba(2, 2, 8, 0.86); backdrop-filter: blur(10px); }
 .image-lightbox form { position: absolute; top: 14px; right: 14px; z-index: 2; margin: 0; }
 .lightbox-close {
@@ -548,8 +575,13 @@ h2 {
 .lightbox-close::before { transform: rotate(45deg); }
 .lightbox-close::after { transform: rotate(-45deg); }
 .lightbox-close:hover, .lightbox-close:focus-visible { border-color: var(--accent); }
-.lightbox-frame { width: 100%; max-height: calc(100vh - 32px); overflow: auto; }
-.lightbox-frame img { display: block; width: var(--lightbox-image-width, 1120px); max-width: none; height: auto; cursor: zoom-out; }
+.lightbox-frame { width: 100%; max-height: calc(100vh - 32px); overflow: hidden; }
+/* Fills the dialog, which is already sized to fit. Downscaling a 2557px
+   shot to the box keeps it sharp; it never gets scaled up past native. */
+.lightbox-frame img {
+  display: block; width: 100%; max-width: 100%; height: auto;
+  cursor: zoom-out;
+}
 
 /* ---------------------------------------------------------------- footer */
 
@@ -607,13 +639,17 @@ h2 {
 }
 
 @media (max-width: 900px), (max-height: 560px) {
-  .image-lightbox { width: calc(100vw - 20px); height: calc(100vh - 20px); max-height: none; }
-  .image-lightbox form { top: 10px; right: 10px; }
-  .lightbox-frame {
-    display: flex; align-items: center; justify-content: center;
-    width: 100%; height: 100%; max-height: none; overflow: hidden;
+  /* Same fit-both-axes sizing on a tighter margin. Height is left to the
+     image so a portrait shot keeps the dialog wrapped around it instead
+     of stranding it between two black bars. */
+  .image-lightbox {
+    width: min(calc(100vw - 20px), calc((100vh - 28px) * var(--lightbox-aspect, 999)));
+    height: auto;
+    max-height: calc(100vh - 20px);
   }
-  .lightbox-frame img { width: auto; max-width: 100%; max-height: 100%; object-fit: contain; }
+  .image-lightbox form { top: 10px; right: 10px; }
+  .lightbox-frame { width: 100%; max-height: none; overflow: hidden; }
+  .lightbox-frame img { width: 100%; max-width: 100%; height: auto; }
 }
 
 /* ============================================================
@@ -752,7 +788,7 @@ body::before { display: none; }
 }
 .phone-shot .client-preview-trigger:hover .enlarge-hint,
 .phone-shot .client-preview-trigger:focus-visible .enlarge-hint { opacity: 1; }
-.mobile-lightbox { --lightbox-image-width: 460px; }
+.mobile-lightbox { --lightbox-image-width: 460px; --lightbox-aspect: 0.4829; } /* 1290 x up to 2671 */
 
 /* fix: the mobile screenshot's intrinsic width was expanding the Mobile
    column and collapsing the Desktop column — let cells honor the fr ratio */
@@ -1117,9 +1153,10 @@ body::after {
   margin: 0;
   padding: 10px;
   background: linear-gradient(180deg, #1b1c29, #0f1017);
-  border: 1px solid var(--line-2);
+  border: 1px solid var(--shot-edge-device);
   border-radius: 26px;
-  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.55), inset 0 0 0 2px rgba(255, 255, 255, 0.02);
+  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.55), 0 0 22px var(--shot-halo),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.02);
 }
 .tablet .client-preview-trigger { border-radius: 18px; transition: transform 150ms ease; }
 .tablet .client-preview-trigger:hover { transform: translateY(-2px); }
@@ -1139,7 +1176,7 @@ body::after {
 }
 .tablet-shot .client-preview-trigger:hover .enlarge-hint,
 .tablet-shot .client-preview-trigger:focus-visible .enlarge-hint { opacity: 1; }
-.tablet-lightbox { --lightbox-image-width: 820px; }
+.tablet-lightbox { --lightbox-image-width: 820px; --lightbox-aspect: 0.714; } /* 1640 x up to 2296 */
 
 /* the phone rides in front, overlapping the tablet's lower corner */
 .device-duo .phone {
@@ -1572,6 +1609,11 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   /* Mono ink: a yellow that carries a dark ground disappears on paper, so the
      light themes take a dark theme-tinted ink instead. */
   --code-ink: color-mix(in srgb, var(--accent) 28%, var(--text));
+
+  /* Screenshot edges: a light theme's signature is dark, which reads fine
+     against the desktop shot but vanishes into the dark phone/tablet
+     bezel. The device edge takes the brightened signature instead. */
+  --shot-edge-device: color-mix(in srgb, var(--gold-bright) 78%, transparent);
 
   /* Marquee: defined tinted band + dark small-caps text (was #cfd8ec). */
   & .nav-marq {
