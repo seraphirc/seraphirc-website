@@ -1,6 +1,16 @@
 {
   "themes": [
     {
+      "file": "winamp.seraphirc-theme.json",
+      "name": "Winamp",
+      "base": "hackerman",
+      "baseLabel": "Hackerman",
+      "overrides": 98,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-08-09"
+    },
+    {
       "file": "blue-angel.seraphirc-theme.json",
       "name": "Blue Angel",
       "base": "light",
