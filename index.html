@@ -1127,6 +1127,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.0.36-alpha">5.0.36-alpha</option>
               <option value="5.0.35-alpha">5.0.35-alpha</option>
               <option value="5.0.34-alpha">5.0.34-alpha</option>
               <option value="5.0.33-alpha">5.0.33-alpha</option>
@@ -1164,7 +1165,15 @@
             <span class="changelog-date" id="changelog-date">Aug 9, 2026</span>
           </div>
 
-          <article class="release" data-version="5.0.35-alpha" data-date="Aug 9, 2026">
+          <article class="release" data-version="5.0.36-alpha" data-date="Aug 9, 2026">
+            <ul class="release-notes">
+              <li><b>Mentions get a home on mobile:</b> a new @ panel lists who mentioned you, where, and when, and tapping one jumps straight to the message. The @ marks in the channel tree come out in favor of it.</li>
+              <li><b>Your channel list stays accurate:</b> leave a channel from another device while your phone is asleep and it now disappears on your return instead of lingering until a restart. If you were reading that channel, you land back on the tree rather than in an empty room.</li>
+              <li><b>Fixes:</b> the New messages line no longer sits above a join or a quit, unread badges on bouncer networks clear when they should, and the connector lines in the channel tree draw evenly at any window position or display scale.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.0.35-alpha" data-date="Aug 9, 2026" hidden>
             <ul class="release-notes">
               <li>Fixed an intermittent issue where unread badges were not retired properly.</li>
             </ul>
