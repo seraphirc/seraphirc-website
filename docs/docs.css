@@ -1,0 +1,565 @@
+/* ============================================================
+   SeraphIRC docs
+   ------------------------------------------------------------
+   A two pane help browser in the shape of the old Windows help
+   viewers: a contents tree on the left, one topic at a time on
+   the right. Everything is painted with the site's theme
+   variables, so the docs follow the theme picker the same way
+   the marketplace does.
+
+   Layout note: with JavaScript on, <body> gets .docs-js and only
+   the active pane is shown. Without it every pane stays in the
+   document as one long scrolling manual, and the contents tree
+   is plain <details> plus anchors, so nothing depends on script.
+   ============================================================ */
+
+:root {
+  /* Clearance for the sticky topbar (header + marquee + faded nav). */
+  --docs-top: 168px;
+  --docs-rail: 292px;
+}
+
+.docs-shell {
+  width: min(var(--shell), calc(100% - 40px));
+  margin: 0 auto;
+  padding: 28px 0 84px;
+  display: grid;
+  grid-template-columns: var(--docs-rail) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+/* ── Contents rail ─────────────────────────────────────────── */
+
+.docs-sidebar {
+  position: sticky;
+  top: var(--docs-top);
+  max-height: calc(100vh - var(--docs-top) - 24px);
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.docs-rail-head {
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--gold) 9%, transparent),
+    transparent
+  );
+}
+.docs-rail-head strong {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-bright, var(--gold));
+}
+.docs-search-wrap { padding: 10px 12px; border-bottom: 1px solid var(--line-soft, var(--line)); }
+.docs-search {
+  width: 100%;
+  padding: 7px 10px;
+  font: inherit;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+.docs-search::placeholder { color: var(--faint); }
+.docs-search:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+.docs-nav {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 8px 0 14px;
+  scrollbar-width: thin;
+}
+
+/* Books are the top level of the tree, chapters the level inside
+   Commands. Both are <details>, so the tree expands without JS. */
+.docs-nav .book > summary,
+.docs-nav .chapter > summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.docs-nav summary::-webkit-details-marker { display: none; }
+
+.docs-nav .book > summary {
+  padding: 7px 14px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.docs-nav .book > summary:hover { color: var(--text); background: var(--sel); }
+
+.docs-nav .chapter > summary {
+  padding: 5px 14px 5px 26px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.docs-nav .chapter > summary:hover { color: var(--text); background: var(--sel); }
+
+/* The little triangle that turns as a section opens. */
+.docs-nav summary::before {
+  content: "";
+  flex: none;
+  width: 0;
+  height: 0;
+  border-left: 5px solid currentColor;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  color: var(--gold);
+  transition: transform 0.14s ease;
+}
+.docs-nav details[open] > summary::before { transform: rotate(90deg); }
+.docs-nav .chapter > summary::before { color: var(--accent); }
+
+.chapter-count {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 400;
+  color: var(--faint);
+}
+
+.docs-nav .pagelist {
+  margin: 0 0 6px;
+  padding: 0;
+  list-style: none;
+}
+.docs-nav .book > .pagelist { padding-left: 0; }
+
+.docs-nav .pagelist a {
+  display: block;
+  padding: 4px 14px 4px 38px;
+  font-size: 0.855rem;
+  line-height: 1.35;
+  color: var(--dim);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+}
+.docs-nav .book > .pagelist a { padding-left: 30px; }
+.docs-nav .pagelist a code {
+  font-size: 0.85em;
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+.docs-nav .pagelist a:hover {
+  color: var(--text);
+  background: var(--sel);
+}
+/* Sub-pages of a page: one level in from their parent, with a hairline
+   running down the group so the indent reads as containment rather than
+   as an arbitrary margin. */
+.docs-nav .subpages {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-left: 1px solid var(--line);
+  margin-left: 34px;
+}
+.docs-nav .book > .pagelist .subpages { margin-left: 26px; }
+/* Specificity has to clear `.docs-nav .book > .pagelist a`, which sets the
+   parent level's indent. */
+.docs-nav .book > .pagelist .subpages a,
+.docs-nav .pagelist .subpages a {
+  padding-left: 12px;
+  font-size: 0.82rem;
+  color: var(--faint);
+}
+.docs-nav .book > .pagelist .subpages a:hover,
+.docs-nav .pagelist .subpages a:hover { color: var(--text); }
+
+.docs-nav .pagelist a.is-current {
+  color: var(--gold-bright, var(--gold));
+  border-left-color: var(--gold);
+  background: color-mix(in srgb, var(--gold) 10%, transparent);
+}
+.docs-nav .page-overview a {
+  font-style: italic;
+  color: var(--faint);
+}
+
+/* Search results replace the tree while the box has text in it. */
+.docs-nav.is-searching .book,
+.docs-nav.is-searching .chapter { display: none; }
+.docs-results { display: none; margin: 0; padding: 4px 0 0; list-style: none; }
+.docs-nav.is-searching .docs-results { display: block; }
+.docs-results a {
+  display: block;
+  padding: 5px 14px;
+  font-size: 0.855rem;
+  color: var(--dim);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+}
+.docs-results a:hover { color: var(--text); background: var(--sel); }
+.docs-results a code { background: none; padding: 0; color: var(--accent-bright, var(--accent)); }
+.docs-results .res-where {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  color: var(--faint);
+}
+.docs-empty { padding: 10px 14px; font-size: 0.84rem; color: var(--faint); }
+
+/* Mobile toggle for the rail, hidden on desktop. */
+.docs-rail-toggle { display: none; }
+
+/* ── Topic pane ────────────────────────────────────────────── */
+
+.docs-content {
+  min-width: 0;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(20px, 3vw, 38px) clamp(18px, 3vw, 40px) 30px;
+}
+
+.docs-js .docs-pane { display: none; }
+.docs-js .docs-pane.is-active { display: block; }
+
+.docs-pane > h2 {
+  margin: 0 0 10px;
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  line-height: 1.06;
+}
+.pane-kicker {
+  margin: 0 0 4px;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.pane-lead {
+  margin: 0 0 22px;
+  max-width: 72ch;
+  font-size: 1.02rem;
+  color: var(--muted);
+}
+.docs-pane h3 {
+  margin: 30px 0 8px;
+  font-size: 1.32rem;
+}
+.docs-pane h4 {
+  margin: 20px 0 6px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.docs-pane p { max-width: 78ch; color: var(--muted); }
+.docs-pane ul, .docs-pane ol { max-width: 78ch; color: var(--muted); }
+.docs-pane li { margin-bottom: 6px; }
+
+/* Row of anchors at the top of a command section. */
+.entry-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 26px;
+  padding: 12px;
+  background: var(--bg);
+  border: 1px solid var(--line-soft, var(--line));
+  border-radius: var(--radius-sm);
+}
+.entry-jump a {
+  padding: 2px 7px;
+  font-size: 0.82rem;
+  text-decoration: none;
+  color: var(--dim);
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+.entry-jump a code { background: none; padding: 0; color: inherit; font-size: 1em; }
+.entry-jump a:hover {
+  color: var(--gold-bright, var(--gold));
+  border-color: var(--line);
+  background: var(--panel);
+}
+
+/* ── One command ───────────────────────────────────────────── */
+
+.docs-entry {
+  margin: 0 0 14px;
+  padding: 16px 18px 18px;
+  background: var(--bg);
+  border: 1px solid var(--line-soft, var(--line));
+  border-left: 3px solid color-mix(in srgb, var(--gold) 45%, transparent);
+  border-radius: var(--radius-sm);
+  scroll-margin-top: calc(var(--docs-top) + 12px);
+}
+.docs-entry:target {
+  border-color: var(--accent);
+  border-left-color: var(--gold);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.entry-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.entry-head h3 {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--gold-bright, var(--gold));
+}
+.entry-anchor {
+  margin-left: 7px;
+  font-size: 0.8rem;
+  color: var(--faint);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+.docs-entry:hover .entry-anchor,
+.entry-anchor:focus-visible { opacity: 1; }
+
+.entry-flags { display: flex; flex-wrap: wrap; gap: 5px; margin-left: auto; }
+.flag {
+  padding: 1px 7px;
+  font-family: var(--mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  white-space: nowrap;
+}
+.flag-irc { color: var(--accent-bright, var(--accent)); border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+.flag-local { color: var(--green, var(--muted)); border-color: color-mix(in srgb, var(--green, var(--accent)) 34%, transparent); }
+
+.entry-usage {
+  margin: 10px 0 8px;
+  padding: 8px 11px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+}
+.entry-usage code {
+  font-family: var(--mono);
+  font-size: 0.86rem;
+  color: var(--code-ink, var(--gold));
+  background: none;
+  padding: 0;
+  white-space: pre;
+}
+.entry-summary { margin: 0 0 2px; color: var(--text); font-weight: 600; }
+.entry-aliases { margin: 6px 0 0; font-size: 0.88rem; color: var(--dim); }
+.entry-details p { margin: 8px 0 0; font-size: 0.95rem; }
+
+.entry-label { margin: 14px 0 5px; }
+.entry-params { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 3px 14px; }
+.entry-params dt { font-family: var(--mono); font-size: 0.84rem; color: var(--accent-bright, var(--accent)); }
+.entry-params dd { margin: 0; font-size: 0.92rem; color: var(--muted); }
+
+pre.entry-examples {
+  margin: 0;
+  padding: 10px 12px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+}
+pre.entry-examples code {
+  font-family: var(--mono);
+  font-size: 0.84rem;
+  color: var(--muted);
+  background: none;
+  padding: 0;
+}
+
+/* ── Tables shared by the index, formatting, and hotkey panes ── */
+
+.table-scroll { overflow-x: auto; }
+.docs-pane table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+}
+.docs-pane th, .docs-pane td {
+  padding: 7px 12px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line-soft, var(--line));
+  color: var(--muted);
+}
+.docs-pane thead th {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+  white-space: nowrap;
+}
+.docs-pane tbody tr:last-child th,
+.docs-pane tbody tr:last-child td { border-bottom: none; }
+.docs-pane tbody th[scope="row"] { color: var(--text); font-weight: 600; white-space: nowrap; }
+.docs-pane td.na { color: var(--faint); }
+
+.idx-table td.idx-alias code { color: var(--dim); }
+.idx-table td.idx-cat { white-space: nowrap; font-size: 0.85rem; }
+
+.swatch {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  margin-right: 6px;
+  vertical-align: -1px;
+  background: var(--sw);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+
+/* ── Callouts and footers ──────────────────────────────────── */
+
+.docs-note {
+  margin: 18px 0;
+  padding: 12px 14px;
+  max-width: 78ch;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  font-size: 0.94rem;
+  color: var(--muted);
+}
+.docs-note strong { color: var(--text); }
+
+.pane-foot:empty { display: none; }
+.pane-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 34px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--line);
+  font-size: 0.88rem;
+}
+.pane-foot a { text-decoration: none; color: var(--dim); }
+.pane-foot a:hover { color: var(--gold-bright, var(--gold)); }
+.pane-foot .foot-next { margin-left: auto; text-align: right; }
+.pane-foot .foot-dir {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.docs-pane code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  color: var(--code-ink, var(--gold));
+}
+
+/* Cross-references have to look clickable. The site stylesheet resets every
+   anchor to `color: inherit; text-decoration: none` and then re-styles links
+   per component, so without this rule a "See Using a Bouncer" reads as plain
+   prose. Nested <code> takes the link color too, otherwise a /join reference
+   is indistinguishable from a /join mention. */
+.docs-pane a {
+  color: var(--accent-bright, var(--accent));
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.docs-pane a code { color: inherit; }
+.docs-pane a:hover {
+  color: var(--gold-bright, var(--gold));
+  text-decoration-color: var(--gold);
+}
+/* The two link kinds that carry their own treatment and must keep it: the
+   quick-jump row at the top of a command section, and the # permalink on an
+   entry heading. Both need to out-specify the rule above. */
+.docs-pane .entry-jump a {
+  color: var(--dim);
+  text-decoration: none;
+}
+.docs-pane .entry-jump a:hover { color: var(--gold-bright, var(--gold)); }
+.docs-pane .entry-anchor {
+  color: var(--faint);
+  text-decoration: none;
+}
+/* The command index is links end to end, so underlining every cell turns the
+   table into texture. Color carries it there, and the column headings already
+   say what the cells are. */
+.docs-pane .idx-table a { text-decoration: none; }
+.docs-pane .idx-table a:hover { text-decoration: underline; }
+
+/* ── Narrow screens ────────────────────────────────────────── */
+
+@media (max-width: 960px) {
+  :root { --docs-top: 218px; }
+
+  .docs-shell {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .docs-rail-toggle {
+    display: block;
+    width: 100%;
+    padding: 10px 14px;
+    font: inherit;
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--gold-bright, var(--gold));
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    cursor: pointer;
+  }
+
+  .docs-sidebar {
+    position: static;
+    max-height: min(62vh, 460px);
+  }
+  .docs-js .docs-sidebar[hidden] { display: none; }
+  .docs-rail-head { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .docs-nav summary::before,
+  .entry-anchor { transition: none; }
+}

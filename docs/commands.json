@@ -1,0 +1,2173 @@
+[
+  {
+    "Name": "help",
+    "Aliases": null,
+    "Usage": "/help [command]",
+    "Parameters": null,
+    "Summary": "Show command help",
+    "Details": [
+      "Without a command, shows an overview of available slash commands.",
+      "With a command name, shows detailed usage and examples."
+    ],
+    "Examples": [
+      "/help",
+      "/help query",
+      "/help /notice"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "about",
+    "Aliases": null,
+    "Usage": "/about",
+    "Parameters": null,
+    "Summary": "Open About SeraphIRC",
+    "Details": [
+      "Opens the About SeraphIRC panel with version and build information."
+    ],
+    "Examples": [
+      "/about"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "alias",
+    "Aliases": null,
+    "Usage": "/alias \u003cname\u003e \u003ccommand\u003e",
+    "Parameters": [
+      "name: shortcut name, with or without a leading slash",
+      "command: slash command to run when the alias is used"
+    ],
+    "Summary": "Create or update a command alias",
+    "Details": [
+      "Creates or updates a shortcut for another command. Built-in SeraphIRC commands and built-in command aliases cannot be overwritten.",
+      "Run /alias without arguments to open the Aliases settings page."
+    ],
+    "Examples": [
+      "/alias j /join",
+      "/alias kb /kickban",
+      "/j #seraphirc",
+      "/kb Alice flooding"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "unalias",
+    "Aliases": null,
+    "Usage": "/unalias \u003cname\u003e",
+    "Parameters": [
+      "name: user-defined alias to remove"
+    ],
+    "Summary": "Remove a command alias",
+    "Details": [
+      "Removes a user-defined command alias."
+    ],
+    "Examples": [
+      "/unalias j"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "connect",
+    "Aliases": null,
+    "Usage": "/connect or /connect \u003cserver\u003e [port] [remote]",
+    "Parameters": [
+      "server: server to connect",
+      "port: optional port",
+      "remote: optional remote server"
+    ],
+    "Summary": "Connect the active network or request a server link",
+    "Details": [
+      "Without arguments, starts a connection for the active network if it is disconnected.",
+      "With arguments on a connected network, sends IRC CONNECT to request a server link.",
+      "Note: IRC CONNECT usually requires IRC operator privileges."
+    ],
+    "Examples": [
+      "/connect",
+      "/connect irc2.example.net",
+      "/connect irc2.example.net 6697 hub.example.net"
+    ],
+    "Category": "Connection",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "disconnect",
+    "Aliases": null,
+    "Usage": "/disconnect",
+    "Parameters": null,
+    "Summary": "Immediately disconnect the active network",
+    "Details": [
+      "Immediately closes the active network socket without sending a graceful IRC QUIT."
+    ],
+    "Examples": [
+      "/disconnect"
+    ],
+    "Category": "Connection",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "reconnect",
+    "Aliases": null,
+    "Usage": "/reconnect",
+    "Parameters": null,
+    "Summary": "Reconnect the active network",
+    "Details": [
+      "Reconnects the active network using the same behavior as the Reconnect menu action."
+    ],
+    "Examples": [
+      "/reconnect"
+    ],
+    "Category": "Connection",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "znc",
+    "Aliases": null,
+    "Usage": "/znc \u003ccommand\u003e",
+    "Parameters": [
+      "command: ZNC *status command",
+      "module: optional ZNC module target such as controlpanel, sasl, nickserv, or perform"
+    ],
+    "Summary": "Send a command to ZNC",
+    "Details": [
+      "Sends a command to ZNC's *status service.",
+      "Use /znc \u003cmodule\u003e \u003ccommand\u003e to send to a ZNC virtual module such as controlpanel, sasl, nickserv, or perform.",
+      "/znc is available only for ZNC-backed networks."
+    ],
+    "Examples": [
+      "/znc help",
+      "/znc status",
+      "/znc connect",
+      "/znc disconnect",
+      "/znc controlpanel help",
+      "/znc sasl help"
+    ],
+    "Category": "Connection",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "cycle",
+    "Aliases": null,
+    "Usage": "/cycle [#channel]",
+    "Parameters": [
+      "#channel: optional channel to part and rejoin"
+    ],
+    "Summary": "Part and rejoin a channel",
+    "Details": [
+      "Parts and immediately rejoins a channel on the active network. Without a channel, uses the current channel buffer."
+    ],
+    "Examples": [
+      "/cycle",
+      "/cycle #seraphirc"
+    ],
+    "Category": "Connection",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "quit",
+    "Aliases": null,
+    "Usage": "/quit [reason]",
+    "Parameters": [
+      "reason: optional quit message"
+    ],
+    "Summary": "Gracefully quit the active network",
+    "Details": [
+      "Gracefully quits the active network by sending IRC QUIT. Use /disconnect to immediately drop the socket without sending QUIT."
+    ],
+    "Examples": [
+      "/quit",
+      "/quit goodbye for now"
+    ],
+    "Category": "Connection",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "ignore",
+    "Aliases": null,
+    "Usage": "/ignore \u003cnick or mask\u003e",
+    "Parameters": [
+      "nick or mask: a nickname, or a nick!user@host mask with * and ? wildcards"
+    ],
+    "Summary": "Ignore a nick or mask on the current network",
+    "Details": [
+      "Ignores messages, notices, CTCP and invites from a sender on the current network, and hides their joins, parts, quits and nick changes. Uses the same ignore list as the user context menu.",
+      "A bare nick means that nick only, so it stops applying the moment they change it. A mask keeps holding: * matches any run of characters and ? matches one."
+    ],
+    "Examples": [
+      "/ignore Alice",
+      "/ignore troll*",
+      "/ignore *!*@spam.example"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "unignore",
+    "Aliases": null,
+    "Usage": "/unignore \u003cnick or mask\u003e",
+    "Parameters": [
+      "nick or mask: the entry to remove, spelled as it was added"
+    ],
+    "Summary": "Stop ignoring a nick or mask",
+    "Details": [
+      "Removes an entry from the current network ignore list using the same state as the user context menu. Remove it the way it was added: /unignore Alice does not clear a *!*@spam.example that happens to cover her."
+    ],
+    "Examples": [
+      "/unignore Alice",
+      "/unignore *!*@spam.example"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "exit",
+    "Aliases": null,
+    "Usage": "/exit",
+    "Parameters": null,
+    "Summary": "Exit SeraphIRC",
+    "Details": [
+      "Closes the SeraphIRC desktop application."
+    ],
+    "Examples": [
+      "/exit"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "close",
+    "Aliases": null,
+    "Usage": "/close",
+    "Parameters": null,
+    "Summary": "Close the current buffer",
+    "Details": [
+      "Closes the current channel or query buffer and switches to a fallback buffer when available."
+    ],
+    "Examples": [
+      "/close"
+    ],
+    "Category": "Buffers",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": true
+  },
+  {
+    "Name": "clear",
+    "Aliases": null,
+    "Usage": "/clear",
+    "Parameters": null,
+    "Summary": "Clear the current visible buffer without deleting logs",
+    "Details": [
+      "Clears the visible transcript for the current buffer without deleting saved logs."
+    ],
+    "Examples": [
+      "/clear"
+    ],
+    "Category": "Buffers",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": true
+  },
+  {
+    "Name": "clearall",
+    "Aliases": null,
+    "Usage": "/clearall -a | -s",
+    "Parameters": [
+      "-a: clear all buffers across all servers",
+      "-s: clear all buffers on the active server"
+    ],
+    "Summary": "Clear visible buffers without deleting logs",
+    "Details": [
+      "Clears visible transcripts without deleting saved logs.",
+      "Use -a to clear all visible buffers across all servers.",
+      "Use -s to clear all visible buffers on the active server."
+    ],
+    "Examples": [
+      "/clearall -a",
+      "/clearall -s"
+    ],
+    "Category": "Buffers",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "join",
+    "Aliases": null,
+    "Usage": "/join \u003c#channel\u003e",
+    "Parameters": [
+      "#channel: channel name to join"
+    ],
+    "Summary": "Join a channel",
+    "Details": [
+      "Sends JOIN to the IRC server and opens the channel buffer locally."
+    ],
+    "Examples": [
+      "/join #seraphirc"
+    ],
+    "Category": "Connection",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "part",
+    "Aliases": null,
+    "Usage": "/part [#channel] [reason]",
+    "Parameters": [
+      "#channel: optional channel to leave",
+      "reason: optional part reason"
+    ],
+    "Summary": "Leave a channel",
+    "Details": [
+      "Without arguments, parts the current channel. With a channel, parts that channel and uses any remaining text as the part reason."
+    ],
+    "Examples": [
+      "/part",
+      "/part #seraphirc bedtime"
+    ],
+    "Category": "Connection",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "partall",
+    "Aliases": null,
+    "Usage": "/partall",
+    "Parameters": null,
+    "Summary": "Leave all joined channels on the active network",
+    "Details": [
+      "Leave all currently joined channels on the active network. This does not disconnect from the network and does not affect channels on other networks."
+    ],
+    "Examples": [
+      "/partall"
+    ],
+    "Category": "Connection",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "query",
+    "Aliases": null,
+    "Usage": "/query \u003cnick\u003e",
+    "Parameters": [
+      "nick: nickname to open as a private query"
+    ],
+    "Summary": "Open a private query buffer",
+    "Details": [
+      "Opens a private query buffer with a nick. Use /msg if you want to send a message immediately."
+    ],
+    "Examples": [
+      "/query Alice"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "msg",
+    "Aliases": null,
+    "Usage": "/msg \u003cnick|#channel\u003e \u003cmessage\u003e",
+    "Parameters": [
+      "nick|#channel: message target",
+      "message: text to send"
+    ],
+    "Summary": "Send a private or target message",
+    "Details": [
+      "Sends PRIVMSG to the target and echoes it into the matching local query or channel buffer."
+    ],
+    "Examples": [
+      "/msg Alice hello there",
+      "/msg #seraphirc hello channel"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "notice",
+    "Aliases": null,
+    "Usage": "/notice \u003ctarget\u003e \u003cmessage\u003e",
+    "Parameters": [
+      "target: nick or channel",
+      "message: notice text"
+    ],
+    "Summary": "Send an IRC NOTICE",
+    "Details": [
+      "Sends NOTICE to a nick or channel and echoes the outbound notice locally."
+    ],
+    "Examples": [
+      "/notice Alice hello",
+      "/notice #seraphirc maintenance soon"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "me",
+    "Aliases": null,
+    "Usage": "/me \u003caction\u003e",
+    "Parameters": [
+      "action: action text"
+    ],
+    "Summary": "Send an action message",
+    "Details": [
+      "Sends a CTCP ACTION to the current channel or query buffer."
+    ],
+    "Examples": [
+      "/me waves"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": true
+  },
+  {
+    "Name": "format",
+    "Aliases": [
+      "f"
+    ],
+    "Usage": "/format \u003cmessage\u003e",
+    "Parameters": [
+      "message: text with formatting syntax"
+    ],
+    "Summary": "Send one message with text formatting applied",
+    "Details": [
+      "Applies markdown (_italic_, __bold__, ~~strike~~, `code`, ||spoiler||) and token ($b, $i, $s, $u, $m, $c) formatting to this message regardless of the auto_format setting."
+    ],
+    "Examples": [
+      "/format __bold__ and _italic_",
+      "/format $c04,09colored$c text"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": true
+  },
+  {
+    "Name": "plain",
+    "Aliases": null,
+    "Usage": "/plain \u003cmessage\u003e",
+    "Parameters": [
+      "message: text to send verbatim"
+    ],
+    "Summary": "Send one message with text formatting disabled",
+    "Details": [
+      "Sends the message exactly as typed, overriding the auto_format setting for this message."
+    ],
+    "Examples": [
+      "/plain __not bold__"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": true
+  },
+  {
+    "Name": "format-me",
+    "Aliases": null,
+    "Usage": "/format-me \u003caction\u003e",
+    "Parameters": [
+      "action: action text with formatting syntax"
+    ],
+    "Summary": "Send an action message with formatting applied",
+    "Details": null,
+    "Examples": [
+      "/format-me waves __enthusiastically__"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": true
+  },
+  {
+    "Name": "format-msg",
+    "Aliases": null,
+    "Usage": "/format-msg \u003cnick|#channel\u003e \u003cmessage\u003e",
+    "Parameters": [
+      "nick|#channel: message target",
+      "message: text with formatting syntax"
+    ],
+    "Summary": "Send a targeted message with formatting applied",
+    "Details": null,
+    "Examples": [
+      "/format-msg Alice __hello__"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "format-notice",
+    "Aliases": null,
+    "Usage": "/format-notice \u003ctarget\u003e \u003cmessage\u003e",
+    "Parameters": [
+      "target: nick or channel",
+      "message: notice text with formatting syntax"
+    ],
+    "Summary": "Send a NOTICE with formatting applied",
+    "Details": null,
+    "Examples": [
+      "/format-notice #seraphirc __maintenance__ soon"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "plain-me",
+    "Aliases": null,
+    "Usage": "/plain-me \u003caction\u003e",
+    "Parameters": [
+      "action: action text"
+    ],
+    "Summary": "Send an action message with formatting disabled",
+    "Details": null,
+    "Examples": [
+      "/plain-me shrugs __literally__"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": true
+  },
+  {
+    "Name": "plain-msg",
+    "Aliases": null,
+    "Usage": "/plain-msg \u003cnick|#channel\u003e \u003cmessage\u003e",
+    "Parameters": [
+      "nick|#channel: message target",
+      "message: text to send verbatim"
+    ],
+    "Summary": "Send a targeted message with formatting disabled",
+    "Details": null,
+    "Examples": [
+      "/plain-msg Alice __not bold__"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "plain-notice",
+    "Aliases": null,
+    "Usage": "/plain-notice \u003ctarget\u003e \u003cmessage\u003e",
+    "Parameters": [
+      "target: nick or channel",
+      "message: notice text to send verbatim"
+    ],
+    "Summary": "Send a NOTICE with formatting disabled",
+    "Details": null,
+    "Examples": [
+      "/plain-notice Alice __not bold__"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "ctcp",
+    "Aliases": null,
+    "Usage": "/ctcp \u003ctarget\u003e \u003ccommand\u003e [args]",
+    "Parameters": [
+      "target: nick or channel",
+      "command: CTCP command such as VERSION or PING",
+      "args: optional CTCP payload"
+    ],
+    "Summary": "Send a CTCP request",
+    "Details": [
+      "Sends a CTCP request as a PRIVMSG with CTCP framing."
+    ],
+    "Examples": [
+      "/ctcp Alice VERSION",
+      "/ctcp Alice PING 12345"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "notify",
+    "Aliases": null,
+    "Usage": "/notify [nick] [comment]",
+    "Parameters": [
+      "nick: optional nick to add or remove",
+      "comment: optional note saved with the entry"
+    ],
+    "Summary": "Manage notify list entries",
+    "Details": [
+      "Without arguments, opens the notify list. With a nick, toggles that nick in the active network's notify list."
+    ],
+    "Examples": [
+      "/notify",
+      "/notify Alice friend from Libera"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "server",
+    "Aliases": null,
+    "Usage": "/server",
+    "Parameters": null,
+    "Summary": "Open the server buffer",
+    "Details": [
+      "Opens the active network's server/status buffer."
+    ],
+    "Examples": [
+      "/server"
+    ],
+    "Category": "Buffers",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "switch",
+    "Aliases": null,
+    "Usage": "/switch \u003cbuffer\u003e",
+    "Parameters": [
+      "buffer: channel, query, or server buffer name"
+    ],
+    "Summary": "Switch to a buffer",
+    "Details": [
+      "Switches the current buffer for the active network."
+    ],
+    "Examples": [
+      "/switch #seraphirc",
+      "/switch server"
+    ],
+    "Category": "Buffers",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "current",
+    "Aliases": null,
+    "Usage": "/current",
+    "Parameters": null,
+    "Summary": "Show the current buffer",
+    "Details": [
+      "Displays the current buffer for the active network."
+    ],
+    "Examples": [
+      "/current"
+    ],
+    "Category": "Buffers",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "buffers",
+    "Aliases": null,
+    "Usage": "/buffers",
+    "Parameters": null,
+    "Summary": "List buffers",
+    "Details": [
+      "Lists buffers for the active network, including buffer type, message count, and unread count."
+    ],
+    "Examples": [
+      "/buffers"
+    ],
+    "Category": "Buffers",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "show",
+    "Aliases": null,
+    "Usage": "/show [count]",
+    "Parameters": [
+      "count: optional number of recent messages to show, default 20"
+    ],
+    "Summary": "Show recent current-buffer messages",
+    "Details": [
+      "Prints recent messages from the current buffer as local server-style output."
+    ],
+    "Examples": [
+      "/show",
+      "/show 50"
+    ],
+    "Category": "Buffers",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": true,
+    "RequiresBuffer": true
+  },
+  {
+    "Name": "state",
+    "Aliases": null,
+    "Usage": "/state",
+    "Parameters": null,
+    "Summary": "Show buffer state summary",
+    "Details": [
+      "Lists buffers and their message counts for the active network."
+    ],
+    "Examples": [
+      "/state"
+    ],
+    "Category": "Buffers",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "dcc",
+    "Aliases": null,
+    "Usage": "/dcc send \u003cnick\u003e [path] | /dcc get [nick] | /dcc decline [nick] | /dcc cancel \u003cid|nick\u003e | /dcc list",
+    "Parameters": [
+      "nick: the other person",
+      "path: file to send (a picker opens when omitted)"
+    ],
+    "Summary": "Send and receive files directly with another user",
+    "Details": [
+      "DCC transfers files straight between the two computers, with no server in between.",
+      "Because of that it needs a DIRECT connection: it is unavailable on networks that go through a bouncer (soju or ZNC), where the address the transfer would use belongs to the bouncer rather than to either person.",
+      "Incoming offers also appear as cards in the buffer and in the transfers panel, so these commands are a keyboard shortcut rather than the only route.",
+      "/dcc get with no nick accepts the only waiting offer, and resumes automatically when part of the file is already downloaded.",
+      "SeraphIRC does not support DCC chat."
+    ],
+    "Examples": [
+      "/dcc send Alice",
+      "/dcc send Alice /home/me/photo.jpg",
+      "/dcc get",
+      "/dcc list"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": false,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "seraphchat",
+    "Aliases": [
+      "schat"
+    ],
+    "Usage": "/seraphchat \u003cnick\u003e",
+    "Parameters": [
+      "nick: the person to invite (in a query it defaults to that person)"
+    ],
+    "Summary": "Start an encrypted direct chat with another user",
+    "Details": [
+      "Seraph Chat is a direct, end-to-end encrypted conversation between two computers: nothing crosses the IRC server, nothing is logged, and closing the window discards the transcript on both machines.",
+      "Unlike DCC it works from behind a bouncer, because the connection is set up through the Seraph rendezvous rather than through addresses in IRC messages.",
+      "Accepting or sending an invitation reveals your IP address to the rendezvous immediately and to the other person once both sides agree, which is why the first use asks for confirmation.",
+      "The command never reaches the server. Invitations also start from a nickname's right-click menu, so this is a keyboard shortcut rather than the only route.",
+      "Nothing to set up: Seraph Chat is available on every network, including through a bouncer."
+    ],
+    "Examples": [
+      "/seraphchat Alice",
+      "/schat Alice"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "seraphtransfer",
+    "Aliases": null,
+    "Usage": "/seraphtransfer \u003cnick\u003e",
+    "Parameters": [
+      "nick: the person to send to (in a query it defaults to that person)"
+    ],
+    "Summary": "Send a file directly with Seraph Transfer",
+    "Details": [
+      "Opens a file picker and offers the chosen file over Seraph Transfer: a direct, end-to-end encrypted transfer that verifies the file and, unlike DCC, works from behind a bouncer.",
+      "The same action as \"Send File (Seraph)\" in a nickname's right-click menu, so this is a keyboard shortcut rather than the only route.",
+      "Sending an offer reveals your IP address to the rendezvous immediately and to the other person once they accept.",
+      "The command never reaches the server, and it never falls back to DCC by itself: if the peer cannot answer a Seraph offer, DCC is suggested rather than silently used.",
+      "Nothing to set up: Seraph Transfer is available on every network, including through a bouncer. Settings \u003e File Uploads \u0026 DCC tunes where files land and how large an offer may be."
+    ],
+    "Examples": [
+      "/seraphtransfer Alice"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "giphy",
+    "Aliases": null,
+    "Usage": "/giphy [search terms]",
+    "Parameters": [
+      "search terms: what to look for (omit to browse what is trending)"
+    ],
+    "Summary": "Open the GIF picker, optionally with a search already run",
+    "Details": [
+      "Opens the GIF picker above the composer. With search terms it runs that search. With none it shows what is trending.",
+      "The command never sends anything by itself. Attach puts the GIF's link in the composer and leaves it there, so you can add a comment, and so the message goes out through the same checks as anything else you type.",
+      "Off until you turn it on. The integration needs a free Giphy API key of your own: Settings \u003e Integrations \u003e Giphy Integration.",
+      "When enabled, your search terms and IP address are sent to Giphy. GIFs you post are links to Giphy's servers, so anyone whose client displays them also connects to Giphy."
+    ],
+    "Examples": [
+      "/giphy",
+      "/giphy shrug"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": true
+  },
+  {
+    "Name": "whois",
+    "Aliases": null,
+    "Usage": "/whois \u003cnick\u003e",
+    "Parameters": [
+      "nick: nick to inspect"
+    ],
+    "Summary": "Request WHOIS information",
+    "Details": [
+      "Requests WHOIS information from the IRC server."
+    ],
+    "Examples": [
+      "/whois Alice"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "whowas",
+    "Aliases": null,
+    "Usage": "/whowas \u003cnickname\u003e",
+    "Parameters": [
+      "nickname: nickname to inspect"
+    ],
+    "Summary": "Shows information about a user who has quit",
+    "Details": [
+      "Sends WHOWAS to the IRC server for the requested nickname."
+    ],
+    "Examples": [
+      "/whowas Alice"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "nick",
+    "Aliases": null,
+    "Usage": "/nick \u003cnewnick\u003e",
+    "Parameters": [
+      "newnick: requested nickname"
+    ],
+    "Summary": "Change nickname",
+    "Details": [
+      "Requests a nickname change. This is also allowed while registration is blocked if the socket is open."
+    ],
+    "Examples": [
+      "/nick SeraphUser"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "away",
+    "Aliases": null,
+    "Usage": "/away [message]",
+    "Parameters": [
+      "message: optional away message"
+    ],
+    "Summary": "Mark yourself away",
+    "Details": [
+      "Marks you away with an optional message."
+    ],
+    "Examples": [
+      "/away lunch",
+      "/away"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "back",
+    "Aliases": null,
+    "Usage": "/back",
+    "Parameters": null,
+    "Summary": "Clear away status",
+    "Details": [
+      "Marks you as back by clearing away status."
+    ],
+    "Examples": [
+      "/back"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "topic",
+    "Aliases": null,
+    "Usage": "/topic [text]",
+    "Parameters": [
+      "text: optional new topic"
+    ],
+    "Summary": "Show or set channel topic",
+    "Details": [
+      "Without text, shows the current channel topic. With text, sends a topic change for the current channel."
+    ],
+    "Examples": [
+      "/topic",
+      "/topic Welcome to SeraphIRC"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": true
+  },
+  {
+    "Name": "names",
+    "Aliases": null,
+    "Usage": "/names [#channel]",
+    "Parameters": [
+      "#channel: optional channel name"
+    ],
+    "Summary": "Request channel user names",
+    "Details": [
+      "Requests NAMES for a channel. Without a channel, uses the current channel and avoids network-wide NAMES output."
+    ],
+    "Examples": [
+      "/names",
+      "/names #seraphirc"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "list",
+    "Aliases": null,
+    "Usage": "/list [pattern]",
+    "Parameters": [
+      "pattern: optional channel list filter"
+    ],
+    "Summary": "Open channel list",
+    "Details": [
+      "Requests the network channel list and opens SeraphIRC's searchable channel list UI."
+    ],
+    "Examples": [
+      "/list",
+      "/list #go*"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "mode",
+    "Aliases": null,
+    "Usage": "/mode \u003ctarget\u003e [modes] [args]",
+    "Parameters": null,
+    "Summary": "Send MODE command",
+    "Details": [
+      "Sends a raw MODE command to the IRC server.",
+      "The target can be a #channel or a nickname. Use your own nick to view or change your user modes: /mode \u003cyournick\u003e shows your current modes, and /mode \u003cyournick\u003e +i sets one (e.g. +i for invisible)."
+    ],
+    "Examples": [
+      "/mode #seraphirc",
+      "/mode #seraphirc +m",
+      "/mode yournick",
+      "/mode yournick +i"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "knock",
+    "Aliases": null,
+    "Usage": "/knock \u003c#channel\u003e [reason]",
+    "Parameters": [
+      "#channel: the invite-only channel to request entry to",
+      "reason: optional message shown to the channel operators"
+    ],
+    "Summary": "Request an invite to an invite-only channel",
+    "Details": [
+      "Sends a KNOCK to an invite-only (+i) channel, asking its operators to invite you. Availability and exact behavior depend on the server."
+    ],
+    "Examples": [
+      "/knock #private",
+      "/knock #private please let me in"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "accept",
+    "Aliases": null,
+    "Usage": "/accept \u003c+nick|-nick|*\u003e",
+    "Parameters": [
+      "+nick: allow this nick to message you",
+      "-nick: remove this nick from the list",
+      "*: list your current accept entries"
+    ],
+    "Summary": "Manage your caller-ID (+g) accept list",
+    "Details": [
+      "On networks with the caller-ID user mode (+g), the ACCEPT list controls who may send you private messages and notices. Use +nick to allow someone, -nick to remove them, and * to list the current entries."
+    ],
+    "Examples": [
+      "/accept +friend",
+      "/accept -friend",
+      "/accept *"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "motd",
+    "Aliases": null,
+    "Usage": "/motd [server]",
+    "Parameters": [
+      "server: optional server name"
+    ],
+    "Summary": "Fetch the server Message of the Day",
+    "Details": [
+      "Requests the server Message of the Day. MOTD numerics display in the existing server/status output."
+    ],
+    "Examples": [
+      "/motd",
+      "/motd irc.example.net"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "who",
+    "Aliases": null,
+    "Usage": "/who \u003cmask\u003e",
+    "Parameters": null,
+    "Summary": "Send WHO command",
+    "Details": [
+      "Sends WHO to the IRC server."
+    ],
+    "Examples": [
+      "/who #seraphirc"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "ban",
+    "Aliases": null,
+    "Usage": "/ban \u003cnick|mask\u003e or /ban \u003c#channel\u003e \u003cnick|mask\u003e",
+    "Parameters": [
+      "#channel: optional channel when not issued from a channel buffer",
+      "nick|mask: nickname or ban mask"
+    ],
+    "Summary": "Ban a nick or mask from a channel",
+    "Details": [
+      "Sends MODE +b. Without an explicit channel, uses the current channel buffer. Nicknames are converted to nick!*@* masks."
+    ],
+    "Examples": [
+      "/ban SeraphGo_!*@*",
+      "/ban Alice",
+      "/ban #seraphirc SeraphGo_!*@*"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "unban",
+    "Aliases": null,
+    "Usage": "/unban \u003cnick|mask\u003e or /unban \u003c#channel\u003e \u003cnick|mask\u003e",
+    "Parameters": [
+      "#channel: optional channel when not issued from a channel buffer",
+      "nick|mask: nickname or ban mask"
+    ],
+    "Summary": "Remove a ban from a channel",
+    "Details": [
+      "Sends MODE -b. Without an explicit channel, uses the current channel buffer. Nicknames are converted to nick!*@* masks."
+    ],
+    "Examples": [
+      "/unban SeraphGo_!*@*",
+      "/unban #seraphirc SeraphGo_!*@*"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "kickban",
+    "Aliases": null,
+    "Usage": "/kickban \u003cnick\u003e [reason] or /kickban \u003c#channel\u003e \u003cnick\u003e [reason]",
+    "Parameters": [
+      "#channel: optional channel when not issued from a channel buffer",
+      "nick: nickname to ban and kick",
+      "reason: optional kick reason"
+    ],
+    "Summary": "Ban and kick a user from a channel",
+    "Details": [
+      "Sets a ban mask and then kicks the nick. Without an explicit channel, uses the current channel buffer."
+    ],
+    "Examples": [
+      "/kickban Alice",
+      "/kickban Alice repeated flooding",
+      "/kickban #seraphirc Alice repeated flooding"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "op",
+    "Aliases": null,
+    "Usage": "/op \u003cnick\u003e",
+    "Parameters": [
+      "nick: nickname to give operator status"
+    ],
+    "Summary": "Give channel operator status",
+    "Details": [
+      "Sends MODE +o for a nick in the current channel."
+    ],
+    "Examples": [
+      "/op Alice"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "deop",
+    "Aliases": null,
+    "Usage": "/deop \u003cnick\u003e",
+    "Parameters": [
+      "nick: nickname to remove operator status from"
+    ],
+    "Summary": "Remove channel operator status",
+    "Details": [
+      "Sends MODE -o for a nick in the current channel."
+    ],
+    "Examples": [
+      "/deop Alice"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "voice",
+    "Aliases": null,
+    "Usage": "/voice \u003cnick\u003e",
+    "Parameters": [
+      "nick: nickname to give voice"
+    ],
+    "Summary": "Give voice to a nick",
+    "Details": [
+      "Sends MODE +v for a nick in the current channel."
+    ],
+    "Examples": [
+      "/voice Alice"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "devoice",
+    "Aliases": null,
+    "Usage": "/devoice \u003cnick\u003e",
+    "Parameters": [
+      "nick: nickname to remove voice from"
+    ],
+    "Summary": "Remove voice from a nick",
+    "Details": [
+      "Sends MODE -v for a nick in the current channel."
+    ],
+    "Examples": [
+      "/devoice Alice"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "invite",
+    "Aliases": null,
+    "Usage": "/invite \u003cnick\u003e [#channel]",
+    "Parameters": [
+      "nick: nick to invite",
+      "#channel: channel target, defaulting to the channel you are currently viewing"
+    ],
+    "Summary": "Invite a nick to a channel",
+    "Details": [
+      "Sends INVITE to the IRC server. If you omit the channel while viewing a channel, the current channel is used."
+    ],
+    "Examples": [
+      "/invite Alice",
+      "/invite Alice #seraphirc"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "kick",
+    "Aliases": null,
+    "Usage": "/kick \u003cnick\u003e [reason] or /kick \u003c#channel\u003e \u003cnick\u003e [reason]",
+    "Parameters": [
+      "#channel: optional channel when not issued from a channel buffer",
+      "nick: nick to kick",
+      "reason: optional kick reason"
+    ],
+    "Summary": "Kick a user from a channel",
+    "Details": [
+      "Sends KICK to the IRC server. Without an explicit channel, uses the current channel buffer."
+    ],
+    "Examples": [
+      "/kick Alice",
+      "/kick Alice repeated flooding",
+      "/kick #seraphirc Alice repeated flooding"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "raw",
+    "Aliases": [
+      "quote"
+    ],
+    "Usage": "/raw \u003cIRC line\u003e",
+    "Parameters": [
+      "IRC line: raw command text to send"
+    ],
+    "Summary": "Send a raw IRC line",
+    "Details": [
+      "Sends the provided IRC line exactly as typed after /raw. /quote is an alias."
+    ],
+    "Examples": [
+      "/raw WHOIS Alice",
+      "/quote TIME"
+    ],
+    "Category": "Advanced",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "users",
+    "Aliases": null,
+    "Usage": "/users [args]",
+    "Parameters": [
+      "args: optional server-specific USERS arguments"
+    ],
+    "Summary": "Request the server USERS listing",
+    "Details": [
+      "Sends IRC USERS to the active network. Server support and output vary by IRC network."
+    ],
+    "Examples": [
+      "/users",
+      "/users *"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "lusers",
+    "Aliases": null,
+    "Usage": "/lusers [args]",
+    "Parameters": [
+      "args: optional server-specific LUSERS arguments"
+    ],
+    "Summary": "Request IRC network user/server statistics",
+    "Details": [
+      "Sends IRC LUSERS to request local and global user/server counts for the active network."
+    ],
+    "Examples": [
+      "/lusers",
+      "/lusers *"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "time",
+    "Aliases": null,
+    "Usage": "/time [server]",
+    "Parameters": [
+      "server: optional server name"
+    ],
+    "Summary": "Request the server time",
+    "Details": [
+      "Sends IRC TIME to request the server time. With a server argument, requests time from that server."
+    ],
+    "Examples": [
+      "/time",
+      "/time irc.example.net"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "admin",
+    "Aliases": null,
+    "Usage": "/admin [server]",
+    "Parameters": [
+      "server: optional server name"
+    ],
+    "Summary": "Request server administrator information",
+    "Details": [
+      "Sends IRC ADMIN to request server administrator information."
+    ],
+    "Examples": [
+      "/admin",
+      "/admin irc.example.net"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "info",
+    "Aliases": null,
+    "Usage": "/info [server]",
+    "Parameters": [
+      "server: optional server name"
+    ],
+    "Summary": "Request server information",
+    "Details": [
+      "Sends IRC INFO to request server information, if supported by the network."
+    ],
+    "Examples": [
+      "/info",
+      "/info irc.example.net"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "ison",
+    "Aliases": null,
+    "Usage": "/ison \u003cnick\u003e [nick...]",
+    "Parameters": [
+      "nick: one or more nicknames to check"
+    ],
+    "Summary": "Check whether nicknames are online",
+    "Details": [
+      "Sends IRC ISON to check whether one or more nicknames are currently online."
+    ],
+    "Examples": [
+      "/ison Alice",
+      "/ison Alice Bob Carol"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "userhost",
+    "Aliases": null,
+    "Usage": "/userhost \u003cnick\u003e [nick...]",
+    "Parameters": [
+      "nick: one or more nicknames to inspect"
+    ],
+    "Summary": "Request user/host information",
+    "Details": [
+      "Sends IRC USERHOST to request user and host information for one or more nicknames."
+    ],
+    "Examples": [
+      "/userhost Alice",
+      "/userhost Alice Bob"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "oper",
+    "Aliases": null,
+    "Usage": "/oper \u003cuser\u003e \u003cpassword\u003e",
+    "Parameters": [
+      "user: operator account name",
+      "password: operator password"
+    ],
+    "Summary": "Gain IRC operator privileges",
+    "Details": [
+      "Authenticates as an IRC operator. The password is sent to the server but is redacted from local output and command history.",
+      "Note: Requires IRC operator privileges."
+    ],
+    "Examples": [
+      "/oper myuser \u003cpassword\u003e"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "kill",
+    "Aliases": null,
+    "Usage": "/kill \u003cnick\u003e \u003creason\u003e",
+    "Parameters": [
+      "nick: user to disconnect",
+      "reason: kill reason"
+    ],
+    "Summary": "Forcibly disconnect a user",
+    "Details": [
+      "Forcibly disconnects a user from the server.",
+      "Note: Requires IRC operator privileges."
+    ],
+    "Examples": [
+      "/kill Alice repeated abuse"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "kline",
+    "Aliases": null,
+    "Usage": "/kline \u003cmask\u003e [duration] \u003creason\u003e",
+    "Parameters": [
+      "mask: host/IP mask",
+      "duration: optional duration such as 1d",
+      "reason: ban reason"
+    ],
+    "Summary": "Set a server-level host/IP ban",
+    "Details": [
+      "Sets a server-level host/IP ban. If the second token looks like a duration, SeraphIRC sends it before the mask.",
+      "Note: Requires IRC operator privileges. Syntax may vary by network."
+    ],
+    "Examples": [
+      "/kline *@bad.host repeated spam",
+      "/kline *@bad.host 1d repeated spam"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "unkline",
+    "Aliases": null,
+    "Usage": "/unkline \u003cmask\u003e",
+    "Parameters": [
+      "mask: K-line mask to remove"
+    ],
+    "Summary": "Remove a K-line",
+    "Details": [
+      "Removes a server-level K-line.",
+      "Note: Requires IRC operator privileges. Syntax may vary by network."
+    ],
+    "Examples": [
+      "/unkline *@bad.host"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "gline",
+    "Aliases": null,
+    "Usage": "/gline \u003cmask\u003e \u003creason\u003e",
+    "Parameters": [
+      "mask: network-wide ban mask",
+      "reason: ban reason"
+    ],
+    "Summary": "Set a network-wide ban, if supported",
+    "Details": [
+      "Sets a network-wide ban on networks that support GLINE.",
+      "Note: Requires IRC operator privileges. Syntax may vary by network."
+    ],
+    "Examples": [
+      "/gline *@bad.host repeated abuse"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "zline",
+    "Aliases": null,
+    "Usage": "/zline \u003cip\u003e \u003creason\u003e",
+    "Parameters": [
+      "ip: IP address or mask",
+      "reason: ban reason"
+    ],
+    "Summary": "Set an IP-level ban, if supported",
+    "Details": [
+      "Sets an IP-level ban on networks that support ZLINE.",
+      "Note: Requires IRC operator privileges. Syntax may vary by network."
+    ],
+    "Examples": [
+      "/zline 203.0.113.10 repeated abuse"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "shun",
+    "Aliases": null,
+    "Usage": "/shun \u003cmask\u003e \u003creason\u003e",
+    "Parameters": [
+      "mask: user mask",
+      "reason: shun reason"
+    ],
+    "Summary": "Silently block commands from a user",
+    "Details": [
+      "Silently blocks commands from a user on networks that support SHUN.",
+      "Note: Requires IRC operator privileges. Syntax may vary by network."
+    ],
+    "Examples": [
+      "/shun *@bad.host repeated abuse"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "squit",
+    "Aliases": null,
+    "Usage": "/squit \u003cserver\u003e \u003creason\u003e",
+    "Parameters": [
+      "server: server to disconnect",
+      "reason: split reason"
+    ],
+    "Summary": "Disconnect a server",
+    "Details": [
+      "Disconnects a server from the network.",
+      "Note: Requires IRC operator privileges."
+    ],
+    "Examples": [
+      "/squit irc2.example.net maintenance"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "rehash",
+    "Aliases": null,
+    "Usage": "/rehash [config]",
+    "Parameters": [
+      "config: optional config name or target"
+    ],
+    "Summary": "Reload server configuration",
+    "Details": [
+      "Reloads server configuration without a full restart.",
+      "Note: Requires IRC operator privileges. Syntax may vary by network."
+    ],
+    "Examples": [
+      "/rehash",
+      "/rehash kline"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "restart",
+    "Aliases": null,
+    "Usage": "/restart \u003creason\u003e",
+    "Parameters": [
+      "reason: restart reason"
+    ],
+    "Summary": "Restart the IRC server",
+    "Details": [
+      "Restarts the IRC server. A reason is required.",
+      "Note: Destructive. Requires IRC operator privileges."
+    ],
+    "Examples": [
+      "/restart maintenance"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "die",
+    "Aliases": null,
+    "Usage": "/die \u003creason\u003e",
+    "Parameters": [
+      "reason: shutdown reason"
+    ],
+    "Summary": "Shut down the IRC server",
+    "Details": [
+      "Shuts down the IRC server. A reason is required.",
+      "Note: Highly destructive. Requires IRC operator privileges."
+    ],
+    "Examples": [
+      "/die emergency maintenance"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "stats",
+    "Aliases": null,
+    "Usage": "/stats \u003cflag\u003e",
+    "Parameters": [
+      "flag: statistics flag"
+    ],
+    "Summary": "Query server statistics",
+    "Details": [
+      "Queries server statistics.",
+      "Note: Some flags may require IRC operator privileges."
+    ],
+    "Examples": [
+      "/stats k",
+      "/stats u",
+      "/stats l"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "links",
+    "Aliases": null,
+    "Usage": "/links",
+    "Parameters": null,
+    "Summary": "List linked servers",
+    "Details": [
+      "Lists linked servers.",
+      "Note: Some networks restrict this command."
+    ],
+    "Examples": [
+      "/links"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "map",
+    "Aliases": null,
+    "Usage": "/map",
+    "Parameters": null,
+    "Summary": "Show network topology, if supported",
+    "Details": [
+      "Shows the network topology map on servers that support MAP.",
+      "Note: Syntax and availability may vary by network."
+    ],
+    "Examples": [
+      "/map"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "trace",
+    "Aliases": null,
+    "Usage": "/trace \u003cnick|server\u003e",
+    "Parameters": [
+      "nick|server: target to trace"
+    ],
+    "Summary": "Trace a user or server route",
+    "Details": [
+      "Traces the route to a user or server.",
+      "Note: May require IRC operator privileges."
+    ],
+    "Examples": [
+      "/trace Alice"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "globops",
+    "Aliases": null,
+    "Usage": "/globops \u003cmessage\u003e",
+    "Parameters": [
+      "message: message to send"
+    ],
+    "Summary": "Message all online IRC operators",
+    "Details": [
+      "Sends a message to all online IRC operators.",
+      "Note: Requires IRC operator privileges."
+    ],
+    "Examples": [
+      "/globops test message"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "wallops",
+    "Aliases": null,
+    "Usage": "/wallops \u003cmessage\u003e",
+    "Parameters": [
+      "message: message to broadcast"
+    ],
+    "Summary": "Broadcast to users with wallops enabled",
+    "Details": [
+      "Broadcasts to users with wallops enabled.",
+      "Note: Requires server permission on many networks."
+    ],
+    "Examples": [
+      "/wallops test message"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "locops",
+    "Aliases": null,
+    "Usage": "/locops \u003cmessage\u003e",
+    "Parameters": [
+      "message: message to send"
+    ],
+    "Summary": "Message local IRC operators",
+    "Details": [
+      "Sends a message to local IRC operators on the current server.",
+      "Note: Requires IRC operator privileges."
+    ],
+    "Examples": [
+      "/locops test message"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "cloak",
+    "Aliases": null,
+    "Usage": "/cloak \u003cnick\u003e",
+    "Parameters": [
+      "nick: target nick"
+    ],
+    "Summary": "Manage hostname cloaking, if supported",
+    "Details": [
+      "Manages or requests hostname cloaking where supported.",
+      "Note: Requires IRC operator privileges. Syntax may vary by network."
+    ],
+    "Examples": [
+      "/cloak Alice"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "uncloak",
+    "Aliases": null,
+    "Usage": "/uncloak \u003cnick\u003e",
+    "Parameters": [
+      "nick: target nick"
+    ],
+    "Summary": "Remove hostname cloaking, if supported",
+    "Details": [
+      "Removes hostname cloaking where supported.",
+      "Note: Requires IRC operator privileges. Syntax may vary by network."
+    ],
+    "Examples": [
+      "/uncloak Alice"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "sethost",
+    "Aliases": null,
+    "Usage": "/sethost \u003cnick\u003e \u003chost\u003e",
+    "Parameters": [
+      "nick: target nick",
+      "host: displayed host"
+    ],
+    "Summary": "Set a user's displayed host",
+    "Details": [
+      "Sets a user's displayed host where supported.",
+      "Note: Requires IRC operator privileges. Syntax may vary by network."
+    ],
+    "Examples": [
+      "/sethost Alice staff/example"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "chghost",
+    "Aliases": null,
+    "Usage": "/chghost \u003cnick\u003e \u003cnewhost\u003e",
+    "Parameters": [
+      "nick: target nick",
+      "newhost: displayed host"
+    ],
+    "Summary": "Change a user's displayed host",
+    "Details": [
+      "Changes a user's displayed host where supported.",
+      "Note: Requires IRC operator privileges. Syntax may vary by network."
+    ],
+    "Examples": [
+      "/chghost Alice staff/example"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "silence",
+    "Aliases": null,
+    "Usage": "/silence [args...]",
+    "Parameters": [
+      "args: optional network-specific SILENCE arguments"
+    ],
+    "Summary": "Manage server-side silence entries",
+    "Details": [
+      "Manages server-side silence entries. Syntax varies by network, so use /raw for network-specific syntax."
+    ],
+    "Examples": [
+      "/silence",
+      "/silence +bad!*@*",
+      "/silence -bad!*@*"
+    ],
+    "Category": "IRC Operator",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "nickserv",
+    "Aliases": [
+      "ns"
+    ],
+    "Usage": "/nickserv \u003ccommand\u003e",
+    "Parameters": null,
+    "Summary": "Message NickServ",
+    "Details": [
+      "Sends a private message to the configured NickServ target for the active network."
+    ],
+    "Examples": [
+      "/nickserv IDENTIFY \u003cpassword\u003e",
+      "/ns STATUS"
+    ],
+    "Category": "Services",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "chanserv",
+    "Aliases": [
+      "cs"
+    ],
+    "Usage": "/chanserv \u003ccommand\u003e",
+    "Parameters": null,
+    "Summary": "Message ChanServ",
+    "Details": [
+      "Sends a private message to the configured ChanServ target for the active network."
+    ],
+    "Examples": [
+      "/chanserv OP #seraphirc",
+      "/cs FLAGS #seraphirc"
+    ],
+    "Category": "Services",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "memoserv",
+    "Aliases": [
+      "ms"
+    ],
+    "Usage": "/memoserv \u003ccommand\u003e",
+    "Parameters": null,
+    "Summary": "Message MemoServ",
+    "Details": [
+      "Sends a private message to the configured MemoServ target for the active network."
+    ],
+    "Examples": [
+      "/memoserv LIST",
+      "/ms READ 1"
+    ],
+    "Category": "Services",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "helpserv",
+    "Aliases": null,
+    "Usage": "/helpserv \u003ccommand\u003e",
+    "Parameters": null,
+    "Summary": "Message HelpServ",
+    "Details": [
+      "Sends a private message to the configured HelpServ target for the active network."
+    ],
+    "Examples": [
+      "/helpserv HELP"
+    ],
+    "Category": "Services",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "hostserv",
+    "Aliases": [
+      "hs"
+    ],
+    "Usage": "/hostserv \u003ccommand\u003e",
+    "Parameters": null,
+    "Summary": "Message HostServ",
+    "Details": [
+      "Sends a private message to the configured HostServ target for the active network."
+    ],
+    "Examples": [
+      "/hostserv ON",
+      "/hs ON"
+    ],
+    "Category": "Services",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "botserv",
+    "Aliases": [
+      "bs"
+    ],
+    "Usage": "/botserv \u003ccommand\u003e",
+    "Parameters": null,
+    "Summary": "Message BotServ",
+    "Details": [
+      "Sends a private message to the configured BotServ target for the active network."
+    ],
+    "Examples": [
+      "/botserv HELP",
+      "/bs HELP"
+    ],
+    "Category": "Services",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "operserv",
+    "Aliases": [
+      "os"
+    ],
+    "Usage": "/operserv \u003ccommand\u003e",
+    "Parameters": null,
+    "Summary": "Message OperServ",
+    "Details": [
+      "Sends a private message to the configured OperServ target for the active network."
+    ],
+    "Examples": [
+      "/operserv HELP",
+      "/os HELP"
+    ],
+    "Category": "Services",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  }
+]

@@ -2173,10 +2173,20 @@ h3 {
 }
 .news-panel:has(.news-index:empty) { grid-template-columns: minmax(0, 1fr); }
 .news-index:empty { display: none; }
+/* The index gains a row with every release, so it is capped at the five most
+   recent and scrolls past that. Left to grow it runs well below the card it
+   sits beside, and the two columns stop reading as one panel. */
 .news-index {
   display: grid;
   gap: 2px;
   align-content: start;
+  /* 9px padding twice, the name line, a 3px gap, then the date line. */
+  --news-index-row: 54px;
+  max-height: calc(var(--news-index-row) * 5 + 2px * 4);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--accent) 38%, transparent) transparent;
 }
 .news-index-item {
   display: grid;
@@ -2227,7 +2237,13 @@ h3 {
 .news-body p { max-width: 72ch; font-size: var(--t-small); }
 @media (max-width: 1000px) {
   .news-panel, .news-panel:has(.news-index:empty) { grid-template-columns: minmax(0, 1fr); }
-  .news-index { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* Stacked under the card in two columns, there is no card height to stay
+     level with, so the cap comes off and the list runs full length. */
+  .news-index {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-height: none;
+    overflow-y: visible;
+  }
 }
 @media (max-width: 560px) { .news-index { grid-template-columns: minmax(0, 1fr); } }
 
