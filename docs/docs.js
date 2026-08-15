@@ -250,6 +250,69 @@
     if (isNarrow()) closeRailOnNarrow();
   }
 
+  /* ── Printing: open the whole contents tree ──────────────── */
+
+  /* A closed <details> hides its content through the UA's own slot
+     rendering, so no rule on the light-DOM children reaches it. The print
+     stylesheet cannot expand the tree on its own, and a contents page with
+     five empty headings on it is worse than none. Open every book for the
+     duration of the print job, then put back exactly the ones that were
+     shut, so the reader's rail looks untouched afterwards. */
+  var reopenedForPrint = [];
+
+  function expandForPrint() {
+    if (reopenedForPrint.length) return; // already expanded for this job
+    Array.prototype.forEach.call(nav.querySelectorAll("details:not([open])"), function (book) {
+      reopenedForPrint.push(book);
+      book.open = true;
+    });
+  }
+
+  function collapseAfterPrint() {
+    reopenedForPrint.forEach(function (book) { book.open = false; });
+    reopenedForPrint = [];
+  }
+
+  window.addEventListener("beforeprint", expandForPrint);
+  window.addEventListener("afterprint", collapseAfterPrint);
+
+  /* Safari fired neither event until 13, and some engines only emit the
+     media change. Listening to both is harmless: expandForPrint is
+     idempotent and collapseAfterPrint is a no-op when nothing was opened. */
+  if (window.matchMedia) {
+    var printQuery = window.matchMedia("print");
+    var onPrintChange = function (event) {
+      if (event.matches) expandForPrint();
+      else collapseAfterPrint();
+    };
+    if (printQuery.addEventListener) printQuery.addEventListener("change", onPrintChange);
+    else if (printQuery.addListener) printQuery.addListener(onPrintChange);
+  }
+
+  /* Download as PDF. A page cannot write a file to disk on its own, so this
+     hands over the print dialog, where "Save as PDF" is the destination. The
+     print stylesheet lays the manual out one topic page to a sheet in
+     whatever theme is selected, and expanding here rather than relying on
+     beforeprint alone means the tree is already open if an engine paints its
+     preview first. */
+  var pdfButton = document.getElementById("docs-pdf");
+  if (pdfButton) {
+    pdfButton.addEventListener("click", function () {
+      expandForPrint();
+      var stamp = document.getElementById("docs-print-date");
+      if (stamp) {
+        try {
+          stamp.textContent = new Date().toLocaleDateString(undefined, {
+            year: "numeric", month: "long", day: "numeric"
+          });
+        } catch (e) {
+          stamp.textContent = "";
+        }
+      }
+      window.print();
+    });
+  }
+
   /* ── Scroll spy inside the active pane ───────────────────── */
 
   if ("IntersectionObserver" in window) {

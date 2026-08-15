@@ -106,6 +106,19 @@
 
     <main>
       <div class="docs-shell">
+        <!-- Cover sheet, print only. Screen readers skip it because the page
+             already carries the same title in its <title> and h2s. -->
+        <div class="docs-print-cover" aria-hidden="true">
+          <img class="mark-dark" src="/assets/seraph-mark.svg" alt="">
+          <img class="mark-light" src="/assets/seraph-mark-light.svg" alt="">
+          <h1>SeraphIRC</h1>
+          <p class="cover-sub">Documentation</p>
+          <p class="cover-meta">
+            www.seraphirc.chat/docs
+            <span id="docs-print-date"></span>
+          </p>
+        </div>
+
         <button
           class="docs-rail-toggle"
           id="rail-toggle"
@@ -117,6 +130,12 @@
         <aside class="docs-sidebar" id="docs-rail" aria-label="Documentation contents">
           <div class="docs-rail-head">
             <strong>Contents</strong>
+            <button
+              class="docs-pdf"
+              id="docs-pdf"
+              type="button"
+              title="Opens your browser's print dialog. Choose Save as PDF."
+            >Download as PDF</button>
           </div>
           <div class="docs-search-wrap">
             <input
@@ -208,7 +227,7 @@
           <details class="chapter">
             <summary>Connection<span class="chapter-count">9</span></summary>
             <ul class="pagelist">
-              <li class="page-overview"><a href="#commands-connection">All connection commands</a></li>
+              <li class="page-overview"><a href="#commands-connection"><span class="lbl-screen">All connection commands</span><span class="lbl-print">Connection</span></a></li>
               <li><a href="#cmd-connect"><code>/connect</code></a></li>
               <li><a href="#cmd-cycle"><code>/cycle</code></a></li>
               <li><a href="#cmd-disconnect"><code>/disconnect</code></a></li>
@@ -223,7 +242,7 @@
           <details class="chapter">
             <summary>Messaging<span class="chapter-count">17</span></summary>
             <ul class="pagelist">
-              <li class="page-overview"><a href="#commands-messaging">All messaging commands</a></li>
+              <li class="page-overview"><a href="#commands-messaging"><span class="lbl-screen">All messaging commands</span><span class="lbl-print">Messaging</span></a></li>
               <li><a href="#cmd-ctcp"><code>/ctcp</code></a></li>
               <li><a href="#cmd-dcc"><code>/dcc</code></a></li>
               <li><a href="#cmd-format"><code>/format</code></a></li>
@@ -246,7 +265,7 @@
           <details class="chapter">
             <summary>IRC<span class="chapter-count">29</span></summary>
             <ul class="pagelist">
-              <li class="page-overview"><a href="#commands-irc">All irc commands</a></li>
+              <li class="page-overview"><a href="#commands-irc"><span class="lbl-screen">All irc commands</span><span class="lbl-print">IRC</span></a></li>
               <li><a href="#cmd-accept"><code>/accept</code></a></li>
               <li><a href="#cmd-admin"><code>/admin</code></a></li>
               <li><a href="#cmd-away"><code>/away</code></a></li>
@@ -281,7 +300,7 @@
           <details class="chapter">
             <summary>IRC Operator<span class="chapter-count">23</span></summary>
             <ul class="pagelist">
-              <li class="page-overview"><a href="#commands-irc-operator">All irc operator commands</a></li>
+              <li class="page-overview"><a href="#commands-irc-operator"><span class="lbl-screen">All irc operator commands</span><span class="lbl-print">IRC Operator</span></a></li>
               <li><a href="#cmd-chghost"><code>/chghost</code></a></li>
               <li><a href="#cmd-cloak"><code>/cloak</code></a></li>
               <li><a href="#cmd-die"><code>/die</code></a></li>
@@ -310,7 +329,7 @@
           <details class="chapter">
             <summary>Services<span class="chapter-count">7</span></summary>
             <ul class="pagelist">
-              <li class="page-overview"><a href="#commands-services">All services commands</a></li>
+              <li class="page-overview"><a href="#commands-services"><span class="lbl-screen">All services commands</span><span class="lbl-print">Services</span></a></li>
               <li><a href="#cmd-botserv"><code>/botserv</code></a></li>
               <li><a href="#cmd-chanserv"><code>/chanserv</code></a></li>
               <li><a href="#cmd-helpserv"><code>/helpserv</code></a></li>
@@ -323,7 +342,7 @@
           <details class="chapter">
             <summary>Buffers<span class="chapter-count">9</span></summary>
             <ul class="pagelist">
-              <li class="page-overview"><a href="#commands-buffers">All buffers commands</a></li>
+              <li class="page-overview"><a href="#commands-buffers"><span class="lbl-screen">All buffers commands</span><span class="lbl-print">Buffers</span></a></li>
               <li><a href="#cmd-buffers"><code>/buffers</code></a></li>
               <li><a href="#cmd-clear"><code>/clear</code></a></li>
               <li><a href="#cmd-clearall"><code>/clearall</code></a></li>
@@ -338,7 +357,7 @@
           <details class="chapter">
             <summary>Client<span class="chapter-count">8</span></summary>
             <ul class="pagelist">
-              <li class="page-overview"><a href="#commands-client">All client commands</a></li>
+              <li class="page-overview"><a href="#commands-client"><span class="lbl-screen">All client commands</span><span class="lbl-print">Client</span></a></li>
               <li><a href="#cmd-about"><code>/about</code></a></li>
               <li><a href="#cmd-alias"><code>/alias</code></a></li>
               <li><a href="#cmd-exit"><code>/exit</code></a></li>
@@ -352,7 +371,7 @@
           <details class="chapter">
             <summary>Advanced<span class="chapter-count">1</span></summary>
             <ul class="pagelist">
-              <li class="page-overview"><a href="#commands-advanced">All advanced commands</a></li>
+              <li class="page-overview"><a href="#commands-advanced"><span class="lbl-screen">All advanced commands</span><span class="lbl-print">Advanced</span></a></li>
               <li><a href="#cmd-raw"><code>/raw</code></a></li>
             </ul>
           </details>

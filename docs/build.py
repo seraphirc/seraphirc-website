@@ -278,7 +278,8 @@ def render_nav(grouped):
             f'<span class="chapter-count">{len(commands)}</span></summary>\n'
             f'            <ul class="pagelist">\n'
             f'              <li class="page-overview"><a href="#{slug}">'
-            f"All {esc(category.lower())} commands</a></li>\n"
+            f'<span class="lbl-screen">All {esc(category.lower())} commands</span>'
+            f'<span class="lbl-print">{esc(category)}</span></a></li>\n'
             f"{items}"
             f"            </ul>\n"
             f"          </details>\n"

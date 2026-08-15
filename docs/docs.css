@@ -44,6 +44,10 @@
 }
 
 .docs-rail-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
   padding: 12px 14px 10px;
   border-bottom: 1px solid var(--line);
   background: linear-gradient(
@@ -60,6 +64,24 @@
   text-transform: uppercase;
   color: var(--gold-bright, var(--gold));
 }
+.docs-pdf {
+  flex: none;
+  padding: 0;
+  font: inherit;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--dim);
+  background: none;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.docs-pdf:hover { color: var(--gold-bright, var(--gold)); border-bottom-color: var(--gold); }
+.docs-pdf:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
 .docs-search-wrap { padding: 10px 12px; border-bottom: 1px solid var(--line-soft, var(--line)); }
 .docs-search {
   width: 100%;
@@ -199,6 +221,11 @@
   font-style: italic;
   color: var(--faint);
 }
+/* The overview row carries two labels. On screen it reads "All connection
+   commands", sitting under a chapter heading that already says Connection.
+   In print the heading is a <summary>, which cannot be a link, so the row
+   takes its place and needs the bare category name instead. */
+.lbl-print { display: none; }
 
 /* Search results replace the tree while the box has text in it. */
 .docs-nav.is-searching .book,
@@ -556,10 +583,246 @@ pre.entry-examples code {
     max-height: min(62vh, 460px);
   }
   .docs-js .docs-sidebar[hidden] { display: none; }
-  .docs-rail-head { display: none; }
+  /* The head stays: the button beside "Contents" is the only route to the
+     PDF, and hiding it here would take the feature away on phones. */
 }
 
 @media (prefers-reduced-motion: reduce) {
   .docs-nav summary::before,
   .entry-anchor { transition: none; }
+}
+
+/* ============================================================
+   Print / Save as PDF
+   ------------------------------------------------------------
+   The manual printed whole, one topic page to one sheet, in
+   whatever theme the reader has selected. There is no PDF
+   library here: the browser's own print pipeline produces
+   selectable text and working internal links, which a canvas
+   rasterizer would not.
+
+   Backgrounds are the catch. Chrome and Firefox both drop them
+   from print by default, and a themed PDF with no theme is the
+   whole feature gone, so every painted surface asks for
+   print-color-adjust: exact. That forces the element's own
+   background irrespective of the dialog's "Background graphics"
+   checkbox.
+   ============================================================ */
+
+.docs-print-cover { display: none; }
+
+@media print {
+  /* A generous sheet margin, and a smaller root so the rem-based scale the
+     screen layout is built on shrinks with it. Without the second half, a
+     wider margin just squeezes the same screen-sized type into a narrower
+     column and the pages get longer instead of calmer. */
+  @page { margin: 20mm 18mm 22mm; }
+
+  html {
+    font-size: 12px;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    background: var(--bg);
+    color: var(--text);
+  }
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    background: var(--bg);
+    color: var(--text);
+    /* Belt and braces: some engines paint the root background across the
+       page margin, which reads as text sitting hard against the edge. */
+    padding: 0;
+  }
+
+  /* The screen sizes lean on clamp() with vw units, which resolve against
+     the sheet in print and come out wildly off. Pin them in points. */
+  .docs-pane > h2 { font-size: 19pt; margin-bottom: 6pt; }
+  .docs-pane h3 { font-size: 12pt; margin: 14pt 0 4pt; }
+  .docs-pane h4 { font-size: 8pt; margin: 10pt 0 3pt; }
+  .pane-kicker { font-size: 7.5pt; }
+  .pane-lead { font-size: 10pt; margin-bottom: 12pt; }
+  .docs-pane p,
+  .docs-pane li { font-size: 9.5pt; }
+  .docs-pane table { font-size: 8.5pt; }
+  .docs-pane th, .docs-pane td { padding: 4pt 7pt; }
+  .entry-head h3 { font-size: 11pt; }
+  .entry-usage code,
+  pre.entry-examples code { font-size: 8.5pt; }
+  .entry-summary, .entry-aliases, .entry-details p { font-size: 9pt; }
+  .entry-params dt, .entry-params dd { font-size: 8.5pt; }
+  .flag { font-size: 6pt; }
+  .docs-note { font-size: 9pt; padding: 8pt 10pt; }
+
+  /* Screen furniture: the starfield and meteors would cost a page of ink
+     apiece, and the sticky chrome has nothing to stick to on paper. */
+  body::before,
+  body::after,
+  main::before,
+  .shooting-stars,
+  .topbar,
+  .site-footer,
+  .docs-rail-toggle,
+  .docs-pdf,
+  .docs-search-wrap,
+  .docs-results,
+  .pane-foot,
+  .entry-anchor,
+  .entry-jump { display: none !important; }
+
+  .docs-shell {
+    display: block;
+    width: auto;
+    max-width: none;
+    padding: 0;
+  }
+
+  /* ── Cover ──────────────────────────────────────────────── */
+  .docs-print-cover {
+    display: block;
+    break-after: page;
+    padding: 28mm 0 0;
+    text-align: center;
+  }
+  .docs-print-cover img { width: 92px; height: auto; margin: 0 auto 18px; }
+  .docs-print-cover h1 {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 44pt;
+    line-height: 1;
+    color: var(--text);
+  }
+  .docs-print-cover .cover-sub {
+    margin: 6px 0 0;
+    font-family: var(--mono);
+    font-size: 11pt;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold, var(--accent));
+  }
+  .docs-print-cover .cover-meta {
+    margin: 26px 0 0;
+    font-family: var(--mono);
+    font-size: 8pt;
+    color: var(--dim);
+  }
+  .docs-print-cover .cover-meta span::before { content: " · "; }
+  .docs-print-cover .cover-meta span:empty::before { content: none; }
+
+  /* ── Contents ───────────────────────────────────────────── */
+  .docs-sidebar {
+    position: static;
+    display: block;
+    max-height: none;
+    overflow: visible;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    break-after: page;
+  }
+  .docs-sidebar[hidden] { display: block !important; }
+
+  /* The rail becomes the manual's table of contents. Its entries are
+     same-document fragment links, which browsers that keep links in their
+     PDF export turn into internal jumps to the page holding that id. That
+     is as close to navigation as print-to-PDF gets: it cannot emit a real
+     PDF outline, since nothing in HTML or CSS drives the bookmark tree that
+     a viewer's sidebar reads. */
+  .docs-rail-head {
+    display: block;
+    padding: 0 0 10px;
+    background: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .docs-rail-head strong {
+    font-family: var(--serif);
+    font-size: 22pt;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text);
+  }
+
+  .docs-nav {
+    overflow: visible;
+    padding: 12px 0 0;
+    /* 145 entries deep, so it sets in two columns rather than running on
+       for four sheets. */
+    columns: 2;
+    column-gap: 14mm;
+  }
+  /* A printed contents page cannot be expanded, so every book is open. */
+  .docs-nav details > *:not(summary) { display: block !important; }
+  .docs-nav .book {
+    break-inside: avoid;
+    margin-bottom: 9pt;
+  }
+  .docs-nav .book > summary { padding: 0 0 3pt; color: var(--gold, var(--accent)); }
+  .docs-nav .book > summary::before { display: none; }
+
+  /* A <summary> cannot be a link, so a printed chapter heading would be dead
+     text pointing at a page the reader can see but not reach. The overview
+     row underneath already links to exactly that page, so it takes over as
+     the heading and the summary steps aside. */
+  .docs-nav .chapter > summary { display: none; }
+  .docs-nav .page-overview { display: block; }
+  .docs-nav .page-overview .lbl-screen { display: none; }
+  .docs-nav .page-overview .lbl-print { display: inline; }
+  .docs-nav .page-overview a {
+    padding: 3pt 0 1pt;
+    font-style: normal;
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .docs-nav .pagelist a,
+  .docs-nav .subpages a {
+    padding: 1pt 0 1pt 8pt;
+    font-size: 8.5pt;
+    line-height: 1.35;
+    color: var(--text);
+    text-decoration: none;
+    border-left: 0;
+  }
+  .docs-nav .book > .pagelist a { padding-left: 8pt; }
+  .docs-nav .book > .pagelist .subpages a,
+  .docs-nav .pagelist .subpages a { padding-left: 8pt; font-size: 8.5pt; color: var(--text); }
+  .docs-nav .subpages { margin-left: 8pt; border-left-color: var(--line); }
+  .docs-nav .pagelist a.is-current { background: none; color: var(--text); }
+  .docs-nav .chapter-count { color: var(--dim); }
+
+  /* ── One topic page, one sheet ──────────────────────────── */
+  .docs-content {
+    display: block;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+  }
+  .docs-js .docs-pane,
+  .docs-pane {
+    display: block;
+    break-before: page;
+  }
+  /* The contents already ended with a forced break. */
+  .docs-pane:first-of-type { break-before: auto; }
+
+  /* Keep a command, a table row, or a callout from straddling a sheet. */
+  .docs-entry,
+  .docs-note,
+  pre,
+  tr { break-inside: avoid; }
+  h2, h3, h4 { break-after: avoid; }
+  .pane-lead { break-after: avoid; }
+
+  .docs-entry,
+  .entry-usage,
+  pre.entry-examples,
+  .docs-pane table,
+  .docs-note { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+
+  /* Internal cross-references stay live in the PDF, so they keep their
+     color, but the underline is noise at print sizes. */
+  .docs-pane a { text-decoration: none; }
+
 }
