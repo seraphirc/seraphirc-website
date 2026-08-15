@@ -236,11 +236,36 @@
         <div class="news-panel" data-news-panel>
           <div class="news-main">
           <div class="news-deck" data-news-deck>
+            <article class="news-card" data-news-title="Ignore Sync">
+              <div class="news-bar">
+                <span class="news-kicker">Ignore Sync</span>
+                <span class="news-date">5.1.2 &middot; Aug 15, 2026</span>
+                <span class="news-flag">New</span>
+              </div>
+              <div class="news-body">
+                <h3>Ignore once, ignored everywhere</h3>
+                <p>
+                  Ignore someone on the desktop and your phone never got the memo, so the
+                  same person kept turning up in your pocket. On a soju bouncer that is
+                  over. Ignore a nick on one device and the other has them ignored too, and
+                  unignoring travels back the same way. It rides soju's
+                  <code>soju.im/blocked</code> key, so a phone that was asleep catches up on
+                  reconnect, and soju stops pushing notifications from anyone on the list.
+                </p>
+                <p>
+                  Entries are IRC masks now, so <code>troll*</code> survives the inevitable
+                  nick change, and an ignore covers notices, invites and the join and quit
+                  noise rather than only messages. Masks are the one thing that stays put,
+                  so every row says whether it syncs or lives on this device alone.
+                </p>
+                <p class="news-cmd"><code>Settings &gt; Ignore List</code></p>
+              </div>
+            </article>
+
             <article class="news-card" data-news-title="Guided Tour">
               <div class="news-bar">
                 <span class="news-kicker">Guided Tour</span>
                 <span class="news-date">5.0.34 &middot; Aug 8, 2026</span>
-                <span class="news-flag">New</span>
               </div>
               <div class="news-body">
                 <h3>Guided Tour for new users</h3>
@@ -756,7 +781,7 @@
 
         <div class="cap-groups">
           <div class="cap-group">
-            <h3 class="cap-head"><span class="status-dot status-supported" aria-hidden="true"></span>Supported <span class="cap-count">&middot; 26</span></h3>
+            <h3 class="cap-head"><span class="status-dot status-supported" aria-hidden="true"></span>Supported <span class="cap-count">&middot; 27</span></h3>
             <ul class="punchlist cap-list">
               <li><code>account-notify</code></li>
               <li><code>account-tag</code></li>
@@ -779,6 +804,7 @@
               <li><code>multi-prefix</code></li>
               <li><code>sasl (plain)</code></li>
               <li><code>server-time</code></li>
+              <li><code>soju.im/blocked</code></li>
               <li><code>soju.im/bouncer-networks</code></li>
               <li><code>soju.im/bouncer-networks-notify</code></li>
               <li><code>soju.im/FILEHOST</code></li>
@@ -1125,6 +1151,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.2">5.1.2</option>
               <option value="5.1.1">5.1.1</option>
               <option value="5.1.0">5.1.0</option>
               <option value="5.0.36">5.0.36</option>
@@ -1162,10 +1189,19 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Aug 14, 2026</span>
+            <span class="changelog-date" id="changelog-date">Aug 15, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.1" data-date="Aug 14, 2026">
+          <article class="release" data-version="5.1.2" data-date="Aug 15, 2026">
+            <ul class="release-notes">
+              <li><b>Ignores follow you between devices:</b> on a soju bouncer, ignoring a nick on the desktop leaves them ignored on your phone, and unignoring travels back the same way. It rides soju's <code>soju.im/blocked</code> capability, so a device that was asleep catches up on reconnect, and soju stops pushing notifications from anyone on the list.</li>
+              <li><b>Ignore lists match masks:</b> entries take the <code>nick!user@host</code> form with <code>*</code> and <code>?</code> wildcards, so a troll changing nick does not walk back in. An ignore now also covers notices, invites, and join, part, quit and nick-change lines rather than only messages. Add one from Settings with a text box and a network picker. Masks stay on the device that made them, and each row in the list says whether it syncs or not.</li>
+              <li><b>Ignore and Notify get their own settings pages:</b> Notify shows its full list on the page instead of a link out to a dialog, and the toolbar gains an Ignore List button beside Notify List.</li>
+              <li><b>Fixes:</b> <code>/ignore</code> and <code>/unignore</code> no longer drop a confirmation into the channel, where it read as though the last person to speak had typed it. The Join and Open Query dialogs close with Escape and lose their duplicate Close button.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.1" data-date="Aug 14, 2026" hidden>
             <ul class="release-notes">
               <li><b>The name menu knows who is still in the room:</b> right-click someone who has left and the actions that need them there, like Slap and the operator tools, are grayed out with a reason instead of failing. Additionally, reply and quote text for a user not present in channel are grayed out.</li>
               <li><b>Fixes:</b> hovering a grayed item in that menu now actually shows its explanation.</li>
