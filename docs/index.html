@@ -424,7 +424,7 @@
                   <tr><th scope="row"><a href="#bouncers">Bouncers</a></th><td>First class Soju support with network discovery, chat history, and read markers that sync across devices. Existing ZNC setups keep working. No bouncer at all is fine too.</td></tr>
                   <tr><th scope="row">IRCv3</th><td>SASL, server-time, account tags, away-notify, echo-message, batch, and chat history negotiated where the network offers them. IRCv3 functionality continues to expand, and is updated on the <a href="/#ircv3">website</a> as new features arrive.</td></tr>
                   <tr><th scope="row"><a href="#formatting">Formatting</a></th><td>Markdown and token syntax compiled to standard IRC control codes, so other clients see ordinary bold, italics, and color.</td></tr>
-                  <tr><th scope="row"><a href="#files">File transfer</a></th><td>Bouncer uploads, classic DCC, and Seraph Transfer, an encrypted peer to peer send that works from behind a bouncer and behind NAT.</td></tr>
+                  <tr><th scope="row"><a href="#files">File transfer</a></th><td>Bouncer uploads, classic DCC, and Seraph Transfer, an encrypted peer to peer send between SeraphIRC users that works from behind a bouncer and behind NAT.</td></tr>
                   <tr><th scope="row"><a href="#appearance">Appearance</a></th><td>A collection of prebuilt themes, a theme editor, and imports from the community <a href="/marketplace/">marketplace</a>.</td></tr>
                   <tr><th scope="row">Privacy</th><td>No analytics, no account requirement, no cloud dependency. The client talks to your networks and nothing else.</td></tr>
                 </tbody>
@@ -648,9 +648,10 @@
             <p class="pane-kicker">Getting Started</p>
             <h2>Sending Files</h2>
             <p class="pane-lead">
-              Three routes. Which one you want depends on whether you are behind a
-              bouncer and whether the file may touch a third party. Each has its own
-              settings page under <a href="#dcc-transfers">Network</a>.
+              Three routes. Which one you want depends on what client the other
+              person runs, whether either of you is behind a bouncer, and whether the
+              file may touch a third party. Each has its own settings page under
+              <a href="#dcc-transfers">Network</a>.
             </p>
 
             <h3>Seraph Transfer</h3>
@@ -664,6 +665,11 @@
             <p>
               <a href="#cmd-seraphchat"><code>/seraphchat nick</code></a> is the
               conversational version: a direct encrypted chat outside the network.
+            </p>
+            <p>
+              <strong>Both ends have to be running SeraphIRC.</strong> Offers go out
+              as a custom CTCP verb that other clients ignore in silence, so somebody
+              on a different client never sees one.
             </p>
 
             <h3>DCC</h3>
@@ -1598,6 +1604,15 @@ server/Libera/server.log</code></pre>
             </p>
 
             <div class="docs-note">
+              <strong>Both people need SeraphIRC.</strong> Offers and invitations
+              travel as the CTCP verb <code>SERAPHXFER</code>, which every other
+              client ignores in silence. Send one to somebody on a different client
+              and nothing happens at their end, so nothing comes back. Use
+              <a href="#dcc-transfers">DCC</a> or a
+              <a href="#uploads">bouncer upload</a> for them instead.
+            </div>
+
+            <div class="docs-note">
               <strong>Seraph Transfer is peer to peer, so the other end can see your
               real IP address.</strong> Sending an offer reveals it to the rendezvous
               immediately, and to the other person once they accept.
@@ -1647,10 +1662,12 @@ server/Libera/server.log</code></pre>
 
             <h3>DCC is still there</h3>
             <p>
-              Seraph Transfer is newer and its traversal can fail on networks it
-              cannot get through. <a href="#dcc-transfers">DCC</a> stays reachable as
-              a deliberate choice rather than something hidden once the new one
-              exists.
+              Seraph Transfer only reaches other SeraphIRC users, and its traversal
+              can fail on networks it cannot get through.
+              <a href="#dcc-transfers">DCC</a> stays reachable as a deliberate choice
+              rather than something hidden once the new one exists. When a peer
+              cannot answer a Seraph offer, DCC is suggested rather than silently
+              substituted.
             </p>
           </article>
 
