@@ -226,7 +226,17 @@
         <span>Privacy-conscious IRC for desktop &amp; mobile</span>
         <a href="https://www.seraphirc.chat">www.seraphirc.chat</a>
       </div>
-      <div class="foot-meta">© 1997&ndash;2026 SeraphIRC · best experienced everywhere — desktop &amp; mobile</div>
+      <div class="foot-meta">© <span data-year>2026</span> SeraphIRC · best experienced everywhere — desktop &amp; mobile</div>
     </footer>
+    <script>
+      // The footer year tracks the clock, so it never needs a January edit.
+      // The markup carries a year of its own, so it is right without script too.
+      (function () {
+        var stamp = String(new Date().getFullYear());
+        document.querySelectorAll("[data-year]").forEach(function (slot) {
+          slot.textContent = stamp;
+        });
+      })();
+    </script>
   </body>
 </html>

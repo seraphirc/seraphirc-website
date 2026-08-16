@@ -1270,7 +1270,7 @@
       </div>
 
       <div class="foot-meta">
-        © 1997–2026 SeraphIRC · best viewed with any browser
+        © <span data-year>2026</span> SeraphIRC · best viewed with any browser
       </div>
     </footer>
 
@@ -1437,6 +1437,14 @@
         select.addEventListener("change", function () { show(select.value); });
       })();
 
+      // The footer year tracks the clock, so it never needs a January edit.
+      // The markup carries a year of its own, so it is right without script too.
+      (function () {
+        var stamp = String(new Date().getFullYear());
+        document.querySelectorAll("[data-year]").forEach(function (slot) {
+          slot.textContent = stamp;
+        });
+      })();
     </script>
   </body>
 </html>
