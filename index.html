@@ -869,6 +869,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.3">5.1.3</option>
               <option value="5.1.2">5.1.2</option>
               <option value="5.1.1">5.1.1</option>
               <option value="5.1.0">5.1.0</option>
@@ -907,10 +908,17 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Aug 15, 2026</span>
+            <span class="changelog-date" id="changelog-date">Aug 16, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.2" data-date="Aug 15, 2026">
+          <article class="release" data-version="5.1.3" data-date="Aug 16, 2026">
+            <ul class="release-notes">
+              <li><b>/LIST shows its colors:</b> channels that dress up their topics with IRC color codes now appear in the list the way they were written, instead of being flattened to plain text.</li>
+              <li><b>/LIST no longer flinches at big networks:</b> an unfiltered search can come back with well over a thousand channels, and the window now loads them in pages as you scroll toward the bottom rather than drawing everything at once. Large networks browse smoothly all the way down.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.2" data-date="Aug 15, 2026" hidden>
             <ul class="release-notes">
               <li><b>Ignores follow you between devices:</b> on a soju bouncer, ignoring a nick on the desktop leaves them ignored on your phone, and unignoring travels back the same way. It rides soju's <code>soju.im/blocked</code> capability, so a device that was asleep catches up on reconnect, and soju stops pushing notifications from anyone on the list.</li>
               <li><b>Ignore lists match masks:</b> entries take the <code>nick!user@host</code> form with <code>*</code> and <code>?</code> wildcards, so a troll changing nick does not walk back in. An ignore now also covers notices, invites, and join, part, quit and nick-change lines rather than only messages. Add one from Settings with a text box and a network picker. Masks stay on the device that made them, and each row in the list says whether it syncs or not.</li>
