@@ -869,6 +869,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.4">5.1.4</option>
               <option value="5.1.3">5.1.3</option>
               <option value="5.1.2">5.1.2</option>
               <option value="5.1.1">5.1.1</option>
@@ -908,10 +909,17 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Aug 16, 2026</span>
+            <span class="changelog-date" id="changelog-date">Aug 17, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.3" data-date="Aug 16, 2026">
+          <article class="release" data-version="5.1.4" data-date="Aug 17, 2026">
+            <ul class="release-notes">
+              <li><b>Quieter behind the scenes:</b> the app fetches channel member details much more gently, so busy networks no longer bounce those lookups and drop rate-limit warnings into your server buffer. On mobile the lookups now wait until you actually open a channel, which keeps a reconnecting phone from setting them off in a burst.</li>
+              <li><b>Fixes:</b> when the server changes one of your user modes, the rest now stay in place instead of vanishing until the next refresh.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.3" data-date="Aug 16, 2026" hidden>
             <ul class="release-notes">
               <li><b>/LIST shows its colors:</b> channels that dress up their topics with IRC color codes now appear in the list the way they were written, instead of being flattened to plain text.</li>
               <li><b>/LIST no longer flinches at big networks:</b> an unfiltered search can come back with well over a thousand channels, and the window now loads them in pages as you scroll toward the bottom rather than drawing everything at once. Large networks browse smoothly all the way down.</li>
