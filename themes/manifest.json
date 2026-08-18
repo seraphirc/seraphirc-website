@@ -1,8 +1,8 @@
 {
   "themes": [
     {
-      "file": "slate.seraphirc-theme.json",
-      "name": "Slate",
+      "file": "lamplight.seraphirc-theme.json",
+      "name": "Lamplight",
       "base": "dim",
       "baseLabel": "Dim",
       "overrides": 122,

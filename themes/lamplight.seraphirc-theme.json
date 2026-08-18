@@ -3,7 +3,7 @@
   "formatVersion": 1,
   "appVersion": "5.1.4",
   "exportedAt": "2026-08-18T02:36:31Z",
-  "name": "Slate",
+  "name": "Lamplight",
   "base": "dim",
   "overrides": {
     "--action-text": "#b294bb",
