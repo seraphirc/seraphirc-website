@@ -1,6 +1,16 @@
 {
   "themes": [
     {
+      "file": "slate.seraphirc-theme.json",
+      "name": "Slate",
+      "base": "dim",
+      "baseLabel": "Dim",
+      "overrides": 122,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-08-17"
+    },
+    {
       "file": "winamp.seraphirc-theme.json",
       "name": "Winamp",
       "base": "hackerman",
