@@ -889,19 +889,76 @@ body::before { display: none; }
 .topnav { width: min(1280px, calc(100% - 36px)); margin: 0 auto; padding: 0 0 8px; }
 .topnav .nav-marq { margin: 0; padding: 9px 0; }
 .topnav .faded { padding: 8px 0 2px; }
-/* keep anchored sections clear of the fixed bar */
-html { scroll-padding-top: 158px; }
-.section { scroll-margin-top: 158px; }
-@media (max-width: 760px) {
-  html { scroll-padding-top: 208px; }
-  .section { scroll-margin-top: 208px; }
-}
+/* Keep anchored sections clear of the fixed bar. The bar's rows wrap at
+   several widths, so its height is not a step function of the breakpoints —
+   a script publishes the measured height as --bar-h and this spends it. The
+   per-breakpoint fallbacks are the measured heights and carry the no-JS case. */
+:root { --bar-fallback: 148px; }
+@media (max-width: 1000px) { :root { --bar-fallback: 212px; } }
+@media (max-width: 760px)  { :root { --bar-fallback: 279px; } }
+@media (max-width: 460px)  { :root { --bar-fallback: 307px; } }
+html     { scroll-padding-top: calc(var(--bar-h, var(--bar-fallback)) + 10px); }
+.section { scroll-margin-top:  calc(var(--bar-h, var(--bar-fallback)) + 10px); }
 /* faded links stay visible on mobile too (per request) */
 .topnav .faded { display: flex; }
 
 /* marquee row in the sticky bar */
 .marqrow { display: flex; align-items: center; gap: 12px; }
 .marqrow .nav-marq { flex: 1; min-width: 0; }
+
+/* pinned download buttons: centered on the header row between the brand and
+   the theme picker, so they ride the sticky bar and stay reachable from
+   anywhere on the page (moved up from the Apps section). Sized to the
+   brand's own height so the row — and the marquee under it — never shifts. */
+.nav-dl-group { display: flex; justify-content: center; align-items: center; gap: 10px; }
+.nav-dl {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 26px;
+  padding: 0 12px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  border-radius: var(--radius-sm);
+  transition: transform 150ms ease, background 150ms ease;
+}
+.nav-dl:hover { transform: translateY(-1px); }
+.nav-dl .button-os-logos { gap: 6px; }
+.nav-dl .button-os-logo { width: 14px; height: 14px; }
+.nav-dl-primary { color: #0a0812; background: var(--gold); }
+.nav-dl-primary:hover { background: var(--gold-bright); }
+.nav-dl-primary:focus-visible { outline: 3px solid rgba(243, 211, 114, 0.8); outline-offset: 2px; }
+/* Windows button keeps its Fluent type and blue, but shares the corner
+   radius of its neighbor so the pair reads as one control */
+.nav-dl-windows {
+  color: #ffffff;
+  background: #0067b8;
+  font-family: "Segoe UI", "Segoe UI Variable", system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+}
+.nav-dl-windows .button-windows-logo { width: 14px; height: 14px; }
+.nav-dl-windows:hover { background: #005da6; }
+.nav-dl-windows:focus-visible { outline: 3px solid rgba(0, 103, 184, 0.55); outline-offset: 2px; }
+/* mobile app takes the theme's accent, the way its neighbor takes the gold.
+   Ink is --bg rather than a fixed near-black: the light themes seed a dark
+   accent and a pale ground, so the pairing stays legible in both directions. */
+.nav-dl-mobile { color: var(--bg); background: var(--accent); }
+.nav-dl-mobile:hover { background: var(--accent-bright); }
+.nav-dl-mobile:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 80%, transparent);
+  outline-offset: 2px;
+}
+/* the header stacks to a column here, so the buttons take their own row and
+   line up with the brand and theme picker above them */
+@media (max-width: 760px) {
+  .nav-dl-group { order: 3; justify-content: flex-start; flex-wrap: wrap; }
+}
+/* small phones: drop the "for <platform>" wording, the logos carry it */
+@media (max-width: 520px) {
+  .nav-dl-os { display: none; }
+}
 
 /* ============================================================
    DARK, NO STARFIELD (2026-07-11) — Aura dark stays, the star
@@ -1615,6 +1672,24 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   & .nav-run a {
     color: color-mix(in srgb, var(--text) 82%, var(--sd-accent));
   }
+
+  /* Top-bar download buttons: on paper the glow and the accent are already
+     dark signatures, so the dark ink they carry on the dark themes would land
+     dark-on-dark. Both take the page ground as ink instead, over a fill pushed
+     toward the text color — a light signature like ocean-breeze's yellow
+     cannot carry pale ink on its own. The mixes are the strongest that still
+     clear 4.5:1 on every light theme, and hover darkens rather than
+     brightening so the contrast only ever improves. */
+  & .nav-dl-primary {
+    background: color-mix(in srgb, var(--gold) 45%, var(--text));
+    color: var(--sd-bg);
+  }
+  & .nav-dl-primary:hover { background: color-mix(in srgb, var(--gold) 32%, var(--text)); }
+  & .nav-dl-mobile {
+    background: color-mix(in srgb, var(--accent) 71%, var(--text));
+    color: var(--sd-bg);
+  }
+  & .nav-dl-mobile:hover { background: color-mix(in srgb, var(--accent) 58%, var(--text)); }
 
   /* Footer badges: light chips with readable, still color-coded ink. */
   & .b31 {
