@@ -869,6 +869,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.5">5.1.5</option>
               <option value="5.1.4">5.1.4</option>
               <option value="5.1.3">5.1.3</option>
               <option value="5.1.2">5.1.2</option>
@@ -909,10 +910,18 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Aug 17, 2026</span>
+            <span class="changelog-date" id="changelog-date">Aug 18, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.4" data-date="Aug 17, 2026">
+          <article class="release" data-version="5.1.5" data-date="Aug 18, 2026">
+            <ul class="release-notes">
+              <li><b>Every emoji, and easier to find:</b> the picker now carries the full Unicode set, over 1,900 emojis. Search understands keywords, so "mask" finds 🎭. It only offers what your system can draw.</li>
+              <li><b>Image links:</b> direct links to images now show a thumbnail preview on desktop, as they already did on mobile. Mobile previews also load more reliably instead of sometimes appearing without their image.</li>
+              <li><b>Ban options always available:</b> the user menu no longer shows "Host bans unavailable" for members whose address the network never shared. The app looks it up on the spot and fills in real ban choices while the menu is open.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.4" data-date="Aug 17, 2026" hidden>
             <ul class="release-notes">
               <li><b>Quieter behind the scenes:</b> the app fetches channel member details much more gently, so busy networks no longer bounce those lookups and drop rate-limit warnings into your server buffer. On mobile the lookups now wait until you actually open a channel, which keeps a reconnecting phone from setting them off in a burst.</li>
               <li><b>Fixes:</b> when the server changes one of your user modes, the rest now stay in place instead of vanishing until the next refresh.</li>
