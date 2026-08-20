@@ -867,6 +867,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.6">5.1.6</option>
               <option value="5.1.5">5.1.5</option>
               <option value="5.1.4">5.1.4</option>
               <option value="5.1.3">5.1.3</option>
@@ -908,10 +909,20 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Aug 18, 2026</span>
+            <span class="changelog-date" id="changelog-date">Aug 20, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.5" data-date="Aug 18, 2026">
+          <article class="release" data-version="5.1.6" data-date="Aug 20, 2026">
+            <ul class="release-notes">
+              <li><b>Unknown commands reach the server:</b> a slash command the desktop does not recognize now goes to the server instead of coming back as "Unknown command".</li>
+              <li><b><code>/whois</code> on mobile answers in the panel:</b> typing it opens the same details panel the nick menu does, and a long channel list now scrolls instead of running off the bottom.</li>
+              <li><b>Fonts on mobile:</b> the font list now includes fonts you installed on the device, JetBrains Mono ships with the app, and text boxes like the composer finally use your choice too. The iOS text size setting now reaches every font rather than only some.</li>
+              <li><b>Diagnostics:</b> reconnecting to a bouncer with big channels no longer floods the log, push notifications now record what they did, and a Verbose switch brings back the fine detail.</li>
+              <li><b>New About screen:</b> the app version and the licenses for what SeraphIRC bundles, on mobile.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.5" data-date="Aug 18, 2026" hidden>
             <ul class="release-notes">
               <li><b>Every emoji, and easier to find:</b> the picker now carries the full Unicode set, over 1,900 emojis. Search understands keywords, so "mask" finds 🎭. It only offers what your system can draw.</li>
               <li><b>Image links:</b> direct links to images now show a thumbnail preview on desktop, as they already did on mobile. Mobile previews also load more reliably instead of sometimes appearing without their image.</li>
