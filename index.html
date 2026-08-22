@@ -264,6 +264,36 @@
         <div class="news-panel" data-news-panel>
           <div class="news-main">
           <div class="news-deck" data-news-deck>
+            <article class="news-card" data-news-title="Encryption">
+              <div class="news-bar">
+                <span class="news-kicker">Encryption</span>
+                <span class="news-date">5.1.7 &middot; Aug 21, 2026</span>
+                <span class="news-flag">New</span>
+              </div>
+              <div class="news-body">
+                <h3>Gone FiSHin'</h3>
+                <p>
+                  SeraphIRC now includes a native FiSH implementation, the Blowfish encryption used by HexChat, Konversation,
+                  Quassel and mIRC have used for years. Set a shared key for a channel or a
+                  person and everything you send there goes out encrypted. The people you talk to on those other clients can
+                  read you, and you can read them.
+                </p>
+                <p>
+                  A lock marks what was protected on the conversation in the tree and title
+                  bar as well as on each message that traveled encrypted. This way, you never have to guess
+                  whether a line went cleartext. If you'd rather not type commands,
+                  a Blowfish Settings panel on desktop and mobile holds the key for each
+                  conversation, and the desktop can negotiate one with the other side for you.
+                </p>
+                <p>
+                  Mobile caveat: mention notifications cannot arrive for encrypted
+                  channel messages, because your bouncer cannot read them to spot your name.
+                  Direct messages still notify.
+                </p>
+                <p class="news-cmd"><a href="/docs/#encryption"><code>seraphirc.chat/docs#encryption</code></a></p>
+              </div>
+            </article>
+
             <article class="news-card" data-news-title="Documentation">
               <div class="news-bar">
                 <span class="news-kicker">Documentation</span>
@@ -867,6 +897,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.7">5.1.7</option>
               <option value="5.1.6">5.1.6</option>
               <option value="5.1.5">5.1.5</option>
               <option value="5.1.4">5.1.4</option>
@@ -909,10 +940,19 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Aug 20, 2026</span>
+            <span class="changelog-date" id="changelog-date">Aug 21, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.6" data-date="Aug 20, 2026">
+          <article class="release" data-version="5.1.7" data-date="Aug 21, 2026">
+            <ul class="release-notes">
+              <li><b>Encrypted messaging:</b> SeraphIRC now speaks FiSH, the Blowfish encryption HexChat, Konversation, Quassel and mIRC already use. Set a shared key for a channel or a person and messages to them encrypt on their own. <a href="/docs/#encryption">Setup notes are in the docs</a>.</li>
+              <li><b>Locks show what was protected:</b> encrypted conversations carry a lock in the tree and title bar, and so does each encrypted message, so you never have to guess whether a line went out in the clear.</li>
+              <li><b>Keys without the commands:</b> a Blowfish Settings panel on desktop and mobile manages the key for each conversation. Automatic key exchange runs from the desktop, since two devices answering the same request would end up with different keys.</li>
+              <li><b>One mobile trade-off:</b> mention notifications cannot arrive for encrypted channel messages, because your bouncer cannot read them to spot your name. Direct messages still notify.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.6" data-date="Aug 20, 2026" hidden>
             <ul class="release-notes">
               <li><b>Unknown commands reach the server:</b> a slash command the desktop does not recognize now goes to the server instead of coming back as "Unknown command".</li>
               <li><b><code>/whois</code> on mobile answers in the panel:</b> typing it opens the same details panel the nick menu does, and a long channel list now scrolls instead of running off the bottom.</li>
