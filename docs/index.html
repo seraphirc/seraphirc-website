@@ -217,6 +217,7 @@
                     <li><a href="#send-guard-exceptions">Exceptions</a></li>
                   </ul>
                 </li>
+                <li><a href="#encryption">Encrypted Messaging</a></li>
               </ul>
             </details>
             <details class="book">
@@ -288,6 +289,19 @@
               <li><a href="#cmd-query"><code>/query</code></a></li>
               <li><a href="#cmd-seraphchat"><code>/seraphchat</code></a></li>
               <li><a href="#cmd-seraphtransfer"><code>/seraphtransfer</code></a></li>
+            </ul>
+          </details>
+          <details class="chapter">
+            <summary>Encryption<span class="chapter-count">7</span></summary>
+            <ul class="pagelist">
+              <li class="page-overview"><a href="#commands-encryption"><span class="lbl-screen">All encryption commands</span><span class="lbl-print">Encryption</span></a></li>
+              <li><a href="#cmd-delkey"><code>/delkey</code></a></li>
+              <li><a href="#cmd-keyx"><code>/keyx</code></a></li>
+              <li><a href="#cmd-msg"><code>/msg+</code></a></li>
+              <li><a href="#cmd-notice"><code>/notice+</code></a></li>
+              <li><a href="#cmd-setkey"><code>/setkey</code></a></li>
+              <li><a href="#cmd-showkey"><code>/showkey</code></a></li>
+              <li><a href="#cmd-topic"><code>/topic+</code></a></li>
             </ul>
           </details>
           <details class="chapter">
@@ -453,6 +467,7 @@
                   <tr><th scope="row">IRCv3</th><td>SASL, server-time, account tags, away-notify, echo-message, batch, and chat history negotiated where the network offers them. IRCv3 functionality continues to expand, and is updated on the <a href="/#ircv3">website</a> as new features arrive.</td></tr>
                   <tr><th scope="row"><a href="#formatting">Formatting</a></th><td>Markdown and token syntax compiled to standard IRC control codes, so other clients see ordinary bold, italics, and color.</td></tr>
                   <tr><th scope="row"><a href="#files">File transfer</a></th><td>Bouncer uploads, classic DCC, and Seraph Transfer, an encrypted peer to peer send between SeraphIRC users that works from behind a bouncer and behind NAT.</td></tr>
+                  <tr><th scope="row"><a href="#encryption">Encryption</a></th><td>FiSH message encryption compatible with HexChat, Konversation, Quassel, and mIRC. Set a shared key and a conversation encrypts automatically, with lock indicators showing exactly what was protected.</td></tr>
                   <tr><th scope="row"><a href="#appearance">Appearance</a></th><td>A collection of prebuilt themes, a theme editor, and imports from the community <a href="/marketplace/">marketplace</a>.</td></tr>
                   <tr><th scope="row">Privacy</th><td>No analytics, no account requirement, no cloud dependency. The client talks to your networks and nothing else.</td></tr>
                 </tbody>
@@ -471,7 +486,7 @@
                 <tbody>
                   <tr><th scope="row">Getting Started</th><td>Connecting, channels, bouncers, and sending files.</td></tr>
                   <tr><th scope="row">Interface, Chatting, Network</th><td>Every settings page, grouped the way the client groups them.</td></tr>
-                  <tr><th scope="row"><a href="#command-basics">Commands</a></th><td>All 103 slash commands, by category, plus an alphabetical <a href="#command-index">index</a>.</td></tr>
+                  <tr><th scope="row"><a href="#command-basics">Commands</a></th><td>All 110 slash commands, by category, plus an alphabetical <a href="#command-index">index</a>.</td></tr>
                   <tr><th scope="row"><a href="#formatting">Text Formatting</a></th><td>Both input syntaxes, the color palette, and what goes on the wire.</td></tr>
                   <tr><th scope="row"><a href="#hotkeys">Keyboard</a></th><td>The desktop shortcuts.</td></tr>
                 </tbody>
@@ -1488,6 +1503,95 @@ server/Libera/server.log</code></pre>
             </div>
           </article>
 
+          <article class="docs-pane" id="encryption" data-pane>
+            <p class="pane-kicker">Chatting</p>
+            <h2>Encrypted Messaging</h2>
+            <p class="pane-lead">
+              SeraphIRC speaks FiSH, the Blowfish message encryption used across
+              IRC clients for two decades. Set a shared key for a channel or a
+              person and everything you send there is encrypted before it leaves,
+              readable by HexChat, Konversation, Quassel, mIRC with FiSH 10, and
+              anyone else holding the key.
+            </p>
+
+            <h3>Setting a key</h3>
+            <p>
+              Right-click a channel or query in the buffer list and choose
+              <strong>Blowfish Settings</strong>. On mobile, press and hold the
+              buffer, or use the chat header menu. Enter the key both sides agreed
+              on, and from then on messages to that buffer encrypt automatically.
+              The same dialog deletes the key when you are done with it.
+              <code>/setkey</code>, <code>/showkey</code>, and
+              <code>/delkey</code> do the same from the composer.
+            </p>
+            <p>
+              Every encrypted message wears a small lock in the transcript, and a
+              buffer with an active key shows a lock beside its name. If a message
+              arrives as a wall of text starting with <code>+OK</code>, you are
+              seeing the raw ciphertext: either no key is set on this device or it
+              does not match the sender's.
+            </p>
+
+            <h3>Key exchange</h3>
+            <p>
+              In a query, the desktop app can negotiate a key for you:
+              <code>/keyx</code> runs a DH1080 exchange with the other person's
+              client and both sides derive the same key without it ever being
+              typed or sent. Mobile does not answer key exchanges. A phone and a
+              desktop answering the same exchange would each derive a different
+              key, so on mobile you enter the key by hand in Blowfish Settings
+              instead.
+            </p>
+
+            <h3>Modes</h3>
+            <p>
+              A manually entered key defaults to ECB, the mode every FiSH client
+              understands, which keeps a bare <code>/setkey</code> compatible with
+              whatever the other side runs. CBC is the stronger choice and is what
+              <code>/keyx</code> negotiates. Whichever mode a key stores,
+              incoming messages decrypt in the mode they actually arrived in.
+            </p>
+
+            <h3>The explicit commands</h3>
+            <p>
+              <code>/msg+</code>, <code>/notice+</code>, and <code>/topic+</code>
+              encrypt to a keyed target on demand. The first two work even when
+              the buffer is not open. Topics are never encrypted automatically,
+              because a channel full of mixed clients reads its topic more often
+              than it reads any one message, so <code>/topic+</code> is always a
+              deliberate act. All of them fail plainly when no key is set rather
+              than falling back to cleartext.
+            </p>
+
+            <h3>Where keys live</h3>
+            <p>
+              Keys are stored on the device that entered them: in the system
+              keyring on desktop, in the device Keychain on iOS. They are never
+              written to chat logs or diagnostics, never sent to any service, and
+              never synchronized between devices, which is why each device needs
+              the key entered once. Your local chat log stores the decrypted
+              text, so your own history stays searchable and readable after a key
+              changes.
+            </p>
+
+            <h3>What it does and does not protect</h3>
+            <p>
+              FiSH hides message content from the network, the bouncer, and
+              anyone logging the channel without the key. It is compatibility
+              crypto from another era: Blowfish in ECB or CBC without
+              authentication, and a DH1080 exchange that cannot verify who is on
+              the other end. It is real protection against casual reading and
+              logging, not against a determined adversary. Treat it as a privacy
+              curtain, not a vault.
+            </p>
+            <div class="docs-note">
+              On mobile, being mentioned inside an encrypted channel message
+              cannot raise a push notification. The bouncer decides what to push,
+              and it cannot see your name inside a message it cannot read. Direct
+              messages still notify normally.
+            </div>
+          </article>
+
           <!-- ══ Network ═════════════════════════════════════════════════ -->
 
           <article class="docs-pane" id="bouncer-profiles" data-pane>
@@ -2376,6 +2480,108 @@ server/Libera/server.log</code></pre>
             <div class="entry-details"><p>Opens a file picker and offers the chosen file over Seraph Transfer: a direct, end-to-end encrypted transfer that verifies the file and, unlike DCC, works from behind a bouncer.</p><p>The same action as "Send File (Seraph)" in a nickname's right-click menu, so this is a keyboard shortcut rather than the only route.</p><p>Sending an offer reveals your IP address to the rendezvous immediately and to the other person once they accept.</p><p>The command never reaches the server, and it never falls back to DCC by itself: if the peer cannot answer a Seraph offer, DCC is suggested rather than silently used.</p><p>Nothing to set up: Seraph Transfer is available on every network, including through a bouncer. Settings &gt; File Uploads &amp; DCC tunes where files land and how large an offer may be.</p></div>
             <h4 class="entry-label">Examples</h4>
             <pre class="entry-examples"><code>/seraphtransfer Alice</code></pre>
+          </section>
+        </article>
+        <article class="docs-pane" id="commands-encryption" data-pane>
+          <p class="pane-kicker">Commands</p>
+          <h2>Encryption</h2>
+          <p class="pane-lead">FiSH message encryption, compatible with HexChat, Konversation, Quassel, and mIRC FiSH 10. Set a shared key and messages to that buffer encrypt automatically. See <a href="#encryption">Encrypted Messaging</a>.</p>
+          <nav class="entry-jump" aria-label="Encryption commands"><a href="#cmd-delkey"><code>/delkey</code></a><a href="#cmd-keyx"><code>/keyx</code></a><a href="#cmd-msg"><code>/msg+</code></a><a href="#cmd-notice"><code>/notice+</code></a><a href="#cmd-setkey"><code>/setkey</code></a><a href="#cmd-showkey"><code>/showkey</code></a><a href="#cmd-topic"><code>/topic+</code></a></nav>
+          <section class="docs-entry" id="cmd-delkey">
+            <header class="entry-head">
+              <h3>/delkey<a class="entry-anchor" href="#cmd-delkey" aria-label="Link to /delkey">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-network">needs a network</span></span>
+            </header>
+            <p class="entry-usage"><code>/delkey [&lt;target&gt;]</code></p>
+            <p class="entry-summary">Delete a FiSH encryption key</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>target</code></dt><dd>nick or channel (defaults to the current buffer)</dd></dl>
+            <div class="entry-details"><p>Removes the stored encryption key for a nick or channel; messages are sent in cleartext again.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/delkey
+/delkey #secret</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-keyx">
+            <header class="entry-head">
+              <h3>/keyx<a class="entry-anchor" href="#cmd-keyx" aria-label="Link to /keyx">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-irc">sends IRC</span><span class="flag flag-network">needs a network</span></span>
+            </header>
+            <p class="entry-usage"><code>/keyx [-cbc|-ecb] [&lt;nick&gt;]</code></p>
+            <p class="entry-summary">Start a DH1080 key exchange</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>nick</code></dt><dd>the person to exchange keys with (defaults to the current query)</dd><dt><code>-cbc/-ecb</code></dt><dd>cipher mode to request (CBC by default)</dd></dl>
+            <div class="entry-details"><p>Negotiates a shared FiSH key with a nick using DH1080 Diffie-Hellman, so no key has to be typed on both ends. Nick-to-nick only, not for channels.</p><p>DH1080 has no identity verification: an active attacker who intercepts the exchange can read the conversation.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/keyx Alice
+/keyx -cbc Alice</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-msg">
+            <header class="entry-head">
+              <h3>/msg+<a class="entry-anchor" href="#cmd-msg" aria-label="Link to /msg+">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-irc">sends IRC</span><span class="flag flag-network">needs a network</span></span>
+            </header>
+            <p class="entry-usage"><code>/msg+ &lt;target&gt; &lt;message&gt;</code></p>
+            <p class="entry-summary">Send an encrypted message</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>target</code></dt><dd>nick or channel with a key set</dd><dt><code>message</code></dt><dd>message text</dd></dl>
+            <div class="entry-details"><p>Encrypts and sends a message to a target that has a FiSH key set, even if that buffer is not open. Fails if no key is set.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/msg+ Alice meet at noon</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-notice">
+            <header class="entry-head">
+              <h3>/notice+<a class="entry-anchor" href="#cmd-notice" aria-label="Link to /notice+">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-irc">sends IRC</span><span class="flag flag-network">needs a network</span></span>
+            </header>
+            <p class="entry-usage"><code>/notice+ &lt;target&gt; &lt;message&gt;</code></p>
+            <p class="entry-summary">Send an encrypted notice</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>target</code></dt><dd>nick or channel with a key set</dd><dt><code>message</code></dt><dd>notice text</dd></dl>
+            <div class="entry-details"><p>Encrypts and sends a NOTICE to a target that has a FiSH key set. Fails if no key is set.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/notice+ Alice heads up</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-setkey">
+            <header class="entry-head">
+              <h3>/setkey<a class="entry-anchor" href="#cmd-setkey" aria-label="Link to /setkey">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-network">needs a network</span></span>
+            </header>
+            <p class="entry-usage"><code>/setkey [&lt;target&gt;] [cbc:|ecb:]&lt;key&gt;</code></p>
+            <p class="entry-summary">Set a FiSH (Blowfish) encryption key</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>target</code></dt><dd>nick or channel (defaults to the current buffer)</dd><dt><code>key</code></dt><dd>the shared passphrase, optionally prefixed cbc: or ecb:</dd></dl>
+            <div class="entry-details"><p>Sets the shared key used to encrypt and decrypt messages with a nick or channel, compatible with HexChat (FiSHLiM), Konversation, and mIRC FiSH.</p><p>Without a cbc:/ecb: prefix the key uses ECB mode, matching HexChat, Konversation, and mIRC FiSH. Use cbc: for the stronger mode, or /keyx which negotiates it. FiSH is legacy compatibility encryption, not modern secure messaging.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/setkey hunter2
+/setkey #secret cbc:hunter2
+/setkey Alice ecb:oldschool</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-showkey">
+            <header class="entry-head">
+              <h3>/showkey<a class="entry-anchor" href="#cmd-showkey" aria-label="Link to /showkey">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-network">needs a network</span></span>
+            </header>
+            <p class="entry-usage"><code>/showkey [&lt;target&gt;]</code></p>
+            <p class="entry-summary">Show the FiSH key for a target</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>target</code></dt><dd>nick or channel (defaults to the current buffer)</dd></dl>
+            <div class="entry-details"><p>Prints the stored encryption key and its mode to the local buffer only; nothing is sent to the network.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/showkey
+/showkey Alice</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-topic">
+            <header class="entry-head">
+              <h3>/topic+<a class="entry-anchor" href="#cmd-topic" aria-label="Link to /topic+">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-irc">sends IRC</span><span class="flag flag-network">needs a network</span><span class="flag flag-buffer">needs a buffer</span></span>
+            </header>
+            <p class="entry-usage"><code>/topic+ &lt;topic&gt;</code></p>
+            <p class="entry-summary">Set an encrypted channel topic</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>topic</code></dt><dd>the new channel topic</dd></dl>
+            <div class="entry-details"><p>Encrypts and sets the topic on the current channel using its FiSH key. Fails if no key is set.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/topic+ members only</code></pre>
           </section>
         </article>
         <article class="docs-pane" id="commands-irc" data-pane>
@@ -3425,16 +3631,17 @@ server/Libera/server.log</code></pre>
             <p class="entry-aliases">Also written as <code>/quote</code></p>
             <h4 class="entry-label">Parameters</h4>
             <dl class="entry-params"><dt><code>IRC line</code></dt><dd>raw command text to send</dd></dl>
-            <div class="entry-details"><p>Sends the provided IRC line exactly as typed after /raw. /quote is an alias.</p></div>
+            <div class="entry-details"><p>Sends the provided IRC line exactly as typed after /raw. /quote is an alias.</p><p>You rarely need it: any command SeraphIRC does not recognise is already sent to the server as typed, so a server that asks you to "type /validate &lt;token&gt;" can simply be answered with /validate &lt;token&gt;. Use /raw when the command name is not plain letters, or to be explicit.</p><p>Arguments are passed through untouched, so a final argument containing spaces needs a leading colon: /raw SQUIT irc.example :taking it down.</p></div>
             <h4 class="entry-label">Examples</h4>
             <pre class="entry-examples"><code>/raw WHOIS Alice
-/quote TIME</code></pre>
+/quote TIME
+/raw SQUIT irc.example :maintenance</code></pre>
           </section>
         </article>
         <article class="docs-pane" id="command-index" data-pane>
           <p class="pane-kicker">Commands</p>
           <h2>Command Index</h2>
-          <p class="pane-lead">Every command SeraphIRC answers, all 103 of them, in one alphabetical list. The client keeps the same list behind <code>/help</code>.</p>
+          <p class="pane-lead">Every command SeraphIRC answers, all 110 of them, in one alphabetical list. The client keeps the same list behind <code>/help</code>.</p>
           <div class="table-scroll">
             <table class="idx-table">
               <thead><tr><th>Command</th><th>Also</th><th>Summary</th><th>Section</th></tr></thead>
@@ -3459,6 +3666,7 @@ server/Libera/server.log</code></pre>
               <tr><th scope="row"><a href="#cmd-current"><code>/current</code></a></th><td class="idx-alias"><code></code></td><td>Show the current buffer</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
               <tr><th scope="row"><a href="#cmd-cycle"><code>/cycle</code></a></th><td class="idx-alias"><code></code></td><td>Part and rejoin a channel</td><td class="idx-cat"><a href="#commands-connection">Connection</a></td></tr>
               <tr><th scope="row"><a href="#cmd-dcc"><code>/dcc</code></a></th><td class="idx-alias"><code></code></td><td>Send and receive files directly with another user</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-delkey"><code>/delkey</code></a></th><td class="idx-alias"><code></code></td><td>Delete a FiSH encryption key</td><td class="idx-cat"><a href="#commands-encryption">Encryption</a></td></tr>
               <tr><th scope="row"><a href="#cmd-deop"><code>/deop</code></a></th><td class="idx-alias"><code></code></td><td>Remove channel operator status</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-devoice"><code>/devoice</code></a></th><td class="idx-alias"><code></code></td><td>Remove voice from a nick</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-die"><code>/die</code></a></th><td class="idx-alias"><code></code></td><td>Shut down the IRC server</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
@@ -3479,6 +3687,7 @@ server/Libera/server.log</code></pre>
               <tr><th scope="row"><a href="#cmd-invite"><code>/invite</code></a></th><td class="idx-alias"><code></code></td><td>Invite a nick to a channel</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-ison"><code>/ison</code></a></th><td class="idx-alias"><code></code></td><td>Check whether nicknames are online</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-join"><code>/join</code></a></th><td class="idx-alias"><code></code></td><td>Join a channel</td><td class="idx-cat"><a href="#commands-connection">Connection</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-keyx"><code>/keyx</code></a></th><td class="idx-alias"><code></code></td><td>Start a DH1080 key exchange</td><td class="idx-cat"><a href="#commands-encryption">Encryption</a></td></tr>
               <tr><th scope="row"><a href="#cmd-kick"><code>/kick</code></a></th><td class="idx-alias"><code></code></td><td>Kick a user from a channel</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-kickban"><code>/kickban</code></a></th><td class="idx-alias"><code></code></td><td>Ban and kick a user from a channel</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-kill"><code>/kill</code></a></th><td class="idx-alias"><code></code></td><td>Forcibly disconnect a user</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
@@ -3494,10 +3703,12 @@ server/Libera/server.log</code></pre>
               <tr><th scope="row"><a href="#cmd-mode"><code>/mode</code></a></th><td class="idx-alias"><code></code></td><td>Send MODE command</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-motd"><code>/motd</code></a></th><td class="idx-alias"><code></code></td><td>Fetch the server Message of the Day</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-msg"><code>/msg</code></a></th><td class="idx-alias"><code></code></td><td>Send a private or target message</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-msg"><code>/msg+</code></a></th><td class="idx-alias"><code></code></td><td>Send an encrypted message</td><td class="idx-cat"><a href="#commands-encryption">Encryption</a></td></tr>
               <tr><th scope="row"><a href="#cmd-names"><code>/names</code></a></th><td class="idx-alias"><code></code></td><td>Request channel user names</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-nick"><code>/nick</code></a></th><td class="idx-alias"><code></code></td><td>Change nickname</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-nickserv"><code>/nickserv</code></a></th><td class="idx-alias"><code>/ns</code></td><td>Message NickServ</td><td class="idx-cat"><a href="#commands-services">Services</a></td></tr>
               <tr><th scope="row"><a href="#cmd-notice"><code>/notice</code></a></th><td class="idx-alias"><code></code></td><td>Send an IRC NOTICE</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-notice"><code>/notice+</code></a></th><td class="idx-alias"><code></code></td><td>Send an encrypted notice</td><td class="idx-cat"><a href="#commands-encryption">Encryption</a></td></tr>
               <tr><th scope="row"><a href="#cmd-notify"><code>/notify</code></a></th><td class="idx-alias"><code></code></td><td>Manage notify list entries</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-op"><code>/op</code></a></th><td class="idx-alias"><code></code></td><td>Give channel operator status</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-oper"><code>/oper</code></a></th><td class="idx-alias"><code></code></td><td>Gain IRC operator privileges</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
@@ -3518,7 +3729,9 @@ server/Libera/server.log</code></pre>
               <tr><th scope="row"><a href="#cmd-seraphtransfer"><code>/seraphtransfer</code></a></th><td class="idx-alias"><code></code></td><td>Send a file directly with Seraph Transfer</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-server"><code>/server</code></a></th><td class="idx-alias"><code></code></td><td>Open the server buffer</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
               <tr><th scope="row"><a href="#cmd-sethost"><code>/sethost</code></a></th><td class="idx-alias"><code></code></td><td>Set a user's displayed host</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-setkey"><code>/setkey</code></a></th><td class="idx-alias"><code></code></td><td>Set a FiSH (Blowfish) encryption key</td><td class="idx-cat"><a href="#commands-encryption">Encryption</a></td></tr>
               <tr><th scope="row"><a href="#cmd-show"><code>/show</code></a></th><td class="idx-alias"><code></code></td><td>Show recent current-buffer messages</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-showkey"><code>/showkey</code></a></th><td class="idx-alias"><code></code></td><td>Show the FiSH key for a target</td><td class="idx-cat"><a href="#commands-encryption">Encryption</a></td></tr>
               <tr><th scope="row"><a href="#cmd-shun"><code>/shun</code></a></th><td class="idx-alias"><code></code></td><td>Silently block commands from a user</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
               <tr><th scope="row"><a href="#cmd-silence"><code>/silence</code></a></th><td class="idx-alias"><code></code></td><td>Manage server-side silence entries</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
               <tr><th scope="row"><a href="#cmd-squit"><code>/squit</code></a></th><td class="idx-alias"><code></code></td><td>Disconnect a server</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
@@ -3527,6 +3740,7 @@ server/Libera/server.log</code></pre>
               <tr><th scope="row"><a href="#cmd-switch"><code>/switch</code></a></th><td class="idx-alias"><code></code></td><td>Switch to a buffer</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
               <tr><th scope="row"><a href="#cmd-time"><code>/time</code></a></th><td class="idx-alias"><code></code></td><td>Request the server time</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-topic"><code>/topic</code></a></th><td class="idx-alias"><code></code></td><td>Show or set channel topic</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-topic"><code>/topic+</code></a></th><td class="idx-alias"><code></code></td><td>Set an encrypted channel topic</td><td class="idx-cat"><a href="#commands-encryption">Encryption</a></td></tr>
               <tr><th scope="row"><a href="#cmd-trace"><code>/trace</code></a></th><td class="idx-alias"><code></code></td><td>Trace a user or server route</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
               <tr><th scope="row"><a href="#cmd-unalias"><code>/unalias</code></a></th><td class="idx-alias"><code></code></td><td>Remove a command alias</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-unban"><code>/unban</code></a></th><td class="idx-alias"><code></code></td><td>Remove a ban from a channel</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>

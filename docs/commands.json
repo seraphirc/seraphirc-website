@@ -482,6 +482,157 @@
     "RequiresBuffer": true
   },
   {
+    "Name": "setkey",
+    "Aliases": null,
+    "Usage": "/setkey [\u003ctarget\u003e] [cbc:|ecb:]\u003ckey\u003e",
+    "Parameters": [
+      "target: nick or channel (defaults to the current buffer)",
+      "key: the shared passphrase, optionally prefixed cbc: or ecb:"
+    ],
+    "Summary": "Set a FiSH (Blowfish) encryption key",
+    "Details": [
+      "Sets the shared key used to encrypt and decrypt messages with a nick or channel, compatible with HexChat (FiSHLiM), Konversation, and mIRC FiSH.",
+      "Without a cbc:/ecb: prefix the key uses ECB mode, matching HexChat, Konversation, and mIRC FiSH. Use cbc: for the stronger mode, or /keyx which negotiates it. FiSH is legacy compatibility encryption, not modern secure messaging."
+    ],
+    "Examples": [
+      "/setkey hunter2",
+      "/setkey #secret cbc:hunter2",
+      "/setkey Alice ecb:oldschool"
+    ],
+    "Category": "Encryption",
+    "SendsIRC": false,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "delkey",
+    "Aliases": null,
+    "Usage": "/delkey [\u003ctarget\u003e]",
+    "Parameters": [
+      "target: nick or channel (defaults to the current buffer)"
+    ],
+    "Summary": "Delete a FiSH encryption key",
+    "Details": [
+      "Removes the stored encryption key for a nick or channel; messages are sent in cleartext again."
+    ],
+    "Examples": [
+      "/delkey",
+      "/delkey #secret"
+    ],
+    "Category": "Encryption",
+    "SendsIRC": false,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "showkey",
+    "Aliases": null,
+    "Usage": "/showkey [\u003ctarget\u003e]",
+    "Parameters": [
+      "target: nick or channel (defaults to the current buffer)"
+    ],
+    "Summary": "Show the FiSH key for a target",
+    "Details": [
+      "Prints the stored encryption key and its mode to the local buffer only; nothing is sent to the network."
+    ],
+    "Examples": [
+      "/showkey",
+      "/showkey Alice"
+    ],
+    "Category": "Encryption",
+    "SendsIRC": false,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "keyx",
+    "Aliases": null,
+    "Usage": "/keyx [-cbc|-ecb] [\u003cnick\u003e]",
+    "Parameters": [
+      "nick: the person to exchange keys with (defaults to the current query)",
+      "-cbc/-ecb: cipher mode to request (CBC by default)"
+    ],
+    "Summary": "Start a DH1080 key exchange",
+    "Details": [
+      "Negotiates a shared FiSH key with a nick using DH1080 Diffie-Hellman, so no key has to be typed on both ends. Nick-to-nick only, not for channels.",
+      "DH1080 has no identity verification: an active attacker who intercepts the exchange can read the conversation."
+    ],
+    "Examples": [
+      "/keyx Alice",
+      "/keyx -cbc Alice"
+    ],
+    "Category": "Encryption",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "msg+",
+    "Aliases": null,
+    "Usage": "/msg+ \u003ctarget\u003e \u003cmessage\u003e",
+    "Parameters": [
+      "target: nick or channel with a key set",
+      "message: message text"
+    ],
+    "Summary": "Send an encrypted message",
+    "Details": [
+      "Encrypts and sends a message to a target that has a FiSH key set, even if that buffer is not open. Fails if no key is set."
+    ],
+    "Examples": [
+      "/msg+ Alice meet at noon"
+    ],
+    "Category": "Encryption",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "notice+",
+    "Aliases": null,
+    "Usage": "/notice+ \u003ctarget\u003e \u003cmessage\u003e",
+    "Parameters": [
+      "target: nick or channel with a key set",
+      "message: notice text"
+    ],
+    "Summary": "Send an encrypted notice",
+    "Details": [
+      "Encrypts and sends a NOTICE to a target that has a FiSH key set. Fails if no key is set."
+    ],
+    "Examples": [
+      "/notice+ Alice heads up"
+    ],
+    "Category": "Encryption",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false
+  },
+  {
+    "Name": "topic+",
+    "Aliases": null,
+    "Usage": "/topic+ \u003ctopic\u003e",
+    "Parameters": [
+      "topic: the new channel topic"
+    ],
+    "Summary": "Set an encrypted channel topic",
+    "Details": [
+      "Encrypts and sets the topic on the current channel using its FiSH key. Fails if no key is set."
+    ],
+    "Examples": [
+      "/topic+ members only"
+    ],
+    "Category": "Encryption",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": true
+  },
+  {
     "Name": "format",
     "Aliases": [
       "f"
@@ -1373,11 +1524,14 @@
     ],
     "Summary": "Send a raw IRC line",
     "Details": [
-      "Sends the provided IRC line exactly as typed after /raw. /quote is an alias."
+      "Sends the provided IRC line exactly as typed after /raw. /quote is an alias.",
+      "You rarely need it: any command SeraphIRC does not recognise is already sent to the server as typed, so a server that asks you to \"type /validate \u003ctoken\u003e\" can simply be answered with /validate \u003ctoken\u003e. Use /raw when the command name is not plain letters, or to be explicit.",
+      "Arguments are passed through untouched, so a final argument containing spaces needs a leading colon: /raw SQUIT irc.example :taking it down."
     ],
     "Examples": [
       "/raw WHOIS Alice",
-      "/quote TIME"
+      "/quote TIME",
+      "/raw SQUIT irc.example :maintenance"
     ],
     "Category": "Advanced",
     "SendsIRC": true,
