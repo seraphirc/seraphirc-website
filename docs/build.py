@@ -53,6 +53,7 @@ PAGE = HERE / "index.html"
 CATEGORY_ORDER = [
     "Connection",
     "Messaging",
+    "Encryption",
     "IRC",
     "IRC Operator",
     "Services",
@@ -69,6 +70,10 @@ CATEGORY_LEADS = {
     "Messaging": "Putting text, files, or an action in front of someone. The "
     "formatting variants are covered under "
     "<a href=\"#formatting\">Text Formatting</a>.",
+    "Encryption": "FiSH message encryption, compatible with HexChat, "
+    "Konversation, Quassel, and mIRC FiSH 10. Set a shared key and messages "
+    "to that buffer encrypt automatically. See "
+    "<a href=\"#encryption\">Encrypted Messaging</a>.",
     "IRC": "Standard IRC verbs, passed to the server. Operator commands such "
     "as <code>/op</code> and <code>/kick</code> only work when you hold status "
     "in the channel.",
