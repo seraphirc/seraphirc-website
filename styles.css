@@ -950,14 +950,22 @@ html     { scroll-padding-top: calc(var(--bar-h, var(--bar-fallback)) + 10px); }
   outline: 3px solid color-mix(in srgb, var(--accent) 80%, transparent);
   outline-offset: 2px;
 }
+/* the tip jar keeps Buy Me a Coffee's brand yellow, the way the Windows
+   button keeps its Fluent blue, so it reads as the service it links to */
+.nav-dl-coffee { color: #0d0c22; background: #ffdd00; }
+.nav-dl-coffee:hover { background: #ffe94d; }
+.nav-dl-coffee:focus-visible { outline: 3px solid rgba(255, 221, 0, 0.6); outline-offset: 2px; }
 /* the header stacks to a column here, so the buttons take their own row and
    line up with the brand and theme picker above them */
 @media (max-width: 760px) {
   .nav-dl-group { order: 3; justify-content: flex-start; flex-wrap: wrap; }
 }
-/* small phones: drop the "for <platform>" wording, the logos carry it */
+/* small phones: drop the "for <platform>" wording, the logos carry it,
+   and the tip jar shrinks to the coffee cup alone */
 @media (max-width: 520px) {
   .nav-dl-os { display: none; }
+  .nav-dl-coffee .nav-dl-coffee-text { display: none; }
+  .nav-dl-coffee { padding: 0 9px; }
 }
 
 /* ============================================================
