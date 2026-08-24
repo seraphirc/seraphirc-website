@@ -925,6 +925,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.8">5.1.8</option>
               <option value="5.1.7">5.1.7</option>
               <option value="5.1.6">5.1.6</option>
               <option value="5.1.5">5.1.5</option>
@@ -968,10 +969,19 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Aug 21, 2026</span>
+            <span class="changelog-date" id="changelog-date">Aug 24, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.7" data-date="Aug 21, 2026">
+          <article class="release" data-version="5.1.8" data-date="Aug 24, 2026">
+            <ul class="release-notes">
+              <li><b>Bots wear a badge:</b> SeraphIRC now recognizes bots and marks them with a "Bot" annotation in the user list. Their user info card says so too.</li>
+              <li><b>Auto-ignore bots:</b> one switch on the Ignore List page keeps bot traffic out of your channels entirely.</li>
+              <li><b>Or just quiet them down:</b> a gentler Sounds and Alerts toggle keeps bots out of your sounds, notifications, and mentions while their messages stay visible.</li>
+              <li><b>Timestamps know the day:</b> hover any timestamp to see the date it belongs to, so older scrollback no longer leaves you guessing.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.7" data-date="Aug 21, 2026" hidden>
             <ul class="release-notes">
               <li><b>Encrypted messaging:</b> SeraphIRC now speaks FiSH, the Blowfish encryption HexChat, Konversation, Quassel and mIRC already use. Set a shared key for a channel or a person and messages to them encrypt on their own. <a href="/docs/#encryption">Setup notes are in the docs</a>.</li>
               <li><b>Locks show what was protected:</b> encrypted conversations carry a lock in the tree and title bar, and so does each encrypted message, so you never have to guess whether a line went out in the clear.</li>
