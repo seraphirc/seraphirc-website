@@ -877,7 +877,7 @@
               <a href="#buffer-settings">Buffer Settings</a>.
             </p>
 
-            <h3>The four switches</h3>
+            <h3>The five switches</h3>
             <div class="table-scroll">
               <table>
                 <thead><tr><th>Setting</th><th>Default</th><th>What it does</th></tr></thead>
@@ -886,6 +886,7 @@
                   <tr><th scope="row">Enable sounds</th><td><code>on</code></td><td>The alert chime. Plays whether or not the buffer is focused.</td></tr>
                   <tr><th scope="row">Notify on private messages</th><td><code>on</code></td><td>Alerts for queries and direct messages.</td></tr>
                   <tr><th scope="row">Notify on nick mentions</th><td><code>on</code></td><td>Alerts when your nick appears in a channel.</td></tr>
+                  <tr><th scope="row">Mute alerts from bots</th><td><code>off</code></td><td>No sounds, pop-ups, or @ inbox entries from anyone the network marks as a bot. Their messages still appear and still count as unread. To hide bots entirely, see the <a href="#ignore-list">Ignore List</a>.</td></tr>
                 </tbody>
               </table>
             </div>
@@ -1270,6 +1271,28 @@ server/Libera/server.log</code></pre>
               suppressed, because inferring channel membership from what was
               displayed is how a user list ends up with ghosts in it.
             </p>
+
+            <h3>Bots</h3>
+            <p>
+              The Bots section at the top of the page holds one switch,
+              <strong>Automatically ignore bots</strong>, off by default. Turn it
+              on and every user the network identifies as a bot is filtered the
+              way an ignore entry is: channel messages, private messages,
+              notices, and mentions. It applies on every network, on this device
+              only, and it never syncs.
+            </p>
+            <p>
+              SeraphIRC learns who is a bot from the network itself, from the
+              bot flag servers attach to messages and to WHO and WHOIS answers.
+              Anyone recognized wears a <strong>Bot</strong> mark in the user
+              list, so you can see who the switch would silence before you flip
+              it.
+            </p>
+            <div class="docs-note">
+              To keep bot messages visible but stop them from chiming and
+              popping, use <strong>Mute alerts from bots</strong> in
+              <a href="#alerts">Sounds and Alerts</a> instead.
+            </div>
 
             <h3>Syncing across devices</h3>
             <p>
