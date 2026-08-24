@@ -847,12 +847,13 @@
 
         <div class="cap-groups">
           <div class="cap-group">
-            <h3 class="cap-head"><span class="status-dot status-supported" aria-hidden="true"></span>Supported <span class="cap-count">&middot; 27</span></h3>
+            <h3 class="cap-head"><span class="status-dot status-supported" aria-hidden="true"></span>Supported <span class="cap-count">&middot; 29</span></h3>
             <ul class="punchlist cap-list">
               <li><code>account-notify</code></li>
               <li><code>account-tag</code></li>
               <li><code>away-notify</code></li>
               <li><code>batch</code></li>
+              <li><code>bot mode</code></li>
               <li><code>cap-notify</code></li>
               <li><code>chghost</code></li>
               <li><code>draft/chathistory</code></li>
@@ -875,6 +876,7 @@
               <li><code>soju.im/bouncer-networks-notify</code></li>
               <li><code>soju.im/FILEHOST</code></li>
               <li><code>soju.im/webpush</code></li>
+              <li><code>+typing</code></li>
               <li><code>userhost-in-names</code></li>
             </ul>
           </div>
@@ -890,13 +892,21 @@
             "Partial" means the capability is negotiated but not every code path uses it yet.
             Where a server advertises the ratified name instead of a draft one, the unprefixed
             variant (<code>chathistory</code>, <code>read-marker</code>, <code>no-implicit-names</code>)
-            is negotiated too.
+            is negotiated too, along with soju's <code>soju.im/no-implicit-names</code> spelling.
           </p>
           <p class="compat-note">
-            <code>+draft/reply</code> is a client-only tag rather than a capability. It rides on
-            <code>message-tags</code> and goes out under both spellings, and SeraphIRC offers Reply
-            as a threaded reply only where <code>CLIENTTAGDENY</code> says the server will pass it
-            along. Everywhere else the same action addresses the nick instead.
+            <code>+draft/reply</code> and <code>+typing</code> are client-only tags rather than
+            capabilities. Both ride on <code>message-tags</code>. Reply goes out under both
+            spellings, and SeraphIRC offers it as a threaded reply only where
+            <code>CLIENTTAGDENY</code> says the server will pass it along. Everywhere else the
+            same action addresses the nick instead. Typing indicators are sent and shown in
+            channels, queries, and multi-window views.
+          </p>
+          <p class="compat-note">
+            Bot mode covers the <code>BOT</code> ISUPPORT token, the bot flag in WHO replies,
+            <code>RPL_WHOISBOT</code>, and the <code>bot</code> message tag. Bots wear a badge in
+            the member list, and they can be auto-ignored or have their alerts muted from
+            Settings.
           </p>
         </div>
       </section>
