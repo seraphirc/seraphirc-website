@@ -1800,6 +1800,15 @@ server/Libera/server.log</code></pre>
               immediately, and to the other person once they accept.
             </div>
 
+            <div class="docs-note">
+              <strong>Both ends need a network path they share, meaning both on IPv4
+              or both on IPv6.</strong> Seraph Transfer and Seraph Chat connect the
+              two computers directly, so they can only meet on an address family both
+              sides can use. If one end is reachable only over IPv4 and the other only
+              over IPv6, there is no common path and neither a transfer nor a chat can
+              connect.
+            </div>
+
             <h3>The two things it powers</h3>
             <ul>
               <li><a href="#cmd-seraphtransfer"><code>/seraphtransfer nick</code></a> offers a file. No upload host and no copy left behind.</li>
