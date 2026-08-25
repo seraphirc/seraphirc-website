@@ -925,6 +925,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.9">5.1.9</option>
               <option value="5.1.8">5.1.8</option>
               <option value="5.1.7">5.1.7</option>
               <option value="5.1.6">5.1.6</option>
@@ -969,10 +970,20 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Aug 24, 2026</span>
+            <span class="changelog-date" id="changelog-date">Aug 25, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.8" data-date="Aug 24, 2026">
+          <article class="release" data-version="5.1.9" data-date="Aug 25, 2026">
+            <ul class="release-notes">
+              <li><b>Custom Mentions:</b> add your own words and phrases under Settings and they light up in the transcript just like your nick. They get their own tray next to the @ inbox and their own notification toggle.</li>
+              <li><b>Server latency at a glance:</b> an optional graph in the top bar tracks your last ten round trips to the network. It measures the actual server even through a bouncer, and hovering shows the details. Turn it on under Settings, Interface.</li>
+              <li><b>CTCP from the user menu:</b> Ping, Time, and Version now sit under Whois when you right-click someone, so you can check a client without typing commands. Menus also stay put when a submenu opens instead of jumping around.</li>
+              <li><b>Private messages make noise:</b> new queries now default to alerting on every message, so a direct message actually sounds. Channels still default to mentions only, and any choice you have made stays as it is.</li>
+              <li><b>Fixes:</b> <code>/whowas</code> replies now land in the window that asked, grouped neatly the way <code>/whois</code> already is.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.8" data-date="Aug 24, 2026" hidden>
             <ul class="release-notes">
               <li><b>Bots wear a badge:</b> SeraphIRC now recognizes bots and marks them with a "Bot" annotation in the user list. Their user info card says so too.</li>
               <li><b>Auto-ignore bots:</b> one switch on the Ignore List page keeps bot traffic out of your channels entirely.</li>
