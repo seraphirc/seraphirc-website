@@ -929,6 +929,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.10">5.1.10</option>
               <option value="5.1.9">5.1.9</option>
               <option value="5.1.8">5.1.8</option>
               <option value="5.1.7">5.1.7</option>
@@ -977,7 +978,14 @@
             <span class="changelog-date" id="changelog-date">Aug 25, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.9" data-date="Aug 25, 2026">
+          <article class="release" data-version="5.1.10" data-date="Aug 25, 2026">
+            <ul class="release-notes">
+              <li><b>The latency graph finds a better home:</b> it moved from the top bar, which it crowded on smaller windows, to the sidebar, where it stretches to fit. It also remembers twenty round trips now instead of ten.</li>
+              <li><b>Easier to read:</b> the caption is a touch bigger and names the server being measured, and the hover panel no longer vanishes before your pointer can reach it.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.9" data-date="Aug 25, 2026" hidden>
             <ul class="release-notes">
               <li><b>Custom Mentions:</b> add your own words and phrases under Settings and they light up in the transcript just like your nick. They get their own tray next to the @ inbox and their own notification toggle.</li>
               <li><b>Server latency at a glance:</b> an optional graph in the top bar tracks your last ten round trips to the network. It measures the actual server even through a bouncer, and hovering shows the details. Turn it on under Settings, Interface.</li>
