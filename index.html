@@ -929,6 +929,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.11">5.1.11</option>
               <option value="5.1.10">5.1.10</option>
               <option value="5.1.9">5.1.9</option>
               <option value="5.1.8">5.1.8</option>
@@ -978,7 +979,18 @@
             <span class="changelog-date" id="changelog-date">Aug 25, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.10" data-date="Aug 25, 2026">
+          <article class="release" data-version="5.1.11" data-date="Aug 25, 2026">
+            <ul class="release-notes">
+              <li><b>A security release:</b> this update strengthens how SeraphIRC handles untrusted servers and users. All of these changes apply automatically, with nothing to configure.</li>
+              <li><b>Seraph Transfer and Chat:</b> offers are only evaluated when they are addressed to the expected rendezvous server.</li>
+              <li><b>DCC:</b> file names can no longer hide invisible characters.</li>
+              <li><b>Link previews and avatars:</b> images now load through the same guarded connection as the rest of the app, and their settings note the privacy trade-off.</li>
+              <li><b>General hardening:</b> the client stays responsive when a server opens floods of unwanted conversations, handling of CTCP requests is improved, and Send Guard now covers channel topics.</li>
+              <li><b>Topic editor:</b> the field is larger and resizable.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.10" data-date="Aug 25, 2026" hidden>
             <ul class="release-notes">
               <li><b>The latency graph finds a better home:</b> it moved from the top bar, which it crowded on smaller windows, to the sidebar, where it stretches to fit. It also remembers twenty round trips now instead of ten.</li>
               <li><b>Easier to read:</b> the caption is a touch bigger and names the server being measured, and the hover panel no longer vanishes before your pointer can reach it.</li>
