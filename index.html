@@ -929,6 +929,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.12">5.1.12</option>
               <option value="5.1.11">5.1.11</option>
               <option value="5.1.10">5.1.10</option>
               <option value="5.1.9">5.1.9</option>
@@ -976,10 +977,18 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Aug 25, 2026</span>
+            <span class="changelog-date" id="changelog-date">Aug 27, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.11" data-date="Aug 25, 2026">
+          <article class="release" data-version="5.1.12" data-date="Aug 27, 2026">
+            <ul class="release-notes">
+              <li><b>Text formatting on mobile:</b> the iOS app now renders IRC colors and styles in the transcript and can apply them to your own messages using formatting tokens, markdown, or <code>/format</code> and <code>/plain</code>. Notifications show clean text instead of raw formatting codes.</li>
+              <li><b>Interface polish:</b> enhanced readability in the settings menus.</li>
+              <li><b>Fixes:</b> Ctrl+F no longer freezes the client and now searches nicks too, the latency graph waits for the connection to settle before measuring, ignored users no longer show typing indicators, and the user list responds to hover and clicks more predictably.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.11" data-date="Aug 25, 2026" hidden>
             <ul class="release-notes">
               <li><b>A security release:</b> this update strengthens how SeraphIRC handles untrusted servers and users. All of these changes apply automatically, with nothing to configure.</li>
               <li><b>Seraph Transfer and Chat:</b> offers are only evaluated when they are addressed to the expected rendezvous server.</li>
