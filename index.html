@@ -280,6 +280,30 @@
         <div class="news-panel" data-news-panel>
           <div class="news-main">
           <div class="news-deck" data-news-deck>
+            <article class="news-card" data-news-title="Reactions">
+              <div class="news-bar">
+                <span class="news-kicker">Reactions</span>
+                <span class="news-date">5.1.14 &middot; Aug 28, 2026</span>
+                <span class="news-flag">New</span>
+              </div>
+              <div class="news-body">
+                <h3>Reactions</h3>
+                <p>
+                  React to any message with an emoji, on desktop and mobile alike. Pick
+                  React from a message's menu or type <code>/react</code>, choose from the
+                  full emoji picker, and the reaction appears as a small chip on the
+                  message for everyone whose client supports it.
+                </p>
+                <p>
+                  Talking to someone whose client cannot show them? An optional
+                  send-as-message mode delivers your reaction as a short quoted reply
+                  instead, so nobody is left out of the joke. And if reactions are not
+                  your thing, a single toggle in Settings turns them off entirely.
+                </p>
+                <p class="news-cmd"><code>Right-click a message &gt; React, or /react</code></p>
+              </div>
+            </article>
+
             <article class="news-card" data-news-title="Encryption">
               <div class="news-bar">
                 <span class="news-kicker">Encryption</span>
@@ -929,6 +953,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.14">5.1.14</option>
               <option value="5.1.13">5.1.13</option>
               <option value="5.1.12">5.1.12</option>
               <option value="5.1.11">5.1.11</option>
@@ -978,10 +1003,18 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Aug 27, 2026</span>
+            <span class="changelog-date" id="changelog-date">Aug 28, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.13" data-date="Aug 27, 2026">
+          <article class="release" data-version="5.1.14" data-date="Aug 28, 2026">
+            <ul class="release-notes">
+              <li><b>Reactions:</b> react to any message with an emoji, on desktop and mobile alike. Reactions show as small chips on the message, come with a full picker and <code>/react</code> and <code>/unreact</code> commands, and can be turned off or sent as regular messages for people whose clients cannot show them. They survive restarts and work through bouncers too.</li>
+              <li><b>Interface polish:</b> menu icons are now two-tone on desktop and mobile, so the two look like family.</li>
+              <li><b>Fixes:</b> replying to your own messages now works where the network supports it.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.13" data-date="Aug 27, 2026" hidden>
             <ul class="release-notes">
               <li><b>Topic bar refresh:</b> a new look, plus a pin to keep it open or collapse it out of the way.</li>
               <li><b>Reply arrows:</b> the arrow connecting an IRCv3 reply to its original message looks cleaner.</li>
