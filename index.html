@@ -953,6 +953,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.15">5.1.15</option>
               <option value="5.1.14">5.1.14</option>
               <option value="5.1.13">5.1.13</option>
               <option value="5.1.12">5.1.12</option>
@@ -1003,10 +1004,17 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Aug 28, 2026</span>
+            <span class="changelog-date" id="changelog-date">Aug 29, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.14" data-date="Aug 28, 2026">
+          <article class="release" data-version="5.1.15" data-date="Aug 29, 2026">
+            <ul class="release-notes">
+              <li><b>Interface polish:</b> replies you send on mobile now show the same little corner arrow as on desktop.</li>
+              <li><b>Fixes:</b> leaving a channel no longer puts a stray unread badge on another channel.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.14" data-date="Aug 28, 2026" hidden>
             <ul class="release-notes">
               <li><b>Reactions:</b> react to any message with an emoji, on desktop and mobile alike. Reactions show as small chips on the message, come with a full picker and <code>/react</code> and <code>/unreact</code> commands, and can be turned off or sent as regular messages for people whose clients cannot show them. They survive restarts and work through bouncers too.</li>
               <li><b>Interface polish:</b> menu icons are now two-tone on desktop and mobile, so the two look like family.</li>
