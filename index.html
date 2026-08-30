@@ -875,7 +875,7 @@
 
         <div class="cap-groups">
           <div class="cap-group">
-            <h3 class="cap-head"><span class="status-dot status-supported" aria-hidden="true"></span>Supported <span class="cap-count">&middot; 29</span></h3>
+            <h3 class="cap-head"><span class="status-dot status-supported" aria-hidden="true"></span>Supported <span class="cap-count">&middot; 32</span></h3>
             <ul class="punchlist cap-list">
               <li><code>account-notify</code></li>
               <li><code>account-tag</code></li>
@@ -885,10 +885,13 @@
               <li><code>cap-notify</code></li>
               <li><code>chghost</code></li>
               <li><code>draft/chathistory</code></li>
+              <li><code>draft/event-playback</code></li>
+              <li><code>draft/message-redaction</code></li>
               <li><code>draft/metadata-2</code></li>
               <li><code>draft/multiline</code></li>
               <li><code>draft/no-implicit-names</code></li>
               <li><code>draft/read-marker</code></li>
+              <li><code>+draft/react</code></li>
               <li><code>+draft/reply</code></li>
               <li><code>echo-message</code></li>
               <li><code>extended-join</code></li>
@@ -923,12 +926,14 @@
             is negotiated too, along with soju's <code>soju.im/no-implicit-names</code> spelling.
           </p>
           <p class="compat-note">
-            <code>+draft/reply</code> and <code>+typing</code> are client-only tags rather than
-            capabilities. Both ride on <code>message-tags</code>. Reply goes out under both
-            spellings, and SeraphIRC offers it as a threaded reply only where
-            <code>CLIENTTAGDENY</code> says the server will pass it along. Everywhere else the
-            same action addresses the nick instead. Typing indicators are sent and shown in
-            channels, queries, and multi-window views.
+            <code>+draft/react</code>, <code>+draft/reply</code>, and <code>+typing</code> are
+            client-only tags rather than capabilities. All three ride on
+            <code>message-tags</code>. Reply goes out under both spellings, and SeraphIRC offers
+            it as a threaded reply only where <code>CLIENTTAGDENY</code> says the server will
+            pass it along. Everywhere else the same action addresses the nick instead.
+            Reactions follow the same rule, with an optional mode that sends them as short
+            quoted replies where the tag cannot travel. Typing indicators are sent and shown
+            in channels, queries, and multi-window views.
           </p>
           <p class="compat-note">
             Bot mode covers the <code>BOT</code> ISUPPORT token, the bot flag in WHO replies,
@@ -953,6 +958,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.16">5.1.16</option>
               <option value="5.1.15">5.1.15</option>
               <option value="5.1.14">5.1.14</option>
               <option value="5.1.13">5.1.13</option>
@@ -1007,7 +1013,14 @@
             <span class="changelog-date" id="changelog-date">Aug 29, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.15" data-date="Aug 29, 2026">
+          <article class="release" data-version="5.1.16" data-date="Aug 29, 2026">
+            <ul class="release-notes">
+              <li><b>Message deletion:</b> <a href="https://ircv3.net/specs/extensions/message-redaction" target="_blank" rel="noopener">redact messages</a>, on desktop and mobile alike, wherever the network supports it. A small note takes its place, with the original text tucked behind it for anyone who wants a look.</li>
+              <li><b>Fixes:</b> bouncer network names with spaces in them now import correctly, and a few metadata queries that answered with silence or raw noise now reply properly.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.15" data-date="Aug 29, 2026" hidden>
             <ul class="release-notes">
               <li><b>Interface polish:</b> replies you send on mobile now show the same little corner arrow as on desktop.</li>
               <li><b>Fixes:</b> leaving a channel no longer puts a stray unread badge on another channel.</li>
