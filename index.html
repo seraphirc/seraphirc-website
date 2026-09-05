@@ -958,6 +958,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.17">5.1.17</option>
               <option value="5.1.16">5.1.16</option>
               <option value="5.1.15">5.1.15</option>
               <option value="5.1.14">5.1.14</option>
@@ -1010,10 +1011,17 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Aug 29, 2026</span>
+            <span class="changelog-date" id="changelog-date">Sep 4, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.16" data-date="Aug 29, 2026">
+          <article class="release" data-version="5.1.17" data-date="Sep 4, 2026">
+            <ul class="release-notes">
+              <li><b>Command chaining:</b> run several slash commands from one line on desktop, separated by a pipe with a space on either side. <code>/whois tom | /whois jerry</code> runs both in order, and one that fails does not stop the ones after it. Pipes in topics and nicknames still behave as they always have, and <code>/help chaining</code> covers the rest.</li>
+              <li><b>Chrome refresh:</b> the top toolbar is a little shorter, the SeraphIRC wings now mark the About button in place of a question mark, and the lockup moved from the bottom of the sidebar up to the treebar header. The latency graph took the space that freed at the sidebar floor, and the About page icon no longer has clipped corners.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.16" data-date="Aug 29, 2026" hidden>
             <ul class="release-notes">
               <li><b>Message deletion:</b> <a href="https://ircv3.net/specs/extensions/message-redaction" target="_blank" rel="noopener">Redact messages</a> is now supported on desktop and mobile where the network supports it. A small note takes its place with the original text collapsed for anyone who wants to review the redacted message.</li>
               <li><b>Fixes:</b> bouncer network names with spaces in them now import correctly, and a few metadata queries that answered with silence or raw noise now reply properly.</li>
