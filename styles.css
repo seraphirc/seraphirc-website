@@ -1194,7 +1194,7 @@ body::after {
 
 /* ============================================================
    DEVICE DUO — iPad + iPhone share the Mobile column, phone
-   tucked over the tablet's corner; one TestFlight button below.
+   tucked over the tablet's corner; one App Store button below.
    ============================================================ */
 .device-duo {
   display: flex;
