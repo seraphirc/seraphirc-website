@@ -983,6 +983,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.19">5.1.19</option>
               <option value="5.1.18">5.1.18</option>
               <option value="5.1.17">5.1.17</option>
               <option value="5.1.16">5.1.16</option>
@@ -1040,7 +1041,14 @@
             <span class="changelog-date" id="changelog-date">Sep 5, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.18" data-date="Sep 5, 2026">
+          <article class="release" data-version="5.1.19" data-date="Sep 5, 2026">
+            <ul class="release-notes">
+              <li><b>Channel modes in the transcript:</b> a speaker's status now sits beside their name, so an op reads as <code>&lt;@nick&gt;</code> and a voiced user as <code>&lt;+nick&gt;</code> without a trip to the member list. It follows the live prefix, so a deop repaints every line that person has said in the channel.</li>
+              <li><b>Fixes:</b> the member list no longer paints founders, halfops, and people holding more than one mode as plain members, and the window title sits centered on the window instead of pushed off to the right.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.18" data-date="Sep 5, 2026" hidden>
             <ul class="release-notes">
               <li><b>macOS chrome:</b> as more and more macOS users adopt SeraphIRC, we continue to polish the aesthetic. This release focuses heavily on the macOS user experience, with a macOS chrome selector in <code>Settings &gt; Appearance</code>. This lowers the neon tint and glows and provides a more crisp UI. For macOS users that find the house glow and contrasts appealing, <code>Settings &gt; Appearance &gt; Chrome Style</code> can be set to Seraph to retain original contrast and hues.</li>
               <li><b>Ocean Breeze rebuilt:</b> the theme is one aqua family now instead of a split ground. Section labels, buffer names, and the latency caption were washing out against the sidebar and read clearly again.</li>
