@@ -303,6 +303,30 @@
         <div class="news-panel" data-news-panel>
           <div class="news-main">
           <div class="news-deck" data-news-deck>
+            <article class="news-card" data-news-title="macOS Chrome">
+              <div class="news-bar">
+                <span class="news-kicker">macOS Chrome</span>
+                <span class="news-date">5.1.18 &middot; Sep 5, 2026</span>
+                <span class="news-flag">New</span>
+              </div>
+              <div class="news-body">
+                <h3>A Native Face on macOS</h3>
+                <p>
+                  As more and more macOS users adopt SeraphIRC, we have kept polishing the
+                  aesthetic. This release focuses heavily on the macOS experience, with a
+                  chrome selector in <code>Settings &gt; Appearance</code> that lowers the
+                  neon tint and the glows for a crisper interface that sits comfortably
+                  beside a native window.
+                </p>
+                <p>
+                  For macOS users who find the house glow and contrast appealing, set
+                  <code>Settings &gt; Appearance &gt; Chrome Style</code> to Seraph to keep
+                  the original contrast and hues. Windows and Linux are untouched either way.
+                </p>
+                <p class="news-cmd"><code>Settings &gt; Appearance &gt; Chrome Style</code></p>
+              </div>
+            </article>
+
             <article class="news-card" data-news-title="Reactions">
               <div class="news-bar">
                 <span class="news-kicker">Reactions</span>
@@ -381,7 +405,6 @@
               <div class="news-bar">
                 <span class="news-kicker">Ignore Sync</span>
                 <span class="news-date">5.1.2 &middot; Aug 15, 2026</span>
-                <span class="news-flag">New</span>
               </div>
               <div class="news-body">
                 <h3>Ignore once, ignored everywhere</h3>
@@ -960,6 +983,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.18">5.1.18</option>
               <option value="5.1.17">5.1.17</option>
               <option value="5.1.16">5.1.16</option>
               <option value="5.1.15">5.1.15</option>
@@ -1013,10 +1037,18 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Sep 4, 2026</span>
+            <span class="changelog-date" id="changelog-date">Sep 5, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.17" data-date="Sep 4, 2026">
+          <article class="release" data-version="5.1.18" data-date="Sep 5, 2026">
+            <ul class="release-notes">
+              <li><b>macOS chrome:</b> as more and more macOS users adopt SeraphIRC, we continue to polish the aesthetic. This release focuses heavily on the macOS user experience, with a macOS chrome selector in <code>Settings &gt; Appearance</code>. This lowers the neon tint and glows and provides a more crisp UI. For macOS users that find the house glow and contrasts appealing, <code>Settings &gt; Appearance &gt; Chrome Style</code> can be set to Seraph to retain original contrast and hues.</li>
+              <li><b>Ocean Breeze rebuilt:</b> the theme is one aqua family now instead of a split ground. Section labels, buffer names, and the latency caption were washing out against the sidebar and read clearly again.</li>
+              <li><b>Fixes:</b> clicking a name in the member list highlights it again for people who keep the user list control panel turned off.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.17" data-date="Sep 4, 2026" hidden>
             <ul class="release-notes">
               <li><b>Command chaining:</b> run several slash commands from one line on desktop, separated by a pipe with a space on either side. <code>/whois tom | /whois jerry</code> runs both in order, and one that fails does not stop the ones after it. Pipes in topics and nicknames still behave as they always have, and <code>/help chaining</code> covers the rest.</li>
               <li><b>Chrome refresh:</b> the top toolbar is a little shorter, the SeraphIRC wings now mark the About button in place of a question mark, and the lockup moved from the bottom of the sidebar up to the treebar header. The latency graph took the space that freed at the sidebar floor, and the About page icon no longer has clipped corners.</li>
