@@ -2255,6 +2255,122 @@ h3 {
 @media (max-width: 900px) { .term-grid { columns: 2; } }
 @media (max-width: 620px) { .term-grid { columns: 1; } }
 
+/* --- feature entries: a star, a name, and the note it holds ----
+   Nineteen descriptions stacked as visible prose was the longest wall
+   on the page and almost none of it was being read. The name carries
+   the scan, and the note is spent only when someone asks for it.
+
+   Styled off .term-grid dt rather than the platform cards: the mono
+   name over a gold hairline is the site's own treatment for exactly
+   this content. The bevelled plate those cards wear is a 90s device
+   frame and reads as a dialog button out here, which is not the
+   language the rest of the page speaks.
+
+   The note is pinned left:0/right:0 so it is exactly as wide as its
+   own entry. That is what keeps it safe at every breakpoint: the grid
+   reflows between one and four columns, and a note anchored this way
+   can never overhang the viewport the way a centered fixed-width
+   tooltip would in the first and last column. */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
+  gap: clamp(20px, 2.4vw, 32px) clamp(26px, 3vw, 46px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.feature { position: relative; }
+.feature-plate {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  width: 100%;
+  margin: 0;
+  padding: 0 0 8px;
+  color: var(--text);
+  /* Safari gives buttons an appearance of their own that outranks a bare
+     background declaration, and these have to read as text, not controls. */
+  -webkit-appearance: none;
+  appearance: none;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--gold) 26%, transparent);
+  border-radius: 0;
+  font-family: var(--mono);
+  font-size: var(--t-label);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: help;
+  transition: color 160ms ease, border-color 160ms ease, text-shadow 160ms ease;
+}
+/* the star ahead of each name rests dim and ignites when the note opens */
+.feature-plate::before {
+  content: "\2726";
+  flex: none;
+  color: var(--gold);
+  font-size: 0.9em;
+  opacity: 0.4;
+  transition: opacity 160ms ease, text-shadow 160ms ease;
+}
+.feature-plate:hover,
+.feature-plate:focus-visible,
+.feature:focus-within .feature-plate {
+  color: var(--gold-bright);
+  border-bottom-color: var(--gold);
+  text-shadow: 0 0 14px rgba(243, 211, 114, 0.4);
+  outline: none;
+}
+.feature-plate:hover::before,
+.feature-plate:focus-visible::before,
+.feature:focus-within .feature-plate::before {
+  opacity: 1;
+  text-shadow: 0 0 10px rgba(243, 211, 114, 0.75);
+}
+/* keyboard users still get a visible ring, since the glow alone is
+   the same cue a passing mouse produces */
+.feature-plate:focus-visible { outline: 1px dotted var(--gold); outline-offset: 4px; }
+.feature-note {
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + 9px);
+  left: 0;
+  right: 0;
+  padding: 13px 15px;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--panel) 96%, transparent);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  border: 1px solid rgba(243, 211, 114, 0.3);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42), 0 0 26px var(--shot-halo);
+  font-family: var(--sans);
+  font-size: var(--t-small);
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.62;
+  text-transform: none;
+  /* Opacity rather than display or visibility: the note stays in the
+     accessibility tree, so the aria-describedby on the name is still
+     announced when the note is not on screen. */
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+.feature-note code { color: var(--code-ink); font-size: 0.86em; }
+/* Tap and keyboard focus both land here. Hover is gated behind a real
+   pointer so a tapped name on a phone does not keep a stuck note. */
+.feature:focus-within .feature-note { opacity: 1; transform: none; }
+@media (hover: hover) {
+  .feature:hover .feature-note { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .feature-plate, .feature-plate::before, .feature-note { transition: none; }
+  .feature-note { transform: none; }
+}
+
 /* --- news: deck plus a standing index ------------------------- */
 /* The archive was reachable only by paging blindly through it, and
    the space it now occupies was empty. The index is built by script

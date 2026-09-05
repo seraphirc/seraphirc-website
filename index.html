@@ -785,86 +785,87 @@
       <section class="section" id="features" aria-labelledby="features-title">
         <div class="section-heading">
           <h2 id="features-title">Features</h2>
+          <p class="lead">Hover a plate to read what that feature does. On a touch screen, tap it.</p>
         </div>
 
-        <dl class="term-grid term-grid-3">
-            <div>
-              <dt>Multi-network IRC</dt>
-              <dd>Keep direct networks, bouncer imports, channels, server buffers, and private messages organized in one workspace.</dd>
-            </div>
-            <div>
-              <dt>Direct IRC or bouncer support</dt>
-              <dd>Talk straight to traditional networks, or connect through a bouncer. Soju networks import and manage themselves without leaving the client, and existing ZNC setups keep working.</dd>
-            </div>
-            <div>
-              <dt>Blowfish encryption</dt>
-              <dd>Native FiSH-compatible Blowfish encryption in CBC or ECB mode. Set a shared key for a channel or a person and messages encrypt on their own, readable by HexChat, Konversation, Quassel, and mIRC.</dd>
-            </div>
-            <div>
-              <dt>Custom mentions and notifications</dt>
-              <dd>Add your own words and phrases and they highlight like your nick, with their own mention tray and notification toggle.</dd>
-            </div>
-            <div>
-              <dt>IRCv3 negotiation</dt>
-              <dd>Advertised capabilities such as SASL, server-time, account tags, away-notify, echo-message, batch, and chat history.</dd>
-            </div>
-            <div>
-              <dt>Identity confidence probing</dt>
-              <dd>The query window indicates whether a user is authenticated via SASL and on which account. A green check means verified. An orange question mark means unauthenticated or unknown.</dd>
-            </div>
-            <div>
-              <dt>Themeable interface</dt>
-              <dd>A prebuilt collection of common, beloved themes ready to use.</dd>
-            </div>
-            <div>
-              <dt>Dial in your atmosphere</dt>
-              <dd>Use the Atmosphere slider to control how much cloud and starlight appears throughout the desktop client.</dd>
-            </div>
-            <div>
-              <dt>Diagnostics built in</dt>
-              <dd>Inspect connection behavior, server responses, and client state without guessing what happened.</dd>
-            </div>
-            <div>
-              <dt>Nothing phones home</dt>
-              <dd>No analytics, no account requirement, no cloud dependency. The client talks to your networks and nothing else.</dd>
-            </div>
-            <div>
-              <dt>Desktop and mobile</dt>
-              <dd>Take the desktop's familiar interface layout and flows with you on the go with your mobile device.</dd>
-            </div>
-            <div>
-              <dt>Mobile push notifications</dt>
-              <dd>Receive push notifications on your mobile device when the setting is enabled on your app.</dd>
-            </div>
-            <div>
-              <dt>File uploads and DCC send/receive</dt>
-              <dd>Use your Soju bouncer to upload files and share with others, or transfer files directly with DCC send and receive. Supports drag and drop with coordinates (including non-focused windows) and copy/paste.</dd>
-            </div>
-            <div>
-              <dt>Encrypted peer-to-peer transfers</dt>
-              <dd>Seraph Transfer sends a file straight to another user over mutually authenticated TLS 1.3, with no upload host and no copy left behind, even when you are both behind NAT.</dd>
-            </div>
-            <div>
-              <dt>Encrypted peer-to-peer chats</dt>
-              <dd>Seraph Chat opens a direct, mutually authenticated TLS 1.3 conversation with another user, even when you are both behind NAT.</dd>
-            </div>
-            <div>
-              <dt>Markdown and color formatting</dt>
-              <dd>Write bold, italics, code spans, and colors with markdown or token syntax, all sent as standard IRC control codes that other clients understand. Spoilers are the exception, going out as literal <code>||text||</code> that SeraphIRC renders click-to-reveal.</dd>
-            </div>
-            <div>
-              <dt>Emoji support</dt>
-              <dd>Display emojis and use the emoji picker to spruce up your chat.</dd>
-            </div>
-            <div>
-              <dt>Optional GIPHY integration</dt>
-              <dd>Meme with your friends like anywhere else with our "bring your own key" GIPHY integration.</dd>
-            </div>
-            <div>
-              <dt>Voice dictation</dt>
-              <dd>Use your mobile device's microphone to translate your voice to IRC message. Handy for responding on the go.</dd>
-            </div>
-          </dl>
+        <ul class="feature-grid">
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-multi">Multi-network IRC</button>
+            <span class="feature-note" id="feat-multi" role="tooltip">Keep direct networks, bouncer imports, channels, server buffers, and private messages organized in one workspace.</span>
+          </li>
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-bouncer">Direct IRC or bouncer</button>
+            <span class="feature-note" id="feat-bouncer" role="tooltip">Talk straight to traditional networks, or connect through a bouncer. Soju networks import and manage themselves without leaving the client, and existing ZNC setups keep working.</span>
+          </li>
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-blowfish">Blowfish encryption</button>
+            <span class="feature-note" id="feat-blowfish" role="tooltip">Native FiSH-compatible Blowfish encryption in CBC or ECB mode. Set a shared key for a channel or a person and messages encrypt on their own, readable by HexChat, Konversation, Quassel, and mIRC.</span>
+          </li>
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-mentions">Custom Mentions (Desktop)</button>
+            <span class="feature-note" id="feat-mentions" role="tooltip">Add your own words and phrases and they highlight like your nick, with their own mention tray and notification toggle.</span>
+          </li>
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-ircv3">IRCv3 negotiation</button>
+            <span class="feature-note" id="feat-ircv3" role="tooltip">Advertised capabilities such as SASL, server-time, account tags, away-notify, echo-message, batch, and chat history.</span>
+          </li>
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-identity">Identity probing</button>
+            <span class="feature-note" id="feat-identity" role="tooltip">The query window indicates whether a user is authenticated via SASL and on which account. A green check means verified. An orange question mark means unauthenticated or unknown.</span>
+          </li>
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-reactions">Reactions</button>
+            <span class="feature-note" id="feat-reactions" role="tooltip">React to any message with an emoji, on desktop and mobile alike. Reactions show as small chips on the message, with a full picker and <code>/react</code> and <code>/unreact</code> commands. They survive restarts, travel through bouncers, and can be sent as ordinary messages for people whose clients cannot show them.</span>
+          </li>
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-redaction">Message redaction</button>
+            <span class="feature-note" id="feat-redaction" role="tooltip">Redact a message you sent, on desktop and mobile, wherever the network supports it. A small note takes its place with the original text collapsed for anyone who wants to review it.</span>
+          </li>
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-formatting">Markdown and color</button>
+            <span class="feature-note" id="feat-formatting" role="tooltip">Write bold, italics, code spans, and colors with markdown or token syntax, all sent as standard IRC control codes that other clients understand. Spoilers are the exception, going out as literal <code>||text||</code> that SeraphIRC renders click-to-reveal.</span>
+          </li>
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-emoji">Emoji support</button>
+            <span class="feature-note" id="feat-emoji" role="tooltip">Display emojis and use the emoji picker to spruce up your chat.</span>
+          </li>
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-giphy">Optional GIPHY</button>
+            <span class="feature-note" id="feat-giphy" role="tooltip">Meme with your friends like anywhere else with our "bring your own key" GIPHY integration.</span>
+          </li>
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-uploads">Uploads and DCC</button>
+            <span class="feature-note" id="feat-uploads" role="tooltip">Use your Soju bouncer to upload files and share with others, or transfer files directly with DCC send and receive. Supports drag and drop with coordinates (including non-focused windows) and copy/paste.</span>
+          </li>
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-p2p">Encrypted peer-to-peer</button>
+            <span class="feature-note" id="feat-p2p" role="tooltip">Seraph Transfer sends a file straight to another user over mutually authenticated TLS 1.3, with no upload host and no copy left behind. Seraph Chat opens a direct conversation the same way. Both work even when you are both behind NAT.</span>
+          </li>
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-themes">Themes and atmosphere</button>
+            <span class="feature-note" id="feat-themes" role="tooltip">A prebuilt collection of common, beloved themes ready to use, plus an Atmosphere slider that sets how much cloud and starlight appears throughout the desktop client.</span>
+          </li>
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-platforms">Desktop and mobile</button>
+            <span class="feature-note" id="feat-platforms" role="tooltip">Take the desktop's familiar interface layout and flows with you on the go with your mobile device.</span>
+          </li>
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-push">Push notifications</button>
+            <span class="feature-note" id="feat-push" role="tooltip">Receive push notifications on your mobile device when the setting is enabled on your app.</span>
+          </li>
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-dictation">Voice dictation</button>
+            <span class="feature-note" id="feat-dictation" role="tooltip">Use your mobile device's microphone to translate your voice to IRC message. Handy for responding on the go.</span>
+          </li>
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-diagnostics">Diagnostics built in</button>
+            <span class="feature-note" id="feat-diagnostics" role="tooltip">Inspect connection behavior, server responses, and client state with the help of rich debugging.</span>
+          </li>
+          <li class="feature">
+            <button class="feature-plate" type="button" aria-describedby="feat-privacy">Nothing phones home</button>
+            <span class="feature-note" id="feat-privacy" role="tooltip">No analytics, no account requirement, no cloud dependency. The client talks to your networks and nothing else.</span>
+          </li>
+        </ul>
       </section>
 
       <section class="section bouncer-section" id="bouncers" aria-labelledby="bouncers-title">
@@ -942,28 +943,6 @@
               <li><code>standard-replies</code></li>
             </ul>
           </div>
-          <p class="compat-note">
-            "Partial" means the capability is negotiated but not every code path uses it yet.
-            Where a server advertises the ratified name instead of a draft one, the unprefixed
-            variant (<code>chathistory</code>, <code>read-marker</code>, <code>no-implicit-names</code>)
-            is negotiated too, along with soju's <code>soju.im/no-implicit-names</code> spelling.
-          </p>
-          <p class="compat-note">
-            <code>+draft/react</code>, <code>+draft/reply</code>, and <code>+typing</code> are
-            client-only tags rather than capabilities. All three ride on
-            <code>message-tags</code>. Reply goes out under both spellings, and SeraphIRC offers
-            it as a threaded reply only where <code>CLIENTTAGDENY</code> says the server will
-            pass it along. Everywhere else the same action addresses the nick instead.
-            Reactions follow the same rule, with an optional mode that sends them as short
-            quoted replies where the tag cannot travel. Typing indicators are sent and shown
-            in channels, queries, and multi-window views.
-          </p>
-          <p class="compat-note">
-            Bot mode covers the <code>BOT</code> ISUPPORT token, the bot flag in WHO replies,
-            <code>RPL_WHOISBOT</code>, and the <code>bot</code> message tag. Bots wear a badge in
-            the member list, and they can be auto-ignored or have their alerts muted from
-            Settings.
-          </p>
         </div>
       </section>
 
