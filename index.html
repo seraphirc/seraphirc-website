@@ -672,6 +672,13 @@
           <div class="platform-desktop">
             <div class="platform-card-head">
               <h3>Desktop</h3>
+              <div class="skin-toggle" role="group" aria-label="Desktop UI skin">
+                <span class="skin-toggle-label">UI Skin</span>
+                <span class="skin-toggle-track">
+                  <button class="skin-btn is-active" type="button" data-skin="seraph" aria-pressed="true">Seraph</button>
+                  <button class="skin-btn" type="button" data-skin="macos" aria-pressed="false">macOS</button>
+                </span>
+              </div>
             </div>
             <p>
               Collapse or expand the network tree on the left, and customize your window/tile
@@ -688,11 +695,17 @@
                 <span class="desktop-screen">
                   <img
                     data-desktop-shot
-                    src="assets/desktop-themes/seraph-desktop.png"
-                    alt="SeraphIRC desktop client with four channel windows tiled over the network tree"
+                    src="assets/desktop-themes/seraph-seraph-desktop.png"
+                    alt="SeraphIRC desktop client in the Seraph window style, with four channel windows tiled over the network tree"
                   >
                 </span>
               </button>
+              <figcaption class="shot-caption">
+                Seraph draws its own bolder, neon-lit window chrome. macOS keeps it
+                crisp and minimal. Both ship on every platform and auto-select to match
+                yours. Switch any time under
+                <em>Settings &rsaquo; Appearance &rsaquo; Window &rsaquo; Chrome Style</em>.
+              </figcaption>
             </figure>
           </div>
 
@@ -758,10 +771,10 @@
         <div class="lightbox-frame">
           <img
             data-desktop-shot
-            src="assets/desktop-themes/seraph-desktop.png"
-            alt="SeraphIRC desktop client interface showing IRC channels, chat, and user list"
-            width="2559"
-            height="1572"
+            src="assets/desktop-themes/seraph-seraph-desktop.png"
+            alt="SeraphIRC desktop client in the Seraph window style, showing IRC channels, chat, and user list"
+            width="2560"
+            height="1568"
           >
         </div>
       </dialog>
@@ -1582,16 +1595,32 @@
       })();
 
       // ---- Theme picker: swap the site palette to a desktop-client theme ----
+      // Desktop shots exist once per theme AND per window chrome style, named
+      // <theme>-<skin>-desktop.png, so the picker and the skin toggle below it
+      // both feed the same filename. Mobile ships a single skin and ignores it.
       (function () {
         var select = document.getElementById("theme-select");
         if (!select) return;
         var STORE = "seraphirc-theme";
+        var SKIN_STORE = "seraphirc-skin";
+        var SKINS = { seraph: "Seraph", macos: "macOS" };
         var shots = document.querySelectorAll("[data-desktop-shot]");
         var phoneShots = document.querySelectorAll("[data-phone-shot]");
         var tabletShots = document.querySelectorAll("[data-tablet-shot]");
-        function applyShot(theme) {
+        var skinButtons = Array.prototype.slice.call(document.querySelectorAll("[data-skin]"));
+
+        var theme = document.documentElement.getAttribute("data-theme") || "seraph";
+        var skin = "seraph";
+        try {
+          var saved = localStorage.getItem(SKIN_STORE);
+          if (saved && SKINS[saved]) skin = saved;
+        } catch (e) {}
+
+        function applyShot() {
           shots.forEach(function (img) {
-            img.src = "assets/desktop-themes/" + theme + "-desktop.png";
+            img.src = "assets/desktop-themes/" + theme + "-" + skin + "-desktop.png";
+            img.alt = "SeraphIRC desktop client in the " + SKINS[skin] +
+              " window style, showing IRC channels, chat, and user list";
           });
           phoneShots.forEach(function (img) {
             img.src = "assets/iphone-themes/" + theme + "-iphone.jpg";
@@ -1600,14 +1629,35 @@
             img.src = "assets/ipad-themes/" + theme + "-ipad.jpeg";
           });
         }
-        var current = document.documentElement.getAttribute("data-theme") || "seraph";
-        select.value = current;
-        applyShot(current);
+
+        function applySkinButtons() {
+          skinButtons.forEach(function (button) {
+            var on = button.dataset.skin === skin;
+            button.classList.toggle("is-active", on);
+            button.setAttribute("aria-pressed", on ? "true" : "false");
+          });
+        }
+
+        select.value = theme;
+        applySkinButtons();
+        applyShot();
+
         select.addEventListener("change", function () {
-          var theme = select.value;
+          theme = select.value;
           document.documentElement.setAttribute("data-theme", theme);
-          applyShot(theme);
+          applyShot();
           try { localStorage.setItem(STORE, theme); } catch (e) {}
+        });
+
+        skinButtons.forEach(function (button) {
+          button.addEventListener("click", function () {
+            var next = button.dataset.skin;
+            if (!SKINS[next] || next === skin) return;
+            skin = next;
+            applySkinButtons();
+            applyShot();
+            try { localStorage.setItem(SKIN_STORE, skin); } catch (e) {}
+          });
         });
       })();
 
