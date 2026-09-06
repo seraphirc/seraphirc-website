@@ -983,6 +983,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.20">5.1.20</option>
               <option value="5.1.19">5.1.19</option>
               <option value="5.1.18">5.1.18</option>
               <option value="5.1.17">5.1.17</option>
@@ -1041,7 +1042,16 @@
             <span class="changelog-date" id="changelog-date">Sep 5, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.19" data-date="Sep 5, 2026">
+          <article class="release" data-version="5.1.20" data-date="Sep 5, 2026">
+            <ul class="release-notes">
+              <li><b>Network Manager rebuilt:</b> a selectable server list. Pick a network, read its details underneath, and act from one row of buttons. The list scrolls, group headings stay put as their networks pass under them, and status colors follow the theme. The startup checkbox moved into its footer.</li>
+              <li><b>Classic layout:</b> an unbroken rule separates the sender column from the message body, so nicknames hang off a rail instead of reading as a table. Timestamps come up a size.</li>
+              <li><b>Roster counts:</b> the Users and Ops labels become icons carrying their counts.</li>
+              <li><b>Fixes:</b> Tokyo Night's selection rail goes blue, and the Appearance copy calls the avatar fallback an identicon.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.19" data-date="Sep 5, 2026" hidden>
             <ul class="release-notes">
               <li><b>Channel modes in the transcript:</b> a speaker's status now sits beside their name, so an op reads as <code>&lt;@nick&gt;</code> and a voiced user as <code>&lt;+nick&gt;</code> without a trip to the member list. It follows the live prefix, so a deop repaints every line that person has said in the channel.</li>
               <li><b>Fixes:</b> the member list no longer paints founders, halfops, and people holding more than one mode as plain members, and the window title sits centered on the window instead of pushed off to the right.</li>
