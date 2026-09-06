@@ -2439,11 +2439,25 @@ h3 {
   transition: opacity 150ms ease, transform 150ms ease;
 }
 .feature-note code { color: var(--code-ink); font-size: 0.86em; }
-/* Tap and keyboard focus both land here. Hover is gated behind a real
-   pointer so a tapped name on a phone does not keep a stuck note. */
+/* Keyboard focus lands here. Hover is gated behind a real pointer so a
+   tapped name on a phone does not keep a stuck note. */
 .feature:focus-within .feature-note { opacity: 1; transform: none; }
 @media (hover: hover) {
   .feature:hover .feature-note { opacity: 1; transform: none; }
+}
+/* Tap opens via .is-open, set by script. Neither CSS path above can carry a
+   touch device: (hover: hover) is false there, and Safari does not move focus
+   to a <button> on tap, so :focus-within never fires and iOS got nothing at
+   all. pointer-events go live so the note's own text stays selectable. */
+.feature.is-open .feature-note { opacity: 1; transform: none; pointer-events: auto; }
+.feature.is-open .feature-plate {
+  color: var(--gold-bright);
+  border-bottom-color: var(--gold);
+  text-shadow: 0 0 14px rgba(243, 211, 114, 0.4);
+}
+.feature.is-open .feature-plate::before {
+  opacity: 1;
+  text-shadow: 0 0 10px rgba(243, 211, 114, 0.75);
 }
 @media (prefers-reduced-motion: reduce) {
   .feature-plate, .feature-plate::before, .feature-note { transition: none; }

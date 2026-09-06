@@ -95,7 +95,7 @@
         } catch (e) {}
       })();
     </script>
-    <link rel="stylesheet" href="styles.css?v=20260906-caption-spacing-1">
+    <link rel="stylesheet" href="styles.css?v=20260906-feature-tap-1">
   </head>
   <body>
     <div class="topbar">
@@ -1590,6 +1590,57 @@
           lb.addEventListener("click", (event) => {
             if (event.target === lb || event.target.matches(".lightbox-frame img")) lb.close();
           });
+        });
+      })();
+
+      // ---- Feature plates: tap to open the note ----
+      // The note is otherwise revealed by :hover and :focus-within alone.
+      // Neither reaches a phone: (hover: hover) is false on a touch screen,
+      // and WebKit does not move focus to a <button> on tap, so on iOS (every
+      // browser there, Brave and Chrome included) tapping a plate did nothing.
+      // Click drives an explicit open state instead. Progressive enhancement:
+      // with the script off, hover and keyboard focus behave as before.
+      (function () {
+        var features = Array.prototype.slice.call(document.querySelectorAll(".feature"));
+        if (!features.length) return;
+        var open = null;
+
+        function close() {
+          if (!open) return;
+          open.classList.remove("is-open");
+          var plate = open.querySelector(".feature-plate");
+          if (plate) plate.setAttribute("aria-expanded", "false");
+          open = null;
+        }
+
+        features.forEach(function (feature) {
+          var plate = feature.querySelector(".feature-plate");
+          if (!plate) return;
+          plate.setAttribute("aria-expanded", "false");
+          plate.addEventListener("click", function () {
+            var alreadyOpen = feature === open;
+            close();               // one note at a time
+            if (alreadyOpen) return; // second tap on the same plate closes it
+            feature.classList.add("is-open");
+            plate.setAttribute("aria-expanded", "true");
+            open = feature;
+          });
+          // An open note is absolutely positioned over the plate that follows
+          // it, so while it is live to pointer events it would swallow taps
+          // meant for that plate. Tapping the note dismisses it, which frees
+          // the plate underneath rather than trapping it.
+          var note = feature.querySelector(".feature-note");
+          if (note) note.addEventListener("click", close);
+        });
+
+        // Tap anywhere else, or press Escape, to dismiss. The plate's own
+        // handler runs first and the open feature contains that target, so
+        // this never closes the note it just opened.
+        document.addEventListener("click", function (event) {
+          if (open && !open.contains(event.target)) close();
+        });
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape" || event.key === "Esc") close();
         });
       })();
 
