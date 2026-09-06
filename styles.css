@@ -664,7 +664,10 @@ h2 {
     gap: 10px;
     width: 100%;
     padding: 12px 16px;
-    background: rgba(25, 32, 53, 0.92);
+    /* The sticky .topbar behind this already paints the ground, and it is
+       the element the theme picker recolors — a background here would pin
+       the mobile bar to Seraph navy on every other theme. */
+    background: transparent;
     border-bottom: 1px solid var(--line);
   }
   .header-cta { display: none; }
