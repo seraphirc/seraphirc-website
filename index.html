@@ -95,7 +95,7 @@
         } catch (e) {}
       })();
     </script>
-    <link rel="stylesheet" href="styles.css?v=20260906-skin-toggle-1">
+    <link rel="stylesheet" href="styles.css?v=20260906-caption-spacing-1">
   </head>
   <body>
     <div class="topbar">
@@ -672,18 +672,27 @@
           <div class="platform-desktop">
             <div class="platform-card-head">
               <h3>Desktop</h3>
-              <div class="skin-toggle" role="group" aria-label="Desktop UI skin">
-                <span class="skin-toggle-label">UI Skin</span>
-                <span class="skin-toggle-track">
-                  <button class="skin-btn is-active" type="button" data-skin="seraph" aria-pressed="true">Seraph</button>
-                  <button class="skin-btn" type="button" data-skin="macos" aria-pressed="false">macOS</button>
-                </span>
-              </div>
             </div>
             <p>
               Collapse or expand the network tree on the left, and customize your window/tile
-              layout on the right. Choose from Modern UI or Classic Mode (shown), giving you that original IRC feel.
+              layout on the right. Choose from Modern UI or Classic Mode, giving you that original IRC feel.
             </p>
+            <div class="shot-controls">
+              <div class="shot-toggle" role="group" aria-label="Desktop UI skin">
+                <span class="shot-toggle-label">UI Skin</span>
+                <span class="shot-toggle-track">
+                  <button class="shot-toggle-btn is-active" type="button" data-skin="seraph" aria-pressed="true">Seraph</button>
+                  <button class="shot-toggle-btn" type="button" data-skin="macos" aria-pressed="false">macOS</button>
+                </span>
+              </div>
+              <div class="shot-toggle" role="group" aria-label="Desktop UI layout">
+                <span class="shot-toggle-label">UI Layout</span>
+                <span class="shot-toggle-track">
+                  <button class="shot-toggle-btn is-active" type="button" data-mode="modern" aria-pressed="true">Modern</button>
+                  <button class="shot-toggle-btn" type="button" data-mode="classic" aria-pressed="false">Classic</button>
+                </span>
+              </div>
+            </div>
             <figure class="client-preview platform-shot">
               <button
                 class="client-preview-trigger"
@@ -695,15 +704,15 @@
                 <span class="desktop-screen">
                   <img
                     data-desktop-shot
-                    src="assets/desktop-themes/seraph-seraph-desktop.png"
+                    src="assets/desktop-themes/seraph-seraph-desktop-modern.png"
                     alt="SeraphIRC desktop client in the Seraph window style, with four channel windows tiled over the network tree"
                   >
                 </span>
               </button>
               <figcaption class="shot-caption">
-                Seraph draws its own bolder, neon-lit window chrome. macOS keeps it
+                Seraph draws borders and neon-lit window chrome. macOS keeps it
                 crisp and minimal. Both ship on every platform and auto-select to match
-                yours. Switch any time under
+                yours. Want something different? Switch any time under
                 <em>Settings &rsaquo; Appearance &rsaquo; Window &rsaquo; Chrome Style</em>.
               </figcaption>
             </figure>
@@ -771,7 +780,7 @@
         <div class="lightbox-frame">
           <img
             data-desktop-shot
-            src="assets/desktop-themes/seraph-seraph-desktop.png"
+            src="assets/desktop-themes/seraph-seraph-desktop-modern.png"
             alt="SeraphIRC desktop client in the Seraph window style, showing IRC channels, chat, and user list"
             width="2560"
             height="1568"
@@ -1595,32 +1604,51 @@
       })();
 
       // ---- Theme picker: swap the site palette to a desktop-client theme ----
-      // Desktop shots exist once per theme AND per window chrome style, named
-      // <theme>-<skin>-desktop.png, so the picker and the skin toggle below it
-      // both feed the same filename. Mobile ships a single skin and ignores it.
+      // Desktop shots are named <theme>-<skin>-desktop-<mode>.png, so the theme
+      // picker, the skin toggle and the layout mode all feed one filename.
+      // Mobile ships a single skin and layout, so it ignores both.
       (function () {
         var select = document.getElementById("theme-select");
         if (!select) return;
         var STORE = "seraphirc-theme";
         var SKIN_STORE = "seraphirc-skin";
+        var MODE_STORE = "seraphirc-layout";
         var SKINS = { seraph: "Seraph", macos: "macOS" };
+        var MODES = { modern: "Modern", classic: "Classic" };
         var shots = document.querySelectorAll("[data-desktop-shot]");
         var phoneShots = document.querySelectorAll("[data-phone-shot]");
         var tabletShots = document.querySelectorAll("[data-tablet-shot]");
         var skinButtons = Array.prototype.slice.call(document.querySelectorAll("[data-skin]"));
+        var modeButtons = Array.prototype.slice.call(document.querySelectorAll("[data-mode]"));
 
         var theme = document.documentElement.getAttribute("data-theme") || "seraph";
-        var skin = "seraph";
-        try {
-          var saved = localStorage.getItem(SKIN_STORE);
-          if (saved && SKINS[saved]) skin = saved;
-        } catch (e) {}
+        var skin = restore(SKIN_STORE, SKINS, "seraph");
+        var mode = restore(MODE_STORE, MODES, "modern");
+
+        function restore(key, allowed, fallback) {
+          try {
+            var saved = localStorage.getItem(key);
+            if (saved && allowed[saved]) return saved;
+          } catch (e) {}
+          return fallback;
+        }
+
+        function shotPath(forMode) {
+          return "assets/desktop-themes/" + theme + "-" + skin + "-desktop-" + forMode + ".png";
+        }
 
         function applyShot() {
           shots.forEach(function (img) {
-            img.src = "assets/desktop-themes/" + theme + "-" + skin + "-desktop.png";
-            img.alt = "SeraphIRC desktop client in the " + SKINS[skin] +
-              " window style, showing IRC channels, chat, and user list";
+            // Safety net for a shot that goes missing (a rename, a half-landed
+            // set): fall back to the same skin's classic file rather than
+            // render broken. All 84 combinations exist, so this never fires.
+            img.onerror = function () {
+              img.onerror = null;
+              if (mode !== "classic") img.src = shotPath("classic");
+            };
+            img.src = shotPath(mode);
+            img.alt = "SeraphIRC desktop client, " + MODES[mode] + " layout in the " +
+              SKINS[skin] + " window style, showing IRC channels, chat, and user list";
           });
           phoneShots.forEach(function (img) {
             img.src = "assets/iphone-themes/" + theme + "-iphone.jpg";
@@ -1630,16 +1658,21 @@
           });
         }
 
-        function applySkinButtons() {
-          skinButtons.forEach(function (button) {
-            var on = button.dataset.skin === skin;
+        function applyButtons(buttons, key, value) {
+          buttons.forEach(function (button) {
+            var on = button.dataset[key] === value;
             button.classList.toggle("is-active", on);
             button.setAttribute("aria-pressed", on ? "true" : "false");
           });
         }
 
+        function syncToggles() {
+          applyButtons(skinButtons, "skin", skin);
+          applyButtons(modeButtons, "mode", mode);
+        }
+
         select.value = theme;
-        applySkinButtons();
+        syncToggles();
         applyShot();
 
         select.addEventListener("change", function () {
@@ -1649,16 +1682,22 @@
           try { localStorage.setItem(STORE, theme); } catch (e) {}
         });
 
-        skinButtons.forEach(function (button) {
-          button.addEventListener("click", function () {
-            var next = button.dataset.skin;
-            if (!SKINS[next] || next === skin) return;
-            skin = next;
-            applySkinButtons();
-            applyShot();
-            try { localStorage.setItem(SKIN_STORE, skin); } catch (e) {}
+        function wire(buttons, key, allowed, store, get, set) {
+          buttons.forEach(function (button) {
+            button.addEventListener("click", function () {
+              var next = button.dataset[key];
+              if (!allowed[next] || next === get()) return;
+              set(next);
+              syncToggles();
+              applyShot();
+              try { localStorage.setItem(store, next); } catch (e) {}
+            });
           });
-        });
+        }
+        wire(skinButtons, "skin", SKINS, SKIN_STORE,
+          function () { return skin; }, function (v) { skin = v; });
+        wire(modeButtons, "mode", MODES, MODE_STORE,
+          function () { return mode; }, function (v) { mode = v; });
       })();
 
       // ---- News: one announcement at a time, arrows page between them ----

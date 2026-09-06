@@ -375,24 +375,28 @@ h2 {
 .platform-card-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .platform-card-head h3 { margin: 0; font-family: var(--mono); font-size: 1.35rem; }
 
-/* UI-skin switch on the Desktop card: swaps the shot between the two window
-   chrome styles the app ships. Segmented pill, same vocabulary as the top-bar
-   .theme-select so the two pickers read as one family. */
-.skin-toggle {
+/* Shot switches on the Desktop card: one per axis of the screenshot filename
+   (window chrome style, and layout mode). Segmented pills sharing the top-bar
+   .theme-select vocabulary so all three pickers read as one family. */
+.shot-controls {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 12px 26px;
+  margin-top: 18px;
+}
+.shot-toggle {
   display: inline-flex; align-items: center; gap: 9px;
-  margin-left: auto;
   font-family: var(--mono); font-size: 0.72rem;
 }
-.skin-toggle-label { color: var(--dim); text-transform: uppercase; letter-spacing: 0.14em; }
-.skin-toggle-label::before { content: "\25C8 "; color: var(--gold); }
-.skin-toggle-track {
+.shot-toggle-label { color: var(--dim); text-transform: uppercase; letter-spacing: 0.14em; white-space: nowrap; }
+.shot-toggle-label::before { content: "\25C8 "; color: var(--gold); }
+.shot-toggle-track {
   display: inline-flex; align-items: center; gap: 2px;
   padding: 3px;
   background: color-mix(in srgb, var(--panel) 82%, transparent);
   border: 1px solid var(--line-2);
   border-radius: 999px;
 }
-.skin-btn {
+.shot-toggle-btn {
   margin: 0;
   padding: 5px 14px;
   color: var(--muted);
@@ -403,20 +407,21 @@ h2 {
   cursor: pointer;
   transition: color 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
 }
-.skin-btn:hover { color: var(--text); }
+.shot-toggle-btn:hover { color: var(--text); }
 /* Active chip inverts to the theme's own text/ground pair rather than a --gold
    tint: --gold is a desaturated grey-brown on the light themes, where a tint
    reads as no state at all. text-on-bg is the theme's primary contrast, so it
    stays legible across all 21. The gold stays as the halo. */
-.skin-btn.is-active {
+.shot-toggle-btn.is-active {
   color: var(--bg);
   background: var(--text);
   box-shadow: 0 0 12px color-mix(in srgb, var(--gold) 30%, transparent);
 }
-.skin-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 40%, transparent); }
+.shot-toggle-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 40%, transparent); }
+/* Two toggles no longer fit on one line: stack them so each keeps its label.
+   Dropping the labels instead would leave two unlabelled pill pairs. */
 @media (max-width: 620px) {
-  .skin-toggle { margin-left: 0; }
-  .skin-toggle-label { display: none; }
+  .shot-controls { flex-direction: column; align-items: flex-start; gap: 12px; }
 }
 .platform-desktop p, .platform-mobile p { margin: 0; color: var(--muted); font-size: 0.98rem; line-height: 1.68; }
 /* thumbnail in the Desktop card; click opens it at native 2557px in the lightbox */
@@ -432,8 +437,11 @@ h2 {
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42), 0 0 26px var(--shot-halo);
 }
 
+/* breathing room on both sides of the caption: the platform cards are unboxed
+   (padding:0 in the retro pass), so this margin is the only trailing space
+   under the shot. */
 .shot-caption {
-  margin: 12px 2px 0;
+  margin: 20px 2px 18px;
   color: var(--muted);
   font-size: 0.86rem; line-height: 1.6;
 }
