@@ -749,8 +749,8 @@
             <p class="pane-kicker">Interface</p>
             <h2>Appearance</h2>
             <p class="pane-lead">
-              Theme, fonts, density, and how the message pane is drawn.
-              <code>Settings &gt; Interface &gt; Appearance</code>.
+              Theme, fonts, density, window dressing, and how the message pane is
+              drawn. <code>Settings &gt; Interface &gt; Appearance</code>.
             </p>
 
             <h3>Theme</h3>
@@ -812,7 +812,6 @@
                   <tr><th scope="row">Atmosphere</th><td>0 to 100, default 50</td><td>Every celestial layer at once: treebar dust, member list sparkle, transcript starfield. 0 removes them.</td></tr>
                   <tr><th scope="row">User List Spacing</th><td>0 to 100, default 50</td><td>Vertical padding between member list rows.</td></tr>
                   <tr><th scope="row">Message Spacing</th><td>0 to 100, default 50</td><td>Vertical spacing between messages.</td></tr>
-                  <tr><th scope="row">Window Opacity</th><td>50 to 100, default 100</td><td>A window's surface only. Text never fades, and what shows through is the workspace behind it rather than your desktop.</td></tr>
                 </tbody>
               </table>
             </div>
@@ -822,16 +821,42 @@
               colliding even at the tight end.
             </p>
 
-            <h3>Window controls and icons</h3>
+            <h3>Window</h3>
             <p>
-              <strong>Window controls</strong> sets the style drawn on channel,
-              query, and status windows inside the app. The app's own title bar is
-              not affected. Auto follows your operating system, and the two explicit
-              choices override it.
+              <strong>Window Opacity</strong> runs from 50 to 100, default 100, and
+              fades a window's surface only. Text never fades, and what shows
+              through is the workspace behind it rather than your desktop.
             </p>
             <p>
+              <strong>Window controls</strong> sets the style drawn on channel,
+              query, and status windows inside the app: Auto, macOS, or Linux. Auto
+              follows the system the app is running on, drawing the macOS traffic
+              lights on a Mac and the Linux and Windows controls everywhere else.
+              The app's own title bar is not affected.
+            </p>
+            <p>
+              <strong>Chrome style</strong> sets how the surfaces around your theme
+              are dressed: Auto, macOS, or Seraph. Seraph is the house style, with
+              gradient panels, accent glows, and drawn window frames. macOS is the
+              native register, with flat fills, hairlines, depth in place of glow,
+              and the system type scale. Auto resolves the same way the window
+              controls do, macOS on a Mac and Seraph everywhere else.
+            </p>
+            <div class="docs-note">
+              Both settings are presentation only. Neither changes layout, focus,
+              stacking order, or how windows open and close, and your theme colors
+              are identical under either one, so all 21 themes work in both
+              registers. Either can also be forced against the platform, which is
+              how one machine previews both looks. The macOS dressing is available
+              on Linux and Windows, and the Seraph dressing on a Mac.
+            </div>
+
+            <h3>Icon Size</h3>
+            <p>
               <strong>Icon Size</strong> scales the toolbar and nickname menu
-              glyphs: Normal, Large, or Huge.
+              glyphs: Normal, Large, or Huge. The hit target grows faster than the
+              glyph, so the larger presets are easier to click rather than only
+              bigger to look at.
             </p>
 
             <h3>User List</h3>
