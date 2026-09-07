@@ -817,20 +817,11 @@ body::before { display: none; }
 #contact a:hover, #contact a:hover b,
 #contact a:focus-visible, #contact a:focus-visible b { color: var(--gold-bright); border-bottom-color: var(--gold-bright); outline: none; }
 
-/* ---- footer: badges + hit counter ---- */
+/* ---- footer: link row + hit counter ---- */
 .site-footer { flex-direction: column; align-items: center; gap: 22px; padding-top: 40px; }
 
-.foot-badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-.b31 {
-  width: 98px; height: 34px; display: grid; place-items: center; text-align: center;
-  font-family: var(--mono); font-size: 9px; font-weight: 700; line-height: 1.1; letter-spacing: 0.02em;
-  border-radius: 5px; transition: transform 100ms ease;
-}
-.b31:hover { transform: translateY(-2px); }
-.b31.a { background: #192035; color: var(--accent-bright); border: 1px solid var(--accent); }
-.b31.b { background: var(--accent); color: #0a0812; }
-.b31.c { background: #192035; color: var(--green); border: 1px solid var(--green); }
-.b31.d { background: var(--cyan); color: #04121a; }
+/* The chips themselves are drawn in the FOOTER PASS further down. */
+.foot-links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
 
 .foot-brand { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 14px; }
 .foot-brand span { color: var(--muted); }
@@ -844,8 +835,6 @@ body::before { display: none; }
 @media (max-width: 560px) {
   .site-footer { align-items: center; }
 }
-.b31.e { background: #192035; color: var(--amber); border: 1px solid var(--amber); }
-
 /* real mobile screenshot inside the phone frame (replaces the CSS mockup) */
 .phone-shot { position: relative; }
 .phone-shot .client-preview-trigger { border-radius: 31px; transition: transform 150ms ease; }
@@ -1268,9 +1257,6 @@ body::after {
 .site-footer { border-top-color: rgba(243, 211, 114, 0.3); }
 .site-footer strong { color: var(--gold-bright); }
 
-/* footer badges: the mobile badge joins the gold accent */
-.b31.b { background: var(--gold); color: #171003; }
-
 /* bigger hero emblem */
 .hero-mark img { width: clamp(160px, 24vw, 300px); }
 
@@ -1519,43 +1505,59 @@ h2 { letter-spacing: 0; }
 .hero-subheadline { font-weight: 600; }
 
 /* ============================================================
-   FOOTER PASS — celestial badges; the visitor counter retires.
-   Night-navy panels, hairline borders, soft glow on hover:
-   gold for our apps, blue/cyan for the ecosystem, dim for legal.
+   FOOTER PASS — the 88x31 badge wall retires. What replaces it is
+   a row of chips cut from the same cloth as the rest of the site
+   chrome: mono small caps on a panel wash, hairline border, soft
+   glow on hover, the same lift the buttons up the page use.
+   One lit pip in front of every label, all of them the same gold
+   the footer wordmark already carries, so the five read as one
+   row rather than five competing rectangles. The pip color is
+   spent off a token, so the row follows the theme picker with
+   no per-theme rule.
    ============================================================ */
-.b31 {
-  width: 106px;
-  height: 36px;
-  border-radius: 7px;
-  background: rgba(25, 32, 53, 0.75);
+/* scoped to the footer band: the blanket `.site-footer a` rule up the file
+   is one step more specific than a bare `.foot-link`, and would otherwise
+   take back the ink and the type size. */
+.site-footer .foot-link {
+  --pip: var(--gold-bright);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--panel) 72%, transparent);
   border: 1px solid var(--line-2);
-  color: var(--accent-bright);
-  transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
-}
-.b31.a, .b31.b {
-  color: var(--gold-bright);
-  background: rgba(43, 36, 14, 0.6);
-  border-color: rgba(249, 227, 154, 0.45);
-}
-.b31.c {
-  color: var(--accent-bright);
-  background: rgba(25, 32, 53, 0.75);
-  border-color: rgba(139, 175, 218, 0.45);
-}
-.b31.d {
-  color: var(--cyan);
-  background: rgba(25, 32, 53, 0.75);
-  border-color: rgba(130, 226, 255, 0.35);
-}
-.b31.e {
   color: var(--muted);
-  background: rgba(25, 32, 53, 0.75);
-  border-color: var(--line-2);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: transform 150ms ease, color 150ms ease, border-color 150ms ease,
+              background 150ms ease, box-shadow 150ms ease;
 }
-.b31.a:hover, .b31.b:hover { border-color: var(--gold); box-shadow: 0 0 16px rgba(249, 227, 154, 0.28); }
-.b31.c:hover { border-color: var(--accent); box-shadow: 0 0 16px rgba(139, 175, 218, 0.3); }
-.b31.d:hover { border-color: var(--cyan); box-shadow: 0 0 16px rgba(130, 226, 255, 0.28); }
-.b31.e:hover { border-color: var(--muted); box-shadow: 0 0 12px rgba(199, 210, 230, 0.2); }
+/* one pip, one color, in front of every label */
+.foot-link::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--pip);
+  box-shadow: 0 0 7px color-mix(in srgb, var(--pip) 65%, transparent);
+}
+.site-footer .foot-link:hover {
+  transform: translateY(-1px);
+  color: var(--text);
+  background: color-mix(in srgb, var(--pip) 8%, var(--panel));
+  border-color: color-mix(in srgb, var(--pip) 55%, transparent);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--pip) 20%, transparent);
+}
+.site-footer .foot-link:focus-visible {
+  outline: 2px solid var(--pip);
+  outline-offset: 3px;
+}
 
 /* ============================================================
    THEME SYSTEM (2026-07-15) — desktop-client parity.
@@ -1781,29 +1783,19 @@ html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean
   }
   & .nav-dl-mobile:hover { background: color-mix(in srgb, var(--accent) 58%, var(--text)); }
 
-  /* Footer badges: light chips with readable, still color-coded ink. */
-  & .b31 {
+  /* Footer chips: on paper a brightened gold pip is near white, so it
+     takes a darkened signature instead. The chip lifts toward the page
+     ground, the label darkens, and the glow goes — a halo needs a dark
+     ground to read as one. */
+  & .foot-link {
+    --pip: color-mix(in srgb, var(--gold) 55%, #000);
     background: color-mix(in srgb, var(--panel) 68%, #fff);
     border-color: color-mix(in srgb, var(--accent) 22%, var(--line-2));
+    color: color-mix(in srgb, var(--text) 88%, var(--sd-accent));
+  }
+  & .foot-link::before { box-shadow: none; }
+  & .foot-link:hover {
     color: var(--text);
-  }
-  & .b31.a, & .b31.b {
-    color: color-mix(in srgb, var(--gold) 52%, #000);
-    border-color: color-mix(in srgb, var(--gold) 45%, transparent);
-  }
-  & .b31.c {
-    color: color-mix(in srgb, var(--accent) 48%, #000);
-    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
-  }
-  & .b31.d {
-    color: color-mix(in srgb, var(--cyan) 32%, #000);
-    border-color: color-mix(in srgb, var(--cyan) 45%, transparent);
-  }
-  & .b31.e {
-    color: var(--dim);
-  }
-  & .b31.a:hover, & .b31.b:hover,
-  & .b31.c:hover, & .b31.d:hover {
     box-shadow: none;
   }
 

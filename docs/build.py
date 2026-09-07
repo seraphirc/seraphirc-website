@@ -253,9 +253,9 @@ def render_index_pane(registry):
         '        <article class="docs-pane" id="command-index" data-pane>\n'
         '          <p class="pane-kicker">Commands</p>\n'
         "          <h2>Command Index</h2>\n"
-        f'          <p class="pane-lead">Every command SeraphIRC answers, all '
-        f'{len(registry)} of them, in one alphabetical list. The client keeps '
-        "the same list behind <code>/help</code>.</p>\n"
+        '          <p class="pane-lead">Every command SeraphIRC answers, in '
+        "one alphabetical list. The client keeps the same list behind "
+        "<code>/help</code>.</p>\n"
         '          <div class="table-scroll">\n'
         '            <table class="idx-table">\n'
         "              <thead><tr><th>Command</th><th>Also</th><th>Summary</th>"
