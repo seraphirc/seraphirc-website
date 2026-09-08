@@ -2594,8 +2594,10 @@ h3 {
 }
 
 /* --- hero demo: the client in motion, right under the mark ---- */
-/* Loops silently on its own, but keeps native controls so the reel
-   can be scrubbed back to the start. Framed like the .desktop-screen
+/* Loops silently on its own. The controls are ours and sit under the
+   frame rather than over it: the client's status bar (latency, active
+   server) lives in the bottom rows of the recording, and a native
+   control bar covers exactly that. Framed like the .desktop-screen
    thumbnails so it reads as the same family of screenshots. */
 .hero-demo {
   max-width: 940px;
@@ -2610,4 +2612,87 @@ h3 {
   border: 1px solid var(--shot-edge);
   border-radius: var(--radius-sm);
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42), 0 0 26px var(--shot-halo);
+}
+
+/* Playback strip: mono chrome in the panel tones, sized so the buttons
+   stay comfortable thumb targets on a phone. */
+.demo-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 8px 10px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+/* A class rule outranks the UA sheet's [hidden], so the pre-script
+   state has to be spelled out or the dead bar shows for a no-JS
+   visitor. */
+.demo-controls[hidden] { display: none; }
+.demo-btn {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 30px;
+  padding: 0;
+  color: var(--muted);
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.demo-btn:hover { color: var(--gold-bright); border-color: var(--line-2); }
+.demo-btn:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 2px; }
+.demo-glyph { font-family: var(--mono); font-size: 0.8rem; line-height: 1; }
+.demo-btn-full { margin-left: 2px; }
+.demo-time {
+  flex: none;
+  min-width: 9ch;
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The scrubber is a bare range input, restyled per engine: the track is
+   the same hairline as the strip's border, the thumb takes the gold. */
+.demo-scrub {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 20px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.demo-scrub:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 2px; }
+.demo-scrub::-webkit-slider-runnable-track {
+  height: 4px;
+  background: var(--line-2);
+  border-radius: 2px;
+}
+.demo-scrub::-webkit-slider-thumb {
+  width: 13px;
+  height: 13px;
+  margin-top: -4.5px;
+  background: var(--gold);
+  border: none;
+  border-radius: 50%;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.demo-scrub::-moz-range-track {
+  height: 4px;
+  background: var(--line-2);
+  border-radius: 2px;
+}
+.demo-scrub::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  background: var(--gold);
+  border: none;
+  border-radius: 50%;
 }

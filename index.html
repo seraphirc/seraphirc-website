@@ -95,7 +95,7 @@
         } catch (e) {}
       })();
     </script>
-    <link rel="stylesheet" href="styles.css?v=20260907-hero-demo-2">
+    <link rel="stylesheet" href="styles.css?v=20260907-demo-controls-1">
   </head>
   <body>
     <div class="topbar">
@@ -296,20 +296,127 @@
             poster="assets/demo/demo-poster.jpg"
             width="2556" height="1567"
             autoplay loop muted playsinline
-            controls preload="metadata"
+            preload="metadata"
             aria-label="Screen recording of the SeraphIRC desktop client: tiled channel windows, the network tree, and a message being sent"
           ></video>
+
+          <!-- Controls live below the frame, not over it: the client's status
+               bar (latency, active server) sits in the bottom rows of the
+               recording, and a native control bar lands right on top of it.
+               Hidden until the script wires them up, so a no-JS visitor gets
+               the silent loop instead of dead buttons. -->
+          <div class="demo-controls" data-demo-controls hidden>
+            <button type="button" class="demo-btn" data-demo-toggle aria-label="Pause the demo">
+              <span class="demo-glyph" data-demo-glyph aria-hidden="true">&#9612;&#9612;</span>
+            </button>
+            <button type="button" class="demo-btn" data-demo-restart aria-label="Restart the demo">
+              <span class="demo-glyph" aria-hidden="true">&#8635;</span>
+            </button>
+            <input
+              class="demo-scrub"
+              type="range"
+              min="0" max="1000" value="0" step="1"
+              data-demo-scrub
+              aria-label="Seek through the demo"
+            >
+            <span class="demo-time" data-demo-time>0:00</span>
+            <button type="button" class="demo-btn demo-btn-full" data-demo-full aria-label="Play the demo full screen">
+              <span class="demo-glyph" aria-hidden="true">&#9974;</span>
+            </button>
+          </div>
+
           <script>
-            // Respect a reduced-motion preference: the reel still loops on
-            // demand, it just does not start on its own.
             (function () {
-              if (!window.matchMedia ||
-                  !matchMedia("(prefers-reduced-motion: reduce)").matches) return;
               var v = document.querySelector(".hero-demo-video");
-              if (!v) return;
-              v.removeAttribute("autoplay");
-              v.autoplay = false;
-              v.pause();
+              var bar = document.querySelector("[data-demo-controls]");
+              if (!v || !bar) return;
+
+              var toggle = bar.querySelector("[data-demo-toggle]");
+              var glyph = bar.querySelector("[data-demo-glyph]");
+              var restart = bar.querySelector("[data-demo-restart]");
+              var scrub = bar.querySelector("[data-demo-scrub]");
+              var time = bar.querySelector("[data-demo-time]");
+              var full = bar.querySelector("[data-demo-full]");
+              var PAUSE = "\u258c\u258c", PLAY = "\u25b6";
+              var scrubbing = false;
+
+              // Respect a reduced-motion preference: the reel still loops on
+              // demand, it just does not start on its own.
+              if (window.matchMedia &&
+                  matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                v.removeAttribute("autoplay");
+                v.autoplay = false;
+                v.pause();
+              }
+
+              bar.hidden = false;
+
+              function clock(t) {
+                if (!isFinite(t)) t = 0;
+                var m = Math.floor(t / 60);
+                var s = Math.floor(t % 60);
+                return m + ":" + (s < 10 ? "0" : "") + s;
+              }
+
+              function paintTime() {
+                // The webm carries its duration in the container, so the
+                // total lands with the metadata rather than the last byte.
+                time.textContent = isFinite(v.duration)
+                  ? clock(v.currentTime) + " / " + clock(v.duration)
+                  : clock(v.currentTime);
+              }
+
+              function paint() {
+                var playing = !v.paused && !v.ended;
+                glyph.textContent = playing ? PAUSE : PLAY;
+                toggle.setAttribute("aria-label",
+                  playing ? "Pause the demo" : "Play the demo");
+              }
+
+              v.addEventListener("play", paint);
+              v.addEventListener("pause", paint);
+              v.addEventListener("loadedmetadata", paintTime);
+              paint();
+              paintTime();
+
+              v.addEventListener("timeupdate", function () {
+                if (scrubbing || !isFinite(v.duration) || !v.duration) return;
+                scrub.value = String(Math.round((v.currentTime / v.duration) * 1000));
+                paintTime();
+              });
+
+              toggle.addEventListener("click", function () {
+                if (v.paused || v.ended) v.play(); else v.pause();
+              });
+
+              restart.addEventListener("click", function () {
+                v.currentTime = 0;
+                v.play();
+              });
+
+              scrub.addEventListener("pointerdown", function () { scrubbing = true; });
+              // Pointer capture keeps the drag alive off the track, so release
+              // is watched on the document rather than the input itself.
+              document.addEventListener("pointerup", function () { scrubbing = false; });
+              scrub.addEventListener("keydown", function () { scrubbing = true; });
+              scrub.addEventListener("keyup", function () { scrubbing = false; });
+              scrub.addEventListener("input", function () {
+                if (!isFinite(v.duration) || !v.duration) return;
+                v.currentTime = (scrub.value / 1000) * v.duration;
+                paintTime();
+              });
+
+              if (v.requestFullscreen || v.webkitEnterFullscreen) {
+                full.addEventListener("click", function () {
+                  // iOS Safari never gives an inline video the standard
+                  // fullscreen API, only the WebKit player one.
+                  if (document.fullscreenElement) document.exitFullscreen();
+                  else if (v.requestFullscreen) v.requestFullscreen();
+                  else v.webkitEnterFullscreen();
+                });
+              } else {
+                full.remove();
+              }
             })();
           </script>
         </figure>
