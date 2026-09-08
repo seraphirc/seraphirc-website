@@ -95,7 +95,7 @@
         } catch (e) {}
       })();
     </script>
-    <link rel="stylesheet" href="styles.css?v=20260907-footer-links-1">
+    <link rel="stylesheet" href="styles.css?v=20260907-hero-demo-2">
   </head>
   <body>
     <div class="topbar">
@@ -288,6 +288,31 @@
             SeraphIRC is an easy-to-use IRC client for Linux, Windows, and iOS/macOS supporting direct connections, Soju, or ZNC bouncers.
           </p>
         </div>
+
+        <figure class="hero-demo">
+          <video
+            class="hero-demo-video"
+            src="assets/demo/demo.webm"
+            poster="assets/demo/demo-poster.jpg"
+            width="2556" height="1567"
+            autoplay loop muted playsinline
+            controls preload="metadata"
+            aria-label="Screen recording of the SeraphIRC desktop client: tiled channel windows, the network tree, and a message being sent"
+          ></video>
+          <script>
+            // Respect a reduced-motion preference: the reel still loops on
+            // demand, it just does not start on its own.
+            (function () {
+              if (!window.matchMedia ||
+                  !matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+              var v = document.querySelector(".hero-demo-video");
+              if (!v) return;
+              v.removeAttribute("autoplay");
+              v.autoplay = false;
+              v.pause();
+            })();
+          </script>
+        </figure>
 
       </section>
 

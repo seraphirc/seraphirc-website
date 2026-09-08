@@ -1376,7 +1376,11 @@ body::after {
 .hero { position: relative; }
 /* two standalone SVGs anchored to the emblem: same desktop spots as
    before, but they now scale into the free columns beside the logo
-   on phones instead of being hidden */
+   on phones instead of being hidden.
+   They center on .hero-head rather than .hero: the demo reel below it
+   makes the section far taller than the emblem, and a hero-centered
+   50% would drag them down across the video. */
+.hero-head { position: relative; }
 .constellations {
   position: absolute;
   top: 50%;
@@ -2587,4 +2591,23 @@ h3 {
   border-left: 0;
   font-size: var(--t-lead);
   text-wrap: balance;
+}
+
+/* --- hero demo: the client in motion, right under the mark ---- */
+/* Loops silently on its own, but keeps native controls so the reel
+   can be scrubbed back to the start. Framed like the .desktop-screen
+   thumbnails so it reads as the same family of screenshots. */
+.hero-demo {
+  max-width: 940px;
+  margin: clamp(26px, 4vw, 42px) auto 0;
+}
+.hero-demo-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2556 / 1567;
+  background: #06070c;
+  border: 1px solid var(--shot-edge);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42), 0 0 26px var(--shot-halo);
 }
