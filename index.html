@@ -95,7 +95,7 @@
         } catch (e) {}
       })();
     </script>
-    <link rel="stylesheet" href="styles.css?v=20260907-demo-controls-1">
+    <link rel="stylesheet" href="styles.css?v=20260908-mobile-etiquette-1">
   </head>
   <body>
     <div class="topbar">
@@ -856,7 +856,17 @@
             </div>
             <p>
               The same networks and channels on your iPhone or iPad. It connects through your
-              Soju bouncer, so unread state and history stay in sync with the desktop.
+              Soju bouncer, not its own socket to the network, and that is deliberate.
+            </p>
+            <p>
+              iOS suspends backgrounded apps. A phone connected directly drops and reconnects
+              every time you pocket it, spraying quit and join noise through every channel you
+              sit in. <b class="quip">We mind our manners.</b>
+            </p>
+            <p>
+              Your bouncer stays connected instead. You show up online once, unread state and
+              history stay in sync with the desktop, and push still arrives over
+              <code>soju.im/webpush</code> while the app is asleep.
             </p>
             <div class="device-duo">
               <figure class="tablet tablet-shot client-preview">

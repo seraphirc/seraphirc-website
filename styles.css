@@ -424,6 +424,9 @@ h2 {
   .shot-controls { flex-direction: column; align-items: flex-start; gap: 12px; }
 }
 .platform-desktop p, .platform-mobile p { margin: 0; color: var(--muted); font-size: 0.98rem; line-height: 1.68; }
+/* The etiquette line in the Mobile card: bold italic in the body ink, so it
+   reads as an aside without pulling a second color into the paragraph. */
+.platform-mobile .quip { font-weight: 700; font-style: italic; }
 /* thumbnail in the Desktop card; click opens it at native 2557px in the lightbox */
 .platform-shot { position: relative; margin-top: auto; }
 .platform-shot .client-preview-trigger { transition: transform 150ms ease; }
