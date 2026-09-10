@@ -448,7 +448,7 @@ h2 {
   color: var(--muted);
   font-size: 0.86rem; line-height: 1.6;
 }
-.shot-caption em { color: var(--text); font-style: normal; font-family: var(--mono); font-size: 0.94em; }
+.shot-caption code { color: var(--code-ink); font-size: 0.94em; }
 
 /* phone mock — mobile networks list (matches the SeraphIRC mobile app) */
 .phone {

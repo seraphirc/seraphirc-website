@@ -44,7 +44,7 @@
         document.documentElement.classList.add("docs-js");
       })();
     </script>
-    <link rel="stylesheet" href="/styles.css?v=20260908-mobile-etiquette-1">
+    <link rel="stylesheet" href="/styles.css?v=20260909-caption-code-ink-1">
     <link rel="stylesheet" href="/docs/docs.css?v=20260815-docs-1">
   </head>
   <body>
@@ -938,7 +938,7 @@
                 <thead><tr><th>Setting</th><th>Default</th><th>What it does</th></tr></thead>
                 <tbody>
                   <tr><th scope="row">Enable desktop notifications</th><td><code>off</code></td><td>System pop-ups. These only fire when the buffer is not focused, so the window you are reading never pops at you.</td></tr>
-                  <tr><th scope="row">Enable sounds</th><td><code>on</code></td><td>The alert chime. Plays whether or not the buffer is focused.</td></tr>
+                  <tr><th scope="row">Enable sounds</th><td><code>on</code></td><td>The alert chime. Plays even when the buffer is not focused.</td></tr>
                   <tr><th scope="row">Notify on private messages</th><td><code>on</code></td><td>Alerts for queries and direct messages.</td></tr>
                   <tr><th scope="row">Notify on nick mentions</th><td><code>on</code></td><td>Alerts when your nick appears in a channel.</td></tr>
                   <tr><th scope="row">Mute alerts from bots</th><td><code>off</code></td><td>No sounds, pop-ups, or @ inbox entries from anyone the network marks as a bot. Their messages still appear and still count as unread. To hide bots entirely, see the <a href="#ignore-list">Ignore List</a>.</td></tr>
@@ -1397,7 +1397,7 @@ server/Libera/server.log</code></pre>
               Where the server supports the IRCv3 <code>MONITOR</code> capability,
               SeraphIRC registers the list and the server pushes a line the moment
               somebody appears or leaves. Where it does not, the client falls back to
-              polling with <code>ISON</code> once a minute. Either way you get the
+              polling with <code>ISON</code> once a minute. Both paths give you the
               same events, the fallback is just slower to notice.
             </p>
 
@@ -3718,7 +3718,7 @@ server/Libera/server.log</code></pre>
             <p class="entry-aliases">Also written as <code>/quote</code></p>
             <h4 class="entry-label">Parameters</h4>
             <dl class="entry-params"><dt><code>IRC line</code></dt><dd>raw command text to send</dd></dl>
-            <div class="entry-details"><p>Sends the provided IRC line exactly as typed after /raw. /quote is an alias.</p><p>You rarely need it: any command SeraphIRC does not recognise is already sent to the server as typed, so a server that asks you to "type /validate &lt;token&gt;" can simply be answered with /validate &lt;token&gt;. Use /raw when the command name is not plain letters, or to be explicit.</p><p>Arguments are passed through untouched, so a final argument containing spaces needs a leading colon: /raw SQUIT irc.example :taking it down.</p></div>
+            <div class="entry-details"><p>Sends the provided IRC line exactly as typed after /raw. /quote is an alias.</p><p>You rarely need it: any command SeraphIRC does not recognize is already sent to the server as typed, so a server that asks you to "type /validate &lt;token&gt;" can simply be answered with /validate &lt;token&gt;. Use /raw when the command name is not plain letters, or to be explicit.</p><p>Arguments are passed through untouched, so a final argument containing spaces needs a leading colon: /raw SQUIT irc.example :taking it down.</p></div>
             <h4 class="entry-label">Examples</h4>
             <pre class="entry-examples"><code>/raw WHOIS Alice
 /quote TIME
