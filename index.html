@@ -1127,7 +1127,7 @@
         <div class="section-heading">
           <h2 id="changelog-title">Changelog</h2>
           <p class="lead">
-            What changed in each release of SeraphIRC Desktop. Pick a version to read its notes,
+            What changed in each release of SeraphIRC. Pick a version to read its notes,
             or grab the builds from the
             <a href="https://github.com/seraphirc/seraphirc-download/releases" target="_blank" rel="noopener">releases page</a>.
           </p>
@@ -1137,6 +1137,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.21">5.1.21</option>
               <option value="5.1.20">5.1.20</option>
               <option value="5.1.19">5.1.19</option>
               <option value="5.1.18">5.1.18</option>
@@ -1193,10 +1194,23 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Sep 5, 2026</span>
+            <span class="changelog-date" id="changelog-date">Sep 12, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.20" data-date="Sep 5, 2026">
+          <article class="release" data-version="5.1.21" data-date="Sep 12, 2026">
+            <ul class="release-notes">
+              <li><b>Transcript layouts (mobile):</b> <code>Settings &gt; Chat &gt; Transcript layout</code> is three choices now instead of one switch. Chat Bubbles stays the default, Classic Mode is the plain <code>[11:15] &lt;@nick&gt;</code> transcript, and Modern Mode is desktop's avatar-led layout.</li>
+              <li><b>Avatars (mobile):</b> Modern Mode renders other people's avatars and publishes yours. Rendering is off by default, since fetching an avatar tells the server hosting it that your device is online. Needs a bouncer that relays IRCv3 metadata, Soju issue tracking this: https://codeberg.org/emersion/soju/issues/416</li>
+              <li><b>Favorites (mobile):</b> long-press a channel or a query to pin it to a Favorites card above every network. Rows read <code>#linux (Libera)</code>, and they survive a relaunch.</li>
+              <li><b>Caller ID (mobile &amp; desktop):</b> with user mode <code>+g</code> set, the notice that somebody tried to message you lands in the buffer you are reading instead of the server buffer. The help for <code>/accept</code> now matches what servers take: a bare nick adds, only removal takes a sign.</li>
+              <li><b>Treebar (desktop):</b> rebuilt to the macOS source-list standard. Denser rows, etched network rules, the Networks toggle sharing a line with the collapse button, and about five more rows visible in a three-network list. The status pill drops the state words its own color already carries.</li>
+              <li><b>Icons (desktop):</b> the last outline glyphs in the toolbar and treebar are two-tone now, so the wells and chips around them came off. On light themes each filled shape takes a thin dark keyline to lift it off the pale ground.</li>
+              <li><b>Themes (mobile &amp; desktop):</b> Ocean Breeze is visually coherent instead of a dark sidebar under light content, Light and Solarized Light lost their cream cast, and Tokyo Night is off the purple.</li>
+              <li><b>Fixes (mobile &amp; desktop):</b> the roster shows every mode symbol a person holds, not just the highest. A theme change now repaints transcript rows already on screen, server notices get the same network block on both platforms, and mobile settings rows no longer fuse into one box.</li>
+            </ul>
+          </article>
+
+          <article class="release" data-version="5.1.20" data-date="Sep 5, 2026" hidden>
             <ul class="release-notes">
               <li><b>Network Manager rebuilt:</b> a selectable server list. Pick a network, read its details underneath, and act from one row of buttons. The list scrolls, group headings stay put as their networks pass under them, and status colors follow the theme. The startup checkbox moved into its footer.</li>
               <li><b>Classic layout:</b> a visible rule separates the sender column from the message body, so nicknames hang off a rail instead of reading as a table. Timestamps come up a size.</li>
