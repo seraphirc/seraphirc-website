@@ -1001,6 +1001,7 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
+              <option value="5.1.22" selected>5.1.22</option>
               <option value="5.1.21">5.1.21</option>
               <option value="5.1.20">5.1.20</option>
               <option value="5.1.19">5.1.19</option>
@@ -1061,6 +1062,12 @@
             <span class="changelog-date" id="changelog-date">Sep 12, 2026</span>
           </div>
 
+          <article class="release" data-version="5.1.22" data-date="Sep 13, 2026">
+            <ul class="release-notes">
+              <li><b>Fixes (desktop):</b>Fixed a bug where away status in modern mode was not displaying correctly.</li>
+              <li><b>Consolidated join/part/nick/quit events (desktop):</b>Toned down the edge highlights and line hue on lifecycle consolidation. Blends more subtly into the transcript.</li>
+            </ul>
+          </article>
           <article class="release" data-version="5.1.21" data-date="Sep 12, 2026">
             <ul class="release-notes">
               <li><b>Transcript layouts (mobile):</b> <code>Settings &gt; Chat &gt; Transcript layout</code> is three choices now instead of one switch. Chat Bubbles stays the default, Classic Mode is the plain <code>[11:15] &lt;@nick&gt;</code> transcript, and Modern Mode is desktop's avatar-led layout.</li>
