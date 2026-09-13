@@ -1001,7 +1001,8 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
-              <option value="5.1.22" selected>5.1.22</option>
+              <option value="5.1.23" selected>5.1.23</option>
+              <option value="5.1.22">5.1.22</option>
               <option value="5.1.21">5.1.21</option>
               <option value="5.1.20">5.1.20</option>
               <option value="5.1.19">5.1.19</option>
@@ -1059,16 +1060,22 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Sep 12, 2026</span>
+            <span class="changelog-date" id="changelog-date">Sep 13, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.22" data-date="Sep 13, 2026">
+          <article class="release" data-version="5.1.23" data-date="Sep 13, 2026">
+            <ul class="release-notes">
+              <li><b>Connection status (desktop):</b> the connection pill and the Reconnect button beside it washed out on the light themes. Both wear a solid block of the state's color there now, and connecting reads amber everywhere to match the treebar dot.</li>
+              <li><b>Fixes (desktop):</b> reconnecting one network on a Soju profile no longer drags the others back with it, and the treebar dot and pill go red when your session to the bouncer drops instead of staying green.</li>
+            </ul>
+          </article>
+          <article class="release" data-version="5.1.22" data-date="Sep 13, 2026" hidden>
             <ul class="release-notes">
               <li><b>Fixes (desktop):</b>Fixed a bug where away status in modern mode was not displaying correctly.</li>
               <li><b>Consolidated join/part/nick/quit events (desktop):</b>Toned down the edge highlights and line hue on lifecycle consolidation. Blends more subtly into the transcript.</li>
             </ul>
           </article>
-          <article class="release" data-version="5.1.21" data-date="Sep 12, 2026">
+          <article class="release" data-version="5.1.21" data-date="Sep 12, 2026" hidden>
             <ul class="release-notes">
               <li><b>Transcript layouts (mobile):</b> <code>Settings &gt; Chat &gt; Transcript layout</code> is three choices now instead of one switch. Chat Bubbles stays the default, Classic Mode is the plain <code>[11:15] &lt;@nick&gt;</code> transcript, and Modern Mode is desktop's avatar-led layout.</li>
               <li><b>Avatars (mobile):</b> Modern Mode renders other people's avatars and publishes yours. Rendering is off by default, since fetching an avatar tells the server hosting it that your device is online. Needs a bouncer that relays IRCv3 metadata, Soju issue tracking this: https://codeberg.org/emersion/soju/issues/416</li>
