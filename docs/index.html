@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="seraph">
+<html lang="en" data-theme="aura">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,7 +44,7 @@
         document.documentElement.classList.add("docs-js");
       })();
     </script>
-    <link rel="stylesheet" href="/styles.css?v=20260909-caption-code-ink-1">
+    <link rel="stylesheet" href="/styles.css?v=20260912-themed-brand-mark-1">
     <link rel="stylesheet" href="/docs/docs.css?v=20260815-docs-1">
   </head>
   <body>
@@ -52,8 +52,7 @@
     <header class="site-header" aria-label="Site header">
       <a class="brand" href="/" aria-label="SeraphIRC home">
         <span class="brand-mark" aria-hidden="true">
-          <img class="mark-dark" src="/assets/seraph-mark.svg" alt="">
-          <img class="mark-light" src="/assets/seraph-mark-light.svg" alt="">
+          <svg class="seraph-mark" viewBox="9 23.5 74 74" fill="none" stroke-width="11" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M18,66 L74,30" stroke="var(--mark-1)"/><path d="M22,79 L64,52" stroke="var(--mark-2)"/><path d="M28,91 L52,75" stroke="var(--mark-3)"/></svg>
         </span>
         <span>SeraphIRC</span>
       </a>
@@ -153,8 +152,7 @@
         <!-- Cover sheet, print only. Screen readers skip it because the page
              already carries the same title in its <title> and h2s. -->
         <div class="docs-print-cover" aria-hidden="true">
-          <img class="mark-dark" src="/assets/seraph-mark.svg" alt="">
-          <img class="mark-light" src="/assets/seraph-mark-light.svg" alt="">
+          <svg class="seraph-mark" viewBox="9 23.5 74 74" fill="none" stroke-width="11" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M18,66 L74,30" stroke="var(--mark-1)"/><path d="M22,79 L64,52" stroke="var(--mark-2)"/><path d="M28,91 L52,75" stroke="var(--mark-3)"/></svg>
           <h1>SeraphIRC</h1>
           <p class="cover-sub">Documentation</p>
           <p class="cover-meta">
@@ -4135,8 +4133,7 @@ server/Libera/server.log</code></pre>
       </div>
 
       <div class="foot-brand">
-        <img class="mark-dark" src="/assets/seraph-mark.svg" alt="" aria-hidden="true">
-        <img class="mark-light" src="/assets/seraph-mark-light.svg" alt="" aria-hidden="true">
+        <svg class="seraph-mark" viewBox="9 23.5 74 74" fill="none" stroke-width="11" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M18,66 L74,30" stroke="var(--mark-1)"/><path d="M22,79 L64,52" stroke="var(--mark-2)"/><path d="M28,91 L52,75" stroke="var(--mark-3)"/></svg>
         <strong>SeraphIRC</strong>
         <span>IRC for desktop &amp; mobile</span>
         <a href="https://www.seraphirc.chat">www.seraphirc.chat</a>
@@ -4163,7 +4160,7 @@ server/Libera/server.log</code></pre>
         var select = document.getElementById("theme-select");
         if (!select) return;
         var STORE = "seraphirc-theme";
-        var current = document.documentElement.getAttribute("data-theme") || "seraph";
+        var current = document.documentElement.getAttribute("data-theme") || "aura";
         select.value = current;
         select.addEventListener("change", function () {
           document.documentElement.setAttribute("data-theme", select.value);

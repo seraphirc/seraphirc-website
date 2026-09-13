@@ -50,6 +50,14 @@
      where the page tone would otherwise swallow it. */
   --shot-edge-device: var(--shot-edge);
 
+  /* Brand mark: the three wing strokes, painted from tokens rather than
+     baked into the file, so the picker reaches them. These are Seraph's
+     own: the gold leading stroke is Seraph's signature and stays here.
+     Every other theme redefines the three below off its own seeds. */
+  --mark-1: #E8B44C;
+  --mark-2: #BFD8F5;
+  --mark-3: #6E9AD1;
+
   /* Mono ink: the commands tables, release notes, news commands. Struck from
      the accent it was a pale blue on a blue ground, which is one more shade
      of the same thing. The yellow is the mark in this palette, and typed
@@ -158,9 +166,9 @@ code, .mono { font-family: var(--mono); }
 }
 
 .brand-mark { display: grid; place-items: center; width: 30px; height: 24px; }
-.brand-mark img {
-  width: 28px; height: 26px; object-fit: contain;
-  filter: drop-shadow(0 0 6px rgba(139, 175, 218, 0.4));
+.brand-mark .seraph-mark {
+  width: 28px; height: 26px;
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--mark-1) 40%, transparent));
 }
 
 .header-cta {
@@ -646,7 +654,7 @@ h2 {
   color: var(--muted);
   border-top: 1px solid var(--line);
 }
-.site-footer img { width: 24px; height: 24px; object-fit: contain; filter: drop-shadow(0 0 6px rgba(139, 175, 218, 0.4)); }
+.site-footer .seraph-mark { width: 24px; height: 24px; filter: drop-shadow(0 0 6px color-mix(in srgb, var(--mark-1) 40%, transparent)); }
 .site-footer strong { color: var(--text); font-family: var(--mono); letter-spacing: 0.08em; }
 .site-footer a { color: var(--accent-bright); font-family: var(--mono); font-size: 0.9rem; }
 
@@ -1108,10 +1116,10 @@ body {
 
 /* hero: logo art carries the identity, wordmark goes quiet */
 .hero-mark { margin: 0 0 20px; }
-.hero-mark img {
+.hero-mark .seraph-mark {
   width: clamp(88px, 12vw, 140px);
   height: auto;
-  filter: drop-shadow(0 6px 20px rgba(139, 175, 218, 0.28));
+  filter: drop-shadow(0 6px 20px color-mix(in srgb, var(--mark-1) 30%, transparent));
 }
 #hero-title {
   color: #c6c0d8;
@@ -1261,7 +1269,7 @@ body::after {
 .site-footer strong { color: var(--gold-bright); }
 
 /* bigger hero emblem */
-.hero-mark img { width: clamp(160px, 24vw, 300px); }
+.hero-mark .seraph-mark { width: clamp(160px, 24vw, 300px); }
 
 /* ============================================================
    DEVICE DUO — iPad + iPhone share the Mobile column, phone
@@ -1380,9 +1388,8 @@ body::after {
 /* two standalone SVGs anchored to the emblem: same desktop spots as
    before, but they now scale into the free columns beside the logo
    on phones instead of being hidden.
-   They center on .hero-head rather than .hero: the demo reel below it
-   makes the section far taller than the emblem, and a hero-centered
-   50% would drag them down across the video. */
+   They center on .hero-head rather than .hero, so they stay tied to the
+   emblem however tall the section around it grows. */
 .hero-head { position: relative; }
 .constellations {
   position: absolute;
@@ -1645,6 +1652,64 @@ html[data-theme]:not([data-theme='seraph']) {
   --n6: color-mix(in srgb, var(--sd-accent) 60%, #fff);
   --n7: color-mix(in srgb, var(--sd-glow) 62%, #fff);
   --n8: var(--sd-sc);
+
+  /* The wing, off the theme's own seeds, keeping the shape Seraph's own
+     mark has: a leading stroke in a signature hue at mid lightness, a
+     pale highlight under it, then a third that drops back to about the
+     lead's weight. Measured on the stock art that is L60 / L85 / L63,
+     and the mixes below hold every theme to adjacent gaps of that
+     order. --sd-glow is where each theme keeps its signature (Aura's
+     purple, Miami's pink, Phoenix's orange), so the gold that reads as
+     Seraph never turns up on somebody else's palette. */
+  --mark-1: var(--sd-glow);
+  --mark-2: color-mix(in srgb, var(--sd-accent) 48%, #fff);
+  --mark-3: color-mix(in srgb, var(--sd-accent) 88%, #000);
+}
+
+/* On paper the whole ladder shifts down: 48% toward white leaves a
+   stroke that disappears into the page, which is what the old two-file
+   mark was working around. The highlight lifts less and the third
+   stroke stops at the accent rather than going deeper.
+   The [data-theme] qualifier is load-bearing on every rule below: the
+   derivation block above carries :not([data-theme='seraph']), and a
+   bare html[data-theme='x'] scores under it and would lose. */
+html[data-theme]:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean-breeze'],
+                    [data-theme='sage'], [data-theme='sakura'], [data-theme='newsprint']) {
+  --mark-2: color-mix(in srgb, var(--sd-accent) 65%, #fff);
+  --mark-3: var(--sd-accent);
+}
+
+/* Two themes spend --sd-glow inside their own accent's hue family, so
+   the lead would arrive as a fourth shade of one color rather than a
+   signature. Each takes the seed that carries its actual signature:
+   Tokyo Night's purple, and Catppuccin's lavender pulled down to sit
+   under the pale highlight instead of beside it. */
+html[data-theme]:is([data-theme='tokyo-night'])  { --mark-1: var(--sd-sw); }
+html[data-theme]:is([data-theme='catppuccin'])   { --mark-1: color-mix(in srgb, var(--sd-glow) 80%, #000); }
+
+/* The monochrome themes do NOT get a second hue. Reaching for one puts
+   somebody else's color on the mark -- an olive lead on Sage, a purple
+   one on Sakura -- so they separate on weight inside their own family,
+   which is what Seraph's mark does anyway: its two blues are one hue
+   twenty-odd points of lightness apart. Each only needs its highlight
+   named, since the lead and the third stroke already land right. */
+html[data-theme]:is([data-theme='sakura']) { --mark-2: var(--sd-sw); }
+html[data-theme]:is([data-theme='sage'])   { --mark-2: color-mix(in srgb, var(--sd-glow) 72%, #fff); }
+
+/* Ocean Breeze keeps a gold in --sd-glow as a chrome choice rather than
+   an identity, and a gold wing is the one thing this is meant to stop.
+   It leads with its aqua, which then needs the darker third back. */
+html[data-theme]:is([data-theme='ocean-breeze']) {
+  --mark-1: color-mix(in srgb, var(--sd-sc) 72%, #fff);
+  --mark-2: var(--sd-accent);
+  --mark-3: color-mix(in srgb, var(--sd-accent) 55%, #000);
+}
+
+/* Newsprint's accent IS its ink, so all three come off its own greys. */
+html[data-theme]:is([data-theme='newsprint']) {
+  --mark-1: var(--sd-accent);
+  --mark-2: color-mix(in srgb, var(--sd-glow) 70%, #fff);
+  --mark-3: var(--sd-sc);
 }
 
 /* --- Atmosphere recolor (non-Seraph) ------------------------- */
@@ -1696,11 +1761,6 @@ html[data-theme]:not([data-theme='seraph']) .site-footer {
 html[data-theme]:not([data-theme='seraph']) #hero-title {
   color: var(--text);
   text-shadow: 0 0 28px color-mix(in srgb, var(--sd-hero-glow, var(--sd-glow)) 24%, transparent);
-}
-/* Logo lift: a soft offset drop-shadow only, recolored per theme
-   from --sd-accent so it never reads as an off-theme blue. */
-html[data-theme]:not([data-theme='seraph']) .hero-mark img {
-  filter: drop-shadow(0 6px 20px color-mix(in srgb, var(--sd-accent) 30%, transparent));
 }
 
 /* --- Top-bar theme picker ------------------------------------- */
@@ -1940,21 +2000,15 @@ body, .topbar, .site-footer { transition: background-color 350ms ease, border-co
 /* ============================================================
    BRAND MARK — wing sweep
    The mark ships transparent (no icon tile) so the hero halo and the
-   drop-shadows hug the strokes instead of tracing a square. Its stock
-   colors are tuned for dark grounds: the pale-blue stroke all but
-   disappears on paper, so light themes swap to the deeper-blue cut.
-   Both cuts sit in the markup and one is hidden, rather than a CSS
-   content: url() swap — that isn't reliable on <img> across browsers.
+   drop-shadows hug the strokes instead of tracing a square. It is
+   inline SVG rather than an <img> because the three strokes are
+   painted from --mark-1/2/3, and CSS cannot reach inside a file an
+   <img> loads. That also retires the old pair of cuts: the light
+   themes used to swap to a deeper file because the pale-blue stroke
+   vanished on paper, and now every theme mixes its own pair off
+   --sd-accent, which is legible on its own ground by construction.
    ============================================================ */
-.mark-light { display: none; }
-html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean-breeze'],
-        [data-theme='sage'], [data-theme='sakura'], [data-theme='newsprint']) .mark-dark {
-  display: none;
-}
-html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean-breeze'],
-        [data-theme='sage'], [data-theme='sakura'], [data-theme='newsprint']) .mark-light {
-  display: inline;
-}
+.seraph-mark { display: inline-block; vertical-align: middle; }
 
 /* ---------------------------------------------------------------- changelog */
 /* Same recipe as .command-category: every color derives from the
@@ -2594,108 +2648,4 @@ h3 {
   border-left: 0;
   font-size: var(--t-lead);
   text-wrap: balance;
-}
-
-/* --- hero demo: the client in motion, right under the mark ---- */
-/* Loops silently on its own. The controls are ours and sit under the
-   frame rather than over it: the client's status bar (latency, active
-   server) lives in the bottom rows of the recording, and a native
-   control bar covers exactly that. Framed like the .desktop-screen
-   thumbnails so it reads as the same family of screenshots. */
-.hero-demo {
-  max-width: 940px;
-  margin: clamp(26px, 4vw, 42px) auto 0;
-}
-.hero-demo-video {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 2556 / 1567;
-  background: #06070c;
-  border: 1px solid var(--shot-edge);
-  border-radius: var(--radius-sm);
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42), 0 0 26px var(--shot-halo);
-}
-
-/* Playback strip: mono chrome in the panel tones, sized so the buttons
-   stay comfortable thumb targets on a phone. */
-.demo-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-  padding: 8px 10px;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-}
-/* A class rule outranks the UA sheet's [hidden], so the pre-script
-   state has to be spelled out or the dead bar shows for a no-JS
-   visitor. */
-.demo-controls[hidden] { display: none; }
-.demo-btn {
-  flex: none;
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 30px;
-  padding: 0;
-  color: var(--muted);
-  background: var(--raised);
-  border: 1px solid var(--line);
-  border-radius: 5px;
-  cursor: pointer;
-}
-.demo-btn:hover { color: var(--gold-bright); border-color: var(--line-2); }
-.demo-btn:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 2px; }
-.demo-glyph { font-family: var(--mono); font-size: 0.8rem; line-height: 1; }
-.demo-btn-full { margin-left: 2px; }
-.demo-time {
-  flex: none;
-  min-width: 9ch;
-  color: var(--dim);
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  font-variant-numeric: tabular-nums;
-}
-
-/* The scrubber is a bare range input, restyled per engine: the track is
-   the same hairline as the strip's border, the thumb takes the gold. */
-.demo-scrub {
-  flex: 1 1 auto;
-  min-width: 0;
-  height: 20px;
-  margin: 0;
-  background: transparent;
-  cursor: pointer;
-  -webkit-appearance: none;
-  appearance: none;
-}
-.demo-scrub:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 2px; }
-.demo-scrub::-webkit-slider-runnable-track {
-  height: 4px;
-  background: var(--line-2);
-  border-radius: 2px;
-}
-.demo-scrub::-webkit-slider-thumb {
-  width: 13px;
-  height: 13px;
-  margin-top: -4.5px;
-  background: var(--gold);
-  border: none;
-  border-radius: 50%;
-  -webkit-appearance: none;
-  appearance: none;
-}
-.demo-scrub::-moz-range-track {
-  height: 4px;
-  background: var(--line-2);
-  border-radius: 2px;
-}
-.demo-scrub::-moz-range-thumb {
-  width: 13px;
-  height: 13px;
-  background: var(--gold);
-  border: none;
-  border-radius: 50%;
 }
