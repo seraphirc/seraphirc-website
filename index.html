@@ -465,15 +465,36 @@
       <section class="section news-section" id="news" aria-labelledby="news-title">
         <div class="section-heading">
           <h2 id="news-title">News</h2>
-          <p class="lead">
-            What just landed in SeraphIRC Desktop, newest first. Pick any release from
-            the list to read its announcement.
-          </p>
         </div>
 
         <div class="news-panel" data-news-panel>
           <div class="news-main">
           <div class="news-deck" data-news-deck>
+            <article class="news-card" data-news-title="Screen Real Estate">
+              <div class="news-bar">
+                <span class="news-kicker">Screen Real Estate</span>
+                <span class="news-date">5.1.25 &middot; Sep 15, 2026</span>
+                <span class="news-flag">New</span>
+              </div>
+              <div class="news-body">
+                <h3>So much room for activities!</h3>
+                <p>
+                  The feedback we hear most is that the UI takes up too much of the
+                  window. Two new options in <code>Settings &gt; Appearance</code> hand
+                  that space back.
+                </p>
+                <p>
+                  <b>Compact toolbar</b> packs the top bar into one dense row under the
+                  titlebar and trims the connection pill to a bare light, leaving your
+                  icon size alone. <b>Seamless maximize</b> drops the title bar off a
+                  maximized buffer window and moves the member count and channel modes
+                  into the topic, with <code>Restore Window</code> in the toolbar to
+                  bring the frame back. Both are off by default.
+                </p>
+                <p class="news-cmd"><code>Settings &gt; Appearance &gt; Compact toolbar / Seamless maximize</code></p>
+              </div>
+            </article>
+
             <article class="news-card" data-news-title="macOS Chrome">
               <div class="news-bar">
                 <span class="news-kicker">macOS Chrome</span>
@@ -1001,7 +1022,8 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
-              <option value="5.1.24" selected>5.1.24</option>
+              <option value="5.1.25" selected>5.1.25</option>
+              <option value="5.1.24">5.1.24</option>
               <option value="5.1.23">5.1.23</option>
               <option value="5.1.22">5.1.22</option>
               <option value="5.1.21">5.1.21</option>
@@ -1061,10 +1083,20 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Sep 14, 2026</span>
+            <span class="changelog-date" id="changelog-date">Sep 15, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.24" data-date="Sep 14, 2026">
+          <article class="release" data-version="5.1.25" data-date="Sep 15, 2026">
+            <ul class="release-notes">
+              <li><b>Compact toolbar (desktop):</b> a new option in <code>Settings &gt; Appearance</code> packs the toolbar into one dense row under the titlebar and cuts the connection pill down to a single light. Your icon size setting is left alone.</li>
+              <li><b>Seamless maximize (desktop):</b> also in <code>Settings &gt; Appearance</code>, a maximized buffer window drops its title bar, so you get topic and transcript with nothing framing them. The member count and channel modes move into the topic, which now leads with the buffer's name.</li>
+              <li><b>Scrollback (desktop):</b> reaching the top of a transcript loads the next page of history on its own, and your place on screen is kept.</li>
+              <li><b>New Messages divider (desktop):</b> the line clears once you scroll back down to the latest message, including in buffers holding more than a page of unread.</li>
+              <li><b>Long nicknames (desktop):</b> hover a name the sender column has cut short and the whole thing appears.</li>
+              <li><b>Fixes (desktop):</b> closing your last window takes one click now and drops you on the server buffer, and a maximized area no longer stops answering treebar clicks.</li>
+            </ul>
+          </article>
+          <article class="release" data-version="5.1.24" data-date="Sep 14, 2026" hidden>
             <ul class="release-notes">
               <li><b>Connection messages (desktop):</b> a new toggle in <code>Settings &gt; Chatting &gt; Chat Logging</code> silences the Connecting, Connected and reconnect countdown lines in your buffers. Useful if your laptop sleeps a lot. On by default.</li>
               <li><b>Setup wizard (desktop):</b> closing the startup wizard now sticks, so it stops greeting you every launch.</li>
