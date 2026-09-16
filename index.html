@@ -1022,7 +1022,8 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
-              <option value="5.1.25" selected>5.1.25</option>
+              <option value="5.1.26" selected>5.1.26</option>
+              <option value="5.1.25">5.1.25</option>
               <option value="5.1.24">5.1.24</option>
               <option value="5.1.23">5.1.23</option>
               <option value="5.1.22">5.1.22</option>
@@ -1083,10 +1084,15 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Sep 15, 2026</span>
+            <span class="changelog-date" id="changelog-date">Sep 16, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.25" data-date="Sep 15, 2026">
+          <article class="release" data-version="5.1.26" data-date="Sep 16, 2026">
+            <ul class="release-notes">
+              <li><b>Interface polish (desktop):</b> removed several edged transition points and updated the UI to flow more cohesively. The toolbar extends across the entirety of the app, and the corners of the treebar, chat and user list are rounded off for a gentler feel.</li>
+            </ul>
+          </article>
+          <article class="release" data-version="5.1.25" data-date="Sep 15, 2026" hidden>
             <ul class="release-notes">
               <li><b>Compact toolbar (desktop):</b> a new option in <code>Settings &gt; Appearance</code> packs the toolbar into one dense row under the titlebar and cuts the connection pill down to a single light. Your icon size setting is left alone.</li>
               <li><b>Seamless maximize (desktop):</b> also in <code>Settings &gt; Appearance</code>, a maximized buffer window drops its title bar, so you get topic and transcript with nothing framing them. The member count and channel modes move into the topic, which now leads with the buffer's name.</li>
