@@ -1022,7 +1022,8 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
-              <option value="5.1.26" selected>5.1.26</option>
+              <option value="5.1.27" selected>5.1.27</option>
+              <option value="5.1.26">5.1.26</option>
               <option value="5.1.25">5.1.25</option>
               <option value="5.1.24">5.1.24</option>
               <option value="5.1.23">5.1.23</option>
@@ -1084,10 +1085,21 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Sep 16, 2026</span>
+            <span class="changelog-date" id="changelog-date">Sep 17, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.26" data-date="Sep 16, 2026">
+          <article class="release" data-version="5.1.27" data-date="Sep 17, 2026">
+            <ul class="release-notes">
+              <li><b>Monitor Feed (desktop):</b> tick Monitor Channel in Buffer Settings and watch all of them in one read-only window, opened and put away from the new toolbar icon beside Seraph Chat.</li>
+              <li><b>Server password (desktop):</b> servers that ask for a password before they let you on now have a Server Password box, in Network Manager and in the setup wizard.</li>
+              <li><b>On-connect commands (desktop):</b> a box under Autojoin in both server dialogs runs a list of slash commands once the network is connected, paced so a long list does not trip flood protection.</li>
+              <li><b>Alternate line shading (desktop):</b> a new option in <code>Settings &gt; Appearance &gt; Transcript Layout</code> shades every other line. Classic layout only, off by default.</li>
+              <li><b>Timestamps (desktop):</b> a Show Timestamps toggle in <code>Settings &gt; Chatting &gt; Chat Logging</code> hides the clock in every buffer. Logs still keep it.</li>
+              <li><b>Actions in Modern (desktop):</b> a <code>/me</code> now sits on one line, nickname then what they did, with the time on hover.</li>
+              <li><b>Fixes (desktop):</b> a network's channels open as soon as you connect instead of seconds later, channels that need services to recognize you are joined once they do, and a maximized buffer gives its topic its own line.</li>
+            </ul>
+          </article>
+          <article class="release" data-version="5.1.26" data-date="Sep 16, 2026" hidden>
             <ul class="release-notes">
               <li><b>Interface polish (desktop):</b> removed several edged transition points and updated the UI to flow more cohesively. The toolbar extends across the entirety of the app, and the corners of the treebar, chat and user list are rounded off for a gentler feel.</li>
             </ul>
