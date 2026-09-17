@@ -552,6 +552,29 @@
               Passwords go to the operating system's credential store, never into the
               config file in plain text.
             </p>
+            <p>
+              Some servers ask for a password before they let you on at all.
+              <strong>Password</strong>, in the cell beside the TLS checkbox, is that
+              one. The setup wizard asks for the same thing as <strong>Server
+              Password</strong> on its Details step, so a network needing one can be
+              created there. It is sent at the very start of the connection, ahead of
+              everything else.
+            </p>
+
+            <h3>On-connect commands</h3>
+            <p>
+              <strong>On-connect commands</strong> sits under Autojoin channels in the
+              Network Manager and the wizard. Put one command per line and they run in
+              order once the network is connected and the channels are joined, never
+              during login.
+            </p>
+            <p>
+              They go through the same dispatcher as anything you type, so aliases,
+              service shortcuts, and raw IRC all behave the way they do in the
+              composer. Commands are spaced a couple of seconds apart so a long list
+              is not discarded as flooding, and anything the client refuses says so in
+              the server window.
+            </p>
 
             <h3>Going up and down</h3>
             <p>
@@ -577,6 +600,11 @@
               Prefer it where the network supports it. NickServ authentication happens
               after connecting, by messaging the service. Both are per network and both
               read from secure storage.
+            </p>
+            <p>
+              Neither is the server password above. That one is about reaching the
+              host, these are about who you are once you are there, and a network can
+              want both.
             </p>
             <p>
               To talk to NickServ by hand use
@@ -797,6 +825,13 @@
                 </tbody>
               </table>
             </div>
+            <p>
+              <strong>Alternate line shading</strong> draws every other message on
+              a faintly shaded band, so a long line stays easy to follow from the
+              nickname across to the text. Off by default, and Classic only. The
+              checkbox greys out in Modern, which already groups messages under
+              each speaker, and your setting is kept for when you switch back.
+            </p>
             <p>
               <strong>Render IRC avatars in Modern Mode</strong> shows the avatar of
               anyone who has published one through IRCv3 metadata, instead of the
@@ -1067,6 +1102,20 @@
               </table>
             </div>
 
+            <h3>Monitor Channel</h3>
+            <p>
+              Channels only. Turning it on also routes this channel to the
+              <strong>Monitor Feed</strong>, a single read-only window that carries
+              every monitored channel at once, each line labeled with the network and
+              channel it came from. Open and dock it with the toolbar icon beside
+              Seraph Chat.
+            </p>
+            <div class="docs-note">
+              The feed starts from your saved history, so past messages appear there
+              only if <a href="#chat-logging">logging</a> is on for that channel.
+              Anything said from now on arrives there with logging off too.
+            </div>
+
             <h3>Scrollback</h3>
             <p>
               How many messages this buffer keeps on screen. The default is 1000,
@@ -1209,6 +1258,23 @@
               already saved stay saved until you clear them. See
               <a href="#exporting-logs">Exporting and Clearing</a>.
             </div>
+
+            <h3>Connection Messages</h3>
+            <p>
+              <strong>Enable Connection Message Logging</strong> is on by default and
+              writes lines like Connecting and Connection lost into your open buffers
+              when a network connects or drops. They are never saved to your chat
+              logs and they go when the app restarts. Turn it off on a machine that
+              sleeps a lot and the transcripts stay clean.
+            </p>
+
+            <h3>Show Timestamps</h3>
+            <p>
+              On by default. It draws the time beside each message in every buffer,
+              channels, queries, server windows, and the Monitor Feed. Display only,
+              despite sitting on this page. Messages are always recorded with the time
+              they arrived, so turning it off leaves your logs and exports untouched.
+            </p>
 
             <h3>Not the same as diagnostics</h3>
             <p>
