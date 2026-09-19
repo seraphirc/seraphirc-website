@@ -1022,7 +1022,9 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
-              <option value="5.1.27" selected>5.1.27</option>
+              <option value="5.1.29" selected>5.1.29</option>
+              <option value="5.1.28">5.1.28</option>
+              <option value="5.1.27">5.1.27</option>
               <option value="5.1.26">5.1.26</option>
               <option value="5.1.25">5.1.25</option>
               <option value="5.1.24">5.1.24</option>
@@ -1085,10 +1087,22 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Sep 17, 2026</span>
+            <span class="changelog-date" id="changelog-date">Sep 18, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.27" data-date="Sep 17, 2026">
+          <article class="release" data-version="5.1.29" data-date="Sep 18, 2026">
+            <ul class="release-notes">
+              <li><b>Monitor Feed (desktop):</b> click a channel name to bring that buffer forward. Links work now, a cut-short nickname shows in full on hover, and the newest line stays put when you resize.</li>
+              <li><b>Monitor Feed (desktop):</b> it sits in the normal window order, so a window opened underneath is no longer trapped there.</li>
+              <li><b>Light themes (desktop):</b> the connection light and the Monitor icon are easier to see.</li>
+            </ul>
+          </article>
+          <article class="release" data-version="5.1.28" data-date="Sep 17, 2026" hidden>
+            <ul class="release-notes">
+              <li><b>Bouncer profiles (desktop):</b> deleting a soju profile now works when it leaves you with one network or none. It used to stop with a raw error message.</li>
+            </ul>
+          </article>
+          <article class="release" data-version="5.1.27" data-date="Sep 17, 2026" hidden>
             <ul class="release-notes">
               <li><b>Monitor Feed (desktop):</b> tick Monitor Channel in Buffer Settings and watch all of them in one read-only window, opened and put away from the new toolbar icon beside Seraph Chat.</li>
               <li><b>Server password (desktop):</b> servers that ask for a password before they let you on now have a Server Password box, in Network Manager and in the setup wizard.</li>
