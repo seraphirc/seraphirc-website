@@ -1022,7 +1022,8 @@
           <div class="changelog-bar">
             <label class="changelog-label" for="changelog-select">Version</label>
             <select id="changelog-select" class="changelog-select" aria-label="Release version">
-              <option value="5.1.30" selected>5.1.30</option>
+              <option value="5.1.31" selected>5.1.31</option>
+              <option value="5.1.30">5.1.30</option>
               <option value="5.1.29">5.1.29</option>
               <option value="5.1.28">5.1.28</option>
               <option value="5.1.27">5.1.27</option>
@@ -1088,10 +1089,24 @@
               <option value="5.0.3">5.0.3</option>
               <option value="5.0.2">5.0.2</option>
             </select>
-            <span class="changelog-date" id="changelog-date">Sep 19, 2026</span>
+            <span class="changelog-date" id="changelog-date">Sep 20, 2026</span>
           </div>
 
-          <article class="release" data-version="5.1.30" data-date="Sep 19, 2026">
+          <article class="release" data-version="5.1.31" data-date="Sep 20, 2026">
+            <ul class="release-notes">
+              <li><b>IRCv3 Metadata (desktop):</b> a new page at <code>Settings &gt; Chatting &gt; IRCv3 Metadata</code> publishes your avatar, pronouns, homepage and status, globally or per network. The status field has an emoji picker.</li>
+              <li><b>User Info (desktop):</b> other people&rsquo;s pronouns, homepage and status show alongside what the server reports.</li>
+              <li><b>User list (desktop):</b> hover a name for a card with their picture and whatever they published about themselves. Modern layout only.</li>
+              <li><b>Avatars (desktop):</b> people wear their picture in the user list, loaded only for the names on screen.</li>
+              <li><b>WHOIS (desktop):</b> the answer carries the face of the person you asked about, and nicknames with brackets in them, like <code>alice[m]</code>, read properly now.</li>
+              <li><b>Bots (desktop):</b> a bot in the user list gets a small robot head in place of the word Bot, leaving more room for the nickname.</li>
+              <li><b>Aliases (desktop):</b> an alias can chain several commands, so one shortcut can join a handful of channels at once.</li>
+              <li><b>Network setup (desktop):</b> leaving the nickname blank hands you one instead of refusing to save, and Network Manager gets a globe icon.</li>
+              <li><b>Modern layout (desktop):</b> joins, parts and quits take the same breathing room as a new speaker, and seamless maximize is on for new installs.</li>
+              <li><b>Fixes (desktop):</b> dropdown lists are readable in every theme, the connected light is gentler on the light themes, and the composer stays put when you turn typing indicators on or off.</li>
+            </ul>
+          </article>
+          <article class="release" data-version="5.1.30" data-date="Sep 19, 2026" hidden>
             <ul class="release-notes">
               <li><b>User info (desktop):</b> the panel opens with their picture at the top, plain readable labels, and a padlock on the nick when the connection is secure. A verified name carries the same badge the query window shows.</li>
               <li><b>Avatars (desktop):</b> people wear their avatar in private messages now, not only in channels.</li>
