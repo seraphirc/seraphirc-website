@@ -1,600 +1,510 @@
-/* ============================================================
-   SeraphIRC — Terminal / IRC-native redesign (2026)
-   Palette + chrome derived from the SeraphIRC desktop client.
-   Seraph v2 brand: night navy grounds, royal blue voice, gold
-   reserved for the halo moments (prompts, actions, primary CTA).
-   ============================================================ */
+/* SeraphIRC site styles
+   One stylesheet for every page. docs/docs.css and the marketplace's
+   inline block build on the variables defined here, so rename with care.
+
+   Contents
+     1. Palette (Seraph) and fonts
+     2. Base elements
+     3. Header and footer
+     4. Buttons and form controls
+     5. Home page
+     6. Lightbox
+     7. Plain content pages (privacy, marketplace)
+     8. Themes (the picker swaps the palette)
+     9. Small screens */
+
+
+/* 1. Palette ------------------------------------------------------------ */
 
 :root {
   color-scheme: dark;
 
-  /* grounds (Seraph v3, 2026-08-08: the client's dusk-navy ladder, lifted
-     off the old near-black so the soft yellow has something to sit on) */
   --bg: #141a2b;
-  --bg-2: #171d2e;
+  --bg-2: #10151f;
   --panel: #192035;
-  --panel-2: #1c2338;
+  --panel-2: #1d2540;
   --raised: #262f4a;
-  --tree: #1d273b;
-  --chat: #1c2338;
 
-  /* lines (structural blue, the icon's mid-blue bar) */
   --line: rgba(139, 175, 218, 0.2);
   --line-2: rgba(139, 175, 218, 0.34);
-  --line-soft: rgba(139, 175, 218, 0.12);
+  --line-soft: rgba(139, 175, 218, 0.11);
 
-  /* text */
   --text: #e5eaf3;
-  --muted: #c7d2e6;
+  --muted: #c3cde0;
   --dim: #9fb0cb;
   --faint: #7186a8;
 
-  /* accents (Seraph v3: the palette is the app icon. Soft yellow is the
-     mark, off-white is the highlight, blue is structural. Selection is
-     yellow here for the same reason it is in the client.) */
   --accent: #79b0ea;
   --accent-bright: #c1daf5;
   --accent-deep: #22345c;
   --gold: #f3d372;
   --gold-bright: #f9e39a;
+  --gold-deep: #4f4118;
   --sel: rgba(243, 211, 114, 0.16);
+  --code-ink: #e0d3ad;
 
-  /* Screenshot outline: a thin signature edge around every client shot
-     (desktop image, phone + tablet bezels, lightbox). Spent off --gold,
-     which each theme redefines below, so the edge follows the picker
-     without a per-theme rule. */
-  --shot-edge: color-mix(in srgb, var(--gold) 52%, transparent);
-  --shot-halo: color-mix(in srgb, var(--gold) 15%, transparent);
-  /* The phone/tablet bezels stay dark on every theme, so their edge is
-     split out — the light themes lift it toward white further down,
-     where the page tone would otherwise swallow it. */
-  --shot-edge-device: var(--shot-edge);
-
-  /* Brand mark: the three wing strokes, painted from tokens rather than
-     baked into the file, so the picker reaches them. These are Seraph's
-     own: the gold leading stroke is Seraph's signature and stays here.
-     Every other theme redefines the three below off its own seeds. */
-  --mark-1: #E8B44C;
-  --mark-2: #BFD8F5;
-  --mark-3: #6E9AD1;
-
-  /* Mono ink: the commands tables, release notes, news commands. Struck from
-     the accent it was a pale blue on a blue ground, which is one more shade
-     of the same thing. The yellow is the mark in this palette, and typed
-     commands are exactly what a mark is for. Resolves per theme, and the
-     light themes override it below. */
-  --code-ink: var(--gold);
-  --green: #61ffca;
-  --amber: #ffca85;
+  --green: #61d9a8;
+  --amber: #f0b76a;
   --red: #ff6767;
-  --cyan: #82e2ff;
-  --pink: #f694ff;
 
-  /* nick colors (deterministic client palette) */
-  --n1: #58cfc0;
-  --n2: #5bc8f5;
-  --n3: #6cd06c;
-  --n4: #e3b341;
-  --n5: #e072b0;
-  --n6: #b9a3ff;
-  --n7: #f0776f;
-  --n8: #6d9bff;
+  /* the three wing strokes of the logo */
+  --mark-1: #e8b44c;
+  --mark-2: #bfd8f5;
+  --mark-3: #6e9ad1;
 
-  --radius: 10px;
-  --radius-sm: 7px;
-  --shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
+  --radius: 6px;
+  --radius-sm: 4px;
+  --shell: 1080px;
+  /* the sticky header's height, so anchors and the docs rail clear it */
+  --header-h: 61px;
 
-  --mono: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas,
+  --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu,
+    Cantarell, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, "Cascadia Mono", Menlo, Consolas,
     "Liberation Mono", monospace;
-  --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-
-  font-family: var(--sans);
+  /* docs.css still asks for --serif on its print cover */
+  --serif: var(--sans);
 }
 
-* { box-sizing: border-box; }
+
+/* 2. Base ------------------------------------------------------------------ */
+
+*, *::before, *::after { box-sizing: border-box; }
 
 html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 88px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 16px);
 }
 
 body {
   min-width: 320px;
   margin: 0;
   color: var(--text);
+  background: var(--bg);
+  font-family: var(--sans);
   font-size: 16px;
-  line-height: 1.5;
-  background:
-    radial-gradient(ellipse at 50% -8%, rgba(139, 175, 218, 0.16), transparent 46%),
-    radial-gradient(ellipse at 88% 6%, rgba(243, 211, 114, 0.05), transparent 34%),
-    linear-gradient(180deg, #171d2e 0%, #1c2338 46%, #12172a 100%);
-  background-attachment: fixed;
-  overflow-x: hidden;
+  line-height: 1.6;
 }
 
-/* faint terminal grid, masked to the top */
-body::before {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  content: "";
-  background:
-    linear-gradient(rgba(139, 175, 218, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(139, 175, 218, 0.03) 1px, transparent 1px);
-  background-size: 52px 52px;
-  mask-image: radial-gradient(ellipse at 50% 0%, black, transparent 62%);
+h1, h2, h3, h4 {
+  margin: 0 0 0.5em;
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--text);
+}
+h1 { font-size: 2.4rem; letter-spacing: -0.015em; }
+h2 { font-size: 1.6rem; letter-spacing: -0.01em; }
+h3 { font-size: 1.12rem; }
+
+p { margin: 0 0 1em; }
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--accent); text-underline-offset: 2px; }
+a:hover { color: var(--accent-bright); }
+
+code, kbd, pre { font-family: var(--mono); font-size: 0.9em; }
+code { color: var(--code-ink); }
+
+img { max-width: 100%; }
+
+ul, ol { padding-left: 1.3em; }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.wrap {
+  width: min(var(--shell), calc(100% - 40px));
+  margin: 0 auto;
 }
 
-a { color: inherit; text-decoration: none; }
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
 
-h1, h2, h3, p { margin-top: 0; }
+.seraph-mark { display: block; width: 100%; height: 100%; }
 
-code, .mono { font-family: var(--mono); }
 
-/* ---------------------------------------------------------------- header */
+/* 3. Header and footer ------------------------------------------------------ */
 
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 40;
+  z-index: 10;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--line);
+}
+.site-header .wrap {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  width: min(1280px, calc(100% - 36px));
-  margin: 0 auto;
-  padding: 14px 0;
-  backdrop-filter: blur(16px);
+  gap: 24px;
+  min-height: 60px;
 }
 
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  font-family: var(--mono);
-  font-weight: 700;
-  font-size: 0.9rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.brand-mark { display: grid; place-items: center; width: 30px; height: 24px; }
-.brand-mark .seraph-mark {
-  width: 28px; height: 26px;
-  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--mark-1) 40%, transparent));
-}
-
-.header-cta {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 15px;
-  color: #0a0812;
-  font-family: var(--mono);
-  font-size: 0.82rem;
+  gap: 10px;
+  color: var(--text);
+  font-size: 1.1rem;
   font-weight: 700;
-  background: var(--accent);
-  border-radius: 999px;
-  transition: transform 150ms ease;
+  text-decoration: none;
 }
-.header-cta:hover { transform: translateY(-1px); }
+.brand:hover { color: var(--text); }
+.brand-mark { width: 26px; height: 26px; flex: none; }
 
-/* ---------------------------------------------------------------- buttons */
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 22px;
+  margin-left: auto;
+}
+.site-nav a {
+  padding: 4px 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+.site-nav a:hover { color: var(--text); }
+.site-nav a[aria-current="page"] {
+  color: var(--text);
+  box-shadow: inset 0 -2px 0 var(--gold);
+}
+
+.site-footer {
+  margin-top: 40px;
+  padding: 32px 0 40px;
+  color: var(--dim);
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+.site-footer .wrap {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px 32px;
+  align-items: start;
+}
+.foot-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.foot-nav a { color: var(--muted); text-decoration: none; }
+.foot-nav a:hover { color: var(--text); text-decoration: underline; }
+.foot-meta { margin: 0; }
+.foot-meta a { color: inherit; }
+
+
+.foot-theme { justify-self: end; }
+
+
+/* 4. Buttons and form controls ---------------------------------------------- */
 
 .button {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 9px;
-  min-height: 48px;
-  padding: 0 20px;
-  font-family: var(--mono);
-  font-size: 0.9rem;
-  font-weight: 700;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
-}
-.button:hover { transform: translateY(-1px); }
-.button:focus-visible { outline: 3px solid rgba(193, 218, 245, 0.8); outline-offset: 3px; }
-
-.button-primary {
-  color: #0a0812;
-  background: var(--accent);
-  border: 0;
-}
-.button-secondary {
+  gap: 8px;
+  padding: 10px 18px;
   color: var(--text);
-  background: color-mix(in srgb, var(--panel) 78%, transparent);
+  background: var(--panel-2);
   border: 1px solid var(--line-2);
-}
-.button-secondary:hover { border-color: var(--accent); }
-
-/* Microsoft Store / Windows download button — deliberately Fluent, not retro */
-.button-windows {
-  gap: 11px;
-  color: #ffffff;
-  background: #0067b8;
-  border: 0;
-  border-radius: 2px;
-  font-family: "Segoe UI", "Segoe UI Variable", system-ui, -apple-system, sans-serif;
+  border-radius: var(--radius);
+  font: inherit;
   font-weight: 600;
-  letter-spacing: 0;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
 }
-.button-windows:hover { background: #005da6; }
-.button-windows:active { background: #004e8c; }
-.button-windows:focus-visible { outline: 3px solid rgba(0, 103, 184, 0.55); outline-offset: 2px; }
-.button-windows-logo {
-  width: 20px;
-  height: 20px;
-  flex: 0 0 auto;
+.button:hover {
+  color: var(--text);
+  background: var(--raised);
 }
 
-/* Linux + macOS marks: monochrome so they take the button's own ink, unlike
-   the Microsoft Store button above, which keeps its full-color brand logo. */
-.button-os-logos {
+select {
+  padding: 5px 28px 5px 10px;
+  color: var(--text);
+  background-color: var(--panel);
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  font-size: 0.9rem;
+}
+select option { color: var(--text); background: var(--panel); }
+
+.field {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  flex: 0 0 auto;
-}
-.button-os-logo {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-  flex: 0 0 auto;
+  gap: 8px;
+  color: var(--dim);
+  font-size: 0.9rem;
 }
 
-/* ---------------------------------------------------------------- hero */
-
-.hero {
-  width: min(1280px, calc(100% - 36px));
-  margin: 0 auto;
-  padding: clamp(48px, 7vw, 86px) 0 40px;
-}
-
-.hero-head { max-width: 940px; }
-
-h1 {
-  margin-bottom: 18px;
-  font-family: var(--mono);
-  font-size: clamp(3.4rem, 10vw, 7.4rem);
-  line-height: 0.92;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
-}
-h1 .caret {
-  display: inline-block;
-  width: 0.5ch;
-  height: 0.82em;
-  margin-left: 0.12em;
-  background: var(--accent-bright);
-  translate: 0 0.06em;
-  animation: blink 1.15s steps(1) infinite;
-}
-@keyframes blink { 50% { opacity: 0; } }
-
-.hero-subheadline {
-  max-width: 760px;
-  margin: 0 0 16px;
-  font-size: clamp(1.35rem, 3vw, 2.1rem);
-  font-weight: 650;
-  line-height: 1.18;
-  text-wrap: balance;
-}
-
-.hero-copy {
-  max-width: 660px;
-  margin: 0;
-  padding-left: 16px;
-  border-left: 2px solid rgba(139, 175, 218, 0.5);
-  color: var(--muted);
-  font-size: 1.06rem;
-  line-height: 1.72;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 30px;
-}
-
-.app {
-  position: relative;
+/* Two-way switch, used for the screenshot's window style and layout. */
+.seg {
+  display: inline-flex;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-sm);
   overflow: hidden;
+}
+.seg button {
+  padding: 5px 12px;
+  color: var(--dim);
+  background: var(--panel);
+  border: 0;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.seg button + button { border-left: 1px solid var(--line-2); }
+.seg button:hover { color: var(--text); }
+.seg button.is-active {
+  color: var(--text);
+  background: var(--raised);
+}
+
+
+/* 5. Home page -------------------------------------------------------------- */
+
+.intro { padding: 56px 0 28px; }
+.intro h1 { max-width: 20em; }
+.intro-text {
+  max-width: 40em;
+  color: var(--muted);
+  font-size: 1.12rem;
+}
+.intro-meta {
+  margin-top: 14px;
+  color: var(--dim);
+  font-size: 0.92rem;
+}
+
+/* Screenshot plus the controls that pick which one is shown. */
+.shot { margin: 32px 0 0; }
+.shot-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: zoom-in;
+}
+.shot img,
+.device-shots img {
+  display: block;
+  width: 100%;
+  height: auto;
   background: var(--panel);
   border: 1px solid var(--line-2);
   border-radius: var(--radius);
-  box-shadow: var(--shadow), 0 0 70px rgba(139, 175, 218, 0.1);
 }
-.nick { font-weight: 700; }
-.n-1 { color: var(--n1); } .n-3 { color: var(--n3); }
-.user {
-  display: flex; align-items: center; gap: 7px;
-  padding: 4px 8px;
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: 0.8rem;
+.shot-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 22px;
+  margin-top: 14px;
 }
-.user::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--faint); flex: none; }
-.user.op { color: var(--text); }
-.user.op::before { content: "@"; width: auto; height: auto; border-radius: 0; background: none; color: var(--accent-bright); font-weight: 700; }
-
-/* ---------------------------------------------------------------- sections */
+.shot figcaption {
+  margin-top: 10px;
+  color: var(--dim);
+  font-size: 0.9rem;
+}
 
 .section {
-  width: min(1180px, calc(100% - 36px));
-  margin: 0 auto;
-  padding: clamp(60px, 8vw, 92px) 0;
-  scroll-margin-top: 88px;
+  padding: 48px 0;
+  border-top: 1px solid var(--line-soft);
 }
-
-.eyebrow {
-  margin: 0 0 14px;
-  color: var(--accent-bright);
-  font-family: var(--mono);
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-.eyebrow::before { content: "// "; color: var(--dim); }
-
-h2 {
-  margin-bottom: 14px;
-  font-family: var(--mono);
-  font-size: clamp(1.9rem, 4.6vw, 3.1rem);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-}
-
-.section-heading { max-width: 760px; margin-bottom: 34px; }
-.section-heading p, .lead {
+.intro + .section { border-top: 0; }
+.section > .wrap > h2 { margin-bottom: 0.6em; }
+.section-intro {
+  max-width: 44em;
   color: var(--muted);
-  font-size: 1.05rem;
-  line-height: 1.72;
 }
 
-/* platforms (desktop + mobile) */
-.platform-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 22px;
-  align-items: stretch;
+/* Tables: downloads, marketplace listing */
+.table-scroll { overflow-x: auto; }
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
 }
-.platform-desktop, .platform-mobile {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: clamp(22px, 3vw, 32px);
-  background: linear-gradient(160deg, rgba(139, 175, 218, 0.08), transparent 44%), var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-}
-.platform-card-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.platform-card-head h3 { margin: 0; font-family: var(--mono); font-size: 1.35rem; }
-
-/* Shot switches on the Desktop card: one per axis of the screenshot filename
-   (window chrome style, and layout mode). Segmented pills sharing the top-bar
-   .theme-select vocabulary so all three pickers read as one family. */
-.shot-controls {
-  display: flex; flex-wrap: wrap; align-items: center;
-  gap: 12px 26px;
-  margin-top: 18px;
-}
-.shot-toggle {
-  display: inline-flex; align-items: center; gap: 9px;
-  font-family: var(--mono); font-size: 0.72rem;
-}
-.shot-toggle-label { color: var(--dim); text-transform: uppercase; letter-spacing: 0.14em; white-space: nowrap; }
-.shot-toggle-label::before { content: "\25C8 "; color: var(--gold); }
-.shot-toggle-track {
-  display: inline-flex; align-items: center; gap: 2px;
-  padding: 3px;
-  background: color-mix(in srgb, var(--panel) 82%, transparent);
-  border: 1px solid var(--line-2);
-  border-radius: 999px;
-}
-.shot-toggle-btn {
-  margin: 0;
-  padding: 5px 14px;
-  color: var(--muted);
-  font-family: inherit; font-size: inherit; font-weight: 600; letter-spacing: 0.06em;
-  background: transparent;
-  border: 0;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: color 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
-}
-.shot-toggle-btn:hover { color: var(--text); }
-/* Active chip inverts to the theme's own text/ground pair rather than a --gold
-   tint: --gold is a desaturated grey-brown on the light themes, where a tint
-   reads as no state at all. text-on-bg is the theme's primary contrast, so it
-   stays legible across all 21. The gold stays as the halo. */
-.shot-toggle-btn.is-active {
-  color: var(--bg);
-  background: var(--text);
-  box-shadow: 0 0 12px color-mix(in srgb, var(--gold) 30%, transparent);
-}
-.shot-toggle-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 40%, transparent); }
-/* Two toggles no longer fit on one line: stack them so each keeps its label.
-   Dropping the labels instead would leave two unlabelled pill pairs. */
-@media (max-width: 620px) {
-  .shot-controls { flex-direction: column; align-items: flex-start; gap: 12px; }
-}
-.platform-desktop p, .platform-mobile p { margin: 0; color: var(--muted); font-size: 0.98rem; line-height: 1.68; }
-/* The etiquette line in the Mobile card: bold italic in the body ink, so it
-   reads as an aside without pulling a second color into the paragraph. */
-.platform-mobile .quip { font-weight: 700; font-style: italic; }
-/* thumbnail in the Desktop card; click opens it at native 2557px in the lightbox */
-.platform-shot { position: relative; margin-top: auto; }
-.platform-shot .client-preview-trigger { transition: transform 150ms ease; }
-.platform-shot .client-preview-trigger:hover { transform: translateY(-2px); }
-.desktop-screen { position: relative; display: block; }
-.desktop-screen img {
-  display: block; width: 100%; max-width: 100%; height: auto;
-  background: #06070c;
-  border: 1px solid var(--shot-edge);
-  border-radius: var(--radius-sm);
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42), 0 0 26px var(--shot-halo);
-}
-
-/* breathing room on both sides of the caption: the platform cards are unboxed
-   (padding:0 in the retro pass), so this margin is the only trailing space
-   under the shot. */
-.shot-caption {
-  margin: 20px 2px 18px;
-  color: var(--muted);
-  font-size: 0.86rem; line-height: 1.6;
-}
-.shot-caption code { color: var(--code-ink); font-size: 0.94em; }
-
-/* phone mock — mobile networks list (matches the SeraphIRC mobile app) */
-.phone {
-  align-self: center;
-  width: min(300px, 100%);
-  margin: 0 auto;
-  padding: 9px;
-  background: linear-gradient(180deg, #1b1c29, #0f1017);
-  border: 1px solid var(--shot-edge-device);
-  border-radius: 40px;
-  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.55), 0 0 22px var(--shot-halo),
-    inset 0 0 0 2px rgba(255, 255, 255, 0.02);
-}
-.phone-screen {
-  position: relative;
-  overflow: hidden;
-  background: #0a0b13;
-  border-radius: 31px;
-  aspect-ratio: 9 / 19.3;
-  display: flex;
-  flex-direction: column;
-}
-.status-dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
-.status-supported { background: var(--green); box-shadow: 0 0 10px rgba(97, 255, 202, 0.6); }
-.status-partial { background: var(--amber); box-shadow: 0 0 10px rgba(255, 202, 133, 0.5); }
-.compat-note {
-  margin: 0;
-  padding: 13px 18px;
-  color: var(--dim);
-  font-size: 0.84rem;
-  border-top: 1px solid var(--line);
-  background: rgba(20, 26, 43, 0.4);
-}
-
-/* commands — titled panels, one table per category. Multi-column
-   rather than a grid so the tall IRC/Operator panels pack against the
-   short ones instead of leaving a column of dead space. Every color
-   derives from the palette tokens, so all 21 themes carry it. */
-.command-grid { columns: 2; column-gap: 15px; }
-.command-category {
-  break-inside: avoid;
-  margin: 0 0 15px;
-  overflow: hidden;
-  background: color-mix(in srgb, var(--panel) 78%, transparent);
-  border: 1px solid var(--line-2);
-  border-radius: 3px;
-  box-shadow: 4px 4px 0 color-mix(in srgb, var(--accent) 10%, transparent);
-}
-.command-category h3 {
-  margin: 0;
-  padding: 12px 16px;
-  color: var(--text);
-  font-family: var(--mono);
-  font-size: 0.94rem;
-  letter-spacing: 0.02em;
-  background: color-mix(in srgb, var(--accent) 15%, transparent);
-  border-bottom: 1px solid var(--line-2);
-}
-.command-category h3::before { content: "\00bb "; color: var(--gold); }
-.command-category table { width: 100%; border-collapse: collapse; }
-.command-category th, .command-category td {
-  padding: 10px 16px;
-  border-bottom: 1px solid var(--line-soft);
+.table th,
+.table td {
+  padding: 10px 14px 10px 0;
   text-align: left;
   vertical-align: top;
+  border-bottom: 1px solid var(--line);
 }
-.command-category tr:last-child th, .command-category tr:last-child td { border-bottom: 0; }
-.command-category tr:nth-child(even) th, .command-category tr:nth-child(even) td {
-  background: color-mix(in srgb, var(--accent) 7%, transparent);
+.table th {
+  color: var(--dim);
+  font-size: 0.85rem;
+  font-weight: 600;
 }
-.command-category th { width: 46%; color: var(--text); font-size: 0.84rem; font-weight: 600; line-height: 1.45; }
-.command-category td { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
-.command-category code {
-  color: var(--code-ink);
-  font-family: var(--mono);
-  overflow-wrap: anywhere;
-}
-.commands-section .section-heading code {
-  color: var(--code-ink);
-  font-family: var(--mono);
-}
+.table td:first-child { font-weight: 600; white-space: nowrap; }
+.table .price { color: var(--dim); white-space: nowrap; }
 
-/* formatting — reuses the command panels, but these tables carry real
-   column headers and 3-4 columns, so the 46% first-column rule is dropped
-   and each panel scrolls sideways rather than collapsing to blocks. */
-.format-grid {
+.downloads { margin: 20px 0 16px; }
+.downloads .button { padding: 7px 14px; font-size: 0.92rem; }
+.downloads .files { color: var(--dim); }
+.small-print { color: var(--dim); font-size: 0.92rem; }
+
+/* Features */
+.feature-groups {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 15px;
+  gap: 0 48px;
+  margin-top: 24px;
+}
+.feature-group + .feature-group { margin-top: 20px; }
+.feature-group h3 {
+  margin: 12px 0 10px;
+  padding-bottom: 6px;
+  color: var(--gold);
+  border-bottom: 1px solid var(--line);
+  font-size: 1rem;
+}
+.feature-list { margin: 0 0 16px; }
+.feature-list dt { font-weight: 700; }
+.feature-list dd {
+  margin: 2px 0 14px;
+  color: var(--muted);
+}
+
+/* Mobile */
+.mobile-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 40px;
   align-items: start;
 }
-.format-grid .command-category { margin: 0; }
-.format-grid .table-scroll { overflow-x: auto; }
-.format-grid thead th {
+.device-shots {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
+.device-shots .shot-button { width: auto; }
+.device-shots .tablet img { width: 300px; }
+.device-shots .phone img { width: 196px; border-radius: 14px; }
+
+/* News */
+.post {
+  max-width: 46em;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.post:first-of-type { padding-top: 8px; }
+.post h3 {
+  margin-bottom: 2px;
+  font-size: 1.2rem;
+}
+.post-meta {
+  margin: 0 0 10px;
   color: var(--dim);
-  font-family: var(--mono);
-  font-size: 0.72rem;
+  font-size: 0.88rem;
+}
+.post p { color: var(--muted); }
+.post .post-where {
+  color: var(--dim);
+  font-size: 0.9rem;
+}
+.older-news { max-width: 46em; margin-top: 18px; }
+.older-news > summary,
+.show-all {
+  color: var(--accent);
+  cursor: pointer;
   font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  background: color-mix(in srgb, var(--accent) 4%, transparent);
 }
-.format-grid th, .format-grid td { width: auto; }
-.format-grid tbody th { color: var(--text); font-size: 0.86rem; }
-.format-grid td { white-space: nowrap; }
-.format-grid td.na { color: var(--dim); }
-.format-grid .compat-note { border-top: 1px solid var(--line-2); }
-.format-grid .compat-note code { font-size: 0.8rem; }
-.swatch {
-  display: inline-block;
-  width: 11px; height: 11px;
-  margin-right: 8px;
-  vertical-align: -1px;
-  background: var(--sw);
-  border: 1px solid var(--line-2);
-  border-radius: 2px;
-}
-/* .punchlist's `margin: 0` is declared later in this file, so this needs the
-   extra specificity to keep the notes off the bottom of the taller panel. */
-.formatting-section .format-notes { margin-top: 44px; }
-@media (max-width: 900px) { .format-grid { grid-template-columns: minmax(0, 1fr); } }
+.older-news > summary:hover { color: var(--accent-bright); }
+.older-news[open] > summary { margin-bottom: 4px; }
 
-/* ---------------------------------------------------------------- lightbox */
-
-.client-preview { margin: 0; }
-.client-preview-trigger {
-  display: block; width: 100%; padding: 0;
-  background: transparent; border: 0; cursor: zoom-in; color: inherit;
+/* Changelog */
+.releases { max-width: 50em; margin-top: 20px; }
+.release { border-bottom: 1px solid var(--line-soft); }
+.release > summary {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 9px 0;
+  cursor: pointer;
+  list-style: none;
 }
-.client-preview-trigger:focus-visible { outline: 3px solid rgba(193, 218, 245, 0.8); outline-offset: 4px; }
-/* The dialog is sized so the shot fits BOTH axes: width is capped by the
-   viewport as before, and also by what the height budget allows at the
-   shot's own aspect ratio. The image then fills the dialog exactly — no
-   scrollbars to pan with, and no letterbox bars either, because the box
-   is never wider than the picture it holds. --lightbox-aspect is width
-   over height of the source image; the 999 default is a no-op for
-   lightboxes that hold markup rather than a photo (the theme preview). */
+.release > summary::-webkit-details-marker { display: none; }
+.release > summary::before {
+  content: "+";
+  width: 1em;
+  color: var(--faint);
+  font-family: var(--mono);
+}
+.release[open] > summary::before { content: "\2212"; }
+.release-version {
+  min-width: 4.5em;
+  font-family: var(--mono);
+  font-weight: 700;
+}
+.release > summary time { color: var(--dim); font-size: 0.9rem; }
+.release > summary:hover .release-version { color: var(--accent-bright); }
+.release ul {
+  margin: 0 0 16px;
+  padding-left: 2.2em;
+  color: var(--muted);
+}
+.release li { margin-bottom: 6px; }
+.release li b { color: var(--text); }
+.release[hidden] { display: none; }
+.show-all {
+  margin-top: 16px;
+  padding: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-weight: 600;
+}
+.show-all:hover { color: var(--accent-bright); }
+
+/* IRCv3 */
+.cap-list {
+  columns: 3 15em;
+  column-gap: 32px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.cap-list li {
+  padding: 3px 0;
+  break-inside: avoid;
+  font-size: 0.95rem;
+}
+.cap-list a { text-decoration: none; }
+.cap-list a code { color: var(--accent); }
+.cap-list a:hover,
+.cap-list a:hover code { color: var(--accent-bright); text-decoration: underline; }
+.cap-list .partial::after {
+  content: " (partial)";
+  color: var(--faint);
+  font-size: 0.85rem;
+}
+
+/* Contact */
+.contact-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px 40px;
+  margin: 20px 0 0;
+}
+.contact-list dt { font-weight: 700; }
+.contact-list dd { margin: 2px 0 0; color: var(--muted); }
+
+
+/* 6. Lightbox ------------------------------------------------------------------ */
+
+/* Sized so the picture fits both axes at its own aspect ratio, which leaves
+   no scrollbars and no letterboxing. --lightbox-aspect is width / height. */
 .image-lightbox {
   width: min(
     var(--lightbox-image-width, 1120px),
@@ -607,1034 +517,104 @@ h2 {
   padding: 0;
   overflow: hidden;
   color: var(--text);
-  background: #06070c;
-  /* the theme's signature edge, same one the thumbnails carry */
-  border: 1px solid var(--shot-edge);
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
 }
-/* native width of the desktop shots (2559 x 1572). Where a theme's shot
-   differs by a pixel or two, the aspect below is the TALLEST of the set:
-   erring tall leaves a hair of slack rather than a scrollbar. */
+.image-lightbox::backdrop { background: rgba(4, 6, 12, 0.85); }
 .interface-lightbox { --lightbox-image-width: 2560px; --lightbox-aspect: 1.6327; }
-.image-lightbox::backdrop { background: rgba(2, 2, 8, 0.86); backdrop-filter: blur(10px); }
-.image-lightbox form { position: absolute; top: 14px; right: 14px; z-index: 2; margin: 0; }
+.tablet-lightbox { --lightbox-image-width: 1640px; --lightbox-aspect: 0.7143; }
+.mobile-lightbox { --lightbox-image-width: 1290px; --lightbox-aspect: 0.483; }
+
+.image-lightbox form { position: absolute; top: 12px; right: 12px; z-index: 2; margin: 0; }
 .lightbox-close {
   position: relative;
-  width: 42px; height: 42px; padding: 0;
-  cursor: pointer;
-  background: rgba(25, 32, 53, 0.82);
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: var(--panel);
   border: 1px solid var(--line-2);
-  border-radius: 50%;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
 }
-.lightbox-close::before, .lightbox-close::after {
-  position: absolute; top: 19px; left: 11px;
-  width: 18px; height: 2px;
-  content: ""; background: #f2eeff; border-radius: 999px;
+.lightbox-close::before,
+.lightbox-close::after {
+  position: absolute;
+  top: 16px;
+  left: 9px;
+  width: 16px;
+  height: 2px;
+  content: "";
+  background: var(--text);
 }
 .lightbox-close::before { transform: rotate(45deg); }
 .lightbox-close::after { transform: rotate(-45deg); }
-.lightbox-close:hover, .lightbox-close:focus-visible { border-color: var(--accent); }
+.lightbox-close:hover { background: var(--raised); }
 .lightbox-frame { width: 100%; max-height: calc(100vh - 32px); overflow: hidden; }
-/* Fills the dialog, which is already sized to fit. Downscaling a 2557px
-   shot to the box keeps it sharp; it never gets scaled up past native. */
-.lightbox-frame img {
-  display: block; width: 100%; max-width: 100%; height: auto;
-  cursor: zoom-out;
-}
+.lightbox-frame img { display: block; width: 100%; height: auto; cursor: zoom-out; }
 
-/* ---------------------------------------------------------------- footer */
 
-.site-footer {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
-  gap: 10px 16px;
-  width: min(1180px, calc(100% - 36px));
-  margin: 0 auto;
-  padding: 34px 0 48px;
-  color: var(--muted);
-  border-top: 1px solid var(--line);
-}
-.site-footer .seraph-mark { width: 24px; height: 24px; filter: drop-shadow(0 0 6px color-mix(in srgb, var(--mark-1) 40%, transparent)); }
-.site-footer strong { color: var(--text); font-family: var(--mono); letter-spacing: 0.08em; }
-.site-footer a { color: var(--accent-bright); font-family: var(--mono); font-size: 0.9rem; }
+/* 7. Plain content pages -------------------------------------------------------- */
 
-/* ---------------------------------------------------------------- responsive */
+.page { padding: 48px 0 24px; }
+.page-head { margin-bottom: 28px; }
+.page-head p { max-width: 44em; color: var(--muted); }
+.page-meta { color: var(--dim); font-size: 0.92rem; }
 
-@media (max-width: 900px) {
-  .platform-grid { grid-template-columns: 1fr; }
-  .command-grid { columns: 1; }
+.prose { max-width: 44em; }
+.prose h2 {
+  margin: 36px 0 10px;
+  font-size: 1.3rem;
 }
+.prose p,
+.prose li { color: var(--muted); }
+.prose li { margin-bottom: 6px; }
+.prose li b { color: var(--text); }
 
-@media (max-width: 760px) {
-  html { scroll-padding-top: 130px; }
-  .section { scroll-margin-top: 130px; }
-  .site-header {
-    position: sticky;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-    width: 100%;
-    padding: 12px 16px;
-    /* The sticky .topbar behind this already paints the ground, and it is
-       the element the theme picker recolors — a background here would pin
-       the mobile bar to Seraph navy on every other theme. */
-    background: transparent;
-    border-bottom: 1px solid var(--line);
-  }
-  .header-cta { display: none; }
-}
 
-@media (max-width: 560px) {
-  .hero-actions { flex-direction: column; align-items: stretch; }
-  .button { width: 100%; }
-  .command-category table, .command-category tbody, .command-category tr,
-  .command-category th, .command-category td { display: block; width: 100%; }
-  .command-category tr { padding: 12px 16px; border-bottom: 1px solid var(--line-soft); }
-  .command-category tr:last-child { border-bottom: 0; }
-  .command-category th, .command-category td { padding: 0; border-bottom: 0; }
-  .command-category td { margin-top: 5px; }
-  /* the formatting tables keep their column headers and scroll instead */
-  .format-grid table, .format-grid thead, .format-grid tbody { display: revert; width: 100%; }
-  .format-grid tr { display: table-row; padding: 0; border-bottom: 0; }
-  .format-grid th, .format-grid td { display: table-cell; width: auto; margin-top: 0; padding: 9px 14px; border-bottom: 1px solid var(--line-soft); }
-  .format-grid tr:last-child th, .format-grid tr:last-child td { border-bottom: 0; }
-  .site-footer { flex-direction: column; align-items: flex-start; }
-}
+/* 8. Themes ------------------------------------------------------------------ */
 
-@media (max-width: 900px), (max-height: 560px) {
-  /* Same fit-both-axes sizing on a tighter margin. Height is left to the
-     image so a portrait shot keeps the dialog wrapped around it instead
-     of stranding it between two black bars.
-     `fit-content`, NOT `auto`: a dialog is positioned absolutely with both
-     top and bottom set, so `height: auto` over-constrains and stretches the
-     box to the full max-height, stranding the shot in a tall empty frame. */
-  .image-lightbox {
-    width: min(calc(100vw - 20px), calc((100vh - 28px) * var(--lightbox-aspect, 999)));
-    height: fit-content;
-    max-height: calc(100vh - 20px);
-  }
-  .image-lightbox form { top: 10px; right: 10px; }
-  .lightbox-frame { width: 100%; max-height: none; overflow: hidden; }
-  .lightbox-frame img { width: 100%; max-width: 100%; height: auto; }
-}
+/* Seraph is the :root palette above. Every other theme sets a handful of
+   seed colors taken from the desktop client, and one shared rule derives
+   the rest of the palette from them. */
 
-/* The desktop shot is 2560px of landscape UI. Fitting its whole width onto a
-   phone leaves it under 400px wide and unreadable, so on narrow screens it
-   opens at full viewport height and pans sideways instead. The portrait
-   phone/tablet shots fit whole at that width, so they keep the rule above. */
-@media (max-width: 760px) {
-  .interface-lightbox { width: calc(100vw - 20px); }
-  .interface-lightbox .lightbox-frame {
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-  }
-  .interface-lightbox .lightbox-frame img {
-    width: auto; max-width: none;
-    height: min(calc(100vh - 24px), 1568px);
-  }
-}
+html[data-theme='nebula']          { --sd-bg:#050914; --sd-deep:#04030a; --sd-text:#dce2ee; --sd-accent:#67e8f9; --sd-glow:#a855f7; --sd-sw:#d8b4fe; --sd-sc:#67e8f9; }
+html[data-theme='dim']             { --sd-bg:#0f1726; --sd-deep:#0c1321; --sd-text:#d8deea; --sd-accent:#7fc7ff; --sd-glow:#9b6cff; --sd-sw:#b998ff; --sd-sc:#7fc7ff; }
+html[data-theme='monokai']         { --sd-bg:#272822; --sd-deep:#22231d; --sd-text:#eeeee4; --sd-accent:#66d9ef; --sd-glow:#ae81ff; --sd-sw:#e6db74; --sd-sc:#66d9ef; }
+html[data-theme='dracula']         { --sd-bg:#282a36; --sd-deep:#232530; --sd-text:#f0f0ea; --sd-accent:#8be9fd; --sd-glow:#bd93f9; --sd-sw:#ff79c6; --sd-sc:#8be9fd; }
+html[data-theme='funky-fresh']     { --sd-bg:#1e1726; --sd-deep:#17111f; --sd-text:#f0eafd; --sd-accent:#36c5f0; --sd-glow:#a970ff; --sd-sw:#ecb22e; --sd-sc:#36c5f0; }
+html[data-theme='gruvbox']         { --sd-bg:#282828; --sd-deep:#242424; --sd-text:#ebdbb2; --sd-accent:#83a598; --sd-glow:#d79921; --sd-sw:#fabd2f; --sd-sc:#83a598; }
+html[data-theme='tokyo-night']     { --sd-bg:#1a1b26; --sd-deep:#161722; --sd-text:#c0caf5; --sd-accent:#7dcfff; --sd-glow:#7aa2f7; --sd-sw:#bb9af7; --sd-sc:#7dcfff; }
+html[data-theme='nord']            { --sd-bg:#2e3440; --sd-deep:#29303b; --sd-text:#eceff4; --sd-accent:#81a1c1; --sd-glow:#88c0d0; --sd-sw:#ebcb8b; --sd-sc:#88c0d0; }
+html[data-theme='catppuccin']      { --sd-bg:#1e1e2e; --sd-deep:#1a1a28; --sd-text:#cdd6f4; --sd-accent:#89dceb; --sd-glow:#b4befe; --sd-sw:#f9e2af; --sd-sc:#89dceb; }
+html[data-theme='miami-nights']    { --sd-bg:#150a2e; --sd-deep:#0d0221; --sd-text:#e8d8ff; --sd-accent:#00e5ff; --sd-glow:#ff2fb9; --sd-sw:#f9c80e; --sd-sc:#00e5ff; }
+html[data-theme='aura']            { --sd-bg:#15141d; --sd-deep:#100f17; --sd-text:#e8e5ee; --sd-accent:#82e2ff; --sd-glow:#a277ff; --sd-sw:#ffca85; --sd-sc:#82e2ff; }
+html[data-theme='hackerman']       { --sd-bg:#020902; --sd-deep:#010401; --sd-text:#c9f7cd; --sd-accent:#00ffd0; --sd-glow:#39ff14; --sd-sw:#b9ffab; --sd-sc:#00ffd0; }
+html[data-theme='phoenix']         { --sd-bg:#121a29; --sd-deep:#0e1420; --sd-text:#dbe2ee; --sd-accent:#ff9e4f; --sd-glow:#ff6b1a; --sd-sw:#ffc466; --sd-sc:#ff6040; }
+html[data-theme='solarized-dark']  { --sd-bg:#002b36; --sd-deep:#00242d; --sd-text:#eee8d5; --sd-accent:#2aa198; --sd-glow:#268bd2; --sd-sw:#b58900; --sd-sc:#2aa198; }
+html[data-theme='ocean-breeze']    { color-scheme: light; --sd-bg:#e8f2fb; --sd-deep:#d3e5f4; --sd-text:#223c50; --sd-accent:#2f78b4; --sd-glow:#e0a51c; --sd-sw:#d69e10; --sd-sc:#2aa7bd; }
+html[data-theme='solarized-light'] { color-scheme: light; --sd-bg:#fdf6e3; --sd-deep:#eee8d5; --sd-text:#073642; --sd-accent:#268bd2; --sd-glow:#b58900; --sd-sw:#b58900; --sd-sc:#268bd2; }
+html[data-theme='light']           { color-scheme: light; --sd-bg:#fafcff; --sd-deep:#e9eff8; --sd-text:#17202f; --sd-accent:#2563eb; --sd-glow:#1d4ed8; --sd-sw:#2563eb; --sd-sc:#0891b2; }
+html[data-theme='sage']            { color-scheme: light; --sd-bg:#f8faf5; --sd-deep:#eef1e9; --sd-text:#35402f; --sd-accent:#4a7340; --sd-glow:#6b8f5e; --sd-sw:#9e9244; --sd-sc:#3f7d6a; }
+html[data-theme='sakura']          { color-scheme: light; --sd-bg:#fffbfa; --sd-deep:#fbeff0; --sd-text:#4a3b3f; --sd-accent:#b0567d; --sd-glow:#c2185b; --sd-sw:#e282a8; --sd-sc:#7b5aa6; }
+html[data-theme='newsprint']       { color-scheme: light; --sd-bg:#f4f2ee; --sd-deep:#e8e6e1; --sd-text:#21201d; --sd-accent:#21201d; --sd-glow:#8a8172; --sd-sw:#7a6c58; --sd-sc:#585e68; }
 
-/* ============================================================
-   WEB 1.5 THEME LAYER (2026) — neo-retro chrome over the base.
-   Retro lives in the site chrome; the client screenshots stay modern.
-   ============================================================ */
-
-/* starfield ground (replaces the grid texture) */
-body {
-  background:
-    radial-gradient(1px 1px at 18% 24%, rgba(193, 218, 245, 0.55), transparent),
-    radial-gradient(1px 1px at 74% 60%, rgba(130, 226, 255, 0.45), transparent),
-    radial-gradient(1.3px 1.3px at 46% 84%, rgba(255, 255, 255, 0.4), transparent),
-    radial-gradient(1px 1px at 86% 30%, rgba(249, 227, 154, 0.4), transparent),
-    radial-gradient(1px 1px at 30% 62%, rgba(255, 255, 255, 0.3), transparent),
-    linear-gradient(180deg, #1c2338, #192035 60%, #141a2b);
-  background-size: 240px 240px, 280px 280px, 220px 220px, 260px 260px, 200px 200px, 100% 100%;
-}
-body::before { display: none; }
-
-/* header */
-.brand { letter-spacing: 0.12em; }
-.brand > span:last-child {
-  background: linear-gradient(90deg, var(--accent-bright), var(--gold-bright));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.header-cta { border-radius: 8px; box-shadow: 4px 4px 0 var(--accent-deep); }
-.header-cta:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--accent-deep); }
-
-/* retro offset-shadow buttons */
-.button { border-radius: 8px; }
-.button-primary { box-shadow: 5px 5px 0 var(--accent-deep); }
-.button-primary:hover { transform: translate(-1px, -1px); box-shadow: 6px 6px 0 var(--accent-deep); }
-.button-primary:active { transform: translate(3px, 3px); box-shadow: 2px 2px 0 var(--accent-deep); }
-.button-secondary { box-shadow: 5px 5px 0 rgba(139, 175, 218, 0.14); }
-.button-secondary:hover { transform: translate(-1px, -1px); box-shadow: 6px 6px 0 rgba(139, 175, 218, 0.24); }
-/* Windows button stays Fluent, not retro */
-.button-windows { border-radius: 2px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35); }
-.button-windows:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4); }
-
-/* eyebrow marker */
-.eyebrow::before { content: "\00bb "; color: var(--gold-bright); }
-
-/* hero becomes a centered showpiece with a gradient wordmark */
-.hero-head { margin-left: auto; margin-right: auto; text-align: center; }
-#hero-title {
-  background: linear-gradient(180deg, #fdfcff, var(--accent-bright) 60%, #2f6fed);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 3px 18px rgba(139, 175, 218, 0.4));
-}
-#hero-title .caret { filter: none; }
-.hero-subheadline { margin-left: auto; margin-right: auto; }
-.hero-copy { margin-left: auto; margin-right: auto; padding-left: 0; border-left: 0; }
-.hero-actions { justify-content: center; }
-.nav-marq {
-  position: relative; overflow: hidden; white-space: nowrap; cursor: pointer;
-  padding: 12px 0;
-  background: rgba(139, 175, 218, 0.06);
-  border-top: 1px solid rgba(139, 175, 218, 0.28);
-  border-bottom: 1px solid rgba(139, 175, 218, 0.28);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-}
-.nav-run { display: inline-block; font-family: var(--mono); font-size: 14px; animation: marquee 34s linear infinite; }
-.nav-marq:hover .nav-run,
-.nav-marq:focus-within .nav-run,
-.nav-marq.paused .nav-run { animation-play-state: paused; }
-.nav-run a { color: var(--muted); margin: 0 20px; padding: 4px 2px; border-bottom: 2px solid transparent; }
-.nav-run a:hover, .nav-run a:focus-visible { color: var(--cyan); border-color: var(--cyan); outline: none; }
-.nav-run .sep { color: var(--accent-deep); margin: 0 2px; }
-.nav-marq.paused::after {
-  content: "\275A\275A paused \2014 click to resume";
-  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-  font-family: var(--mono); font-size: 10px; color: var(--faint);
-  background: rgba(20, 26, 43, 0.85); padding: 2px 8px; border-radius: 4px;
-}
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-/* dependable faded links */
-.faded { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 2px; padding: 12px 0 2px; font-family: var(--mono); font-size: 12px; }
-.faded a { color: var(--dim); padding: 3px 10px; border-radius: 5px; }
-.faded a:hover, .faded a:focus-visible { color: var(--text); background: rgba(139, 175, 218, 0.12); outline: none; }
-.faded .d { color: var(--faint); }
-
-/* contact section email links */
-#contact a, #contact a b { color: var(--gold); border-bottom: 1px solid rgba(243, 211, 114, 0.4); }
-#contact a b { border-bottom: 0; }
-#contact li > b { color: var(--gold); }
-#contact a:hover, #contact a:hover b,
-#contact a:focus-visible, #contact a:focus-visible b { color: var(--gold-bright); border-bottom-color: var(--gold-bright); outline: none; }
-
-/* ---- footer: link row + hit counter ---- */
-.site-footer { flex-direction: column; align-items: center; gap: 22px; padding-top: 40px; }
-
-/* The chips themselves are drawn in the FOOTER PASS further down. */
-.foot-links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-
-.foot-brand { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 14px; }
-.foot-brand span { color: var(--muted); }
-.foot-meta { font-family: var(--mono); font-size: 11px; color: var(--dim); text-align: center; line-height: 1.8; }
-.foot-meta .counter { display: inline-flex; gap: 2px; vertical-align: -2px; margin: 0 4px; }
-.foot-meta .counter b {
-  background: #000; color: var(--green); border: 1px solid var(--accent-deep);
-  padding: 1px 4px; border-radius: 3px; font-weight: 700; text-shadow: 0 0 5px rgba(97, 255, 202, 0.5);
-}
-
-@media (max-width: 560px) {
-  .site-footer { align-items: center; }
-}
-/* real mobile screenshot inside the phone frame (replaces the CSS mockup) */
-.phone-shot { position: relative; }
-.phone-shot .client-preview-trigger { border-radius: 31px; transition: transform 150ms ease; }
-.phone-shot .client-preview-trigger:hover { transform: translateY(-2px); }
-.phone-shot .phone-screen { position: relative; display: block; aspect-ratio: auto; }
-.phone-shot .phone-screen img { display: block; width: 100%; height: auto; }
-.phone-shot .enlarge-hint {
-  position: absolute; right: 10px; bottom: 10px;
-  font-family: var(--mono); font-size: 10.5px; color: var(--text);
-  background: rgba(20, 26, 43, 0.72); border: 1px solid var(--line-2); border-radius: 6px;
-  padding: 3px 8px; opacity: 0; transition: opacity 150ms ease; pointer-events: none;
-}
-.phone-shot .client-preview-trigger:hover .enlarge-hint,
-.phone-shot .client-preview-trigger:focus-visible .enlarge-hint { opacity: 1; }
-.mobile-lightbox { --lightbox-image-width: 460px; --lightbox-aspect: 0.4829; } /* 1290 x up to 2671 */
-
-/* fix: the mobile screenshot's intrinsic width was expanding the Mobile
-   column and collapsing the Desktop column — let cells honor the fr ratio */
-.platform-desktop, .platform-mobile { min-width: 0; }
-.phone-shot img { max-width: 100%; }
-
-/* keep the two header CTAs from squeezing; wrap to a new line if tight */
-.site-header { flex-wrap: wrap; row-gap: 10px; }
-.header-cta { white-space: nowrap; flex: none; }
-
-/* mobile fix: gradient-clipped wordmarks rendered invisible/near-black on
-   iOS WebKit — a `filter` on a background-clip:text element breaks the fill.
-   Drop the filter, use -webkit-text-fill-color, and give a solid fallback. */
-#hero-title {
-  color: var(--accent-bright);
-  -webkit-text-fill-color: transparent;
-  filter: none;
-}
-#hero-title .caret { -webkit-text-fill-color: var(--accent-bright); }
-.brand > span:last-child {
-  color: var(--accent-bright);
-  -webkit-text-fill-color: transparent;
-}
-
-/* ============================================================
-   WORDMARKS: solid color (background-clip:text is unreliable on
-   iOS WebKit — it rendered as a bar / near-black). Bulletproof.
-   ============================================================ */
-#hero-title {
-  background: none;
-  -webkit-background-clip: border-box;
-  background-clip: border-box;
-  -webkit-text-fill-color: currentColor;
-  color: #cdb4ff;
-  text-shadow: 0 2px 18px rgba(139, 175, 218, 0.25);
-  filter: none;
-}
-#hero-title .caret { -webkit-text-fill-color: var(--accent-bright); background: var(--accent-bright); }
-.brand > span:last-child {
-  background: none;
-  -webkit-background-clip: border-box;
-  background-clip: border-box;
-  -webkit-text-fill-color: currentColor;
-  color: var(--accent-bright);
-}
-
-/* ============================================================
-   RETRO PASS: drop the soft "SaaS card" look — flat dark panels,
-   hard-ish edges, offset solid shadows, box-drawing accents.
-   ============================================================ */
-.platform-desktop, .platform-mobile {
-  border-radius: 3px;
-  background: var(--panel);
-  border: 1px solid rgba(139, 175, 218, 0.3);
-}
-.platform-desktop, .platform-mobile {
-  box-shadow: 5px 5px 0 rgba(139, 175, 218, 0.1);
-}
-/* dashed box-drawing rule under section headings */
-.section-heading h2::after {
-  content: "";
-  display: block;
-  width: 72px; height: 3px; margin-top: 16px;
-  background: repeating-linear-gradient(90deg, var(--accent) 0 8px, transparent 8px 13px);
-}
-/* hard-edge the panel titlebars/legends to match */
-.compat-note { border-radius: 0; }
-
-/* ============================================================
-   90s PASS: beveled panels + title bars (kills the "bootstrap card")
-   Raised bevel = light top/left, dark bottom/right. Hard corners.
-   ============================================================ */
-.platform-desktop, .platform-mobile {
-  border-radius: 0;
-  background: #192035;
-  border-top: 2px solid rgba(184, 164, 255, 0.45);
-  border-left: 2px solid rgba(184, 164, 255, 0.45);
-  border-right: 2px solid #050409;
-  border-bottom: 2px solid #050409;
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
-}
-
-/* chunkier retro divider under section headings */
-.section-heading h2::after {
-  width: 100%;
-  max-width: 340px;
-  height: 6px;
-  background:
-    repeating-linear-gradient(90deg, var(--accent) 0 10px, transparent 10px 10px),
-    linear-gradient(var(--accent-deep), var(--accent-deep));
-  background-size: 100% 2px, 100% 2px;
-  background-position: 0 0, 0 5px;
-  background-repeat: repeat-x;
-}
-
-/* ============================================================
-   FIXED TOP NAV: header + marquee + links stay put while scrolling,
-   so any section is reachable from anywhere on the page.
-   ============================================================ */
-.topbar {
-  position: sticky; top: 0; z-index: 60;
-  background: rgba(25, 32, 53, 0.93);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(139, 175, 218, 0.3);
-}
-.site-header { position: static; backdrop-filter: none; }
-.topnav { width: min(1280px, calc(100% - 36px)); margin: 0 auto; padding: 0 0 8px; }
-.topnav .nav-marq { margin: 0; padding: 9px 0; }
-.topnav .faded { padding: 8px 0 2px; }
-/* Keep anchored sections clear of the fixed bar. The bar's rows wrap at
-   several widths, so its height is not a step function of the breakpoints —
-   a script publishes the measured height as --bar-h and this spends it. The
-   per-breakpoint fallbacks are the measured heights and carry the no-JS case. */
-:root { --bar-fallback: 148px; }
-@media (max-width: 1000px) { :root { --bar-fallback: 212px; } }
-@media (max-width: 760px)  { :root { --bar-fallback: 279px; } }
-@media (max-width: 460px)  { :root { --bar-fallback: 307px; } }
-html     { scroll-padding-top: calc(var(--bar-h, var(--bar-fallback)) + 10px); }
-.section { scroll-margin-top:  calc(var(--bar-h, var(--bar-fallback)) + 10px); }
-/* faded links stay visible on mobile too (per request) */
-.topnav .faded { display: flex; }
-
-/* marquee row in the sticky bar */
-.marqrow { display: flex; align-items: center; gap: 12px; }
-.marqrow .nav-marq { flex: 1; min-width: 0; }
-
-/* pinned download buttons: centered on the header row between the brand and
-   the theme picker, so they ride the sticky bar and stay reachable from
-   anywhere on the page (moved up from the Apps section). Sized to the
-   brand's own height so the row — and the marquee under it — never shifts. */
-.nav-dl-group { display: flex; justify-content: center; align-items: center; gap: 10px; }
-.nav-dl {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  min-height: 26px;
-  padding: 0 12px;
-  font-family: var(--mono);
-  font-size: 11.5px;
-  font-weight: 700;
-  white-space: nowrap;
-  border-radius: var(--radius-sm);
-  transition: transform 150ms ease, background 150ms ease;
-}
-.nav-dl:hover { transform: translateY(-1px); }
-.nav-dl .button-os-logos { gap: 6px; }
-.nav-dl .button-os-logo { width: 14px; height: 14px; }
-.nav-dl-primary { color: #0a0812; background: var(--gold); }
-.nav-dl-primary:hover { background: var(--gold-bright); }
-.nav-dl-primary:focus-visible { outline: 3px solid rgba(243, 211, 114, 0.8); outline-offset: 2px; }
-/* Windows button keeps its Fluent type and blue, but shares the corner
-   radius of its neighbor so the pair reads as one control */
-.nav-dl-windows {
-  color: #ffffff;
-  background: #0067b8;
-  font-family: "Segoe UI", "Segoe UI Variable", system-ui, -apple-system, sans-serif;
-  font-weight: 600;
-}
-.nav-dl-windows .button-windows-logo { width: 14px; height: 14px; }
-.nav-dl-windows:hover { background: #005da6; }
-.nav-dl-windows:focus-visible { outline: 3px solid rgba(0, 103, 184, 0.55); outline-offset: 2px; }
-/* mobile app takes the theme's accent, the way its neighbor takes the gold.
-   Ink is --bg rather than a fixed near-black: the light themes seed a dark
-   accent and a pale ground, so the pairing stays legible in both directions. */
-.nav-dl-mobile { color: var(--bg); background: var(--accent); }
-.nav-dl-mobile:hover { background: var(--accent-bright); }
-.nav-dl-mobile:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--accent) 80%, transparent);
-  outline-offset: 2px;
-}
-/* the tip jar keeps Buy Me a Coffee's brand yellow, the way the Windows
-   button keeps its Fluent blue, so it reads as the service it links to */
-.nav-dl-coffee { color: #0d0c22; background: #ffdd00; }
-.nav-dl-coffee:hover { background: #ffe94d; }
-.nav-dl-coffee:focus-visible { outline: 3px solid rgba(255, 221, 0, 0.6); outline-offset: 2px; }
-/* the header stacks to a column here, so the buttons take their own row and
-   line up with the brand and theme picker above them */
-@media (max-width: 760px) {
-  .nav-dl-group { order: 3; justify-content: flex-start; flex-wrap: wrap; }
-}
-/* small phones: drop the "for <platform>" wording, the logos carry it,
-   and the tip jar shrinks to the coffee cup alone */
-@media (max-width: 520px) {
-  .nav-dl-os { display: none; }
-  .nav-dl-coffee .nav-dl-coffee-text { display: none; }
-  .nav-dl-coffee { padding: 0 9px; }
-}
-
-/* ============================================================
-   DARK, NO STARFIELD (2026-07-11) — Aura dark stays, the star
-   dots go; punchlists replace the feature/bouncer card grids.
-   ============================================================ */
-body {
-  background: linear-gradient(180deg, #1c2338, #192035 60%, #141a2b);
-  background-size: 100% 100%;
-}
-
-/* 90s punchlist (square bullets, two columns) */
-.punchlist {
-  margin: 0;
-  padding-left: 24px;
-  list-style: square;
-  columns: 2;
-  column-gap: 56px;
-}
-.punchlist-1 { columns: 1; max-width: 760px; }
-.punchlist li {
-  margin-bottom: 14px;
-  padding-left: 4px;
-  break-inside: avoid;
-  color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.65;
-}
-.punchlist li::marker { color: var(--accent); }
-.punchlist li b { color: var(--text); }
-@media (max-width: 760px) { .punchlist { columns: 1; } }
-
-/* platform columns: no window box; the grid keeps Desktop/Mobile aligned */
-.platform-desktop, .platform-mobile {
-  padding: 0;
-  background: none;
-  border: 0;
-  box-shadow: none;
-}
-.platform-grid { gap: clamp(28px, 4vw, 56px); }
-
-/* IRCv3 capabilities: grouped punchlists instead of the boxed table */
-.cap-groups { display: grid; gap: 36px; }
-.cap-head {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0 0 16px;
-  font-family: var(--mono);
-  font-size: 1.1rem;
-}
-.cap-count { color: var(--dim); font-size: 0.85em; font-weight: 400; }
-.cap-list { columns: 3; column-gap: 48px; }
-.cap-list li { margin-bottom: 9px; }
-.cap-list li::marker { color: var(--green); }
-.cap-group-partial .cap-list li::marker { color: var(--amber); }
-.cap-list code { color: var(--accent-bright); font-size: 0.92rem; overflow-wrap: anywhere; }
-.cap-groups .compat-note {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: none;
-}
-@media (max-width: 900px) { .cap-list { columns: 2; } }
-@media (max-width: 560px) { .cap-list { columns: 1; } }
-
-/* hero: logo art carries the identity, wordmark goes quiet */
-.hero-mark { margin: 0 0 20px; }
-.hero-mark .seraph-mark {
-  width: clamp(88px, 12vw, 140px);
-  height: auto;
-  filter: drop-shadow(0 6px 20px color-mix(in srgb, var(--mark-1) 30%, transparent));
-}
-#hero-title {
-  color: #c6c0d8;
-  font-size: clamp(2.5rem, 6.5vw, 4.4rem);
-  text-shadow: none;
-}
-#hero-title .caret {
-  background: var(--accent);
-  -webkit-text-fill-color: var(--accent);
-}
-
-/* footer: same band as the sticky header */
-.site-footer {
-  width: 100%;
-  margin: 64px 0 0;
-  padding: 42px 18px 48px;
-  background: rgba(25, 32, 53, 0.93);
-  border-top: 1px solid rgba(139, 175, 218, 0.3);
-}
-
-/* faint terminal grid behind the main content only (header/footer stay clean) */
-main { position: relative; }
-main::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    linear-gradient(rgba(139, 175, 218, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(139, 175, 218, 0.05) 1px, transparent 1px);
-  background-size: 46px 46px;
-  -webkit-mask-image: linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
-  mask-image: linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
-}
-
-/* ============================================================
-   CELESTIAL PASS (2026-07-12) — matches the desktop client's new
-   celestial flagship theme: night navy, gold-first accents, and
-   a starfield in place of the terminal grid.
-   ============================================================ */
-:root {
-  --gold-deep: #4f4118;
-}
-
-/* night sky ground: navy gradient + a faint gold aurora at the top */
-body {
-  background:
-    radial-gradient(ellipse at 50% -8%, rgba(139, 175, 218, 0.13), transparent 50%),
-    radial-gradient(ellipse at 82% 3%, rgba(243, 211, 114, 0.07), transparent 40%),
-    linear-gradient(180deg, #1c2338, #192035 55%, #141a2b);
-  background-size: auto, auto, 100% 100%;
-  background-attachment: fixed;
-}
-
-/* the terminal grid retires; the stars come out */
-main::before { display: none; }
-
-/* starfield: dense far layer (white / blue / gold pinpricks) */
-body::before {
-  content: "";
-  display: block;
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(1px 1px at 22% 18%, rgba(239, 244, 251, 0.5), transparent),
-    radial-gradient(1.4px 1.4px at 68% 44%, rgba(249, 227, 154, 0.5), transparent),
-    radial-gradient(1px 1px at 84% 12%, rgba(193, 218, 245, 0.55), transparent),
-    radial-gradient(1.2px 1.2px at 40% 72%, rgba(239, 244, 251, 0.35), transparent),
-    radial-gradient(1px 1px at 8% 56%, rgba(130, 226, 255, 0.38), transparent),
-    radial-gradient(1.6px 1.6px at 55% 92%, rgba(249, 227, 154, 0.34), transparent),
-    radial-gradient(1px 1px at 92% 78%, rgba(239, 244, 251, 0.4), transparent),
-    radial-gradient(1px 1px at 33% 38%, rgba(193, 218, 245, 0.3), transparent);
-  background-size: 260px 260px, 340px 340px, 300px 300px, 280px 280px,
-    220px 220px, 380px 380px, 320px 320px, 240px 240px;
-  -webkit-mask-image: none;
-  mask-image: none;
-}
-
-/* starfield: sparse near layer, gently twinkling */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(2px 2px at 16% 28%, rgba(249, 227, 154, 0.8), transparent),
-    radial-gradient(1.8px 1.8px at 78% 18%, rgba(239, 244, 251, 0.75), transparent),
-    radial-gradient(2px 2px at 62% 66%, rgba(193, 218, 245, 0.7), transparent),
-    radial-gradient(1.8px 1.8px at 34% 86%, rgba(249, 227, 154, 0.6), transparent),
-    radial-gradient(2.2px 2.2px at 90% 52%, rgba(239, 244, 251, 0.55), transparent);
-  background-size: 520px 520px, 460px 460px, 560px 560px, 480px 480px, 620px 620px;
-  animation: twinkle 5.5s ease-in-out infinite alternate;
-}
-@keyframes twinkle {
-  from { opacity: 0.4; }
-  to { opacity: 1; }
-}
-
-/* gold-first accents (the client's nicks, badges, and halo read gold) */
-.button-primary {
-  color: #171003;
-  background: var(--gold);
-  box-shadow: 5px 5px 0 var(--gold-deep);
-}
-.button-primary:hover { box-shadow: 6px 6px 0 var(--gold-deep); }
-.button-primary:active { box-shadow: 2px 2px 0 var(--gold-deep); }
-
-/* hero: off-white starlight wordmark, soft-yellow caret. The old warm cream
-   was a third hue between the yellow and the blue, which is exactly what the
-   client's retune took out. */
-#hero-title {
-  color: #eff4fb;
-  text-shadow: 0 0 28px rgba(243, 211, 114, 0.22);
-}
-#hero-title .caret {
-  background: var(--gold);
-  -webkit-text-fill-color: var(--gold);
-}
-
-/* punchlist bullets go gold */
-.punchlist li::marker { color: var(--gold); }
-.cap-list li::marker { color: var(--green); }
-.cap-group-partial .cap-list li::marker { color: var(--amber); }
-
-/* section-heading rule: gold dashes over a deep-gold baseline */
-.section-heading h2::after {
-  background:
-    repeating-linear-gradient(90deg, var(--gold) 0 10px, transparent 10px 10px),
-    linear-gradient(var(--gold-deep), var(--gold-deep));
-  background-size: 100% 2px, 100% 2px;
-  background-position: 0 0, 0 5px;
-  background-repeat: repeat-x;
-}
-
-/* marquee: the ★ separators shine gold; hover glows gold too */
-.nav-run .sep { color: var(--gold); text-shadow: 0 0 8px rgba(243, 211, 114, 0.45); }
-.nav-run a:hover, .nav-run a:focus-visible { color: var(--gold-bright); border-color: var(--gold-bright); }
-.faded a:hover, .faded a:focus-visible { background: rgba(243, 211, 114, 0.1); }
-
-/* gold hairline halo on the sticky bar and footer band */
-.topbar { border-bottom-color: rgba(243, 211, 114, 0.3); }
-.site-footer { border-top-color: rgba(243, 211, 114, 0.3); }
-.site-footer strong { color: var(--gold-bright); }
-
-/* bigger hero emblem */
-.hero-mark .seraph-mark { width: clamp(160px, 24vw, 300px); }
-
-/* ============================================================
-   DEVICE DUO — iPad + iPhone share the Mobile column, phone
-   tucked over the tablet's corner; one App Store button below.
-   ============================================================ */
-.device-duo {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  margin-top: auto;
-  padding-bottom: 14px;
-}
-.tablet {
-  width: min(340px, 74%);
-  margin: 0;
-  padding: 10px;
-  background: linear-gradient(180deg, #1b1c29, #0f1017);
-  border: 1px solid var(--shot-edge-device);
-  border-radius: 26px;
-  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.55), 0 0 22px var(--shot-halo),
-    inset 0 0 0 2px rgba(255, 255, 255, 0.02);
-}
-.tablet .client-preview-trigger { border-radius: 18px; transition: transform 150ms ease; }
-.tablet .client-preview-trigger:hover { transform: translateY(-2px); }
-.tablet-screen {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  background: #0a0b13;
-  border-radius: 18px;
-}
-.tablet-screen img { display: block; width: 100%; max-width: 100%; height: auto; }
-.tablet-shot .enlarge-hint {
-  position: absolute; right: 10px; bottom: 10px;
-  font-family: var(--mono); font-size: 10.5px; color: var(--text);
-  background: rgba(20, 26, 43, 0.72); border: 1px solid var(--line-2); border-radius: 6px;
-  padding: 3px 8px; opacity: 0; transition: opacity 150ms ease; pointer-events: none;
-}
-.tablet-shot .client-preview-trigger:hover .enlarge-hint,
-.tablet-shot .client-preview-trigger:focus-visible .enlarge-hint { opacity: 1; }
-.tablet-lightbox { --lightbox-image-width: 820px; --lightbox-aspect: 0.714; } /* 1640 x up to 2296 */
-
-/* the phone rides in front, overlapping the tablet's lower corner */
-.device-duo .phone {
-  position: relative;
-  z-index: 2;
-  align-self: flex-end;
-  width: min(170px, 38%);
-  margin: 0 0 -14px -48px;
-  padding: 6px;
-  border-radius: 26px;
-  filter: drop-shadow(-16px 22px 30px rgba(0, 0, 0, 0.5));
-}
-.device-duo .phone-shot .phone-screen { border-radius: 20px; }
-@media (max-width: 560px) {
-  .device-duo .phone { margin-left: -34px; }
-}
-
-/* ============================================================
-   DIVINE PASS — heavenly / divine / paladin. Gold meteors
-   streak the night sky.
-   ============================================================ */
-
-/* shooting stars: brief gold meteors; most of each cycle is dark */
-.shooting-stars {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-  pointer-events: none;
-}
-.shooting-stars span {
-  position: absolute;
-  top: var(--top);
-  left: var(--left);
-  width: 190px;
-  height: 2.5px;
-  border-radius: 999px;
-  background: linear-gradient(90deg,
-    transparent,
-    rgba(243, 211, 114, 0.55) 40%,
-    #ffe9b0 82%,
-    #fff);
-  box-shadow:
-    0 0 10px rgba(249, 227, 154, 0.55),
-    0 0 26px rgba(243, 211, 114, 0.3);
-  rotate: var(--angle);
-  opacity: 0;
-  animation: shoot var(--dur) linear infinite;
-  animation-delay: var(--delay);
-}
-/* white-hot head with a gold bloom */
-.shooting-stars span::after {
-  content: "";
-  position: absolute;
-  right: -2px;
-  top: -1.75px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow:
-    0 0 8px 2px rgba(255, 236, 180, 0.9),
-    0 0 22px 6px rgba(249, 227, 154, 0.55);
-}
-@keyframes shoot {
-  0%, 91% { opacity: 0; transform: translateX(0); }
-  93% { opacity: 1; }
-  100% { opacity: 0; transform: translateX(58vw); }
-}
-
-/* constellations: a royal scepter and the key of heaven flank the
-   emblem, each drawing itself, holding, then dissolving back into the
-   stars — on different cycle lengths so they never move in lockstep */
-.hero { position: relative; }
-/* two standalone SVGs anchored to the emblem: same desktop spots as
-   before, but they now scale into the free columns beside the logo
-   on phones instead of being hidden.
-   They center on .hero-head rather than .hero, so they stay tied to the
-   emblem however tall the section around it grows. */
-.hero-head { position: relative; }
-.constellations {
-  position: absolute;
-  top: 50%;
-  translate: 0 -50%;
-  z-index: -1;
-  height: auto;
-  pointer-events: none;
-}
-.const-scepter {
-  right: calc(50% + clamp(94px, 22.5vw, 336px));
-  width: clamp(64px, 12.5vw, 190px);
-}
-.const-key {
-  left: calc(50% + clamp(94px, 22.8vw, 340px));
-  width: clamp(68px, 13vw, 195px);
-}
-.constellations .cl {
-  fill: none;
-  stroke: rgba(193, 218, 245, 0.22);
-  stroke-width: 1;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-}
-.constellations .halo { fill: rgba(193, 218, 245, 0.14); opacity: 0; }
-.constellations .halo.gold { fill: rgba(249, 227, 154, 0.16); }
-.constellations .node { fill: #c1daf5; opacity: 0; }
-.constellations .node.gold { fill: var(--gold-bright); }
-
-.c-scepter .cl { animation: constdraw 26s ease-in-out 1.5s infinite; }
-.c-scepter .node, .c-scepter .halo {
-  animation: constnode 26s ease-in-out calc(1.5s + var(--pd, 0s)) infinite;
-}
-.c-key .cl { animation: constdraw 31s ease-in-out 8s infinite; }
-.c-key .node, .c-key .halo {
-  animation: constnode 31s ease-in-out calc(8s + var(--pd, 0s)) infinite;
-}
-
-@keyframes constdraw {
-  0% { stroke-dashoffset: 1; opacity: 1; }
-  14% { stroke-dashoffset: 0; opacity: 1; }
-  55% { stroke-dashoffset: 0; opacity: 1; }
-  65% { stroke-dashoffset: 0; opacity: 0; }
-  66%, 100% { stroke-dashoffset: 1; opacity: 0; }
-}
-@keyframes constnode {
-  0% { opacity: 0; }
-  10% { opacity: 0.9; }
-  30% { opacity: 0.5; }
-  50% { opacity: 0.9; }
-  60% { opacity: 0.7; }
-  65%, 100% { opacity: 0; }
-}
-
-/* the marquee becomes a star chart: the night band drifts slowly by,
-   links set in atlas small-caps, gold stars burning between them */
-.nav-marq {
-  background:
-    radial-gradient(1px 1px at 12% 30%, rgba(239, 244, 251, 0.5), transparent),
-    radial-gradient(1px 1px at 38% 72%, rgba(193, 218, 245, 0.45), transparent),
-    radial-gradient(1.3px 1.3px at 64% 26%, rgba(249, 227, 154, 0.5), transparent),
-    radial-gradient(1px 1px at 86% 62%, rgba(239, 244, 251, 0.4), transparent),
-    repeating-linear-gradient(90deg, rgba(193, 218, 245, 0.14) 0 1px, transparent 1px 48px),
-    rgba(20, 26, 43, 0.6);
-  background-size: 180px 100%, 220px 100%, 260px 100%, 200px 100%, 100% 5px, 100% 100%;
-  background-position: 0 0, 0 0, 0 0, 0 0, 0 100%, 0 0;
-  background-repeat: repeat, repeat, repeat, repeat, no-repeat, no-repeat;
-  border-top: 1px solid rgba(249, 227, 154, 0.22);
-  border-bottom: 1px solid rgba(249, 227, 154, 0.22);
-}
-.nav-run {
-  font-family: var(--serif);
-  font-variant: small-caps;
-  font-size: 17.5px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: #d6dfef;
-  animation-duration: 55s;
-}
-.nav-run a {
-  margin: 0 26px;
-  color: #d6dfef;
-  border-bottom: 0;
-}
-.nav-run a:hover, .nav-run a:focus-visible {
-  color: var(--gold-bright);
-  border-bottom: 0;
-  text-shadow: 0 0 12px rgba(249, 227, 154, 0.5);
-}
-.nav-run .sep {
-  color: var(--gold);
-  font-size: 12px;
-  vertical-align: 2px;
-  text-shadow: 0 0 8px rgba(249, 227, 154, 0.45);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .shooting-stars { display: none; }
-  /* constellations rest fully drawn instead of cycling */
-  .constellations .cl { animation: none; stroke-dashoffset: 0; }
-  .constellations .node, .constellations .halo { animation: none; opacity: 0.6; }
-}
-
-/* ============================================================
-   TYPE PASS — Cormorant Garamond for display, Manrope for text.
-   The mono stays on terminal chrome (nav, buttons, labels).
-   ============================================================ */
-:root {
-  --serif: "Cormorant Garamond", Garamond, "Times New Roman", serif;
-  --sans: Manrope, Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-}
-h1, h2, h3 {
-  font-family: var(--serif);
-  font-weight: 600;
-}
-/* Garamond runs compact — give the display sizes a little back */
-#hero-title {
-  font-size: clamp(3rem, 7.5vw, 5.2rem);
-  letter-spacing: 0;
-}
-h2 { letter-spacing: 0; }
-.platform-card-head h3, .cap-head {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: 1.6rem;
-}
-.hero-subheadline { font-weight: 600; }
-
-/* ============================================================
-   FOOTER PASS — the 88x31 badge wall retires. What replaces it is
-   a row of chips cut from the same cloth as the rest of the site
-   chrome: mono small caps on a panel wash, hairline border, soft
-   glow on hover, the same lift the buttons up the page use.
-   One lit pip in front of every label, all of them the same gold
-   the footer wordmark already carries, so the five read as one
-   row rather than five competing rectangles. The pip color is
-   spent off a token, so the row follows the theme picker with
-   no per-theme rule.
-   ============================================================ */
-/* scoped to the footer band: the blanket `.site-footer a` rule up the file
-   is one step more specific than a bare `.foot-link`, and would otherwise
-   take back the ink and the type size. */
-.site-footer .foot-link {
-  --pip: var(--gold-bright);
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 9px 16px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--panel) 72%, transparent);
-  border: 1px solid var(--line-2);
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  transition: transform 150ms ease, color 150ms ease, border-color 150ms ease,
-              background 150ms ease, box-shadow 150ms ease;
-}
-/* one pip, one color, in front of every label */
-.foot-link::before {
-  content: "";
-  flex: 0 0 auto;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--pip);
-  box-shadow: 0 0 7px color-mix(in srgb, var(--pip) 65%, transparent);
-}
-.site-footer .foot-link:hover {
-  transform: translateY(-1px);
-  color: var(--text);
-  background: color-mix(in srgb, var(--pip) 8%, var(--panel));
-  border-color: color-mix(in srgb, var(--pip) 55%, transparent);
-  box-shadow: 0 0 18px color-mix(in srgb, var(--pip) 20%, transparent);
-}
-.site-footer .foot-link:focus-visible {
-  outline: 2px solid var(--pip);
-  outline-offset: 3px;
-}
-
-/* ============================================================
-   THEME SYSTEM (2026-07-15) — desktop-client parity.
-   Seraph is the default (the untouched :root palette + atmosphere
-   above). Every other theme sets ~8 SEED tokens lifted straight
-   from the client's [data-theme] blocks; the shared derivation
-   rule below turns those seeds into the site's full palette and
-   recolors the atmosphere (nebula glows + starfield). Switching
-   is driven by <html data-theme="…"> from the top-bar picker.
-   ============================================================ */
-
-/* --- Seed sets (per theme) ------------------------------------ */
-/* Seraph needs none — it IS the base :root. */
-html[data-theme='nebula']          { --sd-bg:#050914; --sd-deep:#04030a; --sd-text:#dce2ee; --sd-accent:#67e8f9; --sd-glow:#a855f7; --sd-sw:#d8b4fe; --sd-sc:#67e8f9; --sd-swh:#ffffff; }
-html[data-theme='dim']             { --sd-bg:#0f1726; --sd-deep:#0c1321; --sd-text:#d8deea; --sd-accent:#7fc7ff; --sd-glow:#9b6cff; --sd-sw:#b998ff; --sd-sc:#7fc7ff; --sd-swh:#ffffff; }
-html[data-theme='monokai']         { --sd-bg:#272822; --sd-deep:#22231d; --sd-text:#eeeee4; --sd-accent:#66d9ef; --sd-glow:#ae81ff; --sd-sw:#e6db74; --sd-sc:#66d9ef; --sd-swh:#ffffff; }
-html[data-theme='dracula']         { --sd-bg:#282a36; --sd-deep:#232530; --sd-text:#f0f0ea; --sd-accent:#8be9fd; --sd-glow:#bd93f9; --sd-sw:#ff79c6; --sd-sc:#8be9fd; --sd-swh:#ffffff; }
-html[data-theme='funky-fresh']     { --sd-bg:#1e1726; --sd-deep:#17111f; --sd-text:#f0eafd; --sd-accent:#36c5f0; --sd-glow:#a970ff; --sd-sw:#ecb22e; --sd-sc:#36c5f0; --sd-swh:#ffffff; }
-html[data-theme='gruvbox']         { --sd-bg:#282828; --sd-deep:#242424; --sd-text:#ebdbb2; --sd-accent:#83a598; --sd-glow:#d79921; --sd-sw:#fabd2f; --sd-sc:#83a598; --sd-swh:#fbf1c7; }
-html[data-theme='tokyo-night']     { --sd-bg:#1a1b26; --sd-deep:#161722; --sd-text:#c0caf5; --sd-accent:#7dcfff; --sd-glow:#7aa2f7; --sd-sw:#bb9af7; --sd-sc:#7dcfff; --sd-swh:#ffffff; }
-html[data-theme='nord']            { --sd-bg:#2e3440; --sd-deep:#29303b; --sd-text:#eceff4; --sd-accent:#81a1c1; --sd-glow:#88c0d0; --sd-sw:#ebcb8b; --sd-sc:#88c0d0; --sd-swh:#eceff4; }
-html[data-theme='ocean-breeze']    { color-scheme: light; --sd-bg:#e8f2fb; --sd-deep:#d3e5f4; --sd-text:#223c50; --sd-accent:#2f78b4; --sd-glow:#e0a51c; --sd-sw:#d69e10; --sd-sc:#2aa7bd; --sd-swh:#4a6076; }
-html[data-theme='catppuccin']      { --sd-bg:#1e1e2e; --sd-deep:#1a1a28; --sd-text:#cdd6f4; --sd-accent:#89dceb; --sd-glow:#b4befe; --sd-sw:#f9e2af; --sd-sc:#89dceb; --sd-swh:#ffffff; }
-html[data-theme='miami-nights']    { --sd-bg:#150a2e; --sd-deep:#0d0221; --sd-text:#e8d8ff; --sd-accent:#00e5ff; --sd-glow:#ff2fb9; --sd-sw:#f9c80e; --sd-sc:#00e5ff; --sd-swh:#e8d8ff; }
-html[data-theme='aura']            { --sd-bg:#15141d; --sd-deep:#100f17; --sd-text:#e8e5ee; --sd-accent:#82e2ff; --sd-glow:#a277ff; --sd-sw:#ffca85; --sd-sc:#82e2ff; --sd-swh:#ffffff; }
-html[data-theme='hackerman']       { --sd-bg:#020902; --sd-deep:#010401; --sd-text:#c9f7cd; --sd-accent:#00ffd0; --sd-glow:#39ff14; --sd-sw:#b9ffab; --sd-sc:#00ffd0; --sd-swh:#e6ffe6; }
-html[data-theme='phoenix']         { --sd-bg:#121a29; --sd-deep:#0e1420; --sd-text:#dbe2ee; --sd-accent:#ff9e4f; --sd-glow:#ff6b1a; --sd-sw:#ffc466; --sd-sc:#ff6040; --sd-swh:#fff4eb; }
-html[data-theme='solarized-dark']  { --sd-bg:#002b36; --sd-deep:#00242d; --sd-text:#eee8d5; --sd-accent:#2aa198; --sd-glow:#268bd2; --sd-sw:#b58900; --sd-sc:#2aa198; --sd-swh:#93a1a1; }
-html[data-theme='solarized-light'] { color-scheme: light; --sd-bg:#fdf6e3; --sd-deep:#eee8d5; --sd-text:#073642; --sd-accent:#268bd2; --sd-glow:#b58900; --sd-sw:#b58900; --sd-sc:#268bd2; --sd-swh:#586e75; }
-html[data-theme='light']           { color-scheme: light; --sd-bg:#fafcff; --sd-deep:#e9eff8; --sd-text:#17202f; --sd-accent:#2563eb; --sd-glow:#1d4ed8; --sd-sw:#2563eb; --sd-sc:#0891b2; --sd-swh:#3b4a63; }
-/* The three light newcomers. Their client blocks pitch --nebula-src close to
-   the paper on purpose (a saturated bloom stains a light ground), but the site
-   spends --sd-glow on borders, badges and the picker caret — a near-paper value
-   there reads as missing chrome. So --sd-glow takes each theme's saturated
-   signature (sage green / blossom / foxed grey) instead of its nebula tone.
-   Star seeds stay dark-on-light, as the client's own inversion requires. */
-html[data-theme='sage']            { color-scheme: light; --sd-bg:#f8faf5; --sd-deep:#eef1e9; --sd-text:#35402f; --sd-accent:#4a7340; --sd-glow:#6b8f5e; --sd-sw:#9e9244; --sd-sc:#3f7d6a; --sd-swh:#3c4b37; }
-html[data-theme='sakura']          { color-scheme: light; --sd-bg:#fffbfa; --sd-deep:#fbeff0; --sd-text:#4a3b3f; --sd-accent:#b0567d; --sd-glow:#c2185b; --sd-sw:#e282a8; --sd-sc:#7b5aa6; --sd-swh:#785060; }
-html[data-theme='newsprint']       { color-scheme: light; --sd-bg:#f4f2ee; --sd-deep:#e8e6e1; --sd-text:#21201d; --sd-accent:#21201d; --sd-glow:#8a8172; --sd-sw:#7a6c58; --sd-sc:#585e68; --sd-swh:#33322e; }
-
-/* --- Shared derivation: seeds -> full site palette ------------ */
-/* Applies to every themed root EXCEPT Seraph, which keeps the
-   hand-tuned base palette untouched. "Lift toward --sd-text"
-   brightens surfaces on dark themes and darkens them on light
-   themes, so both directions work from one formula. */
 html[data-theme]:not([data-theme='seraph']) {
-  --bg:       var(--sd-deep);
-  --bg-2:     color-mix(in srgb, var(--sd-bg) 92%, #000);
-  --panel:    var(--sd-bg);
+  --bg:       var(--sd-bg);
+  --bg-2:     var(--sd-deep);
+  --panel:    color-mix(in srgb, var(--sd-bg) 94%, var(--sd-text));
   --panel-2:  color-mix(in srgb, var(--sd-bg) 90%, var(--sd-text));
-  --raised:   color-mix(in srgb, var(--sd-bg) 84%, var(--sd-text));
-  --tree:     color-mix(in srgb, var(--sd-deep) 90%, var(--sd-accent));
-  --chat:     color-mix(in srgb, var(--sd-bg) 97%, #000);
+  --raised:   color-mix(in srgb, var(--sd-bg) 82%, var(--sd-text));
 
-  --line:      color-mix(in srgb, var(--sd-accent) 16%, transparent);
-  --line-2:    color-mix(in srgb, var(--sd-accent) 28%, transparent);
-  --line-soft: color-mix(in srgb, var(--sd-accent) 9%, transparent);
+  --line:      color-mix(in srgb, var(--sd-text) 16%, transparent);
+  --line-2:    color-mix(in srgb, var(--sd-text) 28%, transparent);
+  --line-soft: color-mix(in srgb, var(--sd-text) 9%, transparent);
   --sel:       color-mix(in srgb, var(--sd-accent) 18%, transparent);
 
   --text:  var(--sd-text);
-  --muted: color-mix(in srgb, var(--sd-text) 66%, var(--sd-bg));
-  --dim:   color-mix(in srgb, var(--sd-text) 44%, var(--sd-bg));
-  --faint: color-mix(in srgb, var(--sd-text) 28%, var(--sd-bg));
+  --muted: color-mix(in srgb, var(--sd-text) 82%, var(--sd-bg));
+  --dim:   color-mix(in srgb, var(--sd-text) 62%, var(--sd-bg));
+  --faint: color-mix(in srgb, var(--sd-text) 44%, var(--sd-bg));
 
   --accent:        var(--sd-accent);
   --accent-bright: color-mix(in srgb, var(--sd-accent) 62%, #fff);
@@ -1642,1010 +622,101 @@ html[data-theme]:not([data-theme='seraph']) {
   --gold:          var(--sd-glow);
   --gold-bright:   color-mix(in srgb, var(--sd-glow) 70%, #fff);
   --gold-deep:     color-mix(in srgb, var(--sd-glow) 32%, #000);
+  --code-ink:      color-mix(in srgb, var(--sd-sw) 55%, var(--sd-text));
 
-  /* nick palette spread across the theme's signature hues */
-  --n1: var(--sd-glow);
-  --n2: var(--sd-accent);
-  --n3: color-mix(in srgb, var(--sd-sw) 72%, var(--sd-text));
-  --n4: var(--sd-sw);
-  --n5: color-mix(in srgb, var(--sd-glow) 55%, var(--sd-sc));
-  --n6: color-mix(in srgb, var(--sd-accent) 60%, #fff);
-  --n7: color-mix(in srgb, var(--sd-glow) 62%, #fff);
-  --n8: var(--sd-sc);
-
-  /* The wing, off the theme's own seeds, keeping the shape Seraph's own
-     mark has: a leading stroke in a signature hue at mid lightness, a
-     pale highlight under it, then a third that drops back to about the
-     lead's weight. Measured on the stock art that is L60 / L85 / L63,
-     and the mixes below hold every theme to adjacent gaps of that
-     order. --sd-glow is where each theme keeps its signature (Aura's
-     purple, Miami's pink, Phoenix's orange), so the gold that reads as
-     Seraph never turns up on somebody else's palette. */
   --mark-1: var(--sd-glow);
   --mark-2: color-mix(in srgb, var(--sd-accent) 48%, #fff);
   --mark-3: color-mix(in srgb, var(--sd-accent) 88%, #000);
 }
 
-/* On paper the whole ladder shifts down: 48% toward white leaves a
-   stroke that disappears into the page, which is what the old two-file
-   mark was working around. The highlight lifts less and the third
-   stroke stops at the accent rather than going deeper.
-   The [data-theme] qualifier is load-bearing on every rule below: the
-   derivation block above carries :not([data-theme='seraph']), and a
-   bare html[data-theme='x'] scores under it and would lose. */
+/* Light grounds: darker ink for links, code and highlights. The
+   [data-theme] qualifier keeps these ahead of the derivation rule above. */
 html[data-theme]:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean-breeze'],
                     [data-theme='sage'], [data-theme='sakura'], [data-theme='newsprint']) {
+  --accent-bright: color-mix(in srgb, var(--sd-accent) 70%, #000);
+  --gold-bright:   color-mix(in srgb, var(--sd-glow) 80%, #000);
+  --code-ink:      color-mix(in srgb, var(--sd-accent) 35%, var(--sd-text));
   --mark-2: color-mix(in srgb, var(--sd-accent) 65%, #fff);
   --mark-3: var(--sd-accent);
 }
 
-/* Two themes spend --sd-glow inside their own accent's hue family, so
-   the lead would arrive as a fourth shade of one color rather than a
-   signature. Each takes the seed that carries its actual signature:
-   Tokyo Night's purple, and Catppuccin's lavender pulled down to sit
-   under the pale highlight instead of beside it. */
+/* Logo strokes for themes whose seeds would otherwise give a muddy wing. */
 html[data-theme]:is([data-theme='tokyo-night'])  { --mark-1: var(--sd-sw); }
 html[data-theme]:is([data-theme='catppuccin'])   { --mark-1: color-mix(in srgb, var(--sd-glow) 80%, #000); }
-
-/* The monochrome themes do NOT get a second hue. Reaching for one puts
-   somebody else's color on the mark -- an olive lead on Sage, a purple
-   one on Sakura -- so they separate on weight inside their own family,
-   which is what Seraph's mark does anyway: its two blues are one hue
-   twenty-odd points of lightness apart. Each only needs its highlight
-   named, since the lead and the third stroke already land right. */
-html[data-theme]:is([data-theme='sakura']) { --mark-2: var(--sd-sw); }
-html[data-theme]:is([data-theme='sage'])   { --mark-2: color-mix(in srgb, var(--sd-glow) 72%, #fff); }
-
-/* Ocean Breeze keeps a gold in --sd-glow as a chrome choice rather than
-   an identity, and a gold wing is the one thing this is meant to stop.
-   It leads with its aqua, which then needs the darker third back. */
+html[data-theme]:is([data-theme='sakura'])       { --mark-2: var(--sd-sw); }
+html[data-theme]:is([data-theme='sage'])         { --mark-2: color-mix(in srgb, var(--sd-glow) 72%, #fff); }
 html[data-theme]:is([data-theme='ocean-breeze']) {
   --mark-1: color-mix(in srgb, var(--sd-sc) 72%, #fff);
   --mark-2: var(--sd-accent);
   --mark-3: color-mix(in srgb, var(--sd-accent) 55%, #000);
 }
-
-/* Newsprint's accent IS its ink, so all three come off its own greys. */
 html[data-theme]:is([data-theme='newsprint']) {
   --mark-1: var(--sd-accent);
   --mark-2: color-mix(in srgb, var(--sd-glow) 70%, #fff);
   --mark-3: var(--sd-sc);
 }
 
-/* --- Atmosphere recolor (non-Seraph) ------------------------- */
-/* Base ground: theme gradient + two signature glows (nebula-warm
-   from --sd-glow, cool from --sd-accent). */
-html[data-theme]:not([data-theme='seraph']) body {
-  background:
-    radial-gradient(ellipse at 50% -8%, color-mix(in srgb, var(--sd-hero-glow, var(--sd-glow)) 20%, transparent), transparent 52%),
-    radial-gradient(ellipse at 85% 4%, color-mix(in srgb, var(--sd-accent) 12%, transparent), transparent 44%),
-    linear-gradient(180deg, var(--sd-bg), var(--sd-deep) 62%, var(--sd-deep));
-  background-attachment: fixed;
-}
-/* Dense far starfield, recolored to the theme's star tokens. */
-html[data-theme]:not([data-theme='seraph']) body::before {
-  background:
-    radial-gradient(1px 1px at 22% 18%, color-mix(in srgb, var(--sd-swh) 55%, transparent), transparent),
-    radial-gradient(1.4px 1.4px at 68% 44%, color-mix(in srgb, var(--sd-sw) 58%, transparent), transparent),
-    radial-gradient(1px 1px at 84% 12%, color-mix(in srgb, var(--sd-sc) 58%, transparent), transparent),
-    radial-gradient(1.2px 1.2px at 40% 72%, color-mix(in srgb, var(--sd-swh) 40%, transparent), transparent),
-    radial-gradient(1px 1px at 8% 56%, color-mix(in srgb, var(--sd-sc) 42%, transparent), transparent),
-    radial-gradient(1.6px 1.6px at 55% 92%, color-mix(in srgb, var(--sd-sw) 38%, transparent), transparent),
-    radial-gradient(1px 1px at 92% 78%, color-mix(in srgb, var(--sd-swh) 45%, transparent), transparent),
-    radial-gradient(1px 1px at 33% 38%, color-mix(in srgb, var(--sd-sc) 34%, transparent), transparent);
-  background-size: 260px 260px, 340px 340px, 300px 300px, 280px 280px,
-    220px 220px, 380px 380px, 320px 320px, 240px 240px;
-  -webkit-mask-image: none; mask-image: none;
-}
-/* Sparse near starfield (twinkles via the shared @keyframes). */
-html[data-theme]:not([data-theme='seraph']) body::after {
-  background:
-    radial-gradient(2px 2px at 16% 28%, color-mix(in srgb, var(--sd-sw) 85%, transparent), transparent),
-    radial-gradient(1.8px 1.8px at 78% 18%, color-mix(in srgb, var(--sd-swh) 78%, transparent), transparent),
-    radial-gradient(2px 2px at 62% 66%, color-mix(in srgb, var(--sd-sc) 72%, transparent), transparent),
-    radial-gradient(1.8px 1.8px at 34% 86%, color-mix(in srgb, var(--sd-sw) 62%, transparent), transparent),
-    radial-gradient(2.2px 2.2px at 90% 52%, color-mix(in srgb, var(--sd-swh) 58%, transparent), transparent);
-  background-size: 520px 520px, 460px 460px, 560px 560px, 480px 480px, 620px 620px;
-}
-/* Sticky bar + footer band follow the theme ground and glow. */
-html[data-theme]:not([data-theme='seraph']) .topbar {
-  background: color-mix(in srgb, var(--sd-deep) 92%, transparent);
-  border-bottom-color: color-mix(in srgb, var(--sd-glow) 30%, transparent);
-}
-html[data-theme]:not([data-theme='seraph']) .site-footer {
-  background: color-mix(in srgb, var(--sd-deep) 94%, transparent);
-  border-top-color: color-mix(in srgb, var(--sd-glow) 30%, transparent);
-}
-/* Hero wordmark uses a fixed warm-white on Seraph; let other
-   themes drive it from --text so it stays legible (incl. light). */
-html[data-theme]:not([data-theme='seraph']) #hero-title {
-  color: var(--text);
-  text-shadow: 0 0 28px color-mix(in srgb, var(--sd-hero-glow, var(--sd-glow)) 24%, transparent);
+
+/* 9. Small screens ------------------------------------------------------------- */
+
+@media (max-width: 860px) {
+  .feature-groups { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .mobile-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .contact-list { grid-template-columns: minmax(0, 1fr); }
 }
 
-/* --- Top-bar theme picker ------------------------------------- */
-.header-right { display: flex; align-items: center; gap: 16px; }
-.theme-picker { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.78rem; }
-.theme-picker-label { color: var(--dim); text-transform: uppercase; letter-spacing: 0.14em; }
-.theme-picker-label::before { content: "\25C8 "; color: var(--gold); }
-.theme-select, .changelog-select {
-  appearance: none; -webkit-appearance: none;
-  margin: 0;
-  padding: 6px 30px 6px 12px;
-  color: var(--text);
-  font-family: var(--mono); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.03em;
-  background:
-    linear-gradient(45deg, transparent 50%, var(--gold) 50%) calc(100% - 15px) 55% / 6px 6px no-repeat,
-    linear-gradient(135deg, var(--gold) 50%, transparent 50%) calc(100% - 9px) 55% / 6px 6px no-repeat,
-    color-mix(in srgb, var(--panel) 82%, transparent);
-  border: 1px solid var(--line-2);
-  border-radius: 999px;
-  cursor: pointer;
-  transition: border-color 150ms ease, box-shadow 150ms ease;
-}
-.theme-select:hover, .changelog-select:hover { border-color: var(--gold); box-shadow: 0 0 14px color-mix(in srgb, var(--gold) 30%, transparent); }
-.theme-select:focus-visible, .changelog-select:focus-visible { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 32%, transparent); }
-.theme-select option, .changelog-select option { background: var(--panel); color: var(--text); }
-@media (max-width: 560px) {
-  .theme-picker-label { display: none; }
-  .header-right { gap: 10px; }
-}
+@media (max-width: 720px) {
+  :root { --header-h: 87px; }
 
-/* Light themes: the capability `code` chips use a fixed pale lavender
-   (fine on every dark theme) that washes out on a white ground —
-   darken to a theme-tinted ink so they stay legible. */
-html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean-breeze'],
-        [data-theme='sage'], [data-theme='sakura'], [data-theme='newsprint']) .cap-list code {
-  color: color-mix(in srgb, var(--accent) 45%, var(--text));
-}
+  h1 { font-size: 1.85rem; }
+  h2 { font-size: 1.4rem; }
 
-/* ------------------------------------------------------------------
-   Light-theme contrast pass. The marquee, hero "boxes", badges and
-   line-art were tuned for dark grounds — their fills and text stay too
-   pale on a white page. Darken them for the light themes only; every
-   dark theme is untouched. Each rule below used to enumerate every
-   light theme by hand, which meant six edits per new one — the roster
-   now lives in the single :is() list on this block. Add a light theme
-   here and it inherits the whole pass. Specificity is unchanged:
-   :is() takes its most specific argument, so these still weigh the
-   same as the hand-written html[data-theme='light'] … selectors did.
-   ------------------------------------------------------------------ */
-html:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean-breeze'],
-        [data-theme='sage'], [data-theme='sakura'], [data-theme='newsprint']) {
-  /* Mono ink: a yellow that carries a dark ground disappears on paper, so the
-     light themes take a dark theme-tinted ink instead. */
-  --code-ink: color-mix(in srgb, var(--accent) 28%, var(--text));
-
-  /* Screenshot edges: a light theme's signature is dark, which reads fine
-     against the desktop shot but vanishes into the dark phone/tablet
-     bezel. The device edge takes the brightened signature instead. */
-  --shot-edge-device: color-mix(in srgb, var(--gold-bright) 78%, transparent);
-
-  /* Marquee: defined tinted band + dark small-caps text (was #cfd8ec). */
-  & .nav-marq {
-    background: color-mix(in srgb, var(--sd-accent) 12%, var(--sd-bg));
-    border-top-color: color-mix(in srgb, var(--sd-glow) 32%, transparent);
-    border-bottom-color: color-mix(in srgb, var(--sd-glow) 32%, transparent);
+  .site-header .wrap {
+    flex-wrap: wrap;
+    gap: 0 20px;
+    padding: 10px 0;
   }
-  & .nav-run,
-  & .nav-run a {
-    color: color-mix(in srgb, var(--text) 82%, var(--sd-accent));
+  .site-nav {
+    width: 100%;
+    margin-left: 0;
+    padding-top: 6px;
+    gap: 2px 16px;
+    /* one line that scrolls sideways rather than a ragged second row */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
+  .site-nav a { flex: none; font-size: 0.92rem; }
 
-  /* Top-bar download buttons: on paper the glow and the accent are already
-     dark signatures, so the dark ink they carry on the dark themes would land
-     dark-on-dark. Both take the page ground as ink instead, over a fill pushed
-     toward the text color — a light signature like ocean-breeze's yellow
-     cannot carry pale ink on its own. The mixes are the strongest that still
-     clear 4.5:1 on every light theme, and hover darkens rather than
-     brightening so the contrast only ever improves. */
-  & .nav-dl-primary {
-    background: color-mix(in srgb, var(--gold) 45%, var(--text));
-    color: var(--sd-bg);
+  .intro { padding-top: 32px; }
+  .intro-text { font-size: 1.04rem; }
+
+  .section { padding: 36px 0; }
+
+  .downloads thead { display: none; }
+  .downloads tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
   }
-  & .nav-dl-primary:hover { background: color-mix(in srgb, var(--gold) 32%, var(--text)); }
-  & .nav-dl-mobile {
-    background: color-mix(in srgb, var(--accent) 71%, var(--text));
-    color: var(--sd-bg);
+  .downloads td { padding: 0; border: 0; }
+  .downloads td:nth-child(2) { grid-column: 1 / -1; grid-row: 2; }
+  .downloads td:nth-child(3) { grid-column: 1 / -1; grid-row: 3; }
+  .downloads .price { grid-column: 2; grid-row: 1; }
+
+  /* Columns in proportion to the two screenshots' aspect ratios, so both
+     come out the same height and their space is known before they load. */
+  .device-shots {
+    display: grid;
+    grid-template-columns: 0.714fr 0.483fr;
+    gap: 10px;
   }
-  & .nav-dl-mobile:hover { background: color-mix(in srgb, var(--accent) 58%, var(--text)); }
+  .device-shots .shot-button { width: auto; min-width: 0; }
+  .device-shots .tablet img,
+  .device-shots .phone img { width: 100%; }
 
-  /* Footer chips: on paper a brightened gold pip is near white, so it
-     takes a darkened signature instead. The chip lifts toward the page
-     ground, the label darkens, and the glow goes — a halo needs a dark
-     ground to read as one. */
-  & .foot-link {
-    --pip: color-mix(in srgb, var(--gold) 55%, #000);
-    background: color-mix(in srgb, var(--panel) 68%, #fff);
-    border-color: color-mix(in srgb, var(--accent) 22%, var(--line-2));
-    color: color-mix(in srgb, var(--text) 88%, var(--sd-accent));
-  }
-  & .foot-link::before { box-shadow: none; }
-  & .foot-link:hover {
-    color: var(--text);
-    box-shadow: none;
-  }
-
-  /* Constellations (hero scepter + key line-art): tuned in pale celestial
-     blue/gold for dark grounds, so they vanish on a white page. Darken the
-     strokes, nodes and halos — the draw/twinkle animations and opacity are
-     left to the shared rules. */
-  & .constellations .cl {
-    stroke: color-mix(in srgb, var(--sd-accent) 55%, #000);
-    stroke-opacity: 0.5;
-  }
-  & .constellations .node {
-    fill: color-mix(in srgb, var(--sd-accent) 70%, #000);
-  }
-  & .constellations .node.gold {
-    fill: color-mix(in srgb, var(--sd-glow) 62%, #000);
-  }
-  & .constellations .halo {
-    fill: color-mix(in srgb, var(--sd-accent) 30%, transparent);
-  }
-  & .constellations .halo.gold {
-    fill: color-mix(in srgb, var(--sd-glow) 32%, transparent);
-  }
-
-  /* Meteor (shooting star): a gold→white streak with a white-hot head that
-     disappears on a light ground, so it re-colors to --meteor (picked per
-     theme below). */
-  & .shooting-stars span {
-    background: linear-gradient(90deg,
-      transparent,
-      color-mix(in srgb, var(--meteor) 45%, transparent) 40%,
-      var(--meteor) 82%,
-      var(--meteor));
-    box-shadow:
-      0 0 10px color-mix(in srgb, var(--meteor) 45%, transparent),
-      0 0 26px color-mix(in srgb, var(--meteor) 25%, transparent);
-  }
-  & .shooting-stars span::after {
-    background: var(--meteor);
-    box-shadow:
-      0 0 8px 2px color-mix(in srgb, var(--meteor) 55%, transparent),
-      0 0 22px 6px color-mix(in srgb, var(--meteor) 30%, transparent);
-  }
-
-  /* Command tables: --line/--line-2 and the accent-tinted ink are struck
-     from the accent at low percentages, which all but vanishes on paper.
-     Rebuild the panel's structure and ink from --text so the rules, row
-     stripes and mono commands stay legible on a white ground. */
-  & .command-category {
-    background: var(--panel);
-    border-color: color-mix(in srgb, var(--text) 24%, transparent);
-    box-shadow: 4px 4px 0 color-mix(in srgb, var(--text) 9%, transparent);
-  }
-  & .command-category h3 {
-    background: color-mix(in srgb, var(--accent) 16%, transparent);
-    border-bottom-color: color-mix(in srgb, var(--text) 22%, transparent);
-  }
-  & .command-category th,
-  & .command-category td {
-    border-bottom-color: color-mix(in srgb, var(--text) 12%, transparent);
-  }
-  & .command-category tr:nth-child(even) th,
-  & .command-category tr:nth-child(even) td {
-    background: color-mix(in srgb, var(--text) 5%, transparent);
-  }
-  & .command-category td { color: color-mix(in srgb, var(--text) 88%, var(--panel)); }
-  & .command-category code,
-  & .commands-section .section-heading code {
-    color: color-mix(in srgb, var(--accent) 28%, var(--text));
-  }
-
-  /* Changelog panel: same rebuild as the command tables, structure and
-     ink struck from --text so the panel holds up on paper grounds. */
-  & .changelog-panel {
-    background: var(--panel);
-    border-color: color-mix(in srgb, var(--text) 24%, transparent);
-    box-shadow: 4px 4px 0 color-mix(in srgb, var(--text) 9%, transparent);
-  }
-  & .changelog-bar {
-    background: color-mix(in srgb, var(--accent) 16%, transparent);
-    border-bottom-color: color-mix(in srgb, var(--text) 22%, transparent);
-  }
-  & .release-notes li { color: color-mix(in srgb, var(--text) 88%, var(--panel)); }
-  & .release-notes code { color: color-mix(in srgb, var(--accent) 28%, var(--text)); }
-
-  /* News cards: third panel on the same recipe, same reason. */
-  & .news-card {
-    background: var(--panel);
-    border-color: color-mix(in srgb, var(--text) 24%, transparent);
-    box-shadow: 4px 4px 0 color-mix(in srgb, var(--text) 9%, transparent);
-  }
-  & .news-card:hover { box-shadow: 5px 5px 0 color-mix(in srgb, var(--text) 14%, transparent); }
-  & .news-bar {
-    background: color-mix(in srgb, var(--accent) 16%, transparent);
-    border-bottom-color: color-mix(in srgb, var(--text) 22%, transparent);
-  }
-  & .news-flag {
-    color: color-mix(in srgb, var(--gold) 45%, var(--text));
-    background: color-mix(in srgb, var(--gold) 18%, transparent);
-    border-color: color-mix(in srgb, var(--text) 24%, transparent);
-  }
-  & .news-body p { color: color-mix(in srgb, var(--text) 88%, var(--panel)); }
-  & .news-body .news-cmd { border-top-color: color-mix(in srgb, var(--text) 22%, transparent); }
-  & .news-cmd code,
-  & .news-body p:not(.news-cmd) code { color: color-mix(in srgb, var(--accent) 28%, var(--text)); }
-  & .news-nav {
-    background: color-mix(in srgb, var(--accent) 16%, transparent);
-    border-color: color-mix(in srgb, var(--text) 24%, transparent);
-    box-shadow: 4px 4px 0 color-mix(in srgb, var(--text) 9%, transparent);
-  }
-  & .news-arrow {
-    background: var(--panel);
-    border-color: color-mix(in srgb, var(--text) 24%, transparent);
-  }
-  & .news-arrow:not(:disabled):hover { box-shadow: 2px 2px 0 color-mix(in srgb, var(--text) 16%, transparent); }
-  & .news-arrow-glyph { color: color-mix(in srgb, var(--gold) 45%, var(--text)); }
-}
-
-/* Each light theme's meteor: whichever of its seeds carries furthest
-   against its own paper. */
-html[data-theme='light'] { --meteor: var(--sd-glow); }             /* blue */
-html[data-theme='solarized-light'] { --meteor: var(--text); }      /* ink */
-html[data-theme='ocean-breeze'] { --meteor: var(--sd-accent); }    /* ocean blue */
-html[data-theme='sage'] { --meteor: var(--sd-accent); }            /* deep leaf */
-html[data-theme='sakura'] { --meteor: var(--sd-glow); }            /* blossom */
-html[data-theme='newsprint'] { --meteor: var(--text); }            /* ink */
-
-/* Ocean Breeze keeps gold as its star/badge accent, but a gold hero bloom
-   fought the blue ground — bloom in the theme's cyan-blue instead. */
-html[data-theme='ocean-breeze'] { --sd-hero-glow: var(--sd-sc); }
-
-/* Smooth the palette hand-off when a new theme is picked. */
-body, .topbar, .site-footer { transition: background-color 350ms ease, border-color 350ms ease, color 350ms ease; }
-
-/* ============================================================
-   BRAND MARK — wing sweep
-   The mark ships transparent (no icon tile) so the hero halo and the
-   drop-shadows hug the strokes instead of tracing a square. It is
-   inline SVG rather than an <img> because the three strokes are
-   painted from --mark-1/2/3, and CSS cannot reach inside a file an
-   <img> loads. That also retires the old pair of cuts: the light
-   themes used to swap to a deeper file because the pale-blue stroke
-   vanished on paper, and now every theme mixes its own pair off
-   --sd-accent, which is legible on its own ground by construction.
-   ============================================================ */
-.seraph-mark { display: inline-block; vertical-align: middle; }
-
-/* ---------------------------------------------------------------- changelog */
-/* Same recipe as .command-category: every color derives from the
-   palette tokens, so all 21 themes carry it. The version dropdown
-   reuses the top-bar .theme-select pill styling via .changelog-select. */
-.changelog-panel {
-  max-width: 860px;
-  overflow: hidden;
-  background: color-mix(in srgb, var(--panel) 78%, transparent);
-  border: 1px solid var(--line-2);
-  border-radius: 3px;
-  box-shadow: 4px 4px 0 color-mix(in srgb, var(--accent) 10%, transparent);
-}
-.changelog-bar {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 10px 16px;
-  font-family: var(--mono);
-  background: color-mix(in srgb, var(--accent) 15%, transparent);
-  border-bottom: 1px solid var(--line-2);
-}
-.changelog-label {
-  color: var(--dim);
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-.changelog-label::before { content: "\00bb "; color: var(--gold); }
-.changelog-date {
-  margin-left: auto;
-  color: var(--muted);
-  font-size: 0.8rem;
-  letter-spacing: 0.03em;
-}
-.changelog-date::before { content: "\2605 "; color: var(--gold); }
-.release { padding: 16px 20px 18px; }
-.release[hidden] { display: none; }
-.release-notes {
-  display: grid;
-  gap: 8px;
-  margin: 0;
-  padding-left: 22px;
-}
-.release-notes li {
-  color: var(--muted);
-  font-size: 0.92rem;
-  line-height: 1.6;
-}
-.release-notes li::marker { color: var(--accent); }
-/* The global rule strips color and underline from every anchor, which left
-   release-note links reading as plain prose. Spent off --gold so they follow
-   the theme, the same way the contact links do. */
-.release-notes a {
-  color: var(--gold);
-  border-bottom: 1px solid color-mix(in srgb, var(--gold) 42%, transparent);
-}
-.release-notes a:hover,
-.release-notes a:focus-visible {
-  color: var(--gold-bright);
-  border-bottom-color: var(--gold-bright);
-  outline: none;
-}
-.release-notes code {
-  color: var(--code-ink);
-  font-family: var(--mono);
-  overflow-wrap: anywhere;
-}
-@media (max-width: 560px) {
-  .changelog-date { width: 100%; margin-left: 0; }
-}
-
-/* ---------------------------------------------------------------- news */
-/* Same panel recipe as .changelog-panel and .command-category: titlebar
-   over body, structure struck from the palette tokens so all 21 themes
-   carry it, and the light-theme rebuild lives with the other two below. */
-/* One announcement at a time, newest first, arrows paging between them.
-   The deck is a single column because only one card is ever displayed. With
-   JS off nothing hides anything, the nav stays hidden, and every card
-   renders stacked in order. */
-/* Same 860px measure as .changelog-panel: one card is now the full width of
-   the deck, and card prose set the width of the section would run far past a
-   comfortable line length. */
-.news-panel { max-width: 860px; }
-.news-deck {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 22px;
-}
-/* .news-card is a flex column, so [hidden] needs saying out loud. */
-.news-card[hidden] { display: none; }
-/* backwards, not both: a held `transform: none` at the end would outrank
-   the hover translate below. Re-runs on every swap, since going from
-   display:none back to displayed restarts the animation. */
-.news-deck > .news-card { animation: news-in 220ms ease backwards; }
-@keyframes news-in {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-/* Column so the command rule can be pushed to the foot of the card by the
-   auto margin on .news-cmd, however much prose sits above it. */
-.news-card {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background: color-mix(in srgb, var(--panel) 78%, transparent);
-  border: 1px solid var(--line-2);
-  border-radius: 3px;
-  box-shadow: 4px 4px 0 color-mix(in srgb, var(--accent) 10%, transparent);
-  transition: transform 150ms ease, box-shadow 150ms ease;
-}
-.news-card:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 5px 5px 0 color-mix(in srgb, var(--accent) 16%, transparent);
-}
-/* wrap, because three items in the bar do not fit a narrow phone and a
-   dropped flag reads better than an overflowing one. */
-.news-bar {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 10px 16px;
-  font-family: var(--mono);
-  background: color-mix(in srgb, var(--accent) 15%, transparent);
-  border-bottom: 1px solid var(--line-2);
-}
-.news-kicker {
-  color: var(--text);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-.news-kicker::before { content: "\00bb "; color: var(--gold); }
-/* Release the announcement shipped in. Takes the auto margin off the flag
-   when both are present, so the two sit together at the right rather than
-   splitting the free space between them. */
-.news-date {
-  margin-left: auto;
-  color: var(--muted);
-  font-size: 0.76rem;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-}
-.news-date + .news-flag { margin-left: 0; }
-.news-flag {
-  margin-left: auto;
-  padding: 2px 8px;
-  color: var(--gold-bright);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  background: color-mix(in srgb, var(--gold) 14%, transparent);
-  border: 1px solid color-mix(in srgb, var(--gold) 40%, transparent);
-  border-radius: 2px;
-}
-.news-flag::after { content: " \2605"; }
-.news-body { display: flex; flex-direction: column; flex: 1; padding: 18px 20px 20px; }
-.news-body h3 {
-  margin: 0 0 12px;
-  font-family: var(--mono);
-  font-size: clamp(1.05rem, 1.9vw, 1.32rem);
-  line-height: 1.24;
-  letter-spacing: -0.01em;
-  text-wrap: balance;
-}
-.news-body p {
-  margin: 0 0 12px;
-  color: var(--muted);
-  font-size: 0.94rem;
-  line-height: 1.66;
-}
-/* A command named mid-sentence, same ink as the footer rule below. Excludes
-   .news-cmd so it cannot override that rule's own font-size. */
-.news-body p:not(.news-cmd) code {
-  color: var(--code-ink);
-  font-size: 0.9em;
-  overflow-wrap: anywhere;
-}
-/* (0,2,0) so it beats the .news-body p margin above without !important.
-   auto top margin so the rule sits at the foot of the card rather than
-   floating under whatever the last paragraph happened to be. */
-.news-body .news-cmd {
-  margin: auto 0 0;
-  padding-top: 12px;
-  border-top: 1px dashed var(--line-2);
-}
-.news-cmd code {
-  color: var(--code-ink);
-  font-family: var(--mono);
-  font-size: 0.9rem;
-  overflow-wrap: anywhere;
-}
-.news-cmd a code {
-  border-bottom: 1px dashed color-mix(in srgb, var(--accent) 45%, transparent);
-}
-.news-cmd a:hover code, .news-cmd a:focus-visible code {
-  color: var(--accent-bright);
-  border-bottom-color: var(--accent-bright);
-}
-/* Pager strip under the deck. Same titlebar fill as .news-bar, but its own
-   panel rather than a second bar on the card, which would have stacked two
-   chrome rows on one article. */
-/* Grid, not flex: the two arrows carry the adjacent article's name, so they
-   are different widths and change width on every page. Under flex the count
-   centered in whatever space was left over and shifted with them. Equal
-   minmax(0, 1fr) side tracks pin it to the middle of the strip instead, and
-   the 0 minimum is what lets the labels ellipsis rather than push the track
-   wider. */
-.news-nav {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  align-items: center;
-  gap: 12px;
-  margin-top: 20px;
-  padding: 8px 12px;
-  font-family: var(--mono);
-  background: color-mix(in srgb, var(--accent) 11%, transparent);
-  border: 1px solid var(--line-2);
-  border-radius: 3px;
-  box-shadow: 4px 4px 0 color-mix(in srgb, var(--accent) 10%, transparent);
-}
-.news-nav[hidden] { display: none; }
-.news-arrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  justify-self: start;
-  min-width: 0;
-  padding: 6px 12px;
-  color: var(--text);
-  font-family: inherit;
-  font-size: 0.8rem;
-  letter-spacing: 0.06em;
-  background: color-mix(in srgb, var(--panel) 78%, transparent);
-  border: 1px solid var(--line-2);
-  border-radius: 2px;
-  cursor: pointer;
-  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
-}
-.news-arrow-next { justify-self: end; }
-.news-arrow-glyph { flex: none; color: var(--gold); font-size: 1.05rem; line-height: 1; }
-/* The adjacent article's name, so the arrow says where it goes. */
-.news-arrow-label { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-.news-arrow:not(:disabled):hover {
-  transform: translate(-1px, -1px);
-  border-color: var(--accent);
-  box-shadow: 2px 2px 0 color-mix(in srgb, var(--accent) 24%, transparent);
-}
-.news-arrow:focus-visible { outline: 3px solid rgba(193, 218, 245, 0.8); outline-offset: 2px; }
-.news-arrow:disabled { color: var(--dim); cursor: default; opacity: 0.5; }
-.news-arrow:disabled .news-arrow-glyph { color: var(--dim); }
-.news-count {
-  color: var(--muted);
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-/* Glyphs only, since two article names plus the count will not fit a phone. */
-@media (max-width: 560px) {
-  .news-arrow-label { display: none; }
-}
-
-/* ============================================================
-   STRUCTURE & TYPE PASS (2026-08-07)
-
-   Three problems this layer fixes:
-
-   1. Every section was one narrow left-aligned column inside a
-      wide shell, so a third of the page was dead air on the right.
-      Sections now run their content to the full measure, and the
-      hero and sections share one container so they line up.
-   2. Headings were near-uniform: the same size and weight did
-      duty for a section title, a card title and a panel label. A
-      fixed four-step scale now separates them, and the typeface
-      carries the distinction (serif = editorial voice, mono =
-      interface chrome).
-   3. Bulleted walls of "<b>Term:</b> description" became a real
-      term grid, so the terms scan as a column of labels rather
-      than disappearing into their own paragraphs.
-   ============================================================ */
-
-:root {
-  --shell: 1280px;
-
-  /* one scale, four display steps and three text steps */
-  --t-display: clamp(3rem, 7.5vw, 5.2rem);
-  --t-h2:      clamp(2rem, 4.4vw, 3.05rem);
-  --t-h3:      clamp(1.3rem, 1.9vw, 1.72rem);
-  --t-lead:    clamp(1.06rem, 1.25vw, 1.2rem);
-  --t-body:    1rem;
-  --t-small:   0.92rem;
-  --t-label:   0.74rem;
-}
-
-/* --- shell: hero and sections share one container ------------- */
-.hero, .section {
-  width: min(var(--shell), calc(100% - 40px));
-  margin-inline: auto;
-}
-
-.section-heading { max-width: 780px; }
-
-/* --- type scale ----------------------------------------------- */
-h1 { font-size: var(--t-display); }
-h2 {
-  margin-bottom: 16px;
-  font-size: var(--t-h2);
-  line-height: 1.04;
-}
-/* Serif is the editorial voice: section titles, card titles, the
-   heads of the platform and capability groups. */
-h3 {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: var(--t-h3);
-  line-height: 1.2;
-  letter-spacing: 0;
-}
-.section-heading .lead {
-  max-width: 66ch;
-  margin-bottom: 0;
-  font-size: var(--t-lead);
-  line-height: 1.66;
-}
-.section-heading { margin-bottom: clamp(30px, 3.4vw, 46px); }
-
-/* Mono is interface chrome, and stays that way: the titlebar of a
-   reference panel is a label, not a heading in the editorial
-   voice, so it opts back out of the rule above. */
-.command-category h3,
-.format-grid .command-category h3 {
-  font-family: var(--mono);
-  font-weight: 700;
-  font-size: var(--t-label);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-/* --- term grid: features, bouncers, contact ------------------- */
-/* Replaces the two-column bulleted wall. Each term is a label over
-   a hairline, so the terms read as a scannable column and the
-   descriptions keep a comfortable measure. */
-/* Column flow rather than a grid: grid rows size to their tallest
-   cell, which left ragged holes under the short descriptions. */
-.term-grid {
-  columns: 3;
-  column-gap: clamp(28px, 3.2vw, 52px);
-  margin: 0;
-}
-.term-grid > div {
-  break-inside: avoid;
-  margin-bottom: clamp(24px, 2.4vw, 34px);
-}
-.term-grid dt {
-  margin-bottom: 9px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid color-mix(in srgb, var(--gold) 26%, transparent);
-  color: var(--text);
-  font-family: var(--mono);
-  font-size: var(--t-label);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  line-height: 1.4;
-  text-transform: uppercase;
-}
-.term-grid dd {
-  margin: 0;
-  color: var(--muted);
-  font-size: var(--t-small);
-  line-height: 1.68;
-}
-.term-grid dd code { color: var(--code-ink); }
-.term-grid dd a { color: var(--accent-bright); }
-@media (max-width: 900px) { .term-grid { columns: 2; } }
-@media (max-width: 620px) { .term-grid { columns: 1; } }
-
-/* --- feature entries: a star, a name, and the note it holds ----
-   Nineteen descriptions stacked as visible prose was the longest wall
-   on the page and almost none of it was being read. The name carries
-   the scan, and the note is spent only when someone asks for it.
-
-   Styled off .term-grid dt rather than the platform cards: the mono
-   name over a gold hairline is the site's own treatment for exactly
-   this content. The bevelled plate those cards wear is a 90s device
-   frame and reads as a dialog button out here, which is not the
-   language the rest of the page speaks.
-
-   The note is pinned left:0/right:0 so it is exactly as wide as its
-   own entry. That is what keeps it safe at every breakpoint: the grid
-   reflows between one and four columns, and a note anchored this way
-   can never overhang the viewport the way a centered fixed-width
-   tooltip would in the first and last column. */
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
-  gap: clamp(20px, 2.4vw, 32px) clamp(26px, 3vw, 46px);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.feature { position: relative; }
-.feature-plate {
-  display: flex;
-  align-items: baseline;
-  gap: 9px;
-  width: 100%;
-  margin: 0;
-  padding: 0 0 8px;
-  color: var(--text);
-  /* Safari gives buttons an appearance of their own that outranks a bare
-     background declaration, and these have to read as text, not controls. */
-  -webkit-appearance: none;
-  appearance: none;
-  background: none;
-  border: 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--gold) 26%, transparent);
-  border-radius: 0;
-  font-family: var(--mono);
-  font-size: var(--t-label);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  line-height: 1.4;
-  text-align: left;
-  text-transform: uppercase;
-  cursor: help;
-  transition: color 160ms ease, border-color 160ms ease, text-shadow 160ms ease;
-}
-/* the star ahead of each name rests dim and ignites when the note opens */
-.feature-plate::before {
-  content: "\2726";
-  flex: none;
-  color: var(--gold);
-  font-size: 0.9em;
-  opacity: 0.4;
-  transition: opacity 160ms ease, text-shadow 160ms ease;
-}
-.feature-plate:hover,
-.feature-plate:focus-visible,
-.feature:focus-within .feature-plate {
-  color: var(--gold-bright);
-  border-bottom-color: var(--gold);
-  text-shadow: 0 0 14px rgba(243, 211, 114, 0.4);
-  outline: none;
-}
-.feature-plate:hover::before,
-.feature-plate:focus-visible::before,
-.feature:focus-within .feature-plate::before {
-  opacity: 1;
-  text-shadow: 0 0 10px rgba(243, 211, 114, 0.75);
-}
-/* keyboard users still get a visible ring, since the glow alone is
-   the same cue a passing mouse produces */
-.feature-plate:focus-visible { outline: 1px dotted var(--gold); outline-offset: 4px; }
-.feature-note {
-  position: absolute;
-  z-index: 5;
-  top: calc(100% + 9px);
-  left: 0;
-  right: 0;
-  padding: 13px 15px;
-  color: var(--muted);
-  background: color-mix(in srgb, var(--panel) 96%, transparent);
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
-  border: 1px solid rgba(243, 211, 114, 0.3);
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42), 0 0 26px var(--shot-halo);
-  font-family: var(--sans);
-  font-size: var(--t-small);
-  font-weight: 400;
-  letter-spacing: normal;
-  line-height: 1.62;
-  text-transform: none;
-  /* Opacity rather than display or visibility: the note stays in the
-     accessibility tree, so the aria-describedby on the name is still
-     announced when the note is not on screen. */
-  opacity: 0;
-  transform: translateY(-4px);
-  pointer-events: none;
-  transition: opacity 150ms ease, transform 150ms ease;
-}
-.feature-note code { color: var(--code-ink); font-size: 0.86em; }
-/* Keyboard focus lands here. Hover is gated behind a real pointer so a
-   tapped name on a phone does not keep a stuck note. */
-.feature:focus-within .feature-note { opacity: 1; transform: none; }
-@media (hover: hover) {
-  .feature:hover .feature-note { opacity: 1; transform: none; }
-}
-/* Tap opens via .is-open, set by script. Neither CSS path above can carry a
-   touch device: (hover: hover) is false there, and Safari does not move focus
-   to a <button> on tap, so :focus-within never fires and iOS got nothing at
-   all. pointer-events go live so the note's own text stays selectable. */
-.feature.is-open .feature-note { opacity: 1; transform: none; pointer-events: auto; }
-.feature.is-open .feature-plate {
-  color: var(--gold-bright);
-  border-bottom-color: var(--gold);
-  text-shadow: 0 0 14px rgba(243, 211, 114, 0.4);
-}
-.feature.is-open .feature-plate::before {
-  opacity: 1;
-  text-shadow: 0 0 10px rgba(243, 211, 114, 0.75);
-}
-@media (prefers-reduced-motion: reduce) {
-  .feature-plate, .feature-plate::before, .feature-note { transition: none; }
-  .feature-note { transform: none; }
-}
-
-/* --- news: deck plus a standing index ------------------------- */
-/* The archive was reachable only by paging blindly through it, and
-   the space it now occupies was empty. The index is built by script
-   from the cards, so :has() keeps the single-column layout when the
-   script has not run. */
-.news-panel {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 264px;
-  gap: clamp(28px, 3vw, 52px);
-  align-items: start;
-  max-width: none;
-}
-.news-panel:has(.news-index:empty) { grid-template-columns: minmax(0, 1fr); }
-.news-index:empty { display: none; }
-/* The index gains a row with every release, so it is capped at the five most
-   recent and scrolls past that. Left to grow it runs well below the card it
-   sits beside, and the two columns stop reading as one panel. */
-.news-index {
-  display: grid;
-  gap: 2px;
-  align-content: start;
-  /* 9px padding twice, the name line, a 3px gap, then the date line. */
-  --news-index-row: 54px;
-  max-height: calc(var(--news-index-row) * 5 + 2px * 4);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-width: thin;
-  scrollbar-color: color-mix(in srgb, var(--accent) 38%, transparent) transparent;
-}
-.news-index-item {
-  display: grid;
-  gap: 3px;
-  padding: 9px 12px;
-  text-align: left;
-  background: none;
-  border: 0;
-  border-left: 2px solid transparent;
-  cursor: pointer;
-  transition: background-color 120ms ease, border-color 120ms ease;
-}
-.news-index-name {
-  color: var(--muted);
-  font-size: var(--t-small);
-  font-weight: 600;
-  line-height: 1.3;
-}
-.news-index-date {
-  color: var(--dim);
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.04em;
-}
-.news-index-item:hover {
-  background: color-mix(in srgb, var(--accent) 8%, transparent);
-  border-left-color: color-mix(in srgb, var(--accent) 45%, transparent);
-}
-.news-index-item:hover .news-index-name { color: var(--text); }
-.news-index-item:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: -2px; }
-.news-index-item.is-current {
-  background: color-mix(in srgb, var(--gold) 10%, transparent);
-  border-left-color: var(--gold);
-}
-.news-index-item.is-current .news-index-name { color: var(--text); }
-.news-index-item.is-current .news-index-date { color: var(--gold); }
-/* The deck no longer needs its own measure; the grid track sets it. */
-.news-deck { max-width: none; }
-/* Card title in the editorial voice, against the mono kicker above
-   it, so the two stop competing at the same size and weight. */
-.news-body h3 {
-  margin-bottom: 14px;
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: var(--t-h3);
-  letter-spacing: 0;
-}
-.news-body p { max-width: 72ch; font-size: var(--t-small); }
-@media (max-width: 1000px) {
-  .news-panel, .news-panel:has(.news-index:empty) { grid-template-columns: minmax(0, 1fr); }
-  /* Stacked under the card in two columns, there is no card height to stay
-     level with, so the cap comes off and the list runs full length. */
-  .news-index {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    max-height: none;
-    overflow-y: visible;
-  }
-}
-@media (max-width: 560px) { .news-index { grid-template-columns: minmax(0, 1fr); } }
-
-/* --- changelog: fills the measure, notes run in two columns --- */
-.changelog-panel { max-width: none; }
-.release-notes {
-  display: block;
-  columns: 2;
-  column-gap: 44px;
-}
-.release-notes li { break-inside: avoid; margin-bottom: 9px; }
-@media (max-width: 860px) { .release-notes { columns: 1; } }
-
-/* --- a drawn icon, not a glyph pressed into service ------------ */
-.icon-expand {
-  width: 12px;
-  height: 12px;
-  margin-right: 7px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.enlarge-hint { display: inline-flex; align-items: center; }
-
-/* --- hero: one clear step down from the wordmark -------------- */
-/* The tagline was set at a heavy sans weight directly under the
-   serif display, so the two read as competing titles. It steps
-   down in size and weight instead, and the sentence below it
-   drops the arbitrary blue rule that pointed at nothing. */
-.hero-subheadline {
-  margin-bottom: 20px;
-  color: var(--gold-bright);
-  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
-  font-weight: 500;
-  letter-spacing: 0.01em;
-}
-.hero-copy {
-  padding-left: 0;
-  border-left: 0;
-  font-size: var(--t-lead);
-  text-wrap: balance;
+  .site-footer .wrap { grid-template-columns: minmax(0, 1fr); }
+  .foot-theme { justify-self: start; }
 }

@@ -14,8 +14,8 @@
    ============================================================ */
 
 :root {
-  /* Clearance for the sticky topbar (header + marquee + faded nav). */
-  --docs-top: 168px;
+  /* The sticky contents rail sits just under the sticky site header. */
+  --docs-top: calc(var(--header-h) + 16px);
   --docs-rail: 292px;
 }
 
@@ -50,28 +50,19 @@
   gap: 8px;
   padding: 12px 14px 10px;
   border-bottom: 1px solid var(--line);
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--gold) 9%, transparent),
-    transparent
-  );
 }
 .docs-rail-head strong {
-  font-family: var(--mono);
-  font-size: 0.72rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold-bright, var(--gold));
+  color: var(--text);
 }
 .docs-pdf {
   flex: none;
   padding: 0;
   font: inherit;
   font-family: var(--sans);
-  font-size: 0.68rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
   color: var(--dim);
   background: none;
   border: 0;
@@ -87,8 +78,7 @@
   width: 100%;
   padding: 7px 10px;
   font: inherit;
-  font-family: var(--mono);
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   color: var(--text);
   background: var(--bg);
   border: 1px solid var(--line);
@@ -123,11 +113,8 @@
 
 .docs-nav .book > summary {
   padding: 7px 14px;
-  font-family: var(--mono);
-  font-size: 0.78rem;
+  font-size: 0.92rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
   color: var(--muted);
 }
 .docs-nav .book > summary:hover { color: var(--text); background: var(--sel); }
@@ -273,11 +260,8 @@
 }
 .pane-kicker {
   margin: 0 0 4px;
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--faint);
+  font-size: 0.85rem;
+  color: var(--dim);
 }
 .pane-lead {
   margin: 0 0 22px;
@@ -291,12 +275,9 @@
 }
 .docs-pane h4 {
   margin: 20px 0 6px;
-  font-family: var(--mono);
-  font-size: 0.72rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--dim);
+  color: var(--muted);
 }
 .docs-pane p { max-width: 78ch; color: var(--muted); }
 .docs-pane ul, .docs-pane ol { max-width: 78ch; color: var(--muted); }
@@ -445,12 +426,9 @@ pre.entry-examples code {
   color: var(--muted);
 }
 .docs-pane thead th {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--faint);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--dim);
   white-space: nowrap;
 }
 .docs-pane tbody tr:last-child th,
@@ -502,10 +480,7 @@ pre.entry-examples code {
 .pane-foot .foot-next { margin-left: auto; text-align: right; }
 .pane-foot .foot-dir {
   display: block;
-  font-family: var(--mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 0.8rem;
   color: var(--faint);
 }
 
@@ -553,7 +528,6 @@ pre.entry-examples code {
 /* ── Narrow screens ────────────────────────────────────────── */
 
 @media (max-width: 960px) {
-  :root { --docs-top: 218px; }
 
   .docs-shell {
     grid-template-columns: minmax(0, 1fr);
@@ -565,13 +539,10 @@ pre.entry-examples code {
     width: 100%;
     padding: 10px 14px;
     font: inherit;
-    font-family: var(--mono);
-    font-size: 0.76rem;
+    font-size: 0.95rem;
     font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
     text-align: left;
-    color: var(--gold-bright, var(--gold));
+    color: var(--text);
     background: var(--panel);
     border: 1px solid var(--line);
     border-radius: var(--radius);
@@ -654,13 +625,8 @@ pre.entry-examples code {
   .flag { font-size: 6pt; }
   .docs-note { font-size: 9pt; padding: 8pt 10pt; }
 
-  /* Screen furniture: the starfield and meteors would cost a page of ink
-     apiece, and the sticky chrome has nothing to stick to on paper. */
-  body::before,
-  body::after,
-  main::before,
-  .shooting-stars,
-  .topbar,
+  /* Site header and footer have no place on paper. */
+  .site-header,
   .site-footer,
   .docs-rail-toggle,
   .docs-pdf,
