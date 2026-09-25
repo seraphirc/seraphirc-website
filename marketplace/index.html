@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="aura">
+<html lang="en" data-theme="seraph">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,12 +26,6 @@
     <meta property="og:url" content="https://www.seraphirc.chat/marketplace/">
     <meta property="og:image" content="https://www.seraphirc.chat/assets/seraphirc-link-preview-v4.png">
     <title>SeraphIRC - Theme Marketplace</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    >
     <script>
       // No-flash theme: apply the saved theme before first paint.
       (function () {
@@ -41,24 +35,19 @@
         } catch (e) {}
       })();
     </script>
-    <link rel="stylesheet" href="/styles.css?v=20260912-themed-brand-mark-1">
+    <link rel="stylesheet" href="/styles.css?v=20260925-redesign-5">
     <style>
       /* Marketplace-only styling, built on the site's theme variables. */
       .market-list { overflow-x: auto; }
       .market-table {
         width: 100%; border-collapse: collapse;
-        background: var(--panel); border: 1px solid var(--line);
-        font-size: 0.92rem;
+        font-size: 0.95rem;
       }
       .market-table th, .market-table td {
-        padding: 7px 12px; text-align: left; border-bottom: 1px solid var(--line);
+        padding: 9px 14px 9px 0; text-align: left; border-bottom: 1px solid var(--line);
         white-space: nowrap;
       }
-      .market-table th {
-        color: var(--muted); font-weight: 600; font-size: 0.8rem;
-        text-transform: uppercase; letter-spacing: 0.04em;
-      }
-      .market-table tbody tr:last-child td { border-bottom: none; }
+      .market-table th { color: var(--dim); font-weight: 600; font-size: 0.85rem; }
       .market-table td.market-name { font-weight: 700; }
       .market-table td.market-count { font-family: var(--mono); color: var(--muted); }
       .market-sort {
@@ -74,7 +63,7 @@
         display: inline-flex; align-items: center; gap: 6px;
         text-decoration: none; font-weight: 700; font-size: 0.85rem;
         color: var(--accent-bright, var(--accent));
-        border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px;
+        border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 4px 10px;
       }
       .market-download:hover { border-color: var(--accent); }
       .market-download svg { width: 14px; height: 14px; fill: currentColor; }
@@ -83,7 +72,7 @@
         display: inline-flex; align-items: center; gap: 6px;
         font: inherit; font-weight: 700; font-size: 0.85rem; cursor: pointer;
         color: var(--text); background: none;
-        border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px;
+        border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 4px 10px;
       }
       .market-preview-button:hover { border-color: var(--accent); }
       .market-empty { color: var(--muted); }
@@ -91,116 +80,13 @@
       .market-search {
         width: 100%; max-width: 460px;
         padding: 8px 12px;
-        font: inherit; font-family: var(--mono); font-size: 0.88rem;
+        font: inherit; font-size: 0.92rem;
         color: var(--text);
         background: var(--panel);
-        border: 1px solid var(--line); border-radius: 8px;
+        border: 1px solid var(--line-2); border-radius: var(--radius-sm);
       }
       .market-search::placeholder { color: var(--dim); }
-      .market-search:focus {
-        outline: none;
-        border-color: var(--accent);
-        box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
-      }
-
-      /* ── Storefront heading ───────────────────────────────────────────────
-         The marketplace greeting, dressed up as a shopfront: striped awning
-         with a scalloped hem, centered signage, and a ticker of ★ separators
-         echoing the nav marquee. Everything is painted with theme variables
-         so it follows all site themes. */
-      .market-heading {
-        max-width: none;
-        margin-bottom: 38px;
-        padding: 0 clamp(16px, 4vw, 44px) 30px;
-        text-align: center;
-        background:
-          linear-gradient(180deg, color-mix(in srgb, var(--accent) 8%, transparent), transparent 58%),
-          var(--panel);
-        border: 1px solid var(--line-2, var(--line));
-        border-radius: var(--radius);
-      }
-      .market-awning {
-        --stripe-a: var(--accent);
-        --stripe-b: color-mix(in srgb, var(--accent) 26%, var(--panel));
-        margin: 0 calc(clamp(16px, 4vw, 44px) * -1) 26px;
-      }
-      .market-awning .awning-top {
-        height: 20px;
-        background: repeating-linear-gradient(90deg, var(--stripe-a) 0 26px, var(--stripe-b) 26px 52px);
-        border-radius: var(--radius) var(--radius) 0 0;
-      }
-      .market-awning .awning-scallops {
-        height: 9px;
-        background:
-          radial-gradient(circle at 13px 0, var(--stripe-a) 8.5px, transparent 9px) 0 0 / 52px 9px repeat-x,
-          radial-gradient(circle at 13px 0, var(--stripe-b) 8.5px, transparent 9px) 26px 0 / 52px 9px repeat-x;
-      }
-      .market-heading h2 { margin-bottom: 10px; }
-      .market-heading h2::after { margin-left: auto; margin-right: auto; }
-      .market-heading h2 .orn {
-        color: var(--gold-bright, var(--gold));
-        font-size: 0.55em;
-        vertical-align: 0.28em;
-        padding: 0 0.35em;
-      }
-      .market-greet {
-        margin: 0 0 12px;
-        color: var(--gold-bright, var(--gold));
-        font-family: var(--mono);
-        font-style: italic;
-        font-size: 0.92rem;
-      }
-      .market-ticker {
-        margin: 0 0 18px;
-        color: var(--gold-bright, var(--gold));
-        font-family: var(--mono);
-        font-size: 0.74rem;
-        font-weight: 700;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-      }
-      .market-ticker .sep { color: var(--dim); padding: 0 0.6em; }
-      .market-heading .lead { max-width: 640px; margin-left: auto; margin-right: auto; }
-
-      /* ── Awning signs ────────────────────────────────────────────────────
-         Two little shop signs hung from the hem of the awning on short
-         strings, one at each end. Painted with the theme variables so they
-         recolor with the rest of the site. Decorative only, so they vanish
-         when the side aisles get tight. */
-      .market-heading { position: relative; }
-      .market-sign {
-        position: absolute;
-        top: 48px;
-        padding: 7px 14px;
-        background: var(--gold-bright, var(--gold));
-        color: #26221a;
-        border: 2px solid var(--text);
-        border-radius: 4px;
-        font-family: var(--mono);
-        font-size: 0.78rem;
-        font-weight: 800;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        pointer-events: none;
-        transform-origin: 50% -20px;
-        animation: sign-sway 3.4s ease-in-out infinite alternate;
-      }
-      .market-sign::before,
-      .market-sign::after {
-        content: "";
-        position: absolute;
-        top: -20px;
-        width: 2px;
-        height: 21px;
-        background: var(--text);
-      }
-      .market-sign::before { left: 26%; }
-      .market-sign::after { right: 26%; }
-      .market-sign-left { left: clamp(18px, 3vw, 52px); }
-      .market-sign-right { right: clamp(18px, 3vw, 52px); animation-delay: -1.7s; }
-      @keyframes sign-sway { from { transform: rotate(-2deg); } to { transform: rotate(2.4deg); } }
-      @media (max-width: 980px) { .market-sign { display: none; } }
-      @media (prefers-reduced-motion: reduce) { .market-sign { animation: none; } }
+      .market-search:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 
       /* ── Theme preview dialog ─────────────────────────────────────────────
          A rough sketch of the client, painted with the theme's own custom
@@ -361,124 +247,35 @@
     </style>
   </head>
   <body>
-    <div class="topbar">
-    <header class="site-header" aria-label="Site header">
-      <a class="brand" href="/" aria-label="SeraphIRC home">
-        <span class="brand-mark" aria-hidden="true">
-          <svg class="seraph-mark" viewBox="9 23.5 74 74" fill="none" stroke-width="11" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M18,66 L74,30" stroke="var(--mark-1)"/><path d="M22,79 L64,52" stroke="var(--mark-2)"/><path d="M28,91 L52,75" stroke="var(--mark-3)"/></svg>
-        </span>
-        <span>SeraphIRC</span>
-      </a>
-      <div class="nav-dl-group">
-        <a class="nav-dl nav-dl-primary" href="https://github.com/seraphirc/seraphirc-download/releases/latest">
-          <span class="button-os-logos">
-            <svg class="button-os-logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489a.424.424 0 00-.11.135c-.26.268-.45.6-.663.839-.199.199-.485.267-.797.4-.313.136-.658.269-.864.68-.09.189-.136.394-.132.602 0 .199.027.4.055.536.058.399.116.728.04.97-.249.68-.28 1.145-.106 1.484.174.334.535.47.94.601.81.2 1.91.135 2.774.6.926.466 1.866.67 2.616.47.526-.116.97-.464 1.208-.946.587-.003 1.23-.269 2.26-.334.699-.058 1.574.267 2.577.2.025.134.063.198.114.333l.003.003c.391.778 1.113 1.132 1.884 1.071.771-.06 1.592-.536 2.257-1.306.631-.765 1.683-1.084 2.378-1.503.348-.199.629-.469.649-.853.023-.4-.2-.811-.714-1.376v-.097l-.003-.003c-.17-.2-.25-.535-.338-.926-.085-.401-.182-.786-.492-1.046h-.003c-.059-.054-.123-.067-.188-.135a.357.357 0 00-.19-.064c.431-1.278.264-2.55-.173-3.694-.533-1.41-1.465-2.638-2.175-3.483-.796-1.005-1.576-1.957-1.56-3.368.026-2.152.236-6.133-3.544-6.139zm.529 3.405h.013c.213 0 .396.062.584.198.19.135.33.332.438.533.105.259.158.459.166.724 0-.02.006-.04.006-.06v.105a.086.086 0 01-.004-.021l-.004-.024a1.807 1.807 0 01-.15.706.953.953 0 01-.213.335.71.71 0 00-.088-.042c-.104-.045-.198-.064-.284-.133a1.312 1.312 0 00-.22-.066c.05-.06.146-.133.183-.198.053-.128.082-.264.088-.402v-.02a1.21 1.21 0 00-.061-.4c-.045-.134-.101-.2-.183-.333-.084-.066-.167-.132-.267-.132h-.016c-.093 0-.176.03-.262.132a.8.8 0 00-.205.334 1.18 1.18 0 00-.09.4v.019c.002.089.008.179.02.267-.193-.067-.438-.135-.607-.202a1.635 1.635 0 01-.018-.2v-.02a1.772 1.772 0 01.15-.768c.082-.22.232-.406.43-.533a.985.985 0 01.594-.2zm-2.962.059h.036c.142 0 .27.048.399.135.146.129.264.288.344.465.09.199.14.4.153.667v.004c.007.134.006.2-.002.266v.08c-.03.007-.056.018-.083.024-.152.055-.274.135-.393.2.012-.09.013-.18.003-.267v-.015c-.012-.133-.04-.2-.082-.333a.613.613 0 00-.166-.267.248.248 0 00-.183-.064h-.021c-.071.006-.13.04-.186.132a.552.552 0 00-.12.27.944.944 0 00-.023.33v.015c.012.135.037.2.08.334.046.134.098.2.166.268.01.009.02.018.034.024-.07.057-.117.07-.176.136a.304.304 0 01-.131.068 2.62 2.62 0 01-.275-.402 1.772 1.772 0 01-.155-.667 1.759 1.759 0 01.08-.668 1.43 1.43 0 01.283-.535c.128-.133.26-.2.418-.2zm1.37 1.706c.332 0 .733.065 1.216.399.293.2.523.269 1.052.468h.003c.255.136.405.266.478.399v-.131a.571.571 0 01.016.47c-.123.31-.516.643-1.063.842v.002c-.268.135-.501.333-.775.465-.276.135-.588.292-1.012.267a1.139 1.139 0 01-.448-.067 3.566 3.566 0 01-.322-.198c-.195-.135-.363-.332-.612-.465v-.005h-.005c-.4-.246-.616-.512-.686-.71-.07-.268-.005-.47.193-.6.224-.135.38-.271.483-.336.104-.074.143-.102.176-.131h.002v-.003c.169-.202.436-.47.839-.601.139-.036.294-.065.466-.065zm2.8 2.142c.358 1.417 1.196 3.475 1.735 4.473.286.534.855 1.659 1.102 3.024.156-.005.33.018.513.064.646-1.671-.546-3.467-1.089-3.966-.22-.2-.232-.335-.123-.335.59.534 1.365 1.572 1.646 2.757.13.535.16 1.104.021 1.67.067.028.135.06.205.067 1.032.534 1.413.938 1.23 1.537v-.043c-.06-.003-.12 0-.18 0h-.016c.151-.467-.182-.825-1.065-1.224-.915-.4-1.646-.336-1.77.465-.008.043-.013.066-.018.135-.068.023-.139.053-.209.064-.43.268-.662.669-.793 1.187-.13.533-.17 1.156-.205 1.869v.003c-.02.334-.17.838-.319 1.35-1.5 1.072-3.58 1.538-5.348.334a2.645 2.645 0 00-.402-.533 1.45 1.45 0 00-.275-.333c.182 0 .338-.03.465-.067a.615.615 0 00.314-.334c.108-.267 0-.697-.345-1.163-.345-.467-.931-.995-1.788-1.521-.63-.4-.986-.87-1.15-1.396-.165-.534-.143-1.085-.015-1.645.245-1.07.873-2.11 1.274-2.763.107-.065.037.135-.408.974-.396.751-1.14 2.497-.122 3.854a8.123 8.123 0 01.647-2.876c.564-1.278 1.743-3.504 1.836-5.268.048.036.217.135.289.202.218.133.38.333.59.465.21.201.477.335.876.335.039.003.075.006.11.006.412 0 .73-.134.997-.268.29-.134.52-.334.74-.4h.005c.467-.135.835-.402 1.044-.7zm2.185 8.958c.037.6.343 1.245.882 1.377.588.134 1.434-.333 1.791-.765l.211-.01c.315-.007.577.01.847.268l.003.003c.208.199.305.53.391.876.085.4.154.78.409 1.066.486.527.645.906.636 1.14l.003-.007v.018l-.003-.012c-.015.262-.185.396-.498.595-.63.401-1.746.712-2.457 1.57-.618.737-1.37 1.14-2.036 1.191-.664.053-1.237-.2-1.574-.898l-.005-.003c-.21-.4-.12-1.025.056-1.69.176-.668.428-1.344.463-1.897.037-.714.076-1.335.195-1.814.12-.465.308-.797.641-.984l.045-.022zm-10.814.049h.01c.053 0 .105.005.157.014.376.055.706.333 1.023.752l.91 1.664.003.003c.243.533.754 1.064 1.189 1.637.434.598.77 1.131.729 1.57v.006c-.057.744-.48 1.148-1.125 1.294-.645.135-1.52.002-2.395-.464-.968-.536-2.118-.469-2.857-.602-.369-.066-.61-.2-.723-.4-.11-.2-.113-.602.123-1.23v-.004l.002-.003c.117-.334.03-.752-.027-1.118-.055-.401-.083-.71.043-.94.16-.334.396-.4.69-.533.294-.135.64-.202.915-.47h.002v-.002c.256-.268.445-.601.668-.838.19-.201.38-.336.663-.336zm7.159-9.074c-.435.201-.945.535-1.488.535-.542 0-.97-.267-1.28-.466-.154-.134-.28-.268-.373-.335-.164-.134-.144-.333-.074-.333.109.016.129.134.199.2.096.066.215.2.36.333.292.2.68.467 1.167.467.485 0 1.053-.267 1.398-.466.195-.135.445-.334.648-.467.156-.136.149-.267.279-.267.128.016.034.134-.147.332a8.097 8.097 0 01-.69.468zm-1.082-1.583V5.64c-.006-.02.013-.042.029-.05.074-.043.18-.027.26.004.063 0 .16.067.15.135-.006.049-.085.066-.135.066-.055 0-.092-.043-.141-.068-.052-.018-.146-.008-.163-.065zm-.551 0c-.02.058-.113.049-.166.066-.047.025-.086.068-.14.068-.05 0-.13-.02-.136-.068-.01-.066.088-.133.15-.133.08-.031.184-.047.259-.005.019.009.036.03.03.05v.02h.003z"/>
-            </svg>
-            <svg class="button-os-logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/>
-            </svg>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true">
+            <svg class="seraph-mark" viewBox="9 23.5 74 74" fill="none" stroke-width="11" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M18,66 L74,30" stroke="var(--mark-1)"/><path d="M22,79 L64,52" stroke="var(--mark-2)"/><path d="M28,91 L52,75" stroke="var(--mark-3)"/></svg>
           </span>
-          <span><span class="nav-dl-os">Download </span>Linux/macOS</span>
+          SeraphIRC
         </a>
-        <a class="nav-dl nav-dl-windows" href="https://apps.microsoft.com/store/detail/9NX6N61K61B0?cid=DevShareMCLPCS">
-          <svg class="button-windows-logo" viewBox="0 0 88 88" aria-hidden="true" focusable="false">
-            <rect x="0" y="0" width="41" height="41" fill="#F25022"/>
-            <rect x="47" y="0" width="41" height="41" fill="#7FBA00"/>
-            <rect x="0" y="47" width="41" height="41" fill="#00A4EF"/>
-            <rect x="47" y="47" width="41" height="41" fill="#FFB900"/>
-          </svg>
-          <span><span class="nav-dl-os">Download for </span>Windows</span>
-        </a>
-        <a class="nav-dl nav-dl-mobile" href="https://apps.apple.com/us/app/seraphirc/id6787119413" target="_blank" rel="noopener">
-          <svg class="button-os-logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/>
-          </svg>
-          <span>Mobile<span class="nav-dl-os"> App</span> (iOS)</span>
-        </a>
-        <a
-          class="nav-dl nav-dl-coffee"
-          href="https://buymeacoffee.com/seraphirc"
-          target="_blank"
-          rel="noopener"
-          aria-label="Support SeraphIRC on Buy Me a Coffee"
-          title="Buy Me a Coffee"
-        >
-          <svg class="button-os-logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M4 8h12v5.5A5.5 5.5 0 0 1 10.5 19h-1A5.5 5.5 0 0 1 4 13.5V8z"/>
-            <path fill-rule="evenodd" d="M16.5 9.3a3.2 3.2 0 1 1 0 6.4 3.2 3.2 0 0 1 0-6.4zm0 1.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/>
-            <rect x="7.2" y="3" width="1.6" height="3.2" rx="0.8"/>
-            <rect x="11.2" y="3" width="1.6" height="3.2" rx="0.8"/>
-          </svg>
-          <span class="nav-dl-coffee-text">Support<span class="nav-dl-os"> SeraphIRC</span></span>
-        </a>
-      </div>
-      <div class="header-right">
-        <label class="theme-picker">
-          <span class="theme-picker-label">Theme</span>
-          <select id="theme-select" class="theme-select" aria-label="Site color theme">
-            <option value="aura">Aura</option>
-            <option value="catppuccin">Catppuccin</option>
-            <option value="dim">Dim</option>
-            <option value="dracula">Dracula</option>
-            <option value="funky-fresh">Funky Fresh</option>
-            <option value="gruvbox">Gruvbox</option>
-            <option value="hackerman">Hackerman</option>
-            <option value="light">Light</option>
-            <option value="miami-nights">Miami Nights</option>
-            <option value="monokai">Monokai</option>
-            <option value="nebula">Nebula</option>
-            <option value="newsprint">Newsprint</option>
-            <option value="nord">Nord</option>
-            <option value="ocean-breeze">Ocean Breeze</option>
-            <option value="phoenix">Phoenix</option>
-            <option value="sage">Sage</option>
-            <option value="sakura">Sakura</option>
-            <option value="seraph">Seraph</option>
-            <option value="solarized-dark">Solarized Dark</option>
-            <option value="solarized-light">Solarized Light</option>
-            <option value="tokyo-night">Tokyo Night</option>
-          </select>
-        </label>
+        <nav class="site-nav" aria-label="Main">
+          <a href="/#download">Download</a>
+          <a href="/#features">Features</a>
+          <a href="/#news">News</a>
+          <a href="/#changelog">Changelog</a>
+          <a href="/docs/">Docs</a>
+          <a href="/marketplace/" aria-current="page">Themes</a>
+        </nav>
       </div>
     </header>
 
-      <div class="topnav">
-        <div class="marqrow">
-          <div class="nav-marq" data-marq role="navigation" aria-label="Section links (scrolling)">
-          <div class="nav-run"><a href="/#news">News</a><span class="sep">★</span><a href="/#platforms">Apps</a><span class="sep">★</span><a href="/#features">Features</a><span class="sep">★</span><a href="/#bouncers">Bouncers</a><span class="sep">★</span><a href="/#ircv3">IRCv3</a><span class="sep">★</span><a href="/#changelog">Changelog</a><span class="sep">★</span><a href="/#contact">Contact</a><span class="sep">★</span><a href="/docs/">Docs</a><span class="sep">★</span><a href="/marketplace/">Theme Marketplace</a><span class="sep">★</span><a href="/#news">News</a><span class="sep">★</span><a href="/#platforms">Apps</a><span class="sep">★</span><a href="/#features">Features</a><span class="sep">★</span><a href="/#bouncers">Bouncers</a><span class="sep">★</span><a href="/#ircv3">IRCv3</a><span class="sep">★</span><a href="/#changelog">Changelog</a><span class="sep">★</span><a href="/#contact">Contact</a><span class="sep">★</span><a href="/docs/">Docs</a><span class="sep">★</span><a href="/marketplace/">Theme Marketplace</a><span class="sep">★</span><a href="/#news">News</a><span class="sep">★</span><a href="/#platforms">Apps</a><span class="sep">★</span><a href="/#features">Features</a><span class="sep">★</span><a href="/#bouncers">Bouncers</a><span class="sep">★</span><a href="/#ircv3">IRCv3</a><span class="sep">★</span><a href="/#changelog">Changelog</a><span class="sep">★</span><a href="/#contact">Contact</a><span class="sep">★</span><a href="/docs/">Docs</a><span class="sep">★</span><a href="/marketplace/">Theme Marketplace</a><span class="sep">★</span><a href="/#news">News</a><span class="sep">★</span><a href="/#platforms">Apps</a><span class="sep">★</span><a href="/#features">Features</a><span class="sep">★</span><a href="/#bouncers">Bouncers</a><span class="sep">★</span><a href="/#ircv3">IRCv3</a><span class="sep">★</span><a href="/#changelog">Changelog</a><span class="sep">★</span><a href="/#contact">Contact</a><span class="sep">★</span><a href="/docs/">Docs</a><span class="sep">★</span><a href="/marketplace/">Theme Marketplace</a><span class="sep">★</span></div>
-        </div>
-        </div>
-        <nav class="faded" aria-label="Jump to section"><a href="/#news">News</a><span class="d">·</span><a href="/#platforms">Apps</a><span class="d">·</span><a href="/#features">Features</a><span class="d">·</span><a href="/#bouncers">Bouncers</a><span class="d">·</span><a href="/#ircv3">IRCv3</a><span class="d">·</span><a href="/#changelog">Changelog</a><span class="d">·</span><a href="/#contact">Contact</a><span class="d">·</span><a href="/docs/">Docs</a><span class="d">·</span><a href="/marketplace/">Theme Marketplace</a></nav>
-      </div>
-    </div>
-
-    <div class="shooting-stars" aria-hidden="true">
-      <span style="--top: 8%; --left: 4%; --dur: 9s; --delay: 0s; --angle: 14deg;"></span>
-      <span style="--top: 3%; --left: 50%; --dur: 13s; --delay: 4.2s; --angle: 24deg;"></span>
-      <span style="--top: 42%; --left: 24%; --dur: 16s; --delay: 8.6s; --angle: 10deg;"></span>
-      <span style="--top: 16%; --left: 68%; --dur: 19s; --delay: 12.9s; --angle: 20deg;"></span>
-    </div>
-
-    <main>
-      <section class="section" id="marketplace" aria-labelledby="marketplace-title">
-        <div class="section-heading market-heading">
-          <div class="market-awning" aria-hidden="true">
-            <div class="awning-top"></div>
-            <div class="awning-scallops"></div>
-          </div>
-          <div class="market-sign market-sign-left" aria-hidden="true">Free</div>
-          <div class="market-sign market-sign-right" aria-hidden="true">Themes</div>
-
-          <p class="eyebrow">The SeraphIRC theme</p>
-          <h2 id="marketplace-title"><span class="orn" aria-hidden="true">&#10022;</span>Marketplace<span class="orn" aria-hidden="true">&#10022;</span></h2>
-          <p class="market-greet" id="market-greet">* SeraphBot rolls out the welcome mat</p>
-          <p class="market-ticker" id="market-ticker" aria-hidden="true">Open all hours<span class="sep">&#9733;</span>Free of charge<span class="sep">&#9733;</span>Hand reviewed<span class="sep">&#9733;</span>Made by users</p>
-          <p class="lead">
-            Every theme on these shelves was submitted by a fellow user, checked by hand, and
-            hung up with their nick on it. Take home whatever catches your eye, then import it
-            from <code>Settings &gt; Interface &gt; Appearance &gt; Import Theme</code>.
+    <main class="wrap page">
+      <section id="marketplace" aria-labelledby="marketplace-title">
+        <div class="page-head">
+          <h1 id="marketplace-title">Theme marketplace</h1>
+          <p>
+            Themes made by other SeraphIRC users. Each one is checked by hand before it goes
+            up, with the author's nick on it. Download one, then import it from
+            <code>Settings &gt; Interface &gt; Appearance &gt; Import Theme</code>.
           </p>
+          <p class="page-meta" id="market-summary"></p>
         </div>
 
         <div class="market-toolbar">
@@ -486,7 +283,7 @@
             type="search"
             id="theme-search"
             class="market-search"
-            placeholder="Search the shelves: name, nick, network, or year"
+            placeholder="Search by name, nick, network, or year"
             aria-label="Search themes by name, author nickname, network, or date added"
           >
         </div>
@@ -581,80 +378,71 @@
         </div>
       </dialog>
 
-      <section class="section" id="submit" aria-labelledby="submit-title">
-        <div class="section-heading">
-          <h2 id="submit-title">Submit your theme</h2>
-          <p class="lead">
-            Made something worth showing off? Export it from the desktop client and email the
-            file to <a href="mailto:themes@seraphirc.chat?subject=Theme%20submission"><b>themes@seraphirc.chat</b></a>.
-            Every submission is checked with the client's own theme validators and reviewed by
-            a person. Once approved, it lands in the list above with your nickname on it.
-          </p>
-        </div>
-        <ul class="punchlist punchlist-1">
+      <section class="prose" id="submit" aria-labelledby="submit-title">
+        <h2 id="submit-title">Submit your theme</h2>
+        <p>
+          Made something worth showing off? Export it from the desktop client and email the
+          file to <a href="mailto:themes@seraphirc.chat?subject=Theme%20submission">themes@seraphirc.chat</a>.
+          Every submission is checked with the client's own theme validators and reviewed by
+          a person. Once approved, it shows up in the list above with your nickname on it.
+        </p>
+        <ul>
           <li><b>Export the file:</b> <code>Settings &gt; Interface &gt; Appearance</code>, select your theme in the dropdown, then <code>Edit theme &gt; Export</code>.</li>
-          <li><b>Include your nickname</b> so the theme can be attributed to you.</li>
-          <li><b>Optionally, your preferred server network</b>, so others can find you if they want to ask about the theme.</li>
-          <li><b>Your email address</b> is used for inquiries about the submission only. It is never used for marketing and never sold or shared with third parties.</li>
+          <li><b>Include your nickname</b> so the theme can be credited to you.</li>
+          <li><b>Optionally, your preferred network</b>, so others can find you if they want to ask about the theme.</li>
+          <li><b>Your email address</b> is only used for questions about the submission. It is never used for marketing and never sold or shared.</li>
         </ul>
-      </section>
 
-      <section class="section" id="marketplace-contact" aria-labelledby="marketplace-contact-title">
-        <div class="section-heading">
-          <h2 id="marketplace-contact-title">Questions</h2>
-        </div>
-        <ul class="punchlist punchlist-1">
-          <li>Send any questions or inquiries about themes to <a href="mailto:themes@seraphirc.chat"><b>themes@seraphirc.chat</b></a>.</li>
-          <li>Want a theme taken down or updated? Same address. Include the theme name.</li>
-        </ul>
+        <h2 id="marketplace-contact">Questions</h2>
+        <p>
+          Send questions about themes to <a href="mailto:themes@seraphirc.chat">themes@seraphirc.chat</a>.
+          Want a theme taken down or updated? Same address, and include the theme name.
+        </p>
       </section>
     </main>
 
     <footer class="site-footer">
-      <div class="foot-links">
-        <a class="foot-link" href="https://github.com/seraphirc/seraphirc-download/releases/latest" target="_blank" rel="noopener">Desktop download</a>
-        <a class="foot-link" href="https://apps.apple.com/us/app/seraphirc/id6787119413" target="_blank" rel="noopener">iOS app</a>
-        <a class="foot-link" href="https://ircv3.net" target="_blank" rel="noopener">Powered by IRCv3</a>
-        <a class="foot-link" href="https://soju.im" target="_blank" rel="noopener">About Soju</a>
-        <a class="foot-link" href="/privacy/" target="_blank" rel="noopener">Privacy policy</a>
-      </div>
-
-      <div class="foot-brand">
-        <svg class="seraph-mark" viewBox="9 23.5 74 74" fill="none" stroke-width="11" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M18,66 L74,30" stroke="var(--mark-1)"/><path d="M22,79 L64,52" stroke="var(--mark-2)"/><path d="M28,91 L52,75" stroke="var(--mark-3)"/></svg>
-        <strong>SeraphIRC</strong>
-        <span>IRC for desktop &amp; mobile</span>
-        <a href="https://www.seraphirc.chat">www.seraphirc.chat</a>
-      </div>
-
-      <div class="foot-meta">
-        © <span data-year>2026</span> SeraphIRC · best viewed with any browser
+      <div class="wrap">
+        <ul class="foot-nav">
+          <li><a href="/#download">Download</a></li>
+          <li><a href="/docs/">Docs</a></li>
+          <li><a href="/marketplace/">Themes</a></li>
+          <li><a href="/#changelog">Changelog</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+          <li><a href="ircs://irc.libera.chat/seraphirc">#seraphirc on Libera</a></li>
+          <li><a href="https://buymeacoffee.com/seraphirc">Buy us a coffee</a></li>
+        </ul>
+        <label class="field foot-theme">
+          Site theme
+          <select id="theme-select">
+            <option value="aura">Aura</option>
+            <option value="catppuccin">Catppuccin</option>
+            <option value="dim">Dim</option>
+            <option value="dracula">Dracula</option>
+            <option value="funky-fresh">Funky Fresh</option>
+            <option value="gruvbox">Gruvbox</option>
+            <option value="hackerman">Hackerman</option>
+            <option value="light">Light</option>
+            <option value="miami-nights">Miami Nights</option>
+            <option value="monokai">Monokai</option>
+            <option value="nebula">Nebula</option>
+            <option value="newsprint">Newsprint</option>
+            <option value="nord">Nord</option>
+            <option value="ocean-breeze">Ocean Breeze</option>
+            <option value="phoenix">Phoenix</option>
+            <option value="sage">Sage</option>
+            <option value="sakura">Sakura</option>
+            <option value="seraph">Seraph</option>
+            <option value="solarized-dark">Solarized Dark</option>
+            <option value="solarized-light">Solarized Light</option>
+            <option value="tokyo-night">Tokyo Night</option>
+          </select>
+        </label>
+        <p class="foot-meta">&copy; <span data-year>2026</span> SeraphIRC</p>
       </div>
     </footer>
 
     <script>
-      // ---- Marquee section-nav: pause on hover/focus, click to freeze ----
-      (function () {
-        document.querySelectorAll("[data-marq]").forEach(function (m) {
-          m.addEventListener("click", function (e) {
-            if (e.target.closest("a")) return; // let real links navigate
-            m.classList.toggle("paused");
-          });
-        });
-      })();
-
-      // ---- Theme picker: swap the site palette to a desktop-client theme ----
-      (function () {
-        var select = document.getElementById("theme-select");
-        if (!select) return;
-        var STORE = "seraphirc-theme";
-        var current = document.documentElement.getAttribute("data-theme") || "aura";
-        select.value = current;
-        select.addEventListener("change", function () {
-          document.documentElement.setAttribute("data-theme", select.value);
-          try { localStorage.setItem(STORE, select.value); } catch (e) {}
-        });
-      })();
-
       // ---- Marketplace ----
       (function () {
         var list = document.getElementById("theme-list");
@@ -690,38 +478,12 @@
           });
         }
 
-        // A different doorman line each visit.
-        var greet = document.getElementById("market-greet");
-        var GREETINGS = [
-          "* SeraphBot rolls out the welcome mat",
-          "* SeraphBot throws open the shutters",
-          "* SeraphBot polishes the display shelves",
-          "* SeraphBot waves you in from the doorway",
-          "* SeraphBot dusts off a spot just for you",
-          "* SeraphBot flips the sign to OPEN"
-        ];
-        greet.textContent = GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
-
-        /* Once the manifest arrives, the ticker trades its stock slogans for
-           the real community numbers. Author names and theme names come from
-           submissions, so textContent only. */
-        function updateTicker(themes) {
-          var ticker = document.getElementById("market-ticker");
-          if (!ticker || !themes.length) return;
-          var bits = [
-            themes.length + (themes.length === 1 ? " theme" : " themes") + " on the shelves",
-            "newest arrival: " + themes[0].name
-          ];
-          ticker.textContent = "";
-          bits.forEach(function (text, i) {
-            if (i) {
-              var sep = document.createElement("span");
-              sep.className = "sep";
-              sep.textContent = "★";
-              ticker.appendChild(sep);
-            }
-            ticker.append(text);
-          });
+        /* Theme names come from submissions, so textContent only. */
+        function updateSummary(themes) {
+          var summary = document.getElementById("market-summary");
+          if (!summary || !themes.length) return;
+          summary.textContent = themes.length + (themes.length === 1 ? " theme" : " themes") +
+            ". Newest: " + themes[0].name + ".";
         }
 
         /* Every name, author, and network below came from a submission email.
@@ -741,7 +503,7 @@
             var empty = document.createElement("p");
             empty.className = "market-empty";
             empty.textContent = query
-              ? 'Nothing on the shelves matches "' + query + '". Try a theme name, a nick, a network, or a year.'
+              ? 'No themes match "' + query + '". Try a theme name, a nick, a network, or a year.'
               : "No themes yet. Yours could be the first.";
             list.appendChild(empty);
             return;
@@ -929,7 +691,7 @@
               return String(b.addedAt || "").localeCompare(String(a.addedAt || ""));
             });
             applyFilter();
-            updateTicker(allThemes);
+            updateSummary(allThemes);
           })
           .catch(function () {
             list.textContent = "";
@@ -939,32 +701,24 @@
             list.appendChild(failed);
           });
       })();
-      // The footer year tracks the clock, so it never needs a January edit.
-      // The markup carries a year of its own, so it is right without script too.
+    </script>
+    <script>
+      // The footer theme picker recolors the site to match a client theme.
       (function () {
-        var stamp = String(new Date().getFullYear());
-        document.querySelectorAll("[data-year]").forEach(function (slot) {
-          slot.textContent = stamp;
+        var select = document.getElementById("theme-select");
+        if (!select) return;
+        select.value = document.documentElement.getAttribute("data-theme") || "seraph";
+        select.addEventListener("change", function () {
+          document.documentElement.setAttribute("data-theme", select.value);
+          try { localStorage.setItem("seraphirc-theme", select.value); } catch (e) {}
         });
       })();
     </script>
     <script>
-      // ---- Sticky-bar height -> anchor offset ----
-      // The bar's rows wrap at several widths, so a fixed scroll-padding is
-      // wrong at some of them. Publish the measured height and let the CSS
-      // spend it; the breakpoint fallbacks below cover the no-JS case.
-      (function () {
-        var bar = document.querySelector(".topbar");
-        if (!bar) return;
-        var root = document.documentElement;
-        function sync() {
-          root.style.setProperty(
-            "--bar-h", Math.round(bar.getBoundingClientRect().height) + "px");
-        }
-        sync();
-        if (window.ResizeObserver) new ResizeObserver(sync).observe(bar);
-        else window.addEventListener("resize", sync);
-      })();
+      // Keep the footer year current.
+      document.querySelectorAll("[data-year]").forEach(function (el) {
+        el.textContent = String(new Date().getFullYear());
+      });
     </script>
   </body>
 </html>
