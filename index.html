@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="seraph">
+<html lang="en" data-theme="aura">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -130,7 +130,7 @@
             <button class="shot-button" type="button" data-lightbox-target="interface-lightbox" aria-label="View the desktop screenshot at full size">
               <img
                 data-desktop-shot
-                src="assets/desktop-themes/seraph-seraph-desktop-modern.png"
+                src="assets/desktop-themes/aura-seraph-desktop-modern.png"
                 alt="SeraphIRC desktop client, Modern layout in the Seraph window style, showing IRC channels, chat, and user list"
                 width="2560"
                 height="1568"
@@ -332,7 +332,7 @@
             <button class="shot-button tablet" type="button" data-lightbox-target="tablet-lightbox" aria-label="View the iPad screenshot at full size">
               <img
                 data-tablet-shot
-                src="assets/ipad-themes/seraph-ipad.jpeg"
+                src="assets/ipad-themes/aura-ipad.jpeg"
                 alt="SeraphIRC on iPad showing the network list beside the #ircv3 conversation"
                 width="1640"
                 height="2296"
@@ -342,7 +342,7 @@
             <button class="shot-button phone" type="button" data-lightbox-target="mobile-lightbox" aria-label="View the iPhone screenshot at full size">
               <img
                 data-phone-shot
-                src="assets/iphone-themes/seraph-iphone.jpg"
+                src="assets/iphone-themes/aura-iphone.jpg"
                 alt="SeraphIRC on iPhone showing a conversation in the #ircv3 channel on Libera"
                 width="1290"
                 height="2671"
@@ -1302,19 +1302,19 @@
     <dialog class="image-lightbox interface-lightbox" id="interface-lightbox" aria-label="Desktop screenshot">
       <form method="dialog"><button class="lightbox-close" type="submit" aria-label="Close"></button></form>
       <div class="lightbox-frame">
-        <img data-desktop-shot src="assets/desktop-themes/seraph-seraph-desktop-modern.png" alt="SeraphIRC desktop client, Modern layout in the Seraph window style, showing IRC channels, chat, and user list" width="2560" height="1568" loading="lazy">
+        <img data-desktop-shot src="assets/desktop-themes/aura-seraph-desktop-modern.png" alt="SeraphIRC desktop client, Modern layout in the Seraph window style, showing IRC channels, chat, and user list" width="2560" height="1568" loading="lazy">
       </div>
     </dialog>
     <dialog class="image-lightbox tablet-lightbox" id="tablet-lightbox" aria-label="iPad screenshot">
       <form method="dialog"><button class="lightbox-close" type="submit" aria-label="Close"></button></form>
       <div class="lightbox-frame">
-        <img data-tablet-shot src="assets/ipad-themes/seraph-ipad.jpeg" alt="SeraphIRC on iPad showing the network list beside the #ircv3 conversation" width="1640" height="2296" loading="lazy">
+        <img data-tablet-shot src="assets/ipad-themes/aura-ipad.jpeg" alt="SeraphIRC on iPad showing the network list beside the #ircv3 conversation" width="1640" height="2296" loading="lazy">
       </div>
     </dialog>
     <dialog class="image-lightbox mobile-lightbox" id="mobile-lightbox" aria-label="iPhone screenshot">
       <form method="dialog"><button class="lightbox-close" type="submit" aria-label="Close"></button></form>
       <div class="lightbox-frame">
-        <img data-phone-shot src="assets/iphone-themes/seraph-iphone.jpg" alt="SeraphIRC on iPhone showing a conversation in the #ircv3 channel on Libera" width="1290" height="2671" loading="lazy">
+        <img data-phone-shot src="assets/iphone-themes/aura-iphone.jpg" alt="SeraphIRC on iPhone showing a conversation in the #ircv3 channel on Libera" width="1290" height="2671" loading="lazy">
       </div>
     </dialog>
 
@@ -1353,7 +1353,7 @@
         var select = document.getElementById("theme-select");
         var SKINS = { seraph: "Seraph", macos: "macOS" };
         var MODES = { modern: "Modern", classic: "Classic" };
-        var theme = document.documentElement.getAttribute("data-theme") || "seraph";
+        var theme = document.documentElement.getAttribute("data-theme") || "aura";
         var skin = saved("seraphirc-skin", SKINS, "seraph");
         var mode = saved("seraphirc-layout", MODES, "modern");
 

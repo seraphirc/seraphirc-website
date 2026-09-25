@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="seraph">
+<html lang="en" data-theme="aura">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -202,7 +202,7 @@
       (function () {
         var select = document.getElementById("theme-select");
         if (!select) return;
-        select.value = document.documentElement.getAttribute("data-theme") || "seraph";
+        select.value = document.documentElement.getAttribute("data-theme") || "aura";
         select.addEventListener("change", function () {
           document.documentElement.setAttribute("data-theme", select.value);
           try { localStorage.setItem("seraphirc-theme", select.value); } catch (e) {}
