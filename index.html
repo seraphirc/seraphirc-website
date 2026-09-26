@@ -1296,8 +1296,10 @@
     </footer>
 
     <script>
-      // Loop each demo once it scrolls near the viewport, unless the visitor
-      // has asked for less motion. Nothing downloads before then.
+      // Loop each demo while it is on screen, unless the visitor has asked for
+      // less motion. Nothing downloads before then. Safari pauses muted video
+      // that scrolls away and never resumes it, so this plays and pauses on
+      // visibility itself. A pause the visitor made sticks until they press play.
       (function () {
         var videos = document.querySelectorAll("[data-demo-video]");
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -1310,14 +1312,34 @@
           videos.forEach(start);
           return;
         }
+        // Measured at the moment of the pause, since Safari's own pause can
+        // land before the observer hears the video left the screen.
+        function mostlyOnScreen(video) {
+          var rect = video.getBoundingClientRect();
+          var shown = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+          return shown >= rect.height / 2;
+        }
         var observer = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
-            if (!entry.isIntersecting) return;
-            observer.unobserve(entry.target);
-            start(entry.target);
+            var video = entry.target;
+            if (video.dataset.userPaused) return;
+            if (entry.isIntersecting) {
+              start(video);
+            } else if (!document.fullscreenElement && !video.webkitDisplayingFullscreen) {
+              video.pause();
+            }
           });
-        }, { rootMargin: "200px 0px" });
-        videos.forEach(function (video) { observer.observe(video); });
+        });
+        videos.forEach(function (video) {
+          // A pause with the video mostly on screen came from the visitor.
+          video.addEventListener("pause", function () {
+            if (mostlyOnScreen(video)) video.dataset.userPaused = "true";
+          });
+          video.addEventListener("play", function () {
+            delete video.dataset.userPaused;
+          });
+          observer.observe(video);
+        });
       })();
 
       // The header theme picker recolors the site to match a client theme.
