@@ -1308,6 +1308,28 @@
           var playing = video.play();
           if (playing) playing.catch(function () {});
         }
+        // iOS shows the controls of a video that starts on its own until it
+        // is tapped, so hide them while it autoplays. A tap, click, or Enter
+        // brings them back.
+        videos.forEach(function (video) {
+          video.controls = false;
+          video.tabIndex = 0;
+          video.style.cursor = "pointer";
+          function reveal() {
+            video.controls = true;
+            video.removeAttribute("tabindex");
+            video.style.cursor = "";
+            video.removeEventListener("click", reveal);
+            video.removeEventListener("keydown", onKey);
+          }
+          function onKey(event) {
+            if (event.key !== "Enter" && event.key !== " ") return;
+            event.preventDefault();
+            reveal();
+          }
+          video.addEventListener("click", reveal);
+          video.addEventListener("keydown", onKey);
+        });
         if (!("IntersectionObserver" in window)) {
           videos.forEach(start);
           return;
