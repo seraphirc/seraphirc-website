@@ -160,8 +160,11 @@
               width="2558"
               height="1546"
               controls
+              muted
+              loop
               playsinline
               preload="metadata"
+              data-demo-video
               aria-label="A demo of the SeraphIRC desktop client"
             ></video>
             <figcaption>
@@ -1327,6 +1330,15 @@
           if (event.target === box || event.target.matches(".lightbox-frame img")) box.close();
         });
       });
+
+      // Loop the desktop demo, unless the visitor has asked for less motion.
+      (function () {
+        var video = document.querySelector("[data-demo-video]");
+        if (!video || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        video.muted = true;
+        var playing = video.play();
+        if (playing) playing.catch(function () {});
+      })();
 
       // The header theme picker recolors the site and picks the iPad and
       // iPhone screenshots.
