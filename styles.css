@@ -285,7 +285,7 @@ select option { color: var(--text); background: var(--panel); }
 }
 
 /* Screenshot plus the controls that pick which one is shown. */
-.shot { margin: 32px 0 0; }
+.shot { max-width: 880px; margin: 32px 0 0; }
 .shot-button {
   display: block;
   width: 100%;
@@ -389,8 +389,8 @@ select option { color: var(--text); background: var(--panel); }
   gap: 16px;
 }
 .device-shots .shot-button { width: auto; }
-.device-shots .tablet img { width: 300px; }
-.device-shots .phone img { width: 196px; border-radius: 14px; }
+.device-shots .tablet img { width: 260px; }
+.device-shots .phone img { width: 170px; border-radius: 14px; }
 
 /* News */
 .post {
