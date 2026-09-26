@@ -89,7 +89,7 @@
         } catch (e) {}
       })();
     </script>
-    <link rel="stylesheet" href="styles.css?v=20260926-video-1">
+    <link rel="stylesheet" href="styles.css?v=20260926-video-2">
   </head>
   <body>
     <header class="site-header">
@@ -317,28 +317,20 @@
               <a href="https://apps.apple.com/us/app/seraphirc/id6787119413">SeraphIRC on the App Store</a>
             </p>
           </div>
-          <div class="device-shots">
-            <button class="shot-button tablet" type="button" data-lightbox-target="tablet-lightbox" aria-label="View the iPad screenshot at full size">
-              <img
-                data-tablet-shot
-                src="assets/ipad-themes/aura-ipad.jpeg"
-                alt="SeraphIRC on iPad showing the network list beside the #ircv3 conversation"
-                width="1640"
-                height="2296"
-                loading="lazy"
-              >
-            </button>
-            <button class="shot-button phone" type="button" data-lightbox-target="mobile-lightbox" aria-label="View the iPhone screenshot at full size">
-              <img
-                data-phone-shot
-                src="assets/iphone-themes/aura-iphone.jpg"
-                alt="SeraphIRC on iPhone showing a conversation in the #ircv3 channel on Libera"
-                width="1290"
-                height="2671"
-                loading="lazy"
-              >
-            </button>
-          </div>
+          <video
+            class="phone-video"
+            src="assets/demo/seraphirc-mobile-demo.mp4"
+            poster="assets/demo/seraphirc-mobile-demo-poster.jpg"
+            width="860"
+            height="1766"
+            controls
+            muted
+            loop
+            playsinline
+            preload="none"
+            data-demo-video
+            aria-label="A demo of SeraphIRC on iPhone"
+          ></video>
         </div>
       </section>
 
@@ -1288,19 +1280,6 @@
       </section>
     </main>
 
-    <dialog class="image-lightbox tablet-lightbox" id="tablet-lightbox" aria-label="iPad screenshot">
-      <form method="dialog"><button class="lightbox-close" type="submit" aria-label="Close"></button></form>
-      <div class="lightbox-frame">
-        <img data-tablet-shot src="assets/ipad-themes/aura-ipad.jpeg" alt="SeraphIRC on iPad showing the network list beside the #ircv3 conversation" width="1640" height="2296" loading="lazy">
-      </div>
-    </dialog>
-    <dialog class="image-lightbox mobile-lightbox" id="mobile-lightbox" aria-label="iPhone screenshot">
-      <form method="dialog"><button class="lightbox-close" type="submit" aria-label="Close"></button></form>
-      <div class="lightbox-frame">
-        <img data-phone-shot src="assets/iphone-themes/aura-iphone.jpg" alt="SeraphIRC on iPhone showing a conversation in the #ircv3 channel on Libera" width="1290" height="2671" loading="lazy">
-      </div>
-    </dialog>
-
     <footer class="site-footer">
       <div class="wrap">
         <ul class="foot-nav">
@@ -1317,51 +1296,38 @@
     </footer>
 
     <script>
-      // Screenshot lightboxes. Click the picture or outside it to close.
-      document.querySelectorAll("[data-lightbox-target]").forEach(function (button) {
-        button.addEventListener("click", function () {
-          var box = document.getElementById(button.dataset.lightboxTarget);
-          if (box && box.showModal) box.showModal();
-        });
-      });
-      document.querySelectorAll(".image-lightbox").forEach(function (box) {
-        box.addEventListener("click", function (event) {
-          if (event.target === box || event.target.matches(".lightbox-frame img")) box.close();
-        });
-      });
-
-      // Loop the desktop demo, unless the visitor has asked for less motion.
+      // Loop each demo once it scrolls near the viewport, unless the visitor
+      // has asked for less motion. Nothing downloads before then.
       (function () {
-        var video = document.querySelector("[data-demo-video]");
-        if (!video || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        video.muted = true;
-        var playing = video.play();
-        if (playing) playing.catch(function () {});
+        var videos = document.querySelectorAll("[data-demo-video]");
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        function start(video) {
+          video.muted = true;
+          var playing = video.play();
+          if (playing) playing.catch(function () {});
+        }
+        if (!("IntersectionObserver" in window)) {
+          videos.forEach(start);
+          return;
+        }
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            observer.unobserve(entry.target);
+            start(entry.target);
+          });
+        }, { rootMargin: "200px 0px" });
+        videos.forEach(function (video) { observer.observe(video); });
       })();
 
-      // The header theme picker recolors the site and picks the iPad and
-      // iPhone screenshots.
+      // The header theme picker recolors the site to match a client theme.
       (function () {
         var select = document.getElementById("theme-select");
-        var theme = document.documentElement.getAttribute("data-theme") || "aura";
-
-        function update() {
-          document.querySelectorAll("[data-phone-shot]").forEach(function (img) {
-            img.src = "assets/iphone-themes/" + theme + "-iphone.jpg";
-          });
-          document.querySelectorAll("[data-tablet-shot]").forEach(function (img) {
-            img.src = "assets/ipad-themes/" + theme + "-ipad.jpeg";
-          });
-        }
-
-        select.value = theme;
+        select.value = document.documentElement.getAttribute("data-theme") || "aura";
         select.addEventListener("change", function () {
-          theme = select.value;
-          document.documentElement.setAttribute("data-theme", theme);
-          try { localStorage.setItem("seraphirc-theme", theme); } catch (e) {}
-          update();
+          document.documentElement.setAttribute("data-theme", select.value);
+          try { localStorage.setItem("seraphirc-theme", select.value); } catch (e) {}
         });
-        update();
       })();
 
       // Changelog: open the newest release (or the one in the URL), and fold
