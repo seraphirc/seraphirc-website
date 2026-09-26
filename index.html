@@ -89,7 +89,7 @@
         } catch (e) {}
       })();
     </script>
-    <link rel="stylesheet" href="styles.css?v=20260925-redesign-6">
+    <link rel="stylesheet" href="styles.css?v=20260926-video-1">
   </head>
   <body>
     <header class="site-header">
@@ -108,6 +108,32 @@
           <a href="/docs/">Docs</a>
           <a href="/marketplace/">Themes</a>
         </nav>
+        <label class="field head-theme">
+          Theme
+          <select id="theme-select">
+            <option value="aura">Aura</option>
+            <option value="catppuccin">Catppuccin</option>
+            <option value="dim">Dim</option>
+            <option value="dracula">Dracula</option>
+            <option value="funky-fresh">Funky Fresh</option>
+            <option value="gruvbox">Gruvbox</option>
+            <option value="hackerman">Hackerman</option>
+            <option value="light">Light</option>
+            <option value="miami-nights">Miami Nights</option>
+            <option value="monokai">Monokai</option>
+            <option value="nebula">Nebula</option>
+            <option value="newsprint">Newsprint</option>
+            <option value="nord">Nord</option>
+            <option value="ocean-breeze">Ocean Breeze</option>
+            <option value="phoenix">Phoenix</option>
+            <option value="sage">Sage</option>
+            <option value="sakura">Sakura</option>
+            <option value="seraph">Seraph</option>
+            <option value="solarized-dark">Solarized Dark</option>
+            <option value="solarized-light">Solarized Light</option>
+            <option value="tokyo-night">Tokyo Night</option>
+          </select>
+        </label>
       </div>
     </header>
 
@@ -127,63 +153,24 @@
           </p>
 
           <figure class="shot">
-            <button class="shot-button" type="button" data-lightbox-target="interface-lightbox" aria-label="View the desktop screenshot at full size">
-              <img
-                data-desktop-shot
-                src="assets/desktop-themes/aura-seraph-desktop-modern.png"
-                alt="SeraphIRC desktop client, Modern layout in the Seraph window style, showing IRC channels, chat, and user list"
-                width="2560"
-                height="1568"
-              >
-            </button>
-            <div class="shot-controls">
-              <label class="field">
-                Theme
-                <select id="theme-select">
-                  <option value="aura">Aura</option>
-                  <option value="catppuccin">Catppuccin</option>
-                  <option value="dim">Dim</option>
-                  <option value="dracula">Dracula</option>
-                  <option value="funky-fresh">Funky Fresh</option>
-                  <option value="gruvbox">Gruvbox</option>
-                  <option value="hackerman">Hackerman</option>
-                  <option value="light">Light</option>
-                  <option value="miami-nights">Miami Nights</option>
-                  <option value="monokai">Monokai</option>
-                  <option value="nebula">Nebula</option>
-                  <option value="newsprint">Newsprint</option>
-                  <option value="nord">Nord</option>
-                  <option value="ocean-breeze">Ocean Breeze</option>
-                  <option value="phoenix">Phoenix</option>
-                  <option value="sage">Sage</option>
-                  <option value="sakura">Sakura</option>
-                  <option value="seraph">Seraph</option>
-                  <option value="solarized-dark">Solarized Dark</option>
-                  <option value="solarized-light">Solarized Light</option>
-                  <option value="tokyo-night">Tokyo Night</option>
-                </select>
-              </label>
-              <span class="field" role="group" aria-label="Window style">
-                Window style
-                <span class="seg">
-                  <button class="is-active" type="button" data-skin="seraph" aria-pressed="true">Seraph</button>
-                  <button type="button" data-skin="macos" aria-pressed="false">macOS</button>
-                </span>
-              </span>
-              <span class="field" role="group" aria-label="Layout">
-                Layout
-                <span class="seg">
-                  <button class="is-active" type="button" data-mode="modern" aria-pressed="true">Modern</button>
-                  <button type="button" data-mode="classic" aria-pressed="false">Classic</button>
-                </span>
-              </span>
-            </div>
+            <!-- #t=0.1 makes Safari draw the first frame instead of a blank box. -->
+            <video
+              class="demo-video"
+              src="assets/demo/seraphirc-demo.mp4#t=0.1"
+              width="2558"
+              height="1546"
+              controls
+              playsinline
+              preload="metadata"
+              aria-label="A demo of the SeraphIRC desktop client"
+            ></video>
             <figcaption>
-              The network tree sits on the left, and your channel windows tile and layer on the
-              right. Modern layout groups each person's messages under their name. Classic looks
-              like IRC always has. The Seraph and macOS window styles ship on every platform, and
-              you can switch under <code>Settings &rsaquo; Appearance &rsaquo; Window &rsaquo; Chrome Style</code>.
-              The theme picker recolors this site as well.
+              A quick tour of the desktop client. The network tree sits on the left, and your
+              channel windows tile and layer on the right. Modern layout groups each person's
+              messages under their name. Classic looks like IRC always has. The Seraph and macOS
+              window styles ship on every platform, and you can switch under
+              <code>Settings &rsaquo; Appearance &rsaquo; Window &rsaquo; Chrome Style</code>.
+              The theme picker at the top of the page recolors this site to match.
             </figcaption>
           </figure>
         </div>
@@ -298,7 +285,7 @@
                 <h3>Looks</h3>
                 <dl class="feature-list">
                   <dt>21 built-in themes</dt>
-                  <dd>Try them with the picker above. You can also clone any of them in the built-in editor, and share or download custom themes on the <a href="/marketplace/">theme marketplace</a>.</dd>
+                  <dd>Try them on this site with the picker at the top of the page. You can also clone any of them in the built-in editor, and share or download custom themes on the <a href="/marketplace/">theme marketplace</a>.</dd>
                   <dt>Atmosphere</dt>
                   <dd>A slider for how much cloud and starlight drifts behind the desktop client.</dd>
                   <dt>Your fonts, your spacing</dt>
@@ -1299,12 +1286,6 @@
       </section>
     </main>
 
-    <dialog class="image-lightbox interface-lightbox" id="interface-lightbox" aria-label="Desktop screenshot">
-      <form method="dialog"><button class="lightbox-close" type="submit" aria-label="Close"></button></form>
-      <div class="lightbox-frame">
-        <img data-desktop-shot src="assets/desktop-themes/aura-seraph-desktop-modern.png" alt="SeraphIRC desktop client, Modern layout in the Seraph window style, showing IRC channels, chat, and user list" width="2560" height="1568" loading="lazy">
-      </div>
-    </dialog>
     <dialog class="image-lightbox tablet-lightbox" id="tablet-lightbox" aria-label="iPad screenshot">
       <form method="dialog"><button class="lightbox-close" type="submit" aria-label="Close"></button></form>
       <div class="lightbox-frame">
@@ -1347,43 +1328,18 @@
         });
       });
 
-      // Theme, window style and layout pick the screenshot. Desktop shots are
-      // named <theme>-<skin>-desktop-<mode>.png. The theme also recolors the site.
+      // The header theme picker recolors the site and picks the iPad and
+      // iPhone screenshots.
       (function () {
         var select = document.getElementById("theme-select");
-        var SKINS = { seraph: "Seraph", macos: "macOS" };
-        var MODES = { modern: "Modern", classic: "Classic" };
         var theme = document.documentElement.getAttribute("data-theme") || "aura";
-        var skin = saved("seraphirc-skin", SKINS, "seraph");
-        var mode = saved("seraphirc-layout", MODES, "modern");
-
-        function saved(key, allowed, fallback) {
-          try {
-            var value = localStorage.getItem(key);
-            if (value && allowed[value]) return value;
-          } catch (e) {}
-          return fallback;
-        }
-        function store(key, value) {
-          try { localStorage.setItem(key, value); } catch (e) {}
-        }
 
         function update() {
-          document.querySelectorAll("[data-desktop-shot]").forEach(function (img) {
-            img.src = "assets/desktop-themes/" + theme + "-" + skin + "-desktop-" + mode + ".png";
-            img.alt = "SeraphIRC desktop client, " + MODES[mode] + " layout in the " + SKINS[skin] +
-              " window style, showing IRC channels, chat, and user list";
-          });
           document.querySelectorAll("[data-phone-shot]").forEach(function (img) {
             img.src = "assets/iphone-themes/" + theme + "-iphone.jpg";
           });
           document.querySelectorAll("[data-tablet-shot]").forEach(function (img) {
             img.src = "assets/ipad-themes/" + theme + "-ipad.jpeg";
-          });
-          document.querySelectorAll("[data-skin], [data-mode]").forEach(function (button) {
-            var on = button.dataset.skin ? button.dataset.skin === skin : button.dataset.mode === mode;
-            button.classList.toggle("is-active", on);
-            button.setAttribute("aria-pressed", on ? "true" : "false");
           });
         }
 
@@ -1391,22 +1347,8 @@
         select.addEventListener("change", function () {
           theme = select.value;
           document.documentElement.setAttribute("data-theme", theme);
-          store("seraphirc-theme", theme);
+          try { localStorage.setItem("seraphirc-theme", theme); } catch (e) {}
           update();
-        });
-        document.querySelectorAll("[data-skin]").forEach(function (button) {
-          button.addEventListener("click", function () {
-            skin = button.dataset.skin;
-            store("seraphirc-skin", skin);
-            update();
-          });
-        });
-        document.querySelectorAll("[data-mode]").forEach(function (button) {
-          button.addEventListener("click", function () {
-            mode = button.dataset.mode;
-            store("seraphirc-layout", mode);
-            update();
-          });
         });
         update();
       })();

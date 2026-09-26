@@ -35,7 +35,7 @@
         } catch (e) {}
       })();
     </script>
-    <link rel="stylesheet" href="/styles.css?v=20260925-redesign-6">
+    <link rel="stylesheet" href="/styles.css?v=20260926-video-1">
     <style>
       /* Marketplace-only styling, built on the site's theme variables. */
       .market-list { overflow-x: auto; }
@@ -263,6 +263,32 @@
           <a href="/docs/">Docs</a>
           <a href="/marketplace/" aria-current="page">Themes</a>
         </nav>
+        <label class="field head-theme">
+          Theme
+          <select id="theme-select">
+            <option value="aura">Aura</option>
+            <option value="catppuccin">Catppuccin</option>
+            <option value="dim">Dim</option>
+            <option value="dracula">Dracula</option>
+            <option value="funky-fresh">Funky Fresh</option>
+            <option value="gruvbox">Gruvbox</option>
+            <option value="hackerman">Hackerman</option>
+            <option value="light">Light</option>
+            <option value="miami-nights">Miami Nights</option>
+            <option value="monokai">Monokai</option>
+            <option value="nebula">Nebula</option>
+            <option value="newsprint">Newsprint</option>
+            <option value="nord">Nord</option>
+            <option value="ocean-breeze">Ocean Breeze</option>
+            <option value="phoenix">Phoenix</option>
+            <option value="sage">Sage</option>
+            <option value="sakura">Sakura</option>
+            <option value="seraph">Seraph</option>
+            <option value="solarized-dark">Solarized Dark</option>
+            <option value="solarized-light">Solarized Light</option>
+            <option value="tokyo-night">Tokyo Night</option>
+          </select>
+        </label>
       </div>
     </header>
 
@@ -412,32 +438,6 @@
           <li><a href="ircs://irc.libera.chat/seraphirc">#seraphirc on Libera</a></li>
           <li><a href="https://buymeacoffee.com/seraphirc">Buy us a coffee</a></li>
         </ul>
-        <label class="field foot-theme">
-          Site theme
-          <select id="theme-select">
-            <option value="aura">Aura</option>
-            <option value="catppuccin">Catppuccin</option>
-            <option value="dim">Dim</option>
-            <option value="dracula">Dracula</option>
-            <option value="funky-fresh">Funky Fresh</option>
-            <option value="gruvbox">Gruvbox</option>
-            <option value="hackerman">Hackerman</option>
-            <option value="light">Light</option>
-            <option value="miami-nights">Miami Nights</option>
-            <option value="monokai">Monokai</option>
-            <option value="nebula">Nebula</option>
-            <option value="newsprint">Newsprint</option>
-            <option value="nord">Nord</option>
-            <option value="ocean-breeze">Ocean Breeze</option>
-            <option value="phoenix">Phoenix</option>
-            <option value="sage">Sage</option>
-            <option value="sakura">Sakura</option>
-            <option value="seraph">Seraph</option>
-            <option value="solarized-dark">Solarized Dark</option>
-            <option value="solarized-light">Solarized Light</option>
-            <option value="tokyo-night">Tokyo Night</option>
-          </select>
-        </label>
         <p class="foot-meta">&copy; <span data-year>2026</span> SeraphIRC</p>
       </div>
     </footer>
@@ -703,7 +703,7 @@
       })();
     </script>
     <script>
-      // The footer theme picker recolors the site to match a client theme.
+      // The header theme picker recolors the site to match a client theme.
       (function () {
         var select = document.getElementById("theme-select");
         if (!select) return;

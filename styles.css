@@ -173,6 +173,14 @@ ul, ol { padding-left: 1.3em; }
   box-shadow: inset 0 -2px 0 var(--gold);
 }
 
+/* Site theme picker, set off from the nav by a rule. */
+.head-theme {
+  flex: none;
+  padding-left: 20px;
+  border-left: 1px solid var(--line);
+}
+.head-theme select { padding-top: 3px; padding-bottom: 3px; font-size: 0.85rem; }
+
 .site-footer {
   margin-top: 40px;
   padding: 32px 0 40px;
@@ -199,9 +207,6 @@ ul, ol { padding-left: 1.3em; }
 .foot-nav a:hover { color: var(--text); text-decoration: underline; }
 .foot-meta { margin: 0; }
 .foot-meta a { color: inherit; }
-
-
-.foot-theme { justify-self: end; }
 
 
 /* 4. Buttons and form controls ---------------------------------------------- */
@@ -245,29 +250,6 @@ select option { color: var(--text); background: var(--panel); }
   font-size: 0.9rem;
 }
 
-/* Two-way switch, used for the screenshot's window style and layout. */
-.seg {
-  display: inline-flex;
-  border: 1px solid var(--line-2);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-}
-.seg button {
-  padding: 5px 12px;
-  color: var(--dim);
-  background: var(--panel);
-  border: 0;
-  font: inherit;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-.seg button + button { border-left: 1px solid var(--line-2); }
-.seg button:hover { color: var(--text); }
-.seg button.is-active {
-  color: var(--text);
-  background: var(--raised);
-}
-
 
 /* 5. Home page -------------------------------------------------------------- */
 
@@ -284,8 +266,17 @@ select option { color: var(--text); background: var(--panel); }
   font-size: 0.92rem;
 }
 
-/* Screenshot plus the controls that pick which one is shown. */
+/* Desktop demo video. */
 .shot { max-width: 880px; margin: 32px 0 0; }
+.demo-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2558 / 1546;
+  background: var(--panel);
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius);
+}
 .shot-button {
   display: block;
   width: 100%;
@@ -294,7 +285,6 @@ select option { color: var(--text); background: var(--panel); }
   border: 0;
   cursor: zoom-in;
 }
-.shot img,
 .device-shots img {
   display: block;
   width: 100%;
@@ -303,15 +293,8 @@ select option { color: var(--text); background: var(--panel); }
   border: 1px solid var(--line-2);
   border-radius: var(--radius);
 }
-.shot-controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px 22px;
-  margin-top: 14px;
-}
 .shot figcaption {
-  margin-top: 10px;
+  margin-top: 12px;
   color: var(--dim);
   font-size: 0.9rem;
 }
@@ -522,7 +505,6 @@ select option { color: var(--text); background: var(--panel); }
   border-radius: var(--radius);
 }
 .image-lightbox::backdrop { background: rgba(4, 6, 12, 0.85); }
-.interface-lightbox { --lightbox-image-width: 2560px; --lightbox-aspect: 1.6327; }
 .tablet-lightbox { --lightbox-image-width: 1640px; --lightbox-aspect: 0.7143; }
 .mobile-lightbox { --lightbox-image-width: 1290px; --lightbox-aspect: 0.483; }
 
@@ -659,24 +641,22 @@ html[data-theme]:is([data-theme='newsprint']) {
 
 /* 9. Small screens ------------------------------------------------------------- */
 
-@media (max-width: 860px) {
-  .feature-groups { grid-template-columns: minmax(0, 1fr); gap: 0; }
-  .mobile-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
-  .contact-list { grid-template-columns: minmax(0, 1fr); }
-}
-
-@media (max-width: 720px) {
+@media (max-width: 960px) {
   :root { --header-h: 87px; }
-
-  h1 { font-size: 1.85rem; }
-  h2 { font-size: 1.4rem; }
 
   .site-header .wrap {
     flex-wrap: wrap;
     gap: 0 20px;
     padding: 10px 0;
   }
+  .head-theme {
+    order: 1;
+    margin-left: auto;
+    padding-left: 0;
+    border-left: 0;
+  }
   .site-nav {
+    order: 2;
     width: 100%;
     margin-left: 0;
     padding-top: 6px;
@@ -687,6 +667,18 @@ html[data-theme]:is([data-theme='newsprint']) {
     scrollbar-width: none;
   }
   .site-nav a { flex: none; font-size: 0.92rem; }
+}
+
+@media (max-width: 860px) {
+  .feature-groups { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .mobile-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .contact-list { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 720px) {
+
+  h1 { font-size: 1.85rem; }
+  h2 { font-size: 1.4rem; }
 
   .intro { padding-top: 32px; }
   .intro-text { font-size: 1.04rem; }
@@ -718,5 +710,4 @@ html[data-theme]:is([data-theme='newsprint']) {
   .device-shots .phone img { width: 100%; }
 
   .site-footer .wrap { grid-template-columns: minmax(0, 1fr); }
-  .foot-theme { justify-self: start; }
 }
