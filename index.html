@@ -329,6 +329,30 @@
       <section class="section" id="news" aria-labelledby="news-title">
         <div class="wrap">
           <h2 id="news-title">News</h2>
+          <article class="post" id="news-scripting">
+            <h3>Scripting phase 1 arrives</h3>
+            <p class="post-meta"><time datetime="2026-09-28">Sep 28, 2026</time>, version 6.0.0</p>
+            <p>
+              SeraphIRC now runs scripts written in the mIRC scripting language.
+              Aliases, events, timers, popups, custom <code>@windows</code>, hash
+              tables, and file and socket commands all work, and most classic
+              scripts load with <code>/load</code> and run as they are.
+            </p>
+            <p>
+              Everything lives in the new Scripts Editor, opened with
+              <code>Alt+R</code>. Your existing aliases have already moved in, and
+              each script file can be switched off or kept to certain networks. A
+              script asks before it first loads and before it connects to a new
+              host, and what it sends is paced so it never floods you off a server.
+            </p>
+            <p>
+              Phase 1 is desktop only. Dialogs and picture windows are planned for a
+              later 6.x release. If a script you rely on misbehaves, tell us and we
+              will work with you on a fix.
+            </p>
+            <p class="post-where"><a href="/docs/#scripts-compat"><code>seraphirc.chat/docs#scripts-compat</code></a></p>
+          </article>
+
           <article class="post" id="news-screen-real-estate">
             <h3>So much room for activities!</h3>
             <p class="post-meta"><time datetime="2026-09-15">Sep 15, 2026</time>, version 5.1.25</p>
@@ -365,26 +389,26 @@
             <p class="post-where"><code>Settings &gt; Appearance &gt; Chrome Style</code></p>
           </article>
 
-          <article class="post" id="news-reactions">
-            <h3>Reactions</h3>
-            <p class="post-meta"><time datetime="2026-08-28">Aug 28, 2026</time>, version 5.1.14</p>
-            <p>
-              React to any message with an emoji, on desktop and mobile alike. Pick
-              React from a message's menu or type <code>/react</code>, choose from the
-              full emoji picker, and the reaction appears as a small chip on the
-              message for everyone whose client supports it.
-            </p>
-            <p>
-              Talking to someone whose client cannot show them? An optional
-              send-as-message mode delivers your reaction as a short quoted reply
-              instead, so nobody is left out of the joke. And if reactions are not
-              your thing, a single toggle in Settings turns them off entirely.
-            </p>
-            <p class="post-where"><code>Right-click a message &gt; React, or /react</code></p>
-          </article>
-
           <details class="older-news">
-            <summary>Older news (12 posts)</summary>
+            <summary>Older news (13 posts)</summary>
+
+            <article class="post" id="news-reactions">
+              <h3>Reactions</h3>
+              <p class="post-meta"><time datetime="2026-08-28">Aug 28, 2026</time>, version 5.1.14</p>
+              <p>
+                React to any message with an emoji, on desktop and mobile alike. Pick
+                React from a message's menu or type <code>/react</code>, choose from the
+                full emoji picker, and the reaction appears as a small chip on the
+                message for everyone whose client supports it.
+              </p>
+              <p>
+                Talking to someone whose client cannot show them? An optional
+                send-as-message mode delivers your reaction as a short quoted reply
+                instead, so nobody is left out of the joke. And if reactions are not
+                your thing, a single toggle in Settings turns them off entirely.
+              </p>
+              <p class="post-where"><code>Right-click a message &gt; React, or /react</code></p>
+            </article>
 
             <article class="post" id="news-encryption">
               <h3>Native FiSH Implementation</h3>
@@ -619,6 +643,20 @@
             <a href="https://github.com/seraphirc/seraphirc-download/releases">releases page</a>.
           </p>
           <div class="releases" data-releases>
+            <details class="release" id="v6.0.0">
+              <summary><span class="release-version">6.0.0</span> <time datetime="2026-09-28">Sep 28, 2026</time></summary>
+              <ul>
+                <li><b>Scripting (desktop):</b> SeraphIRC now runs scripts written in the mIRC scripting language, with aliases, events, timers, popups, custom windows, and file and socket commands. Most classic scripts load with <code>/load</code> and run unchanged.</li>
+                <li><b>Scripts Editor (desktop):</b> a new editor with Aliases, Popups, Remote, Users and Variables tabs, plus an Errors tab for anything that went wrong this session. Any script file can be switched off or limited to certain networks.</li>
+                <li><b>Script safety (desktop):</b> a new script asks before it loads, and again before it connects to a new host. Scripts are paced so they never flood you off a server, and if one crashes the app on startup, the next start opens with scripts off.</li>
+                <li><b>Menus (desktop):</b> scripts can add items to the right-click menus and a Commands menu on the menu bar. The Edit menu gains Undo and Redo.</li>
+                <li><b>Aliases (desktop):</b> your existing aliases move into the Scripts Editor on first start and work as before. The built-in <code>/close</code> is now <code>/closebuffer</code>, so scripts can define their own.</li>
+                <li><b>Pasting commands (desktop):</b> a pasted block of commands keeps its lines, and Enter runs them in order. Nothing runs until you press Enter.</li>
+                <li><b>Text art (desktop):</b> colored blocks use the true IRC palette, the MOTD keeps the server&rsquo;s colors, and a banner keeps every line after a restart.</li>
+                <li><b>Spacing (desktop):</b> messages, the user list and the treebar can go tighter than before, with Comfortable and Roomy presets. Your current spacing does not change.</li>
+                <li><b>More (desktop):</b> EsperNet and HybridIRC join the default networks, the classic layout fits a full 16-character nick, and a reset offers to back up your scripts first.</li>
+              </ul>
+            </details>
             <details class="release" id="v5.1.32">
               <summary><span class="release-version">5.1.32</span> <time datetime="2026-09-23">Sep 23, 2026</time></summary>
               <ul>
