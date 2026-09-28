@@ -18,7 +18,8 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": false,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "about",
@@ -36,7 +37,71 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": false,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
+  },
+  {
+    "Name": "load",
+    "Aliases": null,
+    "Usage": "/load -a|-rs \u003cfile\u003e",
+    "Parameters": [
+      "-a: an aliases file, as on the Aliases tab of the classic client's script editor",
+      "-rs: a remote file (events, alias blocks), as on the Remote tab",
+      "file: a path inside the scripts folder, or a full path"
+    ],
+    "Summary": "Load a script",
+    "Details": [
+      "Loads a script written for the classic IRC client's scripting language, and remembers it for the next session.",
+      "Loading a file that is already loaded reloads it, and runs its on LOAD and on START handlers again, as the classic client does. /reload reloads without them."
+    ],
+    "Examples": [
+      "/load -a aliases.ini",
+      "/load -rs remote.ini"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
+    "Name": "reload",
+    "Aliases": null,
+    "Usage": "/reload -a|-rs \u003cfile\u003e",
+    "Parameters": null,
+    "Summary": "Reload a script from disk",
+    "Details": [
+      "Reads a script again from disk, after it was edited outside SeraphIRC, without running its on LOAD or on START handlers."
+    ],
+    "Examples": [
+      "/reload -rs remote.ini"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
+    "Name": "unload",
+    "Aliases": null,
+    "Usage": "/unload -a|-rs \u003cfile\u003e",
+    "Parameters": null,
+    "Summary": "Unload a script",
+    "Details": [
+      "Unloads a script loaded with /load, and forgets it for the next session."
+    ],
+    "Examples": [
+      "/unload -rs remote.ini"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "alias",
@@ -49,6 +114,7 @@
     "Summary": "Create or update a command alias",
     "Details": [
       "Creates or updates a shortcut for another command. Built-in SeraphIRC commands and built-in command aliases cannot be overwritten.",
+      "Service shortcuts such as /ns and /cs are not built in. They pass to the server as raw commands.",
       "Run /alias without arguments to open the Aliases settings page."
     ],
     "Examples": [
@@ -61,7 +127,8 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": false,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "unalias",
@@ -81,7 +148,8 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": false,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "connect",
@@ -107,7 +175,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "disconnect",
@@ -125,7 +194,8 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "reconnect",
@@ -143,7 +213,8 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "znc",
@@ -171,7 +242,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "cycle",
@@ -192,7 +264,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "quit",
@@ -213,7 +286,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "ignore",
@@ -236,7 +310,8 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "unignore",
@@ -257,7 +332,8 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "exit",
@@ -275,25 +351,28 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": false,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
-    "Name": "close",
+    "Name": "closebuffer",
     "Aliases": null,
-    "Usage": "/close",
+    "Usage": "/closebuffer",
     "Parameters": null,
     "Summary": "Close the current buffer",
     "Details": [
-      "Closes the current channel or query buffer and switches to a fallback buffer when available."
+      "Closes the current channel or query buffer and switches to a fallback buffer when available.",
+      "This was /close before SeraphIRC 6.0. /close is now free for scripts and aliases."
     ],
     "Examples": [
-      "/close"
+      "/closebuffer"
     ],
     "Category": "Buffers",
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": false,
-    "RequiresBuffer": true
+    "RequiresBuffer": true,
+    "ChainSafe": true
   },
   {
     "Name": "clear",
@@ -311,12 +390,13 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": false,
-    "RequiresBuffer": true
+    "RequiresBuffer": true,
+    "ChainSafe": true
   },
   {
     "Name": "clearall",
     "Aliases": null,
-    "Usage": "/clearall -a | -s",
+    "Usage": "/clearall [-a|-s]",
     "Parameters": [
       "-a: clear all buffers across all servers",
       "-s: clear all buffers on the active server"
@@ -335,7 +415,8 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": false,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "join",
@@ -355,7 +436,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "part",
@@ -377,7 +459,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "partall",
@@ -395,7 +478,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "query",
@@ -415,7 +499,8 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "msg",
@@ -437,7 +522,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "notice",
@@ -459,7 +545,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "me",
@@ -479,7 +566,365 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": true
+    "RequiresBuffer": true,
+    "ChainSafe": false
+  },
+  {
+    "Name": "timer",
+    "Aliases": null,
+    "Usage": "/timer[name] [-m] \u003crepetitions\u003e \u003cinterval\u003e \u003ccommand\u003e",
+    "Parameters": [
+      "name: optional, written straight after /timer (/timerREMIND); without one the timer is numbered",
+      "-m: the interval is in milliseconds rather than seconds",
+      "repetitions: how many times to run the command, or 0 to repeat until stopped",
+      "interval: time between runs",
+      "command: the command to run"
+    ],
+    "Summary": "Run a command later, or repeatedly",
+    "Details": [
+      "Runs a command after a delay, a set number of times or until stopped. /timerNAME off stops a named timer.",
+      "The command is evaluated when the timer fires. Timers are part of scripting and keep running while SeraphIRC is open."
+    ],
+    "Examples": [
+      "/timer 1 300 say Five minutes are up",
+      "/timerbrb 0 600 away Still away",
+      "/timerbrb off"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
+    "Name": "timers",
+    "Aliases": null,
+    "Usage": "/timers [off]",
+    "Parameters": null,
+    "Summary": "List or stop timers",
+    "Details": [
+      "Lists the active timers. /timers off stops them all."
+    ],
+    "Examples": [
+      "/timers",
+      "/timers off"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
+    "Name": "auser",
+    "Aliases": null,
+    "Usage": "/auser [-a] \u003clevels\u003e \u003cnick|address\u003e [info]",
+    "Parameters": [
+      "-a: add these levels to the entry instead of replacing its levels",
+      "levels: numbers and names, comma separated, such as 10 or 5,friend",
+      "nick|address: a nick, or a nick!user@host mask with wildcards",
+      "info: an optional note kept with the entry"
+    ],
+    "Summary": "Add someone to the scripts user list",
+    "Details": [
+      "Gives a nick or address access levels for scripts. An event written on 10:TEXT runs only for people whose level is 10 or more; everyone else is level 1.",
+      "The list is the Users tab of the Scripts Editor."
+    ],
+    "Examples": [
+      "/auser 10 *!*@trusted.example",
+      "/auser -a friend Alice"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
+    "Name": "scon",
+    "Aliases": null,
+    "Usage": "/scon [-a] [-at1] \u003cN\u003e \u003ccommand\u003e",
+    "Parameters": null,
+    "Summary": "Run a command on another connection",
+    "Details": [
+      "Runs a command on the Nth network, in the order the network list shows them. -a runs it on every network, and -at1 only on the connected ones. The command is evaluated when it runs, so $me is each network's own nick when written $!me."
+    ],
+    "Examples": [
+      "/scon -a away Back in five",
+      "/scon 2 join #help"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
+    "Name": "scid",
+    "Aliases": null,
+    "Usage": "/scid [-a] [-at1] \u003cid\u003e \u003ccommand\u003e",
+    "Parameters": null,
+    "Summary": "Run a command on a connection by its id",
+    "Details": [
+      "As /scon, but picks the network by its connection id, which scripts read from $cid."
+    ],
+    "Examples": [
+      "/scid 3 whois Alice"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
+    "Name": "signal",
+    "Aliases": null,
+    "Usage": "/signal [-n] \u003cname\u003e [parameters]",
+    "Parameters": null,
+    "Summary": "Send a signal to scripts",
+    "Details": [
+      "Runs every loaded script's on SIGNAL handler for the name, with the parameters as $1-. Without -n the handlers run once the current command has finished; with -n, at once."
+    ],
+    "Examples": [
+      "/signal refresh",
+      "/signal -n reload all"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
+    "Name": "enable",
+    "Aliases": null,
+    "Usage": "/enable \u003c#group\u003e [#group...]",
+    "Parameters": null,
+    "Summary": "Switch a script group on",
+    "Details": [
+      "Switches on a #group section of a loaded script: its events, aliases and menu items run again. Wildcards match several groups, as in /enable #away*. The script file's #group line is updated, so the group stays on after a restart."
+    ],
+    "Examples": [
+      "/enable #autogreet"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
+    "Name": "disable",
+    "Aliases": null,
+    "Usage": "/disable \u003c#group\u003e [#group...]",
+    "Parameters": null,
+    "Summary": "Switch a script group off",
+    "Details": [
+      "Switches off a #group section of a loaded script: its events stop firing, its aliases cannot be called and its menu items are hidden. The script file's #group line is updated, so the group stays off after a restart."
+    ],
+    "Examples": [
+      "/disable #autogreet"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
+    "Name": "remote",
+    "Aliases": null,
+    "Usage": "/remote [on|off]",
+    "Parameters": null,
+    "Summary": "Switch script events on or off",
+    "Details": [
+      "Turns every script's event handlers on or off, the Scripts Editor's Listen switch. Aliases still work while events are off. With no argument, says which it is."
+    ],
+    "Examples": [
+      "/remote off",
+      "/remote on"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
+    "Name": "echo",
+    "Aliases": null,
+    "Usage": "/echo [-a|-s] [#channel] \u003ctext\u003e",
+    "Parameters": [
+      "-a: the active window, which is also where text goes by default",
+      "-s: the network's status window",
+      "#channel: that channel's window",
+      "text: what to show"
+    ],
+    "Summary": "Show text in a window, for your eyes only",
+    "Details": [
+      "Shows a line in a window without sending anything to the server.",
+      "Typed with one slash, the text is shown exactly as written. Typed with two slashes, identifiers and variables are filled in first: //echo -a $me shows your nickname, and //echo %name shows that variable from Scripts \u003e Variables. Two slashes do the same for any command."
+    ],
+    "Examples": [
+      "/echo -a Back in five",
+      "//echo -a I am $me",
+      "//echo -s %name"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
+    "Name": "splay",
+    "Aliases": null,
+    "Usage": "/splay [-q] [-c] \u003cfile|stop\u003e",
+    "Parameters": [
+      "-q: queue the sound behind the one playing instead of replacing it",
+      "-c: clear the queue",
+      "file: a .wav, .mp3 or .ogg file, by full path or by name in the sounds folder",
+      "stop: stop the sound playing and clear the queue"
+    ],
+    "Summary": "Play a sound",
+    "Details": [
+      "Plays a sound file. A name without a folder is looked for in the sounds folder beside the scripts folder, then in the scripts folder.",
+      "Script sounds follow the sound switch in Settings \u003e Sounds \u0026 Alerts. MIDI files cannot be played."
+    ],
+    "Examples": [
+      "/splay alert.wav",
+      "/splay -q C:\\Sounds\\ding.mp3",
+      "/splay stop"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
+    "Name": "ruser",
+    "Aliases": null,
+    "Usage": "/ruser [levels] \u003cnick|address\u003e",
+    "Parameters": null,
+    "Summary": "Remove someone from the scripts user list",
+    "Details": [
+      "Removes the given levels from an entry, or the whole entry when no levels are given."
+    ],
+    "Examples": [
+      "/ruser Alice",
+      "/ruser friend Alice"
+    ],
+    "Category": "Client",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
+    "Name": "ctcpreply",
+    "Aliases": null,
+    "Usage": "/ctcpreply \u003cnick\u003e \u003ccommand\u003e [reply]",
+    "Parameters": [
+      "nick: who sent the CTCP request",
+      "command: the CTCP command being answered, such as VERSION",
+      "reply: the answer text"
+    ],
+    "Summary": "Answer a CTCP request",
+    "Details": [
+      "Sends a CTCP reply. Scripts use it to answer VERSION and other CTCP requests themselves. Replies to one nick are rate limited, so a flood of requests cannot make you flood in return."
+    ],
+    "Examples": [
+      "/ctcpreply Alice VERSION My Script 1.0"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
+    "Name": "describe",
+    "Aliases": null,
+    "Usage": "/describe \u003cnick|#channel\u003e \u003caction\u003e",
+    "Parameters": [
+      "target: the channel or nick to send the action to",
+      "action: action text"
+    ],
+    "Summary": "Send an action to a channel or nick",
+    "Details": [
+      "Sends a CTCP ACTION, as /me does, to the channel or nick you name rather than the current buffer. Scripts use it to act in a channel other than the one you are looking at."
+    ],
+    "Examples": [
+      "/describe #seraphirc waves",
+      "/describe Alice waves"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
+    "Name": "react",
+    "Aliases": null,
+    "Usage": "/react \u003cemoji\u003e [n]",
+    "Parameters": [
+      "emoji: the reaction value to add",
+      "n: how many messages back to react to (default 1, the most recent)"
+    ],
+    "Summary": "React to a recent message",
+    "Details": [
+      "Adds an emoji reaction to a recent message in the current buffer, using the IRCv3 react client tag with a reply tag pointing at the message.",
+      "Counts only messages that carry a server ID, since a reaction has to point at one. Requires a network that relays reaction tags."
+    ],
+    "Examples": [
+      "/react 👍",
+      "/react 🎉 3"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": true,
+    "ChainSafe": true
+  },
+  {
+    "Name": "unreact",
+    "Aliases": null,
+    "Usage": "/unreact \u003cemoji\u003e [n]",
+    "Parameters": [
+      "emoji: the reaction value to remove",
+      "n: how many messages back to unreact (default 1, the most recent)"
+    ],
+    "Summary": "Remove your reaction from a recent message",
+    "Details": [
+      "Removes a reaction you added to a recent message in the current buffer, using the IRCv3 unreact client tag."
+    ],
+    "Examples": [
+      "/unreact 👍"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": true,
+    "ChainSafe": true
   },
   {
     "Name": "setkey",
@@ -491,8 +936,8 @@
     ],
     "Summary": "Set a FiSH (Blowfish) encryption key",
     "Details": [
-      "Sets the shared key used to encrypt and decrypt messages with a nick or channel, compatible with HexChat (FiSHLiM), Konversation, and mIRC FiSH.",
-      "Without a cbc:/ecb: prefix the key uses ECB mode, matching HexChat, Konversation, and mIRC FiSH. Use cbc: for the stronger mode, or /keyx which negotiates it. FiSH is legacy compatibility encryption, not modern secure messaging."
+      "Sets the shared key used to encrypt and decrypt messages with a nick or channel, compatible with FiSH encryption in other IRC clients.",
+      "Without a cbc:/ecb: prefix the key uses ECB mode, matching standard FiSH behavior. Use cbc: for the stronger mode, or /keyx which negotiates it. FiSH is legacy compatibility encryption, not modern secure messaging."
     ],
     "Examples": [
       "/setkey hunter2",
@@ -503,7 +948,8 @@
     "SendsIRC": false,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "delkey",
@@ -524,7 +970,8 @@
     "SendsIRC": false,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "showkey",
@@ -545,7 +992,8 @@
     "SendsIRC": false,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "keyx",
@@ -568,7 +1016,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "msg+",
@@ -589,7 +1038,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "notice+",
@@ -610,7 +1060,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "topic+",
@@ -630,7 +1081,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": true
+    "RequiresBuffer": true,
+    "ChainSafe": false
   },
   {
     "Name": "format",
@@ -653,7 +1105,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": true
+    "RequiresBuffer": true,
+    "ChainSafe": false
   },
   {
     "Name": "plain",
@@ -673,7 +1126,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": true
+    "RequiresBuffer": true,
+    "ChainSafe": false
   },
   {
     "Name": "format-me",
@@ -691,7 +1145,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": true
+    "RequiresBuffer": true,
+    "ChainSafe": false
   },
   {
     "Name": "format-msg",
@@ -710,7 +1165,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "format-notice",
@@ -729,7 +1185,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "plain-me",
@@ -747,7 +1204,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": true
+    "RequiresBuffer": true,
+    "ChainSafe": false
   },
   {
     "Name": "plain-msg",
@@ -766,7 +1224,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "plain-notice",
@@ -785,7 +1244,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "ctcp",
@@ -808,7 +1268,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "notify",
@@ -830,7 +1291,8 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "server",
@@ -848,7 +1310,8 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "switch",
@@ -869,7 +1332,8 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "current",
@@ -887,7 +1351,8 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "buffers",
@@ -905,7 +1370,8 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "show",
@@ -926,7 +1392,8 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": true,
-    "RequiresBuffer": true
+    "RequiresBuffer": true,
+    "ChainSafe": true
   },
   {
     "Name": "state",
@@ -944,12 +1411,13 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "dcc",
     "Aliases": null,
-    "Usage": "/dcc send \u003cnick\u003e [path] | /dcc get [nick] | /dcc decline [nick] | /dcc cancel \u003cid|nick\u003e | /dcc list",
+    "Usage": "/dcc \u003csend|get|decline|cancel|list\u003e [args]",
     "Parameters": [
       "nick: the other person",
       "path: file to send (a picker opens when omitted)"
@@ -972,7 +1440,8 @@
     "SendsIRC": false,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "seraphchat",
@@ -999,7 +1468,8 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "seraphtransfer",
@@ -1023,7 +1493,8 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "giphy",
@@ -1047,7 +1518,8 @@
     "SendsIRC": false,
     "LocalOnly": true,
     "RequiresNetwork": false,
-    "RequiresBuffer": true
+    "RequiresBuffer": true,
+    "ChainSafe": false
   },
   {
     "Name": "whois",
@@ -1067,7 +1539,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "whowas",
@@ -1087,7 +1560,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "nick",
@@ -1107,7 +1581,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "away",
@@ -1128,7 +1603,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "back",
@@ -1146,7 +1622,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "topic",
@@ -1167,7 +1644,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": true
+    "RequiresBuffer": true,
+    "ChainSafe": false
   },
   {
     "Name": "names",
@@ -1188,7 +1666,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "list",
@@ -1209,7 +1688,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "mode",
@@ -1231,7 +1711,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "knock",
@@ -1253,23 +1734,24 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "accept",
     "Aliases": null,
-    "Usage": "/accept \u003c+nick|-nick|*\u003e",
+    "Usage": "/accept \u003cnick|-nick|*\u003e",
     "Parameters": [
-      "+nick: allow this nick to message you",
+      "nick: allow this nick to message you",
       "-nick: remove this nick from the list",
       "*: list your current accept entries"
     ],
     "Summary": "Manage your caller-ID (+g) accept list",
     "Details": [
-      "On networks with the caller-ID user mode (+g), the ACCEPT list controls who may send you private messages and notices. Use +nick to allow someone, -nick to remove them, and * to list the current entries."
+      "On networks with the caller-ID user mode (+g), the ACCEPT list controls who may send you private messages and notices. Name a nick on its own to allow them, put a minus in front to remove them, and use * to list the current entries."
     ],
     "Examples": [
-      "/accept +friend",
+      "/accept friend",
       "/accept -friend",
       "/accept *"
     ],
@@ -1277,7 +1759,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "motd",
@@ -1298,7 +1781,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "who",
@@ -1316,7 +1800,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "ban",
@@ -1339,7 +1824,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "unban",
@@ -1361,7 +1847,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "kickban",
@@ -1385,7 +1872,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "op",
@@ -1405,7 +1893,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "deop",
@@ -1425,7 +1914,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "voice",
@@ -1445,7 +1935,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "devoice",
@@ -1465,7 +1956,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "invite",
@@ -1487,7 +1979,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "kick",
@@ -1511,7 +2004,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "raw",
@@ -1537,7 +2031,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "users",
@@ -1558,7 +2053,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "lusers",
@@ -1579,7 +2075,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "time",
@@ -1600,7 +2097,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "admin",
@@ -1621,7 +2119,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "info",
@@ -1642,7 +2141,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "ison",
@@ -1663,7 +2163,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "userhost",
@@ -1684,7 +2185,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "oper",
@@ -1706,7 +2208,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "kill",
@@ -1728,7 +2231,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "kline",
@@ -1752,7 +2256,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "unkline",
@@ -1773,7 +2278,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "gline",
@@ -1795,7 +2301,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "zline",
@@ -1817,7 +2324,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "shun",
@@ -1839,7 +2347,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "squit",
@@ -1861,7 +2370,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "rehash",
@@ -1883,7 +2393,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "restart",
@@ -1904,7 +2415,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "die",
@@ -1925,7 +2437,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "stats",
@@ -1948,7 +2461,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "links",
@@ -1967,7 +2481,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "map",
@@ -1986,7 +2501,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "trace",
@@ -2007,7 +2523,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "globops",
@@ -2028,7 +2545,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "wallops",
@@ -2049,7 +2567,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "locops",
@@ -2070,7 +2589,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   },
   {
     "Name": "cloak",
@@ -2091,7 +2611,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "uncloak",
@@ -2112,7 +2633,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "sethost",
@@ -2134,7 +2656,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "chghost",
@@ -2156,7 +2679,8 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": true
   },
   {
     "Name": "silence",
@@ -2178,150 +2702,7 @@
     "SendsIRC": true,
     "LocalOnly": false,
     "RequiresNetwork": true,
-    "RequiresBuffer": false
-  },
-  {
-    "Name": "nickserv",
-    "Aliases": [
-      "ns"
-    ],
-    "Usage": "/nickserv \u003ccommand\u003e",
-    "Parameters": null,
-    "Summary": "Message NickServ",
-    "Details": [
-      "Sends a private message to the configured NickServ target for the active network."
-    ],
-    "Examples": [
-      "/nickserv IDENTIFY \u003cpassword\u003e",
-      "/ns STATUS"
-    ],
-    "Category": "Services",
-    "SendsIRC": true,
-    "LocalOnly": false,
-    "RequiresNetwork": true,
-    "RequiresBuffer": false
-  },
-  {
-    "Name": "chanserv",
-    "Aliases": [
-      "cs"
-    ],
-    "Usage": "/chanserv \u003ccommand\u003e",
-    "Parameters": null,
-    "Summary": "Message ChanServ",
-    "Details": [
-      "Sends a private message to the configured ChanServ target for the active network."
-    ],
-    "Examples": [
-      "/chanserv OP #seraphirc",
-      "/cs FLAGS #seraphirc"
-    ],
-    "Category": "Services",
-    "SendsIRC": true,
-    "LocalOnly": false,
-    "RequiresNetwork": true,
-    "RequiresBuffer": false
-  },
-  {
-    "Name": "memoserv",
-    "Aliases": [
-      "ms"
-    ],
-    "Usage": "/memoserv \u003ccommand\u003e",
-    "Parameters": null,
-    "Summary": "Message MemoServ",
-    "Details": [
-      "Sends a private message to the configured MemoServ target for the active network."
-    ],
-    "Examples": [
-      "/memoserv LIST",
-      "/ms READ 1"
-    ],
-    "Category": "Services",
-    "SendsIRC": true,
-    "LocalOnly": false,
-    "RequiresNetwork": true,
-    "RequiresBuffer": false
-  },
-  {
-    "Name": "helpserv",
-    "Aliases": null,
-    "Usage": "/helpserv \u003ccommand\u003e",
-    "Parameters": null,
-    "Summary": "Message HelpServ",
-    "Details": [
-      "Sends a private message to the configured HelpServ target for the active network."
-    ],
-    "Examples": [
-      "/helpserv HELP"
-    ],
-    "Category": "Services",
-    "SendsIRC": true,
-    "LocalOnly": false,
-    "RequiresNetwork": true,
-    "RequiresBuffer": false
-  },
-  {
-    "Name": "hostserv",
-    "Aliases": [
-      "hs"
-    ],
-    "Usage": "/hostserv \u003ccommand\u003e",
-    "Parameters": null,
-    "Summary": "Message HostServ",
-    "Details": [
-      "Sends a private message to the configured HostServ target for the active network."
-    ],
-    "Examples": [
-      "/hostserv ON",
-      "/hs ON"
-    ],
-    "Category": "Services",
-    "SendsIRC": true,
-    "LocalOnly": false,
-    "RequiresNetwork": true,
-    "RequiresBuffer": false
-  },
-  {
-    "Name": "botserv",
-    "Aliases": [
-      "bs"
-    ],
-    "Usage": "/botserv \u003ccommand\u003e",
-    "Parameters": null,
-    "Summary": "Message BotServ",
-    "Details": [
-      "Sends a private message to the configured BotServ target for the active network."
-    ],
-    "Examples": [
-      "/botserv HELP",
-      "/bs HELP"
-    ],
-    "Category": "Services",
-    "SendsIRC": true,
-    "LocalOnly": false,
-    "RequiresNetwork": true,
-    "RequiresBuffer": false
-  },
-  {
-    "Name": "operserv",
-    "Aliases": [
-      "os"
-    ],
-    "Usage": "/operserv \u003ccommand\u003e",
-    "Parameters": null,
-    "Summary": "Message OperServ",
-    "Details": [
-      "Sends a private message to the configured OperServ target for the active network."
-    ],
-    "Examples": [
-      "/operserv HELP",
-      "/os HELP"
-    ],
-    "Category": "Services",
-    "SendsIRC": true,
-    "LocalOnly": false,
-    "RequiresNetwork": true,
-    "RequiresBuffer": false
+    "RequiresBuffer": false,
+    "ChainSafe": false
   }
 ]

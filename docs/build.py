@@ -35,6 +35,13 @@ then:
     cd ~/projects/seraphirc-website
     python3 docs/build.py
 
+scripts.json feeds the Scripts compatibility pane the same way: the events
+the client fires, the commands the script engine runs itself, and every
+identifier it knows, from seraphirc-core/script/msl (SupportedEventNames,
+EngineCommandNames, BuiltinIdentifierNames). Refresh it with a throwaway
+seraphirc-core/cmd/dumpscripts/main.go that encodes those three lists as
+{"events": [...], "commands": [...], "identifiers": [...]}.
+
 Only the regions between the BEGIN:/END: marker comments in docs/index.html
 are rewritten. Everything else in that file is hand written and left alone.
 """
@@ -47,6 +54,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 DATA = HERE / "commands.json"
+SCRIPTS_DATA = HERE / "scripts.json"
 PAGE = HERE / "index.html"
 
 # Same order the client uses for its /help overview.
@@ -56,7 +64,6 @@ CATEGORY_ORDER = [
     "Encryption",
     "IRC",
     "IRC Operator",
-    "Services",
     "Buffers",
     "Client",
     "Advanced",
@@ -79,15 +86,14 @@ CATEGORY_LEADS = {
     "in the channel.",
     "IRC Operator": "Server administration. These need an operator block, and "
     "most are non standard, so what works depends on your network's ircd.",
-    "Services": "Shortcuts to the service bots. Each sends to the service "
-    "target configured for that network, so a mistyped target cannot drop your "
-    "password into a channel.",
     "Buffers": "Buffers are your windows: server, channel, and query. These "
     "move between them, tidy them, and close them. None touch the network.",
-    "Client": "SeraphIRC itself rather than IRC. Help, aliases, the ignore "
-    "list, notify entries, and the About panel.",
+    "Client": "SeraphIRC itself rather than IRC. Help, scripts, aliases, the "
+    "ignore list, notify entries, and the About panel.",
     "Advanced": "The escape hatch. If SeraphIRC has no command for something "
-    "your network supports, send the line yourself.",
+    "your network supports, send the line yourself. Any command SeraphIRC "
+    "does not know, such as <code>/ns</code> or <code>/chanserv</code>, goes "
+    "to the server as typed.",
 }
 
 FLAG_LABELS = [
@@ -302,9 +308,117 @@ def replace_region(page, marker, body):
     return pattern.sub(lambda m: m.group(1) + body + m.group(2).lstrip("\n"), page)
 
 
+# How the Scripting pane groups the engine's lists. Hand written; the names
+# themselves come from scripts.json, so a name listed here but gone from the
+# engine is left out, and a name the engine has but no group lists lands in
+# an "Other" row with a warning, so the page never drops or invents one.
+SCRIPT_EVENT_GROUPS = [
+    ("Messages", "TEXT ACTION NOTICE SNOTICE CTCP CTCPREPLY INPUT"),
+    ("Channels", "JOIN PART KICK INVITE TOPIC"),
+    ("Modes", "MODE RAWMODE OP DEOP VOICE DEVOICE HELP DEHELP BAN UNBAN "
+     "SERVERMODE SERVEROP SERVERDEOP SERVERVOICE SERVERDEVOICE"),
+    ("People", "NICK QUIT NOTIFY UNOTIFY"),
+    ("Connection", "CONNECT DISCONNECT RAW"),
+    ("Windows", "OPEN CLOSE ACTIVE APPACTIVE"),
+    ("Scripts", "START EXIT LOAD UNLOAD SIGNAL"),
+    ("Sockets", "SOCKOPEN SOCKREAD SOCKCLOSE"),
+    ("Sound", "WAVEEND MP3END"),
+]
+
+SCRIPT_COMMAND_GROUPS = [
+    ("Variables", "set unset inc dec var"),
+    ("Flow", "halt haltdef return goto break continue noop reseterror tokenize signal"),
+    ("Output", "echo say beep flash titlebar splay"),
+    ("Hash tables", "hmake hadd hdel hfree hsave hload hinc hdec"),
+    ("Files", "write writeini remini flushini remove rename copy mkdir rmdir "
+     "loadbuf savebuf filter"),
+    ("File handles", "fopen fclose fseek fwrite flist"),
+    ("Binary variables", "bset bunset bcopy bread bwrite breplace btrunc"),
+    ("Windows", "window aline iline rline dline close"),
+    ("Sockets", "sockopen sockread sockwrite sockclose sockmark"),
+    ("Timers", "timer timers"),
+    ("Users and groups", "auser guser ruser enable disable"),
+    ("Networks", "scid scon"),
+]
+
+SCRIPT_IDENTIFIER_GROUPS = [
+    ("Who and where", "me nick chan target address fulladdress site network "
+     "server cid activecid active lactive appactive query chat knick newnick "
+     "opnick vnick hnick bnick banmask snick snicks numeric highlight away "
+     "awaymsg"),
+    ("Text", "+ asc chr cr crlf lf len left right mid pos poscs replace "
+     "replacecs remove removecs upper lower str strip qt noqt count encode "
+     "decode utfdecode utfencode md5 sha1 color colour rgb style"),
+    ("Tokens", "addtok deltok findtok gettok instok istok matchtok numtok "
+     "puttok remtok reptok sorttok wildtok"),
+    ("Math and logic", "calc abs ceil floor int round rand base and or not xor "
+     "biton bitoff isbit bytes ord iif true false null isnumber v1 v2 ifmatch result"),
+    ("Time", "time date ctime asctime adate fulldate gmt daylight duration "
+     "ticks timestamp"),
+    ("Users and channels", "comchan ial ialchan mask level ulevel ulist clevel"),
+    ("Variables and tables", "var eval hget hfind group isalias bvar bfind"),
+    ("Files", "exists file isfile isdir finddir finddirn findfile findfilen "
+     "lines read readn readini ini fline filtered longfn shortfn nofile nopath"),
+    ("File handles", "fopen fread fgetc feof ferr"),
+    ("Regular expressions", "regex regml regsub regsubex"),
+    ("Windows", "window line titlebar input"),
+    ("Sockets", "sock sockname sockbr sockerr"),
+    ("Timers and signals", "timer signal"),
+    ("Sound", "insong inwave"),
+    ("Networks", "scid scon"),
+    ("Scripts and client", "script scriptdir mircdir mircexe mircini version "
+     "seraphirc isid error prop show longip maxlenl maxlenm maxlens"),
+]
+
+
+def render_script_table(title, heading, prefix, names, groups):
+    remaining = list(names)
+    rows = []
+    for area, listed in groups:
+        present = [n for n in listed.split() if n in remaining]
+        for n in present:
+            remaining.remove(n)
+        if present:
+            rows.append((area, present))
+    if remaining:
+        print(f"warning: {title}: not in any group: {' '.join(remaining)}",
+              file=sys.stderr)
+        rows.append(("Other", remaining))
+    body = "".join(
+        f'                  <tr><th scope="row">{esc(area)}</th><td class="token-cell">'
+        + " ".join(f"<code>{esc(prefix + n)}</code>" for n in present)
+        + "</td></tr>\n"
+        for area, present in rows
+    )
+    return (
+        f"            <h4>{esc(title)} ({len(names)})</h4>\n"
+        f'            <div class="table-scroll">\n'
+        f"              <table>\n"
+        f"                <thead><tr><th>Area</th><th>{esc(heading)}</th></tr></thead>\n"
+        f"                <tbody>\n{body}"
+        f"                </tbody>\n"
+        f"              </table>\n"
+        f"            </div>\n"
+    )
+
+
+def render_scripts_support():
+    """The Scripting pane's three tables, from scripts.json."""
+    data = json.loads(SCRIPTS_DATA.read_text(encoding="utf-8"))
+    return (
+        render_script_table("Events", "Events", "",
+                            [n.upper() for n in data["events"]], SCRIPT_EVENT_GROUPS)
+        + render_script_table("Commands", "Commands", "/",
+                              data["commands"], SCRIPT_COMMAND_GROUPS)
+        + render_script_table("Identifiers", "Identifiers", "$",
+                              data["identifiers"], SCRIPT_IDENTIFIER_GROUPS)
+    )
+
+
 def main():
     registry, grouped = load_commands()
     page = PAGE.read_text(encoding="utf-8")
+    page = replace_region(page, "scripts-support", render_scripts_support())
 
     panes = "".join(
         render_category_pane(category, grouped[category])

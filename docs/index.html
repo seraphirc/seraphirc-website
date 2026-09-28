@@ -39,7 +39,7 @@
       })();
     </script>
     <link rel="stylesheet" href="/styles.css?v=20260926-video-2">
-    <link rel="stylesheet" href="/docs/docs.css?v=20260925-redesign-2">
+    <link rel="stylesheet" href="/docs/docs.css?v=20260928-scripts-1">
   </head>
   <body>
     <header class="site-header">
@@ -163,7 +163,9 @@
                     <li><a href="#exporting-logs">Exporting and Clearing</a></li>
                   </ul>
                 </li>
+                <li><a href="#custom-mentions">Custom Mentions</a></li>
                 <li><a href="#ignore-list">Ignore List</a></li>
+                <li><a href="#metadata">IRCv3 Metadata</a></li>
                 <li><a href="#notify-list">Notify List</a></li>
                 <li><a href="#send-guard">Send Guard</a>
                   <ul class="subpages">
@@ -172,6 +174,13 @@
                   </ul>
                 </li>
                 <li><a href="#encryption">Encrypted Messaging</a></li>
+              </ul>
+            </details>
+            <details class="book">
+              <summary>Scripts</summary>
+              <ul class="pagelist">
+                <li><a href="#scripts-editor">Scripts Editor</a></li>
+                <li><a href="#scripts-compat">SeraphIRC Scripting</a></li>
               </ul>
             </details>
             <details class="book">
@@ -223,11 +232,13 @@
             </ul>
           </details>
           <details class="chapter">
-            <summary>Messaging<span class="chapter-count">17</span></summary>
+            <summary>Messaging<span class="chapter-count">21</span></summary>
             <ul class="pagelist">
               <li class="page-overview"><a href="#commands-messaging"><span class="lbl-screen">All messaging commands</span><span class="lbl-print">Messaging</span></a></li>
               <li><a href="#cmd-ctcp"><code>/ctcp</code></a></li>
+              <li><a href="#cmd-ctcpreply"><code>/ctcpreply</code></a></li>
               <li><a href="#cmd-dcc"><code>/dcc</code></a></li>
+              <li><a href="#cmd-describe"><code>/describe</code></a></li>
               <li><a href="#cmd-format"><code>/format</code></a></li>
               <li><a href="#cmd-format-me"><code>/format-me</code></a></li>
               <li><a href="#cmd-format-msg"><code>/format-msg</code></a></li>
@@ -241,8 +252,10 @@
               <li><a href="#cmd-plain-msg"><code>/plain-msg</code></a></li>
               <li><a href="#cmd-plain-notice"><code>/plain-notice</code></a></li>
               <li><a href="#cmd-query"><code>/query</code></a></li>
+              <li><a href="#cmd-react"><code>/react</code></a></li>
               <li><a href="#cmd-seraphchat"><code>/seraphchat</code></a></li>
               <li><a href="#cmd-seraphtransfer"><code>/seraphtransfer</code></a></li>
+              <li><a href="#cmd-unreact"><code>/unreact</code></a></li>
             </ul>
           </details>
           <details class="chapter">
@@ -323,26 +336,13 @@
             </ul>
           </details>
           <details class="chapter">
-            <summary>Services<span class="chapter-count">7</span></summary>
-            <ul class="pagelist">
-              <li class="page-overview"><a href="#commands-services"><span class="lbl-screen">All services commands</span><span class="lbl-print">Services</span></a></li>
-              <li><a href="#cmd-botserv"><code>/botserv</code></a></li>
-              <li><a href="#cmd-chanserv"><code>/chanserv</code></a></li>
-              <li><a href="#cmd-helpserv"><code>/helpserv</code></a></li>
-              <li><a href="#cmd-hostserv"><code>/hostserv</code></a></li>
-              <li><a href="#cmd-memoserv"><code>/memoserv</code></a></li>
-              <li><a href="#cmd-nickserv"><code>/nickserv</code></a></li>
-              <li><a href="#cmd-operserv"><code>/operserv</code></a></li>
-            </ul>
-          </details>
-          <details class="chapter">
             <summary>Buffers<span class="chapter-count">9</span></summary>
             <ul class="pagelist">
               <li class="page-overview"><a href="#commands-buffers"><span class="lbl-screen">All buffers commands</span><span class="lbl-print">Buffers</span></a></li>
               <li><a href="#cmd-buffers"><code>/buffers</code></a></li>
               <li><a href="#cmd-clear"><code>/clear</code></a></li>
               <li><a href="#cmd-clearall"><code>/clearall</code></a></li>
-              <li><a href="#cmd-close"><code>/close</code></a></li>
+              <li><a href="#cmd-closebuffer"><code>/closebuffer</code></a></li>
               <li><a href="#cmd-current"><code>/current</code></a></li>
               <li><a href="#cmd-server"><code>/server</code></a></li>
               <li><a href="#cmd-show"><code>/show</code></a></li>
@@ -351,17 +351,32 @@
             </ul>
           </details>
           <details class="chapter">
-            <summary>Client<span class="chapter-count">8</span></summary>
+            <summary>Client<span class="chapter-count">23</span></summary>
             <ul class="pagelist">
               <li class="page-overview"><a href="#commands-client"><span class="lbl-screen">All client commands</span><span class="lbl-print">Client</span></a></li>
               <li><a href="#cmd-about"><code>/about</code></a></li>
               <li><a href="#cmd-alias"><code>/alias</code></a></li>
+              <li><a href="#cmd-auser"><code>/auser</code></a></li>
+              <li><a href="#cmd-disable"><code>/disable</code></a></li>
+              <li><a href="#cmd-echo"><code>/echo</code></a></li>
+              <li><a href="#cmd-enable"><code>/enable</code></a></li>
               <li><a href="#cmd-exit"><code>/exit</code></a></li>
               <li><a href="#cmd-help"><code>/help</code></a></li>
               <li><a href="#cmd-ignore"><code>/ignore</code></a></li>
+              <li><a href="#cmd-load"><code>/load</code></a></li>
               <li><a href="#cmd-notify"><code>/notify</code></a></li>
+              <li><a href="#cmd-reload"><code>/reload</code></a></li>
+              <li><a href="#cmd-remote"><code>/remote</code></a></li>
+              <li><a href="#cmd-ruser"><code>/ruser</code></a></li>
+              <li><a href="#cmd-scid"><code>/scid</code></a></li>
+              <li><a href="#cmd-scon"><code>/scon</code></a></li>
+              <li><a href="#cmd-signal"><code>/signal</code></a></li>
+              <li><a href="#cmd-splay"><code>/splay</code></a></li>
+              <li><a href="#cmd-timer"><code>/timer</code></a></li>
+              <li><a href="#cmd-timers"><code>/timers</code></a></li>
               <li><a href="#cmd-unalias"><code>/unalias</code></a></li>
               <li><a href="#cmd-unignore"><code>/unignore</code></a></li>
+              <li><a href="#cmd-unload"><code>/unload</code></a></li>
             </ul>
           </details>
           <details class="chapter">
@@ -485,8 +500,8 @@
             <p>
               Networks are created in the Network Manager rather than by command. It
               holds the server address and port, TLS, your nickname and alternates,
-              SASL and NickServ credentials, service targets, and the channels to
-              join automatically.
+              SASL and NickServ credentials, and the channels to join automatically.
+              <strong>Show at startup</strong>, at its foot, opens it on launch.
             </p>
             <p>
               Passwords go to the operating system's credential store, never into the
@@ -547,10 +562,8 @@
               want both.
             </p>
             <p>
-              To talk to NickServ by hand use
-              <a href="#cmd-nickserv"><code>/ns</code></a> rather than
-              <code>/msg NickServ</code>. It routes to the configured service target,
-              so a mistyped nickname cannot leak your password.
+              Service shortcuts such as <code>/ns</code> go to the server as typed,
+              and the network's services answer them.
             </p>
 
           </article>
@@ -773,17 +786,7 @@
               each speaker, and your setting is kept for when you switch back.
             </p>
             <p>
-              <strong>Render IRC avatars in Modern Mode</strong> shows the avatar of
-              anyone who has published one through IRCv3 metadata, instead of the
-              colored initial. Off by default, because it loads each image from
-              whatever server that person chose, which tells that server your IP
-              address.
-            </p>
-            <p>
-              <strong>Your avatar address</strong> is published to every network
-              supporting IRCv3 metadata, so other people can see it. It must be an
-              <code>https://</code> link. Leave it empty and press Publish to remove
-              it. Anyone whose client has no avatar support simply will not see it.
+              Avatars are set under <a href="#metadata">IRCv3 Metadata</a>.
             </p>
 
             <h3>Fonts</h3>
@@ -918,11 +921,10 @@
               because a run can be one or the other but not both.
             </p>
 
-            <h3>Command History and startup</h3>
+            <h3>Command History</h3>
             <p>
               <strong>Entries</strong> sets how many submitted messages and commands
-              the up and down arrows recall. <strong>Show Network Manager at
-              startup</strong> controls whether that dialog opens on launch.
+              the up and down arrows recall.
             </p>
           </article>
 
@@ -936,7 +938,7 @@
               <a href="#buffer-settings">Buffer Settings</a>.
             </p>
 
-            <h3>The five switches</h3>
+            <h3>The switches</h3>
             <div class="table-scroll">
               <table>
                 <thead><tr><th>Setting</th><th>Default</th><th>What it does</th></tr></thead>
@@ -945,6 +947,7 @@
                   <tr><th scope="row">Enable sounds</th><td><code>on</code></td><td>The alert chime. Plays even when the buffer is not focused.</td></tr>
                   <tr><th scope="row">Notify on private messages</th><td><code>on</code></td><td>Alerts for queries and direct messages.</td></tr>
                   <tr><th scope="row">Notify on nick mentions</th><td><code>on</code></td><td>Alerts when your nick appears in a channel.</td></tr>
+                  <tr><th scope="row">Notify on custom mentions</th><td><code>on</code></td><td>Alerts for your <a href="#custom-mentions">Custom Mentions</a>.</td></tr>
                   <tr><th scope="row">Mute alerts from bots</th><td><code>off</code></td><td>No sounds, pop-ups, or @ inbox entries from anyone the network marks as a bot. Their messages still appear and still count as unread. To hide bots entirely, see the <a href="#ignore-list">Ignore List</a>.</td></tr>
                 </tbody>
               </table>
@@ -1076,83 +1079,30 @@
             <p class="pane-kicker">Chatting</p>
             <h2>Aliases</h2>
             <p class="pane-lead">
-              An alias is a short name for a longer command. Manage them in
-              <code>Settings &gt; Chatting &gt; Aliases</code>, or from the composer
-              with <a href="#cmd-alias"><code>/alias</code></a>.
+              An alias is a short name for a longer command. Aliases live on the
+              Aliases tab of the <a href="#scripts-editor">Scripts Editor</a>.
             </p>
 
             <h3>Making one</h3>
             <p>
-              <code>/alias j /join</code> means <code>/j #seraphirc</code> works from
-              then on. <a href="#cmd-unalias"><code>/unalias j</code></a> removes it.
-              Running <code>/alias</code> with no arguments opens the settings page,
-              which has the same two fields plus Edit and Delete on every row.
+              <code>/alias j /join $1-</code> means <code>/j #seraphirc</code> works
+              from then on. <a href="#cmd-unalias"><code>/unalias j</code></a>
+              removes it. <code>/alias</code> on its own opens the Aliases tab.
+            </p>
+            <p>
+              <code>$1-</code> stands for whatever you type after the alias. Leave it
+              out and nothing is added.
             </p>
 
-            <h3>Arguments are appended</h3>
+            <h3>Built-in commands</h3>
             <p>
-              An alias is a prefix, not a template. Whatever you type after it is
-              added to the end of the target command. There are no numbered
-              placeholders.
-            </p>
-            <div class="table-scroll">
-              <table>
-                <thead><tr><th>The alias</th><th>You type</th><th>What runs</th></tr></thead>
-                <tbody>
-                  <tr><th scope="row"><code>/alias kb /kickban</code></th><td><code>/kb Alice flooding</code></td><td><code>/kickban Alice flooding</code></td></tr>
-                  <tr><th scope="row"><code>/alias mods /msg #staff</code></th><td><code>/mods need a hand</code></td><td><code>/msg #staff need a hand</code></td></tr>
-                  <tr><th scope="row"><code>/alias afk /away</code></th><td><code>/afk</code></td><td><code>/away</code></td></tr>
-                </tbody>
-              </table>
-            </div>
-
-            <h3>Naming rules</h3>
-            <ul>
-              <li>The leading slash is optional and the name is lowercased, so <code>/J</code> and <code>j</code> save the same alias.</li>
-              <li>No spaces in the name.</li>
-              <li>The target gets a leading slash if you leave it off, so <code>/alias j join</code> works.</li>
-              <li>Built in commands and built in aliases cannot be overwritten, so an alias can never shadow something the client already does.</li>
-            </ul>
-
-            <h3>Names already taken</h3>
-            <p>These nine ship with the client, alongside every command name itself.</p>
-            <div class="table-scroll">
-              <table>
-                <thead><tr><th>Alias</th><th>Runs</th></tr></thead>
-                <tbody>
-                  <tr><th scope="row"><code>/bs</code></th><td><a href="#cmd-botserv"><code>/botserv</code></a></td></tr>
-                  <tr><th scope="row"><code>/cs</code></th><td><a href="#cmd-chanserv"><code>/chanserv</code></a></td></tr>
-                  <tr><th scope="row"><code>/f</code></th><td><a href="#cmd-format"><code>/format</code></a></td></tr>
-                  <tr><th scope="row"><code>/hs</code></th><td><a href="#cmd-hostserv"><code>/hostserv</code></a></td></tr>
-                  <tr><th scope="row"><code>/ms</code></th><td><a href="#cmd-memoserv"><code>/memoserv</code></a></td></tr>
-                  <tr><th scope="row"><code>/ns</code></th><td><a href="#cmd-nickserv"><code>/nickserv</code></a></td></tr>
-                  <tr><th scope="row"><code>/os</code></th><td><a href="#cmd-operserv"><code>/operserv</code></a></td></tr>
-                  <tr><th scope="row"><code>/quote</code></th><td><a href="#cmd-raw"><code>/raw</code></a></td></tr>
-                  <tr><th scope="row"><code>/schat</code></th><td><a href="#cmd-seraphchat"><code>/seraphchat</code></a></td></tr>
-                </tbody>
-              </table>
-            </div>
-
-            <h3>Chaining</h3>
-            <p>
-              An alias may point at another alias. Expansion stops after five hops
-              and reports an expansion loop rather than spinning. An alias pointing
-              directly at itself is refused when you save it.
-            </p>
-
-            <h3>Where they live</h3>
-            <p>
-              Aliases are stored in your client config, so they apply on every
-              network and survive a restart. They travel with
-              <code>Settings &gt; Application &gt; Import/Export Config</code>,
-              merging into whatever is already there, and an imported alias wins a
-              name collision.
+              An alias can replace a built-in command. <code>/!name</code> still runs
+              the built-in one.
             </p>
 
             <div class="docs-note">
-              Aliases resolve locally before anything is sent, so nobody on the
-              network sees the short form. <code>/kb Alice flooding</code> reaches
-              the server as an ordinary kick and ban.
+              Aliases from earlier versions moved to an aliases file the first time
+              6.0 started, and work as before.
             </div>
           </article>
 
@@ -1299,6 +1249,24 @@ server/Libera/server.log</code></pre>
             </div>
           </article>
 
+          <article class="docs-pane" id="custom-mentions" data-pane>
+            <p class="pane-kicker">Chatting</p>
+            <h2>Custom Mentions</h2>
+            <p class="pane-lead">
+              Words and phrases that count as mentions of you, like your nickname.
+              <code>Settings &gt; Chatting &gt; Custom Mentions</code>.
+            </p>
+            <p>
+              A message containing one is highlighted and collected in the Custom
+              Mentions tray beside the @ inbox. Matching ignores case and looks for
+              whole words, so "cat" does not match "concatenate".
+            </p>
+            <p>
+              Alerts follow <strong>Notify on custom mentions</strong> in
+              <a href="#alerts">Sounds and Alerts</a>.
+            </p>
+          </article>
+
           <article class="docs-pane" id="ignore-list" data-pane>
             <p class="pane-kicker">Chatting</p>
             <h2>Ignore List</h2>
@@ -1408,6 +1376,30 @@ server/Libera/server.log</code></pre>
               (<code>+g</code>), telling the server not to deliver private messages
               at all unless you have allowed the sender.
             </p>
+          </article>
+
+          <article class="docs-pane" id="metadata" data-pane>
+            <p class="pane-kicker">Chatting</p>
+            <h2>IRCv3 Metadata</h2>
+            <p class="pane-lead">
+              What you publish about yourself: an avatar, pronouns, a homepage and a
+              status. Clients with IRCv3 metadata support show it beside your name.
+              <code>Settings &gt; Chatting &gt; IRCv3 Metadata</code>.
+            </p>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Render IRC avatars</th><td>Shows other people's avatars instead of identicons. Off by default, because each image loads from a server its owner chose, which sees your IP address.</td></tr>
+                  <tr><th scope="row">Global Metadata</th><td>Published on every network.</td></tr>
+                  <tr><th scope="row">Server Metadata</th><td>A value for one network, used there instead of the global one.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="docs-note">
+              Everything here is visible to everyone on the network. An avatar must
+              be an <code>https://</code> link.
+            </div>
           </article>
 
           <article class="docs-pane" id="notify-list" data-pane>
@@ -1705,6 +1697,200 @@ server/Libera/server.log</code></pre>
             </div>
           </article>
 
+          <!-- ══ Scripts ═════════════════════════════════════════════════ -->
+
+          <article class="docs-pane" id="scripts-editor" data-pane>
+            <p class="pane-kicker">Scripts</p>
+            <h2>Scripts Editor</h2>
+            <p class="pane-lead">
+              Open it with <code>Alt+R</code>, from the toolbar, or from
+              <code>Settings &gt; Chatting &gt; Scripts Editor</code>.
+            </p>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Tab</th><th>Holds</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Aliases</th><td>Your <a href="#aliases">aliases</a>.</td></tr>
+                  <tr><th scope="row">Popups</th><td>Items for right-click menus and the Commands menu.</td></tr>
+                  <tr><th scope="row">Remote</th><td>Script files: events, aliases and menus.</td></tr>
+                  <tr><th scope="row">Users</th><td>User levels for events.</td></tr>
+                  <tr><th scope="row">Variables</th><td>Global variables, saved in <code>vars.ini</code>.</td></tr>
+                  <tr><th scope="row">Errors</th><td>This session's script errors. Click one to open its line.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Loading scripts</h3>
+            <p>
+              Use <strong>File &gt; Load</strong> or
+              <a href="#cmd-load"><code>/load -rs file.mrc</code></a>. A file loaded
+              for the first time shows what it does and asks first.
+              <a href="#cmd-reload"><code>/reload</code></a> reads a file again after
+              you edit it elsewhere.
+            </p>
+
+            <h3>Per file</h3>
+            <ul>
+              <li><strong>On</strong> switches a file off without unloading it.</li>
+              <li><strong>Networks</strong> limits a file to some of your networks.</li>
+            </ul>
+            <p>
+              <strong>Listen &gt; Enabled</strong> turns every script's events off at
+              once.
+            </p>
+          </article>
+
+          <article class="docs-pane" id="scripts-compat" data-pane>
+            <p class="pane-kicker">Scripts</p>
+            <h2>SeraphIRC Scripting</h2>
+            <p class="pane-lead">
+              SeraphIRC 6.0 introduces support for scripting modeled around mIRC
+              scripting language. Significant effort has gone into compatibility and
+              functional testing, but issues and gaps are anticipated.
+            </p>
+            <p>
+              If you have a script you'd like to run inside of SeraphIRC and are
+              having trouble, please contact us and we'll work with you to provide
+              fixes for supported functionality.
+            </p>
+
+            <h3>What works</h3>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Area</th><th>Supported</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Language</th><td>Aliases (global and local), <code>if</code>, <code>elseif</code>, <code>else</code>, <code>while</code> with <code>break</code> and <code>continue</code>, <code>goto</code>, evaluation brackets, <code>$eval</code>, groups with <code>/enable</code> and <code>/disable</code>, and <code>:error</code> handling.</td></tr>
+                  <tr><th scope="row">Events</th><td>Every event in the list below, with the <code>^</code>, <code>!</code>, <code>@</code>, <code>+</code>, <code>$</code> and <code>me:</code> prefixes, user levels, regular-expression matches, <code>halt</code> and <code>haltdef</code>.</td></tr>
+                  <tr><th scope="row">Menus</th><td>The Popups tab and <code>menu</code> blocks in script files, for the Status, channel and query windows, the nick list, and the menu bar.</td></tr>
+                  <tr><th scope="row">Data</th><td>Global variables (kept in <code>vars.ini</code>, in mIRC's own form), local variables, hash tables with <code>/hsave</code> and <code>/hload</code>, INI and text files, binary variables, and <code>/fopen</code> file handles, all inside the scripts folder.</td></tr>
+                  <tr><th scope="row">Timers</th><td><code>/timer</code> with repeats and intervals, and at a time of day.</td></tr>
+                  <tr><th scope="row">Windows</th><td>Custom <code>@windows</code> with their lines, text box and events, and <code>$input</code> prompts.</td></tr>
+                  <tr><th scope="row">Networks</th><td>Sockets once you allow the host, <code>/scon</code> and <code>/scid</code> across networks, and the address list behind <code>$ial</code>, <code>$address</code> and <code>$mask</code>.</td></tr>
+                  <tr><th scope="row">Sound</th><td><code>/splay</code>, one sound at a time, silenced by the Sounds and Alerts switch.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Not supported yet</h3>
+            <p>
+              Dialogs (<code>/dialog</code>, <code>$did</code> and <code>on DIALOG</code>)
+              and picture windows (<code>/drawpic</code> and the other drawing
+              commands) are planned for a later 6.x release.
+            </p>
+            <p>
+              An event that is not in the list below still loads without complaint,
+              but it never fires. Scripts reach files only inside the scripts
+              folder.
+            </p>
+
+            <h3>No current support roadmap</h3>
+            <p>
+              Some of mIRC reaches outside the chat client, and a script from the
+              internet should not be able to do that. While it may change in the
+              future, there is currently no roadmapped support for these.
+            </p>
+            <ul>
+              <li>Starting programs (<code>/run</code>), DLLs (<code>$dll</code>), COM objects (<code>$com</code>) and DDE.</li>
+              <li>Listening sockets. A script can connect out, but nothing can connect in.</li>
+              <li>DCC chat from scripts.</li>
+            </ul>
+
+            <h3>Where SeraphIRC behaves differently</h3>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>What</th><th>How</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">First load asks</th><td>A file that has never been loaded asks before it runs, with a summary of what it does. A script cannot load a new file on its own.</td></tr>
+                  <tr><th scope="row">Connections ask</th><td>A script's first connection to each host asks. "Allow always" is remembered, and can be taken back in the Scripts Editor.</td></tr>
+                  <tr><th scope="row">Script files are protected</th><td>A script cannot overwrite, rename or delete a script file, or any of SeraphIRC's own files.</td></tr>
+                  <tr><th scope="row">Sending is paced</th><td>Scripts that send faster than servers allow are slowed to one line a second, rather than getting you disconnected for flooding.</td></tr>
+                  <tr><th scope="row">Runaway scripts stop</th><td>A handler that runs too long is stopped, and a file whose handlers keep doing it is switched off.</td></tr>
+                  <tr><th scope="row">Per-network scripts</th><td>A file can be limited to some of your networks, so a script written for one network does not answer on the others.</td></tr>
+                  <tr><th scope="row"><code>$version</code></th><td>Returns SeraphIRC's own version, as does <code>$seraphirc</code>. A script that insists on a mIRC version number says so when it loads.</td></tr>
+                  <tr><th scope="row">Unknown identifiers</th><td>Still evaluate to nothing, as in mIRC, but the Scripts Editor underlines them.</td></tr>
+                  <tr><th scope="row">Two devices</th><td>Each device runs its own scripts. With two devices on one bouncer, a script that is on in both replies twice. Switch it off on one of them.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Everything the script engine supports</h3>
+<!-- BEGIN:scripts-support -->
+            <h4>Events (48)</h4>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Area</th><th>Events</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Messages</th><td class="token-cell"><code>TEXT</code> <code>ACTION</code> <code>NOTICE</code> <code>SNOTICE</code> <code>CTCP</code> <code>CTCPREPLY</code> <code>INPUT</code></td></tr>
+                  <tr><th scope="row">Channels</th><td class="token-cell"><code>JOIN</code> <code>PART</code> <code>KICK</code> <code>INVITE</code> <code>TOPIC</code></td></tr>
+                  <tr><th scope="row">Modes</th><td class="token-cell"><code>MODE</code> <code>RAWMODE</code> <code>OP</code> <code>DEOP</code> <code>VOICE</code> <code>DEVOICE</code> <code>HELP</code> <code>DEHELP</code> <code>BAN</code> <code>UNBAN</code> <code>SERVERMODE</code> <code>SERVEROP</code> <code>SERVERDEOP</code> <code>SERVERVOICE</code> <code>SERVERDEVOICE</code></td></tr>
+                  <tr><th scope="row">People</th><td class="token-cell"><code>NICK</code> <code>QUIT</code> <code>NOTIFY</code> <code>UNOTIFY</code></td></tr>
+                  <tr><th scope="row">Connection</th><td class="token-cell"><code>CONNECT</code> <code>DISCONNECT</code> <code>RAW</code></td></tr>
+                  <tr><th scope="row">Windows</th><td class="token-cell"><code>OPEN</code> <code>CLOSE</code> <code>ACTIVE</code> <code>APPACTIVE</code></td></tr>
+                  <tr><th scope="row">Scripts</th><td class="token-cell"><code>START</code> <code>EXIT</code> <code>LOAD</code> <code>UNLOAD</code> <code>SIGNAL</code></td></tr>
+                  <tr><th scope="row">Sockets</th><td class="token-cell"><code>SOCKOPEN</code> <code>SOCKREAD</code> <code>SOCKCLOSE</code></td></tr>
+                  <tr><th scope="row">Sound</th><td class="token-cell"><code>WAVEEND</code> <code>MP3END</code></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h4>Commands (73)</h4>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Area</th><th>Commands</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Variables</th><td class="token-cell"><code>/set</code> <code>/unset</code> <code>/inc</code> <code>/dec</code> <code>/var</code></td></tr>
+                  <tr><th scope="row">Flow</th><td class="token-cell"><code>/halt</code> <code>/haltdef</code> <code>/return</code> <code>/goto</code> <code>/break</code> <code>/continue</code> <code>/noop</code> <code>/reseterror</code> <code>/tokenize</code> <code>/signal</code></td></tr>
+                  <tr><th scope="row">Output</th><td class="token-cell"><code>/echo</code> <code>/say</code> <code>/beep</code> <code>/flash</code> <code>/titlebar</code> <code>/splay</code></td></tr>
+                  <tr><th scope="row">Hash tables</th><td class="token-cell"><code>/hmake</code> <code>/hadd</code> <code>/hdel</code> <code>/hfree</code> <code>/hsave</code> <code>/hload</code> <code>/hinc</code> <code>/hdec</code></td></tr>
+                  <tr><th scope="row">Files</th><td class="token-cell"><code>/write</code> <code>/writeini</code> <code>/remini</code> <code>/flushini</code> <code>/remove</code> <code>/rename</code> <code>/copy</code> <code>/mkdir</code> <code>/rmdir</code> <code>/loadbuf</code> <code>/savebuf</code> <code>/filter</code></td></tr>
+                  <tr><th scope="row">File handles</th><td class="token-cell"><code>/fopen</code> <code>/fclose</code> <code>/fseek</code> <code>/fwrite</code> <code>/flist</code></td></tr>
+                  <tr><th scope="row">Binary variables</th><td class="token-cell"><code>/bset</code> <code>/bunset</code> <code>/bcopy</code> <code>/bread</code> <code>/bwrite</code> <code>/breplace</code> <code>/btrunc</code></td></tr>
+                  <tr><th scope="row">Windows</th><td class="token-cell"><code>/window</code> <code>/aline</code> <code>/iline</code> <code>/rline</code> <code>/dline</code> <code>/close</code></td></tr>
+                  <tr><th scope="row">Sockets</th><td class="token-cell"><code>/sockopen</code> <code>/sockread</code> <code>/sockwrite</code> <code>/sockclose</code> <code>/sockmark</code></td></tr>
+                  <tr><th scope="row">Timers</th><td class="token-cell"><code>/timer</code> <code>/timers</code></td></tr>
+                  <tr><th scope="row">Users and groups</th><td class="token-cell"><code>/auser</code> <code>/guser</code> <code>/ruser</code> <code>/enable</code> <code>/disable</code></td></tr>
+                  <tr><th scope="row">Networks</th><td class="token-cell"><code>/scid</code> <code>/scon</code></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h4>Identifiers (185)</h4>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Area</th><th>Identifiers</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Who and where</th><td class="token-cell"><code>$me</code> <code>$nick</code> <code>$chan</code> <code>$target</code> <code>$address</code> <code>$fulladdress</code> <code>$site</code> <code>$network</code> <code>$server</code> <code>$cid</code> <code>$activecid</code> <code>$active</code> <code>$lactive</code> <code>$appactive</code> <code>$query</code> <code>$chat</code> <code>$knick</code> <code>$newnick</code> <code>$opnick</code> <code>$vnick</code> <code>$hnick</code> <code>$bnick</code> <code>$banmask</code> <code>$snick</code> <code>$snicks</code> <code>$numeric</code> <code>$highlight</code> <code>$away</code> <code>$awaymsg</code></td></tr>
+                  <tr><th scope="row">Text</th><td class="token-cell"><code>$+</code> <code>$asc</code> <code>$chr</code> <code>$cr</code> <code>$crlf</code> <code>$lf</code> <code>$len</code> <code>$left</code> <code>$right</code> <code>$mid</code> <code>$pos</code> <code>$poscs</code> <code>$replace</code> <code>$replacecs</code> <code>$remove</code> <code>$removecs</code> <code>$upper</code> <code>$lower</code> <code>$str</code> <code>$strip</code> <code>$qt</code> <code>$noqt</code> <code>$count</code> <code>$encode</code> <code>$decode</code> <code>$utfdecode</code> <code>$utfencode</code> <code>$md5</code> <code>$sha1</code> <code>$color</code> <code>$colour</code> <code>$rgb</code> <code>$style</code></td></tr>
+                  <tr><th scope="row">Tokens</th><td class="token-cell"><code>$addtok</code> <code>$deltok</code> <code>$findtok</code> <code>$gettok</code> <code>$instok</code> <code>$istok</code> <code>$matchtok</code> <code>$numtok</code> <code>$puttok</code> <code>$remtok</code> <code>$reptok</code> <code>$sorttok</code> <code>$wildtok</code></td></tr>
+                  <tr><th scope="row">Math and logic</th><td class="token-cell"><code>$calc</code> <code>$abs</code> <code>$ceil</code> <code>$floor</code> <code>$int</code> <code>$round</code> <code>$rand</code> <code>$base</code> <code>$and</code> <code>$or</code> <code>$not</code> <code>$xor</code> <code>$biton</code> <code>$bitoff</code> <code>$isbit</code> <code>$bytes</code> <code>$ord</code> <code>$iif</code> <code>$true</code> <code>$false</code> <code>$null</code> <code>$isnumber</code> <code>$v1</code> <code>$v2</code> <code>$ifmatch</code> <code>$result</code></td></tr>
+                  <tr><th scope="row">Time</th><td class="token-cell"><code>$time</code> <code>$date</code> <code>$ctime</code> <code>$asctime</code> <code>$adate</code> <code>$fulldate</code> <code>$gmt</code> <code>$daylight</code> <code>$duration</code> <code>$ticks</code> <code>$timestamp</code></td></tr>
+                  <tr><th scope="row">Users and channels</th><td class="token-cell"><code>$comchan</code> <code>$ial</code> <code>$ialchan</code> <code>$mask</code> <code>$level</code> <code>$ulevel</code> <code>$ulist</code> <code>$clevel</code></td></tr>
+                  <tr><th scope="row">Variables and tables</th><td class="token-cell"><code>$var</code> <code>$eval</code> <code>$hget</code> <code>$hfind</code> <code>$group</code> <code>$isalias</code> <code>$bvar</code> <code>$bfind</code></td></tr>
+                  <tr><th scope="row">Files</th><td class="token-cell"><code>$exists</code> <code>$file</code> <code>$isfile</code> <code>$isdir</code> <code>$finddir</code> <code>$finddirn</code> <code>$findfile</code> <code>$findfilen</code> <code>$lines</code> <code>$read</code> <code>$readn</code> <code>$readini</code> <code>$ini</code> <code>$fline</code> <code>$filtered</code> <code>$longfn</code> <code>$shortfn</code> <code>$nofile</code> <code>$nopath</code></td></tr>
+                  <tr><th scope="row">File handles</th><td class="token-cell"><code>$fopen</code> <code>$fread</code> <code>$fgetc</code> <code>$feof</code> <code>$ferr</code></td></tr>
+                  <tr><th scope="row">Regular expressions</th><td class="token-cell"><code>$regex</code> <code>$regml</code> <code>$regsub</code> <code>$regsubex</code></td></tr>
+                  <tr><th scope="row">Windows</th><td class="token-cell"><code>$window</code> <code>$line</code> <code>$titlebar</code> <code>$input</code></td></tr>
+                  <tr><th scope="row">Sockets</th><td class="token-cell"><code>$sock</code> <code>$sockname</code> <code>$sockbr</code> <code>$sockerr</code></td></tr>
+                  <tr><th scope="row">Timers and signals</th><td class="token-cell"><code>$timer</code> <code>$signal</code></td></tr>
+                  <tr><th scope="row">Sound</th><td class="token-cell"><code>$insong</code> <code>$inwave</code></td></tr>
+                  <tr><th scope="row">Networks</th><td class="token-cell"><code>$scid</code> <code>$scon</code></td></tr>
+                  <tr><th scope="row">Scripts and client</th><td class="token-cell"><code>$script</code> <code>$scriptdir</code> <code>$mircdir</code> <code>$mircexe</code> <code>$mircini</code> <code>$version</code> <code>$seraphirc</code> <code>$isid</code> <code>$error</code> <code>$prop</code> <code>$show</code> <code>$longip</code> <code>$maxlenl</code> <code>$maxlenm</code> <code>$maxlens</code></td></tr>
+                </tbody>
+              </table>
+            </div>
+<!-- END:scripts-support -->
+
+            <h3>Have a script that doesn't work? Want it to?</h3>
+            <p>
+              Tell us in <a href="ircs://irc.libera.chat/seraphirc">#seraphirc on
+              Libera</a>, with the script or a link to it and what went wrong.
+            </p>
+
+            <div class="docs-note">
+              mIRC is a registered trademark of mIRC Co. Ltd. SeraphIRC is an
+              independent project and is not affiliated with or endorsed by mIRC Co.
+              Ltd.
+            </div>
+          </article>
+
           <!-- ══ Network ═════════════════════════════════════════════════ -->
 
           <article class="docs-pane" id="bouncer-profiles" data-pane>
@@ -1964,6 +2150,13 @@ server/Libera/server.log</code></pre>
               </table>
             </div>
 
+            <h3>Direct and ZNC networks</h3>
+            <p>
+              These can upload through a soju bouncer's filehost too.
+              <strong>Upload files through</strong> picks which one, or Automatic for
+              the first soju bouncer that offers uploads.
+            </p>
+
             <h3>Where a dropped file goes</h3>
             <p>
               The drop point decides. Dropped on a <strong>nickname</strong>, the
@@ -2042,7 +2235,7 @@ server/Libera/server.log</code></pre>
               <table>
                 <thead><tr><th>Included</th><th>Detail</th></tr></thead>
                 <tbody>
-                  <tr><th scope="row">Networks</th><td>Servers, ports, TLS and SASL flags, usernames, service targets, autojoin, ignored nicks, and active state.</td></tr>
+                  <tr><th scope="row">Networks</th><td>Servers, ports, TLS and SASL flags, usernames, autojoin, ignored nicks, and active state.</td></tr>
                   <tr><th scope="row"><a href="#bouncer-profiles">Bouncer profiles</a></th><td>Host, port, TLS settings, username, notes, and the trusted certificate fingerprint.</td></tr>
                   <tr><th scope="row"><a href="#aliases">Command aliases</a></th><td>Merged into your existing set. An imported alias wins a name collision.</td></tr>
                   <tr><th scope="row">Favorites and Notify entries</th><td>Channel favorites and <a href="#notify-list">notify list</a> entries.</td></tr>
@@ -2237,8 +2430,8 @@ server/Libera/server.log</code></pre>
             </p>
 
             <div class="docs-note">
-              <strong>Passwords.</strong> Send them through the
-              <a href="#commands-services">service commands</a> rather than
+              <strong>Passwords.</strong> Send them with a service shortcut such as
+              <code>/ns</code>, which goes to the server, rather than
               <code>/msg</code>. A mistyped <code>/msg</code> target puts your
               password in a channel.
             </div>
@@ -2376,7 +2569,7 @@ server/Libera/server.log</code></pre>
           <p class="pane-kicker">Commands</p>
           <h2>Messaging</h2>
           <p class="pane-lead">Putting text, files, or an action in front of someone. The formatting variants are covered under <a href="#formatting">Text Formatting</a>.</p>
-          <nav class="entry-jump" aria-label="Messaging commands"><a href="#cmd-ctcp"><code>/ctcp</code></a><a href="#cmd-dcc"><code>/dcc</code></a><a href="#cmd-format"><code>/format</code></a><a href="#cmd-format-me"><code>/format-me</code></a><a href="#cmd-format-msg"><code>/format-msg</code></a><a href="#cmd-format-notice"><code>/format-notice</code></a><a href="#cmd-giphy"><code>/giphy</code></a><a href="#cmd-me"><code>/me</code></a><a href="#cmd-msg"><code>/msg</code></a><a href="#cmd-notice"><code>/notice</code></a><a href="#cmd-plain"><code>/plain</code></a><a href="#cmd-plain-me"><code>/plain-me</code></a><a href="#cmd-plain-msg"><code>/plain-msg</code></a><a href="#cmd-plain-notice"><code>/plain-notice</code></a><a href="#cmd-query"><code>/query</code></a><a href="#cmd-seraphchat"><code>/seraphchat</code></a><a href="#cmd-seraphtransfer"><code>/seraphtransfer</code></a></nav>
+          <nav class="entry-jump" aria-label="Messaging commands"><a href="#cmd-ctcp"><code>/ctcp</code></a><a href="#cmd-ctcpreply"><code>/ctcpreply</code></a><a href="#cmd-dcc"><code>/dcc</code></a><a href="#cmd-describe"><code>/describe</code></a><a href="#cmd-format"><code>/format</code></a><a href="#cmd-format-me"><code>/format-me</code></a><a href="#cmd-format-msg"><code>/format-msg</code></a><a href="#cmd-format-notice"><code>/format-notice</code></a><a href="#cmd-giphy"><code>/giphy</code></a><a href="#cmd-me"><code>/me</code></a><a href="#cmd-msg"><code>/msg</code></a><a href="#cmd-notice"><code>/notice</code></a><a href="#cmd-plain"><code>/plain</code></a><a href="#cmd-plain-me"><code>/plain-me</code></a><a href="#cmd-plain-msg"><code>/plain-msg</code></a><a href="#cmd-plain-notice"><code>/plain-notice</code></a><a href="#cmd-query"><code>/query</code></a><a href="#cmd-react"><code>/react</code></a><a href="#cmd-seraphchat"><code>/seraphchat</code></a><a href="#cmd-seraphtransfer"><code>/seraphtransfer</code></a><a href="#cmd-unreact"><code>/unreact</code></a></nav>
           <section class="docs-entry" id="cmd-ctcp">
             <header class="entry-head">
               <h3>/ctcp<a class="entry-anchor" href="#cmd-ctcp" aria-label="Link to /ctcp">#</a></h3>
@@ -2391,12 +2584,25 @@ server/Libera/server.log</code></pre>
             <pre class="entry-examples"><code>/ctcp Alice VERSION
 /ctcp Alice PING 12345</code></pre>
           </section>
+          <section class="docs-entry" id="cmd-ctcpreply">
+            <header class="entry-head">
+              <h3>/ctcpreply<a class="entry-anchor" href="#cmd-ctcpreply" aria-label="Link to /ctcpreply">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-irc">sends IRC</span><span class="flag flag-network">needs a network</span></span>
+            </header>
+            <p class="entry-usage"><code>/ctcpreply &lt;nick&gt; &lt;command&gt; [reply]</code></p>
+            <p class="entry-summary">Answer a CTCP request</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>nick</code></dt><dd>who sent the CTCP request</dd><dt><code>command</code></dt><dd>the CTCP command being answered, such as VERSION</dd><dt><code>reply</code></dt><dd>the answer text</dd></dl>
+            <div class="entry-details"><p>Sends a CTCP reply. Scripts use it to answer VERSION and other CTCP requests themselves. Replies to one nick are rate limited, so a flood of requests cannot make you flood in return.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/ctcpreply Alice VERSION My Script 1.0</code></pre>
+          </section>
           <section class="docs-entry" id="cmd-dcc">
             <header class="entry-head">
               <h3>/dcc<a class="entry-anchor" href="#cmd-dcc" aria-label="Link to /dcc">#</a></h3>
               <span class="entry-flags"><span class="flag flag-network">needs a network</span></span>
             </header>
-            <p class="entry-usage"><code>/dcc send &lt;nick&gt; [path] | /dcc get [nick] | /dcc decline [nick] | /dcc cancel &lt;id|nick&gt; | /dcc list</code></p>
+            <p class="entry-usage"><code>/dcc &lt;send|get|decline|cancel|list&gt; [args]</code></p>
             <p class="entry-summary">Send and receive files directly with another user</p>
             <h4 class="entry-label">Parameters</h4>
             <dl class="entry-params"><dt><code>nick</code></dt><dd>the other person</dd><dt><code>path</code></dt><dd>file to send (a picker opens when omitted)</dd></dl>
@@ -2406,6 +2612,20 @@ server/Libera/server.log</code></pre>
 /dcc send Alice /home/me/photo.jpg
 /dcc get
 /dcc list</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-describe">
+            <header class="entry-head">
+              <h3>/describe<a class="entry-anchor" href="#cmd-describe" aria-label="Link to /describe">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-irc">sends IRC</span><span class="flag flag-network">needs a network</span></span>
+            </header>
+            <p class="entry-usage"><code>/describe &lt;nick|#channel&gt; &lt;action&gt;</code></p>
+            <p class="entry-summary">Send an action to a channel or nick</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>target</code></dt><dd>the channel or nick to send the action to</dd><dt><code>action</code></dt><dd>action text</dd></dl>
+            <div class="entry-details"><p>Sends a CTCP ACTION, as /me does, to the channel or nick you name rather than the current buffer. Scripts use it to act in a channel other than the one you are looking at.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/describe #seraphirc waves
+/describe Alice waves</code></pre>
           </section>
           <section class="docs-entry" id="cmd-format">
             <header class="entry-head">
@@ -2575,6 +2795,20 @@ server/Libera/server.log</code></pre>
             <h4 class="entry-label">Examples</h4>
             <pre class="entry-examples"><code>/query Alice</code></pre>
           </section>
+          <section class="docs-entry" id="cmd-react">
+            <header class="entry-head">
+              <h3>/react<a class="entry-anchor" href="#cmd-react" aria-label="Link to /react">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-irc">sends IRC</span><span class="flag flag-network">needs a network</span><span class="flag flag-buffer">needs a buffer</span></span>
+            </header>
+            <p class="entry-usage"><code>/react &lt;emoji&gt; [n]</code></p>
+            <p class="entry-summary">React to a recent message</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>emoji</code></dt><dd>the reaction value to add</dd><dt><code>n</code></dt><dd>how many messages back to react to (default 1, the most recent)</dd></dl>
+            <div class="entry-details"><p>Adds an emoji reaction to a recent message in the current buffer, using the IRCv3 react client tag with a reply tag pointing at the message.</p><p>Counts only messages that carry a server ID, since a reaction has to point at one. Requires a network that relays reaction tags.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/react 👍
+/react 🎉 3</code></pre>
+          </section>
           <section class="docs-entry" id="cmd-seraphchat">
             <header class="entry-head">
               <h3>/seraphchat<a class="entry-anchor" href="#cmd-seraphchat" aria-label="Link to /seraphchat">#</a></h3>
@@ -2602,6 +2836,19 @@ server/Libera/server.log</code></pre>
             <div class="entry-details"><p>Opens a file picker and offers the chosen file over Seraph Transfer: a direct, end-to-end encrypted transfer that verifies the file and, unlike DCC, works from behind a bouncer.</p><p>The same action as "Send File (Seraph)" in a nickname's right-click menu, so this is a keyboard shortcut rather than the only route.</p><p>Sending an offer reveals your IP address to the rendezvous immediately and to the other person once they accept.</p><p>The command never reaches the server, and it never falls back to DCC by itself: if the peer cannot answer a Seraph offer, DCC is suggested rather than silently used.</p><p>Nothing to set up: Seraph Transfer is available on every network, including through a bouncer. Settings &gt; File Uploads &amp; DCC tunes where files land and how large an offer may be.</p></div>
             <h4 class="entry-label">Examples</h4>
             <pre class="entry-examples"><code>/seraphtransfer Alice</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-unreact">
+            <header class="entry-head">
+              <h3>/unreact<a class="entry-anchor" href="#cmd-unreact" aria-label="Link to /unreact">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-irc">sends IRC</span><span class="flag flag-network">needs a network</span><span class="flag flag-buffer">needs a buffer</span></span>
+            </header>
+            <p class="entry-usage"><code>/unreact &lt;emoji&gt; [n]</code></p>
+            <p class="entry-summary">Remove your reaction from a recent message</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>emoji</code></dt><dd>the reaction value to remove</dd><dt><code>n</code></dt><dd>how many messages back to unreact (default 1, the most recent)</dd></dl>
+            <div class="entry-details"><p>Removes a reaction you added to a recent message in the current buffer, using the IRCv3 unreact client tag.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/unreact 👍</code></pre>
           </section>
         </article>
         <article class="docs-pane" id="commands-encryption" data-pane>
@@ -2672,7 +2919,7 @@ server/Libera/server.log</code></pre>
             <p class="entry-summary">Set a FiSH (Blowfish) encryption key</p>
             <h4 class="entry-label">Parameters</h4>
             <dl class="entry-params"><dt><code>target</code></dt><dd>nick or channel (defaults to the current buffer)</dd><dt><code>key</code></dt><dd>the shared passphrase, optionally prefixed cbc: or ecb:</dd></dl>
-            <div class="entry-details"><p>Sets the shared key used to encrypt and decrypt messages with a nick or channel, compatible with HexChat (FiSHLiM), Konversation, and mIRC FiSH.</p><p>Without a cbc:/ecb: prefix the key uses ECB mode, matching HexChat, Konversation, and mIRC FiSH. Use cbc: for the stronger mode, or /keyx which negotiates it. FiSH is legacy compatibility encryption, not modern secure messaging.</p></div>
+            <div class="entry-details"><p>Sets the shared key used to encrypt and decrypt messages with a nick or channel, compatible with FiSH encryption in other IRC clients.</p><p>Without a cbc:/ecb: prefix the key uses ECB mode, matching standard FiSH behavior. Use cbc: for the stronger mode, or /keyx which negotiates it. FiSH is legacy compatibility encryption, not modern secure messaging.</p></div>
             <h4 class="entry-label">Examples</h4>
             <pre class="entry-examples"><code>/setkey hunter2
 /setkey #secret cbc:hunter2
@@ -2716,13 +2963,13 @@ server/Libera/server.log</code></pre>
               <h3>/accept<a class="entry-anchor" href="#cmd-accept" aria-label="Link to /accept">#</a></h3>
               <span class="entry-flags"><span class="flag flag-irc">sends IRC</span><span class="flag flag-network">needs a network</span></span>
             </header>
-            <p class="entry-usage"><code>/accept &lt;+nick|-nick|*&gt;</code></p>
+            <p class="entry-usage"><code>/accept &lt;nick|-nick|*&gt;</code></p>
             <p class="entry-summary">Manage your caller-ID (+g) accept list</p>
             <h4 class="entry-label">Parameters</h4>
-            <dl class="entry-params"><dt><code>+nick</code></dt><dd>allow this nick to message you</dd><dt><code>-nick</code></dt><dd>remove this nick from the list</dd><dt><code>*</code></dt><dd>list your current accept entries</dd></dl>
-            <div class="entry-details"><p>On networks with the caller-ID user mode (+g), the ACCEPT list controls who may send you private messages and notices. Use +nick to allow someone, -nick to remove them, and * to list the current entries.</p></div>
+            <dl class="entry-params"><dt><code>nick</code></dt><dd>allow this nick to message you</dd><dt><code>-nick</code></dt><dd>remove this nick from the list</dd><dt><code>*</code></dt><dd>list your current accept entries</dd></dl>
+            <div class="entry-details"><p>On networks with the caller-ID user mode (+g), the ACCEPT list controls who may send you private messages and notices. Name a nick on its own to allow them, put a minus in front to remove them, and use * to list the current entries.</p></div>
             <h4 class="entry-label">Examples</h4>
-            <pre class="entry-examples"><code>/accept +friend
+            <pre class="entry-examples"><code>/accept friend
 /accept -friend
 /accept *</code></pre>
           </section>
@@ -3416,106 +3663,11 @@ server/Libera/server.log</code></pre>
             <pre class="entry-examples"><code>/zline 203.0.113.10 repeated abuse</code></pre>
           </section>
         </article>
-        <article class="docs-pane" id="commands-services" data-pane>
-          <p class="pane-kicker">Commands</p>
-          <h2>Services</h2>
-          <p class="pane-lead">Shortcuts to the service bots. Each sends to the service target configured for that network, so a mistyped target cannot drop your password into a channel.</p>
-          <nav class="entry-jump" aria-label="Services commands"><a href="#cmd-botserv"><code>/botserv</code></a><a href="#cmd-chanserv"><code>/chanserv</code></a><a href="#cmd-helpserv"><code>/helpserv</code></a><a href="#cmd-hostserv"><code>/hostserv</code></a><a href="#cmd-memoserv"><code>/memoserv</code></a><a href="#cmd-nickserv"><code>/nickserv</code></a><a href="#cmd-operserv"><code>/operserv</code></a></nav>
-          <section class="docs-entry" id="cmd-botserv">
-            <header class="entry-head">
-              <h3>/botserv<a class="entry-anchor" href="#cmd-botserv" aria-label="Link to /botserv">#</a></h3>
-              <span class="entry-flags"><span class="flag flag-irc">sends IRC</span><span class="flag flag-network">needs a network</span></span>
-            </header>
-            <p class="entry-usage"><code>/botserv &lt;command&gt;</code></p>
-            <p class="entry-summary">Message BotServ</p>
-            <p class="entry-aliases">Also written as <code>/bs</code></p>
-            <div class="entry-details"><p>Sends a private message to the configured BotServ target for the active network.</p></div>
-            <h4 class="entry-label">Examples</h4>
-            <pre class="entry-examples"><code>/botserv HELP
-/bs HELP</code></pre>
-          </section>
-          <section class="docs-entry" id="cmd-chanserv">
-            <header class="entry-head">
-              <h3>/chanserv<a class="entry-anchor" href="#cmd-chanserv" aria-label="Link to /chanserv">#</a></h3>
-              <span class="entry-flags"><span class="flag flag-irc">sends IRC</span><span class="flag flag-network">needs a network</span></span>
-            </header>
-            <p class="entry-usage"><code>/chanserv &lt;command&gt;</code></p>
-            <p class="entry-summary">Message ChanServ</p>
-            <p class="entry-aliases">Also written as <code>/cs</code></p>
-            <div class="entry-details"><p>Sends a private message to the configured ChanServ target for the active network.</p></div>
-            <h4 class="entry-label">Examples</h4>
-            <pre class="entry-examples"><code>/chanserv OP #seraphirc
-/cs FLAGS #seraphirc</code></pre>
-          </section>
-          <section class="docs-entry" id="cmd-helpserv">
-            <header class="entry-head">
-              <h3>/helpserv<a class="entry-anchor" href="#cmd-helpserv" aria-label="Link to /helpserv">#</a></h3>
-              <span class="entry-flags"><span class="flag flag-irc">sends IRC</span><span class="flag flag-network">needs a network</span></span>
-            </header>
-            <p class="entry-usage"><code>/helpserv &lt;command&gt;</code></p>
-            <p class="entry-summary">Message HelpServ</p>
-            <div class="entry-details"><p>Sends a private message to the configured HelpServ target for the active network.</p></div>
-            <h4 class="entry-label">Examples</h4>
-            <pre class="entry-examples"><code>/helpserv HELP</code></pre>
-          </section>
-          <section class="docs-entry" id="cmd-hostserv">
-            <header class="entry-head">
-              <h3>/hostserv<a class="entry-anchor" href="#cmd-hostserv" aria-label="Link to /hostserv">#</a></h3>
-              <span class="entry-flags"><span class="flag flag-irc">sends IRC</span><span class="flag flag-network">needs a network</span></span>
-            </header>
-            <p class="entry-usage"><code>/hostserv &lt;command&gt;</code></p>
-            <p class="entry-summary">Message HostServ</p>
-            <p class="entry-aliases">Also written as <code>/hs</code></p>
-            <div class="entry-details"><p>Sends a private message to the configured HostServ target for the active network.</p></div>
-            <h4 class="entry-label">Examples</h4>
-            <pre class="entry-examples"><code>/hostserv ON
-/hs ON</code></pre>
-          </section>
-          <section class="docs-entry" id="cmd-memoserv">
-            <header class="entry-head">
-              <h3>/memoserv<a class="entry-anchor" href="#cmd-memoserv" aria-label="Link to /memoserv">#</a></h3>
-              <span class="entry-flags"><span class="flag flag-irc">sends IRC</span><span class="flag flag-network">needs a network</span></span>
-            </header>
-            <p class="entry-usage"><code>/memoserv &lt;command&gt;</code></p>
-            <p class="entry-summary">Message MemoServ</p>
-            <p class="entry-aliases">Also written as <code>/ms</code></p>
-            <div class="entry-details"><p>Sends a private message to the configured MemoServ target for the active network.</p></div>
-            <h4 class="entry-label">Examples</h4>
-            <pre class="entry-examples"><code>/memoserv LIST
-/ms READ 1</code></pre>
-          </section>
-          <section class="docs-entry" id="cmd-nickserv">
-            <header class="entry-head">
-              <h3>/nickserv<a class="entry-anchor" href="#cmd-nickserv" aria-label="Link to /nickserv">#</a></h3>
-              <span class="entry-flags"><span class="flag flag-irc">sends IRC</span><span class="flag flag-network">needs a network</span></span>
-            </header>
-            <p class="entry-usage"><code>/nickserv &lt;command&gt;</code></p>
-            <p class="entry-summary">Message NickServ</p>
-            <p class="entry-aliases">Also written as <code>/ns</code></p>
-            <div class="entry-details"><p>Sends a private message to the configured NickServ target for the active network.</p></div>
-            <h4 class="entry-label">Examples</h4>
-            <pre class="entry-examples"><code>/nickserv IDENTIFY &lt;password&gt;
-/ns STATUS</code></pre>
-          </section>
-          <section class="docs-entry" id="cmd-operserv">
-            <header class="entry-head">
-              <h3>/operserv<a class="entry-anchor" href="#cmd-operserv" aria-label="Link to /operserv">#</a></h3>
-              <span class="entry-flags"><span class="flag flag-irc">sends IRC</span><span class="flag flag-network">needs a network</span></span>
-            </header>
-            <p class="entry-usage"><code>/operserv &lt;command&gt;</code></p>
-            <p class="entry-summary">Message OperServ</p>
-            <p class="entry-aliases">Also written as <code>/os</code></p>
-            <div class="entry-details"><p>Sends a private message to the configured OperServ target for the active network.</p></div>
-            <h4 class="entry-label">Examples</h4>
-            <pre class="entry-examples"><code>/operserv HELP
-/os HELP</code></pre>
-          </section>
-        </article>
         <article class="docs-pane" id="commands-buffers" data-pane>
           <p class="pane-kicker">Commands</p>
           <h2>Buffers</h2>
           <p class="pane-lead">Buffers are your windows: server, channel, and query. These move between them, tidy them, and close them. None touch the network.</p>
-          <nav class="entry-jump" aria-label="Buffers commands"><a href="#cmd-buffers"><code>/buffers</code></a><a href="#cmd-clear"><code>/clear</code></a><a href="#cmd-clearall"><code>/clearall</code></a><a href="#cmd-close"><code>/close</code></a><a href="#cmd-current"><code>/current</code></a><a href="#cmd-server"><code>/server</code></a><a href="#cmd-show"><code>/show</code></a><a href="#cmd-state"><code>/state</code></a><a href="#cmd-switch"><code>/switch</code></a></nav>
+          <nav class="entry-jump" aria-label="Buffers commands"><a href="#cmd-buffers"><code>/buffers</code></a><a href="#cmd-clear"><code>/clear</code></a><a href="#cmd-clearall"><code>/clearall</code></a><a href="#cmd-closebuffer"><code>/closebuffer</code></a><a href="#cmd-current"><code>/current</code></a><a href="#cmd-server"><code>/server</code></a><a href="#cmd-show"><code>/show</code></a><a href="#cmd-state"><code>/state</code></a><a href="#cmd-switch"><code>/switch</code></a></nav>
           <section class="docs-entry" id="cmd-buffers">
             <header class="entry-head">
               <h3>/buffers<a class="entry-anchor" href="#cmd-buffers" aria-label="Link to /buffers">#</a></h3>
@@ -3543,7 +3695,7 @@ server/Libera/server.log</code></pre>
               <h3>/clearall<a class="entry-anchor" href="#cmd-clearall" aria-label="Link to /clearall">#</a></h3>
               <span class="entry-flags"><span class="flag flag-local">local only</span></span>
             </header>
-            <p class="entry-usage"><code>/clearall -a | -s</code></p>
+            <p class="entry-usage"><code>/clearall [-a|-s]</code></p>
             <p class="entry-summary">Clear visible buffers without deleting logs</p>
             <h4 class="entry-label">Parameters</h4>
             <dl class="entry-params"><dt><code>-a</code></dt><dd>clear all buffers across all servers</dd><dt><code>-s</code></dt><dd>clear all buffers on the active server</dd></dl>
@@ -3552,16 +3704,16 @@ server/Libera/server.log</code></pre>
             <pre class="entry-examples"><code>/clearall -a
 /clearall -s</code></pre>
           </section>
-          <section class="docs-entry" id="cmd-close">
+          <section class="docs-entry" id="cmd-closebuffer">
             <header class="entry-head">
-              <h3>/close<a class="entry-anchor" href="#cmd-close" aria-label="Link to /close">#</a></h3>
+              <h3>/closebuffer<a class="entry-anchor" href="#cmd-closebuffer" aria-label="Link to /closebuffer">#</a></h3>
               <span class="entry-flags"><span class="flag flag-local">local only</span><span class="flag flag-buffer">needs a buffer</span></span>
             </header>
-            <p class="entry-usage"><code>/close</code></p>
+            <p class="entry-usage"><code>/closebuffer</code></p>
             <p class="entry-summary">Close the current buffer</p>
-            <div class="entry-details"><p>Closes the current channel or query buffer and switches to a fallback buffer when available.</p></div>
+            <div class="entry-details"><p>Closes the current channel or query buffer and switches to a fallback buffer when available.</p><p>This was /close before SeraphIRC 6.0. /close is now free for scripts and aliases.</p></div>
             <h4 class="entry-label">Examples</h4>
-            <pre class="entry-examples"><code>/close</code></pre>
+            <pre class="entry-examples"><code>/closebuffer</code></pre>
           </section>
           <section class="docs-entry" id="cmd-current">
             <header class="entry-head">
@@ -3628,8 +3780,8 @@ server/Libera/server.log</code></pre>
         <article class="docs-pane" id="commands-client" data-pane>
           <p class="pane-kicker">Commands</p>
           <h2>Client</h2>
-          <p class="pane-lead">SeraphIRC itself rather than IRC. Help, aliases, the ignore list, notify entries, and the About panel.</p>
-          <nav class="entry-jump" aria-label="Client commands"><a href="#cmd-about"><code>/about</code></a><a href="#cmd-alias"><code>/alias</code></a><a href="#cmd-exit"><code>/exit</code></a><a href="#cmd-help"><code>/help</code></a><a href="#cmd-ignore"><code>/ignore</code></a><a href="#cmd-notify"><code>/notify</code></a><a href="#cmd-unalias"><code>/unalias</code></a><a href="#cmd-unignore"><code>/unignore</code></a></nav>
+          <p class="pane-lead">SeraphIRC itself rather than IRC. Help, scripts, aliases, the ignore list, notify entries, and the About panel.</p>
+          <nav class="entry-jump" aria-label="Client commands"><a href="#cmd-about"><code>/about</code></a><a href="#cmd-alias"><code>/alias</code></a><a href="#cmd-auser"><code>/auser</code></a><a href="#cmd-disable"><code>/disable</code></a><a href="#cmd-echo"><code>/echo</code></a><a href="#cmd-enable"><code>/enable</code></a><a href="#cmd-exit"><code>/exit</code></a><a href="#cmd-help"><code>/help</code></a><a href="#cmd-ignore"><code>/ignore</code></a><a href="#cmd-load"><code>/load</code></a><a href="#cmd-notify"><code>/notify</code></a><a href="#cmd-reload"><code>/reload</code></a><a href="#cmd-remote"><code>/remote</code></a><a href="#cmd-ruser"><code>/ruser</code></a><a href="#cmd-scid"><code>/scid</code></a><a href="#cmd-scon"><code>/scon</code></a><a href="#cmd-signal"><code>/signal</code></a><a href="#cmd-splay"><code>/splay</code></a><a href="#cmd-timer"><code>/timer</code></a><a href="#cmd-timers"><code>/timers</code></a><a href="#cmd-unalias"><code>/unalias</code></a><a href="#cmd-unignore"><code>/unignore</code></a><a href="#cmd-unload"><code>/unload</code></a></nav>
           <section class="docs-entry" id="cmd-about">
             <header class="entry-head">
               <h3>/about<a class="entry-anchor" href="#cmd-about" aria-label="Link to /about">#</a></h3>
@@ -3650,12 +3802,63 @@ server/Libera/server.log</code></pre>
             <p class="entry-summary">Create or update a command alias</p>
             <h4 class="entry-label">Parameters</h4>
             <dl class="entry-params"><dt><code>name</code></dt><dd>shortcut name, with or without a leading slash</dd><dt><code>command</code></dt><dd>slash command to run when the alias is used</dd></dl>
-            <div class="entry-details"><p>Creates or updates a shortcut for another command. Built-in SeraphIRC commands and built-in command aliases cannot be overwritten.</p><p>Run /alias without arguments to open the Aliases settings page.</p></div>
+            <div class="entry-details"><p>Creates or updates a shortcut for another command. Built-in SeraphIRC commands and built-in command aliases cannot be overwritten.</p><p>Service shortcuts such as /ns and /cs are not built in. They pass to the server as raw commands.</p><p>Run /alias without arguments to open the Aliases settings page.</p></div>
             <h4 class="entry-label">Examples</h4>
             <pre class="entry-examples"><code>/alias j /join
 /alias kb /kickban
 /j #seraphirc
 /kb Alice flooding</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-auser">
+            <header class="entry-head">
+              <h3>/auser<a class="entry-anchor" href="#cmd-auser" aria-label="Link to /auser">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span></span>
+            </header>
+            <p class="entry-usage"><code>/auser [-a] &lt;levels&gt; &lt;nick|address&gt; [info]</code></p>
+            <p class="entry-summary">Add someone to the scripts user list</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>-a</code></dt><dd>add these levels to the entry instead of replacing its levels</dd><dt><code>levels</code></dt><dd>numbers and names, comma separated, such as 10 or 5,friend</dd><dt><code>nick|address</code></dt><dd>a nick, or a nick!user@host mask with wildcards</dd><dt><code>info</code></dt><dd>an optional note kept with the entry</dd></dl>
+            <div class="entry-details"><p>Gives a nick or address access levels for scripts. An event written on 10:TEXT runs only for people whose level is 10 or more; everyone else is level 1.</p><p>The list is the Users tab of the Scripts Editor.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/auser 10 *!*@trusted.example
+/auser -a friend Alice</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-disable">
+            <header class="entry-head">
+              <h3>/disable<a class="entry-anchor" href="#cmd-disable" aria-label="Link to /disable">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span></span>
+            </header>
+            <p class="entry-usage"><code>/disable &lt;#group&gt; [#group...]</code></p>
+            <p class="entry-summary">Switch a script group off</p>
+            <div class="entry-details"><p>Switches off a #group section of a loaded script: its events stop firing, its aliases cannot be called and its menu items are hidden. The script file's #group line is updated, so the group stays off after a restart.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/disable #autogreet</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-echo">
+            <header class="entry-head">
+              <h3>/echo<a class="entry-anchor" href="#cmd-echo" aria-label="Link to /echo">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span></span>
+            </header>
+            <p class="entry-usage"><code>/echo [-a|-s] [#channel] &lt;text&gt;</code></p>
+            <p class="entry-summary">Show text in a window, for your eyes only</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>-a</code></dt><dd>the active window, which is also where text goes by default</dd><dt><code>-s</code></dt><dd>the network's status window</dd><dt><code>#channel</code></dt><dd>that channel's window</dd><dt><code>text</code></dt><dd>what to show</dd></dl>
+            <div class="entry-details"><p>Shows a line in a window without sending anything to the server.</p><p>Typed with one slash, the text is shown exactly as written. Typed with two slashes, identifiers and variables are filled in first: //echo -a $me shows your nickname, and //echo %name shows that variable from Scripts &gt; Variables. Two slashes do the same for any command.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/echo -a Back in five
+//echo -a I am $me
+//echo -s %name</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-enable">
+            <header class="entry-head">
+              <h3>/enable<a class="entry-anchor" href="#cmd-enable" aria-label="Link to /enable">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span></span>
+            </header>
+            <p class="entry-usage"><code>/enable &lt;#group&gt; [#group...]</code></p>
+            <p class="entry-summary">Switch a script group on</p>
+            <div class="entry-details"><p>Switches on a #group section of a loaded script: its events, aliases and menu items run again. Wildcards match several groups, as in /enable #away*. The script file's #group line is updated, so the group stays on after a restart.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/enable #autogreet</code></pre>
           </section>
           <section class="docs-entry" id="cmd-exit">
             <header class="entry-head">
@@ -3696,6 +3899,20 @@ server/Libera/server.log</code></pre>
 /ignore troll*
 /ignore *!*@spam.example</code></pre>
           </section>
+          <section class="docs-entry" id="cmd-load">
+            <header class="entry-head">
+              <h3>/load<a class="entry-anchor" href="#cmd-load" aria-label="Link to /load">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span></span>
+            </header>
+            <p class="entry-usage"><code>/load -a|-rs &lt;file&gt;</code></p>
+            <p class="entry-summary">Load a script</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>-a</code></dt><dd>an aliases file, as on the Aliases tab of the classic client's script editor</dd><dt><code>-rs</code></dt><dd>a remote file (events, alias blocks), as on the Remote tab</dd><dt><code>file</code></dt><dd>a path inside the scripts folder, or a full path</dd></dl>
+            <div class="entry-details"><p>Loads a script written for the classic IRC client's scripting language, and remembers it for the next session.</p><p>Loading a file that is already loaded reloads it, and runs its on LOAD and on START handlers again, as the classic client does. /reload reloads without them.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/load -a aliases.ini
+/load -rs remote.ini</code></pre>
+          </section>
           <section class="docs-entry" id="cmd-notify">
             <header class="entry-head">
               <h3>/notify<a class="entry-anchor" href="#cmd-notify" aria-label="Link to /notify">#</a></h3>
@@ -3709,6 +3926,118 @@ server/Libera/server.log</code></pre>
             <h4 class="entry-label">Examples</h4>
             <pre class="entry-examples"><code>/notify
 /notify Alice friend from Libera</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-reload">
+            <header class="entry-head">
+              <h3>/reload<a class="entry-anchor" href="#cmd-reload" aria-label="Link to /reload">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span></span>
+            </header>
+            <p class="entry-usage"><code>/reload -a|-rs &lt;file&gt;</code></p>
+            <p class="entry-summary">Reload a script from disk</p>
+            <div class="entry-details"><p>Reads a script again from disk, after it was edited outside SeraphIRC, without running its on LOAD or on START handlers.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/reload -rs remote.ini</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-remote">
+            <header class="entry-head">
+              <h3>/remote<a class="entry-anchor" href="#cmd-remote" aria-label="Link to /remote">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span></span>
+            </header>
+            <p class="entry-usage"><code>/remote [on|off]</code></p>
+            <p class="entry-summary">Switch script events on or off</p>
+            <div class="entry-details"><p>Turns every script's event handlers on or off, the Scripts Editor's Listen switch. Aliases still work while events are off. With no argument, says which it is.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/remote off
+/remote on</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-ruser">
+            <header class="entry-head">
+              <h3>/ruser<a class="entry-anchor" href="#cmd-ruser" aria-label="Link to /ruser">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span></span>
+            </header>
+            <p class="entry-usage"><code>/ruser [levels] &lt;nick|address&gt;</code></p>
+            <p class="entry-summary">Remove someone from the scripts user list</p>
+            <div class="entry-details"><p>Removes the given levels from an entry, or the whole entry when no levels are given.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/ruser Alice
+/ruser friend Alice</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-scid">
+            <header class="entry-head">
+              <h3>/scid<a class="entry-anchor" href="#cmd-scid" aria-label="Link to /scid">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span></span>
+            </header>
+            <p class="entry-usage"><code>/scid [-a] [-at1] &lt;id&gt; &lt;command&gt;</code></p>
+            <p class="entry-summary">Run a command on a connection by its id</p>
+            <div class="entry-details"><p>As /scon, but picks the network by its connection id, which scripts read from $cid.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/scid 3 whois Alice</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-scon">
+            <header class="entry-head">
+              <h3>/scon<a class="entry-anchor" href="#cmd-scon" aria-label="Link to /scon">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span></span>
+            </header>
+            <p class="entry-usage"><code>/scon [-a] [-at1] &lt;N&gt; &lt;command&gt;</code></p>
+            <p class="entry-summary">Run a command on another connection</p>
+            <div class="entry-details"><p>Runs a command on the Nth network, in the order the network list shows them. -a runs it on every network, and -at1 only on the connected ones. The command is evaluated when it runs, so $me is each network's own nick when written $!me.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/scon -a away Back in five
+/scon 2 join #help</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-signal">
+            <header class="entry-head">
+              <h3>/signal<a class="entry-anchor" href="#cmd-signal" aria-label="Link to /signal">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span></span>
+            </header>
+            <p class="entry-usage"><code>/signal [-n] &lt;name&gt; [parameters]</code></p>
+            <p class="entry-summary">Send a signal to scripts</p>
+            <div class="entry-details"><p>Runs every loaded script's on SIGNAL handler for the name, with the parameters as $1-. Without -n the handlers run once the current command has finished; with -n, at once.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/signal refresh
+/signal -n reload all</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-splay">
+            <header class="entry-head">
+              <h3>/splay<a class="entry-anchor" href="#cmd-splay" aria-label="Link to /splay">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span></span>
+            </header>
+            <p class="entry-usage"><code>/splay [-q] [-c] &lt;file|stop&gt;</code></p>
+            <p class="entry-summary">Play a sound</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>-q</code></dt><dd>queue the sound behind the one playing instead of replacing it</dd><dt><code>-c</code></dt><dd>clear the queue</dd><dt><code>file</code></dt><dd>a .wav, .mp3 or .ogg file, by full path or by name in the sounds folder</dd><dt><code>stop</code></dt><dd>stop the sound playing and clear the queue</dd></dl>
+            <div class="entry-details"><p>Plays a sound file. A name without a folder is looked for in the sounds folder beside the scripts folder, then in the scripts folder.</p><p>Script sounds follow the sound switch in Settings &gt; Sounds &amp; Alerts. MIDI files cannot be played.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/splay alert.wav
+/splay -q C:\Sounds\ding.mp3
+/splay stop</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-timer">
+            <header class="entry-head">
+              <h3>/timer<a class="entry-anchor" href="#cmd-timer" aria-label="Link to /timer">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span></span>
+            </header>
+            <p class="entry-usage"><code>/timer[name] [-m] &lt;repetitions&gt; &lt;interval&gt; &lt;command&gt;</code></p>
+            <p class="entry-summary">Run a command later, or repeatedly</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>name</code></dt><dd>optional, written straight after /timer (/timerREMIND); without one the timer is numbered</dd><dt><code>-m</code></dt><dd>the interval is in milliseconds rather than seconds</dd><dt><code>repetitions</code></dt><dd>how many times to run the command, or 0 to repeat until stopped</dd><dt><code>interval</code></dt><dd>time between runs</dd><dt><code>command</code></dt><dd>the command to run</dd></dl>
+            <div class="entry-details"><p>Runs a command after a delay, a set number of times or until stopped. /timerNAME off stops a named timer.</p><p>The command is evaluated when the timer fires. Timers are part of scripting and keep running while SeraphIRC is open.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/timer 1 300 say Five minutes are up
+/timerbrb 0 600 away Still away
+/timerbrb off</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-timers">
+            <header class="entry-head">
+              <h3>/timers<a class="entry-anchor" href="#cmd-timers" aria-label="Link to /timers">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span></span>
+            </header>
+            <p class="entry-usage"><code>/timers [off]</code></p>
+            <p class="entry-summary">List or stop timers</p>
+            <div class="entry-details"><p>Lists the active timers. /timers off stops them all.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/timers
+/timers off</code></pre>
           </section>
           <section class="docs-entry" id="cmd-unalias">
             <header class="entry-head">
@@ -3737,11 +4066,22 @@ server/Libera/server.log</code></pre>
             <pre class="entry-examples"><code>/unignore Alice
 /unignore *!*@spam.example</code></pre>
           </section>
+          <section class="docs-entry" id="cmd-unload">
+            <header class="entry-head">
+              <h3>/unload<a class="entry-anchor" href="#cmd-unload" aria-label="Link to /unload">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span></span>
+            </header>
+            <p class="entry-usage"><code>/unload -a|-rs &lt;file&gt;</code></p>
+            <p class="entry-summary">Unload a script</p>
+            <div class="entry-details"><p>Unloads a script loaded with /load, and forgets it for the next session.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/unload -rs remote.ini</code></pre>
+          </section>
         </article>
         <article class="docs-pane" id="commands-advanced" data-pane>
           <p class="pane-kicker">Commands</p>
           <h2>Advanced</h2>
-          <p class="pane-lead">The escape hatch. If SeraphIRC has no command for something your network supports, send the line yourself.</p>
+          <p class="pane-lead">The escape hatch. If SeraphIRC has no command for something your network supports, send the line yourself. Any command SeraphIRC does not know, such as <code>/ns</code> or <code>/chanserv</code>, goes to the server as typed.</p>
           <nav class="entry-jump" aria-label="Advanced commands"><a href="#cmd-raw"><code>/raw</code></a></nav>
           <section class="docs-entry" id="cmd-raw">
             <header class="entry-head">
@@ -3753,7 +4093,7 @@ server/Libera/server.log</code></pre>
             <p class="entry-aliases">Also written as <code>/quote</code></p>
             <h4 class="entry-label">Parameters</h4>
             <dl class="entry-params"><dt><code>IRC line</code></dt><dd>raw command text to send</dd></dl>
-            <div class="entry-details"><p>Sends the provided IRC line exactly as typed after /raw. /quote is an alias.</p><p>You rarely need it: any command SeraphIRC does not recognize is already sent to the server as typed, so a server that asks you to "type /validate &lt;token&gt;" can simply be answered with /validate &lt;token&gt;. Use /raw when the command name is not plain letters, or to be explicit.</p><p>Arguments are passed through untouched, so a final argument containing spaces needs a leading colon: /raw SQUIT irc.example :taking it down.</p></div>
+            <div class="entry-details"><p>Sends the provided IRC line exactly as typed after /raw. /quote is an alias.</p><p>You rarely need it: any command SeraphIRC does not recognise is already sent to the server as typed, so a server that asks you to "type /validate &lt;token&gt;" can simply be answered with /validate &lt;token&gt;. Use /raw when the command name is not plain letters, or to be explicit.</p><p>Arguments are passed through untouched, so a final argument containing spaces needs a leading colon: /raw SQUIT irc.example :taking it down.</p></div>
             <h4 class="entry-label">Examples</h4>
             <pre class="entry-examples"><code>/raw WHOIS Alice
 /quote TIME
@@ -3772,27 +4112,31 @@ server/Libera/server.log</code></pre>
               <tr><th scope="row"><a href="#cmd-accept"><code>/accept</code></a></th><td class="idx-alias"><code></code></td><td>Manage your caller-ID (+g) accept list</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-admin"><code>/admin</code></a></th><td class="idx-alias"><code></code></td><td>Request server administrator information</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-alias"><code>/alias</code></a></th><td class="idx-alias"><code></code></td><td>Create or update a command alias</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-auser"><code>/auser</code></a></th><td class="idx-alias"><code></code></td><td>Add someone to the scripts user list</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-away"><code>/away</code></a></th><td class="idx-alias"><code></code></td><td>Mark yourself away</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-back"><code>/back</code></a></th><td class="idx-alias"><code></code></td><td>Clear away status</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-ban"><code>/ban</code></a></th><td class="idx-alias"><code></code></td><td>Ban a nick or mask from a channel</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
-              <tr><th scope="row"><a href="#cmd-botserv"><code>/botserv</code></a></th><td class="idx-alias"><code>/bs</code></td><td>Message BotServ</td><td class="idx-cat"><a href="#commands-services">Services</a></td></tr>
               <tr><th scope="row"><a href="#cmd-buffers"><code>/buffers</code></a></th><td class="idx-alias"><code></code></td><td>List buffers</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
-              <tr><th scope="row"><a href="#cmd-chanserv"><code>/chanserv</code></a></th><td class="idx-alias"><code>/cs</code></td><td>Message ChanServ</td><td class="idx-cat"><a href="#commands-services">Services</a></td></tr>
               <tr><th scope="row"><a href="#cmd-chghost"><code>/chghost</code></a></th><td class="idx-alias"><code></code></td><td>Change a user's displayed host</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
               <tr><th scope="row"><a href="#cmd-clear"><code>/clear</code></a></th><td class="idx-alias"><code></code></td><td>Clear the current visible buffer without deleting logs</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
               <tr><th scope="row"><a href="#cmd-clearall"><code>/clearall</code></a></th><td class="idx-alias"><code></code></td><td>Clear visible buffers without deleting logs</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
               <tr><th scope="row"><a href="#cmd-cloak"><code>/cloak</code></a></th><td class="idx-alias"><code></code></td><td>Manage hostname cloaking, if supported</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
-              <tr><th scope="row"><a href="#cmd-close"><code>/close</code></a></th><td class="idx-alias"><code></code></td><td>Close the current buffer</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-closebuffer"><code>/closebuffer</code></a></th><td class="idx-alias"><code></code></td><td>Close the current buffer</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
               <tr><th scope="row"><a href="#cmd-connect"><code>/connect</code></a></th><td class="idx-alias"><code></code></td><td>Connect the active network or request a server link</td><td class="idx-cat"><a href="#commands-connection">Connection</a></td></tr>
               <tr><th scope="row"><a href="#cmd-ctcp"><code>/ctcp</code></a></th><td class="idx-alias"><code></code></td><td>Send a CTCP request</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-ctcpreply"><code>/ctcpreply</code></a></th><td class="idx-alias"><code></code></td><td>Answer a CTCP request</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-current"><code>/current</code></a></th><td class="idx-alias"><code></code></td><td>Show the current buffer</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
               <tr><th scope="row"><a href="#cmd-cycle"><code>/cycle</code></a></th><td class="idx-alias"><code></code></td><td>Part and rejoin a channel</td><td class="idx-cat"><a href="#commands-connection">Connection</a></td></tr>
               <tr><th scope="row"><a href="#cmd-dcc"><code>/dcc</code></a></th><td class="idx-alias"><code></code></td><td>Send and receive files directly with another user</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-delkey"><code>/delkey</code></a></th><td class="idx-alias"><code></code></td><td>Delete a FiSH encryption key</td><td class="idx-cat"><a href="#commands-encryption">Encryption</a></td></tr>
               <tr><th scope="row"><a href="#cmd-deop"><code>/deop</code></a></th><td class="idx-alias"><code></code></td><td>Remove channel operator status</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-describe"><code>/describe</code></a></th><td class="idx-alias"><code></code></td><td>Send an action to a channel or nick</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-devoice"><code>/devoice</code></a></th><td class="idx-alias"><code></code></td><td>Remove voice from a nick</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-die"><code>/die</code></a></th><td class="idx-alias"><code></code></td><td>Shut down the IRC server</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-disable"><code>/disable</code></a></th><td class="idx-alias"><code></code></td><td>Switch a script group off</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-disconnect"><code>/disconnect</code></a></th><td class="idx-alias"><code></code></td><td>Immediately disconnect the active network</td><td class="idx-cat"><a href="#commands-connection">Connection</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-echo"><code>/echo</code></a></th><td class="idx-alias"><code></code></td><td>Show text in a window, for your eyes only</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-enable"><code>/enable</code></a></th><td class="idx-alias"><code></code></td><td>Switch a script group on</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-exit"><code>/exit</code></a></th><td class="idx-alias"><code></code></td><td>Exit SeraphIRC</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-format"><code>/format</code></a></th><td class="idx-alias"><code>/f</code></td><td>Send one message with text formatting applied</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-format-me"><code>/format-me</code></a></th><td class="idx-alias"><code></code></td><td>Send an action message with formatting applied</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
@@ -3802,8 +4146,6 @@ server/Libera/server.log</code></pre>
               <tr><th scope="row"><a href="#cmd-gline"><code>/gline</code></a></th><td class="idx-alias"><code></code></td><td>Set a network-wide ban, if supported</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
               <tr><th scope="row"><a href="#cmd-globops"><code>/globops</code></a></th><td class="idx-alias"><code></code></td><td>Message all online IRC operators</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
               <tr><th scope="row"><a href="#cmd-help"><code>/help</code></a></th><td class="idx-alias"><code></code></td><td>Show command help</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
-              <tr><th scope="row"><a href="#cmd-helpserv"><code>/helpserv</code></a></th><td class="idx-alias"><code></code></td><td>Message HelpServ</td><td class="idx-cat"><a href="#commands-services">Services</a></td></tr>
-              <tr><th scope="row"><a href="#cmd-hostserv"><code>/hostserv</code></a></th><td class="idx-alias"><code>/hs</code></td><td>Message HostServ</td><td class="idx-cat"><a href="#commands-services">Services</a></td></tr>
               <tr><th scope="row"><a href="#cmd-ignore"><code>/ignore</code></a></th><td class="idx-alias"><code></code></td><td>Ignore a nick or mask on the current network</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-info"><code>/info</code></a></th><td class="idx-alias"><code></code></td><td>Request server information</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-invite"><code>/invite</code></a></th><td class="idx-alias"><code></code></td><td>Invite a nick to a channel</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
@@ -3817,24 +4159,22 @@ server/Libera/server.log</code></pre>
               <tr><th scope="row"><a href="#cmd-knock"><code>/knock</code></a></th><td class="idx-alias"><code></code></td><td>Request an invite to an invite-only channel</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-links"><code>/links</code></a></th><td class="idx-alias"><code></code></td><td>List linked servers</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
               <tr><th scope="row"><a href="#cmd-list"><code>/list</code></a></th><td class="idx-alias"><code></code></td><td>Open channel list</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-load"><code>/load</code></a></th><td class="idx-alias"><code></code></td><td>Load a script</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-locops"><code>/locops</code></a></th><td class="idx-alias"><code></code></td><td>Message local IRC operators</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
               <tr><th scope="row"><a href="#cmd-lusers"><code>/lusers</code></a></th><td class="idx-alias"><code></code></td><td>Request IRC network user/server statistics</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-map"><code>/map</code></a></th><td class="idx-alias"><code></code></td><td>Show network topology, if supported</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
               <tr><th scope="row"><a href="#cmd-me"><code>/me</code></a></th><td class="idx-alias"><code></code></td><td>Send an action message</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
-              <tr><th scope="row"><a href="#cmd-memoserv"><code>/memoserv</code></a></th><td class="idx-alias"><code>/ms</code></td><td>Message MemoServ</td><td class="idx-cat"><a href="#commands-services">Services</a></td></tr>
               <tr><th scope="row"><a href="#cmd-mode"><code>/mode</code></a></th><td class="idx-alias"><code></code></td><td>Send MODE command</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-motd"><code>/motd</code></a></th><td class="idx-alias"><code></code></td><td>Fetch the server Message of the Day</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-msg"><code>/msg</code></a></th><td class="idx-alias"><code></code></td><td>Send a private or target message</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-msg"><code>/msg+</code></a></th><td class="idx-alias"><code></code></td><td>Send an encrypted message</td><td class="idx-cat"><a href="#commands-encryption">Encryption</a></td></tr>
               <tr><th scope="row"><a href="#cmd-names"><code>/names</code></a></th><td class="idx-alias"><code></code></td><td>Request channel user names</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-nick"><code>/nick</code></a></th><td class="idx-alias"><code></code></td><td>Change nickname</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
-              <tr><th scope="row"><a href="#cmd-nickserv"><code>/nickserv</code></a></th><td class="idx-alias"><code>/ns</code></td><td>Message NickServ</td><td class="idx-cat"><a href="#commands-services">Services</a></td></tr>
               <tr><th scope="row"><a href="#cmd-notice"><code>/notice</code></a></th><td class="idx-alias"><code></code></td><td>Send an IRC NOTICE</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-notice"><code>/notice+</code></a></th><td class="idx-alias"><code></code></td><td>Send an encrypted notice</td><td class="idx-cat"><a href="#commands-encryption">Encryption</a></td></tr>
               <tr><th scope="row"><a href="#cmd-notify"><code>/notify</code></a></th><td class="idx-alias"><code></code></td><td>Manage notify list entries</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-op"><code>/op</code></a></th><td class="idx-alias"><code></code></td><td>Give channel operator status</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-oper"><code>/oper</code></a></th><td class="idx-alias"><code></code></td><td>Gain IRC operator privileges</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
-              <tr><th scope="row"><a href="#cmd-operserv"><code>/operserv</code></a></th><td class="idx-alias"><code>/os</code></td><td>Message OperServ</td><td class="idx-cat"><a href="#commands-services">Services</a></td></tr>
               <tr><th scope="row"><a href="#cmd-part"><code>/part</code></a></th><td class="idx-alias"><code></code></td><td>Leave a channel</td><td class="idx-cat"><a href="#commands-connection">Connection</a></td></tr>
               <tr><th scope="row"><a href="#cmd-partall"><code>/partall</code></a></th><td class="idx-alias"><code></code></td><td>Leave all joined channels on the active network</td><td class="idx-cat"><a href="#commands-connection">Connection</a></td></tr>
               <tr><th scope="row"><a href="#cmd-plain"><code>/plain</code></a></th><td class="idx-alias"><code></code></td><td>Send one message with text formatting disabled</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
@@ -3844,9 +4184,15 @@ server/Libera/server.log</code></pre>
               <tr><th scope="row"><a href="#cmd-query"><code>/query</code></a></th><td class="idx-alias"><code></code></td><td>Open a private query buffer</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-quit"><code>/quit</code></a></th><td class="idx-alias"><code></code></td><td>Gracefully quit the active network</td><td class="idx-cat"><a href="#commands-connection">Connection</a></td></tr>
               <tr><th scope="row"><a href="#cmd-raw"><code>/raw</code></a></th><td class="idx-alias"><code>/quote</code></td><td>Send a raw IRC line</td><td class="idx-cat"><a href="#commands-advanced">Advanced</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-react"><code>/react</code></a></th><td class="idx-alias"><code></code></td><td>React to a recent message</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-reconnect"><code>/reconnect</code></a></th><td class="idx-alias"><code></code></td><td>Reconnect the active network</td><td class="idx-cat"><a href="#commands-connection">Connection</a></td></tr>
               <tr><th scope="row"><a href="#cmd-rehash"><code>/rehash</code></a></th><td class="idx-alias"><code></code></td><td>Reload server configuration</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-reload"><code>/reload</code></a></th><td class="idx-alias"><code></code></td><td>Reload a script from disk</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-remote"><code>/remote</code></a></th><td class="idx-alias"><code></code></td><td>Switch script events on or off</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-restart"><code>/restart</code></a></th><td class="idx-alias"><code></code></td><td>Restart the IRC server</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-ruser"><code>/ruser</code></a></th><td class="idx-alias"><code></code></td><td>Remove someone from the scripts user list</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-scid"><code>/scid</code></a></th><td class="idx-alias"><code></code></td><td>Run a command on a connection by its id</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-scon"><code>/scon</code></a></th><td class="idx-alias"><code></code></td><td>Run a command on another connection</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-seraphchat"><code>/seraphchat</code></a></th><td class="idx-alias"><code>/schat</code></td><td>Start an encrypted direct chat with another user</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-seraphtransfer"><code>/seraphtransfer</code></a></th><td class="idx-alias"><code></code></td><td>Send a file directly with Seraph Transfer</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-server"><code>/server</code></a></th><td class="idx-alias"><code></code></td><td>Open the server buffer</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
@@ -3855,12 +4201,16 @@ server/Libera/server.log</code></pre>
               <tr><th scope="row"><a href="#cmd-show"><code>/show</code></a></th><td class="idx-alias"><code></code></td><td>Show recent current-buffer messages</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
               <tr><th scope="row"><a href="#cmd-showkey"><code>/showkey</code></a></th><td class="idx-alias"><code></code></td><td>Show the FiSH key for a target</td><td class="idx-cat"><a href="#commands-encryption">Encryption</a></td></tr>
               <tr><th scope="row"><a href="#cmd-shun"><code>/shun</code></a></th><td class="idx-alias"><code></code></td><td>Silently block commands from a user</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-signal"><code>/signal</code></a></th><td class="idx-alias"><code></code></td><td>Send a signal to scripts</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-silence"><code>/silence</code></a></th><td class="idx-alias"><code></code></td><td>Manage server-side silence entries</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-splay"><code>/splay</code></a></th><td class="idx-alias"><code></code></td><td>Play a sound</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-squit"><code>/squit</code></a></th><td class="idx-alias"><code></code></td><td>Disconnect a server</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
               <tr><th scope="row"><a href="#cmd-state"><code>/state</code></a></th><td class="idx-alias"><code></code></td><td>Show buffer state summary</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
               <tr><th scope="row"><a href="#cmd-stats"><code>/stats</code></a></th><td class="idx-alias"><code></code></td><td>Query server statistics</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
               <tr><th scope="row"><a href="#cmd-switch"><code>/switch</code></a></th><td class="idx-alias"><code></code></td><td>Switch to a buffer</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
               <tr><th scope="row"><a href="#cmd-time"><code>/time</code></a></th><td class="idx-alias"><code></code></td><td>Request the server time</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-timer"><code>/timer</code></a></th><td class="idx-alias"><code></code></td><td>Run a command later, or repeatedly</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-timers"><code>/timers</code></a></th><td class="idx-alias"><code></code></td><td>List or stop timers</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-topic"><code>/topic</code></a></th><td class="idx-alias"><code></code></td><td>Show or set channel topic</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-topic"><code>/topic+</code></a></th><td class="idx-alias"><code></code></td><td>Set an encrypted channel topic</td><td class="idx-cat"><a href="#commands-encryption">Encryption</a></td></tr>
               <tr><th scope="row"><a href="#cmd-trace"><code>/trace</code></a></th><td class="idx-alias"><code></code></td><td>Trace a user or server route</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
@@ -3869,6 +4219,8 @@ server/Libera/server.log</code></pre>
               <tr><th scope="row"><a href="#cmd-uncloak"><code>/uncloak</code></a></th><td class="idx-alias"><code></code></td><td>Remove hostname cloaking, if supported</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
               <tr><th scope="row"><a href="#cmd-unignore"><code>/unignore</code></a></th><td class="idx-alias"><code></code></td><td>Stop ignoring a nick or mask</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-unkline"><code>/unkline</code></a></th><td class="idx-alias"><code></code></td><td>Remove a K-line</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-unload"><code>/unload</code></a></th><td class="idx-alias"><code></code></td><td>Unload a script</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-unreact"><code>/unreact</code></a></th><td class="idx-alias"><code></code></td><td>Remove your reaction from a recent message</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-userhost"><code>/userhost</code></a></th><td class="idx-alias"><code></code></td><td>Request user/host information</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-users"><code>/users</code></a></th><td class="idx-alias"><code></code></td><td>Request the server USERS listing</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-voice"><code>/voice</code></a></th><td class="idx-alias"><code></code></td><td>Give voice to a nick</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>

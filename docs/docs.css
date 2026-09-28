@@ -450,6 +450,16 @@ pre.entry-examples code {
   border-radius: 3px;
 }
 
+/* The Scripting pane's generated tables of events, commands and
+   identifiers, built by build.py from scripts.json: each row's names wrap
+   as a run of chips. */
+.token-cell code {
+  display: inline-block;
+  margin: 2px 4px 2px 0;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
 /* ── Callouts and footers ──────────────────────────────────── */
 
 .docs-note {
