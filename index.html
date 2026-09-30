@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="aura">
+<html lang="en" data-theme="seraph">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -346,14 +346,6 @@
             <p>
               <b>On the living version.</b> Wails 3 is where the Wails team puts its
               new work, so SeraphIRC keeps up as Windows, macOS and Linux change.
-            </p>
-            <p>
-              <b>Room to grow.</b> The biggest change is one you cannot see... yet!
-              Wails 2 gave SeraphIRC a single window. Wails 3 can open as many as it
-              needs, and that makes detached windows possible: pull a channel or a
-              private message out into a window of its own and park it on a second
-              monitor. Detached windows are on the way, and script
-              <code>@windows</code> could float free on the desktop the same way.
             </p>
             <p>
               <b>What changed.</b> macOS now needs version 12 (Monterey) or later.
@@ -1447,7 +1439,7 @@
       // The header theme picker recolors the site to match a client theme.
       (function () {
         var select = document.getElementById("theme-select");
-        select.value = document.documentElement.getAttribute("data-theme") || "aura";
+        select.value = document.documentElement.getAttribute("data-theme") || "seraph";
         select.addEventListener("change", function () {
           document.documentElement.setAttribute("data-theme", select.value);
           try { localStorage.setItem("seraphirc-theme", select.value); } catch (e) {}
