@@ -331,6 +331,39 @@
       <section class="section" id="news" aria-labelledby="news-title">
         <div class="wrap">
           <h2 id="news-title">News</h2>
+          <article class="post" id="news-wails-3">
+            <h3>Wail Wail Wails</h3>
+            <p class="post-meta"><time datetime="2026-09-30">Sep 30, 2026</time>, version 6.0.2</p>
+            <p>
+              The desktop app runs on Wails, the framework that puts SeraphIRC in a
+              native window on Windows, macOS and Linux. Version 6.0.2 moves it from
+              Wails 2 to Wails 3. Your settings and scripts carry over, so there is
+              nothing to do but update.
+            </p>
+            <p>
+              <b>Sharper on Linux.</b> On Hyprland and other displays scaled to 125%
+              or 150%, the window is now crisp instead of soft and blurry.
+            </p>
+            <p>
+              <b>On the living version.</b> Wails 3 is where the Wails team puts its
+              new work, so SeraphIRC keeps up as Windows, macOS and Linux change.
+            </p>
+            <p>
+              <b>Room to grow.</b> The biggest change is one you cannot see... yet!
+              Wails 2 gave SeraphIRC a single window. Wails 3 can open as many as it
+              needs, and that makes detached windows possible: pull a channel or a
+              private message out into a window of its own and park it on a second
+              monitor. Detached windows are on the way, and script
+              <code>@windows</code> could float free on the desktop the same way.
+            </p>
+            <p>
+              <b>What changed.</b> macOS now needs version 12 (Monterey) or later.
+              On Linux, SeraphIRC now uses GTK 4 and WebKitGTK 6.0, which current
+              distributions include.
+            </p>
+            <p class="post-where"><a href="#v6.0.2"><code>Changelog &gt; 6.0.2</code></a></p>
+          </article>
+
           <article class="post" id="news-scripting">
             <h3>Scripting phase 1 arrives</h3>
             <p class="post-meta"><time datetime="2026-09-28">Sep 28, 2026</time>, version 6.0.0</p>
@@ -374,25 +407,25 @@
             <p class="post-where"><code>Settings &gt; Appearance &gt; Compact toolbar / Seamless maximize</code></p>
           </article>
 
-          <article class="post" id="news-macos-chrome">
-            <h3>A Native Face on macOS</h3>
-            <p class="post-meta"><time datetime="2026-09-05">Sep 5, 2026</time>, version 5.1.18</p>
-            <p>
-              Plenty of you are on a Mac now, and the house glow does not always sit
-              well beside a native window. There is a chrome selector in
-              <code>Settings &gt; Appearance</code> that turns the neon and the glows
-              down for something crisper.
-            </p>
-            <p>
-              If the glow is half of why you are here, set
-              <code>Settings &gt; Appearance &gt; Chrome Style</code> back to Seraph and
-              keep it. Nothing changed on Windows or Linux.
-            </p>
-            <p class="post-where"><code>Settings &gt; Appearance &gt; Chrome Style</code></p>
-          </article>
-
           <details class="older-news">
-            <summary>Older news (13 posts)</summary>
+            <summary>Older news (14 posts)</summary>
+
+            <article class="post" id="news-macos-chrome">
+              <h3>A Native Face on macOS</h3>
+              <p class="post-meta"><time datetime="2026-09-05">Sep 5, 2026</time>, version 5.1.18</p>
+              <p>
+                Plenty of you are on a Mac now, and the house glow does not always sit
+                well beside a native window. There is a chrome selector in
+                <code>Settings &gt; Appearance</code> that turns the neon and the glows
+                down for something crisper.
+              </p>
+              <p>
+                If the glow is half of why you are here, set
+                <code>Settings &gt; Appearance &gt; Chrome Style</code> back to Seraph and
+                keep it. Nothing changed on Windows or Linux.
+              </p>
+              <p class="post-where"><code>Settings &gt; Appearance &gt; Chrome Style</code></p>
+            </article>
 
             <article class="post" id="news-reactions">
               <h3>Reactions</h3>
@@ -645,6 +678,14 @@
             <a href="https://github.com/seraphirc/seraphirc-download/releases">releases page</a>.
           </p>
           <div class="releases" data-releases>
+            <details class="release" id="v6.0.2">
+              <summary><span class="release-version">6.0.2</span> <time datetime="2026-09-30">Sep 30, 2026</time></summary>
+              <ul>
+                <li><b>Display (Linux):</b> the window is now sharp on Hyprland and other fractionally scaled displays, instead of soft and blurry.</li>
+                <li><b>Requirements (macOS):</b> SeraphIRC now needs macOS 12 or later.</li>
+                <li><b>Scripts Editor (desktop):</b> Open Scripts Folder moves to the File menu, under Reload.</li>
+              </ul>
+            </details>
             <details class="release" id="v6.0.1">
               <summary><span class="release-version">6.0.1</span> <time datetime="2026-09-28">Sep 28, 2026</time></summary>
               <ul>
