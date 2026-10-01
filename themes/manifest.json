@@ -1,6 +1,26 @@
 {
   "themes": [
     {
+      "file": "hexed-black.seraphirc-theme.json",
+      "name": "Hexed Black",
+      "base": "tokyo-night",
+      "baseLabel": "Tokyo Night",
+      "overrides": 131,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-01"
+    },
+    {
+      "file": "spooky-season.seraphirc-theme.json",
+      "name": "Spooky Season",
+      "base": "dim",
+      "baseLabel": "Dim",
+      "overrides": 131,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-01"
+    },
+    {
       "file": "lamplight.seraphirc-theme.json",
       "name": "Lamplight",
       "base": "dim",
