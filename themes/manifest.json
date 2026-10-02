@@ -1,6 +1,26 @@
 {
   "themes": [
     {
+      "file": "ratsignal-dark.seraphirc-theme.json",
+      "name": "Ratsignal (Dark)",
+      "base": "tokyo-night",
+      "baseLabel": "Tokyo Night",
+      "overrides": 131,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-02"
+    },
+    {
+      "file": "ratsignal-light.seraphirc-theme.json",
+      "name": "Ratsignal (Light)",
+      "base": "newsprint",
+      "baseLabel": "Newsprint",
+      "overrides": 131,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-02"
+    },
+    {
       "file": "hexed-black.seraphirc-theme.json",
       "name": "Hexed Black",
       "base": "tokyo-night",
@@ -35,7 +55,7 @@
       "name": "Winamp",
       "base": "hackerman",
       "baseLabel": "Hackerman",
-      "overrides": 98,
+      "overrides": 123,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-08-09"
