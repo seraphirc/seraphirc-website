@@ -136,6 +136,21 @@
     "--settings-button-text": "rgb(176, 42, 42)",
     "--settings-button-border": "rgb(217, 163, 163)",
     "--danger-text": "rgb(155, 28, 28)",
-    "--danger-bg": "rgba(155, 28, 28, 0.1)"
+    "--danger-bg": "rgba(155, 28, 28, 0.1)",
+    "--link-decoration": "rgba(176, 42, 42, 0.42)",
+    "--send-button-border": "rgba(140, 20, 20, 0.4)",
+    "--channel-topic-label": "rgb(176, 42, 42)",
+    "--toast-bg": "rgba(253, 252, 252, 0.97)",
+    "--toast-border": "rgba(43, 43, 43, 0.24)",
+    "--toast-text": "rgb(43, 43, 43)",
+    "--add-button-hover-bg": "rgba(43, 43, 43, 0.13)",
+    "--add-button-hover-border": "rgba(43, 43, 43, 0.46)",
+    "--settings-button-hover-bg": "rgba(43, 43, 43, 0.08)",
+    "--settings-button-hover-border": "rgb(198, 40, 40)",
+    "--danger-hover-text": "rgb(110, 18, 18)",
+    "--channel-metadata-icon-glow": "rgba(43, 43, 43, 0.08)",
+    "--mark-1": "rgb(211, 47, 47)",
+    "--mark-2": "rgb(163, 155, 155)",
+    "--mark-3": "rgb(43, 43, 43)"
   }
 }

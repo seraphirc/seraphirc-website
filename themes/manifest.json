@@ -5,7 +5,7 @@
       "name": "Ratsignal (Dark)",
       "base": "tokyo-night",
       "baseLabel": "Tokyo Night",
-      "overrides": 132,
+      "overrides": 147,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-02"
@@ -15,7 +15,7 @@
       "name": "Ratsignal (Light)",
       "base": "newsprint",
       "baseLabel": "Newsprint",
-      "overrides": 131,
+      "overrides": 146,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-02"
