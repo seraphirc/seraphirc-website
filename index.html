@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="aura">
+<html lang="en" data-theme="spooky-season">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -89,7 +89,7 @@
         } catch (e) {}
       })();
     </script>
-    <link rel="stylesheet" href="styles.css?v=20260926-video-2">
+    <link rel="stylesheet" href="styles.css?v=20261001-spooky-2">
   </head>
   <body>
     <header class="site-header">
@@ -131,6 +131,7 @@
             <option value="seraph">Seraph</option>
             <option value="solarized-dark">Solarized Dark</option>
             <option value="solarized-light">Solarized Light</option>
+            <option value="spooky-season">Spooky Season</option>
             <option value="tokyo-night">Tokyo Night</option>
           </select>
         </label>
@@ -1450,7 +1451,7 @@
       // The header theme picker recolors the site to match a client theme.
       (function () {
         var select = document.getElementById("theme-select");
-        select.value = document.documentElement.getAttribute("data-theme") || "aura";
+        select.value = document.documentElement.getAttribute("data-theme") || "spooky-season";
         select.addEventListener("change", function () {
           document.documentElement.setAttribute("data-theme", select.value);
           try { localStorage.setItem("seraphirc-theme", select.value); } catch (e) {}
