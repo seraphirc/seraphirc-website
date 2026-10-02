@@ -1,8 +1,8 @@
 {
   "format": "seraphirc-theme",
   "formatVersion": 1,
-  "appVersion": "6.0.5",
-  "exportedAt": "2026-10-02T13:19:13Z",
+  "appVersion": "6.0.6",
+  "exportedAt": "2026-10-02T19:10:44Z",
   "name": "Spooky Season",
   "base": "dim",
   "overrides": {
