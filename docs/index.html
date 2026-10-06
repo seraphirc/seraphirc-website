@@ -138,7 +138,11 @@
               <summary>Getting Started</summary>
               <ul class="pagelist">
                 <li><a href="#welcome">Welcome</a></li>
-                <li><a href="#connecting">Connecting to a Network</a></li>
+                <li><a href="#connecting">Connecting to a Network</a>
+                  <ul class="subpages">
+                    <li><a href="#certificate-login">Certificate Login</a></li>
+                  </ul>
+                </li>
                 <li><a href="#channels">Channels and Conversations</a></li>
                 <li><a href="#bouncers">Using a Bouncer</a></li>
                 <li><a href="#files">Sending Files</a></li>
@@ -558,6 +562,10 @@
               read from secure storage.
             </p>
             <p>
+              SASL can also log you in with a client certificate instead of a
+              password. See <a href="#certificate-login">Certificate Login</a>.
+            </p>
+            <p>
               Neither is the server password above. That one is about reaching the
               host, these are about who you are once you are there, and a network can
               want both.
@@ -567,6 +575,96 @@
               and the network's services answer them.
             </p>
 
+          </article>
+
+          <article class="docs-pane" id="certificate-login" data-pane>
+            <p class="pane-kicker">Getting Started</p>
+            <h2>Certificate Login</h2>
+            <p class="pane-lead">
+              SASL EXTERNAL logs you in with a TLS client certificate instead of a
+              password. SeraphIRC creates the certificate and registers it with
+              NickServ for you.
+            </p>
+
+            <div class="docs-note">
+              Certificate login is in the desktop app, for networks you connect to
+              directly. Networks reached through a bouncer do not use it.
+            </div>
+
+            <h3>Turning it on</h3>
+            <p>
+              Open the network in the Network Manager, tick <strong>SASL
+              enabled</strong>, and set <strong>SASL type</strong> to
+              <strong>External (certificate)</strong>. TLS has to be on, because the
+              certificate is presented during the TLS handshake.
+            </p>
+            <p>
+              Leave your <strong>SASL username</strong> and <strong>SASL
+              password</strong> filled in. They are used once, to register the
+              certificate with your account.
+            </p>
+
+            <h3>Registering the certificate</h3>
+            <p>
+              Saving the network creates a certificate for it, shown under
+              <strong>Client Certificate</strong>. Each network gets its own, so the
+              operators of one network cannot match your fingerprint to you on
+              another.
+            </p>
+            <p>
+              The network does not know a new certificate, so the first certificate
+              login is refused. SeraphIRC then logs in once on the same connection
+              with your saved username and password, and asks NickServ to add the
+              certificate to your account. From the next connect on, the certificate
+              logs you in and the password is not sent.
+            </p>
+            <p>
+              That password login happens once per certificate. The Client
+              Certificate section shows where things stand: registered, sent on an
+              earlier connect, or not registered yet.
+            </p>
+
+            <h3>The Client Certificate section</h3>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Control</th><th>What it does</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Fingerprints</th><td>SHA-512, SHA-256, and SHA-1, each with a Copy button, for networks where you add a fingerprint by hand. Services differ in which one they want.</td></tr>
+                  <tr><th scope="row">Register with NickServ</th><td>Asks NickServ to add the certificate to the account you are logged in to. Needs the network connected.</td></tr>
+                  <tr><th scope="row">Register again</th><td>For when the network has forgotten the certificate. The next refused login registers it again with your password, once.</td></tr>
+                  <tr><th scope="row">New certificate</th><td>Replaces the certificate. The old fingerprint stops identifying you until the new one is registered.</td></tr>
+                  <tr><th scope="row">Import...</th><td>Uses a certificate you already have: a PEM file with its key, a PEM certificate plus a separate key file, or a PKCS#12 bundle (<code>.p12</code>, <code>.pfx</code>) and its password.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              The certificate's private key is stored encrypted, with the key that
+              unlocks it held in the operating system's credential store. Deleting
+              the network removes both.
+            </p>
+
+            <h3>When login fails</h3>
+            <p>
+              A refused certificate login disconnects rather than carrying on
+              without an account. Certificate login is usually chosen so your account
+              and cloak are in place before anyone sees you, and continuing would show
+              your real host to the network.
+            </p>
+            <p>
+              The server window says why. Common causes are a server or port that
+              never asks for a certificate, a server that does not offer EXTERNAL
+              (it lists the mechanisms it does offer), or a certificate the network
+              no longer knows, which <strong>Register again</strong> fixes.
+            </p>
+
+            <h3>A certificate without EXTERNAL</h3>
+            <p>
+              <strong>Present a client certificate</strong>, at the top of Client
+              Certificate, sends the certificate even when SASL is set to Plain or
+              turned off. Services that know the certificate can identify you by it
+              after you connect. It is also a way to register a certificate by hand
+              before switching to External.
+            </p>
           </article>
 
           <article class="docs-pane" id="channels" data-pane>
