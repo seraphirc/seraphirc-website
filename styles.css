@@ -272,7 +272,7 @@ select option { color: var(--text); background: var(--panel); }
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 2558 / 1546;
+  aspect-ratio: 2558 / 1550;
   background: var(--panel);
   border: 1px solid var(--line-2);
   border-radius: var(--radius);
