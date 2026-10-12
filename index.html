@@ -333,6 +333,33 @@
       <section class="section" id="news" aria-labelledby="news-title">
         <div class="wrap">
           <h2 id="news-title">News</h2>
+          <article class="post" id="news-treebar-upgrades">
+            <h3>Treebar Upgrades</h3>
+            <p class="post-meta"><time datetime="2026-10-11">Oct 11, 2026</time>, version 6.0.12</p>
+            <p>
+              Version 6.0.12 gives the treebar a new look we call Constellation.
+            </p>
+            <p>
+              <b>Networks as cards.</b> Each network sits in its own card, with its
+              status light, a Soju or Direct chip, and an unread total. Under the name,
+              the card shows which server answered and how fast. The network you are
+              working in carries a faint glow, and the latency graph at the bottom is
+              a card to match.
+            </p>
+            <p>
+              <b>Easier to scan.</b> Section captions show their count, the selected
+              window is a lit, outlined capsule, and rows with mentions or private
+              messages waiting stand out with a badge. In the Modern layout, private
+              messages lead with the person's avatar.
+            </p>
+            <p>
+              <b>Clearer on light themes.</b> Themes with a light treebar, Sage and
+              Sakura among them, now use darker small labels that are much easier to
+              read.
+            </p>
+            <p class="post-where"><a href="#v6.0.12"><code>Changelog &gt; 6.0.12</code></a></p>
+          </article>
+
           <article class="post" id="news-wails-3">
             <h3>Wail Wail Wails</h3>
             <p class="post-meta"><time datetime="2026-09-30">Sep 30, 2026</time>, version 6.0.2</p>
@@ -381,27 +408,27 @@
             <p class="post-where"><a href="/docs/#scripts-compat"><code>seraphirc.chat/docs#scripts-compat</code></a></p>
           </article>
 
-          <article class="post" id="news-screen-real-estate">
-            <h3>So much room for activities!</h3>
-            <p class="post-meta"><time datetime="2026-09-15">Sep 15, 2026</time>, version 5.1.25</p>
-            <p>
-              The feedback we hear most is that the UI takes up too much of the
-              window. Two new options in <code>Settings &gt; Appearance</code> hand
-              that space back.
-            </p>
-            <p>
-              <b>Compact toolbar</b> packs the top bar into one dense row under the
-              titlebar and trims the connection pill to a bare light, leaving your
-              icon size alone. <b>Seamless maximize</b> drops the title bar off a
-              maximized buffer window and moves the member count and channel modes
-              into the topic, with <code>Restore Window</code> in the toolbar to
-              bring the frame back. Both are off by default.
-            </p>
-            <p class="post-where"><code>Settings &gt; Appearance &gt; Compact toolbar / Seamless maximize</code></p>
-          </article>
-
           <details class="older-news">
-            <summary>Older news (14 posts)</summary>
+            <summary>Older news (15 posts)</summary>
+
+            <article class="post" id="news-screen-real-estate">
+              <h3>So much room for activities!</h3>
+              <p class="post-meta"><time datetime="2026-09-15">Sep 15, 2026</time>, version 5.1.25</p>
+              <p>
+                The feedback we hear most is that the UI takes up too much of the
+                window. Two new options in <code>Settings &gt; Appearance</code> hand
+                that space back.
+              </p>
+              <p>
+                <b>Compact toolbar</b> packs the top bar into one dense row under the
+                titlebar and trims the connection pill to a bare light, leaving your
+                icon size alone. <b>Seamless maximize</b> drops the title bar off a
+                maximized buffer window and moves the member count and channel modes
+                into the topic, with <code>Restore Window</code> in the toolbar to
+                bring the frame back. Both are off by default.
+              </p>
+              <p class="post-where"><code>Settings &gt; Appearance &gt; Compact toolbar / Seamless maximize</code></p>
+            </article>
 
             <article class="post" id="news-macos-chrome">
               <h3>A Native Face on macOS</h3>
@@ -671,6 +698,15 @@
             <a href="https://github.com/seraphirc/seraphirc-download/releases">releases page</a>.
           </p>
           <div class="releases" data-releases>
+            <details class="release" id="v6.0.12">
+              <summary><span class="release-version">6.0.12</span> <time datetime="2026-10-11">Oct 11, 2026</time></summary>
+              <ul>
+                <li><b>Treebar (desktop):</b> a new Constellation look. Each network is a card showing its status, server and latency, the selected window is a glowing outlined capsule, and private messages show the person's avatar in the Modern layout.</li>
+                <li><b>Channel Info (desktop):</b> opens from a new info button in the topic bar. Ban and invite exceptions can be viewed and edited beside bans, and more channel modes are listed where the server supports them.</li>
+                <li><b>Connection Health (desktop):</b> Expanded horizontal width on information cards. This should make it less treacherous to read. 🙂</li>
+                <li><b>Themes (desktop):</b> Aura is the default for new installs. Your saved theme stays as it is. Miami Nights' sunset glow now follows the Atmosphere slider like every other glow.</li>
+              </ul>
+            </details>
             <details class="release" id="v6.0.11">
               <summary><span class="release-version">6.0.11</span> <time datetime="2026-10-11">Oct 11, 2026</time></summary>
               <ul>
