@@ -564,7 +564,7 @@ html[data-theme='light']           { color-scheme: light; --sd-bg:#fafcff; --sd-
 html[data-theme='sage']            { color-scheme: light; --sd-bg:#f8faf5; --sd-deep:#eef1e9; --sd-text:#35402f; --sd-accent:#4a7340; --sd-glow:#6b8f5e; --sd-sw:#9e9244; --sd-sc:#3f7d6a; }
 html[data-theme='sakura']          { color-scheme: light; --sd-bg:#fffbfa; --sd-deep:#fbeff0; --sd-text:#4a3b3f; --sd-accent:#b0567d; --sd-glow:#c2185b; --sd-sw:#e282a8; --sd-sc:#7b5aa6; }
 html[data-theme='newsprint']       { color-scheme: light; --sd-bg:#f4f2ee; --sd-deep:#e8e6e1; --sd-text:#21201d; --sd-accent:#21201d; --sd-glow:#8a8172; --sd-sw:#7a6c58; --sd-sc:#585e68; }
-html[data-theme='spooky-season']   { --sd-bg:#0e0b14; --sd-deep:#000000; --sd-text:#e8e2d6; --sd-accent:#7cff4f; --sd-glow:#ff7518; --sd-sw:#c07bff; --sd-sc:#7cff4f; }
+html[data-theme='cyberpunk']       { --sd-bg:#080b0f; --sd-deep:#050709; --sd-text:#e6f1f5; --sd-accent:#00f0ff; --sd-glow:#fcee0a; --sd-sw:#fcee0a; --sd-sc:#00f0ff; }
 
 html[data-theme]:not([data-theme='seraph']) {
   --bg:       var(--sd-bg);
@@ -623,41 +623,43 @@ html[data-theme]:is([data-theme='newsprint']) {
   --mark-3: var(--sd-sc);
 }
 
-/* Spooky Season turns the volume up: purple-tinted surfaces and rules,
-   pumpkin headings and buttons, and an orange, purple and green logo. */
-html[data-theme]:is([data-theme='spooky-season']) {
-  --panel:     color-mix(in srgb, var(--sd-bg) 88%, var(--sd-sw));
-  --panel-2:   color-mix(in srgb, var(--sd-bg) 82%, var(--sd-sw));
-  --raised:    color-mix(in srgb, var(--sd-bg) 70%, var(--sd-sw));
-  --line:      color-mix(in srgb, var(--sd-sw) 38%, transparent);
-  --line-2:    color-mix(in srgb, var(--sd-sw) 60%, transparent);
-  --line-soft: color-mix(in srgb, var(--sd-sw) 20%, transparent);
-  --sel:       color-mix(in srgb, var(--sd-glow) 30%, transparent);
-  --muted:     #c9bfd8;
-  --dim:       #a89cb8;
-  --faint:     #8a809a;
-  --code-ink:  color-mix(in srgb, var(--sd-sw) 70%, #fff);
-  --mark-2:    var(--sd-sw);
+/* Cyberpunk, after the desktop theme: electric yellow for headings, the
+   header rule, buttons and the selection, cyan for structure, red for
+   alerts, and the client's faint circuit pattern behind the page. */
+html[data-theme]:is([data-theme='cyberpunk']) {
+  --panel:     #0b0f14;
+  --panel-2:   #10161d;
+  --raised:    #16202a;
+  --line:      color-mix(in srgb, var(--sd-accent) 22%, transparent);
+  --line-2:    color-mix(in srgb, var(--sd-accent) 40%, transparent);
+  --line-soft: color-mix(in srgb, var(--sd-accent) 11%, transparent);
+  --sel:       color-mix(in srgb, var(--sd-glow) 22%, transparent);
+  --muted:     #b8ccd4;
+  --dim:       #8fa9b4;
+  --faint:     #6f8c99;
+  --red:       #ff4d6d;
+  --code-ink:  #fff38a;
+  --mark-1:    #fcee0a;
+  --mark-2:    #9ff9ff;
+  --mark-3:    #00c8dc;
 }
-html[data-theme='spooky-season'] :is(h1, h2) { color: var(--sd-glow); }
-html[data-theme='spooky-season'] .site-header {
+html[data-theme='cyberpunk'] body {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 420' fill='none' stroke='%2300f0ff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg stroke-opacity='0.05'%3E%3Cpath d='M40 0V60L58 78V150L40 168V420'/%3E%3Cpath d='M92 0V120L112 140V230L92 250V420'/%3E%3Cpath d='M102 0V116L122 136V234L102 254V420'/%3E%3Cpath d='M160 0V300L176 316V340L160 356V420'/%3E%3Cpath d='M214 0V40L196 58V200L214 218V420'/%3E%3Cpath d='M224 0V36L206 54V204L224 222V420'/%3E%3Cpath d='M268 0V260L252 276V340L268 356V420'/%3E%3Cpath d='M58 110H24'/%3E%3Ccircle cx='18' cy='110' r='5.5'/%3E%3Cpath d='M160 80L178 98V112'/%3E%3Ccircle cx='178' cy='119' r='5.5'/%3E%3Cpath d='M102 300H136'/%3E%3Ccircle cx='142' cy='300' r='5.5'/%3E%3Cpath d='M224 300H246'/%3E%3Ccircle cx='252' cy='300' r='5'/%3E%3Cpath d='M252 150H282'/%3E%3Ccircle cx='288' cy='150' r='5.5'/%3E%3Cpath d='M40 360H66L74 352V330'/%3E%3Ccircle cx='74' cy='323' r='5'/%3E%3Cpath d='M196 120H174V180'/%3E%3Ccircle cx='174' cy='187' r='5'/%3E%3C/g%3E%3Cg fill='%2300f0ff' stroke='none' fill-opacity='0.05'%3E%3Ccircle cx='58' cy='78' r='2.6'/%3E%3Ccircle cx='112' cy='140' r='2.6'/%3E%3Ccircle cx='122' cy='136' r='2.6'/%3E%3Ccircle cx='196' cy='58' r='2.6'/%3E%3Ccircle cx='206' cy='54' r='2.6'/%3E%3Ccircle cx='252' cy='276' r='2.6'/%3E%3Ccircle cx='176' cy='316' r='2.6'/%3E%3Ccircle cx='40' cy='168' r='2.6'/%3E%3Ccircle cx='92' cy='250' r='2.6'/%3E%3Ccircle cx='214' cy='218' r='2.6'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 300px 420px;
+}
+html[data-theme='cyberpunk'] :is(h1, h2) { color: var(--sd-glow); }
+html[data-theme='cyberpunk'] .site-header {
   border-bottom-color: var(--sd-glow);
   box-shadow: 0 1px 0 var(--sd-glow);
 }
-html[data-theme='spooky-season'] .site-header .brand::after {
-  content: "🎃";
-  font-size: 1.25rem;
-  line-height: 1;
-  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--sd-glow) 70%, transparent));
-}
-html[data-theme='spooky-season'] .site-nav a[aria-current="page"] { color: var(--sd-glow); }
-html[data-theme='spooky-season'] .button { border-color: var(--sd-glow); }
-html[data-theme='spooky-season'] .button:hover {
-  color: #000;
+html[data-theme='cyberpunk'] .site-nav a[aria-current="page"] { color: var(--sd-glow); }
+html[data-theme='cyberpunk'] .button { border-color: var(--sd-glow); }
+html[data-theme='cyberpunk'] .button:hover {
+  color: #050709;
   background: var(--sd-glow);
 }
-html[data-theme='spooky-season'] ::selection {
-  color: #000;
+html[data-theme='cyberpunk'] ::selection {
+  color: #050709;
   background: var(--sd-glow);
 }
 

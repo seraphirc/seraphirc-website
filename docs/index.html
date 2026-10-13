@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="spooky-season">
+<html lang="en" data-theme="cyberpunk">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,12 +33,13 @@
       (function () {
         try {
           var t = localStorage.getItem("seraphirc-theme");
-          if (t) document.documentElement.setAttribute("data-theme", t);
+          // Spooky Season was retired, so a saved pick of it falls back to the default.
+          if (t && t !== "spooky-season") document.documentElement.setAttribute("data-theme", t);
         } catch (e) {}
         document.documentElement.classList.add("docs-js");
       })();
     </script>
-    <link rel="stylesheet" href="/styles.css?v=20261001-spooky-2">
+    <link rel="stylesheet" href="/styles.css?v=20261013-cyberpunk-1">
     <link rel="stylesheet" href="/docs/docs.css?v=20260928-scripts-1">
   </head>
   <body>
@@ -64,6 +65,7 @@
           <select id="theme-select">
             <option value="aura">Aura</option>
             <option value="catppuccin">Catppuccin</option>
+            <option value="cyberpunk">Cyberpunk</option>
             <option value="dim">Dim</option>
             <option value="dracula">Dracula</option>
             <option value="funky-fresh">Funky Fresh</option>
@@ -82,7 +84,6 @@
             <option value="seraph">Seraph</option>
             <option value="solarized-dark">Solarized Dark</option>
             <option value="solarized-light">Solarized Light</option>
-            <option value="spooky-season">Spooky Season</option>
             <option value="tokyo-night">Tokyo Night</option>
           </select>
         </label>
@@ -4633,7 +4634,7 @@ server/Libera/server.log</code></pre>
       (function () {
         var select = document.getElementById("theme-select");
         if (!select) return;
-        select.value = document.documentElement.getAttribute("data-theme") || "spooky-season";
+        select.value = document.documentElement.getAttribute("data-theme") || "cyberpunk";
         select.addEventListener("change", function () {
           document.documentElement.setAttribute("data-theme", select.value);
           try { localStorage.setItem("seraphirc-theme", select.value); } catch (e) {}
