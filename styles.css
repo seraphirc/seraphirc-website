@@ -425,6 +425,8 @@ select option { color: var(--text); background: var(--panel); }
 }
 .release li { margin-bottom: 6px; }
 .release li b { color: var(--text); }
+.release ul:has(+ .release-note) { margin-bottom: 6px; }
+.release-note { margin: 0 0 16px; padding-left: 2.2em; color: var(--accent-bright); }
 .release[hidden] { display: none; }
 .show-all {
   margin-top: 16px;
