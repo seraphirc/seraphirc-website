@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en" data-theme="cyberpunk">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="News from SeraphIRC, the IRC client for desktop and mobile: new features and releases, newest first.">
+    <meta name="theme-color" content="#10151f">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.seraphirc.chat/news/">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-v3.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32-v3.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16-v3.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon-v3.png">
+    <title>News - SeraphIRC</title>
+    <script>
+      // Apply the saved theme before first paint.
+      (function () {
+        try {
+          var t = localStorage.getItem("seraphirc-theme");
+          // Spooky Season was retired, so a saved pick of it falls back to the default.
+          if (t && t !== "spooky-season") document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="/styles.css?v=20261018-6014-3">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true">
+            <svg class="seraph-mark" viewBox="9 23.5 74 74" fill="none" stroke-width="11" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M18,66 L74,30" stroke="var(--mark-1)"/><path d="M22,79 L64,52" stroke="var(--mark-2)"/><path d="M28,91 L52,75" stroke="var(--mark-3)"/></svg>
+          </span>
+          SeraphIRC
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          <a href="/#download">Download</a>
+          <a href="/#features">Features</a>
+          <a href="/news/" aria-current="page">News</a>
+          <a href="/changelog/">Changelog</a>
+          <a href="/#ircv3">IRCv3</a>
+          <a href="/docs/">Docs</a>
+          <a href="/marketplace/">Themes</a>
+        </nav>
+        <label class="field head-theme">
+          Theme
+          <select id="theme-select">
+            <option value="aura">Aura</option>
+            <option value="catppuccin">Catppuccin</option>
+            <option value="cyberpunk">Cyberpunk</option>
+            <option value="dim">Dim</option>
+            <option value="dracula">Dracula</option>
+            <option value="funky-fresh">Funky Fresh</option>
+            <option value="gruvbox">Gruvbox</option>
+            <option value="hackerman">Hackerman</option>
+            <option value="light">Light</option>
+            <option value="miami-nights">Miami Nights</option>
+            <option value="monokai">Monokai</option>
+            <option value="nebula">Nebula</option>
+            <option value="newsprint">Newsprint</option>
+            <option value="nord">Nord</option>
+            <option value="ocean-breeze">Ocean Breeze</option>
+            <option value="phoenix">Phoenix</option>
+            <option value="sage">Sage</option>
+            <option value="sakura">Sakura</option>
+            <option value="seraph">Seraph</option>
+            <option value="solarized-dark">Solarized Dark</option>
+            <option value="solarized-light">Solarized Light</option>
+            <option value="tokyo-night">Tokyo Night</option>
+          </select>
+        </label>
+      </div>
+    </header>
+
+    <main class="wrap page">
+      <section id="news" aria-labelledby="news-title">
+        <div class="page-head">
+          <h1 id="news-title">News</h1>
+          <p>What's new in SeraphIRC.</p>
+        </div>
+        <article class="post" id="news-cyberpunk-theme">
+          <h2>New built-in theme</h2>
+          <p class="post-meta"><time datetime="2026-10-13">Oct 13, 2026</time>, version 6.0.13</p>
+          <p>
+            Version 6.0.13 brings Cyberpunk, a new built-in theme. It pairs
+            electric yellow with cyan, adds red for alerts, and gives nicks six
+            neon colors that stay easy to read.
+          </p>
+          <p>
+            <b>Circuits.</b> A faint circuit-board pattern can now sit behind the
+            channel tree under the stars and the glow. Cyberpunk draws it in cyan
+            and Hackerman in green. Any theme can turn it on with its own color
+            and strength.
+          </p>
+          <p>
+            <b>Atmosphere in the nicklist.</b> Circuits and stars can both extend
+            into the nicklist. Each one is optional and has its own switch.
+          </p>
+          <p>
+            More options to make the UI feel like your own. You will find them in
+            the theme editor's Atmosphere section.
+          </p>
+          <p class="post-where"><a href="/changelog/#v6.0.13"><code>Changelog &gt; 6.0.13</code></a></p>
+        </article>
+
+        <article class="post" id="news-treebar-upgrades">
+          <h2>Treebar Upgrades</h2>
+          <p class="post-meta"><time datetime="2026-10-11">Oct 11, 2026</time>, version 6.0.12</p>
+          <p>
+            Version 6.0.12 gives the treebar a new look we call Constellation.
+          </p>
+          <p>
+            <b>Networks as cards.</b> Each network sits in its own card, with its
+            status light, a Soju or Direct chip, and an unread total. Under the name,
+            the card shows which server answered and how fast. The network you are
+            working in carries a faint glow, and the latency graph at the bottom is
+            a card to match.
+          </p>
+          <p>
+            <b>Easier to scan.</b> Section captions show their count, the selected
+            window is a lit, outlined capsule, and rows with mentions or private
+            messages waiting stand out with a badge. In the Modern layout, private
+            messages lead with the person's avatar.
+          </p>
+          <p>
+            <b>Clearer on light themes.</b> Themes with a light treebar, Sage and
+            Sakura among them, now use darker small labels that are much easier to
+            read.
+          </p>
+          <p class="post-where"><a href="/changelog/#v6.0.12"><code>Changelog &gt; 6.0.12</code></a></p>
+        </article>
+
+        <article class="post" id="news-wails-3">
+          <h2>Wail Wail Wails</h2>
+          <p class="post-meta"><time datetime="2026-09-30">Sep 30, 2026</time>, version 6.0.2</p>
+          <p>
+            The desktop app runs on Wails, the framework that puts SeraphIRC in a
+            native window on Windows, macOS and Linux. Version 6.0.2 moves it from
+            Wails 2 to Wails 3. Your settings and scripts carry over.
+          </p>
+          <p>
+            <b>Sharper on Linux.</b> On Hyprland and other displays scaled fractionally, 
+            the window is now crisp instead of soft and blurry.
+          </p>
+          <p>
+            <b>On the living version.</b> Wails 3 is where the Wails team puts its
+            new work, so SeraphIRC keeps up as Windows, macOS and Linux change.
+          </p>
+          <p>
+            <b>What changed.</b> macOS now needs version 12 (Monterey) or later.
+            On Linux, SeraphIRC now uses GTK 4 and WebKitGTK 6.0, which current
+            distributions include.
+          </p>
+          <p class="post-where"><a href="/changelog/#v6.0.2"><code>Changelog &gt; 6.0.2</code></a></p>
+        </article>
+
+        <article class="post" id="news-scripting">
+          <h2>Scripting phase 1 arrives</h2>
+          <p class="post-meta"><time datetime="2026-09-28">Sep 28, 2026</time>, version 6.0.0</p>
+          <p>
+            SeraphIRC now runs scripts written in the mIRC scripting language.
+            Aliases, events, timers, popups, custom <code>@windows</code>, hash
+            tables, and file and socket commands all work, and most classic
+            scripts load with <code>/load</code> and run as they are.
+          </p>
+          <p>
+            Everything lives in the new Scripts Editor, opened with
+            <code>Alt+R</code>. Your existing aliases have already moved in, and
+            each script file can be switched off or kept to certain networks. A
+            script asks before it first loads and before it connects to a new
+            host, and what it sends is paced so it never floods you off a server.
+          </p>
+          <p>
+            Phase 1 is mIRC script support. Phase 2 is Lua/Python. Dialogs and picture windows are planned for a
+            later 6.x release. If a script you rely on misbehaves, tell us and we
+            will work with you on a fix.
+          </p>
+          <p class="post-where"><a href="/docs/#scripts-compat"><code>seraphirc.chat/docs#scripts-compat</code></a></p>
+        </article>
+
+        <article class="post" id="news-screen-real-estate">
+          <h2>So much room for activities!</h2>
+          <p class="post-meta"><time datetime="2026-09-15">Sep 15, 2026</time>, version 5.1.25</p>
+          <p>
+            The feedback we hear most is that the UI takes up too much of the
+            window. Two new options in <code>Settings &gt; Appearance</code> hand
+            that space back.
+          </p>
+          <p>
+            <b>Compact toolbar</b> packs the top bar into one dense row under the
+            titlebar and trims the connection pill to a bare light, leaving your
+            icon size alone. <b>Seamless maximize</b> drops the title bar off a
+            maximized buffer window and moves the member count and channel modes
+            into the topic, with <code>Restore Window</code> in the toolbar to
+            bring the frame back. Both are off by default.
+          </p>
+          <p class="post-where"><code>Settings &gt; Appearance &gt; Compact toolbar / Seamless maximize</code></p>
+        </article>
+
+        <article class="post" id="news-macos-chrome">
+          <h2>A Native Face on macOS</h2>
+          <p class="post-meta"><time datetime="2026-09-05">Sep 5, 2026</time>, version 5.1.18</p>
+          <p>
+            Plenty of you are on a Mac now, and the house glow does not always sit
+            well beside a native window. There is a chrome selector in
+            <code>Settings &gt; Appearance</code> that turns the neon and the glows
+            down for something crisper.
+          </p>
+          <p>
+            If the glow is half of why you are here, set
+            <code>Settings &gt; Appearance &gt; Chrome Style</code> back to Seraph and
+            keep it. Nothing changed on Windows or Linux.
+          </p>
+          <p class="post-where"><code>Settings &gt; Appearance &gt; Chrome Style</code></p>
+        </article>
+
+        <article class="post" id="news-reactions">
+          <h2>Reactions</h2>
+          <p class="post-meta"><time datetime="2026-08-28">Aug 28, 2026</time>, version 5.1.14</p>
+          <p>
+            React to any message with an emoji, on desktop and mobile alike. Pick
+            React from a message's menu or type <code>/react</code>, choose from the
+            full emoji picker, and the reaction appears as a small chip on the
+            message for everyone whose client supports it.
+          </p>
+          <p>
+            Talking to someone whose client cannot show them? An optional
+            send-as-message mode delivers your reaction as a short quoted reply
+            instead, so nobody is left out of the joke. And if reactions are not
+            your thing, a single toggle in Settings turns them off entirely.
+          </p>
+          <p class="post-where"><code>Right-click a message &gt; React, or /react</code></p>
+        </article>
+
+        <article class="post" id="news-encryption">
+          <h2>Native FiSH Implementation</h2>
+          <p class="post-meta"><time datetime="2026-08-21">Aug 21, 2026</time>, version 5.1.7</p>
+          <p>
+            SeraphIRC now includes a native FiSH implementation, the Blowfish encryption used by HexChat, Konversation,
+            Quassel and mIRC for years. Set a shared key for a channel or a
+            person and everything you send there goes out encrypted. The people you talk to on those other clients can
+            read you, and you can read them.
+          </p>
+          <p>
+            A lock marks what was protected on the conversation in the tree and title
+            bar as well as on each message that traveled encrypted. This way, you never have to guess
+            whether a line went cleartext. If you'd rather not type commands,
+            a Blowfish Settings panel on desktop and mobile holds the key for each
+            conversation, and the desktop can negotiate one with the other side for you.
+          </p>
+          <p>
+            Mobile caveat: mention notifications cannot arrive for encrypted
+            channel messages, because your bouncer cannot read them to spot your name.
+            Direct messages still notify.
+          </p>
+          <p class="post-where"><a href="/docs/#encryption"><code>seraphirc.chat/docs#encryption</code></a></p>
+        </article>
+
+        <article class="post" id="news-documentation">
+          <h2>Docs are live!</h2>
+          <p class="post-meta"><time datetime="2026-08-15">Aug 15, 2026</time></p>
+          <p>
+            Docs for SeraphIRC desktop are up on the site: every setting you can reach
+            in the interface, plus markdown, colors, and a fair pile of things that
+            were previously only findable by accident.
+          </p>
+          <p class="post-where"><a href="/docs/"><code>seraphirc.chat/docs</code></a></p>
+        </article>
+
+        <article class="post" id="news-ignore-sync">
+          <h2>Ignore once, ignored everywhere</h2>
+          <p class="post-meta"><time datetime="2026-08-15">Aug 15, 2026</time>, version 5.1.2</p>
+          <p>
+            Ignore someone on the desktop and your phone never got the memo, so the
+            same person kept turning up in your pocket. On a soju bouncer that is
+            over. Ignore a nick on one device and the other has them ignored too, and
+            unignoring travels back the same way. It rides soju's
+            <code>soju.im/blocked</code> key, so a phone that was asleep catches up on
+            reconnect, and soju stops pushing notifications from anyone on the list.
+            Syncing needs a Soju version that offers <code>soju.im/blocked</code>. On
+            an older bouncer, ignores keep working per device.
+          </p>
+          <p>
+            Entries are IRC masks now, so <code>troll*</code> survives the inevitable
+            nick change, and an ignore covers notices, invites and the join and quit
+            noise rather than only messages. Every row says whether it syncs or lives
+            on this device alone.
+          </p>
+          <p class="post-where"><code>Settings &gt; Ignore List</code></p>
+        </article>
+
+        <article class="post" id="news-guided-tour">
+          <h2>Guided Tour for new users</h2>
+          <p class="post-meta"><time datetime="2026-08-08">Aug 8, 2026</time>, version 5.0.34</p>
+          <p>
+            SeraphIRC has grown a lot of features, and plenty of them sit behind a
+            small button in a corner you would never think to click. On your first run,
+            the app walks you through it. A tip appears, rings the thing it is talking
+            about, says what it does, and waits. Click "Got it", or click into the item
+            itself, and the next one comes along.
+          </p>
+          <p>
+            The tour points out where your settings live, how to read the connection
+            health light, the trays along the side, the Networks and Bouncers lists,
+            and the pages inside Settings worth a look on day one. Already know your
+            way around? Every tip carries a checkbox that shuts off the rest for good.
+          </p>
+          <p class="post-where"><code>Appears on first run, nothing to turn on</code></p>
+        </article>
+
+        <article class="post" id="news-theme-marketplace">
+          <h2>Step right up, the Marketplace is open</h2>
+          <p class="post-meta"><time datetime="2026-08-04">Aug 4, 2026</time></p>
+          <p>
+            Custom themes were never meant to stay on one machine. The Theme
+            Marketplace is now live on the site: a community shelf where SeraphIRC
+            users show off their handiwork and everyone else takes it home. Browse
+            the lineup, preview any theme on a little mock client right in the page,
+            and download whatever catches your eye.
+          </p>
+          <p>
+            Made one worth bragging about? Email it in and it goes up on the shelf
+            with your nick on it. Every submission is checked by a person before it
+            hangs, so the racks stay clean. Come on by, the awning is up.
+          </p>
+          <p class="post-where"><a href="/marketplace/"><code>seraphirc.chat/marketplace</code></a></p>
+        </article>
+
+        <article class="post" id="news-custom-themes">
+          <h2>Seraph your way</h2>
+          <p class="post-meta"><time datetime="2026-08-04">Aug 4, 2026</time>, version 5.0.28</p>
+          <p>
+            SeraphIRC ships with 21 themes, and until today that was the whole menu.
+            Now any of them is a starting point. Clone one, give it a name, and recolor
+            it from a floating editor that paints every change onto the running app as
+            you make it. Every color is named for the thing it paints on screen, so you
+            are choosing "Timestamps" or "Selected channel background", not deciphering
+            a stylesheet. Pick from the palette the theme already uses, dial in
+            something new on a full color wheel, or build a gradient. Your client,
+            your colors.
+          </p>
+          <p>
+            Made something worth showing off? Export it. A theme travels as a small
+            file that carries its name and colors and nothing else, never your networks
+            or credentials, so you can hand it to a friend or drop it in a channel.
+            Imported themes are checked before a single color lands. And the originals
+            are never touched, so there is always a way back.
+          </p>
+          <p class="post-where"><code>Settings &gt; Preferences &gt; Appearance</code></p>
+        </article>
+
+        <article class="post" id="news-multiline-and-replies">
+          <h2>Additional IRCv3 Capabilities</h2>
+          <p class="post-meta"><time datetime="2026-08-02">Aug 2, 2026</time>, version 5.0.24</p>
+          <p>
+            Two IRCv3 extensions land together. Multiline lets a long message, or one
+            with line breaks in it, travel as a single message instead of being chopped
+            into a run of separate lines. Replies point a message at the one it answers,
+            so the client draws that parent above it with a jump back to where it sits
+            in the conversation.
+          </p>
+          <p>
+            Both fail gracefully, because most of IRC has not caught up yet. Multiline is
+            used only where the network offers it and your message actually needs it.
+            A reply that cannot be tagged opens with <code>nick:</code> instead, the way
+            IRC has addressed people for thirty years, so it reads correctly on every
+            client ever written. Where the tag does travel, SeraphIRC hides the
+            now-redundant prefix and draws the preview in its place.
+          </p>
+          <p class="post-where"><code>Right-click a message &gt; Reply</code></p>
+        </article>
+
+        <article class="post" id="news-giphy">
+          <h2>Some things are better said in motion</h2>
+          <p class="post-meta"><time datetime="2026-08-02">Aug 2, 2026</time>, version 5.0.23</p>
+          <p>
+            GIPHY has arrived. A GIF picker now sits in the composer next to the emoji
+            button, or use <code>/giphy</code> to search via command.
+            Find the one that says it better than you were going to, and send it.
+          </p>
+          <p>
+            Off until you bring your own Giphy API key. SeraphIRC
+            ships no key and runs no proxy, so your searches go to Giphy under your
+            agreement and SeraphIRC never sees them. The key lives in your operating
+            system's keyring, never in a config file.
+          </p>
+          <p class="post-where"><code>Settings &gt; Integrations</code></p>
+        </article>
+
+        <article class="post" id="news-modern-mode">
+          <h2>A fresh take on conversation</h2>
+          <p class="post-meta"><time datetime="2026-07-31">Jul 31, 2026</time>, version 5.0.19</p>
+          <p>
+            If Discord-style layouts are your thing, Modern Mode is familiar ground:
+            the nickname and time above the message, a run from one person grouped
+            together, the shape you already know, running on IRC.
+          </p>
+          <p>
+            Avatars ride IRCv3 metadata and are opt-in, because fetching someone's picture
+            tells their server your IP address. Anyone without one gets an identicon drawn
+            on your own machine from their nick or account. Nothing is asked of a third
+            party to build it.
+          </p>
+          <p class="post-where"><code>Settings &gt; Preferences &gt; Appearance</code></p>
+        </article>
+
+        <article class="post" id="news-send-guard">
+          <h2>Check yourself, before you... yeah.</h2>
+          <p class="post-meta"><time datetime="2026-07-30">Jul 30, 2026</time>, version 5.0.18</p>
+          <p>
+            IRC has no undo. Send Guard reads a message on its way to the wire and holds
+            the ones that look like an accident: a password typed into a channel instead of
+            a services window, a private line addressed to someone who isn't in the room, a
+            forty-line paste into a busy channel.
+          </p>
+          <p>
+            A held message waits in a banner above the composer that names the destination
+            and says which rule stopped it. Enter is deliberately not the confirm key, because
+            the reflex that just sent the secret is a second tap on Enter. Send anyway is
+            Ctrl+Enter, or Cmd+Enter on macOS, or a click. Escape drops the line, and editing
+            it runs the check again.
+          </p>
+          <p class="post-where"><code>Settings &gt; Send Guard</code></p>
+        </article>
+
+        <article class="post" id="news-seraph-transfer">
+          <h2>Straight from your machine to theirs</h2>
+          <p class="post-meta"><time datetime="2026-07-28">Jul 28, 2026</time>, version 5.0.15</p>
+          <p>
+            Peer-to-peer file transfer that works from behind a home router. A rendezvous
+            server introduces the two clients and the file
+            rides mutually authenticated TLS 1.3 from your machine to theirs. No upload host,
+            no copy left on somebody else's disk. NO CLEARTEXT.
+          </p>
+          <p>
+            Peers are pinned the first time you transfer with them. If that identity ever
+            changes, the transfer stops and asks instead of quietly carrying on.
+          </p>
+          <p class="post-where"><code>/seraphtransfer &lt;nick&gt;</code></p>
+        </article>
+
+        <article class="post" id="news-seraph-chat">
+          <h2>Direct, encrypted, no logs</h2>
+          <p class="post-meta"><time datetime="2026-07-28">Jul 28, 2026</time>, version 5.0.15</p>
+          <p>
+            An encrypted conversation over that same direct link, in a floating window that
+            never becomes a buffer. Nothing is logged, stored, or restored, and the invitation
+            itself never lands in a query window.
+          </p>
+          <p>
+            Close the window and the conversation is gone from both machines. There is no
+            history to hand over later, because there was never any history.
+          </p>
+          <p class="post-where"><code>/seraphchat &lt;nick&gt;</code></p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <ul class="foot-nav">
+          <li><a href="/#download">Download</a></li>
+          <li><a href="/docs/">Docs</a></li>
+          <li><a href="/marketplace/">Themes</a></li>
+          <li><a href="/changelog/">Changelog</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+          <li><a href="ircs://irc.libera.chat/seraphirc">#seraphirc on Libera</a></li>
+          <li><a href="https://buymeacoffee.com/seraphirc">Buy us a coffee</a></li>
+        </ul>
+        <p class="foot-meta">&copy; <span data-year>2026</span> SeraphIRC</p>
+      </div>
+    </footer>
+    <script>
+      // The header theme picker recolors the site to match a client theme.
+      (function () {
+        var select = document.getElementById("theme-select");
+        if (!select) return;
+        select.value = document.documentElement.getAttribute("data-theme") || "cyberpunk";
+        select.addEventListener("change", function () {
+          document.documentElement.setAttribute("data-theme", select.value);
+          try { localStorage.setItem("seraphirc-theme", select.value); } catch (e) {}
+        });
+      })();
+    </script>
+    <script>
+      // Keep the footer year current.
+      document.querySelectorAll("[data-year]").forEach(function (el) {
+        el.textContent = String(new Date().getFullYear());
+      });
+    </script>
+  </body>
+</html>

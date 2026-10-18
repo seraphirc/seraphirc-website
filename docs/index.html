@@ -39,7 +39,7 @@
         document.documentElement.classList.add("docs-js");
       })();
     </script>
-    <link rel="stylesheet" href="/styles.css?v=20261018-6014-2">
+    <link rel="stylesheet" href="/styles.css?v=20261018-6014-3">
     <link rel="stylesheet" href="/docs/docs.css?v=20260928-scripts-1">
   </head>
   <body>
@@ -54,8 +54,8 @@
         <nav class="site-nav" aria-label="Main">
           <a href="/#download">Download</a>
           <a href="/#features">Features</a>
-          <a href="/#news">News</a>
-          <a href="/#changelog">Changelog</a>
+          <a href="/news/">News</a>
+          <a href="/changelog/">Changelog</a>
           <a href="/#ircv3">IRCv3</a>
           <a href="/docs/" aria-current="page">Docs</a>
           <a href="/marketplace/">Themes</a>
@@ -428,9 +428,8 @@
             <p class="pane-kicker">Getting Started</p>
             <h2>Welcome</h2>
             <p class="pane-lead">
-              SeraphIRC is an IRC client for Linux, Windows, and iOS/macOS. It talks
-              to networks directly, or through a Soju or ZNC bouncer, and it keeps
-              the classic feel while carrying modern protocol support.
+              SeraphIRC is an IRC client for Windows, macOS, Linux, iPhone and iPad.
+              It talks to networks directly or through a Soju or ZNC bouncer.
             </p>
 
             <h3>What it does</h3>
@@ -745,8 +744,8 @@
             <h2>Using a Bouncer</h2>
             <p class="pane-lead">
               A bouncer stays on IRC when your computer is not, then replays what you
-              missed. SeraphIRC handles the two common ones natively and works fine
-              without either. Connection details are saved once as a
+              missed. SeraphIRC handles the two common ones natively. Connection
+              details are saved once as a
               <a href="#bouncer-profiles">bouncer profile</a>.
             </p>
 
@@ -1093,8 +1092,7 @@
             <h2>Per-Buffer Settings</h2>
             <p class="pane-lead">
               Right click any buffer in the treebar and pick <strong>Buffer
-              Settings</strong> to tune one channel or query on its own. A busy
-              channel can go quiet without touching anything else.
+              Settings</strong> to tune one channel or query on its own.
             </p>
 
             <h3>Buffer Alerts</h3>
@@ -1669,8 +1667,8 @@ server/Libera/server.log</code></pre>
             <p class="pane-kicker">Chatting</p>
             <h2>Exceptions</h2>
             <p class="pane-lead">
-              Two kinds, and they are very different in scope. One quiets a single
-              check, the other switches the guard off entirely.
+              Two kinds. One quiets a single check, the other switches the guard
+              off entirely.
             </p>
 
             <h3>Message prefix exceptions</h3>
@@ -1714,7 +1712,7 @@ server/Libera/server.log</code></pre>
             <h2>Encrypted Messaging</h2>
             <p class="pane-lead">
               SeraphIRC speaks FiSH, the Blowfish message encryption used across
-              IRC clients for two decades. Set a shared key for a channel or a
+              IRC clients. Set a shared key for a channel or a
               person and everything you send there is encrypted before it leaves,
               readable by HexChat, Konversation, Quassel, mIRC with FiSH 10, and
               anyone else holding the key.
@@ -1846,8 +1844,7 @@ server/Libera/server.log</code></pre>
             <h2>SeraphIRC Scripting</h2>
             <p class="pane-lead">
               SeraphIRC 6.0 introduces support for scripting modeled around mIRC
-              scripting language. Significant effort has gone into compatibility and
-              functional testing, but issues and gaps are anticipated.
+              scripting language. Compatibility is not complete yet.
             </p>
             <p>
               If you have a script you'd like to run inside of SeraphIRC and are
@@ -2412,8 +2409,7 @@ server/Libera/server.log</code></pre>
             <h2>Recovery</h2>
             <p class="pane-lead">
               Start over from a clean install.
-              <code>Settings &gt; Application &gt; Recovery</code>. This is the only
-              destructive page in Settings, which is why it sits alone at the bottom.
+              <code>Settings &gt; Application &gt; Recovery</code>.
             </p>
 
             <h3>Reset All Settings</h3>
@@ -4541,8 +4537,7 @@ server/Libera/server.log</code></pre>
             <p class="pane-kicker">Text Formatting</p>
             <h2>On the Wire</h2>
             <p class="pane-lead">
-              What actually leaves your computer. For anyone writing a bot, debugging
-              a relay, or wondering why a message looks different elsewhere.
+              What actually leaves your computer.
             </p>
 
             <div class="table-scroll">
@@ -4619,7 +4614,7 @@ server/Libera/server.log</code></pre>
           <li><a href="/#download">Download</a></li>
           <li><a href="/docs/">Docs</a></li>
           <li><a href="/marketplace/">Themes</a></li>
-          <li><a href="/#changelog">Changelog</a></li>
+          <li><a href="/changelog/">Changelog</a></li>
           <li><a href="/privacy/">Privacy</a></li>
           <li><a href="ircs://irc.libera.chat/seraphirc">#seraphirc on Libera</a></li>
           <li><a href="https://buymeacoffee.com/seraphirc">Buy us a coffee</a></li>
