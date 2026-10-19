@@ -886,6 +886,29 @@
               each speaker, and your setting is kept for when you switch back.
             </p>
             <p>
+              <strong>Enhanced composer</strong> puts a formatting bar above the
+              message box with buttons for bold, italic, underline, strikethrough,
+              code, spoilers, and color. Emoji, uploads, and Send sit on the row
+              below. Each layout has its own switch. It is on for Modern and off for
+              Classic by default.
+            </p>
+            <p>
+              The buttons insert the same markers you would type by hand (see
+              <a href="#formatting">Text Formatting</a>). Selected text is wrapped,
+              and pressing a button again on styled text removes the style. The
+              color picker sets the text or background color from the 16 standard
+              colors and the extended palette. The bar follows Automatic text
+              formatting under Chat below. Markdown alone
+              has no underline or color, so those buttons leave the bar, and with
+              automatic formatting off the bar is hidden.
+            </p>
+            <p>
+              <strong>Live formatting (experimental)</strong> shows bold, colors,
+              code, and the rest as they will look while you type. Formatting codes
+              stay hidden until your cursor reaches them. It needs the enhanced
+              composer.
+            </p>
+            <p>
               Avatars are set under <a href="#metadata">IRCv3 Metadata</a>.
             </p>
 
@@ -918,6 +941,14 @@
               <strong>Window Opacity</strong> runs from 50 to 100, default 100, and
               fades a window's surface only. Text never fades, and what shows
               through is the workspace behind it rather than your desktop.
+            </p>
+            <p>
+              <strong>Active Network Highlight</strong> sets how strongly the active
+              network's card is outlined in the treebar. <strong>Topic Bar
+              Highlight</strong> does the same for the outline around a channel's
+              topic bar. Both run from 0 to 100, default 50, with None, Subtle, and
+              Solid presets at 0, 50, and 100. The two draw the same outline, so
+              equal settings look identical, but each slider only changes its own.
             </p>
             <p>
               <strong>Window controls</strong> sets the style drawn on channel,
@@ -1007,7 +1038,7 @@
               <table>
                 <thead><tr><th>Setting</th><th>Default</th><th>What it does</th></tr></thead>
                 <tbody>
-                  <tr><th scope="row">Automatic text formatting</th><td><code>off</code></td><td>Applies <a href="#formatting">formatting syntax</a> to outgoing messages, including <code>/me</code>, <code>/msg</code>, and <code>/notice</code>. Choose markdown, or markdown and tokens.</td></tr>
+                  <tr><th scope="row">Automatic text formatting</th><td>Markdown and tokens</td><td>Applies <a href="#formatting">formatting syntax</a> to outgoing messages, including <code>/me</code>, <code>/msg</code>, and <code>/notice</code>. Choose off, markdown, or markdown and tokens.</td></tr>
                   <tr><th scope="row">Show link previews</th><td><code>off</code></td><td>Fetches and displays a preview card for links posted in chat.</td></tr>
                   <tr><th scope="row">Send and show typing indicators</th><td><code>off</code></td><td>Needs IRCv3 message-tags.</td></tr>
                   <tr><th scope="row">Reply inserts the nick</th><td><code>on</code></td><td>Starts a reply with <code>nick: </code> in the composer. The IRCv3 reply tag is invisible to clients without support, so without this your reply reaches them as an ordinary line with nothing to say what it answers.</td></tr>
@@ -4361,6 +4392,7 @@ server/Libera/server.log</code></pre>
                   <tr><th scope="row">One message</th><td><a href="#cmd-format"><code>/format</code></a> or <code>/f</code>, with <a href="#cmd-format-me"><code>/format-me</code></a>, <a href="#cmd-format-msg"><code>/format-msg</code></a>, and <a href="#cmd-format-notice"><code>/format-notice</code></a> variants</td></tr>
                   <tr><th scope="row">One message, off</th><td><a href="#cmd-plain"><code>/plain</code></a>, with the same <code>-me</code>, <code>-msg</code>, and <code>-notice</code> variants</td></tr>
                   <tr><th scope="row">Always</th><td><code>Settings &gt; Preferences &gt; Chat</code> sets <code>auto_format</code> to off, markdown, or markdown plus tokens as you type</td></tr>
+                  <tr><th scope="row">With buttons</th><td>The <a href="#appearance">enhanced composer</a>'s formatting bar, or <code>Ctrl+B</code>, <code>Ctrl+I</code>, <code>Ctrl+U</code>, and <code>Ctrl+Shift+X</code> (<a href="#hotkeys">Keyboard Shortcuts</a>)</td></tr>
                 </tbody>
               </table>
             </div>
@@ -4584,17 +4616,27 @@ server/Libera/server.log</code></pre>
                 <tbody>
                   <tr><th scope="row"><code>Ctrl+S</code></th><td>Open or close the Quick Switcher (Cmd+S on macOS, and Ctrl+K works too)</td></tr>
                   <tr><th scope="row"><code>Ctrl+T</code></th><td>Collapse or expand the treebar</td></tr>
-                  <tr><th scope="row"><code>Ctrl+U</code></th><td>Collapse or expand the member list in the current channel window</td></tr>
+                  <tr><th scope="row"><code>Ctrl+N</code></th><td>Collapse or expand the member list in the current channel window</td></tr>
                   <tr><th scope="row"><code>Ctrl+&larr;</code> / <code>Ctrl+&rarr;</code></th><td>Switch the treebar between Networks and Bouncers view</td></tr>
                   <tr><th scope="row"><code>Ctrl+F</code></th><td>Find in the current window (Cmd+F on macOS)</td></tr>
                   <tr><th scope="row"><code>Ctrl+Shift+R</code></th><td>Restore the default appearance if a theme leaves the interface unreadable, with Undo offered (Cmd+Shift+R on macOS)</td></tr>
                   <tr><th scope="row"><code>Shift+Enter</code></th><td>Insert a line break, and never sends</td></tr>
                   <tr><th scope="row"><code>Ctrl+Enter</code></th><td>Confirm a <a href="#send-guard">Send Guard</a> hold and send anyway (Cmd+Enter on macOS)</td></tr>
                   <tr><th scope="row"><code>Tab</code></th><td>Complete a nickname or command in the composer</td></tr>
-                  <tr><th scope="row"><code>&uarr;</code> / <code>&darr;</code></th><td>Step through your input history, or move through an open suggestion list</td></tr>
+                  <tr><th scope="row"><code>&uarr;</code> / <code>&darr;</code></th><td>Move between the lines of a long message. In an empty message box, step through your input history. Also moves through an open suggestion list</td></tr>
+                  <tr><th scope="row"><code>Ctrl+B</code></th><td>Bold the selected text, or start bold at the cursor (Cmd+B on macOS)</td></tr>
+                  <tr><th scope="row"><code>Ctrl+I</code></th><td>Italicize the selected text, or start italics at the cursor (Cmd+I on macOS)</td></tr>
+                  <tr><th scope="row"><code>Ctrl+U</code></th><td>Underline the selected text, or start underlining at the cursor (Cmd+U on macOS)</td></tr>
+                  <tr><th scope="row"><code>Ctrl+Shift+X</code></th><td>Strike through the selected text, or start strikethrough at the cursor (Cmd+Shift+X on macOS)</td></tr>
                 </tbody>
               </table>
             </div>
+            <p>
+              The formatting shortcuts work in both composers and match the
+              <a href="#appearance">enhanced composer</a>'s buttons. A second press
+              removes the style. They follow Automatic text formatting, so they do
+              nothing when it is off, and underline needs markdown and tokens.
+            </p>
 
             <div class="docs-note">
               The Quick Switcher is the fastest way around a busy workspace. Press
