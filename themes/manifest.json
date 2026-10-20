@@ -1,6 +1,126 @@
 {
   "themes": [
     {
+      "file": "ayu-mirage.seraphirc-theme.json",
+      "name": "Ayu Mirage",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "catppuccin-latte.seraphirc-theme.json",
+      "name": "Catppuccin Latte",
+      "base": "newsprint",
+      "baseLabel": "Newsprint",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "classic-irc.seraphirc-theme.json",
+      "name": "Classic IRC",
+      "base": "newsprint",
+      "baseLabel": "Newsprint",
+      "overrides": 113,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "cobalt.seraphirc-theme.json",
+      "name": "Cobalt",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "everforest.seraphirc-theme.json",
+      "name": "Everforest",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "github-dark.seraphirc-theme.json",
+      "name": "GitHub Dark",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "github-light.seraphirc-theme.json",
+      "name": "GitHub Light",
+      "base": "newsprint",
+      "baseLabel": "Newsprint",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "kanagawa.seraphirc-theme.json",
+      "name": "Kanagawa",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "night-owl.seraphirc-theme.json",
+      "name": "Night Owl",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "one-dark.seraphirc-theme.json",
+      "name": "One Dark",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "rose-pine.seraphirc-theme.json",
+      "name": "Rosé Pine",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "rose-pine-dawn.seraphirc-theme.json",
+      "name": "Rosé Pine Dawn",
+      "base": "newsprint",
+      "baseLabel": "Newsprint",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
       "file": "ratsignal-dark.seraphirc-theme.json",
       "name": "Ratsignal (Dark)",
       "base": "tokyo-night",
