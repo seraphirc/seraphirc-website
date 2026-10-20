@@ -39,27 +39,46 @@
     <link rel="stylesheet" href="/styles.css?v=20261018-6014-3">
     <style>
       /* Marketplace-only styling, built on the site's theme variables. */
-      .market-list { overflow-x: auto; }
-      .market-table {
-        width: 100%; border-collapse: collapse;
-        font-size: 0.95rem;
+      .market-grid {
+        display: grid; gap: 18px;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       }
-      .market-table th, .market-table td {
-        padding: 9px 14px 9px 0; text-align: left; border-bottom: 1px solid var(--line);
-        white-space: nowrap;
+      .market-card {
+        display: flex; flex-direction: column; min-width: 0;
+        background: var(--panel);
+        border: 1px solid var(--line); border-radius: 8px;
+        overflow: hidden;
       }
-      .market-table th { color: var(--dim); font-weight: 600; font-size: 0.85rem; }
-      .market-table td.market-name { font-weight: 700; }
-      .market-table td.market-count { font-family: var(--mono); color: var(--muted); }
-      .market-sort {
-        display: inline-flex; align-items: center; gap: 5px;
-        font: inherit; color: inherit; letter-spacing: inherit; text-transform: inherit;
-        background: none; border: 0; padding: 0; cursor: pointer;
+      /* The card mock is laid out at a fixed 640x400 and scaled to the card
+         width (--pv-scale is set from script), so it reads as the enlarged
+         preview in miniature. */
+      .market-thumb {
+        display: block; width: 100%; aspect-ratio: 16 / 10;
+        padding: 0; border: 0; border-bottom: 1px solid var(--line);
+        overflow: hidden; cursor: zoom-in;
+        font: inherit; text-align: left;
+        background: var(--line);
       }
-      .market-sort:hover { color: var(--text); }
-      .market-sort .arrow { font-size: 0.6rem; color: var(--dim); }
-      .market-sort.active { color: var(--accent-bright, var(--accent)); }
-      .market-sort.active .arrow { color: var(--gold-bright, var(--gold)); }
+      .market-thumb:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+      .market-thumb .pv-app {
+        width: 640px; height: 400px;
+        border: 0; border-radius: 0;
+        transform: scale(var(--pv-scale, 0.45)); transform-origin: 0 0;
+        pointer-events: none;
+        opacity: 0; transition: opacity 0.2s ease;
+      }
+      .market-thumb.loaded .pv-app { opacity: 1; }
+      .market-body { flex: 1; display: flex; flex-direction: column; gap: 4px; padding: 12px 14px 14px; }
+      .market-card-title { margin: 0; font-size: 1.08rem; letter-spacing: 0; }
+      .market-meta { margin: 0; color: var(--muted); font-size: 0.88rem; }
+      .market-details { margin: 0; color: var(--dim); font-size: 0.8rem; }
+      .market-foot { display: flex; align-items: center; gap: 10px; margin-top: auto; padding-top: 10px; }
+      .market-swatches { display: flex; flex-wrap: wrap; gap: 4px; min-width: 0; }
+      .market-swatches span {
+        width: 14px; height: 14px; border-radius: 3px;
+        border: 1px solid var(--line-2, var(--line));
+      }
+      .market-foot .market-download { margin-left: auto; flex: none; }
       .market-download {
         display: inline-flex; align-items: center; gap: 6px;
         text-decoration: none; font-weight: 700; font-size: 0.85rem;
@@ -68,18 +87,19 @@
       }
       .market-download:hover { border-color: var(--accent); }
       .market-download svg { width: 14px; height: 14px; fill: currentColor; }
-      .market-actions { display: flex; gap: 8px; }
-      .market-preview-button {
-        display: inline-flex; align-items: center; gap: 6px;
-        font: inherit; font-weight: 700; font-size: 0.85rem; cursor: pointer;
-        color: var(--text); background: none;
-        border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 4px 10px;
-      }
-      .market-preview-button:hover { border-color: var(--accent); }
       .market-empty { color: var(--muted); }
-      .market-toolbar { margin-bottom: 14px; }
+      /* Set the submission info apart from the card grid, the same way the
+         home page divides its sections. */
+      .market-submit {
+        max-width: none;
+        margin-top: 56px; padding-top: 48px;
+        border-top: 1px solid var(--line);
+      }
+      .market-submit > * { max-width: 44em; }
+      .market-submit > h2:first-child { margin-top: 0; font-size: 1.6rem; }
+      .market-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 18px; }
       .market-search {
-        width: 100%; max-width: 460px;
+        flex: 1 1 240px; max-width: 460px;
         padding: 8px 12px;
         font: inherit; font-size: 0.92rem;
         color: var(--text);
@@ -89,7 +109,7 @@
       .market-search::placeholder { color: var(--dim); }
       .market-search:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 
-      /* ── Theme preview dialog ─────────────────────────────────────────────
+      /* ── Theme preview (cards and dialog) ─────────────────────────────────
          A rough sketch of the client, painted with the theme's own custom
          properties. The tokens are the client's real ones, so the overrides
          apply directly; anything a sparse theme leaves unset falls back to a
@@ -314,6 +334,10 @@
             placeholder="Search by name, nick, network, or year"
             aria-label="Search themes by name, author nickname, network, or date added"
           >
+          <select id="theme-sort" aria-label="Sort themes">
+            <option value="newest">Newest first</option>
+            <option value="downloads">Most downloaded</option>
+          </select>
         </div>
 
         <div class="market-list" id="theme-list" aria-live="polite">
@@ -328,7 +352,9 @@
         <div class="pv-frame">
           <h3 id="pv-title">Theme preview</h3>
           <p class="pv-sub" id="pv-sub"></p>
-          <div class="pv-app" id="pv-root" aria-hidden="true">
+          <!-- The client mock, cloned into every card and into this dialog. -->
+          <template id="pv-template">
+          <div class="pv-app" aria-hidden="true">
             <div class="pv-header">SeraphIRC</div>
             <div class="pv-body">
               <div class="pv-side">
@@ -399,6 +425,7 @@
               </div>
             </div>
           </div>
+          </template>
           <div class="pv-palette" id="pv-palette"></div>
           <p class="pv-note">
             This is an automated color scheme render. It does not represent the actual client interface.
@@ -406,7 +433,7 @@
         </div>
       </dialog>
 
-      <section class="prose" id="submit" aria-labelledby="submit-title">
+      <section class="prose market-submit" id="submit" aria-labelledby="submit-title">
         <h2 id="submit-title">Submit your theme</h2>
         <p>
           Export it from the desktop client and email the file to
@@ -455,21 +482,16 @@
            origin. */
         var WORKER_API = "https://seraphirc-theme-marketplace.seraphirc.workers.dev/api/";
 
-        /* filename -> count, from the worker. Null until it loads; the
-           Downloads column shows an em dash placeholder until then. */
+        /* filename -> count, from the worker. Null until it loads; cards
+           leave the count out until then. */
         var downloadCounts = null;
 
         function countOf(theme) {
           return downloadCounts ? (Number(downloadCounts[theme.file]) || 0) : 0;
         }
 
-        function countLabel(theme) {
-          if (!downloadCounts) return "—";
-          return countOf(theme).toLocaleString();
-        }
-
-        /* Off by default (list stays newest first); the Downloads header
-           toggles most-downloaded first, ties broken by recency. */
+        /* Off by default (list stays newest first); the sort menu switches
+           to most-downloaded first, ties broken by recency. */
         var sortByDownloads = false;
 
         function sortedThemes(themes) {
@@ -488,108 +510,33 @@
             ". Newest: " + themes[0].name + ".";
         }
 
-        /* Every name, author, and network below came from a submission email.
-           They are rendered with textContent only, never markup. */
-        function cell(row, text, className) {
-          var td = document.createElement("td");
-          if (className) td.className = className;
-          td.textContent = text;
-          row.appendChild(td);
-          return td;
-        }
-
-        function render(themes, query) {
-          themes = sortedThemes(themes);
-          list.textContent = "";
-          if (!themes.length) {
-            var empty = document.createElement("p");
-            empty.className = "market-empty";
-            empty.textContent = query
-              ? 'No themes match "' + query + '". Try a theme name, a nick, a network, or a year.'
-              : "No themes yet. Yours could be the first.";
-            list.appendChild(empty);
-            return;
-          }
-
-          var table = document.createElement("table");
-          table.className = "market-table";
-          var thead = document.createElement("thead");
-          var headRow = document.createElement("tr");
-          ["Theme", "By", "Network", "Added", "Downloads", ""].forEach(function (label) {
-            var th = document.createElement("th");
-            th.scope = "col";
-            if (label === "Downloads") {
-              th.setAttribute("aria-sort", sortByDownloads ? "descending" : "none");
-              var sort = document.createElement("button");
-              sort.type = "button";
-              sort.className = "market-sort" + (sortByDownloads ? " active" : "");
-              sort.title = sortByDownloads ? "Back to newest first" : "Sort by most downloads";
-              sort.append(label);
-              var arrow = document.createElement("span");
-              arrow.className = "arrow";
-              arrow.setAttribute("aria-hidden", "true");
-              arrow.textContent = "▼";
-              sort.appendChild(arrow);
-              sort.addEventListener("click", function () {
-                sortByDownloads = !sortByDownloads;
-                applyFilter();
-                /* The re-render replaced the button; keep keyboard focus on it. */
-                var replacement = list.querySelector(".market-sort");
-                if (replacement) replacement.focus();
-              });
-              th.appendChild(sort);
-            } else {
-              th.textContent = label;
-            }
-            headRow.appendChild(th);
-          });
-          thead.appendChild(headRow);
-          table.appendChild(thead);
-
-          var tbody = document.createElement("tbody");
-          themes.forEach(function (theme) {
-            var row = document.createElement("tr");
-            cell(row, theme.name, "market-name");
-            cell(row, theme.author);
-            cell(row, theme.network || "");
-            cell(row, theme.addedAt || "");
-            cell(row, countLabel(theme), "market-count");
-
-            var actions = document.createElement("td");
-            actions.className = "market-actions";
-
-            var preview = document.createElement("button");
-            preview.className = "market-preview-button";
-            preview.type = "button";
-            preview.textContent = "Preview";
-            preview.addEventListener("click", function () { openPreview(theme); });
-            actions.appendChild(preview);
-
-            var link = document.createElement("a");
-            link.className = "market-download";
-            link.href = WORKER_API + "download/" + encodeURIComponent(theme.file);
-            link.setAttribute("download", theme.file);
-            link.innerHTML =
-              '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.2l3.6-3.6 1.4 1.4-6 6-6-6 1.4-1.4L11 13.2V3h1zM5 19h14v2H5z"/></svg>';
-            link.append("Download");
-            actions.appendChild(link);
-            row.appendChild(actions);
-
-            tbody.appendChild(row);
-          });
-          table.appendChild(tbody);
-          list.appendChild(table);
-        }
-
-        // ---- Preview dialog ----
-        var previewDialog = document.getElementById("preview-lightbox");
-        var previewRoot = document.getElementById("pv-root");
-        var previewTitle = document.getElementById("pv-title");
-        var previewSub = document.getElementById("pv-sub");
-        var previewPalette = document.getElementById("pv-palette");
+        // ---- Theme files and the client mock ----
+        var mockTemplate = document.getElementById("pv-template");
         /* Bases whose stock palette is light; everything else previews on a
            dark fallback. Only used for the tokens a theme leaves unset. */
         var LIGHT_BASES = ["light", "ocean-breeze", "sage", "sakura", "newsprint", "solarized-light"];
+
+        function newMock(theme) {
+          var mock = mockTemplate.content.firstElementChild.cloneNode(true);
+          if (theme) mock.classList.toggle("pv-light", LIGHT_BASES.indexOf(theme.base) >= 0);
+          return mock;
+        }
+
+        /* file -> promise of the parsed theme, so a card and the enlarged
+           preview share one fetch. A failed fetch is forgotten so it can be
+           retried. */
+        var themeDocs = {};
+        function loadTheme(theme) {
+          if (!themeDocs[theme.file]) {
+            themeDocs[theme.file] = fetch("/themes/" + encodeURIComponent(theme.file))
+              .then(function (r) {
+                if (!r.ok) throw new Error("HTTP " + r.status);
+                return r.json();
+              });
+            themeDocs[theme.file].catch(function () { delete themeDocs[theme.file]; });
+          }
+          return themeDocs[theme.file];
+        }
 
         function paletteOf(overrides) {
           /* Sum the theme up: every color literal in its values, deduped. */
@@ -609,36 +556,184 @@
           return colors;
         }
 
+        /* Published themes already passed the client's validators, but
+           re-screen the shape anyway before anything lands in a style
+           attribute. */
+        function paint(mock, theme, overrides) {
+          mock.setAttribute("style", "");
+          mock.classList.toggle("pv-light", LIGHT_BASES.indexOf(theme.base) >= 0);
+          Object.keys(overrides).forEach(function (key) {
+            var value = overrides[key];
+            if (!/^--[a-z0-9-]{1,64}$/.test(key)) return;
+            if (typeof value !== "string" || value.length > 512) return;
+            if (/[;{}<>\\]/.test(value)) return;
+            mock.style.setProperty(key, value);
+          });
+        }
+
+        function fillSwatches(container, overrides, limit, className) {
+          container.textContent = "";
+          paletteOf(overrides).slice(0, limit).forEach(function (color) {
+            var swatch = document.createElement("span");
+            if (className) swatch.className = className;
+            swatch.style.background = color;
+            swatch.title = color;
+            container.appendChild(swatch);
+          });
+        }
+
+        // ---- Cards ----
+        /* Every name, author, and network below came from a submission email.
+           They are rendered with textContent only, never markup. */
+        var grid = document.createElement("div");
+        grid.className = "market-grid";
+
+        /* One card per theme, built once and reused across searches and
+           sorts, so each mock is painted only once. */
+        var cards = {};
+
+        function detailsOf(theme) {
+          var parts = [];
+          if (theme.baseLabel) parts.push("Based on " + theme.baseLabel);
+          if (theme.addedAt) parts.push("Added " + theme.addedAt);
+          if (downloadCounts) {
+            var count = countOf(theme);
+            parts.push(count.toLocaleString() + (count === 1 ? " download" : " downloads"));
+          }
+          return parts.join(" · ");
+        }
+
+        function paintCard(card) {
+          loadTheme(card.theme).then(function (doc) {
+            var overrides = doc.overrides || {};
+            paint(card.mock, card.theme, overrides);
+            fillSwatches(card.swatches, overrides, 8);
+            card.thumb.classList.add("loaded");
+          }).catch(function () {});
+        }
+
+        /* Theme files are fetched as their cards come near the viewport, so
+           the first paint only waits on the manifest. */
+        var thumbObserver = "IntersectionObserver" in window
+          ? new IntersectionObserver(function (entries) {
+              entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                thumbObserver.unobserve(entry.target);
+                paintCard(cards[entry.target.getAttribute("data-file")]);
+              });
+            }, { rootMargin: "400px 0px" })
+          : null;
+
+        function cardFor(theme) {
+          if (cards[theme.file]) return cards[theme.file];
+
+          var el = document.createElement("article");
+          el.className = "market-card";
+
+          var thumb = document.createElement("button");
+          thumb.type = "button";
+          thumb.className = "market-thumb";
+          thumb.setAttribute("data-file", theme.file);
+          thumb.setAttribute("aria-label", "Enlarge the preview of " + theme.name);
+          var mock = newMock(theme);
+          thumb.appendChild(mock);
+          thumb.addEventListener("click", function () { openPreview(theme); });
+          el.appendChild(thumb);
+
+          var body = document.createElement("div");
+          body.className = "market-body";
+
+          var title = document.createElement("h2");
+          title.className = "market-card-title";
+          title.textContent = theme.name;
+          body.appendChild(title);
+
+          var meta = document.createElement("p");
+          meta.className = "market-meta";
+          meta.textContent = "Submitted by " + theme.author + (theme.network ? " on " + theme.network : "");
+          body.appendChild(meta);
+
+          var details = document.createElement("p");
+          details.className = "market-details";
+          body.appendChild(details);
+
+          var foot = document.createElement("div");
+          foot.className = "market-foot";
+          var swatches = document.createElement("div");
+          swatches.className = "market-swatches";
+          swatches.setAttribute("aria-hidden", "true");
+          foot.appendChild(swatches);
+
+          var link = document.createElement("a");
+          link.className = "market-download";
+          link.href = WORKER_API + "download/" + encodeURIComponent(theme.file);
+          link.setAttribute("download", theme.file);
+          link.setAttribute("aria-label", "Download " + theme.name);
+          link.innerHTML =
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.2l3.6-3.6 1.4 1.4-6 6-6-6 1.4-1.4L11 13.2V3h1zM5 19h14v2H5z"/></svg>';
+          link.append("Download");
+          foot.appendChild(link);
+          body.appendChild(foot);
+          el.appendChild(body);
+
+          var card = { theme: theme, el: el, thumb: thumb, mock: mock, details: details, swatches: swatches };
+          cards[theme.file] = card;
+          if (thumbObserver) thumbObserver.observe(thumb);
+          else paintCard(card);
+          return card;
+        }
+
+        /* Every card is the same width, so one measurement scales them all. */
+        var MOCK_WIDTH = 640;
+        function fitThumbs() {
+          var thumb = grid.querySelector(".market-thumb");
+          if (thumb && thumb.clientWidth) {
+            grid.style.setProperty("--pv-scale", String(thumb.clientWidth / MOCK_WIDTH));
+          }
+        }
+        if ("ResizeObserver" in window) new ResizeObserver(fitThumbs).observe(grid);
+        else window.addEventListener("resize", fitThumbs);
+
+        function render(themes, query) {
+          themes = sortedThemes(themes);
+          list.textContent = "";
+          if (!themes.length) {
+            var empty = document.createElement("p");
+            empty.className = "market-empty";
+            empty.textContent = query
+              ? 'No themes match "' + query + '". Try a theme name, a nick, a network, or a year.'
+              : "No themes yet. Yours could be the first.";
+            list.appendChild(empty);
+            return;
+          }
+
+          grid.textContent = "";
+          themes.forEach(function (theme) {
+            var card = cardFor(theme);
+            card.details.textContent = detailsOf(theme);
+            grid.appendChild(card.el);
+          });
+          list.appendChild(grid);
+          fitThumbs();
+        }
+
+        // ---- Preview dialog ----
+        /* Clicking a card's mock opens it full size, with the whole palette. */
+        var previewDialog = document.getElementById("preview-lightbox");
+        var previewTitle = document.getElementById("pv-title");
+        var previewSub = document.getElementById("pv-sub");
+        var previewPalette = document.getElementById("pv-palette");
+        var previewRoot = newMock();
+        previewPalette.parentNode.insertBefore(previewRoot, previewPalette);
+
         function openPreview(theme) {
-          fetch("/themes/" + encodeURIComponent(theme.file))
-            .then(function (r) { return r.json(); })
+          loadTheme(theme)
             .then(function (doc) {
               var overrides = doc.overrides || {};
               previewTitle.textContent = doc.name || theme.name;
-              previewSub.textContent = "by " + theme.author;
-
-              /* Published themes already passed the client's validators, but
-                 re-screen the shape anyway before anything lands in a style
-                 attribute. */
-              previewRoot.setAttribute("style", "");
-              previewRoot.classList.toggle("pv-light", LIGHT_BASES.indexOf(theme.base) >= 0);
-              Object.keys(overrides).forEach(function (key) {
-                var value = overrides[key];
-                if (!/^--[a-z0-9-]{1,64}$/.test(key)) return;
-                if (typeof value !== "string" || value.length > 512) return;
-                if (/[;{}<>\\]/.test(value)) return;
-                previewRoot.style.setProperty(key, value);
-              });
-
-              previewPalette.textContent = "";
-              paletteOf(overrides).slice(0, 20).forEach(function (color) {
-                var swatch = document.createElement("span");
-                swatch.className = "pv-swatch";
-                swatch.style.background = color;
-                swatch.title = color;
-                previewPalette.appendChild(swatch);
-              });
-
+              previewSub.textContent = "Submitted by " + theme.author;
+              paint(previewRoot, theme, overrides);
+              fillSwatches(previewPalette, overrides, 20, "pv-swatch");
               if (typeof previewDialog.showModal === "function") previewDialog.showModal();
             })
             .catch(function () {
@@ -676,8 +771,16 @@
 
         searchInput.addEventListener("input", applyFilter);
 
+        var sortSelect = document.getElementById("theme-sort");
+        /* The browser can restore the menu on back/forward navigation. */
+        sortByDownloads = sortSelect.value === "downloads";
+        sortSelect.addEventListener("change", function () {
+          sortByDownloads = sortSelect.value === "downloads";
+          applyFilter();
+        });
+
         /* Fetched alongside the manifest; whichever lands second completes
-           the table. A worker hiccup just leaves the placeholder dashes. */
+           the cards. A worker hiccup just leaves the counts out. */
         fetch(WORKER_API + "downloads")
           .then(function (r) { return r.json(); })
           .then(function (counts) {

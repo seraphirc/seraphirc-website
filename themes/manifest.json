@@ -1,8 +1,38 @@
 {
   "themes": [
     {
+      "file": "aurora.seraphirc-theme.json",
+      "name": "Aurora",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "aurora-drift.seraphirc-theme.json",
+      "name": "Aurora Drift",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
       "file": "ayu-mirage.seraphirc-theme.json",
       "name": "Ayu Mirage",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "carbonfox.seraphirc-theme.json",
+      "name": "Carbonfox",
       "base": "nebula",
       "baseLabel": "Nebula",
       "overrides": 134,
@@ -15,6 +45,16 @@
       "name": "Catppuccin Latte",
       "base": "newsprint",
       "baseLabel": "Newsprint",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "catppuccin-macchiato.seraphirc-theme.json",
+      "name": "Catppuccin Macchiato",
+      "base": "nebula",
+      "baseLabel": "Nebula",
       "overrides": 134,
       "author": "knowmadic",
       "network": "Libera",
@@ -41,10 +81,40 @@
       "addedAt": "2026-10-20"
     },
     {
+      "file": "ethereal.seraphirc-theme.json",
+      "name": "Ethereal",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
       "file": "everforest.seraphirc-theme.json",
       "name": "Everforest",
       "base": "nebula",
       "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "ferra.seraphirc-theme.json",
+      "name": "Ferra",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "flexoki-light.seraphirc-theme.json",
+      "name": "Flexoki Light",
+      "base": "newsprint",
+      "baseLabel": "Newsprint",
       "overrides": 134,
       "author": "knowmadic",
       "network": "Libera",
@@ -71,8 +141,68 @@
       "addedAt": "2026-10-20"
     },
     {
+      "file": "inky-pinky.seraphirc-theme.json",
+      "name": "Inky Pinky",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
       "file": "kanagawa.seraphirc-theme.json",
       "name": "Kanagawa",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "last-horizon.seraphirc-theme.json",
+      "name": "Last Horizon",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "lumon.seraphirc-theme.json",
+      "name": "Lumon",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "lupine.seraphirc-theme.json",
+      "name": "Lupine",
+      "base": "newsprint",
+      "baseLabel": "Newsprint",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "matte-black.seraphirc-theme.json",
+      "name": "Matte Black",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "miasma.seraphirc-theme.json",
+      "name": "Miasma",
       "base": "nebula",
       "baseLabel": "Nebula",
       "overrides": 134,
@@ -91,8 +221,48 @@
       "addedAt": "2026-10-20"
     },
     {
+      "file": "nightfox.seraphirc-theme.json",
+      "name": "Nightfox",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
       "file": "one-dark.seraphirc-theme.json",
       "name": "One Dark",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "osaka-jade.seraphirc-theme.json",
+      "name": "Osaka Jade",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "retro-82.seraphirc-theme.json",
+      "name": "Retro 82",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "ristretto.seraphirc-theme.json",
+      "name": "Ristretto",
       "base": "nebula",
       "baseLabel": "Nebula",
       "overrides": 134,
@@ -113,6 +283,66 @@
     {
       "file": "rose-pine-dawn.seraphirc-theme.json",
       "name": "Rosé Pine Dawn",
+      "base": "newsprint",
+      "baseLabel": "Newsprint",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "rose-pine-moon.seraphirc-theme.json",
+      "name": "Rosé Pine Moon",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "solitude.seraphirc-theme.json",
+      "name": "Solitude",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "starship.seraphirc-theme.json",
+      "name": "Starship",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "tokyo-night-storm.seraphirc-theme.json",
+      "name": "Tokyo Night Storm",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "vantablack.seraphirc-theme.json",
+      "name": "Vantablack",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 134,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-10-20"
+    },
+    {
+      "file": "white.seraphirc-theme.json",
+      "name": "White",
       "base": "newsprint",
       "baseLabel": "Newsprint",
       "overrides": 134,
