@@ -117,6 +117,10 @@
     "--nick-6": "#000000",
     "--mark-1": "#00007f",
     "--mark-2": "#009300",
-    "--mark-3": "#9c009c"
+    "--mark-3": "#9c009c",
+    "--atmosphere-mist-src": "#ffffff",
+    "--surface-sidebar": "#ffffff",
+    "--surface-raised": "#ffffff",
+    "--surface-inset": "#f0f0f0"
   }
 }

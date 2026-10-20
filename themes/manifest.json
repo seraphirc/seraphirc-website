@@ -5,7 +5,7 @@
       "name": "Aurora",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -15,7 +15,7 @@
       "name": "Aurora Drift",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -35,7 +35,7 @@
       "name": "Carbonfox",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -45,7 +45,7 @@
       "name": "Catppuccin Latte",
       "base": "newsprint",
       "baseLabel": "Newsprint",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -55,7 +55,7 @@
       "name": "Catppuccin Macchiato",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -65,7 +65,7 @@
       "name": "Classic IRC",
       "base": "newsprint",
       "baseLabel": "Newsprint",
-      "overrides": 113,
+      "overrides": 117,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -85,7 +85,7 @@
       "name": "Ethereal",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -105,7 +105,7 @@
       "name": "Ferra",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -115,7 +115,7 @@
       "name": "Flexoki Light",
       "base": "newsprint",
       "baseLabel": "Newsprint",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -145,7 +145,7 @@
       "name": "Inky Pinky",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -165,7 +165,7 @@
       "name": "Last Horizon",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -175,7 +175,7 @@
       "name": "Lumon",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -185,7 +185,7 @@
       "name": "Lupine",
       "base": "newsprint",
       "baseLabel": "Newsprint",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -195,7 +195,7 @@
       "name": "Matte Black",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -205,7 +205,7 @@
       "name": "Miasma",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -225,7 +225,7 @@
       "name": "Nightfox",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -245,7 +245,7 @@
       "name": "Osaka Jade",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -255,7 +255,7 @@
       "name": "Retro 82",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -265,7 +265,7 @@
       "name": "Ristretto",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -295,7 +295,7 @@
       "name": "Rosé Pine Moon",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -305,7 +305,7 @@
       "name": "Solitude",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -315,7 +315,7 @@
       "name": "Starship",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -325,7 +325,7 @@
       "name": "Tokyo Night Storm",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -335,7 +335,7 @@
       "name": "Vantablack",
       "base": "nebula",
       "baseLabel": "Nebula",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
@@ -345,7 +345,7 @@
       "name": "White",
       "base": "newsprint",
       "baseLabel": "Newsprint",
-      "overrides": 134,
+      "overrides": 138,
       "author": "knowmadic",
       "network": "Libera",
       "addedAt": "2026-10-20"
