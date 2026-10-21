@@ -1,8 +1,8 @@
 {
   "format": "seraphirc-theme",
   "formatVersion": 1,
-  "appVersion": "6.0.17",
-  "exportedAt": "2026-10-20T18:13:12Z",
+  "appVersion": "6.0.18",
+  "exportedAt": "2026-10-21T23:52:10Z",
   "name": "Rosé Pine Moon",
   "base": "nebula",
   "overrides": {
@@ -22,7 +22,7 @@
     "--badge-text": "#232136",
     "--badge-unread-bg": "#c4a7e7",
     "--badge-unread-text": "#232136",
-    "--border": "#393552",
+    "--border": "#6e6a86",
     "--border-strong": "#56526e",
     "--channel-metadata-icon-bg": "rgba(196, 167, 231, 0.12)",
     "--channel-metadata-icon-border": "rgba(196, 167, 231, 0.35)",
@@ -39,7 +39,7 @@
     "--danger-hover-text": "#ef8ca8",
     "--danger-text": "#eb6f92",
     "--dcc-accent": "#c4a7e7",
-    "--divider": "#393552",
+    "--divider": "#6e6a86",
     "--event-accent-text": "#9ccfd8",
     "--event-text": "#9ccfd8",
     "--faint-text": "#6e6a86",

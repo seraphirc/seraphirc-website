@@ -1,8 +1,8 @@
 {
   "format": "seraphirc-theme",
   "formatVersion": 1,
-  "appVersion": "6.0.17",
-  "exportedAt": "2026-10-20T18:13:32Z",
+  "appVersion": "6.0.18",
+  "exportedAt": "2026-10-21T23:50:50Z",
   "name": "Rosé Pine",
   "base": "nebula",
   "overrides": {
@@ -21,7 +21,7 @@
     "--badge-text": "#191724",
     "--badge-unread-bg": "#c4a7e7",
     "--badge-unread-text": "#191724",
-    "--border": "#26233a",
+    "--border": "#403d52",
     "--border-strong": "#524f67",
     "--channel-metadata-icon-bg": "rgba(196, 167, 231, 0.12)",
     "--channel-metadata-icon-border": "rgba(196, 167, 231, 0.35)",
@@ -38,7 +38,7 @@
     "--danger-hover-text": "#ef8ca8",
     "--danger-text": "#eb6f92",
     "--dcc-accent": "#c4a7e7",
-    "--divider": "#26233a",
+    "--divider": "#403d52",
     "--event-accent-text": "#9ccfd8",
     "--event-text": "#9ccfd8",
     "--faint-text": "#6e6a86",
