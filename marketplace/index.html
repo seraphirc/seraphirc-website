@@ -111,9 +111,10 @@
 
       /* ── Theme preview (cards and dialog) ─────────────────────────────────
          A rough sketch of the client, painted with the theme's own custom
-         properties. The tokens are the client's real ones, so the overrides
-         apply directly; anything a sparse theme leaves unset falls back to a
-         generic light or dark base. */
+         properties. The tokens are the client's real ones, so the base
+         theme's stock tokens (from the manifest) and the theme's overrides
+         apply directly; anything both leave unset falls back to a generic
+         light or dark base. */
       .market-preview-lightbox { --lightbox-image-width: 780px; }
       .pv-frame { padding: 22px; max-height: calc(100vh - 32px); overflow: auto; }
       .pv-frame h3 { margin: 0 0 2px; font-size: 1.2rem; }
@@ -123,6 +124,13 @@
       .pv-app {
         --fb-bg: #10131c; --fb-panel: #171b28; --fb-text: #e8e8f0;
         --fb-muted: #9aa0b5; --fb-accent: #5b7cfa; --fb-line: rgba(255,255,255,0.12);
+        /* The client's atmosphere colors at its default Atmosphere setting
+           (50%). A theme with no star or nebula tokens gets a clear sky. */
+        --atmosphere-strength: 50%;
+        --star-warm: color-mix(in srgb, var(--star-warm-src, transparent) var(--atmosphere-strength), transparent);
+        --star-cool: color-mix(in srgb, var(--star-cool-src, transparent) var(--atmosphere-strength), transparent);
+        --star-white: color-mix(in srgb, var(--star-white-src, transparent) var(--atmosphere-strength), transparent);
+        --nebula: color-mix(in srgb, var(--nebula-src, transparent) var(--atmosphere-strength), transparent);
         display: grid; grid-template-rows: auto 1fr;
         height: 400px; font-size: 11px; line-height: 1.45;
         font-family: var(--mono);
@@ -140,33 +148,117 @@
         color: var(--heading-text, var(--fb-text));
         border-bottom: 1px solid var(--border, var(--fb-line));
       }
-      .pv-body { display: grid; grid-template-columns: 118px 1fr; min-height: 0; }
+      .pv-body { display: grid; grid-template-columns: 138px 1fr; min-height: 0; }
       .pv-side {
-        display: flex; flex-direction: column; gap: 2px; padding: 8px 0;
-        background: var(--sidebar-bg, var(--fb-panel));
+        display: flex; flex-direction: column; gap: 6px; padding: 6px 5px;
+        font-size: 10px; line-height: 1.5;
+        /* The client's channel tree layers: starfield, nebula bloom, and the
+           circuit slot (--circuit-layer, set by applyDecor), over the theme's
+           own --sidebar-bg. The circuit tile is sized against the text rather
+           than the panel, so its traces sit as far apart, line for line, as
+           they do in the client's full-width channel tree. */
+        background:
+          radial-gradient(2.4px 2.4px at 18% 24%, var(--star-warm, transparent), transparent 65%),
+          radial-gradient(1.6px 1.6px at 74% 62%, var(--star-cool, transparent), transparent 65%),
+          radial-gradient(2px 2px at 46% 84%, var(--star-white, transparent), transparent 65%),
+          radial-gradient(1.6px 1.6px at 86% 32%, var(--star-warm, transparent), transparent 65%),
+          radial-gradient(1.2px 1.2px at 32% 52%, color-mix(in srgb, var(--star-warm, transparent) 55%, transparent), transparent 65%),
+          radial-gradient(1.2px 1.2px at 60% 8%, color-mix(in srgb, var(--star-cool, transparent) 62%, transparent), transparent 65%),
+          radial-gradient(circle at 8% 0%, color-mix(in srgb, var(--nebula, transparent) 7%, transparent), transparent 42%),
+          radial-gradient(60% 26% at 50% 100%, color-mix(in srgb, var(--nebula, transparent) 7%, transparent), transparent 70%),
+          radial-gradient(90% 40% at 50% 100%, color-mix(in srgb, var(--nebula, transparent) 4%, transparent), transparent 72%),
+          radial-gradient(110% 16% at 50% 100%, color-mix(in srgb, var(--nebula, transparent) 6%, transparent), transparent 70%),
+          radial-gradient(2px 2px at 9% 88%, color-mix(in srgb, var(--star-warm, transparent) 70%, transparent), transparent 65%),
+          var(--circuit-layer, none) center bottom / 100% auto repeat-y,
+          var(--sidebar-bg, var(--fb-panel));
+        background-size: 170px 170px, 150px 150px, 190px 190px, 130px 130px, 110px 110px, 90px 90px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 21.5em auto, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
         color: var(--sidebar-text, var(--fb-muted));
         border-right: 1px solid var(--border, var(--fb-line));
       }
-      .pv-network { padding: 0 10px 4px; font-weight: 700; color: var(--network-name-text, var(--fb-text)); }
-      .pv-chan { padding: 2px 10px 2px 18px; }
-      .pv-chan.sel {
-        background: var(--selected-bg, var(--fb-accent));
-        color: var(--selected-text, #ffffff);
-        border-left: 2px solid var(--selected-border, transparent);
-        padding-left: 16px;
+      /* A network card, as the client's [data-treebar-network-group]: an
+         outlined, see-through card, the active one marked by its outline. */
+      .pv-card {
+        padding: 4px 4px 5px; border-radius: 9px;
+        border: 1px solid var(--treebar-card-border, var(--border, var(--fb-line)));
+        background: color-mix(in srgb, var(--subpanel-bg, var(--fb-panel)) 70%, transparent);
       }
-      .pv-chan.unread { display: flex; align-items: center; gap: 6px; color: var(--unread-label-text, var(--fb-text)); font-weight: 700; }
+      .pv-card.active {
+        border-color: color-mix(in srgb, var(--treebar-card-active-border, var(--selected-border, var(--fb-accent))) 80%, transparent);
+      }
+      .pv-net {
+        display: flex; align-items: center; gap: 4px; padding: 0 3px; font-weight: 700;
+        color: var(--network-name-text, color-mix(in srgb, var(--network-header-text, var(--fb-muted)) 44%, var(--heading-text, var(--fb-text))));
+      }
+      .pv-card.active .pv-net { color: var(--network-name-text, var(--heading-text, var(--fb-text))); }
+      .pv-status {
+        flex: none; width: 6px; height: 6px; border-radius: 50%;
+        background: var(--present-dot, #3fa06a);
+        box-shadow: 0 0 4px var(--present-dot-glow, transparent);
+      }
+      .pv-tag {
+        font-size: 6px; letter-spacing: 0.06em; padding: 0 3px; border-radius: 3px;
+        border: 1px solid var(--border-strong, var(--fb-line));
+        color: var(--muted-text, var(--fb-muted));
+      }
+      .pv-net .num { margin-left: auto; font-weight: 400; font-size: 8px; color: var(--muted-text, var(--fb-muted)); }
+      .pv-server {
+        padding: 0 3px 0 13px; font-size: 8px; white-space: nowrap; overflow: hidden;
+        color: var(--muted-text, var(--fb-muted));
+      }
+      .pv-cap {
+        display: flex; align-items: center; gap: 3px; margin: 3px 3px 1px;
+        font-size: 7px; font-weight: 700; letter-spacing: 0.045em;
+        color: var(--treebar-section-text, color-mix(in srgb, var(--muted-text, var(--fb-muted)) 64%, var(--faint-text, var(--fb-muted))));
+      }
+      .pv-cap b { color: var(--rail-accent, var(--fb-accent)); }
+      .pv-cap::after { content: ""; flex: 1; height: 1px; background: var(--treebar-hierarchy-line, var(--fb-line)); }
+      /* One guide line per section, down the left of its rows. */
+      .pv-tree { margin-left: 6px; padding-left: 5px; border-left: 1px solid var(--treebar-hierarchy-line, var(--fb-line)); }
+      .pv-chan { display: flex; align-items: center; padding: 0 4px; border-radius: 5px; white-space: nowrap; }
+      .pv-hash { color: var(--rail-accent, var(--fb-accent)); opacity: var(--constellation-accent-strength, 0.75); font-weight: 600; }
+      /* The selected window: an outlined, softly glowing capsule with a lit
+         dot leading the name. */
+      .pv-chan.sel {
+        margin-left: -8px; padding-left: 5px;
+        background: var(--selected-bg, var(--fb-accent));
+        color: var(--selected-text, #ffffff); font-weight: 700;
+        box-shadow: inset 0 0 0 1px var(--selected-border, transparent), 0 0 10px -2px var(--selected-glow, transparent);
+      }
+      .pv-lead {
+        flex: none; width: 4px; height: 4px; margin-right: 4px; border-radius: 50%;
+        background: var(--rail-accent, var(--fb-accent));
+        box-shadow: 0 0 4px var(--rail-glow, transparent);
+      }
+      .pv-close { margin-left: auto; font-weight: 400; opacity: 0.5; }
+      .pv-chan.unread { color: var(--unread-label-text, var(--fb-text)); font-weight: 700; }
       .pv-badge {
-        font-size: 9px; font-weight: 700; padding: 0 5px; border-radius: 999px;
-        background: var(--badge-unread-bg, var(--fb-accent));
-        color: var(--badge-unread-text, #ffffff);
+        margin-left: auto; font-size: 7px; font-weight: 700; padding: 0 4px; border-radius: 4px;
+        background: var(--treebar-unread-bg, var(--badge-unread-bg, var(--fb-accent)));
+        color: var(--treebar-unread-text, var(--badge-unread-text, #ffffff));
+      }
+
+      /* Nicknames take the theme's palette slots, as the client's nickColor()
+         does: an edited --nick-N, else the base's --nick-default-N. The faces
+         stand in for the client's identicons. */
+      .pv-app .c1 { --c: var(--nick-1, var(--nick-default-1, var(--fb-accent))); }
+      .pv-app .c2 { --c: var(--nick-2, var(--nick-default-2, var(--fb-accent))); }
+      .pv-app .c3 { --c: var(--nick-3, var(--nick-default-3, var(--fb-accent))); }
+      .pv-app .c4 { --c: var(--nick-4, var(--nick-default-4, var(--fb-accent))); }
+      .pv-app .c5 { --c: var(--nick-5, var(--nick-default-5, var(--fb-accent))); }
+      .pv-app .c6 { --c: var(--nick-6, var(--nick-default-6, var(--fb-accent))); }
+      .pv-face {
+        flex: none; width: 9px; height: 9px; margin-right: 4px; border-radius: 2px;
+        background:
+          radial-gradient(circle at 32% 42%, rgba(0, 0, 0, 0.55) 0 1px, transparent 1.3px),
+          radial-gradient(circle at 68% 42%, rgba(0, 0, 0, 0.55) 0 1px, transparent 1.3px),
+          var(--c);
       }
 
       /* The floating channel window, over the app fill. */
       .pv-desk { padding: 8px; min-width: 0; display: flex; background: var(--main-bg, var(--app-bg, var(--fb-bg))); }
       .pv-window {
         flex: 1; min-width: 0; display: grid;
-        grid-template-columns: minmax(0, 1fr) 118px;
+        grid-template-columns: minmax(0, 1fr) 124px;
         grid-template-rows: auto auto 1fr auto;
         border: 1px solid var(--border-strong, var(--fb-line));
         border-radius: 8px; overflow: hidden;
@@ -197,15 +289,15 @@
       }
       .pv-msg { display: flex; gap: 7px; margin-bottom: 6px; }
       .pv-av { flex: none; width: 18px; height: 18px; border-radius: 50%; margin-top: 1px; border: 1px solid var(--border, var(--fb-line)); }
-      .pv-av.a1 { background: var(--nick-1, var(--fb-accent)); }
-      .pv-av.a2 { background: var(--nick-2, var(--fb-accent)); }
-      .pv-av.a3 { background: var(--nick-5, var(--fb-accent)); }
+      .pv-av.a1 { background: var(--nick-1, var(--nick-default-1, var(--fb-accent))); }
+      .pv-av.a2 { background: var(--nick-2, var(--nick-default-2, var(--fb-accent))); }
+      .pv-av.a3 { background: var(--nick-5, var(--nick-default-5, var(--fb-accent))); }
       .pv-msg .bd { min-width: 0; }
       .pv-msg .txt { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       .pv-chat .t { color: var(--timestamp-text, var(--fb-muted)); margin-left: 6px; font-size: 9px; }
-      .pv-chat .n1 { color: var(--nick-1, var(--fb-accent)); font-weight: 700; }
-      .pv-chat .n2 { color: var(--nick-2, var(--fb-accent)); font-weight: 700; }
-      .pv-chat .n3 { color: var(--nick-5, var(--fb-accent)); font-weight: 700; }
+      .pv-chat .n1 { color: var(--nick-1, var(--nick-default-1, var(--fb-accent))); font-weight: 700; }
+      .pv-chat .n2 { color: var(--nick-2, var(--nick-default-2, var(--fb-accent))); font-weight: 700; }
+      .pv-chat .n3 { color: var(--nick-5, var(--nick-default-5, var(--fb-accent))); font-weight: 700; }
       .pv-chat .ev { color: var(--event-text, var(--fb-muted)); margin: 4px 0 6px 25px; }
       .pv-chat .lk { color: var(--link-text, var(--fb-accent)); text-decoration: underline; }
       .pv-composer {
@@ -229,29 +321,62 @@
       }
       .pv-roster {
         grid-column: 2; grid-row: 2 / 5;
-        display: flex; flex-direction: column; gap: 4px; padding: 7px 7px 8px;
-        background: var(--roster-bg, var(--surface-roster, var(--fb-panel)));
+        display: flex; flex-direction: column; gap: 2px; padding: 6px 5px 7px;
+        font-size: 10px; line-height: 1.5;
+        /* The client's member list layers: a corner bloom and two stars, the
+           channel tree's starfield and circuit when the theme extends them
+           here (--roster-star-*, --roster-circuit-layer), then --roster-bg.
+           The circuit tile is text-sized, as on the channel tree, at the
+           narrower width the client's member list gives it. */
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.022), transparent 34%),
+          radial-gradient(1.5px 1.5px at 90% 6%, var(--star-white, transparent), transparent 62%),
+          radial-gradient(1.3px 1.3px at 95% 15%, var(--star-cool, transparent), transparent 62%),
+          radial-gradient(62% 26% at 100% 0%, color-mix(in srgb, var(--nebula, transparent) 12%, transparent), transparent 62%),
+          radial-gradient(2.4px 2.4px at 18% 24%, var(--roster-star-warm, transparent), transparent 65%),
+          radial-gradient(1.6px 1.6px at 74% 62%, var(--roster-star-cool, transparent), transparent 65%),
+          radial-gradient(2px 2px at 46% 84%, var(--roster-star-white, transparent), transparent 65%),
+          radial-gradient(1.6px 1.6px at 86% 32%, var(--roster-star-warm, transparent), transparent 65%),
+          radial-gradient(1.2px 1.2px at 32% 52%, color-mix(in srgb, var(--roster-star-warm, transparent) 55%, transparent), transparent 65%),
+          radial-gradient(1.2px 1.2px at 60% 8%, color-mix(in srgb, var(--roster-star-cool, transparent) 62%, transparent), transparent 65%),
+          radial-gradient(2px 2px at 9% 88%, color-mix(in srgb, var(--roster-star-warm, transparent) 70%, transparent), transparent 65%),
+          var(--roster-circuit-layer, none) center bottom / 100% auto repeat-y,
+          var(--roster-bg, var(--sidebar-bg, var(--fb-panel)));
+        background-size: 100% 100%, auto, auto, 100% 100%, 170px 170px, 150px 150px, 190px 190px, 130px 130px, 110px 110px, 90px 90px, 100% 100%, 15.5em auto, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
         border-left: 1px solid var(--border, var(--fb-line));
         min-height: 0; overflow: hidden;
       }
-      .pv-roster-head { font-weight: 700; color: var(--heading-text, var(--fb-text)); }
+      .pv-roster-head { text-align: center; font-weight: 700; color: var(--heading-text, var(--fb-text)); }
+      .pv-roster-head .acc { color: var(--rail-accent, var(--fb-accent)); }
       .pv-find {
-        padding: 2px 8px; border-radius: 999px; font-size: 9px;
+        margin: 2px 0 3px; padding: 2px 6px; border-radius: 5px; font-size: 9px;
         background: var(--field-bg, var(--fb-bg));
-        color: var(--field-text, var(--fb-muted));
+        color: var(--muted-text, var(--fb-muted));
         border: 1px solid var(--field-border, var(--fb-line));
       }
+      /* The member list's section bands: a rounded chip of the roster surface
+         over a hairline. */
       .pv-sec {
         display: flex; justify-content: space-between; align-items: center;
-        padding: 1px 7px; border-radius: 3px;
-        font-weight: 700; font-size: 9px; letter-spacing: 0.06em;
+        margin-top: 3px; padding: 0 5px; border-radius: 4px;
+        font-weight: 700; font-size: 7px; letter-spacing: 0.045em;
         background: var(--surface-roster, var(--fb-line));
-        color: var(--roster-section-text, var(--fb-muted));
+        border-bottom: 1px solid var(--hairline, transparent);
+        color: color-mix(in srgb, var(--muted-text, var(--fb-muted)) 58%, var(--roster-section-text, var(--network-header-text, var(--fb-muted))));
       }
-      .pv-user { display: flex; align-items: center; gap: 5px; padding-left: 7px; }
+      .pv-user { display: flex; align-items: center; padding-left: 1px; white-space: nowrap; }
+      .pv-user .nk { color: var(--c); }
+      .pv-pfx { flex: none; width: 9px; font-weight: 700; }
+      .pv-pfx.op { color: var(--user-prefix-text, var(--fb-accent)); }
+      .pv-pfx.voice { color: var(--voice-prefix-text, var(--away-indicator-text, var(--fb-accent))); }
+      .pv-user.away .nk { opacity: 0.55; }
+      .pv-zzz { margin-left: auto; font-size: 7px; font-weight: 700; color: var(--away-indicator-text, var(--fb-muted)); }
       .pv-user .pv-dot { margin-left: auto; }
-      .pv-dot { flex: none; width: 5px; height: 5px; border-radius: 50%; background: var(--present-dot, #3fa06a); }
-      .pv-op { color: var(--user-prefix-text, var(--fb-accent)); font-weight: 700; }
+      .pv-dot {
+        flex: none; width: 3px; height: 3px; border-radius: 50%;
+        background: var(--present-dot, #3fa06a);
+        box-shadow: 0 0 3px var(--present-dot-glow, transparent);
+      }
       .pv-btns { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
       .pv-btn {
         text-align: center; padding: 2px 0; border-radius: 5px; font-size: 9px;
@@ -335,7 +460,8 @@
             aria-label="Search themes by name, author nickname, network, or date added"
           >
           <select id="theme-sort" aria-label="Sort themes">
-            <option value="newest">Newest first</option>
+            <option value="alpha">Alphabetical</option>
+            <option value="newest">Newest to oldest</option>
             <option value="downloads">Most downloaded</option>
           </select>
         </div>
@@ -358,11 +484,26 @@
             <div class="pv-header">SeraphIRC</div>
             <div class="pv-body">
               <div class="pv-side">
-                <div class="pv-network">Libera</div>
-                <div class="pv-chan sel">#seraphirc</div>
-                <div class="pv-chan">#ircv3</div>
-                <div class="pv-chan unread">#soju <span class="pv-badge">3</span></div>
-                <div class="pv-chan">#linux</div>
+                <div class="pv-card active">
+                  <div class="pv-net"><span class="pv-status"></span>Libera<span class="pv-tag">SOJU</span><span class="num">6</span></div>
+                  <div class="pv-server">libera.chat · 42 ms</div>
+                  <div class="pv-cap">CHANNELS <b>4</b></div>
+                  <div class="pv-tree">
+                    <div class="pv-chan sel"><span class="pv-lead"></span><span class="pv-hash">#</span>seraphirc<span class="pv-close">×</span></div>
+                    <div class="pv-chan"><span class="pv-hash">#</span>ircv3</div>
+                    <div class="pv-chan unread"><span class="pv-hash">#</span>soju<span class="pv-badge">3</span></div>
+                    <div class="pv-chan"><span class="pv-hash">#</span>linux</div>
+                  </div>
+                  <div class="pv-cap">QUERIES <b>2</b></div>
+                  <div class="pv-tree">
+                    <div class="pv-chan c1"><span class="pv-face"></span>halo</div>
+                    <div class="pv-chan c4"><span class="pv-face"></span>kaotic_</div>
+                  </div>
+                </div>
+                <div class="pv-card">
+                  <div class="pv-net"><span class="pv-status"></span>OFTC<span class="num">2</span></div>
+                  <div class="pv-server">irc.oftc.net · 61 ms</div>
+                </div>
               </div>
               <div class="pv-desk">
                 <div class="pv-window">
@@ -391,7 +532,7 @@
                       <span class="pv-av a3"></span>
                       <div class="bd">
                         <div><span class="n3">RealAct</span><span class="t">21:56</span></div>
-                        <div class="txt">screenshots or it did not happen</div>
+                        <div class="txt">screenshots or didn't happen</div>
                       </div>
                     </div>
                     <div class="pv-msg">
@@ -407,15 +548,17 @@
                     <span class="pv-send">Send</span>
                   </div>
                   <div class="pv-roster">
-                    <div class="pv-roster-head">Users 5 · Ops 1</div>
-                    <div class="pv-find">Find users</div>
+                    <div class="pv-roster-head">6 · <span class="acc">@</span> 1</div>
+                    <div class="pv-find">⌕ Find users</div>
                     <div class="pv-sec">OPS <span>1</span></div>
-                    <div class="pv-user"><span class="pv-op">@knowmadic</span><span class="pv-dot"></span></div>
+                    <div class="pv-user c3"><span class="pv-pfx op">@</span><span class="pv-face"></span><span class="nk">knowmadic</span><span class="pv-dot"></span></div>
+                    <div class="pv-sec">VOICED <span>1</span></div>
+                    <div class="pv-user c5"><span class="pv-pfx voice">+</span><span class="pv-face"></span><span class="nk">RealAct</span><span class="pv-dot"></span></div>
                     <div class="pv-sec">USERS <span>4</span></div>
-                    <div class="pv-user">halo<span class="pv-dot"></span></div>
-                    <div class="pv-user">wing<span class="pv-dot"></span></div>
-                    <div class="pv-user">RealAct<span class="pv-dot"></span></div>
-                    <div class="pv-user">kaotic_<span class="pv-dot"></span></div>
+                    <div class="pv-user c1"><span class="pv-pfx"></span><span class="pv-face"></span><span class="nk">halo</span><span class="pv-dot"></span></div>
+                    <div class="pv-user c4 away"><span class="pv-pfx"></span><span class="pv-face"></span><span class="nk">kaotic_</span><span class="pv-zzz">ZzZ</span></div>
+                    <div class="pv-user c6"><span class="pv-pfx"></span><span class="pv-face"></span><span class="nk">pfsrc</span><span class="pv-dot"></span></div>
+                    <div class="pv-user c2"><span class="pv-pfx"></span><span class="pv-face"></span><span class="nk">wing</span><span class="pv-dot"></span></div>
                     <div class="pv-btns">
                       <span class="pv-btn">Op</span><span class="pv-btn">DeOp</span>
                       <span class="pv-btn">Ban</span><span class="pv-btn">Kick</span>
@@ -490,15 +633,23 @@
           return downloadCounts ? (Number(downloadCounts[theme.file]) || 0) : 0;
         }
 
-        /* Off by default (list stays newest first); the sort menu switches
-           to most-downloaded first, ties broken by recency. */
-        var sortByDownloads = false;
+        /* Alphabetical by default. Newest and most-downloaded break ties
+           by name so the order stays stable. */
+        var sortMode = "alpha";
+
+        function byName(a, b) {
+          return String(a.name || "").localeCompare(String(b.name || ""), undefined, { sensitivity: "base" });
+        }
 
         function sortedThemes(themes) {
-          if (!sortByDownloads) return themes;
           return themes.slice().sort(function (a, b) {
-            return (countOf(b) - countOf(a))
-              || String(b.addedAt || "").localeCompare(String(a.addedAt || ""));
+            if (sortMode === "newest") {
+              return String(b.addedAt || "").localeCompare(String(a.addedAt || "")) || byName(a, b);
+            }
+            if (sortMode === "downloads") {
+              return (countOf(b) - countOf(a)) || byName(a, b);
+            }
+            return byName(a, b);
           });
         }
 
@@ -538,6 +689,24 @@
           return themeDocs[theme.file];
         }
 
+        /* The client's stock tokens, from the manifest: the shared ones every
+           theme inherits, and base key -> that theme's own. A theme file only
+           stores what differs from its base, so a sparse theme needs these
+           under it to look like itself. */
+        var sharedTokens = {};
+        var baseTokens = {};
+
+        /* Shared, then base, then the file, as the client cascades them.
+           The swatches leave the shared layer out, so they sum up the theme
+           and its base rather than the app's common derived colors. */
+        function tokensOf(theme, doc, withShared) {
+          var tokens = {};
+          [withShared ? sharedTokens : {}, baseTokens[theme.base] || {}, doc.overrides || {}].forEach(function (layer) {
+            Object.keys(layer).forEach(function (key) { tokens[key] = layer[key]; });
+          });
+          return tokens;
+        }
+
         function paletteOf(overrides) {
           /* Sum the theme up: every color literal in its values, deduped. */
           var seen = {};
@@ -569,6 +738,66 @@
             if (/[;{}<>\\]/.test(value)) return;
             mock.style.setProperty(key, value);
           });
+          applyDecor(mock, overrides);
+        }
+
+        /* The panels' stars and circuit, ported from the client's
+           appearance/circuit.ts at its default Atmosphere setting (50%, where
+           the circuit is at full strength). A theme file only carries a
+           switch, a color and a number; the drawing is built here, and the
+           color is refused unless it is plainly a color. */
+        var CIRCUIT_TILE =
+          "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 420' fill='none' stroke='COLOR' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><g stroke-opacity='OP'><path d='M40 0V60L58 78V150L40 168V420'/><path d='M92 0V120L112 140V230L92 250V420'/><path d='M102 0V116L122 136V234L102 254V420'/><path d='M160 0V300L176 316V340L160 356V420'/><path d='M214 0V40L196 58V200L214 218V420'/><path d='M224 0V36L206 54V204L224 222V420'/><path d='M268 0V260L252 276V340L268 356V420'/><path d='M58 110H24'/><circle cx='18' cy='110' r='5.5'/><path d='M160 80L178 98V112'/><circle cx='178' cy='119' r='5.5'/><path d='M102 300H136'/><circle cx='142' cy='300' r='5.5'/><path d='M224 300H246'/><circle cx='252' cy='300' r='5'/><path d='M252 150H282'/><circle cx='288' cy='150' r='5.5'/><path d='M40 360H66L74 352V330'/><circle cx='74' cy='323' r='5'/><path d='M196 120H174V180'/><circle cx='174' cy='187' r='5'/></g><g fill='COLOR' stroke='none' fill-opacity='OP'><circle cx='58' cy='78' r='2.6'/><circle cx='112' cy='140' r='2.6'/><circle cx='122' cy='136' r='2.6'/><circle cx='196' cy='58' r='2.6'/><circle cx='206' cy='54' r='2.6'/><circle cx='252' cy='276' r='2.6'/><circle cx='176' cy='316' r='2.6'/><circle cx='40' cy='168' r='2.6'/><circle cx='92' cy='250' r='2.6'/><circle cx='214' cy='218' r='2.6'/></g></svg>";
+        var CIRCUIT_COLOR =
+          /^(#[0-9a-f]{3,8}|rgba?\([0-9.,\s%/]+\)|hsla?\([0-9.,\s%/a-z]+\)|(?:color|oklch|oklab|lab|lch)\([0-9a-z.,\s%/-]+\)|[a-z]{3,24})$/i;
+
+        /* The client's shared defaults for the decoration switches, and for
+           the tokens the circuit color falls back through. */
+        var DECOR_DEFAULTS = {
+          "--stars": "on",
+          "--stars-nicklist": "off",
+          "--circuit": "off",
+          "--circuit-color": "var(--rail-accent)",
+          "--circuit-strength": "5",
+          "--circuit-nicklist": "off",
+          "--rail-accent": "var(--user-prefix-text)"
+        };
+
+        /* A token's value with any var() chain followed through the theme's
+           tokens, since the color is spliced into an image rather than left
+           to the cascade. */
+        function resolveToken(tokens, name) {
+          var value = name in tokens ? tokens[name] : DECOR_DEFAULTS[name];
+          for (var depth = 0; depth < 8; depth++) {
+            var ref = /^var\(\s*(--[a-z0-9-]+)\s*(?:,\s*(.+))?\)$/i.exec(String(value || "").trim());
+            if (!ref) break;
+            value = ref[1] in tokens ? tokens[ref[1]] : (DECOR_DEFAULTS[ref[1]] || ref[2]);
+          }
+          return String(value || "").trim();
+        }
+
+        function applyDecor(mock, tokens) {
+          function on(name) { return resolveToken(tokens, name) === "on"; }
+          var layer = "none";
+          var strength = parseFloat(resolveToken(tokens, "--circuit-strength"));
+          var opacity = Math.round(((isFinite(strength) ? strength : 0) / 100) * 1000) / 1000;
+          var color = resolveToken(tokens, "--circuit-color");
+          if (on("--circuit") && opacity > 0 && CIRCUIT_COLOR.test(color)) {
+            var svg = CIRCUIT_TILE.split("COLOR").join(color).split("OP").join(String(Math.min(1, opacity)));
+            layer = 'url("data:image/svg+xml,' + encodeURIComponent(svg) + '")';
+          }
+          mock.style.setProperty("--circuit-layer", layer);
+          mock.style.setProperty("--roster-circuit-layer", on("--circuit-nicklist") ? layer : "none");
+          if (on("--stars-nicklist")) {
+            mock.style.setProperty("--roster-star-warm", "var(--star-warm)");
+            mock.style.setProperty("--roster-star-cool", "var(--star-cool)");
+            mock.style.setProperty("--roster-star-white", "var(--star-white)");
+          }
+          if (!on("--stars")) {
+            mock.style.setProperty("--star-warm", "transparent");
+            mock.style.setProperty("--star-cool", "transparent");
+            mock.style.setProperty("--star-white", "transparent");
+          }
         }
 
         function fillSwatches(container, overrides, limit, className) {
@@ -605,9 +834,8 @@
 
         function paintCard(card) {
           loadTheme(card.theme).then(function (doc) {
-            var overrides = doc.overrides || {};
-            paint(card.mock, card.theme, overrides);
-            fillSwatches(card.swatches, overrides, 8);
+            paint(card.mock, card.theme, tokensOf(card.theme, doc, true));
+            fillSwatches(card.swatches, tokensOf(card.theme, doc), 8);
             card.thumb.classList.add("loaded");
           }).catch(function () {});
         }
@@ -729,11 +957,10 @@
         function openPreview(theme) {
           loadTheme(theme)
             .then(function (doc) {
-              var overrides = doc.overrides || {};
               previewTitle.textContent = doc.name || theme.name;
               previewSub.textContent = "Submitted by " + theme.author;
-              paint(previewRoot, theme, overrides);
-              fillSwatches(previewPalette, overrides, 20, "pv-swatch");
+              paint(previewRoot, theme, tokensOf(theme, doc, true));
+              fillSwatches(previewPalette, tokensOf(theme, doc), 20, "pv-swatch");
               if (typeof previewDialog.showModal === "function") previewDialog.showModal();
             })
             .catch(function () {
@@ -773,9 +1000,9 @@
 
         var sortSelect = document.getElementById("theme-sort");
         /* The browser can restore the menu on back/forward navigation. */
-        sortByDownloads = sortSelect.value === "downloads";
+        sortMode = sortSelect.value;
         sortSelect.addEventListener("change", function () {
-          sortByDownloads = sortSelect.value === "downloads";
+          sortMode = sortSelect.value;
           applyFilter();
         });
 
@@ -792,6 +1019,8 @@
         fetch("/themes/manifest.json")
           .then(function (r) { return r.json(); })
           .then(function (manifest) {
+            sharedTokens = manifest.shared || {};
+            baseTokens = manifest.bases || {};
             allThemes = (manifest.themes || []).slice().sort(function (a, b) {
               return String(b.addedAt || "").localeCompare(String(a.addedAt || ""));
             });

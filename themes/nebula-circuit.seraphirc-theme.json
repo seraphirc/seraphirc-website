@@ -1,0 +1,16 @@
+{
+  "format": "seraphirc-theme",
+  "formatVersion": 1,
+  "appVersion": "6.0.19",
+  "exportedAt": "2026-10-22T15:56:07Z",
+  "name": "Nebula Circuit",
+  "base": "nebula",
+  "overrides": {
+    "--circuit": "on",
+    "--circuit-nicklist": "on",
+    "--circuit-strength": "10",
+    "--event-text": "#3fb950",
+    "--stars": "off",
+    "--stars-nicklist": "off"
+  }
+}
