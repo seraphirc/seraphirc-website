@@ -210,6 +210,7 @@
             <details class="book">
               <summary>Application</summary>
               <ul class="pagelist">
+                <li><a href="#close-behavior">Close Behavior</a></li>
                 <li><a href="#config-transfer">Import/Export Config</a></li>
                 <li><a href="#diagnostics">Diagnostics</a></li>
                 <li><a href="#recovery">Recovery</a></li>
@@ -239,7 +240,7 @@
             </ul>
           </details>
           <details class="chapter">
-            <summary>Messaging<span class="chapter-count">21</span></summary>
+            <summary>Messaging<span class="chapter-count">23</span></summary>
             <ul class="pagelist">
               <li class="page-overview"><a href="#commands-messaging"><span class="lbl-screen">All messaging commands</span><span class="lbl-print">Messaging</span></a></li>
               <li><a href="#cmd-ctcp"><code>/ctcp</code></a></li>
@@ -251,6 +252,7 @@
               <li><a href="#cmd-format-msg"><code>/format-msg</code></a></li>
               <li><a href="#cmd-format-notice"><code>/format-notice</code></a></li>
               <li><a href="#cmd-giphy"><code>/giphy</code></a></li>
+              <li><a href="#cmd-imgbb"><code>/imgbb</code></a></li>
               <li><a href="#cmd-me"><code>/me</code></a></li>
               <li><a href="#cmd-msg"><code>/msg</code></a></li>
               <li><a href="#cmd-notice"><code>/notice</code></a></li>
@@ -263,6 +265,7 @@
               <li><a href="#cmd-seraphchat"><code>/seraphchat</code></a></li>
               <li><a href="#cmd-seraphtransfer"><code>/seraphtransfer</code></a></li>
               <li><a href="#cmd-unreact"><code>/unreact</code></a></li>
+              <li><a href="#cmd-upload"><code>/upload</code></a></li>
             </ul>
           </details>
           <details class="chapter">
@@ -441,7 +444,7 @@
                   <tr><th scope="row"><a href="#bouncers">Bouncers</a></th><td>First class Soju support with network discovery, chat history, and read markers that sync across devices. Existing ZNC setups keep working. No bouncer at all is fine too.</td></tr>
                   <tr><th scope="row">IRCv3</th><td>SASL, server-time, account tags, away-notify, echo-message, batch, and chat history negotiated where the network offers them. IRCv3 functionality continues to expand, and is updated on the <a href="/#ircv3">website</a> as new features arrive.</td></tr>
                   <tr><th scope="row"><a href="#formatting">Formatting</a></th><td>Markdown and token syntax compiled to standard IRC control codes, so other clients see ordinary bold, italics, and color.</td></tr>
-                  <tr><th scope="row"><a href="#files">File transfer</a></th><td>Bouncer uploads, classic DCC, and Seraph Transfer, an encrypted peer to peer send between SeraphIRC users that works from behind a bouncer and behind NAT.</td></tr>
+                  <tr><th scope="row"><a href="#files">File transfer</a></th><td>Filehost uploads, classic DCC, and Seraph Transfer, an encrypted peer to peer send between SeraphIRC users that works from behind a bouncer and behind NAT.</td></tr>
                   <tr><th scope="row"><a href="#encryption">Encryption</a></th><td>FiSH message encryption compatible with HexChat, Konversation, Quassel, and mIRC. Set a shared key and a conversation encrypts automatically, with lock indicators showing exactly what was protected.</td></tr>
                   <tr><th scope="row"><a href="#appearance">Appearance</a></th><td>A collection of prebuilt themes, a theme editor, and imports from the community <a href="/marketplace/">marketplace</a>.</td></tr>
                   <tr><th scope="row">Privacy</th><td>No analytics, no account requirement, no cloud dependency. The client talks to your networks and nothing else.</td></tr>
@@ -821,14 +824,14 @@
               computer to computer with no server between. It needs a direct
               connection, so it is unavailable through soju or ZNC. Incoming offers
               also appear as cards in the window and in the transfers panel. DCC chat
-              is not supported.
+              opens a direct conversation in its own window.
             </p>
 
-            <h3>Bouncer uploads</h3>
+            <h3>Uploads</h3>
             <p>
-              If your soju bouncer has uploads enabled, hand it a file and share the
-              link. This one goes through a host, which is the price of working with
-              anyone regardless of client.
+              Hand a file to a filehost and share the link. That can be your server's
+              own, your soju bouncer's, or one you set. This one goes through a host,
+              which is the price of working with anyone regardless of client.
             </p>
 
             <h3>Drag, drop, and paste</h3>
@@ -2160,8 +2163,19 @@ server/Libera/server.log</code></pre>
               Incoming offers appear as cards in the conversation and in the
               transfers panel, so the <a href="#cmd-dcc"><code>/dcc</code></a>
               commands are a shortcut rather than the only route. Dragging a file
-              onto a nickname offers it over DCC. SeraphIRC does not support DCC
-              chat.
+              onto a nickname offers it over DCC.
+            </p>
+
+            <h3>DCC chat</h3>
+            <p>
+              <strong>DCC &gt; Chat</strong> in a nickname's menu, or
+              <a href="#cmd-dcc"><code>/dcc chat nick</code></a>, opens a direct
+              conversation in an <code>=nick</code> window among your private
+              messages. It uses the same connection settings as file sends. A strip
+              above the chat shows where it stands, and an incoming request waits for
+              Accept or Decline. Each of you sees the other's IP address. The chat is
+              not encrypted unless you set a <a href="#cmd-setkey">FiSH key</a> for
+              it or for the nick.
             </p>
           </article>
 
@@ -2182,7 +2196,7 @@ server/Libera/server.log</code></pre>
               client ignores in silence. Send one to somebody on a different client
               and nothing happens at their end, so nothing comes back. Use
               <a href="#dcc-transfers">DCC</a> or a
-              <a href="#uploads">bouncer upload</a> for them instead.
+              <a href="#uploads">filehost upload</a> for them instead.
             </div>
 
             <div class="docs-note">
@@ -2257,33 +2271,105 @@ server/Libera/server.log</code></pre>
             <p class="pane-kicker">Network</p>
             <h2>Uploads</h2>
             <p class="pane-lead">
-              Drop a file onto a window, or paste an image into the composer, and it
-              goes to your bouncer's filehost with the link dropped into your
-              message. <code>Settings &gt; Network &gt; Uploads</code>.
+              Drop a file onto a window, paste an image into the composer, or type
+              <a href="#cmd-upload"><code>/upload</code></a>, and the file goes to a
+              filehost with the link dropped into your draft. Nothing is sent until
+              you send the message. <code>Settings &gt; Network &gt; Uploads</code>.
             </p>
 
-            <h3>Requirements</h3>
+            <h3>Where files go</h3>
             <p>
-              A soju bouncer that offers uploads. SeraphIRC reads the filehost
-              address the bouncer advertises, so there is nothing to configure beyond
-              the two switches.
+              A filehost is a web address that takes uploads. SeraphIRC can use three
+              kinds.
+            </p>
+            <ul>
+              <li><strong>The server's own</strong>, when the server advertises one
+                with <code>draft/FILEHOST</code> or <code>soju.im/FILEHOST</code>.</li>
+              <li><strong>Your soju bouncer's</strong>, for any network, including
+                direct and ZNC ones.</li>
+              <li><strong>A custom URL</strong> you enter yourself.</li>
+            </ul>
+            <p>
+              Each network picks one in its own <a href="#uploads-per-network">File
+              uploads</a> settings. Most can stay on Automatic.
             </p>
 
+            <h3>File uploads</h3>
             <div class="table-scroll">
               <table>
                 <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
                 <tbody>
-                  <tr><th scope="row">Drag and drop file upload</th><td>Dropping a file on a window uploads it.</td></tr>
-                  <tr><th scope="row">Paste image / file upload</th><td>Pasting into the composer uploads it.</td></tr>
+                  <tr><th scope="row">Enable file uploads</th><td>Turns uploads on. Turning it off grays out the three below and keeps what they were set to.</td></tr>
+                  <tr><th scope="row">Show Upload a file in the composer menu</th><td>Adds a file picker to the composer menu.</td></tr>
+                  <tr><th scope="row">Upload pasted images and files</th><td>Pasting into the composer uploads it.</td></tr>
+                  <tr><th scope="row">Upload dropped files</th><td>Dropping a file on a window uploads it.</td></tr>
                 </tbody>
               </table>
             </div>
 
-            <h3>Direct and ZNC networks</h3>
+            <h3>Default filehost</h3>
             <p>
-              These can upload through a soju bouncer's filehost too.
-              <strong>Upload files through</strong> picks which one, or Automatic for
-              the first soju bouncer that offers uploads.
+              Used by every network set to Automatic that has no filehost of its own.
+            </p>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Choice</th><th>What it does</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Your soju bouncer</th><td>Uploads to that bouncer and signs in with its own login. With more than one bouncer you can also pick the first soju bouncer that offers uploads.</td></tr>
+                  <tr><th scope="row">Custom URL</th><td>One filehost for every network. Sign in with a username and password for this host, or with no sign-in. Click Save once the address is in.</td></tr>
+                  <tr><th scope="row">Off</th><td>Networks without a filehost of their own don't upload.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              <strong>Test filehost</strong> checks that the address answers before
+              you rely on it. An address that is not https is skipped by networks that
+              connect with TLS.
+            </p>
+
+            <h3 id="uploads-per-network">Per network</h3>
+            <p>
+              Open the network in the Network Manager. Its <strong>File
+              uploads</strong> section, also in the setup wizard, has
+              <strong>Upload files through</strong>.
+            </p>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Choice</th><th>What it does</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Automatic</th><td>This server's own filehost when it offers one, otherwise the default filehost. A new network shows the default until it first connects.</td></tr>
+                  <tr><th scope="row">This server's filehost</th><td>Only the one this server offers. If the server stops offering it, the network doesn't upload. Listed once the server has offered one.</td></tr>
+                  <tr><th scope="row">Default filehost</th><td>Always the default from Settings &gt; Uploads, even when this server offers its own.</td></tr>
+                  <tr><th scope="row">Custom URL</th><td>A different filehost for this network only, with its own sign-in.</td></tr>
+                  <tr><th scope="row">Off</th><td>No uploads on this network.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              <strong>Test filehost</strong> checks whichever one is picked.
+            </p>
+
+            <h3>Signing in</h3>
+            <p>
+              A login goes with the host, never the network. A soju bouncer's filehost
+              gets that bouncer's login. On a direct network, <strong>Sign in to this
+              server's filehost with</strong> offers this network's SASL login, a
+              separate username and password, or no sign-in. A custom URL has the same
+              choices of its own, so neither login reaches the other's host. Passwords
+              go to the operating system's credential store.
+            </p>
+
+            <h3>Trusted upload hosts</h3>
+            <p>
+              The first upload to a new host asks first and says whose login goes
+              there. Your own soju bouncers never ask. Hosts you have agreed to are
+              listed under <strong>Trusted upload hosts</strong>, and
+              <strong>Remove</strong> makes one ask again.
+            </p>
+            <p>
+              A custom URL with a self-signed certificate can be trusted by its
+              fingerprint, and SeraphIRC warns you if the certificate changes. An
+              address a server advertises is never trusted that way.
             </p>
 
             <h3>Where a dropped file goes</h3>
@@ -2350,6 +2436,35 @@ server/Libera/server.log</code></pre>
           </article>
 
           <!-- ══ Application ══════════════════════════════════════════ -->
+
+          <article class="docs-pane" id="close-behavior" data-pane>
+            <p class="pane-kicker">Application</p>
+            <h2>Close Behavior</h2>
+            <p class="pane-lead">
+              What happens when you close the window.
+              <code>Settings &gt; Application &gt; Close Behavior</code>.
+            </p>
+
+            <div class="docs-note">
+              Windows and macOS only. On Linux, closing the window always quits.
+            </div>
+
+            <h3>Close app to system tray</h3>
+            <p>
+              With this on, closing the window hides it and SeraphIRC keeps running in
+              the system tray, still connected. Click the tray icon to open it again,
+              or choose <strong>Exit</strong> there to quit.
+            </p>
+            <p>
+              The first time you close the window, SeraphIRC asks which you want and
+              remembers the answer. A "No" is never asked again. Change it here at
+              any time.
+            </p>
+            <p>
+              Only closing the window goes to the tray. Quitting from the menu, with
+              Cmd+Q, from the tray's Exit, or by logging out always quits.
+            </p>
+          </article>
 
           <article class="docs-pane" id="config-transfer" data-pane>
             <p class="pane-kicker">Application</p>
@@ -2697,7 +2812,7 @@ server/Libera/server.log</code></pre>
           <p class="pane-kicker">Commands</p>
           <h2>Messaging</h2>
           <p class="pane-lead">Putting text, files, or an action in front of someone. The formatting variants are covered under <a href="#formatting">Text Formatting</a>.</p>
-          <nav class="entry-jump" aria-label="Messaging commands"><a href="#cmd-ctcp"><code>/ctcp</code></a><a href="#cmd-ctcpreply"><code>/ctcpreply</code></a><a href="#cmd-dcc"><code>/dcc</code></a><a href="#cmd-describe"><code>/describe</code></a><a href="#cmd-format"><code>/format</code></a><a href="#cmd-format-me"><code>/format-me</code></a><a href="#cmd-format-msg"><code>/format-msg</code></a><a href="#cmd-format-notice"><code>/format-notice</code></a><a href="#cmd-giphy"><code>/giphy</code></a><a href="#cmd-me"><code>/me</code></a><a href="#cmd-msg"><code>/msg</code></a><a href="#cmd-notice"><code>/notice</code></a><a href="#cmd-plain"><code>/plain</code></a><a href="#cmd-plain-me"><code>/plain-me</code></a><a href="#cmd-plain-msg"><code>/plain-msg</code></a><a href="#cmd-plain-notice"><code>/plain-notice</code></a><a href="#cmd-query"><code>/query</code></a><a href="#cmd-react"><code>/react</code></a><a href="#cmd-seraphchat"><code>/seraphchat</code></a><a href="#cmd-seraphtransfer"><code>/seraphtransfer</code></a><a href="#cmd-unreact"><code>/unreact</code></a></nav>
+          <nav class="entry-jump" aria-label="Messaging commands"><a href="#cmd-ctcp"><code>/ctcp</code></a><a href="#cmd-ctcpreply"><code>/ctcpreply</code></a><a href="#cmd-dcc"><code>/dcc</code></a><a href="#cmd-describe"><code>/describe</code></a><a href="#cmd-format"><code>/format</code></a><a href="#cmd-format-me"><code>/format-me</code></a><a href="#cmd-format-msg"><code>/format-msg</code></a><a href="#cmd-format-notice"><code>/format-notice</code></a><a href="#cmd-giphy"><code>/giphy</code></a><a href="#cmd-imgbb"><code>/imgbb</code></a><a href="#cmd-me"><code>/me</code></a><a href="#cmd-msg"><code>/msg</code></a><a href="#cmd-notice"><code>/notice</code></a><a href="#cmd-plain"><code>/plain</code></a><a href="#cmd-plain-me"><code>/plain-me</code></a><a href="#cmd-plain-msg"><code>/plain-msg</code></a><a href="#cmd-plain-notice"><code>/plain-notice</code></a><a href="#cmd-query"><code>/query</code></a><a href="#cmd-react"><code>/react</code></a><a href="#cmd-seraphchat"><code>/seraphchat</code></a><a href="#cmd-seraphtransfer"><code>/seraphtransfer</code></a><a href="#cmd-unreact"><code>/unreact</code></a><a href="#cmd-upload"><code>/upload</code></a></nav>
           <section class="docs-entry" id="cmd-ctcp">
             <header class="entry-head">
               <h3>/ctcp<a class="entry-anchor" href="#cmd-ctcp" aria-label="Link to /ctcp">#</a></h3>
@@ -2730,13 +2845,14 @@ server/Libera/server.log</code></pre>
               <h3>/dcc<a class="entry-anchor" href="#cmd-dcc" aria-label="Link to /dcc">#</a></h3>
               <span class="entry-flags"><span class="flag flag-network">needs a network</span></span>
             </header>
-            <p class="entry-usage"><code>/dcc &lt;send|get|decline|cancel|list&gt; [args]</code></p>
-            <p class="entry-summary">Send and receive files directly with another user</p>
+            <p class="entry-usage"><code>/dcc &lt;send|chat|get|decline|cancel|list&gt; [args]</code></p>
+            <p class="entry-summary">Send files and chat directly with another user</p>
             <h4 class="entry-label">Parameters</h4>
             <dl class="entry-params"><dt><code>nick</code></dt><dd>the other person</dd><dt><code>path</code></dt><dd>file to send (a picker opens when omitted)</dd></dl>
-            <div class="entry-details"><p>DCC transfers files straight between the two computers, with no server in between.</p><p>Because of that it needs a DIRECT connection: it is unavailable on networks that go through a bouncer (soju or ZNC), where the address the transfer would use belongs to the bouncer rather than to either person.</p><p>Incoming offers also appear as cards in the buffer and in the transfers panel, so these commands are a keyboard shortcut rather than the only route.</p><p>/dcc get with no nick accepts the only waiting offer, and resumes automatically when part of the file is already downloaded.</p><p>SeraphIRC does not support DCC chat.</p></div>
+            <div class="entry-details"><p>DCC transfers files straight between the two computers, with no server in between.</p><p>Because of that it needs a DIRECT connection: it is unavailable on networks that go through a bouncer (soju or ZNC), where the address the transfer would use belongs to the bouncer rather than to either person.</p><p>Incoming offers also appear as cards in the buffer and in the transfers panel, so these commands are a keyboard shortcut rather than the only route.</p><p>/dcc get with no nick accepts the only waiting offer, and resumes automatically when part of the file is already downloaded.</p><p>/dcc chat opens a direct conversation in an =nick buffer, for clients that support DCC chat. It shows each of you the other's IP address and is not encrypted.</p></div>
             <h4 class="entry-label">Examples</h4>
             <pre class="entry-examples"><code>/dcc send Alice
+/dcc chat Alice
 /dcc send Alice /home/me/photo.jpg
 /dcc get
 /dcc list</code></pre>
@@ -2815,10 +2931,21 @@ server/Libera/server.log</code></pre>
             <p class="entry-summary">Open the GIF picker, optionally with a search already run</p>
             <h4 class="entry-label">Parameters</h4>
             <dl class="entry-params"><dt><code>search terms</code></dt><dd>what to look for (omit to browse what is trending)</dd></dl>
-            <div class="entry-details"><p>Opens the GIF picker above the composer. With search terms it runs that search. With none it shows what is trending.</p><p>The command never sends anything by itself. Attach puts the GIF's link in the composer and leaves it there, so you can add a comment, and so the message goes out through the same checks as anything else you type.</p><p>Off until you turn it on. The integration needs a free Giphy API key of your own: Settings &gt; Integrations &gt; Giphy Integration.</p><p>When enabled, your search terms and IP address are sent to Giphy. GIFs you post are links to Giphy's servers, so anyone whose client displays them also connects to Giphy.</p></div>
+            <div class="entry-details"><p>Opens the GIF picker above the composer. With search terms it runs that search. With none it shows what is trending.</p><p>The command never sends anything by itself. Attach puts the GIF's link in the composer and leaves it there, so you can add a comment, and so the message goes out through the same checks as anything else you type.</p><p>Off until you turn it on. The integration needs a free Giphy API key of your own: Settings &gt; Third-Party Services &gt; Giphy API.</p><p>When enabled, your search terms and IP address are sent to Giphy. GIFs you post are links to Giphy's servers, so anyone whose client displays them also connects to Giphy.</p></div>
             <h4 class="entry-label">Examples</h4>
             <pre class="entry-examples"><code>/giphy
 /giphy shrug</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-imgbb">
+            <header class="entry-head">
+              <h3>/imgbb<a class="entry-anchor" href="#cmd-imgbb" aria-label="Link to /imgbb">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span><span class="flag flag-buffer">needs a buffer</span></span>
+            </header>
+            <p class="entry-usage"><code>/imgbb</code></p>
+            <p class="entry-summary">Pick an image and upload it to ImgBB</p>
+            <div class="entry-details"><p>Opens a file picker, uploads the chosen image to your ImgBB account, and puts its link in the composer. The same action as Upload to ImgBB in the composer menu.</p><p>The command never sends anything by itself. The link waits in the composer, so you can add a comment, and the message goes out through the same checks as anything else you type.</p><p>Off until you turn it on. The integration needs a free ImgBB API key of your own: Settings &gt; Third-Party Services &gt; ImgBB API.</p><p>Pasting and dropping files in still upload to the network's filehost, set in Settings &gt; Uploads. Only this command and the menu item use ImgBB.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/imgbb</code></pre>
           </section>
           <section class="docs-entry" id="cmd-me">
             <header class="entry-head">
@@ -2961,7 +3088,7 @@ server/Libera/server.log</code></pre>
             <p class="entry-summary">Send a file directly with Seraph Transfer</p>
             <h4 class="entry-label">Parameters</h4>
             <dl class="entry-params"><dt><code>nick</code></dt><dd>the person to send to (in a query it defaults to that person)</dd></dl>
-            <div class="entry-details"><p>Opens a file picker and offers the chosen file over Seraph Transfer: a direct, end-to-end encrypted transfer that verifies the file and, unlike DCC, works from behind a bouncer.</p><p>The same action as "Send File (Seraph)" in a nickname's right-click menu, so this is a keyboard shortcut rather than the only route.</p><p>Sending an offer reveals your IP address to the rendezvous immediately and to the other person once they accept.</p><p>The command never reaches the server, and it never falls back to DCC by itself: if the peer cannot answer a Seraph offer, DCC is suggested rather than silently used.</p><p>Nothing to set up: Seraph Transfer is available on every network, including through a bouncer. Settings &gt; File Uploads &amp; DCC tunes where files land and how large an offer may be.</p></div>
+            <div class="entry-details"><p>Opens a file picker and offers the chosen file over Seraph Transfer: a direct, end-to-end encrypted transfer that verifies the file and, unlike DCC, works from behind a bouncer.</p><p>The same action as "Send File (Seraph)" in a nickname's right-click menu, so this is a keyboard shortcut rather than the only route.</p><p>Sending an offer reveals your IP address to the rendezvous immediately and to the other person once they accept.</p><p>The command never reaches the server, and it never falls back to DCC by itself: if the peer cannot answer a Seraph offer, DCC is suggested rather than silently used.</p><p>Nothing to set up: Seraph Transfer is available on every network, including through a bouncer. Settings &gt; Network &gt; Seraph Transfer &amp; Chat tunes where files land and how large an offer may be.</p></div>
             <h4 class="entry-label">Examples</h4>
             <pre class="entry-examples"><code>/seraphtransfer Alice</code></pre>
           </section>
@@ -2977,6 +3104,17 @@ server/Libera/server.log</code></pre>
             <div class="entry-details"><p>Removes a reaction you added to a recent message in the current buffer, using the IRCv3 unreact client tag.</p></div>
             <h4 class="entry-label">Examples</h4>
             <pre class="entry-examples"><code>/unreact 👍</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-upload">
+            <header class="entry-head">
+              <h3>/upload<a class="entry-anchor" href="#cmd-upload" aria-label="Link to /upload">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span><span class="flag flag-buffer">needs a buffer</span></span>
+            </header>
+            <p class="entry-usage"><code>/upload</code></p>
+            <p class="entry-summary">Pick a file and upload it to this network's filehost</p>
+            <div class="entry-details"><p>Opens a file picker, uploads the chosen file, and puts its link in the composer. The same action as Upload a file in the composer menu.</p><p>The command never sends anything by itself. The link waits in the composer, so you can add a comment, and the message goes out through the same checks as anything else you type.</p><p>Where the file goes is the network's File uploads setting: its own server's filehost, the default filehost from Settings &gt; Uploads, or a custom URL. The first upload to a new host asks first.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/upload</code></pre>
           </section>
         </article>
         <article class="docs-pane" id="commands-encryption" data-pane>
@@ -4255,7 +4393,7 @@ server/Libera/server.log</code></pre>
               <tr><th scope="row"><a href="#cmd-ctcpreply"><code>/ctcpreply</code></a></th><td class="idx-alias"><code></code></td><td>Answer a CTCP request</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-current"><code>/current</code></a></th><td class="idx-alias"><code></code></td><td>Show the current buffer</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
               <tr><th scope="row"><a href="#cmd-cycle"><code>/cycle</code></a></th><td class="idx-alias"><code></code></td><td>Part and rejoin a channel</td><td class="idx-cat"><a href="#commands-connection">Connection</a></td></tr>
-              <tr><th scope="row"><a href="#cmd-dcc"><code>/dcc</code></a></th><td class="idx-alias"><code></code></td><td>Send and receive files directly with another user</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-dcc"><code>/dcc</code></a></th><td class="idx-alias"><code></code></td><td>Send files and chat directly with another user</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-delkey"><code>/delkey</code></a></th><td class="idx-alias"><code></code></td><td>Delete a FiSH encryption key</td><td class="idx-cat"><a href="#commands-encryption">Encryption</a></td></tr>
               <tr><th scope="row"><a href="#cmd-deop"><code>/deop</code></a></th><td class="idx-alias"><code></code></td><td>Remove channel operator status</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-describe"><code>/describe</code></a></th><td class="idx-alias"><code></code></td><td>Send an action to a channel or nick</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
@@ -4275,6 +4413,7 @@ server/Libera/server.log</code></pre>
               <tr><th scope="row"><a href="#cmd-globops"><code>/globops</code></a></th><td class="idx-alias"><code></code></td><td>Message all online IRC operators</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
               <tr><th scope="row"><a href="#cmd-help"><code>/help</code></a></th><td class="idx-alias"><code></code></td><td>Show command help</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-ignore"><code>/ignore</code></a></th><td class="idx-alias"><code></code></td><td>Ignore a nick or mask on the current network</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-imgbb"><code>/imgbb</code></a></th><td class="idx-alias"><code></code></td><td>Pick an image and upload it to ImgBB</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-info"><code>/info</code></a></th><td class="idx-alias"><code></code></td><td>Request server information</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-invite"><code>/invite</code></a></th><td class="idx-alias"><code></code></td><td>Invite a nick to a channel</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-ison"><code>/ison</code></a></th><td class="idx-alias"><code></code></td><td>Check whether nicknames are online</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
@@ -4349,6 +4488,7 @@ server/Libera/server.log</code></pre>
               <tr><th scope="row"><a href="#cmd-unkline"><code>/unkline</code></a></th><td class="idx-alias"><code></code></td><td>Remove a K-line</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
               <tr><th scope="row"><a href="#cmd-unload"><code>/unload</code></a></th><td class="idx-alias"><code></code></td><td>Unload a script</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-unreact"><code>/unreact</code></a></th><td class="idx-alias"><code></code></td><td>Remove your reaction from a recent message</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-upload"><code>/upload</code></a></th><td class="idx-alias"><code></code></td><td>Pick a file and upload it to this network's filehost</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-userhost"><code>/userhost</code></a></th><td class="idx-alias"><code></code></td><td>Request user/host information</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-users"><code>/users</code></a></th><td class="idx-alias"><code></code></td><td>Request the server USERS listing</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-voice"><code>/voice</code></a></th><td class="idx-alias"><code></code></td><td>Give voice to a nick</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>

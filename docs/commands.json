@@ -1417,21 +1417,22 @@
   {
     "Name": "dcc",
     "Aliases": null,
-    "Usage": "/dcc \u003csend|get|decline|cancel|list\u003e [args]",
+    "Usage": "/dcc \u003csend|chat|get|decline|cancel|list\u003e [args]",
     "Parameters": [
       "nick: the other person",
       "path: file to send (a picker opens when omitted)"
     ],
-    "Summary": "Send and receive files directly with another user",
+    "Summary": "Send files and chat directly with another user",
     "Details": [
       "DCC transfers files straight between the two computers, with no server in between.",
       "Because of that it needs a DIRECT connection: it is unavailable on networks that go through a bouncer (soju or ZNC), where the address the transfer would use belongs to the bouncer rather than to either person.",
       "Incoming offers also appear as cards in the buffer and in the transfers panel, so these commands are a keyboard shortcut rather than the only route.",
       "/dcc get with no nick accepts the only waiting offer, and resumes automatically when part of the file is already downloaded.",
-      "SeraphIRC does not support DCC chat."
+      "/dcc chat opens a direct conversation in an =nick buffer, for clients that support DCC chat. It shows each of you the other's IP address and is not encrypted."
     ],
     "Examples": [
       "/dcc send Alice",
+      "/dcc chat Alice",
       "/dcc send Alice /home/me/photo.jpg",
       "/dcc get",
       "/dcc list"
@@ -1484,7 +1485,7 @@
       "The same action as \"Send File (Seraph)\" in a nickname's right-click menu, so this is a keyboard shortcut rather than the only route.",
       "Sending an offer reveals your IP address to the rendezvous immediately and to the other person once they accept.",
       "The command never reaches the server, and it never falls back to DCC by itself: if the peer cannot answer a Seraph offer, DCC is suggested rather than silently used.",
-      "Nothing to set up: Seraph Transfer is available on every network, including through a bouncer. Settings \u003e File Uploads \u0026 DCC tunes where files land and how large an offer may be."
+      "Nothing to set up: Seraph Transfer is available on every network, including through a bouncer. Settings \u003e Network \u003e Seraph Transfer \u0026 Chat tunes where files land and how large an offer may be."
     ],
     "Examples": [
       "/seraphtransfer Alice"
@@ -1507,12 +1508,55 @@
     "Details": [
       "Opens the GIF picker above the composer. With search terms it runs that search. With none it shows what is trending.",
       "The command never sends anything by itself. Attach puts the GIF's link in the composer and leaves it there, so you can add a comment, and so the message goes out through the same checks as anything else you type.",
-      "Off until you turn it on. The integration needs a free Giphy API key of your own: Settings \u003e Integrations \u003e Giphy Integration.",
+      "Off until you turn it on. The integration needs a free Giphy API key of your own: Settings \u003e Third-Party Services \u003e Giphy API.",
       "When enabled, your search terms and IP address are sent to Giphy. GIFs you post are links to Giphy's servers, so anyone whose client displays them also connects to Giphy."
     ],
     "Examples": [
       "/giphy",
       "/giphy shrug"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": true,
+    "ChainSafe": false
+  },
+  {
+    "Name": "imgbb",
+    "Aliases": null,
+    "Usage": "/imgbb",
+    "Parameters": null,
+    "Summary": "Pick an image and upload it to ImgBB",
+    "Details": [
+      "Opens a file picker, uploads the chosen image to your ImgBB account, and puts its link in the composer. The same action as Upload to ImgBB in the composer menu.",
+      "The command never sends anything by itself. The link waits in the composer, so you can add a comment, and the message goes out through the same checks as anything else you type.",
+      "Off until you turn it on. The integration needs a free ImgBB API key of your own: Settings \u003e Third-Party Services \u003e ImgBB API.",
+      "Pasting and dropping files in still upload to the network's filehost, set in Settings \u003e Uploads. Only this command and the menu item use ImgBB."
+    ],
+    "Examples": [
+      "/imgbb"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": false,
+    "RequiresBuffer": true,
+    "ChainSafe": false
+  },
+  {
+    "Name": "upload",
+    "Aliases": null,
+    "Usage": "/upload",
+    "Parameters": null,
+    "Summary": "Pick a file and upload it to this network's filehost",
+    "Details": [
+      "Opens a file picker, uploads the chosen file, and puts its link in the composer. The same action as Upload a file in the composer menu.",
+      "The command never sends anything by itself. The link waits in the composer, so you can add a comment, and the message goes out through the same checks as anything else you type.",
+      "Where the file goes is the network's File uploads setting: its own server's filehost, the default filehost from Settings \u003e Uploads, or a custom URL. The first upload to a new host asks first."
+    ],
+    "Examples": [
+      "/upload"
     ],
     "Category": "Messaging",
     "SendsIRC": false,
