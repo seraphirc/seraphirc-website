@@ -1566,6 +1566,36 @@
     "ChainSafe": false
   },
   {
+    "Name": "search",
+    "Aliases": null,
+    "Usage": "/search [filters] [text]",
+    "Parameters": [
+      "in=\u003cchannel or nick\u003e: where to search (defaults to this window)",
+      "from=\u003cnick\u003e: only messages from this nick",
+      "after=\u003ctime\u003e and before=\u003ctime\u003e: a time range, written as 2026-10-01T00:00:00.000Z",
+      "limit=\u003cnumber\u003e: how many results per conversation, up to 100",
+      "text: every other word is what to look for"
+    ],
+    "Summary": "Search a network's message logs",
+    "Details": [
+      "Opens the search dialog. With filters it runs the search right away, and with none it opens so you can fill them in. The dialog can search many conversations on many networks at once.",
+      "Searches from the start of today unless after= gives another time. Results come newest first. Clear After in the dialog to search all of the logs.",
+      "On a soju bouncer that keeps message logs, the search runs on the bouncer, so it covers history from before you opened SeraphIRC. Everywhere else it searches this device's chat logs, so it finds what Chat Logging kept.",
+      "Results stay in the dialog and never appear in the channel. /raw SEARCH and /quote SEARCH open the same dialog, and soju's own form of the filters works too: in=#channel;text=words."
+    ],
+    "Examples": [
+      "/search",
+      "/search filehost broke",
+      "/search from=Alice in=#seraphirc filehost"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
     "Name": "whois",
     "Aliases": null,
     "Usage": "/whois \u003cnick\u003e",

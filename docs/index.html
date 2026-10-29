@@ -165,11 +165,13 @@
               <summary>Chatting</summary>
               <ul class="pagelist">
                 <li><a href="#aliases">Aliases</a></li>
+                <li><a href="#autocomplete">Autocomplete</a></li>
                 <li><a href="#chat-logging">Chat Logging</a>
                   <ul class="subpages">
                     <li><a href="#exporting-logs">Exporting and Clearing</a></li>
                   </ul>
                 </li>
+                <li><a href="#log-search">Log Search</a></li>
                 <li><a href="#custom-mentions">Custom Mentions</a></li>
                 <li><a href="#ignore-list">Ignore List</a></li>
                 <li><a href="#metadata">IRCv3 Metadata</a></li>
@@ -240,7 +242,7 @@
             </ul>
           </details>
           <details class="chapter">
-            <summary>Messaging<span class="chapter-count">23</span></summary>
+            <summary>Messaging<span class="chapter-count">24</span></summary>
             <ul class="pagelist">
               <li class="page-overview"><a href="#commands-messaging"><span class="lbl-screen">All messaging commands</span><span class="lbl-print">Messaging</span></a></li>
               <li><a href="#cmd-ctcp"><code>/ctcp</code></a></li>
@@ -262,6 +264,7 @@
               <li><a href="#cmd-plain-notice"><code>/plain-notice</code></a></li>
               <li><a href="#cmd-query"><code>/query</code></a></li>
               <li><a href="#cmd-react"><code>/react</code></a></li>
+              <li><a href="#cmd-search"><code>/search</code></a></li>
               <li><a href="#cmd-seraphchat"><code>/seraphchat</code></a></li>
               <li><a href="#cmd-seraphtransfer"><code>/seraphtransfer</code></a></li>
               <li><a href="#cmd-unreact"><code>/unreact</code></a></li>
@@ -1239,12 +1242,39 @@
             </div>
           </article>
 
+          <article class="docs-pane" id="autocomplete" data-pane>
+            <p class="pane-kicker">Chatting</p>
+            <h2>Autocomplete</h2>
+            <p class="pane-lead">
+              How <code>Tab</code> completes nicknames as you type. The setting lives in
+              <code>Settings &gt; Chatting &gt; Autocomplete</code>.
+            </p>
+
+            <h3>Autocomplete recently active nicks first</h3>
+            <p>
+              Off by default. Turn it on and <code>Tab</code> offers the people who
+              spoke most recently in the channel first, newest first. Everyone else
+              follows in nick list order.
+            </p>
+            <p>
+              Speaking means sending a message or a <code>/me</code> action. Joins,
+              parts and nick changes don't count, and people who have left the channel
+              are skipped. With the option off, <code>Tab</code> follows the order of
+              the nick list.
+            </p>
+            <p>
+              On iPhone and iPad the same setting orders the nick suggestions above
+              the composer.
+            </p>
+          </article>
+
           <article class="docs-pane" id="chat-logging" data-pane>
             <p class="pane-kicker">Chatting</p>
             <h2>Chat Logging</h2>
             <p class="pane-lead">
-              SeraphIRC keeps a searchable local history of your conversations.
-              Nothing is uploaded. The controls live in
+              SeraphIRC keeps a local history of your conversations, and
+              <a href="#log-search">Log Search</a> finds things in it. Nothing is
+              uploaded. The controls live in
               <code>Settings &gt; Chatting &gt; Chat Logging</code>.
             </p>
 
@@ -1320,18 +1350,23 @@
             <h3>Exporting everything</h3>
             <p>
               <code>Settings &gt; Chatting &gt; Chat Logging</code> has four collect
-              buttons. Each opens a save dialog and writes a <code>.tgz</code>
-              archive. A button is disabled when there is nothing of that kind to
-              export.
+              buttons. Each opens a save dialog and writes a <code>.zip</code>
+              archive, which opens without extra software on every system. A button
+              is disabled when there is nothing of that kind to export.
+            </p>
+            <p>
+              On iPhone and iPad the same four buttons show how many lines each
+              covers, and hand the archive to the share sheet so you can Save to
+              Files.
             </p>
             <div class="table-scroll">
               <table>
                 <thead><tr><th>Button</th><th>Archive</th></tr></thead>
                 <tbody>
-                  <tr><th scope="row">Collect Server Logs</th><td><code>seraphirc-server-logs.tgz</code></td></tr>
-                  <tr><th scope="row">Collect Query Logs</th><td><code>seraphirc-query-logs.tgz</code></td></tr>
-                  <tr><th scope="row">Collect Channel Logs</th><td><code>seraphirc-channel-logs.tgz</code></td></tr>
-                  <tr><th scope="row">Collect All Chat Logs</th><td><code>seraphirc-all-logs.tgz</code></td></tr>
+                  <tr><th scope="row">Collect Server Logs</th><td><code>seraphirc-server-logs.zip</code></td></tr>
+                  <tr><th scope="row">Collect Query Logs</th><td><code>seraphirc-query-logs.zip</code></td></tr>
+                  <tr><th scope="row">Collect Channel Logs</th><td><code>seraphirc-channel-logs.zip</code></td></tr>
+                  <tr><th scope="row">Collect All Chat Logs</th><td><code>seraphirc-all-logs.zip</code></td></tr>
                 </tbody>
               </table>
             </div>
@@ -1379,6 +1414,85 @@ server/Libera/server.log</code></pre>
               <a href="#cmd-clear"><code>/clear</code></a> and
               <a href="#cmd-clearall"><code>/clearall</code></a> are the safe pair.
               They tidy the view without deleting anything you might want later.
+            </div>
+          </article>
+
+          <article class="docs-pane" id="log-search" data-pane>
+            <p class="pane-kicker">Chatting</p>
+            <h2>Log Search</h2>
+            <p class="pane-lead">
+              Log Search finds old messages across any of your networks, channels,
+              and queries at once. Results stay in the dialog and never appear in a
+              channel.
+            </p>
+
+            <h3>Opening it</h3>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Way in</th><th>What happens</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row"><code>Ctrl+L</code></th><td>Opens or closes Log Search (Cmd+L on macOS). It works from the composer too.</td></tr>
+                  <tr><th scope="row">The magnifier on the toolbar</th><td>Opens Log Search with the conversations you picked last time.</td></tr>
+                  <tr><th scope="row">View &gt; Log Search&hellip;</th><td>The same as the toolbar button.</td></tr>
+                  <tr><th scope="row"><a href="#cmd-search"><code>/search</code></a></th><td>Opens it on the current channel or query. With filters it runs the search right away.</td></tr>
+                  <tr><th scope="row"><code>/raw SEARCH</code> or <code>/quote SEARCH</code></th><td>Opens the same dialog, and accepts soju's own filter form, as in <code>in=#channel;text=words</code>.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              <code>Escape</code> closes it. On iPhone and iPad the magnifier sits in
+              the top bar, right of Settings.
+            </p>
+
+            <h3>Where it looks</h3>
+            <p>
+              On a soju bouncer that keeps message logs, the search runs on the
+              bouncer, so it covers history from before you opened SeraphIRC.
+              Everywhere else it searches this device's
+              <a href="#chat-logging">chat logs</a>, so it only finds what Chat
+              Logging kept. The line under the filters says which applies.
+            </p>
+            <p>
+              The <strong>Conversations</strong> list on the left picks what to
+              search. Tick a whole network, all of its channels or queries, or single
+              conversations. Your picks are remembered for next time.
+            </p>
+
+            <h3>Filters</h3>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Field</th><th>What it does</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Text</th><td>The phrase to look for. Capitalization is ignored unless <strong>Match case</strong> is on. Some soju bouncers only find whole words.</td></tr>
+                  <tr><th scope="row">From</th><td>Only messages from this nick. On a soju bouncer it must match exactly, capitalization included.</td></tr>
+                  <tr><th scope="row">After and Before</th><td>A time range. Type a day, or a day and a 24-hour time, and add a year for an earlier one, as in <code>Oct 28, 2025, 14:16</code>.</td></tr>
+                  <tr><th scope="row">Range</th><td>Today, 7 days, 30 days, or All time. Each fills After and Before, which stay editable.</td></tr>
+                  <tr><th scope="row">Limit</th><td>How many results each conversation shows, up to 100.</td></tr>
+                  <tr><th scope="row">Context</th><td>How many lines to show before and after a result, from 1 to 50. The default is 10.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              A new search covers today. Pick a wider Range, or clear After, to reach
+              further back.
+            </p>
+
+            <h3>Reading results</h3>
+            <p>
+              Results are grouped by conversation and day, newest first. Each line
+              has a <strong>Copy</strong> button, and the words you searched for are
+              highlighted.
+            </p>
+            <ul>
+              <li><strong>Double-click a result</strong> to show the lines around it. Double-click again to hide them.</li>
+              <li><strong>Context on every result</strong> shows those lines for every result at once, and merges results close enough to share them.</li>
+              <li><strong>Day</strong> opens the whole day around a line. Previous day and Next day step through the log, and <strong>Export .log</strong> saves every line of that day as a text file.</li>
+            </ul>
+
+            <div class="docs-note">
+              Nothing in Log Search jumps the transcript to a result. A result from
+              last month would mean loading thousands of lines into the channel, so
+              it stays a line you can read and copy.
             </div>
           </article>
 
@@ -2649,7 +2763,8 @@ server/Libera/server.log</code></pre>
             <p>
               <code>Tab</code> completes a command, and the same key completes
               nicknames anywhere else in the line. Up and down step through your input
-              history or an open suggestion list.
+              history or an open suggestion list. <a href="#autocomplete">Autocomplete</a>
+              can offer the most recently active nicks first.
             </p>
 
             <h3>Help in the client</h3>
@@ -2812,7 +2927,7 @@ server/Libera/server.log</code></pre>
           <p class="pane-kicker">Commands</p>
           <h2>Messaging</h2>
           <p class="pane-lead">Putting text, files, or an action in front of someone. The formatting variants are covered under <a href="#formatting">Text Formatting</a>.</p>
-          <nav class="entry-jump" aria-label="Messaging commands"><a href="#cmd-ctcp"><code>/ctcp</code></a><a href="#cmd-ctcpreply"><code>/ctcpreply</code></a><a href="#cmd-dcc"><code>/dcc</code></a><a href="#cmd-describe"><code>/describe</code></a><a href="#cmd-format"><code>/format</code></a><a href="#cmd-format-me"><code>/format-me</code></a><a href="#cmd-format-msg"><code>/format-msg</code></a><a href="#cmd-format-notice"><code>/format-notice</code></a><a href="#cmd-giphy"><code>/giphy</code></a><a href="#cmd-imgbb"><code>/imgbb</code></a><a href="#cmd-me"><code>/me</code></a><a href="#cmd-msg"><code>/msg</code></a><a href="#cmd-notice"><code>/notice</code></a><a href="#cmd-plain"><code>/plain</code></a><a href="#cmd-plain-me"><code>/plain-me</code></a><a href="#cmd-plain-msg"><code>/plain-msg</code></a><a href="#cmd-plain-notice"><code>/plain-notice</code></a><a href="#cmd-query"><code>/query</code></a><a href="#cmd-react"><code>/react</code></a><a href="#cmd-seraphchat"><code>/seraphchat</code></a><a href="#cmd-seraphtransfer"><code>/seraphtransfer</code></a><a href="#cmd-unreact"><code>/unreact</code></a><a href="#cmd-upload"><code>/upload</code></a></nav>
+          <nav class="entry-jump" aria-label="Messaging commands"><a href="#cmd-ctcp"><code>/ctcp</code></a><a href="#cmd-ctcpreply"><code>/ctcpreply</code></a><a href="#cmd-dcc"><code>/dcc</code></a><a href="#cmd-describe"><code>/describe</code></a><a href="#cmd-format"><code>/format</code></a><a href="#cmd-format-me"><code>/format-me</code></a><a href="#cmd-format-msg"><code>/format-msg</code></a><a href="#cmd-format-notice"><code>/format-notice</code></a><a href="#cmd-giphy"><code>/giphy</code></a><a href="#cmd-imgbb"><code>/imgbb</code></a><a href="#cmd-me"><code>/me</code></a><a href="#cmd-msg"><code>/msg</code></a><a href="#cmd-notice"><code>/notice</code></a><a href="#cmd-plain"><code>/plain</code></a><a href="#cmd-plain-me"><code>/plain-me</code></a><a href="#cmd-plain-msg"><code>/plain-msg</code></a><a href="#cmd-plain-notice"><code>/plain-notice</code></a><a href="#cmd-query"><code>/query</code></a><a href="#cmd-react"><code>/react</code></a><a href="#cmd-search"><code>/search</code></a><a href="#cmd-seraphchat"><code>/seraphchat</code></a><a href="#cmd-seraphtransfer"><code>/seraphtransfer</code></a><a href="#cmd-unreact"><code>/unreact</code></a><a href="#cmd-upload"><code>/upload</code></a></nav>
           <section class="docs-entry" id="cmd-ctcp">
             <header class="entry-head">
               <h3>/ctcp<a class="entry-anchor" href="#cmd-ctcp" aria-label="Link to /ctcp">#</a></h3>
@@ -3063,6 +3178,21 @@ server/Libera/server.log</code></pre>
             <h4 class="entry-label">Examples</h4>
             <pre class="entry-examples"><code>/react 👍
 /react 🎉 3</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-search">
+            <header class="entry-head">
+              <h3>/search<a class="entry-anchor" href="#cmd-search" aria-label="Link to /search">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span><span class="flag flag-network">needs a network</span></span>
+            </header>
+            <p class="entry-usage"><code>/search [filters] [text]</code></p>
+            <p class="entry-summary">Search a network's message logs</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>in=&lt;channel or nick&gt;</code></dt><dd>where to search (defaults to this window)</dd><dt><code>from=&lt;nick&gt;</code></dt><dd>only messages from this nick</dd><dt><code>after=&lt;time&gt; and before=&lt;time&gt;</code></dt><dd>a time range, written as 2026-10-01T00:00:00.000Z</dd><dt><code>limit=&lt;number&gt;</code></dt><dd>how many results per conversation, up to 100</dd><dt><code>text</code></dt><dd>every other word is what to look for</dd></dl>
+            <div class="entry-details"><p>Opens the search dialog. With filters it runs the search right away, and with none it opens so you can fill them in. The dialog can search many conversations on many networks at once.</p><p>Searches from the start of today unless after= gives another time. Results come newest first. Clear After in the dialog to search all of the logs.</p><p>On a soju bouncer that keeps message logs, the search runs on the bouncer, so it covers history from before you opened SeraphIRC. Everywhere else it searches this device's chat logs, so it finds what Chat Logging kept.</p><p>Results stay in the dialog and never appear in the channel. /raw SEARCH and /quote SEARCH open the same dialog, and soju's own form of the filters works too: in=#channel;text=words.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/search
+/search filehost broke
+/search from=Alice in=#seraphirc filehost</code></pre>
           </section>
           <section class="docs-entry" id="cmd-seraphchat">
             <header class="entry-head">
@@ -4460,6 +4590,7 @@ server/Libera/server.log</code></pre>
               <tr><th scope="row"><a href="#cmd-ruser"><code>/ruser</code></a></th><td class="idx-alias"><code></code></td><td>Remove someone from the scripts user list</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-scid"><code>/scid</code></a></th><td class="idx-alias"><code></code></td><td>Run a command on a connection by its id</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
               <tr><th scope="row"><a href="#cmd-scon"><code>/scon</code></a></th><td class="idx-alias"><code></code></td><td>Run a command on another connection</td><td class="idx-cat"><a href="#commands-client">Client</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-search"><code>/search</code></a></th><td class="idx-alias"><code></code></td><td>Search a network's message logs</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-seraphchat"><code>/seraphchat</code></a></th><td class="idx-alias"><code>/schat</code></td><td>Start an encrypted direct chat with another user</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-seraphtransfer"><code>/seraphtransfer</code></a></th><td class="idx-alias"><code></code></td><td>Send a file directly with Seraph Transfer</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-server"><code>/server</code></a></th><td class="idx-alias"><code></code></td><td>Open the server buffer</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
@@ -4759,10 +4890,11 @@ server/Libera/server.log</code></pre>
                   <tr><th scope="row"><code>Ctrl+N</code></th><td>Collapse or expand the member list in the current channel window</td></tr>
                   <tr><th scope="row"><code>Ctrl+&larr;</code> / <code>Ctrl+&rarr;</code></th><td>Switch the treebar between Networks and Bouncers view</td></tr>
                   <tr><th scope="row"><code>Ctrl+F</code></th><td>Find in the current window (Cmd+F on macOS)</td></tr>
+                  <tr><th scope="row"><code>Ctrl+L</code></th><td>Open or close <a href="#log-search">Log Search</a> to search old messages across networks (Cmd+L on macOS)</td></tr>
                   <tr><th scope="row"><code>Ctrl+Shift+R</code></th><td>Restore the default appearance if a theme leaves the interface unreadable, with Undo offered (Cmd+Shift+R on macOS)</td></tr>
                   <tr><th scope="row"><code>Shift+Enter</code></th><td>Insert a line break, and never sends</td></tr>
                   <tr><th scope="row"><code>Ctrl+Enter</code></th><td>Confirm a <a href="#send-guard">Send Guard</a> hold and send anyway (Cmd+Enter on macOS)</td></tr>
-                  <tr><th scope="row"><code>Tab</code></th><td>Complete a nickname or command in the composer</td></tr>
+                  <tr><th scope="row"><code>Tab</code></th><td>Complete a nickname or command in the composer. <a href="#autocomplete">Autocomplete</a> sets the nick order</td></tr>
                   <tr><th scope="row"><code>&uarr;</code> / <code>&darr;</code></th><td>Move between the lines of a long message. In an empty message box, step through your input history. Also moves through an open suggestion list</td></tr>
                   <tr><th scope="row"><code>Ctrl+B</code></th><td>Bold the selected text, or start bold at the cursor (Cmd+B on macOS)</td></tr>
                   <tr><th scope="row"><code>Ctrl+I</code></th><td>Italicize the selected text, or start italics at the cursor (Cmd+I on macOS)</td></tr>
