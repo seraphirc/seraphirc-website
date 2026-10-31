@@ -8,6 +8,11 @@
       content="SeraphIRC is an IRC client for desktop and mobile, with Soju and ZNC bouncer support, IRCv3, and locally stored history."
     >
     <meta name="theme-color" content="#192035">
+    <!-- The one place to bump each release. The desktop client reads these to
+         offer updates, and the download section fills in its version line from them. -->
+    <meta name="seraphirc:latest-version" content="6.0.23">
+    <meta name="seraphirc:release-date" content="2026-10-30">
+    <meta name="seraphirc:download-url" content="https://www.seraphirc.chat/#download">
     <link rel="canonical" href="https://www.seraphirc.chat/">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-v3.png">
@@ -158,11 +163,6 @@
             network or through your Soju or ZNC bouncer. It has classic and modern layouts and
             broad IRCv3 support.
           </p>
-          <p class="intro-meta">
-            Version <a href="/changelog/#v6.0.23">6.0.23</a>,
-            released Oct 30, 2026.
-          </p>
-
           <figure class="shot">
             <!-- #t=0.1 makes Safari draw the first frame instead of a blank box. -->
             <video
@@ -185,6 +185,10 @@
       <section class="section" id="download" aria-labelledby="download-title">
         <div class="wrap">
           <h2 id="download-title">Download</h2>
+          <p class="small-print" data-latest-release hidden>
+            Latest desktop version <a href="/changelog/" data-latest-version></a>,
+            released <time data-latest-date></time>.
+          </p>
           <div class="table-scroll">
             <table class="table downloads">
               <thead>
@@ -518,6 +522,27 @@
       document.querySelectorAll("[data-year]").forEach(function (el) {
         el.textContent = String(new Date().getFullYear());
       });
+
+      // Fill the download section's version line from the release meta tags.
+      (function () {
+        function meta(name) {
+          var tag = document.querySelector('meta[name="seraphirc:' + name + '"]');
+          return tag ? tag.content : "";
+        }
+        var version = meta("latest-version");
+        var date = meta("release-date");
+        var line = document.querySelector("[data-latest-release]");
+        if (!line || !version || !date) return;
+        var link = line.querySelector("[data-latest-version]");
+        link.textContent = version;
+        link.href = "/changelog/#v" + version;
+        var time = line.querySelector("[data-latest-date]");
+        time.dateTime = date;
+        time.textContent = new Date(date).toLocaleDateString("en-US", {
+          month: "short", day: "numeric", year: "numeric", timeZone: "UTC"
+        });
+        line.hidden = false;
+      })();
     </script>
   </body>
 </html>
