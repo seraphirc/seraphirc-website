@@ -743,6 +743,46 @@
               <code>/kickban</code>, <code>/topic</code>, and <code>/mode</code>. Most
               take an optional channel, so you can moderate from another window.
             </p>
+
+            <h3>Favorites</h3>
+            <p>
+              Right click a channel or query in the treebar, its title bar, or a
+              query's transcript and choose <strong>Add to Favorites</strong>. You can
+              also hover a row in the treebar and click the star before its name.
+              Favorites gather in a card above your networks, with channels and
+              queries listed separately and each one labeled with its network.
+            </p>
+            <p>
+              The star in the toolbar and <strong>View &gt; Favorites</strong> open the
+              same card. Click the gold star or choose <strong>Remove from
+              Favorites</strong> to drop one. To take the card out of the treebar, see
+              <a href="#appearance-favorites">Appearance</a>.
+            </p>
+            <div class="docs-note">
+              Parting a channel keeps its star, and the row comes back when you
+              rejoin. Closing a query removes its star. Favorite queries reopen when
+              their network connects after a restart.
+            </div>
+
+            <h3>Detaching a window</h3>
+            <p>
+              A channel, query, or DCC chat can move out of the main window into one
+              of its own. Click the <strong>Detach window</strong> button on its title
+              bar, or right click it in the treebar, its title bar, or its transcript
+              and choose <strong>Detach Window</strong>. Drag the new window anywhere on
+              screen or onto another monitor.
+            </p>
+            <p>
+              A detached conversation keeps its row in the treebar with a small
+              window mark beside the name. Clicking the row brings its window to the
+              front. To put it back, click <strong>Reattach window</strong> on its
+              title bar, choose <strong>Reattach Window</strong> from a right click
+              menu, or close the window.
+            </p>
+            <div class="docs-note">
+              Detached windows follow your theme, and a setting changed in one window
+              applies to all of them. They do not reopen on the next launch.
+            </div>
           </article>
 
           <article class="docs-pane" id="bouncers" data-pane>
@@ -923,6 +963,15 @@
               The interface font and the message font are set separately, family and
               size each, from the fonts installed on your system. Both start at
               <code>system-ui</code> at 15px.
+            </p>
+
+            <h3 id="appearance-favorites">Favorites</h3>
+            <p>
+              <strong>Show favorites in treebar</strong> puts your
+              <a href="#channels">favorite channels and queries</a> in a card above
+              your networks. On by default. Turned off, the card leaves the treebar
+              but your favorites are kept, and the star in the toolbar still opens
+              them.
             </p>
 
             <h3>Density</h3>
@@ -2596,7 +2645,7 @@ server/Libera/server.log</code></pre>
                   <tr><th scope="row">Networks</th><td>Servers, ports, TLS and SASL flags, usernames, autojoin, ignored nicks, and active state.</td></tr>
                   <tr><th scope="row"><a href="#bouncer-profiles">Bouncer profiles</a></th><td>Host, port, TLS settings, username, notes, and the trusted certificate fingerprint.</td></tr>
                   <tr><th scope="row"><a href="#aliases">Command aliases</a></th><td>Merged into your existing set. An imported alias wins a name collision.</td></tr>
-                  <tr><th scope="row">Favorites and Notify entries</th><td>Channel favorites and <a href="#notify-list">notify list</a> entries.</td></tr>
+                  <tr><th scope="row">Notify entries</th><td>Your <a href="#notify-list">notify list</a>.</td></tr>
                   <tr><th scope="row"><a href="#buffer-settings">Per-buffer settings</a></th><td>Alert mode, activity mode, focus mode and its busy threshold, scrollback limit, and whether that buffer keeps a log.</td></tr>
                   <tr><th scope="row"><a href="#appearance">Appearance</a></th><td>Theme, fonts, layout, spacing, window preferences, and any custom themes you have made.</td></tr>
                   <tr><th scope="row">Preferences</th><td>Alert preferences, the diagnostics logging preference, the chat logging default, and whether first-run setup is complete.</td></tr>
@@ -2606,7 +2655,8 @@ server/Libera/server.log</code></pre>
 
             <h3>What does not</h3>
             <p>
-              Passwords, keyring secrets, <a href="#chat-logging">chat logs</a>,
+              Passwords, keyring secrets, <a href="#channels">favorites</a>,
+              <a href="#chat-logging">chat logs</a>,
               <a href="#diagnostics">diagnostics logs</a>, the SQLite databases, and
               runtime connection state are all excluded. You will be re-entering
               credentials on the new machine.
@@ -2622,10 +2672,9 @@ server/Libera/server.log</code></pre>
             <h3>Importing</h3>
             <p>
               Import Configuration reads the file and shows an <strong>Import
-              Preview</strong> first, counting the networks, favorites, notify
-              entries, buffer preferences, and preferences it found, along with the
-              export version and when it was made. Nothing changes until you press
-              Apply Import.
+              Preview</strong> first, counting the networks, notify entries, buffer
+              preferences, and preferences it found, along with the export version
+              and when it was made. Nothing changes until you press Apply Import.
             </p>
           </article>
 
