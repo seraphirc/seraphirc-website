@@ -172,6 +172,7 @@
                   </ul>
                 </li>
                 <li><a href="#log-search">Log Search</a></li>
+                <li><a href="#stats">Channel and User Stats</a></li>
                 <li><a href="#custom-mentions">Custom Mentions</a></li>
                 <li><a href="#ignore-list">Ignore List</a></li>
                 <li><a href="#metadata">IRCv3 Metadata</a></li>
@@ -242,9 +243,10 @@
             </ul>
           </details>
           <details class="chapter">
-            <summary>Messaging<span class="chapter-count">24</span></summary>
+            <summary>Messaging<span class="chapter-count">26</span></summary>
             <ul class="pagelist">
               <li class="page-overview"><a href="#commands-messaging"><span class="lbl-screen">All messaging commands</span><span class="lbl-print">Messaging</span></a></li>
+              <li><a href="#cmd-chanstats"><code>/chanstats</code></a></li>
               <li><a href="#cmd-ctcp"><code>/ctcp</code></a></li>
               <li><a href="#cmd-ctcpreply"><code>/ctcpreply</code></a></li>
               <li><a href="#cmd-dcc"><code>/dcc</code></a></li>
@@ -269,6 +271,7 @@
               <li><a href="#cmd-seraphtransfer"><code>/seraphtransfer</code></a></li>
               <li><a href="#cmd-unreact"><code>/unreact</code></a></li>
               <li><a href="#cmd-upload"><code>/upload</code></a></li>
+              <li><a href="#cmd-userstats"><code>/userstats</code></a></li>
             </ul>
           </details>
           <details class="chapter">
@@ -712,7 +715,8 @@
               <a href="#cmd-whois"><code>/whois nick</code></a> asks the server for
               somebody's account, host, idle time, and shared channels.
               <a href="#cmd-whowas"><code>/whowas</code></a> answers for somebody who
-              has left.
+              has left. <a href="#stats">User Stats</a> shows when they are around and
+              where they talk, from your own logs.
             </p>
             <p>
               Query windows show whether the other person is authenticated and on
@@ -1482,7 +1486,7 @@ server/Libera/server.log</code></pre>
                 <tbody>
                   <tr><th scope="row"><code>Ctrl+L</code></th><td>Opens or closes Log Search (Cmd+L on macOS). It works from the composer too.</td></tr>
                   <tr><th scope="row">The magnifier on the toolbar</th><td>Opens Log Search with the conversations you picked last time.</td></tr>
-                  <tr><th scope="row">View &gt; Log Search&hellip;</th><td>The same as the toolbar button.</td></tr>
+                  <tr><th scope="row">View &gt; Log Search</th><td>The same as the toolbar button.</td></tr>
                   <tr><th scope="row"><a href="#cmd-search"><code>/search</code></a></th><td>Opens it on the current channel or query. With filters it runs the search right away.</td></tr>
                   <tr><th scope="row"><code>/raw SEARCH</code> or <code>/quote SEARCH</code></th><td>Opens the same dialog, and accepts soju's own filter form, as in <code>in=#channel;text=words</code>.</td></tr>
                 </tbody>
@@ -1542,6 +1546,61 @@ server/Libera/server.log</code></pre>
               Nothing in Log Search jumps the transcript to a result. A result from
               last month would mean loading thousands of lines into the channel, so
               it stays a line you can read and copy.
+            </div>
+          </article>
+
+          <article class="docs-pane" id="stats" data-pane>
+            <p class="pane-kicker">Chatting</p>
+            <h2>Channel and User Stats</h2>
+            <p class="pane-lead">
+              Channel Stats shows who talks in a channel and when. User Stats does
+              the same for one person. Both count this device's
+              <a href="#chat-logging">chat logs</a> and never ask the server.
+            </p>
+
+            <h3>Opening them</h3>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Way in</th><th>What opens</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Right click a channel</th><td>Channel Stats, in the treebar or on the channel's title bar.</td></tr>
+                  <tr><th scope="row">View &gt; Channel Stats</th><td>Channel Stats for the current channel.</td></tr>
+                  <tr><th scope="row"><a href="#cmd-chanstats"><code>/chanstats [#channel]</code></a></th><td>Channel Stats for the current channel, or the one you name.</td></tr>
+                  <tr><th scope="row">Right click a nick</th><td>User Stats, under User Info. A private chat's menu has it too.</td></tr>
+                  <tr><th scope="row"><a href="#cmd-userstats"><code>/userstats &lt;nick&gt;</code></a></th><td>User Stats for that nick. In a private chat the nick is optional.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              Pick Today, 7 days, 30 days, or All time at the top. Click a nick in
+              either dialog to see their User Stats, or a channel in User Stats to
+              see its Channel Stats. The range carries over.
+            </p>
+
+            <h3>Channel Stats</h3>
+            <p>
+              Messages compared with the period before, how many people talked, the
+              busiest day, and the peak hour. Below that are a weekday by hour heat
+              map, top talkers, regulars, the most shared sites, and a hall of fame.
+              Notices, joins, and ignored nicks are left out.
+            </p>
+
+            <h3>User Stats</h3>
+            <p>
+              When someone is around, when you first saw them and when they last
+              spoke, the channels you share, who they talk with most, how they
+              write, and the sites they share. It works for people who are offline.
+            </p>
+            <p>
+              In a channel, the <strong>Where</strong> switch picks that channel or
+              the whole network. The network view also counts what they sent you in
+              private. Lines they sent under another nick are not included.
+            </p>
+
+            <div class="docs-note">
+              Numbers can differ between devices. Each one keeps its own logs and
+              fetches only a channel's recent history. On a network without chat
+              history, a device has only what it saw while connected.
             </div>
           </article>
 
@@ -2976,7 +3035,21 @@ server/Libera/server.log</code></pre>
           <p class="pane-kicker">Commands</p>
           <h2>Messaging</h2>
           <p class="pane-lead">Putting text, files, or an action in front of someone. The formatting variants are covered under <a href="#formatting">Text Formatting</a>.</p>
-          <nav class="entry-jump" aria-label="Messaging commands"><a href="#cmd-ctcp"><code>/ctcp</code></a><a href="#cmd-ctcpreply"><code>/ctcpreply</code></a><a href="#cmd-dcc"><code>/dcc</code></a><a href="#cmd-describe"><code>/describe</code></a><a href="#cmd-format"><code>/format</code></a><a href="#cmd-format-me"><code>/format-me</code></a><a href="#cmd-format-msg"><code>/format-msg</code></a><a href="#cmd-format-notice"><code>/format-notice</code></a><a href="#cmd-giphy"><code>/giphy</code></a><a href="#cmd-imgbb"><code>/imgbb</code></a><a href="#cmd-me"><code>/me</code></a><a href="#cmd-msg"><code>/msg</code></a><a href="#cmd-notice"><code>/notice</code></a><a href="#cmd-plain"><code>/plain</code></a><a href="#cmd-plain-me"><code>/plain-me</code></a><a href="#cmd-plain-msg"><code>/plain-msg</code></a><a href="#cmd-plain-notice"><code>/plain-notice</code></a><a href="#cmd-query"><code>/query</code></a><a href="#cmd-react"><code>/react</code></a><a href="#cmd-search"><code>/search</code></a><a href="#cmd-seraphchat"><code>/seraphchat</code></a><a href="#cmd-seraphtransfer"><code>/seraphtransfer</code></a><a href="#cmd-unreact"><code>/unreact</code></a><a href="#cmd-upload"><code>/upload</code></a></nav>
+          <nav class="entry-jump" aria-label="Messaging commands"><a href="#cmd-chanstats"><code>/chanstats</code></a><a href="#cmd-ctcp"><code>/ctcp</code></a><a href="#cmd-ctcpreply"><code>/ctcpreply</code></a><a href="#cmd-dcc"><code>/dcc</code></a><a href="#cmd-describe"><code>/describe</code></a><a href="#cmd-format"><code>/format</code></a><a href="#cmd-format-me"><code>/format-me</code></a><a href="#cmd-format-msg"><code>/format-msg</code></a><a href="#cmd-format-notice"><code>/format-notice</code></a><a href="#cmd-giphy"><code>/giphy</code></a><a href="#cmd-imgbb"><code>/imgbb</code></a><a href="#cmd-me"><code>/me</code></a><a href="#cmd-msg"><code>/msg</code></a><a href="#cmd-notice"><code>/notice</code></a><a href="#cmd-plain"><code>/plain</code></a><a href="#cmd-plain-me"><code>/plain-me</code></a><a href="#cmd-plain-msg"><code>/plain-msg</code></a><a href="#cmd-plain-notice"><code>/plain-notice</code></a><a href="#cmd-query"><code>/query</code></a><a href="#cmd-react"><code>/react</code></a><a href="#cmd-search"><code>/search</code></a><a href="#cmd-seraphchat"><code>/seraphchat</code></a><a href="#cmd-seraphtransfer"><code>/seraphtransfer</code></a><a href="#cmd-unreact"><code>/unreact</code></a><a href="#cmd-upload"><code>/upload</code></a><a href="#cmd-userstats"><code>/userstats</code></a></nav>
+          <section class="docs-entry" id="cmd-chanstats">
+            <header class="entry-head">
+              <h3>/chanstats<a class="entry-anchor" href="#cmd-chanstats" aria-label="Link to /chanstats">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span><span class="flag flag-network">needs a network</span></span>
+            </header>
+            <p class="entry-usage"><code>/chanstats [#channel]</code></p>
+            <p class="entry-summary">Show who talks in a channel, and when</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>#channel</code></dt><dd>the channel to count (defaults to this window)</dd></dl>
+            <div class="entry-details"><p>Opens Channel Stats: messages, the busiest day and hour, top talkers, regulars, the sites people link to and a hall of fame, for today, the last 7 days, the last 30 days or all time.</p><p>Counted from this device's chat logs, so it covers what SeraphIRC has seen or fetched. It never asks the server for anything.</p><p>The same as Channel Stats in a channel's right-click menu. /stats is the server's own statistics command and still goes to the server.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/chanstats
+/chanstats #seraphirc</code></pre>
+          </section>
           <section class="docs-entry" id="cmd-ctcp">
             <header class="entry-head">
               <h3>/ctcp<a class="entry-anchor" href="#cmd-ctcp" aria-label="Link to /ctcp">#</a></h3>
@@ -3107,7 +3180,7 @@ server/Libera/server.log</code></pre>
             </header>
             <p class="entry-usage"><code>/imgbb</code></p>
             <p class="entry-summary">Pick an image and upload it to ImgBB</p>
-            <div class="entry-details"><p>Opens a file picker, uploads the chosen image to your ImgBB account, and puts its link in the composer. The same action as Upload to ImgBB in the composer menu.</p><p>The command never sends anything by itself. The link waits in the composer, so you can add a comment, and the message goes out through the same checks as anything else you type.</p><p>Off until you turn it on. The integration needs a free ImgBB API key of your own: Settings &gt; Third-Party Services &gt; ImgBB API.</p><p>Pasting and dropping files in still upload to the network's filehost, set in Settings &gt; Uploads. Only this command and the menu item use ImgBB.</p></div>
+            <div class="entry-details"><p>Opens a file picker, uploads the chosen image to your ImgBB account, and puts its link in the composer. The same action as Upload to ImgBB in the composer menu.</p><p>The command never sends anything by itself. The link waits in the composer, so you can add a comment, and the message goes out through the same checks as anything else you type.</p><p>Off until you turn it on. The integration needs a free ImgBB API key of your own: Settings &gt; Third-Party Services &gt; ImgBB API.</p><p>Pasting and dragging files in still upload to your bouncer's file host. Only this command and the menu item use ImgBB.</p></div>
             <h4 class="entry-label">Examples</h4>
             <pre class="entry-examples"><code>/imgbb</code></pre>
           </section>
@@ -3267,7 +3340,7 @@ server/Libera/server.log</code></pre>
             <p class="entry-summary">Send a file directly with Seraph Transfer</p>
             <h4 class="entry-label">Parameters</h4>
             <dl class="entry-params"><dt><code>nick</code></dt><dd>the person to send to (in a query it defaults to that person)</dd></dl>
-            <div class="entry-details"><p>Opens a file picker and offers the chosen file over Seraph Transfer: a direct, end-to-end encrypted transfer that verifies the file and, unlike DCC, works from behind a bouncer.</p><p>The same action as "Send File (Seraph)" in a nickname's right-click menu, so this is a keyboard shortcut rather than the only route.</p><p>Sending an offer reveals your IP address to the rendezvous immediately and to the other person once they accept.</p><p>The command never reaches the server, and it never falls back to DCC by itself: if the peer cannot answer a Seraph offer, DCC is suggested rather than silently used.</p><p>Nothing to set up: Seraph Transfer is available on every network, including through a bouncer. Settings &gt; Network &gt; Seraph Transfer &amp; Chat tunes where files land and how large an offer may be.</p></div>
+            <div class="entry-details"><p>Opens a file picker and offers the chosen file over Seraph Transfer: a direct, end-to-end encrypted transfer that verifies the file and, unlike DCC, works from behind a bouncer.</p><p>The same action as "Send File (Seraph)" in a nickname's right-click menu, so this is a keyboard shortcut rather than the only route.</p><p>Sending an offer reveals your IP address to the rendezvous immediately and to the other person once they accept.</p><p>The command never reaches the server, and it never falls back to DCC by itself: if the peer cannot answer a Seraph offer, DCC is suggested rather than silently used.</p><p>Nothing to set up: Seraph Transfer is available on every network, including through a bouncer. Settings &gt; File Uploads &amp; DCC tunes where files land and how large an offer may be.</p></div>
             <h4 class="entry-label">Examples</h4>
             <pre class="entry-examples"><code>/seraphtransfer Alice</code></pre>
           </section>
@@ -3294,6 +3367,19 @@ server/Libera/server.log</code></pre>
             <div class="entry-details"><p>Opens a file picker, uploads the chosen file, and puts its link in the composer. The same action as Upload a file in the composer menu.</p><p>The command never sends anything by itself. The link waits in the composer, so you can add a comment, and the message goes out through the same checks as anything else you type.</p><p>Where the file goes is the network's File uploads setting: its own server's filehost, the default filehost from Settings &gt; Uploads, or a custom URL. The first upload to a new host asks first.</p></div>
             <h4 class="entry-label">Examples</h4>
             <pre class="entry-examples"><code>/upload</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-userstats">
+            <header class="entry-head">
+              <h3>/userstats<a class="entry-anchor" href="#cmd-userstats" aria-label="Link to /userstats">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-local">local only</span><span class="flag flag-network">needs a network</span></span>
+            </header>
+            <p class="entry-usage"><code>/userstats &lt;nick&gt;</code></p>
+            <p class="entry-summary">Show when someone talks, where, and with whom</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>nick</code></dt><dd>the person to look up on this network (defaults to the person in a private chat)</dd></dl>
+            <div class="entry-details"><p>Opens User Stats for that nick on this network: when they're around, the channels you share, who they talk with most and how they write, for today, the last 7 days, the last 30 days or all time.</p><p>Counted from this device's chat logs in channels only, matched by nick. It works for people who aren't online and never asks the server for anything.</p><p>The same as User Stats in a nick's right-click menu.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/userstats tobin</code></pre>
           </section>
         </article>
         <article class="docs-pane" id="commands-encryption" data-pane>
@@ -4562,6 +4648,7 @@ server/Libera/server.log</code></pre>
               <tr><th scope="row"><a href="#cmd-back"><code>/back</code></a></th><td class="idx-alias"><code></code></td><td>Clear away status</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-ban"><code>/ban</code></a></th><td class="idx-alias"><code></code></td><td>Ban a nick or mask from a channel</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-buffers"><code>/buffers</code></a></th><td class="idx-alias"><code></code></td><td>List buffers</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-chanstats"><code>/chanstats</code></a></th><td class="idx-alias"><code></code></td><td>Show who talks in a channel, and when</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-chghost"><code>/chghost</code></a></th><td class="idx-alias"><code></code></td><td>Change a user's displayed host</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
               <tr><th scope="row"><a href="#cmd-clear"><code>/clear</code></a></th><td class="idx-alias"><code></code></td><td>Clear the current visible buffer without deleting logs</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
               <tr><th scope="row"><a href="#cmd-clearall"><code>/clearall</code></a></th><td class="idx-alias"><code></code></td><td>Clear visible buffers without deleting logs</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
@@ -4671,6 +4758,7 @@ server/Libera/server.log</code></pre>
               <tr><th scope="row"><a href="#cmd-upload"><code>/upload</code></a></th><td class="idx-alias"><code></code></td><td>Pick a file and upload it to this network's filehost</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-userhost"><code>/userhost</code></a></th><td class="idx-alias"><code></code></td><td>Request user/host information</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-users"><code>/users</code></a></th><td class="idx-alias"><code></code></td><td>Request the server USERS listing</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-userstats"><code>/userstats</code></a></th><td class="idx-alias"><code></code></td><td>Show when someone talks, where, and with whom</td><td class="idx-cat"><a href="#commands-messaging">Messaging</a></td></tr>
               <tr><th scope="row"><a href="#cmd-voice"><code>/voice</code></a></th><td class="idx-alias"><code></code></td><td>Give voice to a nick</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-wallops"><code>/wallops</code></a></th><td class="idx-alias"><code></code></td><td>Broadcast to users with wallops enabled</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
               <tr><th scope="row"><a href="#cmd-who"><code>/who</code></a></th><td class="idx-alias"><code></code></td><td>Send WHO command</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>

@@ -1485,7 +1485,7 @@
       "The same action as \"Send File (Seraph)\" in a nickname's right-click menu, so this is a keyboard shortcut rather than the only route.",
       "Sending an offer reveals your IP address to the rendezvous immediately and to the other person once they accept.",
       "The command never reaches the server, and it never falls back to DCC by itself: if the peer cannot answer a Seraph offer, DCC is suggested rather than silently used.",
-      "Nothing to set up: Seraph Transfer is available on every network, including through a bouncer. Settings \u003e Network \u003e Seraph Transfer \u0026 Chat tunes where files land and how large an offer may be."
+      "Nothing to set up: Seraph Transfer is available on every network, including through a bouncer. Settings \u003e File Uploads \u0026 DCC tunes where files land and how large an offer may be."
     ],
     "Examples": [
       "/seraphtransfer Alice"
@@ -1532,7 +1532,7 @@
       "Opens a file picker, uploads the chosen image to your ImgBB account, and puts its link in the composer. The same action as Upload to ImgBB in the composer menu.",
       "The command never sends anything by itself. The link waits in the composer, so you can add a comment, and the message goes out through the same checks as anything else you type.",
       "Off until you turn it on. The integration needs a free ImgBB API key of your own: Settings \u003e Third-Party Services \u003e ImgBB API.",
-      "Pasting and dropping files in still upload to the network's filehost, set in Settings \u003e Uploads. Only this command and the menu item use ImgBB."
+      "Pasting and dragging files in still upload to your bouncer's file host. Only this command and the menu item use ImgBB."
     ],
     "Examples": [
       "/imgbb"
@@ -1587,6 +1587,53 @@
       "/search",
       "/search filehost broke",
       "/search from=Alice in=#seraphirc filehost"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
+    "Name": "chanstats",
+    "Aliases": null,
+    "Usage": "/chanstats [#channel]",
+    "Parameters": [
+      "#channel: the channel to count (defaults to this window)"
+    ],
+    "Summary": "Show who talks in a channel, and when",
+    "Details": [
+      "Opens Channel Stats: messages, the busiest day and hour, top talkers, regulars, the sites people link to and a hall of fame, for today, the last 7 days, the last 30 days or all time.",
+      "Counted from this device's chat logs, so it covers what SeraphIRC has seen or fetched. It never asks the server for anything.",
+      "The same as Channel Stats in a channel's right-click menu. /stats is the server's own statistics command and still goes to the server."
+    ],
+    "Examples": [
+      "/chanstats",
+      "/chanstats #seraphirc"
+    ],
+    "Category": "Messaging",
+    "SendsIRC": false,
+    "LocalOnly": true,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
+    "Name": "userstats",
+    "Aliases": null,
+    "Usage": "/userstats \u003cnick\u003e",
+    "Parameters": [
+      "nick: the person to look up on this network (defaults to the person in a private chat)"
+    ],
+    "Summary": "Show when someone talks, where, and with whom",
+    "Details": [
+      "Opens User Stats for that nick on this network: when they're around, the channels you share, who they talk with most and how they write, for today, the last 7 days, the last 30 days or all time.",
+      "Counted from this device's chat logs in channels only, matched by nick. It works for people who aren't online and never asks the server for anything.",
+      "The same as User Stats in a nick's right-click menu."
+    ],
+    "Examples": [
+      "/userstats tobin"
     ],
     "Category": "Messaging",
     "SendsIRC": false,
