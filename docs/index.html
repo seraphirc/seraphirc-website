@@ -153,7 +153,9 @@
             <details class="book">
               <summary>Interface</summary>
               <ul class="pagelist">
-                <li><a href="#appearance">Appearance</a></li>
+                <li><a href="#theme">Theme</a></li>
+                <li><a href="#text-spacing">Text and Spacing</a></li>
+                <li><a href="#layout">Layout</a></li>
                 <li><a href="#alerts">Sounds and Alerts</a>
                   <ul class="subpages">
                     <li><a href="#buffer-settings">Per-Buffer Settings</a></li>
@@ -176,6 +178,7 @@
                 <li><a href="#custom-mentions">Custom Mentions</a></li>
                 <li><a href="#ignore-list">Ignore List</a></li>
                 <li><a href="#metadata">IRCv3 Metadata</a></li>
+                <li><a href="#messages">Messages</a></li>
                 <li><a href="#notify-list">Notify List</a></li>
                 <li><a href="#send-guard">Send Guard</a>
                   <ul class="subpages">
@@ -452,7 +455,7 @@
                   <tr><th scope="row"><a href="#formatting">Formatting</a></th><td>Markdown and token syntax compiled to standard IRC control codes, so other clients see ordinary bold, italics, and color.</td></tr>
                   <tr><th scope="row"><a href="#files">File transfer</a></th><td>Filehost uploads, classic DCC, and Seraph Transfer, an encrypted peer to peer send between SeraphIRC users that works from behind a bouncer and behind NAT.</td></tr>
                   <tr><th scope="row"><a href="#encryption">Encryption</a></th><td>FiSH message encryption compatible with HexChat, Konversation, Quassel, and mIRC. Set a shared key and a conversation encrypts automatically, with lock indicators showing exactly what was protected.</td></tr>
-                  <tr><th scope="row"><a href="#appearance">Appearance</a></th><td>A collection of prebuilt themes, a theme editor, and imports from the community <a href="/marketplace/">marketplace</a>.</td></tr>
+                  <tr><th scope="row"><a href="#theme">Appearance</a></th><td>A collection of prebuilt themes, a theme editor, and imports from the community <a href="/marketplace/">marketplace</a>.</td></tr>
                   <tr><th scope="row">Privacy</th><td>No analytics, no account requirement, no cloud dependency. The client talks to your networks and nothing else.</td></tr>
                 </tbody>
               </table>
@@ -760,7 +763,7 @@
               The star in the toolbar and <strong>View &gt; Favorites</strong> open the
               same card. Click the gold star or choose <strong>Remove from
               Favorites</strong> to drop one. To take the card out of the treebar, see
-              <a href="#appearance-favorites">Appearance</a>.
+              <a href="#layout-favorites">Layout</a>.
             </p>
             <div class="docs-note">
               Parting a channel keeps its star, and the row comes back when you
@@ -890,27 +893,37 @@
 
           <!-- ══ Interface ════════════════════════════════════════════ -->
 
-          <article class="docs-pane" id="appearance" data-pane>
+          <article class="docs-pane" id="theme" data-pane>
             <p class="pane-kicker">Interface</p>
-            <h2>Appearance</h2>
+            <h2 id="appearance">Theme</h2>
             <p class="pane-lead">
-              Theme, fonts, density, window dressing, and how the message pane is
-              drawn. <code>Settings &gt; Interface &gt; Appearance</code>.
+              Your theme, atmosphere, chrome style, window controls, opacity, and
+              highlights.
+              <code>Settings &gt; Interface &gt; Theme</code>.
             </p>
 
             <h3>Theme</h3>
             <p>
-              Pick a built-in theme, or one of your own. Clone a built-in and the
-              copy appears under Your themes, editable in the theme editor while
-              staying a layer over the stock theme rather than a replacement for it.
+              Pick a built-in theme, or one of your own. <strong>Clone and
+              edit</strong> makes a copy under Your themes that opens in the theme
+              editor. The copy stays a layer over the stock theme rather than a
+              replacement for it.
             </p>
             <p>
-              Themes other people made import from
-              <code>Settings &gt; Interface &gt; Appearance &gt; Import Theme</code>.
-              The <a href="/marketplace/">theme marketplace</a> holds the community
+              <strong>Import</strong> brings in a theme file someone else made. The
+              <a href="/marketplace/">theme marketplace</a> holds the community
               submitted ones, each checked by hand and credited to the nick that sent
               it in.
             </p>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Setting</th><th>Default</th><th>What it does</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Toolbar logo follows theme</th><td><code>on</code></td><td>Tints the toolbar logo with your theme's colors.</td></tr>
+                  <tr><th scope="row">Atmosphere</th><td>50</td><td>Celestial dust across the toolbar, treebar, and member list. Presets for Off, Subtle, Default, and Full.</td></tr>
+                </tbody>
+              </table>
+            </div>
 
             <div class="docs-note">
               <strong>If a theme leaves the interface unreadable</strong>, press
@@ -918,48 +931,53 @@
               (<code>Cmd+Shift+R</code> on macOS). Undo is offered afterwards.
             </div>
 
-            <h3>Transcript Layout</h3>
+            <h3>Window</h3>
+            <p>
+              <strong>Chrome style</strong> sets how the surfaces around your theme
+              are dressed: Auto, macOS, or Seraph. Seraph adds gradient panels and
+              accent glows. macOS is flat, with hairlines and the system type scale.
+              Auto picks macOS on a Mac and Seraph everywhere else.
+            </p>
+            <p>
+              <strong>Window controls</strong> sets the buttons on channel, query,
+              and status windows: Auto, macOS, or Linux. The app's own title bar is
+              not affected.
+            </p>
+            <div class="docs-note">
+              Both are looks only. Your theme colors are the same under either, and
+              either can be used on any system.
+            </div>
             <div class="table-scroll">
               <table>
-                <thead><tr><th>Mode</th><th>Draws</th></tr></thead>
+                <thead><tr><th>Setting</th><th>Default</th><th>What it does</th></tr></thead>
                 <tbody>
-                  <tr><th scope="row">Classic</th><td>The traditional IRC layout. Timestamp, nickname, and message on one line.</td></tr>
-                  <tr><th scope="row">Modern</th><td>The default. Nickname and time above the message, with consecutive messages from one person grouped under a single header.</td></tr>
+                  <tr><th scope="row">Compact toolbar</th><td><code>off</code></td><td>Packs the toolbar into one dense row and shrinks the connection pill to a status light. Hover and click work as before.</td></tr>
+                  <tr><th scope="row">Seamless maximize</th><td><code>on</code></td><td>A maximized window drops its title bar. The topic line shows the name and details the title bar carried.</td></tr>
+                  <tr><th scope="row">Window opacity</th><td>100</td><td>50 to 100. Fades the window surface only, never the text.</td></tr>
+                  <tr><th scope="row">Active network highlight</th><td>50</td><td>The outline on the active network in the treebar. Presets for None, Subtle, and Solid.</td></tr>
+                  <tr><th scope="row">Topic bar highlight</th><td>50</td><td>The outline around a channel's topic bar. Presets for None, Subtle, and Solid.</td></tr>
                 </tbody>
               </table>
             </div>
+            <div class="docs-note">
+              With seamless maximize there is no close or restore control on the
+              window itself. <strong>Restore Window</strong> in the toolbar and the
+              Window menu both bring the frame back.
+            </div>
+
+            <h3>Defaults</h3>
             <p>
-              <strong>Alternate line shading</strong> draws every other message on
-              a faintly shaded band, so a long line stays easy to follow from the
-              nickname across to the text. Off by default, and Classic only. The
-              checkbox greys out in Modern, which already groups messages under
-              each speaker, and your setting is kept for when you switch back.
+              <strong>Restore interface defaults</strong> puts theme, text, spacing,
+              and layout back to how they shipped. Your own themes are kept.
             </p>
-            <p>
-              <strong>Enhanced composer</strong> puts a formatting bar above the
-              message box with buttons for bold, italic, underline, strikethrough,
-              code, spoilers, and color. Emoji, uploads, and Send sit on the row
-              below. Each layout has its own switch. It is on for Modern and off for
-              Classic by default.
-            </p>
-            <p>
-              The buttons insert the same markers you would type by hand (see
-              <a href="#formatting">Text Formatting</a>). Selected text is wrapped,
-              and pressing a button again on styled text removes the style. The
-              color picker sets the text or background color from the 16 standard
-              colors and the extended palette. The bar follows Automatic text
-              formatting under Chat below. Markdown alone
-              has no underline or color, so those buttons leave the bar, and with
-              automatic formatting off the bar is hidden.
-            </p>
-            <p>
-              <strong>Live formatting (experimental)</strong> shows bold, colors,
-              code, and the rest as they will look while you type. Formatting codes
-              stay hidden until your cursor reaches them. It needs the enhanced
-              composer.
-            </p>
-            <p>
-              Avatars are set under <a href="#metadata">IRCv3 Metadata</a>.
+          </article>
+
+          <article class="docs-pane" id="text-spacing" data-pane>
+            <p class="pane-kicker">Interface</p>
+            <h2>Text and Spacing</h2>
+            <p class="pane-lead">
+              Fonts, nicknames, message and member list spacing, and icon size.
+              <code>Settings &gt; Interface &gt; Text and Spacing</code>.
             </p>
 
             <h3>Fonts</h3>
@@ -968,153 +986,98 @@
               size each, from the fonts installed on your system. Both start at
               <code>system-ui</code> at 15px.
             </p>
-
-            <h3 id="appearance-favorites">Favorites</h3>
-            <p>
-              <strong>Show favorites in treebar</strong> puts your
-              <a href="#channels">favorite channels and queries</a> in a card above
-              your networks. On by default. Turned off, the card leaves the treebar
-              but your favorites are kept, and the star in the toolbar still opens
-              them.
-            </p>
-
-            <h3>Density</h3>
-            <div class="table-scroll">
-              <table>
-                <thead><tr><th>Slider</th><th>Range</th><th>What it moves</th></tr></thead>
-                <tbody>
-                  <tr><th scope="row">Atmosphere</th><td>0 to 100, default 50</td><td>Every celestial layer at once: treebar dust, member list sparkle, transcript starfield. 0 removes them.</td></tr>
-                  <tr><th scope="row">User List Spacing</th><td>0 to 100, default 50</td><td>Vertical padding between member list rows.</td></tr>
-                  <tr><th scope="row">Message Spacing</th><td>0 to 100, default 50</td><td>Vertical spacing between messages.</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <p>
-              50 is the historical spacing on both spacing sliders. Left tightens,
-              right loosens, and line height keeps descenders and mode glyphs from
-              colliding even at the tight end.
-            </p>
-
-            <h3>Window</h3>
-            <p>
-              <strong>Window Opacity</strong> runs from 50 to 100, default 100, and
-              fades a window's surface only. Text never fades, and what shows
-              through is the workspace behind it rather than your desktop.
-            </p>
-            <p>
-              <strong>Active Network Highlight</strong> sets how strongly the active
-              network's card is outlined in the treebar. <strong>Topic Bar
-              Highlight</strong> does the same for the outline around a channel's
-              topic bar. Both run from 0 to 100, default 50, with None, Subtle, and
-              Solid presets at 0, 50, and 100. The two draw the same outline, so
-              equal settings look identical, but each slider only changes its own.
-            </p>
-            <p>
-              <strong>Window controls</strong> sets the style drawn on channel,
-              query, and status windows inside the app: Auto, macOS, or Linux. Auto
-              follows the system the app is running on, drawing the macOS traffic
-              lights on a Mac and the Linux and Windows controls everywhere else.
-              The app's own title bar is not affected.
-            </p>
-            <p>
-              <strong>Chrome style</strong> sets how the surfaces around your theme
-              are dressed: Auto, macOS, or Seraph. Seraph is the house style, with
-              gradient panels, accent glows, and drawn window frames. macOS is the
-              native register, with flat fills, hairlines, depth in place of glow,
-              and the system type scale. Auto resolves the same way the window
-              controls do, macOS on a Mac and Seraph everywhere else.
-            </p>
-            <div class="docs-note">
-              Both settings are presentation only. Neither changes layout, focus,
-              stacking order, or how windows open and close, and your theme colors
-              are identical under either one, so all 21 themes work in both
-              registers. Either can also be forced against the platform, which is
-              how one machine previews both looks. The macOS dressing is available
-              on Linux and Windows, and the Seraph dressing on a Mac.
-            </div>
-            <p>
-              <strong>Seamless maximize</strong> drops the title bar from the window
-              owning a maximized area, so a maximized buffer is topic and transcript
-              with nothing framing them. Off by default. Nothing about the floating
-              layout changes.
-            </p>
-            <p>
-              What the title bar was carrying moves into the topic, which leads with
-              the buffer's name. A channel states its member count and channel modes,
-              a query states the nick and whether the network vouches for them, and a
-              server window states your nick, your user modes, and the host you are
-              connected to.
-            </p>
-            <div class="docs-note">
-              With no title bar there is no close or restore control on the window
-              itself. <strong>Restore Window</strong> in the toolbar and the Window
-              menu both bring the frame back.
-            </div>
-
-            <h3>Toolbar</h3>
-            <p>
-              <strong>Compact toolbar</strong> packs the trays and the action cluster
-              into one dense row under the title bar, gives up the row's own padding,
-              and cuts the connection pill down to a bare light. The light keeps the
-              hover popover and the click into Connection Health the full pill carries.
-              Off by default.
-            </p>
-            <p>
-              Icon size is left alone, so the glyphs stay whatever you set below.
-              Compact changes the room around them rather than the glyphs themselves.
-            </p>
-
-            <h3>Icon Size</h3>
-            <p>
-              <strong>Icon Size</strong> scales the toolbar and nickname menu
-              glyphs: Normal, Large, or Huge. The hit target grows faster than the
-              glyph, so the larger presets are easier to click rather than only
-              bigger to look at.
-            </p>
-
-            <h3>User List</h3>
-            <p>
-              The userlist control panel is a row of action buttons docked under the
-              member list. Click a name to choose who they act on, then press a
-              button. Right click any button to reassign it, add more, or remove it.
-            </p>
-
-            <h3>Latency Measurement</h3>
-            <p>
-              <strong>Latency Measurement</strong> shows a server latency graph in
-              the sidebar, a visual representation of the round trip response time
-              between SeraphIRC and the upstream IRC server you are connected to.
-              Hover the graph for per-sample detail and the minimum, average, and
-              maximum.
-            </p>
-            <div class="docs-note">
-              The graph measures the upstream server even when you connect through
-              a bouncer. It does not measure bouncer latency.
-            </div>
-
-            <h3>Chat</h3>
             <div class="table-scroll">
               <table>
                 <thead><tr><th>Setting</th><th>Default</th><th>What it does</th></tr></thead>
                 <tbody>
-                  <tr><th scope="row">Automatic text formatting</th><td>Markdown and tokens</td><td>Applies <a href="#formatting">formatting syntax</a> to outgoing messages, including <code>/me</code>, <code>/msg</code>, and <code>/notice</code>. Choose off, markdown, or markdown and tokens.</td></tr>
-                  <tr><th scope="row">Show link previews</th><td><code>off</code></td><td>Fetches and displays a preview card for links posted in chat.</td></tr>
-                  <tr><th scope="row">Send and show typing indicators</th><td><code>off</code></td><td>Needs IRCv3 message-tags.</td></tr>
-                  <tr><th scope="row">Reply inserts the nick</th><td><code>on</code></td><td>Starts a reply with <code>nick: </code> in the composer. The IRCv3 reply tag is invisible to clients without support, so without this your reply reaches them as an ordinary line with nothing to say what it answers.</td></tr>
-                  <tr><th scope="row">Hide join, part, quit, and nick change lines</th><td><code>off</code></td><td>Kicks and topic changes stay visible. Per-channel <a href="#buffer-settings">focus mode</a> still applies.</td></tr>
-                  <tr><th scope="row">Collapse them into a summary</th><td><code>on</code></td><td>Turns a run into one line such as "4 users joined, 2 parted, 6 quit, 1 changed nick", with an arrow to expand.</td></tr>
+                  <tr><th scope="row">Bold nicknames</th><td><code>on</code></td><td>Draws nicknames in bold.</td></tr>
+                  <tr><th scope="row">Color nicknames in messages</th><td><code>on</code></td><td>A nickname mentioned in a message takes that person's color.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Spacing</h3>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Setting</th><th>Choices</th><th>What it moves</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Messages</th><td>Default, Comfortable, Roomy</td><td>Space between messages in the transcript.</td></tr>
+                  <tr><th scope="row">Member list and treebar</th><td>Default, Comfortable, Roomy</td><td>Space between names and rows in the side panels.</td></tr>
+                  <tr><th scope="row">Icon size</th><td>Normal, Large, Huge</td><td>Toolbar and menu icons. Larger sizes also get larger click targets.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="docs-pane" id="layout" data-pane>
+            <p class="pane-kicker">Interface</p>
+            <h2>Layout</h2>
+            <p class="pane-lead">
+              Classic or Modern, the composer, favorites, the userlist control panel,
+              and latency graphs.
+              <code>Settings &gt; Interface &gt; Layout</code>.
+            </p>
+
+            <h3>Transcript and composer</h3>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Layout</th><th>Draws</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Classic</th><td>The traditional IRC layout. Timestamp, nickname, and message on one line.</td></tr>
+                  <tr><th scope="row">Modern</th><td>The default. Nickname and time above the message, with consecutive messages from one person grouped under a single header.</td></tr>
                 </tbody>
               </table>
             </div>
             <p>
-              Hide and Collapse are exclusive. Turning Collapse on turns Hide off,
-              because a run can be one or the other but not both.
+              Each layout keeps its own choices below, and the page shows the ones
+              for the layout in use.
+            </p>
+            <p>
+              <strong>Enhanced composer</strong> puts a formatting bar above the
+              message box with buttons for bold, italic, underline, strikethrough,
+              code, spoilers, and color. On for Modern and off for Classic by
+              default. The buttons insert the same markers you would type by hand
+              (see <a href="#formatting">Text Formatting</a>), and pressing one again
+              on styled text removes the style. The bar follows Automatic text
+              formatting under <a href="#messages">Messages</a>, and is hidden when
+              that is off.
+            </p>
+            <p>
+              <strong>Live formatting</strong> shows bold, colors, code, and the rest
+              as they will look while you type. Experimental, and it needs the
+              enhanced composer.
+            </p>
+            <p>
+              <strong>Alternate line shading</strong> (Classic) draws every other
+              message on a faint band, so a long line is easy to follow. Off by
+              default.
+            </p>
+            <p>
+              <strong>Enhanced events, textures and colors</strong> (Modern) adds
+              texture, a rail in each speaker's color, time dividers, and joins and
+              quits as chips. On by default. Chat texture, treebar and nicklist
+              textures, the message color gradient, and enhanced events can each be
+              turned off on their own.
             </p>
 
-            <h3>Command History</h3>
+            <h3>Treebar and member list</h3>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Setting</th><th>Default</th><th>What it does</th></tr></thead>
+                <tbody>
+                  <tr id="layout-favorites"><th scope="row">Favorites in treebar</th><td><code>on</code></td><td>Your <a href="#channels">favorite channels and queries</a> in a card above your networks. Off, they stay a click away from the star in the toolbar.</td></tr>
+                  <tr><th scope="row">Userlist control panel</th><td><code>on</code></td><td>Action buttons under the member list. Click a name, then a button. Right-click a button to reassign it, add more, or remove it.</td></tr>
+                  <tr><th scope="row">Server latency graphs</th><td><code>on</code></td><td>Round trip time to the IRC server, in the sidebar. Hover for each sample and the minimum, average, and maximum.</td></tr>
+                  <tr><th scope="row">Show in the member list</th><td><code>off</code></td><td>Puts the latency graph in the member list as well.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="docs-note">
+              The latency graph measures the IRC server even when you connect through
+              a bouncer. It does not measure the bouncer.
+            </div>
             <p>
-              <strong>Entries</strong> sets how many submitted messages and commands
-              the up and down arrows recall.
+              Avatars are set under <a href="#metadata">IRCv3 Metadata</a>.
             </p>
           </article>
 
@@ -1335,8 +1298,8 @@
             <p>
               Messages are written to a SQLite database inside the client's data
               folder on your own machine.
-              <code>Settings &gt; Application &gt; Diagnostics</code> has an Open
-              Data Folder button if you want to look at it.
+              <code>Settings &gt; Application &gt; Diagnostics</code> opens the
+              data folder if you want to look at it.
             </p>
             <p>
               This log is also what fills your windows again after a restart, so
@@ -1344,9 +1307,9 @@
               time you launch.
             </p>
 
-            <h3>Enable All Logging</h3>
+            <h3>Log New Buffers</h3>
             <p>
-              On by default. The checkbox sets the default for <em>new</em> buffers
+              On by default. The switch sets the default for <em>new</em> buffers
               only. Channels, queries, and server windows that already exist keep
               whatever setting they have, so switching it off does not retroactively
               silence anything you are already in.
@@ -1365,21 +1328,13 @@
               <a href="#exporting-logs">Exporting and Clearing</a>.
             </div>
 
-            <h3>Connection Messages</h3>
+            <h3>Connection Status Lines</h3>
             <p>
-              <strong>Enable Connection Message Logging</strong> is on by default and
+              <strong>Connection status lines</strong> is on by default and
               writes lines like Connecting and Connection lost into your open buffers
               when a network connects or drops. They are never saved to your chat
               logs and they go when the app restarts. Turn it off on a machine that
               sleeps a lot and the transcripts stay clean.
-            </p>
-
-            <h3>Show Timestamps</h3>
-            <p>
-              On by default. It draws the time beside each message in every buffer,
-              channels, queries, server windows, and the Monitor Feed. Display only,
-              despite sitting on this page. Messages are always recorded with the time
-              they arrived, so turning it off leaves your logs and exports untouched.
             </p>
 
             <h3>Not the same as diagnostics</h3>
@@ -1402,7 +1357,7 @@
 
             <h3>Exporting everything</h3>
             <p>
-              <code>Settings &gt; Chatting &gt; Chat Logging</code> has four collect
+              <code>Settings &gt; Chatting &gt; Chat Logging</code> has four Collect
               buttons. Each opens a save dialog and writes a <code>.zip</code>
               archive, which opens without extra software on every system. A button
               is disabled when there is nothing of that kind to export.
@@ -1755,6 +1710,47 @@ server/Libera/server.log</code></pre>
               Everything here is visible to everyone on the network. An avatar must
               be an <code>https://</code> link.
             </div>
+          </article>
+
+          <article class="docs-pane" id="messages" data-pane>
+            <p class="pane-kicker">Chatting</p>
+            <h2>Messages</h2>
+            <p class="pane-lead">
+              Text formatting, replies, typing, timestamps, link previews, reactions,
+              and join and part lines.
+              <code>Settings &gt; Chatting &gt; Messages</code>.
+            </p>
+
+            <h3>Sending</h3>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Setting</th><th>Default</th><th>What it does</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Automatic text formatting</th><td>Markdown and tokens</td><td>Applies <a href="#formatting">formatting syntax</a> to messages, <code>/me</code>, <code>/msg</code>, and <code>/notice</code>. Choose disabled, markdown, or markdown and tokens.</td></tr>
+                  <tr><th scope="row">Address the person when replying</th><td><code>on</code></td><td>Starts a reply with <code>nick: </code> so people whose client can't show replies still see who you answered.</td></tr>
+                  <tr><th scope="row">Typing indicators</th><td><code>off</code></td><td>Sends and shows typing status. Needs IRCv3 message tags.</td></tr>
+                  <tr><th scope="row">Command history</th><td>10</td><td>How many sent messages and commands Up and Down recall, from 1 to 50.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>In the transcript</h3>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Setting</th><th>Default</th><th>What it does</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Timestamps</th><td><code>on</code></td><td>The time beside each message. Display only. Logged messages always keep their time.</td></tr>
+                  <tr><th scope="row">Link previews</th><td><code>off</code></td><td>A preview card for links posted in chat. Shows your IP address to the site that hosts the link.</td></tr>
+                  <tr><th scope="row">Reactions</th><td><code>on</code></td><td>Emoji reactions under messages, and React on right-click. Needs the IRCv3 react tag.</td></tr>
+                  <tr><th scope="row">Also send reactions as a message</th><td><code>off</code></td><td>Sends a visible line as well, so people without reactions see them.</td></tr>
+                  <tr><th scope="row">Joins, parts, quits and nick changes</th><td>Summarize</td><td>Show, Summarize, or Hide. Summarize folds a run into one line, such as "4 joined, 2 quit", that expands on click.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              Kicks and topic changes always show, and a channel's
+              <a href="#buffer-settings">focus mode</a> still applies.
+            </p>
           </article>
 
           <article class="docs-pane" id="notify-list" data-pane>
@@ -2619,7 +2615,7 @@ server/Libera/server.log</code></pre>
             <h2>Third-Party Services</h2>
             <p class="pane-lead">
               Optional connections to services outside SeraphIRC, at
-              <code>Settings &gt; Integrations &gt; Third-Party Services</code>.
+              <code>Settings &gt; Third-Party Services</code>.
               Each is off until you turn it on and supply a credential of your own.
             </p>
 
@@ -2706,7 +2702,7 @@ server/Libera/server.log</code></pre>
                   <tr><th scope="row"><a href="#aliases">Command aliases</a></th><td>Merged into your existing set. An imported alias wins a name collision.</td></tr>
                   <tr><th scope="row">Notify entries</th><td>Your <a href="#notify-list">notify list</a>.</td></tr>
                   <tr><th scope="row"><a href="#buffer-settings">Per-buffer settings</a></th><td>Alert mode, activity mode, focus mode and its busy threshold, scrollback limit, and whether that buffer keeps a log.</td></tr>
-                  <tr><th scope="row"><a href="#appearance">Appearance</a></th><td>Theme, fonts, layout, spacing, window preferences, and any custom themes you have made.</td></tr>
+                  <tr><th scope="row"><a href="#theme">Appearance</a></th><td>Theme, fonts, layout, spacing, window preferences, and any custom themes you have made.</td></tr>
                   <tr><th scope="row">Preferences</th><td>Alert preferences, the diagnostics logging preference, the chat logging default, and whether first-run setup is complete.</td></tr>
                 </tbody>
               </table>
@@ -2747,9 +2743,9 @@ server/Libera/server.log</code></pre>
 
             <h3>Collection</h3>
             <p>
-              <strong>Enable Diagnostic Log Collection</strong> gathers information
-              useful for troubleshooting. Sensitive information such as passwords is
-              never logged. The log keeps its most recent 10,000 entries and rolls
+              <strong>Collect diagnostic logs</strong> gathers information useful for
+              troubleshooting. Off by default. Passwords and other secrets are never
+              logged. The log keeps its most recent 10,000 entries and rolls
               over past that.
             </p>
 
@@ -2758,9 +2754,9 @@ server/Libera/server.log</code></pre>
               <table>
                 <thead><tr><th>Button</th><th>Does</th></tr></thead>
                 <tbody>
-                  <tr><th scope="row">View Logs</th><td>Reads the current diagnostic log in the app.</td></tr>
-                  <tr><th scope="row">Clear Logs</th><td>Empties the diagnostic log.</td></tr>
-                  <tr><th scope="row">Open Data Folder</th><td>Opens the folder holding the client's data, including the chat log database.</td></tr>
+                  <tr><th scope="row">View logs</th><td>Reads the current diagnostic log in the app.</td></tr>
+                  <tr><th scope="row">Clear logs</th><td>Empties the diagnostic log.</td></tr>
+                  <tr><th scope="row">Open</th><td>Beside Data folder. Opens the folder holding the client's data, including the chat log database.</td></tr>
                 </tbody>
               </table>
             </div>
@@ -4799,8 +4795,8 @@ server/Libera/server.log</code></pre>
                 <tbody>
                   <tr><th scope="row">One message</th><td><a href="#cmd-format"><code>/format</code></a> or <code>/f</code>, with <a href="#cmd-format-me"><code>/format-me</code></a>, <a href="#cmd-format-msg"><code>/format-msg</code></a>, and <a href="#cmd-format-notice"><code>/format-notice</code></a> variants</td></tr>
                   <tr><th scope="row">One message, off</th><td><a href="#cmd-plain"><code>/plain</code></a>, with the same <code>-me</code>, <code>-msg</code>, and <code>-notice</code> variants</td></tr>
-                  <tr><th scope="row">Always</th><td><code>Settings &gt; Preferences &gt; Chat</code> sets <code>auto_format</code> to off, markdown, or markdown plus tokens as you type</td></tr>
-                  <tr><th scope="row">With buttons</th><td>The <a href="#appearance">enhanced composer</a>'s formatting bar, or <code>Ctrl+B</code>, <code>Ctrl+I</code>, <code>Ctrl+U</code>, and <code>Ctrl+Shift+X</code> (<a href="#hotkeys">Keyboard Shortcuts</a>)</td></tr>
+                  <tr><th scope="row">Always</th><td><code>Settings &gt; Chatting &gt; Messages</code> sets <code>auto_format</code> to off, markdown, or markdown plus tokens as you type</td></tr>
+                  <tr><th scope="row">With buttons</th><td>The <a href="#layout">enhanced composer</a>'s formatting bar, or <code>Ctrl+B</code>, <code>Ctrl+I</code>, <code>Ctrl+U</code>, and <code>Ctrl+Shift+X</code> (<a href="#hotkeys">Keyboard Shortcuts</a>)</td></tr>
                 </tbody>
               </table>
             </div>
@@ -5042,7 +5038,7 @@ server/Libera/server.log</code></pre>
             </div>
             <p>
               The formatting shortcuts work in both composers and match the
-              <a href="#appearance">enhanced composer</a>'s buttons. A second press
+              <a href="#layout">enhanced composer</a>'s buttons. A second press
               removes the style. They follow Automatic text formatting, so they do
               nothing when it is off, and underline needs markdown and tokens.
             </p>
