@@ -1,0 +1,19 @@
+{
+  "format": "seraphirc-theme",
+  "formatVersion": 1,
+  "appVersion": "6.0.25",
+  "exportedAt": "2026-11-07T02:18:13Z",
+  "name": "Aura Circuit",
+  "base": "aura",
+  "overrides": {
+    "--circuit": "on",
+    "--circuit-color": "#72c7e0",
+    "--circuit-nicklist": "on",
+    "--circuit-strength": "10",
+    "--favorites-count": "#b892ff",
+    "--favorites-header": "#82e2ff",
+    "--favorites-outline": "#c3f1ff",
+    "--favorites-rail": "#82e2ff",
+    "--stars": "off"
+  }
+}
