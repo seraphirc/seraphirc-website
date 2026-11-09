@@ -786,6 +786,10 @@
               title bar, choose <strong>Reattach Window</strong> from a right click
               menu, or close the window.
             </p>
+            <p>
+              Clicking into a detached window marks it read, and its title bar lights
+              up like the active window.
+            </p>
             <div class="docs-note">
               Detached windows follow your theme, and a setting changed in one window
               applies to all of them. They do not reopen on the next launch.
@@ -807,7 +811,9 @@
               The deepest support. Networks import from the bouncer, bouncer networks
               are discovered through <code>soju.im/bouncer-networks</code>, and you
               manage them without leaving the client. History comes back over
-              <code>chathistory</code>, read markers sync across devices through
+              <code>chathistory</code>, including the joins, parts and quits you
+              missed when soju offers event playback. Read markers sync across
+              devices through
               <code>MARKREAD</code>, and mobile push arrives over
               <code>soju.im/webpush</code>.
             </p>
@@ -1056,8 +1062,8 @@
               <strong>Enhanced events, textures and colors</strong> (Modern) adds
               texture, a rail in each speaker's color, time dividers, and joins and
               quits as chips. On by default. Chat texture, treebar and nicklist
-              textures, the message color gradient, and enhanced events can each be
-              turned off on their own.
+              textures, the message highlight rail, the message color gradient, and
+              enhanced events can each be turned off on their own.
             </p>
 
             <h3>Treebar and member list</h3>
@@ -1572,6 +1578,25 @@ server/Libera/server.log</code></pre>
               whole words, so "cat" does not match "concatenate".
             </p>
             <p>
+              Select a mention in the list to set its options:
+            </p>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Option</th><th>What it does</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Network</th><td>All networks, or only one.</td></tr>
+                  <tr><th scope="row">Channels</th><td>Only these channels. Leave empty for every channel and private chat.</td></tr>
+                  <tr><th scope="row">Color</th><td>The highlight color, or the theme's highlight.</td></tr>
+                  <tr><th scope="row">Sound</th><td>The Custom mention sound, no sound, or a file of your own.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              When several mentions match one line, the most specific one picks the
+              sound and color. Deleting a network pauses its mentions until you pick
+              another network.
+            </p>
+            <p>
               Alerts follow <strong>Notify on custom mentions</strong> in
               <a href="#alerts">Sounds and Alerts</a>.
             </p>
@@ -1717,7 +1742,7 @@ server/Libera/server.log</code></pre>
             <h2>Messages</h2>
             <p class="pane-lead">
               Text formatting, replies, typing, timestamps, link previews, reactions,
-              and join and part lines.
+              deleted messages, scrolling, and join and part lines.
               <code>Settings &gt; Chatting &gt; Messages</code>.
             </p>
 
@@ -1743,6 +1768,8 @@ server/Libera/server.log</code></pre>
                   <tr><th scope="row">Link previews</th><td><code>off</code></td><td>A preview card for links posted in chat. Shows your IP address to the site that hosts the link.</td></tr>
                   <tr><th scope="row">Reactions</th><td><code>on</code></td><td>Emoji reactions under messages, and React on right-click. Needs the IRCv3 react tag.</td></tr>
                   <tr><th scope="row">Also send reactions as a message</th><td><code>off</code></td><td>Sends a visible line as well, so people without reactions see them.</td></tr>
+                  <tr><th scope="row">Redaction visibility</th><td><code>off</code></td><td>Click a deleted message to see what it said. Off shows only the "Message deleted by" note.</td></tr>
+                  <tr><th scope="row">Long-history scrolling</th><td><code>on</code></td><td>Keeps busy channels fast while you scroll up, and loads older lines from your logs and the bouncer. Off scrolls the way earlier versions did.</td></tr>
                   <tr><th scope="row">Joins, parts, quits and nick changes</th><td>Summarize</td><td>Show, Summarize, or Hide. Summarize folds a run into one line, such as "4 joined, 2 quit", that expands on click.</td></tr>
                 </tbody>
               </table>
