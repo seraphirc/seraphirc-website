@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="cyberpunk">
+<html lang="en" data-theme="aura">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -167,7 +167,7 @@
             <!-- #t=0.1 makes Safari draw the first frame instead of a blank box. -->
             <video
               class="demo-video"
-              src="assets/demo/seraphirc-demo.mp4?v=20261013-demo-1#t=0.1"
+              src="assets/demo/seraphirc-demo.mp4?v=20261111-demo-1#t=0.1"
               width="2558"
               height="1550"
               controls
@@ -323,8 +323,8 @@
           </div>
           <video
             class="phone-video"
-            src="assets/demo/seraphirc-mobile-demo.mp4?v=20261014-mobile-1"
-            poster="assets/demo/seraphirc-mobile-demo-poster.jpg?v=20261014-mobile-1"
+            src="assets/demo/seraphirc-mobile-demo.mp4?v=20261111-mobile-3"
+            poster="assets/demo/seraphirc-mobile-demo-poster.jpg?v=20261111-mobile-3"
             width="860"
             height="1766"
             controls
@@ -509,7 +509,7 @@
       // The header theme picker recolors the site to match a client theme.
       (function () {
         var select = document.getElementById("theme-select");
-        select.value = document.documentElement.getAttribute("data-theme") || "cyberpunk";
+        select.value = document.documentElement.getAttribute("data-theme") || "aura";
         select.addEventListener("change", function () {
           document.documentElement.setAttribute("data-theme", select.value);
           try { localStorage.setItem("seraphirc-theme", select.value); } catch (e) {}
