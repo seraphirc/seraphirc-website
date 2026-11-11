@@ -181,6 +181,19 @@ ul, ol { padding-left: 1.3em; }
 }
 .head-theme select { padding-top: 3px; padding-bottom: 3px; font-size: 0.85rem; }
 
+/* Wide screens: logo and nav centered together, theme picker at the far
+   right of the window rather than the content column. */
+@media (min-width: 961px) {
+  .site-header .wrap {
+    display: grid;
+    grid-template-columns: 1fr auto auto 1fr;
+    width: calc(100% - 40px);
+  }
+  .brand { grid-column: 2; }
+  .site-nav { grid-column: 3; margin-left: 0; }
+  .head-theme { grid-column: 4; justify-self: end; }
+}
+
 .site-footer {
   margin-top: 40px;
   padding: 32px 0 40px;
@@ -255,6 +268,22 @@ select option { color: var(--text); background: var(--panel); }
 
 .intro { padding: 56px 0 28px; }
 .intro h1 { max-width: 20em; }
+
+/* Home heading: the logo beside the name. */
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  font-size: clamp(2.6rem, 7vw, 3.6rem);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 0.4em;
+}
+.wordmark-mark {
+  width: 0.8em;
+  height: 0.8em;
+  flex: none;
+}
 .intro-text {
   max-width: 40em;
   color: var(--muted);
