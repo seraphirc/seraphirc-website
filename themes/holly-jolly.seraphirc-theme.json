@@ -2,7 +2,7 @@
   "format": "seraphirc-theme",
   "formatVersion": 1,
   "appVersion": "6.0.28",
-  "exportedAt": "2026-11-13T12:25:03Z",
+  "exportedAt": "2026-11-13T12:31:53Z",
   "name": "Holly Jolly",
   "base": "monokai",
   "overrides": {
@@ -144,7 +144,7 @@
     "--toast-border": "#2fbf71",
     "--toast-text": "#f4f4f6",
     "--top-bar-icon": "#e4e4ea",
-    "--topic-bg": "linear-gradient(243deg, #155633 0%, #e8384d 100%)",
+    "--topic-bg": "linear-gradient(243deg, #155633 0%, #b8243a 100%)",
     "--transcript-bg-image": "#16161b",
     "--treebar-add-button": "#6fe3b5",
     "--treebar-card-active-border": "#2fbf71",
