@@ -832,6 +832,13 @@
               network and everything behaves the way a classic client does. DCC is
               available here, where a bouncer would rule it out.
             </p>
+            <p>
+              Long pastes and fast scripts go out at the pace the server allows, so
+              you are not disconnected for flooding. A few lines go at once, then one
+              every few seconds. While lines are waiting, a bar above the message box
+              shows how many are left, with Cancel. Servers that allow faster
+              sending, such as Ergo, are not slowed.
+            </p>
 
             <div class="docs-note">
               Behind a bouncer, the address other clients see belongs to the bouncer,
@@ -1769,6 +1776,7 @@ server/Libera/server.log</code></pre>
                   <tr><th scope="row">Also send reactions as a message</th><td><code>off</code></td><td>Sends a visible line as well, so people without reactions see them.</td></tr>
                   <tr><th scope="row">Redaction visibility</th><td><code>off</code></td><td>Click a deleted message to see what it said. Off shows only the "Message deleted by" note.</td></tr>
                   <tr><th scope="row">Long-history scrolling</th><td><code>on</code></td><td>Keeps busy channels fast while you scroll up, and loads older lines from your logs and the bouncer. Off scrolls the way earlier versions did.</td></tr>
+                  <tr><th scope="row">Enable transcript glide</th><td><code>off</code></td><td>New lines slide in at the bottom instead of appearing at once. Skipped in very busy channels and when your system's reduce motion setting is on. If the transcript flickers or lags, turn it off.</td></tr>
                   <tr><th scope="row">Joins, parts, quits and nick changes</th><td>Summarize</td><td>Show, Summarize, or Hide. Summarize folds a run into one line, such as "4 joined, 2 quit", that expands on click.</td></tr>
                 </tbody>
               </table>
@@ -1928,6 +1936,8 @@ server/Libera/server.log</code></pre>
             <p>
               On by default. Asks before flooding a channel with a paste, and says so
               when a message is too long for one line and will arrive as several.
+              On a <a href="#bouncers">Direct network</a> it also says about
+              how long a held paste will take to send.
             </p>
             <p>
               Both checks switch themselves off on networks supporting IRCv3
@@ -2187,7 +2197,7 @@ server/Libera/server.log</code></pre>
                   <tr><th scope="row">First load asks</th><td>A file that has never been loaded asks before it runs, with a summary of what it does. A script cannot load a new file on its own.</td></tr>
                   <tr><th scope="row">Connections ask</th><td>A script's first connection to each host asks. "Allow always" is remembered, and can be taken back in the Scripts Editor.</td></tr>
                   <tr><th scope="row">Script files are protected</th><td>A script cannot overwrite, rename or delete a script file, or any of SeraphIRC's own files.</td></tr>
-                  <tr><th scope="row">Sending is paced</th><td>Scripts that send faster than servers allow are slowed to one line a second, rather than getting you disconnected for flooding.</td></tr>
+                  <tr><th scope="row">Sending is paced</th><td>On Direct connections, scripts that send faster than the server allows are slowed to its pace, rather than getting you disconnected for flooding.</td></tr>
                   <tr><th scope="row">Runaway scripts stop</th><td>A handler that runs too long is stopped, and a file whose handlers keep doing it is switched off.</td></tr>
                   <tr><th scope="row">Per-network scripts</th><td>A file can be limited to some of your networks, so a script written for one network does not answer on the others.</td></tr>
                   <tr><th scope="row"><code>$version</code></th><td>Returns SeraphIRC's own version, as does <code>$seraphirc</code>. A script that insists on a mIRC version number says so when it loads.</td></tr>
