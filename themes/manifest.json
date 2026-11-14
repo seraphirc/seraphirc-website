@@ -1,6 +1,16 @@
 {
   "themes": [
     {
+      "file": "firefox-nova-dark.seraphirc-theme.json",
+      "name": "Firefox Nova Dark",
+      "base": "nebula",
+      "baseLabel": "Nebula",
+      "overrides": 142,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-11-14"
+    },
+    {
       "file": "holly-jolly.seraphirc-theme.json",
       "name": "Holly Jolly",
       "base": "monokai",
