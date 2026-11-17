@@ -1485,7 +1485,7 @@
       "The same action as \"Send File (Seraph)\" in a nickname's right-click menu, so this is a keyboard shortcut rather than the only route.",
       "Sending an offer reveals your IP address to the rendezvous immediately and to the other person once they accept.",
       "The command never reaches the server, and it never falls back to DCC by itself: if the peer cannot answer a Seraph offer, DCC is suggested rather than silently used.",
-      "Nothing to set up: Seraph Transfer is available on every network, including through a bouncer. Settings \u003e File Uploads \u0026 DCC tunes where files land and how large an offer may be."
+      "Nothing to set up: Seraph Transfer is available on every network, including through a bouncer. Settings \u003e Network \u003e Seraph Transfer \u0026 Chat tunes where files land and how large an offer may be."
     ],
     "Examples": [
       "/seraphtransfer Alice"
@@ -1532,7 +1532,7 @@
       "Opens a file picker, uploads the chosen image to your ImgBB account, and puts its link in the composer. The same action as Upload to ImgBB in the composer menu.",
       "The command never sends anything by itself. The link waits in the composer, so you can add a comment, and the message goes out through the same checks as anything else you type.",
       "Off until you turn it on. The integration needs a free ImgBB API key of your own: Settings \u003e Third-Party Services \u003e ImgBB API.",
-      "Pasting and dragging files in still upload to your bouncer's file host. Only this command and the menu item use ImgBB."
+      "Pasting and dropping files in still upload to the network's filehost, set in Settings \u003e Uploads. Only this command and the menu item use ImgBB."
     ],
     "Examples": [
       "/imgbb"
