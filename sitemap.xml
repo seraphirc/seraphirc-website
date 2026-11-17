@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.seraphirc.chat/</loc>
+    <image:image>
+      <image:loc>https://www.seraphirc.chat/assets/demo/seraphirc-demo-poster.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.seraphirc.chat/assets/demo/seraphirc-mobile-demo-poster.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.seraphirc.chat/docs/</loc>
+  </url>
+  <url>
+    <loc>https://www.seraphirc.chat/changelog/</loc>
+  </url>
+  <url>
+    <loc>https://www.seraphirc.chat/news/</loc>
+  </url>
+  <url>
+    <loc>https://www.seraphirc.chat/marketplace/</loc>
+  </url>
+  <url>
+    <loc>https://www.seraphirc.chat/privacy/</loc>
+  </url>
+</urlset>

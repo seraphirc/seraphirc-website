@@ -58,6 +58,7 @@
             "url": "https://www.seraphirc.chat/",
             "downloadUrl": "https://github.com/seraphirc/seraphirc-download/releases/latest",
             "image": "https://www.seraphirc.chat/assets/seraphirc-link-preview-v4.png",
+            "screenshot": "https://www.seraphirc.chat/assets/demo/seraphirc-demo-poster.jpg",
             "license": "Proprietary",
             "offers": {
               "@type": "Offer",
@@ -75,6 +76,7 @@
             "url": "https://www.seraphirc.chat/",
             "downloadUrl": "https://apps.apple.com/us/app/seraphirc/id6787119413",
             "image": "https://www.seraphirc.chat/assets/seraphirc-link-preview-v4.png",
+            "screenshot": "https://www.seraphirc.chat/assets/demo/seraphirc-mobile-demo-poster.jpg",
             "license": "Proprietary",
             "offers": {
               "@type": "Offer",
@@ -166,10 +168,12 @@
             broad IRCv3 support.
           </p>
           <figure class="shot">
-            <!-- #t=0.1 makes Safari draw the first frame instead of a blank box. -->
+            <!-- The poster is a still from the video. It is what crawlers, link
+                 previews and AI tools see, since they don't read video frames. -->
             <video
               class="demo-video"
-              src="assets/demo/seraphirc-demo.mp4?v=20261111-demo-1#t=0.1"
+              src="assets/demo/seraphirc-demo.mp4?v=20261111-demo-1"
+              poster="assets/demo/seraphirc-demo-poster.jpg?v=20261117-1"
               width="2558"
               height="1550"
               controls
@@ -179,7 +183,14 @@
               preload="metadata"
               data-demo-video
               aria-label="A demo of the SeraphIRC desktop client"
-            ></video>
+            >
+              <img
+                src="assets/demo/seraphirc-demo-poster.jpg?v=20261117-1"
+                width="1920"
+                height="1163"
+                alt="The SeraphIRC desktop client on Windows: a network tree with favorites, three channel windows side by side, and their user lists"
+              >
+            </video>
           </figure>
         </div>
       </section>
