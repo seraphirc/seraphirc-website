@@ -218,6 +218,7 @@
                 <li><a href="#close-behavior">Close Behavior</a></li>
                 <li><a href="#config-transfer">Import/Export Config</a></li>
                 <li><a href="#diagnostics">Diagnostics</a></li>
+                <li><a href="#performance">Performance</a></li>
                 <li><a href="#recovery">Recovery</a></li>
                 <li><a href="#about">About</a></li>
               </ul>
@@ -770,6 +771,22 @@
               their network connects after a restart.
             </div>
 
+            <h3>Window buttons</h3>
+            <p>
+              Closing a floating window docks it. You stay in the channel. To leave,
+              right click it and choose <strong>Close Buffer</strong>. On macOS, the
+              red and yellow buttons both dock. Maximized windows keep their minimize
+              and close buttons.
+            </p>
+
+            <h3>Hiding the topic bar</h3>
+            <p>
+              Click the pin on a floating channel window, or right click the channel
+              in the treebar and choose <strong>Hide Topic Bar</strong>. Each channel
+              remembers its choice. With seamless maximize, use the treebar to bring
+              the topic bar back.
+            </p>
+
             <h3>Detaching a window</h3>
             <p>
               A channel, query, or DCC chat can move out of the main window into one
@@ -968,6 +985,7 @@
                   <tr><th scope="row">Window opacity</th><td>100</td><td>50 to 100. Fades the window surface only, never the text.</td></tr>
                   <tr><th scope="row">Active network highlight</th><td>50</td><td>The outline on the active network in the treebar. Presets for None, Subtle, and Solid.</td></tr>
                   <tr><th scope="row">Topic bar highlight</th><td>50</td><td>The outline around a channel's topic bar. Presets for None, Subtle, and Solid.</td></tr>
+                  <tr><th scope="row">Composer highlight</th><td>100</td><td>The outline around the message box while you type. Presets for None, Subtle, and Solid.</td></tr>
                 </tbody>
               </table>
             </div>
@@ -1771,6 +1789,7 @@ server/Libera/server.log</code></pre>
                 <thead><tr><th>Setting</th><th>Default</th><th>What it does</th></tr></thead>
                 <tbody>
                   <tr><th scope="row">Timestamps</th><td><code>on</code></td><td>The time beside each message. Display only. Logged messages always keep their time.</td></tr>
+                  <tr><th scope="row">Remove timestamp brackets</th><td><code>off</code></td><td>Shows <code>13:08</code> instead of <code>[13:08]</code>. Needs Timestamps on.</td></tr>
                   <tr><th scope="row">Link previews</th><td><code>off</code></td><td>A preview card for links posted in chat. Shows your IP address to the site that hosts the link.</td></tr>
                   <tr><th scope="row">Ask before opening links</th><td><code>on</code></td><td>Shows where a link goes and asks before it opens in your browser. Off opens links right away.</td></tr>
                   <tr><th scope="row">Pause animations in unfocused windows</th><td><code>on</code></td><td>GIFs hold still in windows you aren't using and while SeraphIRC is in the background, then play again when you come back. Off keeps every GIF playing.</td></tr>
@@ -2820,6 +2839,33 @@ server/Libera/server.log</code></pre>
               Diagnostic logs and <a href="#chat-logging">chat logs</a> are separate
               stores. Clearing one never touches the other, and neither is included
               in a <a href="#config-transfer">config export</a>.
+            </div>
+          </article>
+
+          <article class="docs-pane" id="performance" data-pane>
+            <p class="pane-kicker">Application</p>
+            <h2>Performance</h2>
+            <p class="pane-lead">
+              Pause hidden windows and Faster drawing, for keeping SeraphIRC quick
+              with lots of windows open.
+              <code>Settings &gt; Application &gt; Performance</code>.
+            </p>
+
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Setting</th><th>Default</th><th>What it does</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Pause hidden windows</th><td><code>off</code></td><td>Windows behind a maximized window stop updating until you bring them back. They catch up right away, and unread counts, mentions and notifications keep working.</td></tr>
+                  <tr><th scope="row">Faster drawing</th><td><code>off</code></td><td>Linux with NVIDIA graphics only. Can make SeraphIRC much smoother on laptops with both NVIDIA and built-in graphics. Takes effect after a restart.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="docs-note">
+              After the restart, SeraphIRC asks whether to keep Faster drawing. If
+              you don't click <strong>Keep</strong>, it turns back off. If the window
+              comes up blank, close SeraphIRC and it starts with Faster drawing off.
+              It asks again after an NVIDIA driver update.
             </div>
           </article>
 
