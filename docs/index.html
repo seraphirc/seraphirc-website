@@ -522,6 +522,12 @@
               <strong>Show at startup</strong>, at its foot, opens it on launch.
             </p>
             <p>
+              Your bouncers are listed there too, under your networks. See
+              <a href="#bouncer-profiles">Bouncer Profiles</a>. Hover a network to
+              see its description. A network's name can't be changed after it is
+              created.
+            </p>
+            <p>
               Passwords go to the operating system's credential store, never into the
               config file in plain text.
             </p>
@@ -532,6 +538,12 @@
               Password</strong> on its Details step, so a network needing one can be
               created there. It is sent at the very start of the connection, ahead of
               everything else.
+            </p>
+            <p>
+              If the server keeps rejecting your password, SeraphIRC stops
+              reconnecting instead of trying forever. The connection pill and
+              connection health say which login was rejected, with a button to edit
+              the network.
             </p>
 
             <h3>On-connect commands</h3>
@@ -781,10 +793,12 @@
 
             <h3>Hiding the topic bar</h3>
             <p>
-              Click the pin on a floating channel window, or right click the channel
-              in the treebar and choose <strong>Hide Topic Bar</strong>. Each channel
-              remembers its choice. With seamless maximize, use the treebar to bring
-              the topic bar back.
+              Click the topic bar button in the toolbar, choose <strong>View &gt; Hide
+              Topic Bar</strong>, or press <code>Ctrl+Shift+T</code>
+              (<code>Cmd+Shift+T</code> on macOS). Each acts on the channel in front,
+              maximized or floating. You can also right click a channel in the
+              treebar and choose <strong>Hide Topic Bar</strong>. Each channel
+              remembers its choice.
             </p>
 
             <h3>Detaching a window</h3>
@@ -994,6 +1008,11 @@
               window itself. <strong>Restore Window</strong> in the toolbar and the
               Window menu both bring the frame back.
             </div>
+            <p>
+              In a narrow window the toolbar icons move closer together and get a
+              little smaller. Any that still don't fit go into the
+              <strong>»</strong> menu at the end of the toolbar.
+            </p>
 
             <h3>Defaults</h3>
             <p>
@@ -1043,8 +1062,8 @@
             <p class="pane-kicker">Interface</p>
             <h2>Layout</h2>
             <p class="pane-lead">
-              Classic or Modern, the composer, favorites, the userlist control panel,
-              and latency graphs.
+              Classic or Modern, the composer, favorites, the compact treebar, the
+              userlist control panel, and latency graphs.
               <code>Settings &gt; Interface &gt; Layout</code>.
             </p>
 
@@ -1086,8 +1105,9 @@
               <strong>Enhanced events, textures and colors</strong> (Modern) adds
               texture, a rail in each speaker's color, time dividers, and joins and
               quits as chips. On by default. Chat texture, treebar and nicklist
-              textures, the message highlight rail, the message color gradient, and
-              enhanced events can each be turned off on their own.
+              textures, the message highlight rail, the message color gradient,
+              enhanced events, and the activity duration gap can each be turned off
+              on their own.
             </p>
 
             <h3>Treebar and member list</h3>
@@ -1096,6 +1116,7 @@
                 <thead><tr><th>Setting</th><th>Default</th><th>What it does</th></tr></thead>
                 <tbody>
                   <tr id="layout-favorites"><th scope="row">Favorites in treebar</th><td><code>on</code></td><td>Your <a href="#channels">favorite channels and queries</a> in a card above your networks. Off, they stay a click away from the star in the toolbar.</td></tr>
+                  <tr id="layout-compact-treebar"><th scope="row">Compact treebar</th><td><code>off</code></td><td>Networks as a classic tree of folders. Click a network to open its server window. Its <strong>...</strong> button or a right-click opens its actions.</td></tr>
                   <tr><th scope="row">Userlist control panel</th><td><code>on</code></td><td>Action buttons under the member list. Click a name, then a button. Right-click a button to reassign it, add more, or remove it.</td></tr>
                   <tr><th scope="row">Server latency graphs</th><td><code>on</code></td><td>Round trip time to the IRC server, in the sidebar. Hover for each sample and the minimum, average, and maximum.</td></tr>
                   <tr><th scope="row">Show in the member list</th><td><code>off</code></td><td>Puts the latency graph in the member list as well.</td></tr>
@@ -1106,6 +1127,12 @@
               The latency graph measures the IRC server even when you connect through
               a bouncer. It does not measure the bouncer.
             </div>
+            <p>
+              To hide a panel, use the treebar and user list buttons in the toolbar,
+              <strong>View &gt; Collapse Treebar</strong> (<code>Ctrl+T</code>), or
+              <strong>View &gt; Collapse User List</strong> (<code>Ctrl+N</code>). The
+              user list is folded per channel.
+            </p>
             <p>
               Avatars are set under <a href="#metadata">IRCv3 Metadata</a>.
             </p>
@@ -2313,8 +2340,9 @@ server/Libera/server.log</code></pre>
             <h2>Bouncer Profiles</h2>
             <p class="pane-lead">
               A profile is one bouncer, saved once and reused by every network that
-              connects through it. Found at
-              <code>Settings &gt; Network &gt; Bouncer Profiles</code>.
+              connects through it. Bouncers are listed in the Network Manager under
+              your networks. <strong>Add Bouncer</strong> creates one, and
+              <strong>Edit</strong> changes the one you select.
             </p>
 
             <h3>Why profiles exist</h3>
@@ -2330,28 +2358,26 @@ server/Libera/server.log</code></pre>
               <table>
                 <thead><tr><th>Field</th><th>Notes</th></tr></thead>
                 <tbody>
-                  <tr><th scope="row">Profile Name</th><td>What you will see when picking it on a network.</td></tr>
-                  <tr><th scope="row">Type</th><td>Soju, ZNC, or Custom IRC bouncer. Soju unlocks network discovery, covered below.</td></tr>
+                  <tr><th scope="row">Profile name</th><td>What you will see when picking it on a network. It can't be changed after the profile is created.</td></tr>
+                  <tr><th scope="row">Type</th><td>ZNC, soju, or Custom IRC bouncer. Soju unlocks network discovery, covered below.</td></tr>
                   <tr><th scope="row">Host and Port</th><td>Where the bouncer listens.</td></tr>
-                  <tr><th scope="row">TLS enabled</th><td>On unless you have a reason. The port default follows this setting.</td></tr>
-                  <tr><th scope="row">Hosting / Trust</th><td>Self hosted or third party. See below.</td></tr>
+                  <tr><th scope="row">TLS</th><td>On unless you have a reason. The port default follows this setting.</td></tr>
+                  <tr><th scope="row">Allow certificate errors</th><td>For a bouncer whose certificate the system doesn't trust. See below.</td></tr>
+                  <tr><th scope="row">Hosting and trust</th><td>Self hosted or third party. See below.</td></tr>
                   <tr><th scope="row">Username and Password</th><td>The password goes to the operating system credential store, never into the config file.</td></tr>
                   <tr><th scope="row">Notes</th><td>Free text for your own benefit.</td></tr>
                 </tbody>
               </table>
             </div>
-            <p>
-              There is a Test Connection action, so you can find out the host is
-              wrong before a network depends on it.
-            </p>
 
-            <h3>Self signed certificates</h3>
+            <h3>Certificate errors</h3>
             <p>
-              A bouncer you run yourself often presents a certificate no public
-              authority signed. The profile can trust that specific certificate,
-              recording its fingerprint, subject, issuer, and validity dates. Trust
-              is pinned to that one certificate rather than switching verification
-              off, so a different certificate appearing later is still caught.
+              A bouncer you run yourself often has a certificate the system doesn't
+              trust: self-signed, expired, or issued for another name. With
+              <strong>Allow certificate errors</strong> off, SeraphIRC refuses it and
+              the error says what to turn on. With it on, you're asked once. Trust
+              is pinned to that one certificate, so a different one appearing later
+              is still caught. Turn it off to forget the certificate.
             </p>
 
             <div class="docs-note">
