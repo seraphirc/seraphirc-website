@@ -463,6 +463,33 @@ select option { color: var(--text); background: var(--panel); }
 .release li b { color: var(--text); }
 .release ul:has(+ .release-note) { margin-bottom: 6px; }
 .release-note { margin: 0 0 16px; padding-left: 2.2em; color: var(--accent-bright); }
+.release ul:has(+ .release-callout) { margin-bottom: 10px; }
+/* .release qualifies it past p:last-child, which would zero its margin. */
+.release .release-callout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  max-width: 78ch;
+  margin: 0 0 28px 2.2em;
+  padding: 8px 20px 8px 14px;
+  background: color-mix(in srgb, var(--amber) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--amber) 45%, transparent);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+.release-callout strong { color: var(--caution-ink, var(--amber)); }
+.release-callout-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--caution-ink, var(--amber));
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .release[hidden] { display: none; }
 .show-all {
   margin-top: 16px;
@@ -643,6 +670,7 @@ html[data-theme]:is([data-theme='light'], [data-theme='solarized-light'], [data-
   --accent-bright: color-mix(in srgb, var(--sd-accent) 70%, #000);
   --gold-bright:   color-mix(in srgb, var(--sd-glow) 80%, #000);
   --code-ink:      color-mix(in srgb, var(--sd-accent) 35%, var(--sd-text));
+  --caution-ink:   #9a5f0e;
   --mark-2: color-mix(in srgb, var(--sd-accent) 65%, #fff);
   --mark-3: var(--sd-accent);
 }

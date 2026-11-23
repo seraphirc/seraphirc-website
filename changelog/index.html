@@ -23,7 +23,7 @@
         } catch (e) {}
       })();
     </script>
-    <link rel="stylesheet" href="/styles.css?v=20261111-header-3">
+    <link rel="stylesheet" href="/styles.css?v=20261123-callout-4">
   </head>
   <body>
     <header class="site-header">
@@ -79,6 +79,17 @@
           <p>Release notes for every version.</p>
         </div>
         <div class="releases" data-releases>
+          <details class="release" id="v6.0.34">
+            <summary><span class="release-version">6.0.34</span> <time datetime="2026-11-23">Nov 23, 2026</time></summary>
+            <ul>
+              <li><b>WebSocket (desktop):</b> connect to a network or a soju bouncer over WebSocket. Turn on Use WebSocket when you add or edit one, or paste a wss:// address into the server field and the rest fills itself in.</li>
+              <li><b>TLS upgrades (desktop):</b> when a server says it requires TLS, SeraphIRC switches to TLS and saves the new port for you. The TLS setting stays locked for as long as the server asks, with a note saying until when.</li>
+              <li><b>ZNC replays (desktop):</b> fixed an issue where replays could duplicate messages and show them as unread.</li>
+              <li><b>ZNC playback (desktop):</b> Use ZNC playback is back in the network form for ZNC networks.</li>
+              <li><b>Compact treebar (desktop):</b> right-click a network for its server window's menu, the same as in the full treebar. The ... button opens the network menu.</li>
+            </ul>
+            <p class="release-callout" role="note"><svg class="release-callout-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 3.9 1.8 18.4A2 2 0 0 0 3.5 21.4h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v5"/><path d="M12 17.5h.01"/></svg><span><strong>ZNC users:</strong> if you have trouble connecting to ZNC the first time you start 6.0.34, click the ... next to the server and choose Reconnect to ZNC. This should clear a known, temporary issue.</span></p>
+          </details>
           <details class="release" id="v6.0.33">
             <summary><span class="release-version">6.0.33</span> <time datetime="2026-11-22">Nov 22, 2026</time></summary>
             <ul>

@@ -532,6 +532,23 @@
               config file in plain text.
             </p>
             <p>
+              Some servers require TLS. If you add one with TLS off, SeraphIRC switches
+              to TLS when the server asks, saves the new port and TLS setting, and keeps
+              using TLS for as long as the server says. Until then the TLS setting is
+              locked, with a note saying when it ends. <strong>Forget</strong> clears
+              it, though a server that still requires TLS sets it again the next time you
+              connect.
+            </p>
+            <p>
+              Some servers also take connections over WebSocket, often behind a web
+              server. Turn on <strong>Use WebSocket</strong>, under TLS, and fill in
+              <strong>WebSocket path</strong> if the server uses one other than
+              <code>/</code>. The port changes to 443 (80 without TLS) unless you typed
+              your own. Pasting a <code>wss://</code> address into the server field fills
+              in everything at once. A web server in front usually doesn't pass your
+              client certificate through, so log in with a password instead.
+            </p>
+            <p>
               Some servers ask for a password before they let you on at all.
               <strong>Password</strong>, in the cell beside the TLS checkbox, is that
               one. The setup wizard asks for the same thing as <strong>Server
@@ -847,6 +864,11 @@
               <code>MARKREAD</code>, and mobile push arrives over
               <code>soju.im/webpush</code>.
             </p>
+            <p>
+              Soju can also be reached over WebSocket. Turn on <strong>Use
+              WebSocket</strong> in the bouncer profile. The path is
+              <code>/socket</code> unless you set another.
+            </p>
 
             <h3>ZNC</h3>
             <p>
@@ -854,7 +876,8 @@
               <code>user/network</code> login.
               <a href="#cmd-znc"><code>/znc</code></a> forwards a command to ZNC
               itself rather than the network behind it, which is how you reach
-              <code>*status</code> and the modules.
+              <code>*status</code> and the modules. ZNC doesn't take WebSocket
+              connections, so its profiles don't offer it.
             </p>
 
             <h3>Direct networks</h3>
@@ -2361,7 +2384,9 @@ server/Libera/server.log</code></pre>
                   <tr><th scope="row">Profile name</th><td>What you will see when picking it on a network. It can't be changed after the profile is created.</td></tr>
                   <tr><th scope="row">Type</th><td>ZNC, soju, or Custom IRC bouncer. Soju unlocks network discovery, covered below.</td></tr>
                   <tr><th scope="row">Host and Port</th><td>Where the bouncer listens.</td></tr>
-                  <tr><th scope="row">TLS</th><td>On unless you have a reason. The port default follows this setting.</td></tr>
+                  <tr><th scope="row">TLS</th><td>On unless you have a reason. The port default follows this setting. A bouncer that requires TLS locks it on, with a note saying until when.</td></tr>
+                  <tr><th scope="row">Use WebSocket</th><td>Soju and Custom IRC bouncer only. Connects over WebSocket instead, and the port default becomes 443 (80 without TLS).</td></tr>
+                  <tr><th scope="row">WebSocket path</th><td>Shown while Use WebSocket is on. Leave it empty for the default: <code>/socket</code> on soju, <code>/</code> otherwise.</td></tr>
                   <tr><th scope="row">Allow certificate errors</th><td>For a bouncer whose certificate the system doesn't trust. See below.</td></tr>
                   <tr><th scope="row">Hosting and trust</th><td>Self hosted or third party. See below.</td></tr>
                   <tr><th scope="row">Username and Password</th><td>The password goes to the operating system credential store, never into the config file.</td></tr>
