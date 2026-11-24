@@ -295,6 +295,141 @@ select option { color: var(--text); background: var(--panel); }
   font-size: 0.92rem;
 }
 
+/* "Why the name" card: the wordmark opens it on hover (mouse) or tap. It is
+   drawn from the theme variables, so it wears whichever theme is picked. */
+.wordmark-wrap { position: relative; }
+.wordmark-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  background: none;
+  border: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+/* The wings may lift past the mark's box while they beat. */
+.wordmark-name .wordmark-mark {
+  overflow: visible;
+  transition: filter 240ms ease;
+}
+.wordmark-mark path {
+  transform-box: fill-box;
+  transform-origin: 0% 100%;
+}
+.wordmark-text {
+  background: linear-gradient(100deg,
+      currentColor 0 34%,
+      var(--mark-1) 42%, var(--mark-2) 50%, var(--mark-3) 58%,
+      currentColor 66% 100%)
+    100% 0 / 300% 100% no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Hover (or open): the wings beat once, one after another, and glow while
+   held; a sweep in the same three colors runs across the name. */
+.wordmark-name:is(:hover, [aria-expanded="true"]) .wordmark-mark {
+  filter: drop-shadow(0 0 0.14em color-mix(in srgb, var(--mark-1) 55%, transparent));
+}
+.wordmark-name:is(:hover, [aria-expanded="true"]) .wordmark-mark path {
+  animation: wordmark-wing 760ms cubic-bezier(0.3, 0.7, 0.4, 1) both;
+}
+.wordmark-name:is(:hover, [aria-expanded="true"]) .wordmark-mark path:nth-child(2) { animation-delay: 70ms; }
+.wordmark-name:is(:hover, [aria-expanded="true"]) .wordmark-mark path:nth-child(3) { animation-delay: 140ms; }
+.wordmark-name:is(:hover, [aria-expanded="true"]) .wordmark-text {
+  -webkit-text-fill-color: transparent;
+  animation: wordmark-sweep 900ms ease-in-out both;
+}
+@keyframes wordmark-wing {
+  0%   { transform: rotate(0deg); }
+  38%  { transform: rotate(-10deg) translateY(-2%); }
+  72%  { transform: rotate(3deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes wordmark-sweep {
+  from { background-position: 100% 0; }
+  to   { background-position: 0% 0; }
+}
+
+.name-card {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  width: min(44rem, 100%);
+  max-height: min(70vh, 640px);
+  max-height: min(70dvh, 640px);
+  overflow: hidden;
+  color: var(--text);
+  background:
+    linear-gradient(90deg, var(--mark-1), var(--mark-2), var(--mark-3)) top / 100% 3px no-repeat,
+    var(--panel);
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.38);
+  animation: name-card-in 140ms ease-out;
+}
+.name-card[hidden] { display: none; }
+@keyframes name-card-in {
+  from { opacity: 0; transform: translateY(-4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .name-card { animation: none; }
+  .wordmark-name .wordmark-mark { transition: none; }
+  .wordmark-name .wordmark-mark path,
+  .wordmark-name .wordmark-text { animation: none !important; }
+}
+
+.name-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 16px 12px 24px;
+  border-bottom: 1px solid var(--line);
+}
+.name-card-title { margin: 0; font-size: 1.3rem; }
+.name-card-close { flex: none; }
+.name-card-body {
+  padding: 4px 24px 22px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.name-card-body h3 {
+  margin: 20px 0 6px;
+  color: var(--accent-bright);
+  font-size: 1.02rem;
+}
+.name-card-body p,
+.name-card-body li { color: var(--muted); }
+.name-card-body li { margin-bottom: 6px; }
+.name-card-body li b { color: var(--text); }
+.name-card-body ul { margin: 0 0 1em; }
+.name-card-table {
+  width: 100%;
+  margin: 4px 0 12px;
+  border-collapse: collapse;
+  font-size: 0.94rem;
+}
+.name-card-table th,
+.name-card-table td {
+  padding: 7px 12px 7px 0;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+.name-card-table th { color: var(--dim); font-size: 0.85rem; font-weight: 600; }
+.name-card-table td { color: var(--muted); }
+.name-card-table td:first-child { width: 34%; color: var(--text); font-weight: 600; }
+
 /* Desktop demo video. */
 .shot { max-width: 880px; margin: 32px 0 0; }
 .demo-video {
@@ -759,12 +894,16 @@ html[data-theme='cyberpunk'] ::selection {
     margin-left: 0;
     padding-top: 6px;
     gap: 2px 16px;
-    /* one line that scrolls sideways rather than a ragged second row */
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
+    /* Phones wrap onto a second row: a row that scrolls sideways hid the
+       last links with no sign that they were there. */
+    flex-wrap: wrap;
   }
   .site-nav a { flex: none; font-size: 0.92rem; }
+}
+
+/* Below this width the nav takes a second row. */
+@media (max-width: 484px) {
+  :root { --header-h: 120px; }
 }
 
 @media (max-width: 860px) {

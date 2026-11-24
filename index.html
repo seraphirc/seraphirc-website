@@ -106,7 +106,7 @@
         } catch (e) {}
       })();
     </script>
-    <link rel="stylesheet" href="styles.css?v=20261111-header-3">
+    <link rel="stylesheet" href="styles.css?v=20261124-name-card-1">
   </head>
   <body>
     <header class="site-header">
@@ -158,10 +158,72 @@
     <main>
       <section class="intro">
         <div class="wrap">
-          <h1 class="wordmark">
-            <svg class="seraph-mark wordmark-mark" viewBox="9 23.5 74 74" fill="none" stroke-width="11" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M18,66 L74,30" stroke="var(--mark-1)"/><path d="M22,79 L64,52" stroke="var(--mark-2)"/><path d="M28,91 L52,75" stroke="var(--mark-3)"/></svg>
-            SeraphIRC
-          </h1>
+          <div class="wordmark-wrap">
+            <h1 class="wordmark">
+              <button type="button" class="wordmark-name" id="name-card-trigger" aria-expanded="false" aria-controls="name-card">
+                <svg class="seraph-mark wordmark-mark" viewBox="9 23.5 74 74" fill="none" stroke-width="11" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M18,66 L74,30" stroke="var(--mark-1)"/><path d="M22,79 L64,52" stroke="var(--mark-2)"/><path d="M28,91 L52,75" stroke="var(--mark-3)"/></svg>
+                <span class="wordmark-text">SeraphIRC</span>
+              </button>
+            </h1>
+            <!-- Why the name: opens on hover (mouse) or tap, in the current theme's colors. -->
+            <div class="name-card" id="name-card" role="region" aria-labelledby="name-card-title" hidden>
+              <div class="name-card-head">
+                <h2 class="name-card-title" id="name-card-title">Why are you named SeraphIRC?</h2>
+                <button type="button" class="lightbox-close name-card-close" aria-label="Close"></button>
+              </div>
+              <div class="name-card-body">
+                <h3>The short answer</h3>
+                <p>SeraphIRC is named after the seraphim, the fiery guardians of the most sacred space in ancient tradition. That's the job we'd like the client to do for you: guard your conversations and your information, and keep the line between your private life and the companies that would like to mine it.</p>
+                <p>SeraphIRC exists to give people a safe, privacy-respecting IRC experience that is still full-featured, makes IRC easier to pick up and learn, and offers a real alternative to chat platforms run by intrusive corporations.</p>
+
+                <h3>Who were the seraphim?</h3>
+                <p>In ancient tradition, the seraphim are the highest order of angelic beings. They are described as surrounding the divine throne and serving as its guardians. The word comes from the Hebrew <i>saraph</i>, "burning," and they are pictured as fiery, six-winged beings.</p>
+                <p>What matters to us is their role, not their theology. A seraph does not rule over what it protects. It stands watch over something precious and keeps it safe.</p>
+
+                <h3>What does that have to do with a chat client?</h3>
+                <p>A chat client sits at the boundary between you and everyone else online. SeraphIRC is built to guard that boundary for you, not to profit from it.</p>
+                <ul>
+                  <li><b>No snooping.</b> Your conversations are yours. SeraphIRC does not watch what you say or who you talk to.</li>
+                  <li><b>No selling your information.</b> Your data is not a product, and it is not passed along to advertisers, brokers or anyone else.</li>
+                  <li><b>Your credentials stay with you.</b> Passwords are kept in your operating system's secure key store and are never sent to us.</li>
+                  <li><b>You curate your own experience.</b> You decide which networks, channels and people you let in, and how the client looks and behaves. Nobody else picks it for you.</li>
+                </ul>
+                <p>In short, a seraph stands guard over what matters most. SeraphIRC aims to be the gatekeeper on your side.</p>
+
+                <h3>Why IRC?</h3>
+                <p>IRC is one of the oldest open chat systems on the internet. No single company owns it, and you can connect from any client you like. That makes it a perfect home for people who want to step away from platforms that treat their users as the product.</p>
+                <p>IRC's reputation for being hard to learn has kept many people away. SeraphIRC tries to lower that barrier without losing what makes IRC great:</p>
+                <ul>
+                  <li><b>Feature rich.</b> It supports modern IRCv3 features, chat history, avatars, rich text formatting and file transfer, alongside classic commands and MSL scripting.</li>
+                  <li><b>Familiar to veterans and approachable for newcomers.</b> It offers both classic and modern views, so longtime IRC users feel at home and first-timers aren't overwhelmed.</li>
+                  <li><b>Less friction.</b> Common tasks, like joining a channel from a link or seeing every mention in one place, take one click instead of a memorized command.</li>
+                </ul>
+
+                <h3>Is SeraphIRC a religious project?</h3>
+                <p>No. The seraph is a symbol of protection, and we chose it for that meaning. SeraphIRC isn't tied to any faith and doesn't promote one.</p>
+
+                <h3>Where does the guardian idea show up in the app?</h3>
+                <p>The guardian idea is built into the features themselves.</p>
+                <table class="name-card-table">
+                  <thead>
+                    <tr><th scope="col">Feature</th><th scope="col">What it guards</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Seraph Transfer (Desktop)</td><td>Sends files directly between people over TLS 1.3 with certificate pinning, as a modern replacement for DCC</td></tr>
+                    <tr><td>Seraph Chat (Desktop)</td><td>Opens a private, encrypted, peer-to-peer conversation that is discarded when either side closes it</td></tr>
+                    <tr><td>Send Guard (Desktop)</td><td>Stops a message before it goes out if it looks like a password or other secret, or seems aimed at the wrong window</td></tr>
+                    <tr><td>Secure credential storage</td><td>Keeps your logins in your OS key store, never on our servers</td></tr>
+                    <tr><td>Location-neutral CTCP TIME</td><td>Replies in UTC, so others can't work out your time zone</td></tr>
+                    <tr><td>FiSH encryption</td><td>Encrypts messages in channels and private chats</td></tr>
+                  </tbody>
+                </table>
+                <p>... and many more places.</p>
+
+                <h3>Is the name a play on "seraphic"?</h3>
+                <p>A happy accident. "Seraphic" means serene or angelic, and we'd like using the client to feel that way, but the name started with the guardians. The pun came along afterward. ;)</p>
+              </div>
+            </div>
+          </div>
           <p class="intro-text">
             An IRC client for Windows, macOS, Linux, iOS and Android. Connect straight to a
             network or through your Soju or ZNC bouncer. It has classic and modern layouts and
@@ -528,6 +590,70 @@
             delete video.dataset.userPaused;
           });
           observer.observe(video);
+        });
+      })();
+
+      // The wordmark opens the "Why the name" card: on hover with a mouse, on
+      // tap or click otherwise. A click pins it open until it is closed, a
+      // click lands outside it, or Escape is pressed.
+      (function () {
+        var trigger = document.getElementById("name-card-trigger");
+        var card = document.getElementById("name-card");
+        if (!trigger || !card) return;
+        var body = card.querySelector(".name-card-body");
+        var pinned = false;
+        var openTimer = 0;
+        var closeTimer = 0;
+        function show(pin) {
+          clearTimeout(openTimer);
+          clearTimeout(closeTimer);
+          if (pin) pinned = true;
+          if (!card.hidden) return;
+          body.scrollTop = 0;
+          card.hidden = false;
+          trigger.setAttribute("aria-expanded", "true");
+        }
+        function hide() {
+          clearTimeout(openTimer);
+          clearTimeout(closeTimer);
+          pinned = false;
+          if (card.hidden) return;
+          card.hidden = true;
+          trigger.setAttribute("aria-expanded", "false");
+        }
+        function hoverIn(event) {
+          if (event.pointerType !== "mouse") return;
+          clearTimeout(closeTimer);
+          if (card.hidden) openTimer = setTimeout(function () { show(false); }, 120);
+        }
+        function hoverOut(event) {
+          if (event.pointerType !== "mouse") return;
+          clearTimeout(openTimer);
+          if (!pinned) closeTimer = setTimeout(hide, 300);
+        }
+        trigger.addEventListener("pointerenter", hoverIn);
+        trigger.addEventListener("pointerleave", hoverOut);
+        card.addEventListener("pointerenter", function (event) {
+          if (event.pointerType === "mouse") clearTimeout(closeTimer);
+        });
+        card.addEventListener("pointerleave", hoverOut);
+        trigger.addEventListener("click", function () {
+          if (!card.hidden && pinned) hide();
+          else show(true);
+        });
+        card.querySelector(".name-card-close").addEventListener("click", function () {
+          hide();
+          trigger.focus();
+        });
+        document.addEventListener("pointerdown", function (event) {
+          if (card.hidden || card.contains(event.target) || trigger.contains(event.target)) return;
+          hide();
+        });
+        document.addEventListener("keydown", function (event) {
+          if (event.key !== "Escape" || card.hidden) return;
+          var inside = card.contains(document.activeElement);
+          hide();
+          if (inside) trigger.focus();
         });
       })();
 
