@@ -1,6 +1,16 @@
 {
   "themes": [
     {
+      "file": "brave.seraphirc-theme.json",
+      "name": "Brave",
+      "base": "tokyo-night",
+      "baseLabel": "Tokyo Night",
+      "overrides": 161,
+      "author": "knowmadic",
+      "network": "Libera",
+      "addedAt": "2026-11-23"
+    },
+    {
       "file": "firefox-nova-dark.seraphirc-theme.json",
       "name": "Firefox Nova Dark",
       "base": "nebula",
