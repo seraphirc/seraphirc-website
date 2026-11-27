@@ -269,6 +269,47 @@ select option { color: var(--text); background: var(--panel); }
 .intro { padding: 56px 0 28px; }
 .intro h1 { max-width: 20em; }
 
+
+/* Crest: the logo's wings on a shield, faint, behind the top of a page.
+   It sits off to the right and runs past the edge of a narrow window.
+   The frame is what keeps it from widening the page. */
+.crest-frame {
+  position: absolute;
+  top: var(--header-h);
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 620px;
+  overflow: hidden;
+  pointer-events: none;
+}
+.crest {
+  position: absolute;
+  top: 34px;
+  left: calc(50% + 250px);
+  width: 430px;
+  height: auto;
+  opacity: 0.07;
+  transform: rotate(7deg);
+}
+html[data-theme]:is([data-theme='light'], [data-theme='solarized-light'], [data-theme='ocean-breeze'],
+                    [data-theme='sage'], [data-theme='sakura'], [data-theme='newsprint']) .crest { opacity: 0.11; }
+/* Docs fills the middle of the page, so there the crest keeps to the
+   right margin, and only where the margin is wide enough to show it. */
+.crest-frame-margin .crest { left: calc(50% + 590px); }
+@media (max-width: 1560px) {
+  .crest-frame-margin { display: none; }
+}
+@media (max-width: 860px) {
+  .crest {
+    top: 12px;
+    left: auto;
+    right: -84px;
+    width: 270px;
+  }
+}
+/* end crest */
+
 /* Home heading: the logo beside the name. */
 .wordmark {
   display: flex;
