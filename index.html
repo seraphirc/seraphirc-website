@@ -106,7 +106,7 @@
         } catch (e) {}
       })();
     </script>
-    <link rel="stylesheet" href="styles.css?v=20261126-wordmark-1">
+    <link rel="stylesheet" href="styles.css?v=20261127-features-1">
   </head>
   <body>
     <header class="site-header">
@@ -255,74 +255,181 @@
       <section class="section" id="features" aria-labelledby="features-title">
         <div class="wrap">
           <h2 id="features-title">Features</h2>
-          <div class="feature-groups">
-            <div class="feature-col">
-              <div class="feature-group">
-                <h3>Connecting</h3>
-                <dl class="feature-list">
-                  <dt>All your networks in one tree</dt>
-                  <dd>Direct networks, bouncer imports, channels, server buffers, and private messages all sit in the same tree.</dd>
-                  <dt id="bouncers">Soju</dt>
-                  <dd>Import networks from Soju and manage bouncer-aware connections inside the client, including push notifications over <code>soju.im/webpush</code>.</dd>
-                  <dt>ZNC</dt>
-                  <dd>Existing setups keep working, including command forwarding and the usual user/network style login.</dd>
-                  <dt>Direct connections</dt>
-                  <dd>No bouncer? Connect straight to a network and everything works the way you expect.</dd>
-                  <dt>IRCv3</dt>
-                  <dd>SASL, server-time, account tags, away-notify, echo-message, batch, chat history and more, used wherever the network offers them. <a href="#ircv3">Full list below.</a></dd>
-                  <dt>Diagnostics built in</dt>
-                  <dd>When a connection or a login goes wrong, you can watch what the connection is doing, what the server sent back, and what the client thinks is going on.</dd>
-                </dl>
-              </div>
+          <ul class="feature-cards">
+            <li class="feature-card" id="bouncers">
+              <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="13" width="18" height="7" rx="1.5"/><path d="M7 7.5h.01M7 16.5h.01M11 7.5h6M11 16.5h6"/></svg>
+              <h3>Soju and ZNC</h3>
+              <p>Import and manage your Soju networks inside the client, with push notifications over <code>soju.im/webpush</code>. Already on ZNC? Your setup keeps working, command forwarding and all.</p>
+            </li>
+            <li class="feature-card">
+              <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M9 4v16M12.5 9h5M12.5 12.5h5M12.5 16h3"/></svg>
+              <h3>Modern and Classic layouts</h3>
+              <p>Modern groups a run of messages under one name and avatar. Classic is the plain <code>[11:15] &lt;@nick&gt;</code> transcript.</p>
+            </li>
+            <li class="feature-card">
+              <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" stroke="none"/></svg>
+              <h3>22 built-in themes</h3>
+              <p>Try them on this site with the picker at the top of the page. You can also clone any of them in the built-in editor, and share or download custom themes on the <a href="/marketplace/">theme marketplace</a>.</p>
+            </li>
+            <li class="feature-card">
+              <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 8h14M15 5l3 3-3 3M20 16H6M9 13l-3 3 3 3"/></svg>
+              <h3>Seraph Transfer and Seraph Chat</h3>
+              <p>Send a file or open a private conversation straight to another SeraphIRC user over mutually authenticated TLS 1.3. It works when you are both behind NAT, and nothing is stored on a server.</p>
+            </li>
+            <li class="feature-card">
+              <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l7 3v5.5c0 4.3-2.9 7.6-7 9-4.1-1.4-7-4.7-7-9V6l7-3z"/><path d="M9 12l2.2 2.2L15 10.5"/></svg>
+              <h3>Send Guard</h3>
+              <p>Holds a message that looks like an accident, such as a password typed into a channel or a forty-line paste, and asks before it goes out.</p>
+            </li>
+            <li class="feature-card">
+              <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3M12 14.5v2"/></svg>
+              <h3>Nothing phones home</h3>
+              <p>No account requirement and no cloud dependency. The client talks to your networks and nothing else.</p>
+            </li>
+          </ul>
 
-              <div class="feature-group">
-                <h3>Files and privacy</h3>
-                <dl class="feature-list">
-                  <dt>Uploads and DCC</dt>
-                  <dd>Upload files through your Soju bouncer, or send them directly with DCC. Drag and drop and copy/paste both work.</dd>
-                  <dt>Seraph Transfer and Seraph Chat</dt>
-                  <dd>Send a file or open a private conversation straight to another SeraphIRC user over mutually authenticated TLS 1.3. It works when you are both behind NAT, and nothing is stored on a server.</dd>
-                  <dt>FiSH encryption</dt>
-                  <dd>Blowfish in CBC or ECB mode, compatible with HexChat, Konversation, Quassel, and mIRC. Set a shared key for a channel or a person and messages are encrypted automatically.</dd>
-                  <dt>Nothing phones home</dt>
-                  <dd>No account requirement and no cloud dependency. The client talks to your networks and nothing else.</dd>
-                </dl>
-              </div>
+          <div class="feature-sheet">
+            <div class="feature-set">
+              <h3>Connecting</h3>
+              <ul class="feature-rows">
+                <li>
+                  <div class="feature-row">
+                    <span class="feature-name">All your networks in one tree</span>
+                    <span class="feature-line">Direct networks and bouncer networks sit side by side.</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="feature-row">
+                    <span class="feature-name">Direct connections</span>
+                    <span class="feature-line">No bouncer? Connect straight to a network.</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="feature-row">
+                    <span class="feature-name">IRCv3</span>
+                    <span class="feature-line">SASL, chat history, away-notify and plenty more. <a href="#ircv3">Full list below.</a></span>
+                  </div>
+                </li>
+                <li>
+                  <details class="feature-fold">
+                    <summary>
+                      <span class="feature-row">
+                        <span class="feature-name">Diagnostics built in</span>
+                        <span class="feature-line">See what went wrong when a connection or login fails.</span>
+                      </span>
+                    </summary>
+                    <p class="feature-detail">It shows what the server sent back and what the client thinks is going on.</p>
+                  </details>
+                </li>
+              </ul>
             </div>
-            <div class="feature-col">
-              <div class="feature-group">
-                <h3>Chatting</h3>
-                <dl class="feature-list">
-                  <dt>Modern and Classic layouts</dt>
-                  <dd>Modern groups a run of messages under one name and avatar. Classic is the plain <code>[11:15] &lt;@nick&gt;</code> transcript.</dd>
-                  <dt>Replies and reactions</dt>
-                  <dd>Answer a specific message or react to it with an emoji. Where a network or client can't show them, replies fall back to a plain <code>nick:</code> prefix and reactions can go out as a normal message.</dd>
-                  <dt>Markdown and color</dt>
-                  <dd>Write bold, italics, code spans, and colors with markdown or token syntax. It all goes out as standard IRC formatting codes that other clients understand.</dd>
-                  <dt>Send Guard</dt>
-                  <dd>Holds a message that looks like an accident, such as a password typed into a channel or a forty-line paste, and asks before it goes out.</dd>
-                  <dt>Custom mentions</dt>
-                  <dd>Add your own words and phrases and they highlight like your nick, with their own tray and notification toggle. Desktop only.</dd>
-                  <dt>Know who you're talking to</dt>
-                  <dd>The query window shows whether someone logged in with SASL, and to which account. A green check means verified.</dd>
-                  <dt>Emoji and GIFs</dt>
-                  <dd>A full emoji picker, plus GIPHY search if you bring your own API key.</dd>
-                  <dt>Message redaction</dt>
-                  <dd>Take back a message you sent, wherever the network supports it.</dd>
-                </dl>
-              </div>
 
-              <div class="feature-group">
-                <h3>Looks</h3>
-                <dl class="feature-list">
-                  <dt>22 built-in themes</dt>
-                  <dd>Try them on this site with the picker at the top of the page. You can also clone any of them in the built-in editor, and share or download custom themes on the <a href="/marketplace/">theme marketplace</a>.</dd>
-                  <dt>Atmosphere</dt>
-                  <dd>A slider for how much cloud and starlight drifts behind the desktop client.</dd>
-                  <dt>Your fonts, your spacing</dt>
-                  <dd>Pick the interface and message fonts, the icon size, and how tightly messages and the user list are packed.</dd>
-                </dl>
-              </div>
+            <div class="feature-set">
+              <h3>Chatting</h3>
+              <ul class="feature-rows">
+                <li>
+                  <details class="feature-fold">
+                    <summary>
+                      <span class="feature-row">
+                        <span class="feature-name">Replies and reactions</span>
+                        <span class="feature-line">Answer a specific message or react to it with an emoji.</span>
+                      </span>
+                    </summary>
+                    <p class="feature-detail">Where a network or client can't show them, replies fall back to a plain <code>nick:</code> prefix and reactions can go out as a normal message.</p>
+                  </details>
+                </li>
+                <li>
+                  <details class="feature-fold">
+                    <summary>
+                      <span class="feature-row">
+                        <span class="feature-name">Markdown and color</span>
+                        <span class="feature-line">Write bold, italics, code spans, and colors with markdown or token syntax.</span>
+                      </span>
+                    </summary>
+                    <p class="feature-detail">It all goes out as standard IRC formatting codes that other clients understand.</p>
+                  </details>
+                </li>
+                <li>
+                  <details class="feature-fold">
+                    <summary>
+                      <span class="feature-row">
+                        <span class="feature-name">Custom mentions</span>
+                        <span class="feature-line">Add your own words and phrases and they highlight like your nick. Desktop only.</span>
+                      </span>
+                    </summary>
+                    <p class="feature-detail">They get their own tray and notification toggle.</p>
+                  </details>
+                </li>
+                <li>
+                  <details class="feature-fold">
+                    <summary>
+                      <span class="feature-row">
+                        <span class="feature-name">Know who you're talking to</span>
+                        <span class="feature-line">The query window shows whether someone logged in with SASL. A green check means verified.</span>
+                      </span>
+                    </summary>
+                    <p class="feature-detail">It also shows which account they logged in to.</p>
+                  </details>
+                </li>
+                <li>
+                  <div class="feature-row">
+                    <span class="feature-name">Emoji and GIFs</span>
+                    <span class="feature-line">A full emoji picker, plus GIPHY search if you bring your own API key.</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="feature-row">
+                    <span class="feature-name">Message redaction</span>
+                    <span class="feature-line">Take back a message you sent, wherever the network supports it.</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="feature-set">
+              <h3>Files and privacy</h3>
+              <ul class="feature-rows">
+                <li>
+                  <details class="feature-fold">
+                    <summary>
+                      <span class="feature-row">
+                        <span class="feature-name">Uploads and DCC</span>
+                        <span class="feature-line">Upload files through your Soju bouncer, or send them directly with DCC.</span>
+                      </span>
+                    </summary>
+                    <p class="feature-detail">Drag and drop and copy/paste both work.</p>
+                  </details>
+                </li>
+                <li>
+                  <details class="feature-fold">
+                    <summary>
+                      <span class="feature-row">
+                        <span class="feature-name">FiSH encryption</span>
+                        <span class="feature-line">Set a shared key for a channel or a person and messages are encrypted automatically.</span>
+                      </span>
+                    </summary>
+                    <p class="feature-detail">Blowfish in CBC or ECB mode, compatible with HexChat, Konversation, Quassel, and mIRC.</p>
+                  </details>
+                </li>
+              </ul>
+            </div>
+
+            <div class="feature-set">
+              <h3>Looks</h3>
+              <ul class="feature-rows">
+                <li>
+                  <div class="feature-row">
+                    <span class="feature-name">Atmosphere</span>
+                    <span class="feature-line">A slider for how much cloud and starlight drifts behind the desktop client.</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="feature-row">
+                    <span class="feature-name">Your fonts, your spacing</span>
+                    <span class="feature-line">Pick the interface and message fonts, the icon size, and how tightly messages and the user list are packed.</span>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
