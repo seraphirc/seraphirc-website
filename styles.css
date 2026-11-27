@@ -630,18 +630,36 @@ select option { color: var(--text); background: var(--panel); }
 }
 .show-all:hover { color: var(--accent-bright); }
 
-/* IRCv3 */
+/* IRCv3: each capability is a tag, under a heading for what it is for. */
+.cap-sheet { margin-top: 20px; }
+.cap-set {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  gap: 0 24px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+.cap-set h3 {
+  margin: 0;
+  padding-top: 2px;
+  color: var(--gold);
+  font-size: 1rem;
+  line-height: 1.6;
+}
 .cap-list {
-  columns: 3 15em;
-  column-gap: 32px;
-  margin: 18px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 .cap-list li {
-  padding: 3px 0;
-  break-inside: avoid;
-  font-size: 0.95rem;
+  padding: 2px 9px;
+  color: var(--dim);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
 }
 .cap-list a { text-decoration: none; }
 .cap-list a code { color: var(--accent); }
@@ -904,6 +922,8 @@ html[data-theme='cyberpunk'] ::selection {
   .feature-set h3 { padding-top: 6px; }
   .feature-row { grid-template-columns: minmax(0, 1fr); }
   .feature-detail { margin-left: 0; }
+  .cap-set { grid-template-columns: minmax(0, 1fr); }
+  .cap-set h3 { padding: 0 0 6px; }
   .mobile-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .contact-list { grid-template-columns: minmax(0, 1fr); }
 }
