@@ -379,9 +379,10 @@
           <h2 id="ircv3-title">IRCv3 support</h2>
           <p class="section-intro">
             The <a href="https://ircv3.net" target="_blank" rel="noopener">IRCv3</a> capabilities SeraphIRC uses when a
-            server offers them. Ones marked partial are only partly used so far.
+            server offers them.
           </p>
           <ul class="cap-list">
+            <li><a href="https://ircv3.net/specs/extensions/account-extban" target="_blank" rel="noopener"><code>account-extban</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/account-notify" target="_blank" rel="noopener"><code>account-notify</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/account-tag" target="_blank" rel="noopener"><code>account-tag</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/away-notify" target="_blank" rel="noopener"><code>away-notify</code></a></li>
@@ -389,6 +390,7 @@
             <li><a href="https://ircv3.net/specs/extensions/bot-mode" target="_blank" rel="noopener"><code>bot</code> mode</a></li>
             <li><a href="https://ircv3.net/specs/extensions/capability-negotiation" target="_blank" rel="noopener"><code>CAP LS 302</code></a> negotiation</li>
             <li><a href="https://ircv3.net/specs/extensions/capability-negotiation#cap-notify" target="_blank" rel="noopener"><code>cap-notify</code></a></li>
+            <li><a href="https://ircv3.net/specs/client-tags/channel-context" target="_blank" rel="noopener"><code>+channel-context</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/chghost" target="_blank" rel="noopener"><code>chghost</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/chathistory" target="_blank" rel="noopener"><code>draft/chathistory</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/chathistory#implementation" target="_blank" rel="noopener"><code>draft/event-playback</code></a></li>
@@ -396,32 +398,34 @@
             <li><a href="https://ircv3.net/specs/extensions/message-redaction" target="_blank" rel="noopener"><code>draft/message-redaction</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/metadata" target="_blank" rel="noopener"><code>draft/metadata-2</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/multiline" target="_blank" rel="noopener"><code>draft/multiline</code></a></li>
-            <li><a href="https://ircv3.net/specs/extensions/no-implicit-names" target="_blank" rel="noopener"><code>draft/no-implicit-names</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/read-marker" target="_blank" rel="noopener"><code>draft/read-marker</code></a></li>
             <li><a href="https://ircv3.net/specs/client-tags/react" target="_blank" rel="noopener"><code>+draft/react</code></a></li>
-            <li><a href="https://ircv3.net/specs/client-tags/reply" target="_blank" rel="noopener"><code>+draft/reply</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/webpush" target="_blank" rel="noopener"><code>draft/webpush</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/echo-message" target="_blank" rel="noopener"><code>echo-message</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/extended-join" target="_blank" rel="noopener"><code>extended-join</code></a></li>
+            <li><a href="https://ircv3.net/specs/extensions/extended-monitor" target="_blank" rel="noopener"><code>extended-monitor</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/invite-notify" target="_blank" rel="noopener"><code>invite-notify</code></a></li>
-            <li class="partial"><a href="https://ircv3.net/specs/extensions/labeled-response" target="_blank" rel="noopener"><code>labeled-response</code></a></li>
+            <li><a href="https://ircv3.net/specs/extensions/labeled-response" target="_blank" rel="noopener"><code>labeled-response</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/message-tags" target="_blank" rel="noopener"><code>message-tags</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/monitor" target="_blank" rel="noopener"><code>monitor</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/message-ids" target="_blank" rel="noopener"><code>msgid</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/multi-prefix" target="_blank" rel="noopener"><code>multi-prefix</code></a></li>
+            <li><a href="https://ircv3.net/specs/extensions/no-implicit-names" target="_blank" rel="noopener"><code>no-implicit-names</code></a></li>
+            <li><a href="https://ircv3.net/specs/client-tags/reply" target="_blank" rel="noopener"><code>+reply</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/sasl-3.1" target="_blank" rel="noopener"><code>sasl</code> 3.1</a> and <a href="https://ircv3.net/specs/extensions/sasl-3.2" target="_blank" rel="noopener">3.2</a> (PLAIN and EXTERNAL)</li>
             <li><a href="https://ircv3.net/specs/extensions/server-time" target="_blank" rel="noopener"><code>server-time</code></a></li>
-            <li class="partial"><a href="https://ircv3.net/specs/extensions/setname" target="_blank" rel="noopener"><code>setname</code></a></li>
+            <li><a href="https://ircv3.net/specs/extensions/setname" target="_blank" rel="noopener"><code>setname</code></a></li>
             <li><a href="https://codeberg.org/emersion/soju/src/branch/master/doc/ext/metadata.md" target="_blank" rel="noopener"><code>soju.im/blocked</code></a></li>
             <li><a href="https://codeberg.org/emersion/soju/src/branch/master/doc/ext/bouncer-networks.md" target="_blank" rel="noopener"><code>soju.im/bouncer-networks</code></a></li>
             <li><a href="https://codeberg.org/emersion/soju/src/branch/master/doc/ext/bouncer-networks.md" target="_blank" rel="noopener"><code>soju.im/bouncer-networks-notify</code></a></li>
             <li><a href="https://codeberg.org/emersion/soju/src/branch/master/doc/ext/filehost.md" target="_blank" rel="noopener"><code>soju.im/FILEHOST</code></a></li>
             <li><a href="https://codeberg.org/emersion/soju/src/branch/master/doc/ext/search.md" target="_blank" rel="noopener"><code>soju.im/search</code></a></li>
             <li><a href="https://codeberg.org/emersion/soju/src/branch/master/doc/ext/webpush.md" target="_blank" rel="noopener"><code>soju.im/webpush</code></a></li>
-            <li class="partial"><a href="https://ircv3.net/specs/extensions/standard-replies" target="_blank" rel="noopener"><code>standard-replies</code></a></li>
+            <li><a href="https://ircv3.net/specs/extensions/standard-replies" target="_blank" rel="noopener"><code>standard-replies</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/sts" target="_blank" rel="noopener"><code>sts</code></a></li>
             <li><a href="https://ircv3.net/specs/client-tags/typing" target="_blank" rel="noopener"><code>+typing</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/userhost-in-names" target="_blank" rel="noopener"><code>userhost-in-names</code></a></li>
+            <li><a href="https://ircv3.net/specs/extensions/utf8-only" target="_blank" rel="noopener"><code>UTF8ONLY</code></a></li>
             <li><a href="https://ircv3.net/specs/extensions/websocket" target="_blank" rel="noopener">WebSocket</a> transport</li>
             <li><a href="https://ircv3.net/specs/extensions/whox" target="_blank" rel="noopener"><code>WHOX</code></a></li>
           </ul>
