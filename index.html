@@ -106,7 +106,7 @@
         } catch (e) {}
       })();
     </script>
-    <link rel="stylesheet" href="styles.css?v=20261127-sky-1">
+    <link rel="stylesheet" href="styles.css?v=20261127-sky-2">
   </head>
   <body>
     <header class="site-header">
@@ -156,7 +156,7 @@
     </header>
 
     <!-- crest -->
-    <div class="crest-frame" aria-hidden="true">
+    <div class="crest-frame" data-threats aria-hidden="true">
       <svg class="crest" viewBox="0 0 240 280" fill="none" stroke-linecap="round" stroke-linejoin="round" focusable="false">
         <path d="M40 26H200a16 16 0 0 1 16 16V126C216 194 172 236 120 260C68 236 24 194 24 126V42a16 16 0 0 1 16-16Z" stroke="var(--mark-2)" stroke-width="7"/>
         <g transform="translate(39.5 20) scale(1.75)" stroke-width="11">
@@ -237,7 +237,7 @@
                 <tr>
                   <td>Linux</td>
                   <td><a class="button" href="https://github.com/seraphirc/seraphirc-download/releases/latest">GitHub releases</a></td>
-                  <td class="files"><a href="/news/#news-chromium-flatpak">Chromium Flatpak</a> (recommended), or <code>.deb</code>, <code>.rpm</code> and Flatpak (WebKitGTK)</td>
+                  <td class="files"><code>.deb</code>, <code>.rpm</code> or <code>.flatpak</code></td>
                   <td class="price">Free</td>
                 </tr>
                 <tr>
@@ -280,18 +280,18 @@
             </li>
             <li class="feature-card">
               <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" stroke="none"/></svg>
-              <h3>22 built-in themes</h3>
-              <p>Try them with the picker at the top of this page. Clone one in the theme editor to make your own. Share it or download others on the <a href="/marketplace/">theme marketplace</a>.</p>
+              <h3>Built-in themes</h3>
+              <p>22 on desktop and 27 on mobile. Try the desktop ones with the picker at the top of this page. Clone one in the theme editor to make your own. Share it or download others on the <a href="/marketplace/">theme marketplace</a>.</p>
             </li>
             <li class="feature-card">
               <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 8h14M15 5l3 3-3 3M20 16H6M9 13l-3 3 3 3"/></svg>
               <h3>Seraph Transfer and Seraph Chat</h3>
-              <p>Send a file or open a private conversation straight to another SeraphIRC user over mutually authenticated TLS 1.3. It works when you're both behind NAT and nothing is stored on a server.</p>
+              <p>Send a file or open a private conversation straight to another SeraphIRC user over mutually authenticated TLS 1.3. It works when you're both behind NAT and nothing is stored on a server. Desktop only.</p>
             </li>
             <li class="feature-card">
               <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l7 3v5.5c0 4.3-2.9 7.6-7 9-4.1-1.4-7-4.7-7-9V6l7-3z"/><path d="M9 12l2.2 2.2L15 10.5"/></svg>
               <h3>Send Guard</h3>
-              <p>Asks first when a message looks like a mistake, like a password typed into a channel or a 40-line paste.</p>
+              <p>Asks first when a message looks like a mistake, like a password typed into a channel or a 40-line paste. Desktop only.</p>
             </li>
             <li class="feature-card">
               <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3M12 14.5v2"/></svg>
@@ -729,5 +729,237 @@
         line.hidden = false;
       })();
     </script>
+    <!-- threats -->
+    <script>
+      // For fun: words fly in as shooting stars and break on the crest, and
+      // now and then a beam leaves it for Seraph Chat or Seraph Transfer.
+      // Nothing runs for people who ask for less motion, on small screens,
+      // or while the top of the page is out of view.
+      (function () {
+        var frame = document.querySelector(".crest-frame[data-threats]");
+        if (!frame || !frame.animate) return;
+        var crest = frame.querySelector(".crest");
+        var calm = window.matchMedia("(prefers-reduced-motion: reduce)");
+        var narrow = window.matchMedia("(max-width: 860px)");
+        var words = ["Corporate snooping", "Info selling", "User profiling", "Ad tracking", "Data brokers"];
+        var bag = [];
+        var onScreen = true;
+        // Where a hit can land, in the drawing's own units, and the side it
+        // is hit from: 1 is from the right, -1 from the left.
+        var spots = [
+          [220, 62, 1], [220, 104, 1], [215, 146, 1], [211, 172, 1], [196, 198, 1],
+          [30, 34, -1], [24, 52, -1], [24, 72, -1]
+        ];
+        // A word has to be in view long enough to read. A flight needs this
+        // much open sky between the edge of the view and the shield, and
+        // takes at least this long to cross it.
+        var ROOM = 300, LEAST_TIME = 2300, MOST_TIME = 3400, SPEED = 150;
+        // The word rides behind the head, so it stays outside the shield.
+        var WORD_FROM = 10, WORD_TO = 160, WORD_DROP = 22;
+
+        function rand(a, b) { return a + Math.random() * (b - a); }
+        function make(tag, cls) { var el = document.createElement(tag); el.className = cls; return el; }
+        function nextWord() {
+          if (!bag.length) bag = words.slice().sort(function () { return Math.random() - 0.5; });
+          return bag.pop();
+        }
+
+        // True when the word would never pass behind the page's own text or
+        // the screenshot on its way in.
+        function clearOf(blocks, path) {
+          for (var d = 0; d <= path.room; d += 14) {
+            var x = path.x + path.ux * d, y = path.y + path.uy * d;
+            var left = path.side > 0 ? x + WORD_FROM : x - WORD_TO;
+            var right = path.side > 0 ? x + WORD_TO : x - WORD_FROM;
+            for (var i = 0; i < blocks.length; i++) {
+              var b = blocks[i];
+              if (right > b.left && left < b.right && y + WORD_DROP > b.top && y - 4 < b.bottom) return false;
+            }
+          }
+          return true;
+        }
+
+        function pickPath() {
+          var ctm = crest.getScreenCTM();
+          if (!ctm) return null;
+          var box = frame.getBoundingClientRect();
+          var blocks = [".wordmark-name", ".intro-text", ".shot"].map(function (sel) {
+            var el = document.querySelector(sel);
+            if (!el) return null;
+            var r = el.getBoundingClientRect();
+            return { left: r.left - box.left, right: r.right - box.left, top: r.top - box.top, bottom: r.bottom - box.top };
+          }).filter(Boolean);
+          var good = [];
+          spots.forEach(function (spot) {
+            var pt = crest.createSVGPoint();
+            pt.x = spot[0]; pt.y = spot[1];
+            var hit = pt.matrixTransform(ctm);
+            var x = hit.x - box.left, y = hit.y - box.top, side = spot[2];
+            if (y < 0 || x < 0 || x > box.width) return;
+            // room for the word beside the hit, inside the window
+            if (side > 0 ? box.width - x < WORD_TO + 10 : x < WORD_TO + 10) return;
+            for (var n = 0; n < 8; n++) {
+              var angle = side > 0 ? rand(8, 80) : rand(6, 24), a = angle * Math.PI / 180;
+              var edge = side > 0 ? box.width - x : x;
+              var path = {
+                x: x, y: y, side: side, angle: angle,
+                ux: side * Math.cos(a), uy: -Math.sin(a),      // points back the way it came
+                room: Math.min(y / Math.sin(a), edge / Math.cos(a))
+              };
+              if (path.room >= ROOM && clearOf(blocks, path)) good.push(path);
+            }
+          });
+          return good.length ? good[Math.floor(Math.random() * good.length)] : null;
+        }
+
+        function launch() {
+          var path = pickPath();
+          if (!path) return;   // no room here for a flight that can be read
+          var el = make("div", path.side > 0 ? "threat" : "threat threat-left");
+          var tail = make("i", "threat-tail");
+          tail.style.transform = "rotate(" + (path.side > 0 ? -path.angle : path.angle - 180) + "deg)";
+          var word = make("span", "threat-word");
+          nextWord().split("").forEach(function (ch) {
+            var b = document.createElement("b");
+            b.textContent = ch === " " ? " " : ch;
+            word.appendChild(b);
+          });
+          var head = make("i", "threat-head");
+          el.appendChild(tail);
+          el.appendChild(head);
+          el.appendChild(word);
+          frame.appendChild(el);
+          // the fireball flickers as it comes
+          head.animate([{ transform: "scale(0.92)" }, { transform: "scale(1.22)" }],
+            { duration: 120, direction: "alternate", iterations: Infinity });
+
+          var far = path.room + 40;   // starts just out of view
+          var time = Math.max(LEAST_TIME, Math.min(MOST_TIME, path.room / SPEED * 1000));
+          el.animate([
+            { transform: "translate(" + (path.x + path.ux * far) + "px," + (path.y + path.uy * far) + "px)", opacity: 0 },
+            { opacity: 1, offset: 0.1 },
+            { transform: "translate(" + path.x + "px," + path.y + "px)", opacity: 1 }
+          ], { duration: time, easing: "cubic-bezier(.35,0,.75,.85)", fill: "forwards" })
+            .onfinish = function () { smash(el, path.x, path.y, path.ux, path.uy); };
+        }
+
+        function smash(el, x, y, ux, uy) {
+          el.querySelector(".threat-tail").animate([{ opacity: 0.85 }, { opacity: 0 }], { duration: 160, fill: "forwards" });
+          el.querySelector(".threat-head").animate(
+            [{ opacity: 1, transform: "scale(1.1)" }, { opacity: 0, transform: "scale(3)" }],
+            { duration: 280, easing: "ease-out", fill: "forwards" });
+          var longest = 0;
+          Array.prototype.forEach.call(el.querySelectorAll(".threat-word b"), function (b, i) {
+            var turn = rand(-1.1, 1.1), c = Math.cos(turn), s = Math.sin(turn), far = rand(14, 52);
+            var dx = (ux * c - uy * s) * far;
+            var dy = (ux * s + uy * c) * far + rand(8, 30);
+            var time = rand(650, 1000), wait = i * 26;
+            longest = Math.max(longest, time + wait);
+            b.animate([
+              { transform: "none", opacity: 1 },
+              { transform: "translate(" + dx + "px," + dy + "px) rotate(" + rand(-140, 140) + "deg)", opacity: 0 }
+            ], { duration: time, delay: wait, easing: "cubic-bezier(.2,.6,.3,1)", fill: "forwards" });
+          });
+          for (var n = 0; n < 7; n++) spark(x, y, ux, uy);
+          var base = parseFloat(getComputedStyle(crest).opacity) || 0.07;
+          crest.animate([{ opacity: base }, { opacity: Math.min(base * 2.6, 0.3) }, { opacity: base }],
+            { duration: 520, easing: "ease-out" });
+          crest.animate([{ translate: "0 0" }, { translate: (-ux * 3) + "px " + (-uy * 3) + "px" }, { translate: "0 0" }],
+            { duration: 300, easing: "ease-out" });
+          setTimeout(function () { el.remove(); }, longest + 60);
+        }
+
+        function spark(x, y, ux, uy) {
+          var dot = make("i", "threat-spark");
+          var turn = rand(-1.25, 1.25), c = Math.cos(turn), s = Math.sin(turn), far = rand(16, 58);
+          var dx = (ux * c - uy * s) * far, dy = (ux * s + uy * c) * far;
+          frame.appendChild(dot);
+          dot.animate([
+            { transform: "translate(" + x + "px," + y + "px) scale(1)", opacity: 0.9 },
+            { transform: "translate(" + (x + dx) + "px," + (y + dy) + "px) scale(0.3)", opacity: 0 }
+          ], { duration: rand(320, 560), easing: "cubic-bezier(.1,.7,.3,1)", fill: "forwards" })
+            .onfinish = function () { dot.remove(); };
+        }
+
+        // Now and then a beam leaves the shield instead: encrypted traffic
+        // going out, for Seraph Chat and Seraph Transfer.
+        var notes = ["Seraph Chat", "Seraph Transfer"];
+        var LOCK = "<svg viewBox=\"0 0 12 12\" width=\"11\" height=\"11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"2\" y=\"5.5\" width=\"8\" height=\"5.5\" rx=\"1\"/><path d=\"M4 5.5V4a2 2 0 0 1 4 0v1.5\"/></svg>";
+        var beamUp = false, sinceBeam = 0;
+
+        // A beam starts at the wings in the middle of the shield and runs
+        // level to the right edge of the view, the longest way out.
+        var sources = [[120, 112], [128, 128], [112, 140]];
+
+        function beam() {
+          var ctm = crest.getScreenCTM();
+          if (!ctm) return false;
+          var box = frame.getBoundingClientRect();
+          var src = sources[Math.floor(Math.random() * sources.length)];
+          var pt = crest.createSVGPoint();
+          pt.x = src[0]; pt.y = src[1];
+          var from = pt.matrixTransform(ctm);
+          var x = from.x - box.left, y = from.y - box.top;
+          var tilt = rand(-3, 4);                       // level, give or take
+          var ux = Math.cos(tilt * Math.PI / 180), uy = Math.sin(tilt * Math.PI / 180);
+          var room = (box.width - x) / ux;
+          var fits = (box.width - x - WORD_TO - 16) / ux;
+          if (fits < 30) return false;                  // no room for the label
+          // The label sits just past the shield when there is room for it
+          // there, and otherwise as far right as it fits.
+          var past = crest.getBoundingClientRect().right - box.left - x + 14;
+          var at = Math.max(30, Math.min(past, fits));
+          var lx = x + ux * at + WORD_FROM, ly = y + uy * at;
+          var blocked = [".wordmark-name", ".intro-text", ".shot"].some(function (sel) {
+            var el = document.querySelector(sel);
+            if (!el) return false;
+            var r = el.getBoundingClientRect();
+            return lx + WORD_TO > r.left - box.left && lx < r.right - box.left &&
+              ly + 26 > r.top - box.top && ly < r.bottom - box.top;
+          });
+          if (blocked) return false;
+
+          beamUp = true;
+          var turn = "rotate(" + tilt + "deg)";
+          var el = make("div", "beam");
+          el.style.transform = "translate(" + x + "px," + y + "px)";
+          var line = make("i", "beam-line");
+          line.style.width = (room + 40) + "px";
+          var note = make("span", "beam-word");
+          note.style.transform = "translate(" + (ux * at) + "px," + (uy * at) + "px)";
+          note.innerHTML = LOCK;
+          note.appendChild(document.createTextNode(notes[Math.floor(Math.random() * notes.length)]));
+          el.appendChild(line);
+          el.appendChild(note);
+          frame.appendChild(el);
+
+          line.animate([{ transform: turn + " scaleX(0)" }, { transform: turn + " scaleX(1)" }],
+            { duration: 450, easing: "cubic-bezier(.2,.7,.3,1)", fill: "forwards" });
+          line.animate([{ backgroundPosition: "0 0, 0 0" }, { backgroundPosition: "38px 0, 0 0" }],
+            { duration: 700, iterations: Infinity });
+          note.animate([{ opacity: 0 }, { opacity: 0.9 }], { duration: 320, delay: 220, fill: "both" });
+          var base = parseFloat(getComputedStyle(crest).opacity) || 0.07;
+          crest.animate([{ opacity: base }, { opacity: Math.min(base * 2.2, 0.26) }, { opacity: base }],
+            { duration: 900, easing: "ease-out" });
+          el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 520, delay: 3000, fill: "forwards" })
+            .onfinish = function () { el.remove(); beamUp = false; };
+          return true;
+        }
+
+        function tick() {
+          var ok = onScreen && !document.hidden && !calm.matches && !narrow.matches;
+          if (ok) {
+            if (!beamUp && sinceBeam >= 2 && Math.random() < 0.34 && beam()) sinceBeam = 0;
+            else { launch(); sinceBeam++; }
+          }
+          setTimeout(tick, ok ? rand(1900, 3700) : 1200);
+        }
+        if ("IntersectionObserver" in window) {
+          new IntersectionObserver(function (entries) { onScreen = entries[0].isIntersecting; }).observe(frame);
+        }
+        setTimeout(tick, 1400);
+      })();
+    </script>
+    <!-- /threats -->
   </body>
 </html>

@@ -1884,6 +1884,27 @@
     "ChainSafe": true
   },
   {
+    "Name": "setname",
+    "Aliases": null,
+    "Usage": "/setname \u003creal name\u003e",
+    "Parameters": [
+      "real name: the new real name, spaces allowed"
+    ],
+    "Summary": "Change your real name",
+    "Details": [
+      "Changes your real name on this connection without reconnecting, on networks that support it. The change is confirmed in the window you typed it in. It lasts until you disconnect: the real name in the network's settings is what a new connection uses."
+    ],
+    "Examples": [
+      "/setname Jane Doe"
+    ],
+    "Category": "IRC",
+    "SendsIRC": true,
+    "LocalOnly": false,
+    "RequiresNetwork": true,
+    "RequiresBuffer": false,
+    "ChainSafe": false
+  },
+  {
     "Name": "motd",
     "Aliases": null,
     "Usage": "/motd [server]",

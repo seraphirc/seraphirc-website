@@ -303,7 +303,7 @@
             </ul>
           </details>
           <details class="chapter">
-            <summary>IRC<span class="chapter-count">29</span></summary>
+            <summary>IRC<span class="chapter-count">30</span></summary>
             <ul class="pagelist">
               <li class="page-overview"><a href="#commands-irc"><span class="lbl-screen">All irc commands</span><span class="lbl-print">IRC</span></a></li>
               <li><a href="#cmd-accept"><code>/accept</code></a></li>
@@ -326,6 +326,7 @@
               <li><a href="#cmd-names"><code>/names</code></a></li>
               <li><a href="#cmd-nick"><code>/nick</code></a></li>
               <li><a href="#cmd-op"><code>/op</code></a></li>
+              <li><a href="#cmd-setname"><code>/setname</code></a></li>
               <li><a href="#cmd-time"><code>/time</code></a></li>
               <li><a href="#cmd-topic"><code>/topic</code></a></li>
               <li><a href="#cmd-unban"><code>/unban</code></a></li>
@@ -767,6 +768,11 @@
               which account. A green check means verified. An orange question mark
               means unauthenticated or unknown.
             </p>
+            <p>
+              Where the network supports it, a query window also says
+              <strong>(Away)</strong> or <strong>(Offline)</strong> beside the name
+              when the other person is away or has left the network.
+            </p>
 
             <h3>Turning the volume down</h3>
             <p>
@@ -790,6 +796,17 @@
               <code>/voice</code>, <code>/kick</code>, <code>/ban</code>,
               <code>/kickban</code>, <code>/topic</code>, and <code>/mode</code>. Most
               take an optional channel, so you can moderate from another window.
+            </p>
+            <p>
+              Right-click a name for the same actions. <strong>Operator
+              Actions</strong>, <strong>CTCP</strong>, and <strong>DCC</strong> each
+              open a list beside the menu.
+            </p>
+            <p>
+              On networks that support account bans, Operator Actions also has
+              <strong>Ban account</strong> and <strong>KickBan account</strong> for
+              someone who is logged in. An account ban follows them through nick and
+              host changes.
             </p>
 
             <h3>Favorites</h3>
@@ -1144,6 +1161,11 @@
               enhanced events, and the activity duration gap can each be turned off
               on their own.
             </p>
+            <p id="layout-hover-actions">
+              <strong>Hover on message for actions</strong> shows Reply, React,
+              Quote, Copy, and Redact on a small bar when you point at a message.
+              Off by default. The same actions are always in the right-click menu.
+            </p>
 
             <h3>Treebar and member list</h3>
             <div class="table-scroll">
@@ -1152,6 +1174,7 @@
                 <tbody>
                   <tr id="layout-favorites"><th scope="row">Favorites in treebar</th><td><code>on</code></td><td>Your <a href="#channels">favorite channels and queries</a> in a card above your networks. Off, they stay a click away from the star in the toolbar.</td></tr>
                   <tr id="layout-compact-treebar"><th scope="row">Compact treebar</th><td><code>off</code></td><td>Networks as a classic tree of folders. Click a network to open its server window. Its <strong>...</strong> button or a right-click opens its actions.</td></tr>
+                  <tr id="layout-network-icons"><th scope="row">Network icons</th><td><code>on</code></td><td>The icon a network provides, beside its name. Off, every network shows the generic icon.</td></tr>
                   <tr><th scope="row">Userlist control panel</th><td><code>on</code></td><td>Action buttons under the member list. Click a name, then a button. Right-click a button to reassign it, add more, or remove it.</td></tr>
                   <tr><th scope="row">Server latency graphs</th><td><code>on</code></td><td>Round trip time to the IRC server, in the sidebar. Hover for each sample and the minimum, average, and maximum.</td></tr>
                   <tr><th scope="row">Show in the member list</th><td><code>off</code></td><td>Puts the latency graph in the member list as well.</td></tr>
@@ -1902,6 +1925,14 @@ server/Libera/server.log</code></pre>
               somebody appears or leaves. Where it does not, the client falls back to
               polling with <code>ISON</code> once a minute. Both paths give you the
               same events, the fallback is just slower to notice.
+            </p>
+
+            <h3>Where you see it</h3>
+            <p>
+              When somebody on the list comes online or leaves, a line appears in
+              the window you are in. <strong>Comes online</strong> and
+              <strong>Goes offline</strong> each have their own sound in
+              <code>Settings &gt; Interface &gt; Sounds &amp; Alerts</code>.
             </p>
 
             <h3>Scope</h3>
@@ -3648,7 +3679,7 @@ server/Libera/server.log</code></pre>
           <p class="pane-kicker">Commands</p>
           <h2>IRC</h2>
           <p class="pane-lead">Standard IRC verbs, passed to the server. Operator commands such as <code>/op</code> and <code>/kick</code> only work when you hold status in the channel.</p>
-          <nav class="entry-jump" aria-label="IRC commands"><a href="#cmd-accept"><code>/accept</code></a><a href="#cmd-admin"><code>/admin</code></a><a href="#cmd-away"><code>/away</code></a><a href="#cmd-back"><code>/back</code></a><a href="#cmd-ban"><code>/ban</code></a><a href="#cmd-deop"><code>/deop</code></a><a href="#cmd-devoice"><code>/devoice</code></a><a href="#cmd-info"><code>/info</code></a><a href="#cmd-invite"><code>/invite</code></a><a href="#cmd-ison"><code>/ison</code></a><a href="#cmd-kick"><code>/kick</code></a><a href="#cmd-kickban"><code>/kickban</code></a><a href="#cmd-knock"><code>/knock</code></a><a href="#cmd-list"><code>/list</code></a><a href="#cmd-lusers"><code>/lusers</code></a><a href="#cmd-mode"><code>/mode</code></a><a href="#cmd-motd"><code>/motd</code></a><a href="#cmd-names"><code>/names</code></a><a href="#cmd-nick"><code>/nick</code></a><a href="#cmd-op"><code>/op</code></a><a href="#cmd-time"><code>/time</code></a><a href="#cmd-topic"><code>/topic</code></a><a href="#cmd-unban"><code>/unban</code></a><a href="#cmd-userhost"><code>/userhost</code></a><a href="#cmd-users"><code>/users</code></a><a href="#cmd-voice"><code>/voice</code></a><a href="#cmd-who"><code>/who</code></a><a href="#cmd-whois"><code>/whois</code></a><a href="#cmd-whowas"><code>/whowas</code></a></nav>
+          <nav class="entry-jump" aria-label="IRC commands"><a href="#cmd-accept"><code>/accept</code></a><a href="#cmd-admin"><code>/admin</code></a><a href="#cmd-away"><code>/away</code></a><a href="#cmd-back"><code>/back</code></a><a href="#cmd-ban"><code>/ban</code></a><a href="#cmd-deop"><code>/deop</code></a><a href="#cmd-devoice"><code>/devoice</code></a><a href="#cmd-info"><code>/info</code></a><a href="#cmd-invite"><code>/invite</code></a><a href="#cmd-ison"><code>/ison</code></a><a href="#cmd-kick"><code>/kick</code></a><a href="#cmd-kickban"><code>/kickban</code></a><a href="#cmd-knock"><code>/knock</code></a><a href="#cmd-list"><code>/list</code></a><a href="#cmd-lusers"><code>/lusers</code></a><a href="#cmd-mode"><code>/mode</code></a><a href="#cmd-motd"><code>/motd</code></a><a href="#cmd-names"><code>/names</code></a><a href="#cmd-nick"><code>/nick</code></a><a href="#cmd-op"><code>/op</code></a><a href="#cmd-setname"><code>/setname</code></a><a href="#cmd-time"><code>/time</code></a><a href="#cmd-topic"><code>/topic</code></a><a href="#cmd-unban"><code>/unban</code></a><a href="#cmd-userhost"><code>/userhost</code></a><a href="#cmd-users"><code>/users</code></a><a href="#cmd-voice"><code>/voice</code></a><a href="#cmd-who"><code>/who</code></a><a href="#cmd-whois"><code>/whois</code></a><a href="#cmd-whowas"><code>/whowas</code></a></nav>
           <section class="docs-entry" id="cmd-accept">
             <header class="entry-head">
               <h3>/accept<a class="entry-anchor" href="#cmd-accept" aria-label="Link to /accept">#</a></h3>
@@ -3925,6 +3956,19 @@ server/Libera/server.log</code></pre>
             <div class="entry-details"><p>Sends MODE +o for a nick in the current channel.</p></div>
             <h4 class="entry-label">Examples</h4>
             <pre class="entry-examples"><code>/op Alice</code></pre>
+          </section>
+          <section class="docs-entry" id="cmd-setname">
+            <header class="entry-head">
+              <h3>/setname<a class="entry-anchor" href="#cmd-setname" aria-label="Link to /setname">#</a></h3>
+              <span class="entry-flags"><span class="flag flag-irc">sends IRC</span><span class="flag flag-network">needs a network</span></span>
+            </header>
+            <p class="entry-usage"><code>/setname &lt;real name&gt;</code></p>
+            <p class="entry-summary">Change your real name</p>
+            <h4 class="entry-label">Parameters</h4>
+            <dl class="entry-params"><dt><code>real name</code></dt><dd>the new real name, spaces allowed</dd></dl>
+            <div class="entry-details"><p>Changes your real name on this connection without reconnecting, on networks that support it. The change is confirmed in the window you typed it in. It lasts until you disconnect: the real name in the network's settings is what a new connection uses.</p></div>
+            <h4 class="entry-label">Examples</h4>
+            <pre class="entry-examples"><code>/setname Jane Doe</code></pre>
           </section>
           <section class="docs-entry" id="cmd-time">
             <header class="entry-head">
@@ -4892,6 +4936,7 @@ server/Libera/server.log</code></pre>
               <tr><th scope="row"><a href="#cmd-server"><code>/server</code></a></th><td class="idx-alias"><code></code></td><td>Open the server buffer</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
               <tr><th scope="row"><a href="#cmd-sethost"><code>/sethost</code></a></th><td class="idx-alias"><code></code></td><td>Set a user's displayed host</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>
               <tr><th scope="row"><a href="#cmd-setkey"><code>/setkey</code></a></th><td class="idx-alias"><code></code></td><td>Set a FiSH (Blowfish) encryption key</td><td class="idx-cat"><a href="#commands-encryption">Encryption</a></td></tr>
+              <tr><th scope="row"><a href="#cmd-setname"><code>/setname</code></a></th><td class="idx-alias"><code></code></td><td>Change your real name</td><td class="idx-cat"><a href="#commands-irc">IRC</a></td></tr>
               <tr><th scope="row"><a href="#cmd-show"><code>/show</code></a></th><td class="idx-alias"><code></code></td><td>Show recent current-buffer messages</td><td class="idx-cat"><a href="#commands-buffers">Buffers</a></td></tr>
               <tr><th scope="row"><a href="#cmd-showkey"><code>/showkey</code></a></th><td class="idx-alias"><code></code></td><td>Show the FiSH key for a target</td><td class="idx-cat"><a href="#commands-encryption">Encryption</a></td></tr>
               <tr><th scope="row"><a href="#cmd-shun"><code>/shun</code></a></th><td class="idx-alias"><code></code></td><td>Silently block commands from a user</td><td class="idx-cat"><a href="#commands-irc-operator">IRC Operator</a></td></tr>

@@ -310,6 +310,104 @@ html[data-theme]:is([data-theme='light'], [data-theme='solarized-light'], [data-
 }
 /* end crest */
 
+/* Threats: for fun. Words fly in as fireballs and break on the crest.
+   The script that moves them is at the end of index.html. */
+.threat {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  color: var(--red);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+/* The fireball: a hot core, an orange body, a red rim. */
+.threat-head {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 42% 42%, #fff3c4 0 16%, #ffb347 36%, #ff5a36 60%, rgba(255, 70, 40, 0) 74%);
+  box-shadow: 0 0 9px 2px rgba(255, 96, 48, 0.5);
+}
+.threat-spark {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #ff9a4a;
+}
+/* The trail: wide at the fireball, thinning to nothing. */
+.threat-tail {
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 130px;
+  height: 6px;
+  background: linear-gradient(90deg, #ffb347, #ff5a36 28%, rgba(255, 90, 54, 0));
+  clip-path: polygon(0 0, 100% 42%, 100% 58%, 0 100%);
+  transform-origin: 0 50%;
+  opacity: 0.85;
+}
+.threat-word {
+  position: absolute;
+  top: 9px;
+  left: 13px;
+  opacity: 0.9;
+}
+.threat-left .threat-word {
+  left: auto;
+  right: 13px;
+}
+.threat-word b {
+  display: inline-block;
+  font-weight: inherit;
+}
+
+/* Beams: now and then a line of light leaves the shield, for Seraph Chat
+   and Seraph Transfer. The dashes run outward along it. */
+.beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  color: var(--green);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+.beam-line {
+  position: absolute;
+  top: -1.5px;
+  left: 0;
+  height: 3px;
+  border-radius: 2px;
+  transform-origin: 0 50%;
+  background:
+    repeating-linear-gradient(90deg, currentColor 0 10px, transparent 10px 38px),
+    linear-gradient(90deg, color-mix(in srgb, currentColor 42%, transparent), color-mix(in srgb, currentColor 42%, transparent));
+  -webkit-mask-image: linear-gradient(90deg, #000 78%, transparent);
+  mask-image: linear-gradient(90deg, #000 78%, transparent);
+}
+.beam-word {
+  position: absolute;
+  top: 9px;
+  left: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+/* end threats */
+
 /* Home heading: the logo beside the name. */
 .wordmark {
   display: flex;
